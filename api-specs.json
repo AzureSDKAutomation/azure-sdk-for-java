@@ -42,6 +42,10 @@
     "source": "specification/containerregistry/resource-manager/readme.md",
     "args": "--multiapi=true --fluent=true"
   },
+  "cosmosdb/resource-manager": {
+    "source": "specification/cosmos-db/resource-manager/readme.md",
+    "args": "--multiapi=true --fluent=true"
+  },
   "datalakeanalytics/resource-manager": {
     "source": "specification/datalake-analytics/resource-manager/readme.md",
     "args": "--multiapi --fluent"
@@ -126,6 +130,10 @@
     "fconfig": {
       "\"moduleName\"": "\"MySQL\""
     }
+  },
+  "monitor/resource-manager": {
+    "source": "specification/monitor/resource-manager/readme.md",
+    "args": "--multiapi --fluent"
   },
   "network/resource-manager": {
     "source": "specification/network/resource-manager/readme.md",
