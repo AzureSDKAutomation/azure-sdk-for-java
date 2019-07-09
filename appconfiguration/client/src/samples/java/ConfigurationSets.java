@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 import com.azure.data.appconfiguration.ConfigurationAsyncClient;
+import com.azure.data.appconfiguration.ConfigurationClientBuilder;
 import com.azure.data.appconfiguration.credentials.ConfigurationClientCredentials;
 import com.azure.data.appconfiguration.models.ConfigurationSetting;
 import com.azure.data.appconfiguration.models.SettingSelector;
@@ -16,7 +17,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Sample demonstrates how to use Azure Application Configuration to switch between "beta" and "production"
+ * Sample demonstrates how to use Azure App Configuration to switch between "beta" and "production"
  * configuration sets.
  *
  * <p>
@@ -50,9 +51,9 @@ public class ConfigurationSets {
         String connectionString = "endpoint={endpoint_value};id={id_value};name={secret_value}";
 
         // Instantiate a configuration client that will be used to call the configuration service.
-        ConfigurationAsyncClient client = ConfigurationAsyncClient.builder()
+        ConfigurationAsyncClient client = new ConfigurationClientBuilder()
             .credentials(new ConfigurationClientCredentials(connectionString))
-            .build();
+            .buildAsyncClient();
 
         // Demonstrates two different complex objects being stored in Azure App Configuration; one used for beta and the
         // other used for production.

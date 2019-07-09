@@ -35,33 +35,33 @@ public class ConfigurationAsyncClientTest extends ConfigurationClientTestBase {
         beforeTestSetup();
 
         if (interceptorManager.isPlaybackMode()) {
-            client = clientSetup(credentials -> ConfigurationAsyncClient.builder()
+            client = clientSetup(credentials -> new ConfigurationClientBuilder()
                     .credentials(credentials)
                     .httpClient(interceptorManager.getPlaybackClient())
                     .httpLogDetailLevel(HttpLogDetailLevel.BODY_AND_HEADERS)
-                    .build());
+                    .buildAsyncClient());
         } else {
-            client = clientSetup(credentials -> ConfigurationAsyncClient.builder()
+            client = clientSetup(credentials -> new ConfigurationClientBuilder()
                     .credentials(credentials)
                     .httpClient(HttpClient.createDefault().wiretap(true))
                     .httpLogDetailLevel(HttpLogDetailLevel.BODY_AND_HEADERS)
                     .addPolicy(interceptorManager.getRecordPolicy())
                     .addPolicy(new RetryPolicy())
-                    .build());
+                    .buildAsyncClient());
         }
     }
 
     @Override
     protected void afterTest() {
-        logger.asInfo().log("Cleaning up created key values.");
+        logger.info("Cleaning up created key values.");
         client.listSettings(new SettingSelector().keys(keyPrefix + "*"))
                 .flatMap(configurationSetting -> {
-                    logger.asInfo().log("Deleting key:label [{}:{}]. isLocked? {}", configurationSetting.key(), configurationSetting.label(), configurationSetting.isLocked());
+                    logger.info("Deleting key:label [{}:{}]. isLocked? {}", configurationSetting.key(), configurationSetting.label(), configurationSetting.isLocked());
                     return client.deleteSetting(configurationSetting);
                 })
                 .blockLast();
 
-        logger.asInfo().log("Finished cleaning up values.");
+        logger.info("Finished cleaning up values.");
     }
 
     /**
@@ -762,7 +762,7 @@ public class ConfigurationAsyncClientTest extends ConfigurationClientTestBase {
     public void deleteAllSettings() {
         client.listSettings(new SettingSelector().keys("*"))
                 .flatMap(configurationSetting -> {
-                    logger.asInfo().log("Deleting key:label [{}:{}]. isLocked? {}", configurationSetting.key(), configurationSetting.label(), configurationSetting.isLocked());
+                    logger.info("Deleting key:label [{}:{}]. isLocked? {}", configurationSetting.key(), configurationSetting.label(), configurationSetting.isLocked());
                     return client.deleteSetting(configurationSetting);
                 }).blockLast();
     }

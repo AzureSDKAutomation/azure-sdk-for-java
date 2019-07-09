@@ -3,7 +3,7 @@
 package com.azure.data.appconfiguration.policy;
 
 import com.azure.data.appconfiguration.ConfigurationAsyncClient;
-import com.azure.data.appconfiguration.ConfigurationAsyncClientBuilder;
+import com.azure.data.appconfiguration.ConfigurationClientBuilder;
 import com.azure.data.appconfiguration.credentials.ConfigurationClientCredentials;
 import com.azure.core.http.HttpPipelineCallContext;
 import com.azure.core.http.HttpPipelineNextPolicy;
@@ -16,12 +16,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * A policy that authenticates requests with Azure Application Configuration service. The content added by this policy
+ * A policy that authenticates requests with Azure App Configuration service. The content added by this policy
  * is leveraged in {@link ConfigurationClientCredentials} to generate the correct "Authorization" header value.
  *
  * @see ConfigurationClientCredentials
  * @see ConfigurationAsyncClient
- * @see ConfigurationAsyncClientBuilder
+ * @see ConfigurationClientBuilder
  */
 public final class ConfigurationCredentialsPolicy implements HttpPipelinePolicy {
     // "Host", "Date", and "x-ms-content-sha256" are required to generate "Authorization" value in
@@ -39,7 +39,7 @@ public final class ConfigurationCredentialsPolicy implements HttpPipelinePolicy 
     }
 
     /**
-     * Adds the required headers to authenticate a request to Azure Application Configuration service.
+     * Adds the required headers to authenticate a request to Azure App Configuration service.
      *
      * @param context The request context
      * @param next The next HTTP pipeline policy to process the {@code context's} request after this policy completes.
