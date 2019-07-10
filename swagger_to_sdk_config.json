@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapistoragetest.blob.core.windows.net/sdkautomation/test/schemas/swagger_to_sdk_config.schema.json",
   "meta": {
     "autorest_options": {
       "java": "",
