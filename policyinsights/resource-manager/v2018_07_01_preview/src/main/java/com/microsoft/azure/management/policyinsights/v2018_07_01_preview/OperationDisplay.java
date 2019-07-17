@@ -17,8 +17,8 @@ public class OperationDisplay {
     /**
      * Resource provider name.
      */
-    @JsonProperty(value = "provider")
-    private String provider;
+    @JsonProperty(value = "providerAPPLESANDBANANAS")
+    private String providerAPPLESANDBANANAS;
 
     /**
      * Resource name on which the operation is performed.
@@ -41,20 +41,20 @@ public class OperationDisplay {
     /**
      * Get resource provider name.
      *
-     * @return the provider value
+     * @return the providerAPPLESANDBANANAS value
      */
-    public String provider() {
-        return this.provider;
+    public String providerAPPLESANDBANANAS() {
+        return this.providerAPPLESANDBANANAS;
     }
 
     /**
      * Set resource provider name.
      *
-     * @param provider the provider value to set
+     * @param providerAPPLESANDBANANAS the providerAPPLESANDBANANAS value to set
      * @return the OperationDisplay object itself.
      */
-    public OperationDisplay withProvider(String provider) {
-        this.provider = provider;
+    public OperationDisplay withProviderAPPLESANDBANANAS(String providerAPPLESANDBANANAS) {
+        this.providerAPPLESANDBANANAS = providerAPPLESANDBANANAS;
         return this;
     }
 
