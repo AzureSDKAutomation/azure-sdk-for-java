@@ -44,6 +44,24 @@ public class Destination {
     private String archiveNameFormat;
 
     /**
+     * DataLake SubscriptionId.
+     */
+    @JsonProperty(value = "properties.dataLakeSubscriptionId")
+    private String dataLakeSubscriptionId;
+
+    /**
+     * DataLake AccountName.
+     */
+    @JsonProperty(value = "properties.dataLakeAccountName")
+    private String dataLakeAccountName;
+
+    /**
+     * DataLake FolderPath.
+     */
+    @JsonProperty(value = "properties.dataLakeFolderPath")
+    private String dataLakeFolderPath;
+
+    /**
      * Get name for capture destination.
      *
      * @return the name value
@@ -120,6 +138,66 @@ public class Destination {
      */
     public Destination withArchiveNameFormat(String archiveNameFormat) {
         this.archiveNameFormat = archiveNameFormat;
+        return this;
+    }
+
+    /**
+     * Get dataLake SubscriptionId.
+     *
+     * @return the dataLakeSubscriptionId value
+     */
+    public String dataLakeSubscriptionId() {
+        return this.dataLakeSubscriptionId;
+    }
+
+    /**
+     * Set dataLake SubscriptionId.
+     *
+     * @param dataLakeSubscriptionId the dataLakeSubscriptionId value to set
+     * @return the Destination object itself.
+     */
+    public Destination withDataLakeSubscriptionId(String dataLakeSubscriptionId) {
+        this.dataLakeSubscriptionId = dataLakeSubscriptionId;
+        return this;
+    }
+
+    /**
+     * Get dataLake AccountName.
+     *
+     * @return the dataLakeAccountName value
+     */
+    public String dataLakeAccountName() {
+        return this.dataLakeAccountName;
+    }
+
+    /**
+     * Set dataLake AccountName.
+     *
+     * @param dataLakeAccountName the dataLakeAccountName value to set
+     * @return the Destination object itself.
+     */
+    public Destination withDataLakeAccountName(String dataLakeAccountName) {
+        this.dataLakeAccountName = dataLakeAccountName;
+        return this;
+    }
+
+    /**
+     * Get dataLake FolderPath.
+     *
+     * @return the dataLakeFolderPath value
+     */
+    public String dataLakeFolderPath() {
+        return this.dataLakeFolderPath;
+    }
+
+    /**
+     * Set dataLake FolderPath.
+     *
+     * @param dataLakeFolderPath the dataLakeFolderPath value to set
+     * @return the Destination object itself.
+     */
+    public Destination withDataLakeFolderPath(String dataLakeFolderPath) {
+        this.dataLakeFolderPath = dataLakeFolderPath;
         return this;
     }
 
