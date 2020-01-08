@@ -123,7 +123,7 @@ public interface NetworkWatchers extends SupportsCreating<NetworkWatcher.Definit
     Observable<ConnectivityInformation> checkConnectivityAsync(String resourceGroupName, String networkWatcherName, ConnectivityParameters parameters);
 
     /**
-     * Gets the relative latency score for internet service providers from a specified location to Azure regions.
+     * NOTE: This feature is currently in preview and still being tested for stability. Gets the relative latency score for internet service providers from a specified location to Azure regions.
      *
      * @param resourceGroupName The name of the network watcher resource group.
      * @param networkWatcherName The name of the network watcher resource.
@@ -134,7 +134,7 @@ public interface NetworkWatchers extends SupportsCreating<NetworkWatcher.Definit
     Observable<AzureReachabilityReport> getAzureReachabilityReportAsync(String resourceGroupName, String networkWatcherName, AzureReachabilityReportParameters parameters);
 
     /**
-     * Lists all available internet service providers for a specified Azure region.
+     * NOTE: This feature is currently in preview and still being tested for stability. Lists all available internet service providers for a specified Azure region.
      *
      * @param resourceGroupName The name of the network watcher resource group.
      * @param networkWatcherName The name of the network watcher resource.
