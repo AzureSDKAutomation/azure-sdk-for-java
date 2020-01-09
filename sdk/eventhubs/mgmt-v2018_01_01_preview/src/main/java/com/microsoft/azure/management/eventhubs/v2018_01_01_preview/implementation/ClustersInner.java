@@ -194,7 +194,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Lists the available Event Hubs Clusters within an ARM resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -213,7 +213,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Lists the available Event Hubs Clusters within an ARM resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -233,7 +233,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Lists the available Event Hubs Clusters within an ARM resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;ClusterInner&gt; object
      */
@@ -250,7 +250,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Lists the available Event Hubs Clusters within an ARM resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;ClusterInner&gt; object
      */
@@ -271,7 +271,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Lists the available Event Hubs Clusters within an ARM resource group.
      *
-    ServiceResponse<PageImpl<ClusterInner>> * @param resourceGroupName Name of the resource group within the Azure subscription.
+    ServiceResponse<PageImpl<ClusterInner>> * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;ClusterInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -309,7 +309,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Gets the resource description of the specified Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -323,7 +323,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Gets the resource description of the specified Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -336,7 +336,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Gets the resource description of the specified Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
@@ -353,7 +353,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Gets the resource description of the specified Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
@@ -395,7 +395,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Creates or updates an instance of an Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -409,7 +409,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Creates or updates an instance of an Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -422,7 +422,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Creates or updates an instance of an Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -439,7 +439,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Creates or updates an instance of an Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -464,7 +464,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Creates or updates an instance of an Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -478,7 +478,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Creates or updates an instance of an Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -491,7 +491,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Creates or updates an instance of an Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
@@ -508,7 +508,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Creates or updates an instance of an Event Hubs Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
@@ -552,7 +552,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param parameters The properties of the Event Hubs Cluster which should be updated.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -567,7 +567,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param parameters The properties of the Event Hubs Cluster which should be updated.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -581,7 +581,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param parameters The properties of the Event Hubs Cluster which should be updated.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -599,7 +599,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param parameters The properties of the Event Hubs Cluster which should be updated.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -629,7 +629,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param parameters The properties of the Event Hubs Cluster which should be updated.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -644,7 +644,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param parameters The properties of the Event Hubs Cluster which should be updated.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -658,7 +658,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param parameters The properties of the Event Hubs Cluster which should be updated.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -676,7 +676,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param parameters The properties of the Event Hubs Cluster which should be updated.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -725,7 +725,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Deletes an existing Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -738,7 +738,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Deletes an existing Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -751,7 +751,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Deletes an existing Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -768,7 +768,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Deletes an existing Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -793,7 +793,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Deletes an existing Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -806,7 +806,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Deletes an existing Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -819,7 +819,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Deletes an existing Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -836,7 +836,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * Deletes an existing Event Hubs Cluster. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -880,7 +880,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -894,7 +894,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -907,7 +907,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EHNamespaceIdListResultInner object
@@ -924,7 +924,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /**
      * List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EHNamespaceIdListResultInner object

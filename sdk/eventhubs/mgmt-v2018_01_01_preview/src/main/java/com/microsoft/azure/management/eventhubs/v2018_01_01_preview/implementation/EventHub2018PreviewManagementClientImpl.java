@@ -185,6 +185,19 @@ public class EventHub2018PreviewManagementClientImpl extends AzureServiceClient 
     }
 
     /**
+     * The NamespaceOperationsInner object to access its operations.
+     */
+    private NamespaceOperationsInner namespaceOperations;
+
+    /**
+     * Gets the NamespaceOperationsInner object to access its operations.
+     * @return the NamespaceOperationsInner object.
+     */
+    public NamespaceOperationsInner namespaceOperations() {
+        return this.namespaceOperations;
+    }
+
+    /**
      * Initializes an instance of EventHub2018PreviewManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -223,6 +236,7 @@ public class EventHub2018PreviewManagementClientImpl extends AzureServiceClient 
         this.clusters = new ClustersInner(restClient().retrofit(), this);
         this.configurations = new ConfigurationsInner(restClient().retrofit(), this);
         this.namespaces = new NamespacesInner(restClient().retrofit(), this);
+        this.namespaceOperations = new NamespaceOperationsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
