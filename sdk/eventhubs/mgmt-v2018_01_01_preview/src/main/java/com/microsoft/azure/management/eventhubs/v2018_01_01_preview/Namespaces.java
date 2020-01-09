@@ -43,7 +43,7 @@ public interface Namespaces extends SupportsCreating<EHNamespace.DefinitionStage
     /**
      * Gets an IpFilterRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -54,7 +54,7 @@ public interface Namespaces extends SupportsCreating<EHNamespace.DefinitionStage
     /**
      * Gets a list of IP Filter rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -64,7 +64,7 @@ public interface Namespaces extends SupportsCreating<EHNamespace.DefinitionStage
     /**
      * Deletes an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -75,7 +75,7 @@ public interface Namespaces extends SupportsCreating<EHNamespace.DefinitionStage
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -86,7 +86,7 @@ public interface Namespaces extends SupportsCreating<EHNamespace.DefinitionStage
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -96,7 +96,7 @@ public interface Namespaces extends SupportsCreating<EHNamespace.DefinitionStage
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -107,7 +107,7 @@ public interface Namespaces extends SupportsCreating<EHNamespace.DefinitionStage
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -118,7 +118,7 @@ public interface Namespaces extends SupportsCreating<EHNamespace.DefinitionStage
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request

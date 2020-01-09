@@ -265,7 +265,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -284,7 +284,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -304,7 +304,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
      */
@@ -321,7 +321,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
      */
@@ -342,7 +342,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-    ServiceResponse<PageImpl<EHNamespaceInner>> * @param resourceGroupName Name of the resource group within the Azure subscription.
+    ServiceResponse<PageImpl<EHNamespaceInner>> * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;EHNamespaceInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -380,7 +380,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -395,7 +395,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -409,7 +409,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -427,7 +427,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -457,7 +457,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -472,7 +472,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -486,7 +486,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -504,7 +504,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -553,7 +553,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -566,7 +566,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -579,7 +579,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -596,7 +596,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -621,7 +621,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -634,7 +634,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -647,7 +647,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -664,7 +664,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -708,7 +708,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets the description of the specified namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -722,7 +722,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets the description of the specified namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -735,7 +735,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets the description of the specified namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EHNamespaceInner object
@@ -752,7 +752,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets the description of the specified namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EHNamespaceInner object
@@ -795,7 +795,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for updating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -810,7 +810,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for updating a namespace resource.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -824,7 +824,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for updating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -842,7 +842,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for updating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -891,7 +891,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of IP Filter rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -911,7 +911,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of IP Filter rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -932,7 +932,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of IP Filter rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;IpFilterRuleInner&gt; object
@@ -950,7 +950,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of IP Filter rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;IpFilterRuleInner&gt; object
@@ -972,7 +972,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of IP Filter rules for a Namespace.
      *
-    ServiceResponse<PageImpl<IpFilterRuleInner>> * @param resourceGroupName Name of the resource group within the Azure subscription.
+    ServiceResponse<PageImpl<IpFilterRuleInner>> * @param resourceGroupName Name of the Resource group within the Azure subscription.
     ServiceResponse<PageImpl<IpFilterRuleInner>> * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;IpFilterRuleInner&gt; object wrapped in {@link ServiceResponse} if successful.
@@ -1014,7 +1014,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @param parameters The Namespace IpFilterRule.
@@ -1030,7 +1030,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @param parameters The Namespace IpFilterRule.
@@ -1045,7 +1045,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @param parameters The Namespace IpFilterRule.
@@ -1064,7 +1064,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @param parameters The Namespace IpFilterRule.
@@ -1115,7 +1115,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1129,7 +1129,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1143,7 +1143,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1161,7 +1161,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an IpFilterRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1208,7 +1208,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an IpFilterRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1223,7 +1223,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an IpFilterRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1237,7 +1237,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an IpFilterRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1255,7 +1255,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an IpFilterRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param ipFilterRuleName The IP Filter Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1301,7 +1301,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -1321,7 +1321,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1342,7 +1342,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;VirtualNetworkRuleInner&gt; object
@@ -1360,7 +1360,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;VirtualNetworkRuleInner&gt; object
@@ -1382,7 +1382,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-    ServiceResponse<PageImpl<VirtualNetworkRuleInner>> * @param resourceGroupName Name of the resource group within the Azure subscription.
+    ServiceResponse<PageImpl<VirtualNetworkRuleInner>> * @param resourceGroupName Name of the Resource group within the Azure subscription.
     ServiceResponse<PageImpl<VirtualNetworkRuleInner>> * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualNetworkRuleInner&gt; object wrapped in {@link ServiceResponse} if successful.
@@ -1424,7 +1424,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1439,7 +1439,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1453,7 +1453,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1471,7 +1471,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1513,7 +1513,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param virtualNetworkSubnetId ARM ID of Virtual Network Subnet
@@ -1529,7 +1529,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param virtualNetworkSubnetId ARM ID of Virtual Network Subnet
@@ -1544,7 +1544,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param virtualNetworkSubnetId ARM ID of Virtual Network Subnet
@@ -1563,7 +1563,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param virtualNetworkSubnetId ARM ID of Virtual Network Subnet
@@ -1612,7 +1612,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1626,7 +1626,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1640,7 +1640,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1658,7 +1658,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1705,7 +1705,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1720,7 +1720,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1734,7 +1734,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1752,7 +1752,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1798,7 +1798,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1813,7 +1813,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1827,7 +1827,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1845,7 +1845,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1892,7 +1892,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -1906,7 +1906,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1919,7 +1919,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the NetworkRuleSetInner object
@@ -1936,7 +1936,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the NetworkRuleSetInner object
