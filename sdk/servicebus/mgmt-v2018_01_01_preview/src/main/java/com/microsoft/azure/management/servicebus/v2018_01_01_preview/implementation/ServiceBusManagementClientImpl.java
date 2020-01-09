@@ -159,6 +159,19 @@ public class ServiceBusManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The NamespaceOperationsInner object to access its operations.
+     */
+    private NamespaceOperationsInner namespaceOperations;
+
+    /**
+     * Gets the NamespaceOperationsInner object to access its operations.
+     * @return the NamespaceOperationsInner object.
+     */
+    public NamespaceOperationsInner namespaceOperations() {
+        return this.namespaceOperations;
+    }
+
+    /**
      * Initializes an instance of ServiceBusManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -195,6 +208,7 @@ public class ServiceBusManagementClientImpl extends AzureServiceClient {
         this.generateClientRequestId = true;
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.namespaces = new NamespacesInner(restClient().retrofit(), this);
+        this.namespaceOperations = new NamespaceOperationsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

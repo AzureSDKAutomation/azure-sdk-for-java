@@ -18,6 +18,7 @@ import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.azure.management.servicebus.v2018_01_01_preview.Operations;
 import com.microsoft.azure.management.servicebus.v2018_01_01_preview.Namespaces;
+import com.microsoft.azure.management.servicebus.v2018_01_01_preview.NamespaceOperations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -27,6 +28,7 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 public final class ServiceBusManager extends ManagerCore<ServiceBusManager, ServiceBusManagementClientImpl> {
     private Operations operations;
     private Namespaces namespaces;
+    private NamespaceOperations namespaceOperations;
     /**
     * Get a Configurable instance that can be used to create ServiceBusManager with optional configuration.
     *
@@ -92,6 +94,16 @@ public final class ServiceBusManager extends ManagerCore<ServiceBusManager, Serv
             this.namespaces = new NamespacesImpl(this);
         }
         return this.namespaces;
+    }
+
+    /**
+     * @return Entry point to manage NamespaceOperations.
+     */
+    public NamespaceOperations namespaceOperations() {
+        if (this.namespaceOperations == null) {
+            this.namespaceOperations = new NamespaceOperationsImpl(this);
+        }
+        return this.namespaceOperations;
     }
 
     /**
