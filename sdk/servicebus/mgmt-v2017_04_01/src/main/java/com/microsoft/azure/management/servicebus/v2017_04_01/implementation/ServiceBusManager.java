@@ -27,6 +27,7 @@ import com.microsoft.azure.management.servicebus.v2017_04_01.Rules;
 import com.microsoft.azure.management.servicebus.v2017_04_01.Regions;
 import com.microsoft.azure.management.servicebus.v2017_04_01.PremiumMessagingRegions;
 import com.microsoft.azure.management.servicebus.v2017_04_01.EventHubs;
+import com.microsoft.azure.management.servicebus.v2017_04_01.NamespaceOperations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -45,6 +46,7 @@ public final class ServiceBusManager extends ManagerCore<ServiceBusManager, Serv
     private Regions regions;
     private PremiumMessagingRegions premiumMessagingRegions;
     private EventHubs eventHubs;
+    private NamespaceOperations namespaceOperations;
     /**
     * Get a Configurable instance that can be used to create ServiceBusManager with optional configuration.
     *
@@ -200,6 +202,16 @@ public final class ServiceBusManager extends ManagerCore<ServiceBusManager, Serv
             this.eventHubs = new EventHubsImpl(this);
         }
         return this.eventHubs;
+    }
+
+    /**
+     * @return Entry point to manage NamespaceOperations.
+     */
+    public NamespaceOperations namespaceOperations() {
+        if (this.namespaceOperations == null) {
+            this.namespaceOperations = new NamespaceOperationsImpl(this);
+        }
+        return this.namespaceOperations;
     }
 
     /**
