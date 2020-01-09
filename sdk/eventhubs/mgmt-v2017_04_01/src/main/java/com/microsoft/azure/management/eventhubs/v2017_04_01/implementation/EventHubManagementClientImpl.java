@@ -211,6 +211,19 @@ public class EventHubManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The NamespaceOperationsInner object to access its operations.
+     */
+    private NamespaceOperationsInner namespaceOperations;
+
+    /**
+     * Gets the NamespaceOperationsInner object to access its operations.
+     * @return the NamespaceOperationsInner object.
+     */
+    public NamespaceOperationsInner namespaceOperations() {
+        return this.namespaceOperations;
+    }
+
+    /**
      * Initializes an instance of EventHubManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -251,6 +264,7 @@ public class EventHubManagementClientImpl extends AzureServiceClient {
         this.eventHubs = new EventHubsInner(restClient().retrofit(), this);
         this.consumerGroups = new ConsumerGroupsInner(restClient().retrofit(), this);
         this.regions = new RegionsInner(restClient().retrofit(), this);
+        this.namespaceOperations = new NamespaceOperationsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

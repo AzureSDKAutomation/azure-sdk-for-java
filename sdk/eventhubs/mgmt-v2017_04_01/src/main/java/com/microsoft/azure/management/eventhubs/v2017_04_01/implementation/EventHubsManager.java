@@ -22,6 +22,7 @@ import com.microsoft.azure.management.eventhubs.v2017_04_01.DisasterRecoveryConf
 import com.microsoft.azure.management.eventhubs.v2017_04_01.EventHubs;
 import com.microsoft.azure.management.eventhubs.v2017_04_01.ConsumerGroups;
 import com.microsoft.azure.management.eventhubs.v2017_04_01.Regions;
+import com.microsoft.azure.management.eventhubs.v2017_04_01.NamespaceOperations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -35,6 +36,7 @@ public final class EventHubsManager extends ManagerCore<EventHubsManager, EventH
     private EventHubs eventHubs;
     private ConsumerGroups consumerGroups;
     private Regions regions;
+    private NamespaceOperations namespaceOperations;
     /**
     * Get a Configurable instance that can be used to create EventHubsManager with optional configuration.
     *
@@ -140,6 +142,16 @@ public final class EventHubsManager extends ManagerCore<EventHubsManager, EventH
             this.regions = new RegionsImpl(this);
         }
         return this.regions;
+    }
+
+    /**
+     * @return Entry point to manage NamespaceOperations.
+     */
+    public NamespaceOperations namespaceOperations() {
+        if (this.namespaceOperations == null) {
+            this.namespaceOperations = new NamespaceOperationsImpl(this);
+        }
+        return this.namespaceOperations;
     }
 
     /**
