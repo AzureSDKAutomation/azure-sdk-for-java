@@ -15,25 +15,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class RegistryStatisticsInner {
     /**
-     * The total count of devices in the identity registry.
+     * The total count of devices in the identity registry. This API is
+     * eventually consistent and may not reflect correct device count
+     * immediately.
      */
     @JsonProperty(value = "totalDeviceCount", access = JsonProperty.Access.WRITE_ONLY)
     private Long totalDeviceCount;
 
     /**
-     * The count of enabled devices in the identity registry.
+     * The count of enabled devices in the identity registry. This API is
+     * eventually consistent and may not reflect correct device count
+     * immediately.
      */
     @JsonProperty(value = "enabledDeviceCount", access = JsonProperty.Access.WRITE_ONLY)
     private Long enabledDeviceCount;
 
     /**
-     * The count of disabled devices in the identity registry.
+     * The count of disabled devices in the identity registry. This API is
+     * eventually consistent and may not reflect correct device count
+     * immediately.
      */
     @JsonProperty(value = "disabledDeviceCount", access = JsonProperty.Access.WRITE_ONLY)
     private Long disabledDeviceCount;
 
     /**
-     * Get the total count of devices in the identity registry.
+     * Get the total count of devices in the identity registry. This API is eventually consistent and may not reflect correct device count immediately.
      *
      * @return the totalDeviceCount value
      */
@@ -42,7 +48,7 @@ public class RegistryStatisticsInner {
     }
 
     /**
-     * Get the count of enabled devices in the identity registry.
+     * Get the count of enabled devices in the identity registry. This API is eventually consistent and may not reflect correct device count immediately.
      *
      * @return the enabledDeviceCount value
      */
@@ -51,7 +57,7 @@ public class RegistryStatisticsInner {
     }
 
     /**
-     * Get the count of disabled devices in the identity registry.
+     * Get the count of disabled devices in the identity registry. This API is eventually consistent and may not reflect correct device count immediately.
      *
      * @return the disabledDeviceCount value
      */
