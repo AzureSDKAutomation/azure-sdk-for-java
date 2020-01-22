@@ -9,6 +9,7 @@
 package com.microsoft.azure.management.network.v2019_09_01.implementation;
 
 import com.microsoft.azure.SubResource;
+import com.microsoft.azure.management.network.v2019_09_01.Ipv6CircuitConnectionConfig;
 import com.microsoft.azure.management.network.v2019_09_01.CircuitConnectionStatus;
 import com.microsoft.azure.management.network.v2019_09_01.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,10 +47,16 @@ public class ExpressRouteCircuitConnectionInner extends SubResource {
     private String authorizationKey;
 
     /**
+     * IPv6 Address PrefixProperties of the express route circuit connection.
+     */
+    @JsonProperty(value = "properties.ipv6CircuitConnectionConfig")
+    private Ipv6CircuitConnectionConfig ipv6CircuitConnectionConfig;
+
+    /**
      * Express Route Circuit connection state. Possible values include:
      * 'Connected', 'Connecting', 'Disconnected'.
      */
-    @JsonProperty(value = "properties.circuitConnectionStatus", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.circuitConnectionStatus")
     private CircuitConnectionStatus circuitConnectionStatus;
 
     /**
@@ -159,12 +166,43 @@ public class ExpressRouteCircuitConnectionInner extends SubResource {
     }
 
     /**
+     * Get iPv6 Address PrefixProperties of the express route circuit connection.
+     *
+     * @return the ipv6CircuitConnectionConfig value
+     */
+    public Ipv6CircuitConnectionConfig ipv6CircuitConnectionConfig() {
+        return this.ipv6CircuitConnectionConfig;
+    }
+
+    /**
+     * Set iPv6 Address PrefixProperties of the express route circuit connection.
+     *
+     * @param ipv6CircuitConnectionConfig the ipv6CircuitConnectionConfig value to set
+     * @return the ExpressRouteCircuitConnectionInner object itself.
+     */
+    public ExpressRouteCircuitConnectionInner withIpv6CircuitConnectionConfig(Ipv6CircuitConnectionConfig ipv6CircuitConnectionConfig) {
+        this.ipv6CircuitConnectionConfig = ipv6CircuitConnectionConfig;
+        return this;
+    }
+
+    /**
      * Get express Route Circuit connection state. Possible values include: 'Connected', 'Connecting', 'Disconnected'.
      *
      * @return the circuitConnectionStatus value
      */
     public CircuitConnectionStatus circuitConnectionStatus() {
         return this.circuitConnectionStatus;
+    }
+
+    /**
+     * Set express Route Circuit connection state. Possible values include: 'Connected', 'Connecting', 'Disconnected'.
+     *
+     * @param circuitConnectionStatus the circuitConnectionStatus value to set
+     * @return the ExpressRouteCircuitConnectionInner object itself.
+     */
+    public ExpressRouteCircuitConnectionInner withCircuitConnectionStatus(CircuitConnectionStatus circuitConnectionStatus) {
+        this.circuitConnectionStatus = circuitConnectionStatus;
+        return this;
     }
 
     /**

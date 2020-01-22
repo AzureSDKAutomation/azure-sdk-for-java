@@ -54,6 +54,11 @@ public interface ExpressRouteCircuitConnection extends HasInner<ExpressRouteCirc
     String id();
 
     /**
+     * @return the ipv6CircuitConnectionConfig value.
+     */
+    Ipv6CircuitConnectionConfig ipv6CircuitConnectionConfig();
+
+    /**
      * @return the name value.
      */
     String name();
@@ -128,6 +133,18 @@ public interface ExpressRouteCircuitConnection extends HasInner<ExpressRouteCirc
         }
 
         /**
+         * The stage of the expressroutecircuitconnection definition allowing to specify CircuitConnectionStatus.
+         */
+        interface WithCircuitConnectionStatus {
+            /**
+             * Specifies circuitConnectionStatus.
+             * @param circuitConnectionStatus Express Route Circuit connection state. Possible values include: 'Connected', 'Connecting', 'Disconnected'
+             * @return the next definition stage
+             */
+            WithCreate withCircuitConnectionStatus(CircuitConnectionStatus circuitConnectionStatus);
+        }
+
+        /**
          * The stage of the expressroutecircuitconnection definition allowing to specify ExpressRouteCircuitPeering.
          */
         interface WithExpressRouteCircuitPeering {
@@ -149,6 +166,18 @@ public interface ExpressRouteCircuitConnection extends HasInner<ExpressRouteCirc
              * @return the next definition stage
              */
             WithCreate withId(String id);
+        }
+
+        /**
+         * The stage of the expressroutecircuitconnection definition allowing to specify Ipv6CircuitConnectionConfig.
+         */
+        interface WithIpv6CircuitConnectionConfig {
+            /**
+             * Specifies ipv6CircuitConnectionConfig.
+             * @param ipv6CircuitConnectionConfig IPv6 Address PrefixProperties of the express route circuit connection
+             * @return the next definition stage
+             */
+            WithCreate withIpv6CircuitConnectionConfig(Ipv6CircuitConnectionConfig ipv6CircuitConnectionConfig);
         }
 
         /**
@@ -180,13 +209,13 @@ public interface ExpressRouteCircuitConnection extends HasInner<ExpressRouteCirc
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ExpressRouteCircuitConnection>, DefinitionStages.WithAddressPrefix, DefinitionStages.WithAuthorizationKey, DefinitionStages.WithExpressRouteCircuitPeering, DefinitionStages.WithId, DefinitionStages.WithName, DefinitionStages.WithPeerExpressRouteCircuitPeering {
+        interface WithCreate extends Creatable<ExpressRouteCircuitConnection>, DefinitionStages.WithAddressPrefix, DefinitionStages.WithAuthorizationKey, DefinitionStages.WithCircuitConnectionStatus, DefinitionStages.WithExpressRouteCircuitPeering, DefinitionStages.WithId, DefinitionStages.WithIpv6CircuitConnectionConfig, DefinitionStages.WithName, DefinitionStages.WithPeerExpressRouteCircuitPeering {
         }
     }
     /**
      * The template for a ExpressRouteCircuitConnection update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ExpressRouteCircuitConnection>, UpdateStages.WithAddressPrefix, UpdateStages.WithAuthorizationKey, UpdateStages.WithExpressRouteCircuitPeering, UpdateStages.WithId, UpdateStages.WithName, UpdateStages.WithPeerExpressRouteCircuitPeering {
+    interface Update extends Appliable<ExpressRouteCircuitConnection>, UpdateStages.WithAddressPrefix, UpdateStages.WithAuthorizationKey, UpdateStages.WithCircuitConnectionStatus, UpdateStages.WithExpressRouteCircuitPeering, UpdateStages.WithId, UpdateStages.WithIpv6CircuitConnectionConfig, UpdateStages.WithName, UpdateStages.WithPeerExpressRouteCircuitPeering {
     }
 
     /**
@@ -218,6 +247,18 @@ public interface ExpressRouteCircuitConnection extends HasInner<ExpressRouteCirc
         }
 
         /**
+         * The stage of the expressroutecircuitconnection update allowing to specify CircuitConnectionStatus.
+         */
+        interface WithCircuitConnectionStatus {
+            /**
+             * Specifies circuitConnectionStatus.
+             * @param circuitConnectionStatus Express Route Circuit connection state. Possible values include: 'Connected', 'Connecting', 'Disconnected'
+             * @return the next update stage
+             */
+            Update withCircuitConnectionStatus(CircuitConnectionStatus circuitConnectionStatus);
+        }
+
+        /**
          * The stage of the expressroutecircuitconnection update allowing to specify ExpressRouteCircuitPeering.
          */
         interface WithExpressRouteCircuitPeering {
@@ -239,6 +280,18 @@ public interface ExpressRouteCircuitConnection extends HasInner<ExpressRouteCirc
              * @return the next update stage
              */
             Update withId(String id);
+        }
+
+        /**
+         * The stage of the expressroutecircuitconnection update allowing to specify Ipv6CircuitConnectionConfig.
+         */
+        interface WithIpv6CircuitConnectionConfig {
+            /**
+             * Specifies ipv6CircuitConnectionConfig.
+             * @param ipv6CircuitConnectionConfig IPv6 Address PrefixProperties of the express route circuit connection
+             * @return the next update stage
+             */
+            Update withIpv6CircuitConnectionConfig(Ipv6CircuitConnectionConfig ipv6CircuitConnectionConfig);
         }
 
         /**
