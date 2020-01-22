@@ -12,6 +12,7 @@ import com.microsoft.azure.management.network.v2019_09_01.ExpressRouteCircuitCon
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.SubResource;
+import com.microsoft.azure.management.network.v2019_09_01.Ipv6CircuitConnectionConfig;
 import com.microsoft.azure.management.network.v2019_09_01.CircuitConnectionStatus;
 import com.microsoft.azure.management.network.v2019_09_01.ProvisioningState;
 
@@ -105,6 +106,11 @@ class ExpressRouteCircuitConnectionImpl extends CreatableUpdatableImpl<ExpressRo
     }
 
     @Override
+    public Ipv6CircuitConnectionConfig ipv6CircuitConnectionConfig() {
+        return this.inner().ipv6CircuitConnectionConfig();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
     }
@@ -145,6 +151,12 @@ class ExpressRouteCircuitConnectionImpl extends CreatableUpdatableImpl<ExpressRo
     }
 
     @Override
+    public ExpressRouteCircuitConnectionImpl withCircuitConnectionStatus(CircuitConnectionStatus circuitConnectionStatus) {
+        this.inner().withCircuitConnectionStatus(circuitConnectionStatus);
+        return this;
+    }
+
+    @Override
     public ExpressRouteCircuitConnectionImpl withExpressRouteCircuitPeering(SubResource expressRouteCircuitPeering) {
         this.inner().withExpressRouteCircuitPeering(expressRouteCircuitPeering);
         return this;
@@ -153,6 +165,12 @@ class ExpressRouteCircuitConnectionImpl extends CreatableUpdatableImpl<ExpressRo
     @Override
     public ExpressRouteCircuitConnectionImpl withId(String id) {
         this.inner().withId(id);
+        return this;
+    }
+
+    @Override
+    public ExpressRouteCircuitConnectionImpl withIpv6CircuitConnectionConfig(Ipv6CircuitConnectionConfig ipv6CircuitConnectionConfig) {
+        this.inner().withIpv6CircuitConnectionConfig(ipv6CircuitConnectionConfig);
         return this;
     }
 
