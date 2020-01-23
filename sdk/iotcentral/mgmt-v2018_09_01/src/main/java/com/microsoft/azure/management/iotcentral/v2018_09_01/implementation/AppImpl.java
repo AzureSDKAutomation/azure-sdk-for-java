@@ -11,43 +11,23 @@ package com.microsoft.azure.management.iotcentral.v2018_09_01.implementation;
 import com.microsoft.azure.arm.resources.models.implementation.GroupableResourceCoreImpl;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.App;
 import rx.Observable;
-import com.microsoft.azure.management.iotcentral.v2018_09_01.AppPatch;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.AppSkuInfo;
-import rx.functions.Func1;
 
-class AppImpl extends GroupableResourceCoreImpl<App, AppInner, AppImpl, IoTCentralManager> implements App, App.Definition, App.Update {
-    private AppPatch updateParameter;
+class AppImpl extends GroupableResourceCoreImpl<App, AppInner, AppImpl, IoTCentralManager> implements App {
     AppImpl(String name, AppInner inner, IoTCentralManager manager) {
         super(name, inner, manager);
-        this.updateParameter = new AppPatch();
     }
 
     @Override
     public Observable<App> createResourceAsync() {
         AppsInner client = this.manager().inner().apps();
-        return client.createOrUpdateAsync(this.resourceGroupName(), this.name(), this.inner())
-            .map(new Func1<AppInner, AppInner>() {
-               @Override
-               public AppInner call(AppInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
-            .map(innerToFluentMap(this));
+        return null; // NOP createResourceAsync implementation as create is not supported
     }
 
     @Override
     public Observable<App> updateResourceAsync() {
         AppsInner client = this.manager().inner().apps();
-        return client.updateAsync(this.resourceGroupName(), this.name(), this.updateParameter)
-            .map(new Func1<AppInner, AppInner>() {
-               @Override
-               public AppInner call(AppInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
-            .map(innerToFluentMap(this));
+        return null; // NOP updateResourceAsync implementation as update is not supported
     }
 
     @Override
@@ -56,14 +36,7 @@ class AppImpl extends GroupableResourceCoreImpl<App, AppInner, AppImpl, IoTCentr
         return client.getByResourceGroupAsync(this.resourceGroupName(), this.name());
     }
 
-    @Override
-    public boolean isInCreateMode() {
-        return this.inner().id() == null;
-    }
 
-    private void resetCreateUpdateParameters() {
-        this.updateParameter = new AppPatch();
-    }
 
     @Override
     public String applicationId() {
@@ -88,42 +61,6 @@ class AppImpl extends GroupableResourceCoreImpl<App, AppInner, AppImpl, IoTCentr
     @Override
     public String template() {
         return this.inner().template();
-    }
-
-    @Override
-    public AppImpl withSku(AppSkuInfo sku) {
-        this.inner().withSku(sku);
-        return this;
-    }
-
-    @Override
-    public AppImpl withDisplayName(String displayName) {
-        if (isInCreateMode()) {
-            this.inner().withDisplayName(displayName);
-        } else {
-            this.updateParameter.withDisplayName(displayName);
-        }
-        return this;
-    }
-
-    @Override
-    public AppImpl withSubdomain(String subdomain) {
-        if (isInCreateMode()) {
-            this.inner().withSubdomain(subdomain);
-        } else {
-            this.updateParameter.withSubdomain(subdomain);
-        }
-        return this;
-    }
-
-    @Override
-    public AppImpl withTemplate(String template) {
-        if (isInCreateMode()) {
-            this.inner().withTemplate(template);
-        } else {
-            this.updateParameter.withTemplate(template);
-        }
-        return this;
     }
 
 }

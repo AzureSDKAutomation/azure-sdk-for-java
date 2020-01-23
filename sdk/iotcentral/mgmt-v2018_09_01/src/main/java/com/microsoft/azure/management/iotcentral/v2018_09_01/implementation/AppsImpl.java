@@ -24,6 +24,7 @@ import com.microsoft.azure.PagedList;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.AppAvailabilityInfo;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.AppTemplate;
+import com.microsoft.azure.management.iotcentral.v2018_09_01.AppPatch;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.OperationInputs;
 
 class AppsImpl extends GroupableResourcesCoreImpl<App, AppImpl, AppInner, AppsInner, IoTCentralManager>  implements Apps {
@@ -124,9 +125,16 @@ class AppsImpl extends GroupableResourcesCoreImpl<App, AppImpl, AppInner, AppsIn
     }
 
     @Override
-    public AppImpl define(String name) {
-        return wrapModel(name);
-    }
+    public Observable<Object> createOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app) {
+        AppsInner client = this.inner();
+        return client.createOrUpdateAsync(resourceGroupName, resourceName, app)
+    ;}
+
+    @Override
+    public Observable<Object> updateAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
+        AppsInner client = this.inner();
+        return client.updateAsync(resourceGroupName, resourceName, appPatch)
+    ;}
 
     @Override
     public Observable<AppAvailabilityInfo> checkNameAvailabilityAsync(OperationInputs operationInputs) {
@@ -177,7 +185,7 @@ class AppsImpl extends GroupableResourcesCoreImpl<App, AppImpl, AppInner, AppsIn
 
     @Override
     protected AppImpl wrapModel(String name) {
-        return new AppImpl(name, new AppInner(), this.manager());
+        return null; // Model is not creatable
     }
 
 }
