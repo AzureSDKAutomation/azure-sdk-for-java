@@ -8,20 +8,42 @@
 
 package com.microsoft.azure.management.iotcentral.v2018_09_01;
 
-import com.microsoft.azure.arm.collection.SupportsCreating;
 import com.microsoft.azure.arm.resources.collection.SupportsDeletingByResourceGroup;
 import com.microsoft.azure.arm.resources.collection.SupportsBatchDeletion;
 import com.microsoft.azure.arm.resources.collection.SupportsGettingByResourceGroup;
 import rx.Observable;
 import com.microsoft.azure.arm.resources.collection.SupportsListingByResourceGroup;
 import com.microsoft.azure.arm.collection.SupportsListing;
+import com.microsoft.azure.management.iotcentral.v2018_09_01.implementation.AppInner;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.implementation.AppsInner;
 import com.microsoft.azure.arm.model.HasInner;
 
 /**
  * Type representing Apps.
  */
-public interface Apps extends SupportsCreating<App.DefinitionStages.Blank>, SupportsDeletingByResourceGroup, SupportsBatchDeletion, SupportsGettingByResourceGroup<App>, SupportsListingByResourceGroup<App>, SupportsListing<App>, HasInner<AppsInner> {
+public interface Apps extends SupportsDeletingByResourceGroup, SupportsBatchDeletion, SupportsGettingByResourceGroup<App>, SupportsListingByResourceGroup<App>, SupportsListing<App>, HasInner<AppsInner> {
+    /**
+     * Create or update the metadata of an IoT Central application. The usual pattern to modify a property is to retrieve the IoT Central application metadata and security metadata, and then combine them with the modified values in a new body to update the IoT Central application.
+     *
+     * @param resourceGroupName The name of the resource group that contains the IoT Central application.
+     * @param resourceName The ARM resource name of the IoT Central application.
+     * @param app The IoT Central application metadata and security metadata.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<Object> createOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app);
+
+    /**
+     * Update the metadata of an IoT Central application.
+     *
+     * @param resourceGroupName The name of the resource group that contains the IoT Central application.
+     * @param resourceName The ARM resource name of the IoT Central application.
+     * @param appPatch The IoT Central application metadata and security metadata.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<Object> updateAsync(String resourceGroupName, String resourceName, AppPatch appPatch);
+
     /**
      * Check if an IoT Central application name is available.
      *
