@@ -11,18 +11,14 @@ package com.microsoft.azure.management.storage.v2019_06_01.implementation;
 import com.microsoft.azure.management.storage.v2019_06_01.FileShare;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
-import java.util.Map;
 import org.joda.time.DateTime;
+import java.util.Map;
 
 class FileShareImpl extends CreatableUpdatableImpl<FileShare, FileShareInner, FileShareImpl> implements FileShare, FileShare.Definition, FileShare.Update {
     private final StorageManager manager;
     private String resourceGroupName;
     private String accountName;
     private String shareName;
-    private Map<String, String> cmetadata;
-    private Integer cshareQuota;
-    private Map<String, String> umetadata;
-    private Integer ushareQuota;
 
     FileShareImpl(String name, StorageManager manager) {
         super(name, new FileShareInner());
@@ -52,14 +48,14 @@ class FileShareImpl extends CreatableUpdatableImpl<FileShare, FileShareInner, Fi
     @Override
     public Observable<FileShare> createResourceAsync() {
         FileSharesInner client = this.manager().inner().fileShares();
-        return client.createAsync(this.resourceGroupName, this.accountName, this.shareName, this.cmetadata, this.cshareQuota)
+        return client.createAsync(this.resourceGroupName, this.accountName, this.shareName, this.inner())
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<FileShare> updateResourceAsync() {
         FileSharesInner client = this.manager().inner().fileShares();
-        return client.updateAsync(this.resourceGroupName, this.accountName, this.shareName, this.umetadata, this.ushareQuota)
+        return client.updateAsync(this.resourceGroupName, this.accountName, this.shareName, this.inner())
             .map(innerToFluentMap(this));
     }
 
@@ -74,6 +70,16 @@ class FileShareImpl extends CreatableUpdatableImpl<FileShare, FileShareInner, Fi
         return this.inner().id() == null;
     }
 
+
+    @Override
+    public Boolean deleted() {
+        return this.inner().deleted();
+    }
+
+    @Override
+    public DateTime deletedTime() {
+        return this.inner().deletedTime();
+    }
 
     @Override
     public String etag() {
@@ -101,6 +107,11 @@ class FileShareImpl extends CreatableUpdatableImpl<FileShare, FileShareInner, Fi
     }
 
     @Override
+    public Integer remainingRetentionDays() {
+        return this.inner().remainingRetentionDays();
+    }
+
+    @Override
     public Integer shareQuota() {
         return this.inner().shareQuota();
     }
@@ -108,6 +119,11 @@ class FileShareImpl extends CreatableUpdatableImpl<FileShare, FileShareInner, Fi
     @Override
     public String type() {
         return this.inner().type();
+    }
+
+    @Override
+    public String version() {
+        return this.inner().version();
     }
 
     @Override
@@ -119,21 +135,19 @@ class FileShareImpl extends CreatableUpdatableImpl<FileShare, FileShareInner, Fi
 
     @Override
     public FileShareImpl withMetadata(Map<String, String> metadata) {
-        if (isInCreateMode()) {
-            this.cmetadata = metadata;
-        } else {
-            this.umetadata = metadata;
-        }
+        this.inner().withMetadata(metadata);
         return this;
     }
 
     @Override
     public FileShareImpl withShareQuota(Integer shareQuota) {
-        if (isInCreateMode()) {
-            this.cshareQuota = shareQuota;
-        } else {
-            this.ushareQuota = shareQuota;
-        }
+        this.inner().withShareQuota(shareQuota);
+        return this;
+    }
+
+    @Override
+    public FileShareImpl withVersion(String version) {
+        this.inner().withVersion(version);
         return this;
     }
 

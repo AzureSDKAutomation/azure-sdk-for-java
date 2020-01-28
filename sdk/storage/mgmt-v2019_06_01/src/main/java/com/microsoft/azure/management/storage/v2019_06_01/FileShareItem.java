@@ -20,6 +20,16 @@ import java.util.Map;
  */
 public interface FileShareItem extends HasInner<FileShareItemInner>, HasManager<StorageManager> {
     /**
+     * @return the deleted value.
+     */
+    Boolean deleted();
+
+    /**
+     * @return the deletedTime value.
+     */
+    DateTime deletedTime();
+
+    /**
      * @return the etag value.
      */
     String etag();
@@ -45,6 +55,11 @@ public interface FileShareItem extends HasInner<FileShareItemInner>, HasManager<
     String name();
 
     /**
+     * @return the remainingRetentionDays value.
+     */
+    Integer remainingRetentionDays();
+
+    /**
      * @return the shareQuota value.
      */
     Integer shareQuota();
@@ -53,5 +68,10 @@ public interface FileShareItem extends HasInner<FileShareItemInner>, HasManager<
      * @return the type value.
      */
     String type();
+
+    /**
+     * @return the version value.
+     */
+    String version();
 
 }
