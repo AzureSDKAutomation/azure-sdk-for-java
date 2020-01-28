@@ -26,6 +26,16 @@ class FileShareItemImpl extends WrapperImpl<FileShareItemInner> implements FileS
     }
 
     @Override
+    public Boolean deleted() {
+        return this.inner().deleted();
+    }
+
+    @Override
+    public DateTime deletedTime() {
+        return this.inner().deletedTime();
+    }
+
+    @Override
     public String etag() {
         return this.inner().etag();
     }
@@ -51,6 +61,11 @@ class FileShareItemImpl extends WrapperImpl<FileShareItemInner> implements FileS
     }
 
     @Override
+    public Integer remainingRetentionDays() {
+        return this.inner().remainingRetentionDays();
+    }
+
+    @Override
     public Integer shareQuota() {
         return this.inner().shareQuota();
     }
@@ -58,6 +73,11 @@ class FileShareItemImpl extends WrapperImpl<FileShareItemInner> implements FileS
     @Override
     public String type() {
         return this.inner().type();
+    }
+
+    @Override
+    public String version() {
+        return this.inner().version();
     }
 
 }

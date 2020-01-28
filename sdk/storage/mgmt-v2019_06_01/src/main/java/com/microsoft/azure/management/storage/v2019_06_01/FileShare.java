@@ -16,13 +16,23 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.StorageManager;
-import java.util.Map;
 import org.joda.time.DateTime;
+import java.util.Map;
 
 /**
  * Type representing FileShare.
  */
 public interface FileShare extends HasInner<FileShareInner>, Indexable, Updatable<FileShare.Update>, HasManager<StorageManager> {
+    /**
+     * @return the deleted value.
+     */
+    Boolean deleted();
+
+    /**
+     * @return the deletedTime value.
+     */
+    DateTime deletedTime();
+
     /**
      * @return the etag value.
      */
@@ -49,6 +59,11 @@ public interface FileShare extends HasInner<FileShareInner>, Indexable, Updatabl
     String name();
 
     /**
+     * @return the remainingRetentionDays value.
+     */
+    Integer remainingRetentionDays();
+
+    /**
      * @return the shareQuota value.
      */
     Integer shareQuota();
@@ -59,9 +74,14 @@ public interface FileShare extends HasInner<FileShareInner>, Indexable, Updatabl
     String type();
 
     /**
+     * @return the version value.
+     */
+    String version();
+
+    /**
      * The entirety of the FileShare definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithFileService, DefinitionStages.WithMetadata, DefinitionStages.WithShareQuota, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithFileService, DefinitionStages.WithCreate {
     }
 
     /**
@@ -84,31 +104,43 @@ public interface FileShare extends HasInner<FileShareInner>, Indexable, Updatabl
             * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only
             * @return the next definition stage
             */
-            WithMetadata withExistingFileService(String resourceGroupName, String accountName);
+            WithCreate withExistingFileService(String resourceGroupName, String accountName);
         }
 
         /**
          * The stage of the fileshare definition allowing to specify Metadata.
          */
         interface WithMetadata {
-           /**
-            * Specifies metadata.
-            * @param metadata A name-value pair to associate with the share as metadata
-            * @return the next definition stage
-            */
-            WithShareQuota withMetadata(Map<String, String> metadata);
+            /**
+             * Specifies metadata.
+             * @param metadata A name-value pair to associate with the share as metadata
+             * @return the next definition stage
+             */
+            WithCreate withMetadata(Map<String, String> metadata);
         }
 
         /**
          * The stage of the fileshare definition allowing to specify ShareQuota.
          */
         interface WithShareQuota {
-           /**
-            * Specifies shareQuota.
-            * @param shareQuota The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400
-            * @return the next definition stage
-            */
+            /**
+             * Specifies shareQuota.
+             * @param shareQuota The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400
+             * @return the next definition stage
+             */
             WithCreate withShareQuota(Integer shareQuota);
+        }
+
+        /**
+         * The stage of the fileshare definition allowing to specify Version.
+         */
+        interface WithVersion {
+            /**
+             * Specifies version.
+             * @param version The version of the share
+             * @return the next definition stage
+             */
+            WithCreate withVersion(String version);
         }
 
         /**
@@ -116,13 +148,13 @@ public interface FileShare extends HasInner<FileShareInner>, Indexable, Updatabl
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<FileShare> {
+        interface WithCreate extends Creatable<FileShare>, DefinitionStages.WithMetadata, DefinitionStages.WithShareQuota, DefinitionStages.WithVersion {
         }
     }
     /**
      * The template for a FileShare update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<FileShare>, UpdateStages.WithMetadata, UpdateStages.WithShareQuota {
+    interface Update extends Appliable<FileShare>, UpdateStages.WithMetadata, UpdateStages.WithShareQuota, UpdateStages.WithVersion {
     }
 
     /**
@@ -151,6 +183,18 @@ public interface FileShare extends HasInner<FileShareInner>, Indexable, Updatabl
              * @return the next update stage
              */
             Update withShareQuota(Integer shareQuota);
+        }
+
+        /**
+         * The stage of the fileshare update allowing to specify Version.
+         */
+        interface WithVersion {
+            /**
+             * Specifies version.
+             * @param version The version of the share
+             * @return the next update stage
+             */
+            Update withVersion(String version);
         }
 
     }

@@ -41,6 +41,30 @@ public class FileShareInner extends AzureEntityResource {
     private Integer shareQuota;
 
     /**
+     * The version of the share.
+     */
+    @JsonProperty(value = "properties.version")
+    private String version;
+
+    /**
+     * Indicates whether the share was deleted.
+     */
+    @JsonProperty(value = "properties.deleted", access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean deleted;
+
+    /**
+     * The deleted time if the share was deleted.
+     */
+    @JsonProperty(value = "properties.deletedTime", access = JsonProperty.Access.WRITE_ONLY)
+    private DateTime deletedTime;
+
+    /**
+     * Remaining retention days for share that was soft deleted.
+     */
+    @JsonProperty(value = "properties.remainingRetentionDays", access = JsonProperty.Access.WRITE_ONLY)
+    private Integer remainingRetentionDays;
+
+    /**
      * Get returns the date and time the share was last modified.
      *
      * @return the lastModifiedTime value
@@ -87,6 +111,53 @@ public class FileShareInner extends AzureEntityResource {
     public FileShareInner withShareQuota(Integer shareQuota) {
         this.shareQuota = shareQuota;
         return this;
+    }
+
+    /**
+     * Get the version of the share.
+     *
+     * @return the version value
+     */
+    public String version() {
+        return this.version;
+    }
+
+    /**
+     * Set the version of the share.
+     *
+     * @param version the version value to set
+     * @return the FileShareInner object itself.
+     */
+    public FileShareInner withVersion(String version) {
+        this.version = version;
+        return this;
+    }
+
+    /**
+     * Get indicates whether the share was deleted.
+     *
+     * @return the deleted value
+     */
+    public Boolean deleted() {
+        return this.deleted;
+    }
+
+    /**
+     * Get the deleted time if the share was deleted.
+     *
+     * @return the deletedTime value
+     */
+    public DateTime deletedTime() {
+        return this.deletedTime;
+    }
+
+    /**
+     * Get remaining retention days for share that was soft deleted.
+     *
+     * @return the remainingRetentionDays value
+     */
+    public Integer remainingRetentionDays() {
+        return this.remainingRetentionDays;
     }
 
 }
