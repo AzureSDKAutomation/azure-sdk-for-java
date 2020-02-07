@@ -20,6 +20,11 @@ import java.util.Map;
  */
 public interface FileShareItem extends HasInner<FileShareItemInner>, HasManager<StorageManager> {
     /**
+     * @return the enabledProtocols value.
+     */
+    EnabledProtocols enabledProtocols();
+
+    /**
      * @return the etag value.
      */
     String etag();
@@ -43,6 +48,11 @@ public interface FileShareItem extends HasInner<FileShareItemInner>, HasManager<
      * @return the name value.
      */
     String name();
+
+    /**
+     * @return the rootSquash value.
+     */
+    RootSquashType rootSquash();
 
     /**
      * @return the shareQuota value.
