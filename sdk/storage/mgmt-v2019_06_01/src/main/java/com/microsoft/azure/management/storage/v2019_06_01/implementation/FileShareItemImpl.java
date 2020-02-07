@@ -10,8 +10,10 @@ package com.microsoft.azure.management.storage.v2019_06_01.implementation;
 
 import com.microsoft.azure.management.storage.v2019_06_01.FileShareItem;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
+import com.microsoft.azure.management.storage.v2019_06_01.EnabledProtocols;
 import org.joda.time.DateTime;
 import java.util.Map;
+import com.microsoft.azure.management.storage.v2019_06_01.RootSquashType;
 
 class FileShareItemImpl extends WrapperImpl<FileShareItemInner> implements FileShareItem {
     private final StorageManager manager;
@@ -23,6 +25,11 @@ class FileShareItemImpl extends WrapperImpl<FileShareItemInner> implements FileS
     @Override
     public StorageManager manager() {
         return this.manager;
+    }
+
+    @Override
+    public EnabledProtocols enabledProtocols() {
+        return this.inner().enabledProtocols();
     }
 
     @Override
@@ -48,6 +55,11 @@ class FileShareItemImpl extends WrapperImpl<FileShareItemInner> implements FileS
     @Override
     public String name() {
         return this.inner().name();
+    }
+
+    @Override
+    public RootSquashType rootSquash() {
+        return this.inner().rootSquash();
     }
 
     @Override

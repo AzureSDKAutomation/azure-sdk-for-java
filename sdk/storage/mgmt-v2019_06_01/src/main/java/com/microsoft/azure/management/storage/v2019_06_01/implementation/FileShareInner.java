@@ -10,6 +10,8 @@ package com.microsoft.azure.management.storage.v2019_06_01.implementation;
 
 import org.joda.time.DateTime;
 import java.util.Map;
+import com.microsoft.azure.management.storage.v2019_06_01.EnabledProtocols;
+import com.microsoft.azure.management.storage.v2019_06_01.RootSquashType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.management.storage.v2019_06_01.AzureEntityResource;
@@ -39,6 +41,20 @@ public class FileShareInner extends AzureEntityResource {
      */
     @JsonProperty(value = "properties.shareQuota")
     private Integer shareQuota;
+
+    /**
+     * Immutable property for file shares protocol. Possible values include:
+     * 'SMB', 'NFS'.
+     */
+    @JsonProperty(value = "properties.enabledProtocols")
+    private EnabledProtocols enabledProtocols;
+
+    /**
+     * Reduction of the access rights for the remote superuser. Possible values
+     * include: 'NoRootSquash', 'RootSquash', 'AllSquash'.
+     */
+    @JsonProperty(value = "properties.rootSquash")
+    private RootSquashType rootSquash;
 
     /**
      * Get returns the date and time the share was last modified.
@@ -86,6 +102,46 @@ public class FileShareInner extends AzureEntityResource {
      */
     public FileShareInner withShareQuota(Integer shareQuota) {
         this.shareQuota = shareQuota;
+        return this;
+    }
+
+    /**
+     * Get immutable property for file shares protocol. Possible values include: 'SMB', 'NFS'.
+     *
+     * @return the enabledProtocols value
+     */
+    public EnabledProtocols enabledProtocols() {
+        return this.enabledProtocols;
+    }
+
+    /**
+     * Set immutable property for file shares protocol. Possible values include: 'SMB', 'NFS'.
+     *
+     * @param enabledProtocols the enabledProtocols value to set
+     * @return the FileShareInner object itself.
+     */
+    public FileShareInner withEnabledProtocols(EnabledProtocols enabledProtocols) {
+        this.enabledProtocols = enabledProtocols;
+        return this;
+    }
+
+    /**
+     * Get reduction of the access rights for the remote superuser. Possible values include: 'NoRootSquash', 'RootSquash', 'AllSquash'.
+     *
+     * @return the rootSquash value
+     */
+    public RootSquashType rootSquash() {
+        return this.rootSquash;
+    }
+
+    /**
+     * Set reduction of the access rights for the remote superuser. Possible values include: 'NoRootSquash', 'RootSquash', 'AllSquash'.
+     *
+     * @param rootSquash the rootSquash value to set
+     * @return the FileShareInner object itself.
+     */
+    public FileShareInner withRootSquash(RootSquashType rootSquash) {
+        this.rootSquash = rootSquash;
         return this;
     }
 
