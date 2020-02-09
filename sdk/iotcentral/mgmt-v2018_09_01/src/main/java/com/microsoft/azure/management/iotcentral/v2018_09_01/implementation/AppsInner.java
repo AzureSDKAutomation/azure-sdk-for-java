@@ -17,6 +17,7 @@ import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.AppPatch;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.ErrorDetailsException;
+import com.microsoft.azure.management.iotcentral.v2018_09_01.ErrorResponseException;
 import com.microsoft.azure.management.iotcentral.v2018_09_01.OperationInputs;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
@@ -223,7 +224,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @param resourceName The ARM resource name of the IoT Central application.
      * @param app The IoT Central application metadata and security metadata.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorDetailsException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the AppInner object if successful.
      */
@@ -300,7 +301,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @param resourceName The ARM resource name of the IoT Central application.
      * @param app The IoT Central application metadata and security metadata.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorDetailsException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the AppInner object if successful.
      */
@@ -380,12 +381,12 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
             });
     }
 
-    private ServiceResponse<AppInner> beginCreateOrUpdateDelegate(Response<ResponseBody> response) throws ErrorDetailsException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<AppInner, ErrorDetailsException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<AppInner> beginCreateOrUpdateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<AppInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<AppInner>() { }.getType())
                 .register(201, new TypeToken<AppInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorDetailsException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
