@@ -23,10 +23,16 @@ public class ManagementPolicyFilter {
     private List<String> prefixMatch;
 
     /**
-     * An array of predefined enum values. Only blockBlob is supported.
+     * An array of predefined enum values.
      */
     @JsonProperty(value = "blobTypes", required = true)
     private List<String> blobTypes;
+
+    /**
+     * An array of tag based filters, there can be at most 10 tag filters.
+     */
+    @JsonProperty(value = "blobIndexMatch")
+    private List<TagFilter> blobIndexMatch;
 
     /**
      * Get an array of strings for prefixes to be match.
@@ -49,7 +55,7 @@ public class ManagementPolicyFilter {
     }
 
     /**
-     * Get an array of predefined enum values. Only blockBlob is supported.
+     * Get an array of predefined enum values.
      *
      * @return the blobTypes value
      */
@@ -58,13 +64,33 @@ public class ManagementPolicyFilter {
     }
 
     /**
-     * Set an array of predefined enum values. Only blockBlob is supported.
+     * Set an array of predefined enum values.
      *
      * @param blobTypes the blobTypes value to set
      * @return the ManagementPolicyFilter object itself.
      */
     public ManagementPolicyFilter withBlobTypes(List<String> blobTypes) {
         this.blobTypes = blobTypes;
+        return this;
+    }
+
+    /**
+     * Get an array of tag based filters, there can be at most 10 tag filters.
+     *
+     * @return the blobIndexMatch value
+     */
+    public List<TagFilter> blobIndexMatch() {
+        return this.blobIndexMatch;
+    }
+
+    /**
+     * Set an array of tag based filters, there can be at most 10 tag filters.
+     *
+     * @param blobIndexMatch the blobIndexMatch value to set
+     * @return the ManagementPolicyFilter object itself.
+     */
+    public ManagementPolicyFilter withBlobIndexMatch(List<TagFilter> blobIndexMatch) {
+        this.blobIndexMatch = blobIndexMatch;
         return this;
     }
 
