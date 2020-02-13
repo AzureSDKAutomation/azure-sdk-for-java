@@ -225,9 +225,9 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorDetailsException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the AppInner object if successful.
+     * @return the Object object if successful.
      */
-    public AppInner createOrUpdate(String resourceGroupName, String resourceName, AppInner app) {
+    public Object createOrUpdate(String resourceGroupName, String resourceName, AppInner app) {
         return createOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, app).toBlocking().last().body();
     }
 
@@ -241,7 +241,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AppInner> createOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app, final ServiceCallback<AppInner> serviceCallback) {
+    public ServiceFuture<Object> createOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app, final ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, app), serviceCallback);
     }
 
@@ -254,10 +254,10 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<AppInner> createOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, app).map(new Func1<ServiceResponse<AppInner>, AppInner>() {
+    public Observable<Object> createOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, app).map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
-            public AppInner call(ServiceResponse<AppInner> response) {
+            public Object call(ServiceResponse<Object> response) {
                 return response.body();
             }
         });
@@ -272,7 +272,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<AppInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, AppInner app) {
+    public Observable<ServiceResponse<Object>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, AppInner app) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -290,7 +290,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
         }
         Validator.validate(app);
         Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), app, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<AppInner>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Object>() { }.getType());
     }
 
     /**
@@ -302,9 +302,9 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorDetailsException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the AppInner object if successful.
+     * @return the Object object if successful.
      */
-    public AppInner beginCreateOrUpdate(String resourceGroupName, String resourceName, AppInner app) {
+    public Object beginCreateOrUpdate(String resourceGroupName, String resourceName, AppInner app) {
         return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, app).toBlocking().single().body();
     }
 
@@ -318,7 +318,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AppInner> beginCreateOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app, final ServiceCallback<AppInner> serviceCallback) {
+    public ServiceFuture<Object> beginCreateOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app, final ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, app), serviceCallback);
     }
 
@@ -329,12 +329,12 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @param resourceName The ARM resource name of the IoT Central application.
      * @param app The IoT Central application metadata and security metadata.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the AppInner object
+     * @return the observable to the Object object
      */
-    public Observable<AppInner> beginCreateOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, app).map(new Func1<ServiceResponse<AppInner>, AppInner>() {
+    public Observable<Object> beginCreateOrUpdateAsync(String resourceGroupName, String resourceName, AppInner app) {
+        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, app).map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
-            public AppInner call(ServiceResponse<AppInner> response) {
+            public Object call(ServiceResponse<Object> response) {
                 return response.body();
             }
         });
@@ -347,9 +347,9 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @param resourceName The ARM resource name of the IoT Central application.
      * @param app The IoT Central application metadata and security metadata.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the AppInner object
+     * @return the observable to the Object object
      */
-    public Observable<ServiceResponse<AppInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, AppInner app) {
+    public Observable<ServiceResponse<Object>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, AppInner app) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -367,11 +367,11 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
         }
         Validator.validate(app);
         return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), app, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<AppInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
-                public Observable<ServiceResponse<AppInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<AppInner> clientResponse = beginCreateOrUpdateDelegate(response);
+                        ServiceResponse<Object> clientResponse = beginCreateOrUpdateDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -380,11 +380,12 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
             });
     }
 
-    private ServiceResponse<AppInner> beginCreateOrUpdateDelegate(Response<ResponseBody> response) throws ErrorDetailsException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<AppInner, ErrorDetailsException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Object> beginCreateOrUpdateDelegate(Response<ResponseBody> response) throws ErrorDetailsException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Object, ErrorDetailsException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<AppInner>() { }.getType())
                 .register(201, new TypeToken<AppInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .register(400, new TypeToken<ARMErrorResponseBodyInner>() { }.getType())
                 .registerError(ErrorDetailsException.class)
                 .build(response);
     }
@@ -398,9 +399,9 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorDetailsException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the AppInner object if successful.
+     * @return the Object object if successful.
      */
-    public AppInner update(String resourceGroupName, String resourceName, AppPatch appPatch) {
+    public Object update(String resourceGroupName, String resourceName, AppPatch appPatch) {
         return updateWithServiceResponseAsync(resourceGroupName, resourceName, appPatch).toBlocking().last().body();
     }
 
@@ -414,7 +415,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AppInner> updateAsync(String resourceGroupName, String resourceName, AppPatch appPatch, final ServiceCallback<AppInner> serviceCallback) {
+    public ServiceFuture<Object> updateAsync(String resourceGroupName, String resourceName, AppPatch appPatch, final ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, resourceName, appPatch), serviceCallback);
     }
 
@@ -427,10 +428,10 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<AppInner> updateAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
-        return updateWithServiceResponseAsync(resourceGroupName, resourceName, appPatch).map(new Func1<ServiceResponse<AppInner>, AppInner>() {
+    public Observable<Object> updateAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
+        return updateWithServiceResponseAsync(resourceGroupName, resourceName, appPatch).map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
-            public AppInner call(ServiceResponse<AppInner> response) {
+            public Object call(ServiceResponse<Object> response) {
                 return response.body();
             }
         });
@@ -445,7 +446,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<AppInner>> updateWithServiceResponseAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
+    public Observable<ServiceResponse<Object>> updateWithServiceResponseAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -463,7 +464,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
         }
         Validator.validate(appPatch);
         Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), appPatch, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<AppInner>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Object>() { }.getType());
     }
 
     /**
@@ -475,9 +476,9 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorDetailsException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the AppInner object if successful.
+     * @return the Object object if successful.
      */
-    public AppInner beginUpdate(String resourceGroupName, String resourceName, AppPatch appPatch) {
+    public Object beginUpdate(String resourceGroupName, String resourceName, AppPatch appPatch) {
         return beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName, appPatch).toBlocking().single().body();
     }
 
@@ -491,7 +492,7 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AppInner> beginUpdateAsync(String resourceGroupName, String resourceName, AppPatch appPatch, final ServiceCallback<AppInner> serviceCallback) {
+    public ServiceFuture<Object> beginUpdateAsync(String resourceGroupName, String resourceName, AppPatch appPatch, final ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName, appPatch), serviceCallback);
     }
 
@@ -502,12 +503,12 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @param resourceName The ARM resource name of the IoT Central application.
      * @param appPatch The IoT Central application metadata and security metadata.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the AppInner object
+     * @return the observable to the Object object
      */
-    public Observable<AppInner> beginUpdateAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName, appPatch).map(new Func1<ServiceResponse<AppInner>, AppInner>() {
+    public Observable<Object> beginUpdateAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName, appPatch).map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
-            public AppInner call(ServiceResponse<AppInner> response) {
+            public Object call(ServiceResponse<Object> response) {
                 return response.body();
             }
         });
@@ -520,9 +521,9 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
      * @param resourceName The ARM resource name of the IoT Central application.
      * @param appPatch The IoT Central application metadata and security metadata.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the AppInner object
+     * @return the observable to the Object object
      */
-    public Observable<ServiceResponse<AppInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
+    public Observable<ServiceResponse<Object>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, AppPatch appPatch) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -540,11 +541,11 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
         }
         Validator.validate(appPatch);
         return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), appPatch, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<AppInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
-                public Observable<ServiceResponse<AppInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<AppInner> clientResponse = beginUpdateDelegate(response);
+                        ServiceResponse<Object> clientResponse = beginUpdateDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -553,10 +554,11 @@ public class AppsInner implements InnerSupportsGet<AppInner>, InnerSupportsDelet
             });
     }
 
-    private ServiceResponse<AppInner> beginUpdateDelegate(Response<ResponseBody> response) throws ErrorDetailsException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<AppInner, ErrorDetailsException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Object> beginUpdateDelegate(Response<ResponseBody> response) throws ErrorDetailsException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Object, ErrorDetailsException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<AppInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .register(400, new TypeToken<ARMErrorResponseBodyInner>() { }.getType())
                 .registerError(ErrorDetailsException.class)
                 .build(response);
     }
