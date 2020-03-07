@@ -126,28 +126,28 @@ class CachesImpl extends GroupableResourcesCoreImpl<Cache, CacheImpl, CacheInner
     }
 
     @Override
-    public Observable<Object> flushAsync(String resourceGroupName, String cacheName) {
+    public Completable flushAsync(String resourceGroupName, String cacheName) {
         CachesInner client = this.inner();
-        return client.flushAsync(resourceGroupName, cacheName)
-    ;}
+        return client.flushAsync(resourceGroupName, cacheName).toCompletable();
+    }
 
     @Override
-    public Observable<Object> startAsync(String resourceGroupName, String cacheName) {
+    public Completable startAsync(String resourceGroupName, String cacheName) {
         CachesInner client = this.inner();
-        return client.startAsync(resourceGroupName, cacheName)
-    ;}
+        return client.startAsync(resourceGroupName, cacheName).toCompletable();
+    }
 
     @Override
-    public Observable<Object> stopAsync(String resourceGroupName, String cacheName) {
+    public Completable stopAsync(String resourceGroupName, String cacheName) {
         CachesInner client = this.inner();
-        return client.stopAsync(resourceGroupName, cacheName)
-    ;}
+        return client.stopAsync(resourceGroupName, cacheName).toCompletable();
+    }
 
     @Override
-    public Observable<Object> upgradeFirmwareAsync(String resourceGroupName, String cacheName) {
+    public Completable upgradeFirmwareAsync(String resourceGroupName, String cacheName) {
         CachesInner client = this.inner();
-        return client.upgradeFirmwareAsync(resourceGroupName, cacheName)
-    ;}
+        return client.upgradeFirmwareAsync(resourceGroupName, cacheName).toCompletable();
+    }
 
     @Override
     protected CacheImpl wrapModel(CacheInner inner) {
