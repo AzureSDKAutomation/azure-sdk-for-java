@@ -44,7 +44,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Caches.
  */
-public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsDelete<Object>, InnerSupportsListing<CacheInner> {
+public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsDelete<Void>, InnerSupportsListing<CacheInner> {
     /** The Retrofit service to perform REST calls. */
     private CachesService service;
     /** The service client containing this operation class. */
@@ -370,10 +370,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object delete(String resourceGroupName, String cacheName) {
-        return deleteWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
+    public void delete(String resourceGroupName, String cacheName) {
+        deleteWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
     }
 
     /**
@@ -385,7 +384,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> deleteAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> deleteAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(deleteWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -397,10 +396,10 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Object> deleteAsync(String resourceGroupName, String cacheName) {
-        return deleteWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> deleteAsync(String resourceGroupName, String cacheName) {
+        return deleteWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -414,7 +413,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<Object>> deleteWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -428,7 +427,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, cacheName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
@@ -439,10 +438,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object beginDelete(String resourceGroupName, String cacheName) {
-        return beginDeleteWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
+    public void beginDelete(String resourceGroupName, String cacheName) {
+        beginDeleteWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
     }
 
     /**
@@ -454,7 +452,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> beginDeleteAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(beginDeleteWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -464,12 +462,12 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Object> beginDeleteAsync(String resourceGroupName, String cacheName) {
-        return beginDeleteWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> beginDeleteAsync(String resourceGroupName, String cacheName) {
+        return beginDeleteWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -481,9 +479,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Object>> beginDeleteWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> beginDeleteWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -497,11 +495,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.beginDelete(resourceGroupName, cacheName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
-                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<Object> clientResponse = beginDeleteDelegate(response);
+                        ServiceResponse<Void> clientResponse = beginDeleteDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -510,11 +508,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             });
     }
 
-    private ServiceResponse<Object> beginDeleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Object, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Object>() { }.getType())
-                .register(202, new TypeToken<Object>() { }.getType())
-                .register(204, new TypeToken<Object>() { }.getType())
+    private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1099,10 +1097,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object flush(String resourceGroupName, String cacheName) {
-        return flushWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
+    public void flush(String resourceGroupName, String cacheName) {
+        flushWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
     }
 
     /**
@@ -1114,7 +1111,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> flushAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> flushAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(flushWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -1126,10 +1123,10 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Object> flushAsync(String resourceGroupName, String cacheName) {
-        return flushWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> flushAsync(String resourceGroupName, String cacheName) {
+        return flushWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -1143,7 +1140,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<Object>> flushWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> flushWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1157,7 +1154,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Observable<Response<ResponseBody>> observable = service.flush(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
@@ -1168,10 +1165,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object beginFlush(String resourceGroupName, String cacheName) {
-        return beginFlushWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
+    public void beginFlush(String resourceGroupName, String cacheName) {
+        beginFlushWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
     }
 
     /**
@@ -1183,7 +1179,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> beginFlushAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> beginFlushAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(beginFlushWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -1193,12 +1189,12 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Object> beginFlushAsync(String resourceGroupName, String cacheName) {
-        return beginFlushWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> beginFlushAsync(String resourceGroupName, String cacheName) {
+        return beginFlushWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -1210,9 +1206,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Object>> beginFlushWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> beginFlushWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1226,11 +1222,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.beginFlush(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
-                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<Object> clientResponse = beginFlushDelegate(response);
+                        ServiceResponse<Void> clientResponse = beginFlushDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1239,11 +1235,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             });
     }
 
-    private ServiceResponse<Object> beginFlushDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Object, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Object>() { }.getType())
-                .register(202, new TypeToken<Object>() { }.getType())
-                .register(204, new TypeToken<Object>() { }.getType())
+    private ServiceResponse<Void> beginFlushDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1256,10 +1252,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object start(String resourceGroupName, String cacheName) {
-        return startWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
+    public void start(String resourceGroupName, String cacheName) {
+        startWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
     }
 
     /**
@@ -1271,7 +1266,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> startAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> startAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(startWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -1283,10 +1278,10 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Object> startAsync(String resourceGroupName, String cacheName) {
-        return startWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> startAsync(String resourceGroupName, String cacheName) {
+        return startWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -1300,7 +1295,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<Object>> startWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> startWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1314,7 +1309,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Observable<Response<ResponseBody>> observable = service.start(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
@@ -1325,10 +1320,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object beginStart(String resourceGroupName, String cacheName) {
-        return beginStartWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
+    public void beginStart(String resourceGroupName, String cacheName) {
+        beginStartWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
     }
 
     /**
@@ -1340,7 +1334,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> beginStartAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> beginStartAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(beginStartWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -1350,12 +1344,12 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Object> beginStartAsync(String resourceGroupName, String cacheName) {
-        return beginStartWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> beginStartAsync(String resourceGroupName, String cacheName) {
+        return beginStartWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -1367,9 +1361,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Object>> beginStartWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> beginStartWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1383,11 +1377,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.beginStart(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
-                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<Object> clientResponse = beginStartDelegate(response);
+                        ServiceResponse<Void> clientResponse = beginStartDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1396,11 +1390,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             });
     }
 
-    private ServiceResponse<Object> beginStartDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Object, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Object>() { }.getType())
-                .register(202, new TypeToken<Object>() { }.getType())
-                .register(204, new TypeToken<Object>() { }.getType())
+    private ServiceResponse<Void> beginStartDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1413,10 +1407,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object stop(String resourceGroupName, String cacheName) {
-        return stopWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
+    public void stop(String resourceGroupName, String cacheName) {
+        stopWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
     }
 
     /**
@@ -1428,7 +1421,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> stopAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> stopAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(stopWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -1440,10 +1433,10 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Object> stopAsync(String resourceGroupName, String cacheName) {
-        return stopWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> stopAsync(String resourceGroupName, String cacheName) {
+        return stopWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -1457,7 +1450,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<Object>> stopWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> stopWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1471,7 +1464,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Observable<Response<ResponseBody>> observable = service.stop(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
@@ -1482,10 +1475,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object beginStop(String resourceGroupName, String cacheName) {
-        return beginStopWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
+    public void beginStop(String resourceGroupName, String cacheName) {
+        beginStopWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
     }
 
     /**
@@ -1497,7 +1489,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> beginStopAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> beginStopAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(beginStopWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -1507,12 +1499,12 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Object> beginStopAsync(String resourceGroupName, String cacheName) {
-        return beginStopWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> beginStopAsync(String resourceGroupName, String cacheName) {
+        return beginStopWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -1524,9 +1516,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Object>> beginStopWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> beginStopWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1540,11 +1532,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.beginStop(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
-                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<Object> clientResponse = beginStopDelegate(response);
+                        ServiceResponse<Void> clientResponse = beginStopDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1553,11 +1545,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             });
     }
 
-    private ServiceResponse<Object> beginStopDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Object, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Object>() { }.getType())
-                .register(202, new TypeToken<Object>() { }.getType())
-                .register(204, new TypeToken<Object>() { }.getType())
+    private ServiceResponse<Void> beginStopDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1570,10 +1562,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object upgradeFirmware(String resourceGroupName, String cacheName) {
-        return upgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
+    public void upgradeFirmware(String resourceGroupName, String cacheName) {
+        upgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().last().body();
     }
 
     /**
@@ -1585,7 +1576,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> upgradeFirmwareAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> upgradeFirmwareAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(upgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -1597,10 +1588,10 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Object> upgradeFirmwareAsync(String resourceGroupName, String cacheName) {
-        return upgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> upgradeFirmwareAsync(String resourceGroupName, String cacheName) {
+        return upgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -1614,7 +1605,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<Object>> upgradeFirmwareWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> upgradeFirmwareWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1628,7 +1619,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Observable<Response<ResponseBody>> observable = service.upgradeFirmware(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
@@ -1639,10 +1630,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Object object if successful.
      */
-    public Object beginUpgradeFirmware(String resourceGroupName, String cacheName) {
-        return beginUpgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
+    public void beginUpgradeFirmware(String resourceGroupName, String cacheName) {
+        beginUpgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName).toBlocking().single().body();
     }
 
     /**
@@ -1654,7 +1644,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Object> beginUpgradeFirmwareAsync(String resourceGroupName, String cacheName, final ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Void> beginUpgradeFirmwareAsync(String resourceGroupName, String cacheName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(beginUpgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName), serviceCallback);
     }
 
@@ -1664,12 +1654,12 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Object> beginUpgradeFirmwareAsync(String resourceGroupName, String cacheName) {
-        return beginUpgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Object>, Object>() {
+    public Observable<Void> beginUpgradeFirmwareAsync(String resourceGroupName, String cacheName) {
+        return beginUpgradeFirmwareWithServiceResponseAsync(resourceGroupName, cacheName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
-            public Object call(ServiceResponse<Object> response) {
+            public Void call(ServiceResponse<Void> response) {
                 return response.body();
             }
         });
@@ -1681,9 +1671,9 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
+     * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Object>> beginUpgradeFirmwareWithServiceResponseAsync(String resourceGroupName, String cacheName) {
+    public Observable<ServiceResponse<Void>> beginUpgradeFirmwareWithServiceResponseAsync(String resourceGroupName, String cacheName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -1697,11 +1687,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.beginUpgradeFirmware(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
-                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<Object> clientResponse = beginUpgradeFirmwareDelegate(response);
+                        ServiceResponse<Void> clientResponse = beginUpgradeFirmwareDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1710,11 +1700,11 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
             });
     }
 
-    private ServiceResponse<Object> beginUpgradeFirmwareDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Object, CloudException>newInstance(this.client.serializerAdapter())
-                .register(201, new TypeToken<Object>() { }.getType())
-                .register(202, new TypeToken<Object>() { }.getType())
-                .register(204, new TypeToken<Object>() { }.getType())
+    private ServiceResponse<Void> beginUpgradeFirmwareDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+                .register(201, new TypeToken<Void>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
