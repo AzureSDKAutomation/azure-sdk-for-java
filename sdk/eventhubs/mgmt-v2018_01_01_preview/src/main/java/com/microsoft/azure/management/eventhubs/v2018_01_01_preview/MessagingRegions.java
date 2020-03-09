@@ -9,29 +9,24 @@
 package com.microsoft.azure.management.eventhubs.v2018_01_01_preview;
 
 import com.microsoft.azure.arm.model.HasInner;
-import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.implementation.NetworkRuleSetInner;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.implementation.EventHubsManager;
-import java.util.List;
+import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.implementation.MessagingRegionsInner;
+import java.util.Map;
 
 /**
- * Type representing NetworkRuleSet.
+ * Type representing MessagingRegions.
  */
-public interface NetworkRuleSet extends HasInner<NetworkRuleSetInner>, HasManager<EventHubsManager> {
-    /**
-     * @return the defaultAction value.
-     */
-    DefaultAction defaultAction();
-
+public interface MessagingRegions extends HasInner<MessagingRegionsInner>, HasManager<EventHubsManager> {
     /**
      * @return the id value.
      */
     String id();
 
     /**
-     * @return the ipRules value.
+     * @return the location value.
      */
-    List<NWRuleSetIpRules> ipRules();
+    String location();
 
     /**
      * @return the name value.
@@ -39,13 +34,18 @@ public interface NetworkRuleSet extends HasInner<NetworkRuleSetInner>, HasManage
     String name();
 
     /**
+     * @return the properties value.
+     */
+    MessagingRegionsProperties properties();
+
+    /**
+     * @return the tags value.
+     */
+    Map<String, String> tags();
+
+    /**
      * @return the type value.
      */
     String type();
-
-    /**
-     * @return the virtualNetworkRules value.
-     */
-    List<NWRuleSetVirtualNetworkRules> virtualNetworkRules();
 
 }

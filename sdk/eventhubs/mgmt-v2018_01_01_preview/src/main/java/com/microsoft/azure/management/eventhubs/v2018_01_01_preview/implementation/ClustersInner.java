@@ -46,7 +46,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
     /** The Retrofit service to perform REST calls. */
     private ClustersService service;
     /** The service client containing this operation class. */
-    private EventHub2018PreviewManagementClientImpl client;
+    private EventHubManagementClientImpl client;
 
     /**
      * Initializes an instance of ClustersInner.
@@ -54,7 +54,7 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ClustersInner(Retrofit retrofit, EventHub2018PreviewManagementClientImpl client) {
+    public ClustersInner(Retrofit retrofit, EventHubManagementClientImpl client) {
         this.service = retrofit.create(ClustersService.class);
         this.client = client;
     }
