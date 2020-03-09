@@ -9,29 +9,21 @@
 package com.microsoft.azure.management.eventhubs.v2018_01_01_preview;
 
 import com.microsoft.azure.arm.model.HasInner;
-import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.implementation.NetworkRuleSetInner;
+import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.implementation.AuthorizationRuleInner;
+import com.microsoft.azure.arm.model.Indexable;
+import com.microsoft.azure.arm.model.Refreshable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.implementation.EventHubsManager;
 import java.util.List;
 
 /**
- * Type representing NetworkRuleSet.
+ * Type representing DisasterRecoveryConfigNamespaceAuthorizationRule.
  */
-public interface NetworkRuleSet extends HasInner<NetworkRuleSetInner>, HasManager<EventHubsManager> {
-    /**
-     * @return the defaultAction value.
-     */
-    DefaultAction defaultAction();
-
+public interface DisasterRecoveryConfigNamespaceAuthorizationRule extends HasInner<AuthorizationRuleInner>, Indexable, Refreshable<DisasterRecoveryConfigNamespaceAuthorizationRule>, HasManager<EventHubsManager> {
     /**
      * @return the id value.
      */
     String id();
-
-    /**
-     * @return the ipRules value.
-     */
-    List<NWRuleSetIpRules> ipRules();
 
     /**
      * @return the name value.
@@ -39,13 +31,13 @@ public interface NetworkRuleSet extends HasInner<NetworkRuleSetInner>, HasManage
     String name();
 
     /**
+     * @return the rights value.
+     */
+    List<AccessRights> rights();
+
+    /**
      * @return the type value.
      */
     String type();
-
-    /**
-     * @return the virtualNetworkRules value.
-     */
-    List<NWRuleSetVirtualNetworkRules> virtualNetworkRules();
 
 }
