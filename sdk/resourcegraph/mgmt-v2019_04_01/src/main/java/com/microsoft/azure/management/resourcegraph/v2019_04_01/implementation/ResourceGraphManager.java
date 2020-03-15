@@ -17,6 +17,7 @@ import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.azure.management.resourcegraph.v2019_04_01.Operations;
+import com.microsoft.azure.management.resourcegraph.v2019_04_01.GraphQuerys;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -25,6 +26,7 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
  */
 public final class ResourceGraphManager extends ManagerCore<ResourceGraphManager, ResourceGraphClientImpl> {
     private Operations operations;
+    private GraphQuerys graphQuerys;
     /**
     * Get a Configurable instance that can be used to create ResourceGraphManager with optional configuration.
     *
@@ -37,24 +39,26 @@ public final class ResourceGraphManager extends ManagerCore<ResourceGraphManager
     * Creates an instance of ResourceGraphManager that exposes ResourceGraph resource management API entry points.
     *
     * @param credentials the credentials to use
+    * @param subscriptionId the subscription UUID
     * @return the ResourceGraphManager
     */
-    public static ResourceGraphManager authenticate(AzureTokenCredentials credentials) {
+    public static ResourceGraphManager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
         return new ResourceGraphManager(new RestClient.Builder()
             .withBaseUrl(credentials.environment(), AzureEnvironment.Endpoint.RESOURCE_MANAGER)
             .withCredentials(credentials)
             .withSerializerAdapter(new AzureJacksonAdapter())
             .withResponseBuilderFactory(new AzureResponseBuilder.Factory())
-            .build());
+            .build(), subscriptionId);
     }
     /**
     * Creates an instance of ResourceGraphManager that exposes ResourceGraph resource management API entry points.
     *
     * @param restClient the RestClient to be used for API calls.
+    * @param subscriptionId the subscription UUID
     * @return the ResourceGraphManager
     */
-    public static ResourceGraphManager authenticate(RestClient restClient) {
-        return new ResourceGraphManager(restClient);
+    public static ResourceGraphManager authenticate(RestClient restClient, String subscriptionId) {
+        return new ResourceGraphManager(restClient, subscriptionId);
     }
     /**
     * The interface allowing configurations to be set.
@@ -64,9 +68,10 @@ public final class ResourceGraphManager extends ManagerCore<ResourceGraphManager
         * Creates an instance of ResourceGraphManager that exposes ResourceGraph management API entry points.
         *
         * @param credentials the credentials to use
+        * @param subscriptionId the subscription UUID
         * @return the interface exposing ResourceGraph management API entry points that work across subscriptions
         */
-        ResourceGraphManager authenticate(AzureTokenCredentials credentials);
+        ResourceGraphManager authenticate(AzureTokenCredentials credentials, String subscriptionId);
     }
 
     /**
@@ -80,17 +85,27 @@ public final class ResourceGraphManager extends ManagerCore<ResourceGraphManager
     }
 
     /**
+     * @return Entry point to manage GraphQuerys.
+     */
+    public GraphQuerys graphQuerys() {
+        if (this.graphQuerys == null) {
+            this.graphQuerys = new GraphQuerysImpl(this);
+        }
+        return this.graphQuerys;
+    }
+
+    /**
     * The implementation for Configurable interface.
     */
     private static final class ConfigurableImpl extends AzureConfigurableCoreImpl<Configurable> implements Configurable {
-        public ResourceGraphManager authenticate(AzureTokenCredentials credentials) {
-           return ResourceGraphManager.authenticate(buildRestClient(credentials));
+        public ResourceGraphManager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
+           return ResourceGraphManager.authenticate(buildRestClient(credentials), subscriptionId);
         }
      }
-    private ResourceGraphManager(RestClient restClient) {
+    private ResourceGraphManager(RestClient restClient, String subscriptionId) {
         super(
             restClient,
-            null,
-            new ResourceGraphClientImpl(restClient));
+            subscriptionId,
+            new ResourceGraphClientImpl(restClient).withSubscriptionId(subscriptionId));
     }
 }
