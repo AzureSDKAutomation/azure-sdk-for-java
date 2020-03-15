@@ -47,16 +47,27 @@ public class ResourceGraphClientImpl extends AzureServiceClient {
         return this.azureClient;
     }
 
-    /** API version. */
-    private String apiVersion;
+    /** The Azure subscription Id. */
+    private String subscriptionId;
 
     /**
-     * Gets API version.
+     * Gets The Azure subscription Id.
      *
-     * @return the apiVersion value.
+     * @return the subscriptionId value.
      */
-    public String apiVersion() {
-        return this.apiVersion;
+    public String subscriptionId() {
+        return this.subscriptionId;
+    }
+
+    /**
+     * Sets The Azure subscription Id.
+     *
+     * @param subscriptionId the subscriptionId value.
+     * @return the service client itself
+     */
+    public ResourceGraphClientImpl withSubscriptionId(String subscriptionId) {
+        this.subscriptionId = subscriptionId;
+        return this;
     }
 
     /** The preferred language for the response. */
@@ -142,6 +153,19 @@ public class ResourceGraphClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The GraphQuerysInner object to access its operations.
+     */
+    private GraphQuerysInner graphQuerys;
+
+    /**
+     * Gets the GraphQuerysInner object to access its operations.
+     * @return the GraphQuerysInner object.
+     */
+    public GraphQuerysInner graphQuerys() {
+        return this.graphQuerys;
+    }
+
+    /**
      * Initializes an instance of ResourceGraphClient client.
      *
      * @param credentials the management credentials for Azure
@@ -172,11 +196,11 @@ public class ResourceGraphClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2019-04-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.operations = new OperationsInner(restClient().retrofit(), this);
+        this.graphQuerys = new GraphQuerysInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
         initializeService();
     }
@@ -255,14 +279,12 @@ public class ResourceGraphClientImpl extends AzureServiceClient {
      * @return the observable to the QueryResponseInner object
      */
     public Observable<ServiceResponse<QueryResponseInner>> resourcesWithServiceResponseAsync(QueryRequest query) {
-        if (this.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
-        }
         if (query == null) {
             throw new IllegalArgumentException("Parameter query is required and cannot be null.");
         }
         Validator.validate(query);
-        return service.resources(this.apiVersion(), query, this.acceptLanguage(), this.userAgent())
+        final String apiVersion = "2019-04-01";
+        return service.resources(apiVersion, query, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<QueryResponseInner>>>() {
                 @Override
                 public Observable<ServiceResponse<QueryResponseInner>> call(Response<ResponseBody> response) {

@@ -6,6 +6,5 @@
 
 /**
  * This package contains the implementation classes for ResourceGraphClient.
- * Azure Resource Graph API Reference.
  */
 package com.microsoft.azure.management.resourcegraph.v2019_04_01.implementation;
