@@ -16,6 +16,7 @@ import com.microsoft.azure.management.apigeneration.Beta.SinceVersion;
 import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
+import com.microsoft.azure.management.resourcegraph.v2019_04_01.Resources;
 import com.microsoft.azure.management.resourcegraph.v2019_04_01.Operations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
@@ -24,6 +25,7 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
  * Entry point to Azure ResourceGraph resource management.
  */
 public final class ResourceGraphManager extends ManagerCore<ResourceGraphManager, ResourceGraphClientImpl> {
+    private Resources resources;
     private Operations operations;
     /**
     * Get a Configurable instance that can be used to create ResourceGraphManager with optional configuration.
@@ -67,6 +69,16 @@ public final class ResourceGraphManager extends ManagerCore<ResourceGraphManager
         * @return the interface exposing ResourceGraph management API entry points that work across subscriptions
         */
         ResourceGraphManager authenticate(AzureTokenCredentials credentials);
+    }
+
+    /**
+     * @return Entry point to manage Resources.
+     */
+    public Resources resources() {
+        if (this.resources == null) {
+            this.resources = new ResourcesImpl(this);
+        }
+        return this.resources;
     }
 
     /**
