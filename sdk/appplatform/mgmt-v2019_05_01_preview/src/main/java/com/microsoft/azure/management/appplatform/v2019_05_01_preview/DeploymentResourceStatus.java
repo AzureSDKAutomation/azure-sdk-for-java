@@ -28,9 +28,6 @@ public final class DeploymentResourceStatus extends ExpandableStringEnum<Deploym
     /** Static value Failed for DeploymentResourceStatus. */
     public static final DeploymentResourceStatus FAILED = fromString("Failed");
 
-    /** Static value Processing for DeploymentResourceStatus. */
-    public static final DeploymentResourceStatus PROCESSING = fromString("Processing");
-
     /** Static value Allocating for DeploymentResourceStatus. */
     public static final DeploymentResourceStatus ALLOCATING = fromString("Allocating");
 
@@ -39,6 +36,9 @@ public final class DeploymentResourceStatus extends ExpandableStringEnum<Deploym
 
     /** Static value Compiling for DeploymentResourceStatus. */
     public static final DeploymentResourceStatus COMPILING = fromString("Compiling");
+
+    /** Static value Processing for DeploymentResourceStatus. */
+    public static final DeploymentResourceStatus PROCESSING = fromString("Processing");
 
     /**
      * Creates or finds a DeploymentResourceStatus from its string representation.

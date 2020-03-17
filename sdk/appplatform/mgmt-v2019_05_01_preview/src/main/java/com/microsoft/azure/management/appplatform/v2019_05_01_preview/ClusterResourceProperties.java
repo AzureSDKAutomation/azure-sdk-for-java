@@ -35,6 +35,12 @@ public class ClusterResourceProperties {
     private TraceProperties trace;
 
     /**
+     * VNet injection properties of the Service.
+     */
+    @JsonProperty(value = "vNet")
+    private VNetProperties vNet;
+
+    /**
      * Version of the Service.
      */
     @JsonProperty(value = "version", access = JsonProperty.Access.WRITE_ONLY)
@@ -45,6 +51,12 @@ public class ClusterResourceProperties {
      */
     @JsonProperty(value = "serviceId", access = JsonProperty.Access.WRITE_ONLY)
     private String serviceId;
+
+    /**
+     * The encryption property.
+     */
+    @JsonProperty(value = "encryption")
+    private EncryptionProperties encryption;
 
     /**
      * Get provisioning state of the Service. Possible values include: 'Creating', 'Updating', 'Deleting', 'Deleted', 'Succeeded', 'Failed', 'Moving', 'Moved', 'MoveFailed'.
@@ -96,6 +108,26 @@ public class ClusterResourceProperties {
     }
 
     /**
+     * Get vNet injection properties of the Service.
+     *
+     * @return the vNet value
+     */
+    public VNetProperties vNet() {
+        return this.vNet;
+    }
+
+    /**
+     * Set vNet injection properties of the Service.
+     *
+     * @param vNet the vNet value to set
+     * @return the ClusterResourceProperties object itself.
+     */
+    public ClusterResourceProperties withVNet(VNetProperties vNet) {
+        this.vNet = vNet;
+        return this;
+    }
+
+    /**
      * Get version of the Service.
      *
      * @return the version value
@@ -111,6 +143,26 @@ public class ClusterResourceProperties {
      */
     public String serviceId() {
         return this.serviceId;
+    }
+
+    /**
+     * Get the encryption value.
+     *
+     * @return the encryption value
+     */
+    public EncryptionProperties encryption() {
+        return this.encryption;
+    }
+
+    /**
+     * Set the encryption value.
+     *
+     * @param encryption the encryption value to set
+     * @return the ClusterResourceProperties object itself.
+     */
+    public ClusterResourceProperties withEncryption(EncryptionProperties encryption) {
+        this.encryption = encryption;
+        return this;
     }
 
 }

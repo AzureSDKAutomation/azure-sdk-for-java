@@ -111,4 +111,15 @@ public interface Deployments extends SupportsCreating<DeploymentResource.Definit
      */
     Completable deleteAsync(String resourceGroupName, String serviceName, String appName, String deploymentName);
 
+    /**
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param appName The name of the App resource.
+     * @param deploymentName The name of the Deployment resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<AutoScaleSkuCollection> getSkusAsync(String resourceGroupName, String serviceName, String appName, String deploymentName);
+
 }
