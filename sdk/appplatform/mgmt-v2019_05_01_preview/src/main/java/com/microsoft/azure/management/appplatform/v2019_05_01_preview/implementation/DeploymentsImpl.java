@@ -17,6 +17,7 @@ import rx.functions.Func1;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.DeploymentResource;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.LogFileUrlResponse;
+import com.microsoft.azure.management.appplatform.v2019_05_01_preview.AutoScaleSkuCollection;
 
 class DeploymentsImpl extends WrapperImpl<DeploymentsInner> implements Deployments {
     private final AppPlatformManager manager;
@@ -129,6 +130,18 @@ class DeploymentsImpl extends WrapperImpl<DeploymentsInner> implements Deploymen
     public Completable deleteAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
         DeploymentsInner client = this.inner();
         return client.deleteAsync(resourceGroupName, serviceName, appName, deploymentName).toCompletable();
+    }
+
+    @Override
+    public Observable<AutoScaleSkuCollection> getSkusAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
+        DeploymentsInner client = this.inner();
+        return client.getSkusAsync(resourceGroupName, serviceName, appName, deploymentName)
+        .map(new Func1<AutoScaleSkuCollectionInner, AutoScaleSkuCollection>() {
+            @Override
+            public AutoScaleSkuCollection call(AutoScaleSkuCollectionInner inner) {
+                return new AutoScaleSkuCollectionImpl(inner, manager());
+            }
+        });
     }
 
 }

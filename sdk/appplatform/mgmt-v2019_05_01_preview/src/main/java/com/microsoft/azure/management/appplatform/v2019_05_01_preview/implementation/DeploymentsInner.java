@@ -40,8 +40,6 @@ import rx.functions.Func1;
 import rx.Observable;
 import com.microsoft.azure.LongRunningFinalState;
 import com.microsoft.azure.LongRunningOperationOptions;
-import com.microsoft.azure.LongRunningFinalState;
-import com.microsoft.azure.LongRunningOperationOptions;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -100,6 +98,10 @@ public class DeploymentsInner {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments listClusterAllDeployments" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/deployments")
         Observable<Response<ResponseBody>> listClusterAllDeployments(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Query("version") String version, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments getSkus" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/skus")
+        Observable<Response<ResponseBody>> getSkus(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments start" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/start")
@@ -399,11 +401,8 @@ public class DeploymentsInner {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
         Validator.validate(properties);
-        DeploymentResourceInner deploymentResource = null;
-        if (properties != null) {
-            deploymentResource = new DeploymentResourceInner();
-            deploymentResource.withProperties(properties);
-        }
+        DeploymentResourceInner deploymentResource = new DeploymentResourceInner();
+        deploymentResource.withProperties(properties);
         Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentResourceInner>() { }.getType());
     }
@@ -582,11 +581,8 @@ public class DeploymentsInner {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
         Validator.validate(properties);
-        DeploymentResourceInner deploymentResource = null;
-        if (properties != null) {
-            deploymentResource = new DeploymentResourceInner();
-            deploymentResource.withProperties(properties);
-        }
+        DeploymentResourceInner deploymentResource = new DeploymentResourceInner();
+        deploymentResource.withProperties(properties);
         return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentResourceInner>>>() {
                 @Override
@@ -869,11 +865,8 @@ public class DeploymentsInner {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
         Validator.validate(properties);
-        DeploymentResourceInner deploymentResource = null;
-        if (properties != null) {
-            deploymentResource = new DeploymentResourceInner();
-            deploymentResource.withProperties(properties);
-        }
+        DeploymentResourceInner deploymentResource = new DeploymentResourceInner();
+        deploymentResource.withProperties(properties);
         Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentResourceInner>() { }.getType());
     }
@@ -1052,11 +1045,8 @@ public class DeploymentsInner {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
         Validator.validate(properties);
-        DeploymentResourceInner deploymentResource = null;
-        if (properties != null) {
-            deploymentResource = new DeploymentResourceInner();
-            deploymentResource.withProperties(properties);
-        }
+        DeploymentResourceInner deploymentResource = new DeploymentResourceInner();
+        deploymentResource.withProperties(properties);
         return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentResourceInner>>>() {
                 @Override
@@ -1575,6 +1565,99 @@ public class DeploymentsInner {
     private ServiceResponse<PageImpl<DeploymentResourceInner>> listClusterAllDeploymentsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<DeploymentResourceInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<DeploymentResourceInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param appName The name of the App resource.
+     * @param deploymentName The name of the Deployment resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the AutoScaleSkuCollectionInner object if successful.
+     */
+    public AutoScaleSkuCollectionInner getSkus(String resourceGroupName, String serviceName, String appName, String deploymentName) {
+        return getSkusWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).toBlocking().single().body();
+    }
+
+    /**
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param appName The name of the App resource.
+     * @param deploymentName The name of the Deployment resource.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<AutoScaleSkuCollectionInner> getSkusAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, final ServiceCallback<AutoScaleSkuCollectionInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getSkusWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName), serviceCallback);
+    }
+
+    /**
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param appName The name of the App resource.
+     * @param deploymentName The name of the Deployment resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the AutoScaleSkuCollectionInner object
+     */
+    public Observable<AutoScaleSkuCollectionInner> getSkusAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
+        return getSkusWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).map(new Func1<ServiceResponse<AutoScaleSkuCollectionInner>, AutoScaleSkuCollectionInner>() {
+            @Override
+            public AutoScaleSkuCollectionInner call(ServiceResponse<AutoScaleSkuCollectionInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param appName The name of the App resource.
+     * @param deploymentName The name of the Deployment resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the AutoScaleSkuCollectionInner object
+     */
+    public Observable<ServiceResponse<AutoScaleSkuCollectionInner>> getSkusWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (serviceName == null) {
+            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
+        }
+        if (appName == null) {
+            throw new IllegalArgumentException("Parameter appName is required and cannot be null.");
+        }
+        if (deploymentName == null) {
+            throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
+        }
+        return service.getSkus(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<AutoScaleSkuCollectionInner>>>() {
+                @Override
+                public Observable<ServiceResponse<AutoScaleSkuCollectionInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<AutoScaleSkuCollectionInner> clientResponse = getSkusDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<AutoScaleSkuCollectionInner> getSkusDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<AutoScaleSkuCollectionInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<AutoScaleSkuCollectionInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

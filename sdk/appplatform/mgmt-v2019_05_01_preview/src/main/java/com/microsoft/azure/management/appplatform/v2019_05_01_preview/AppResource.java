@@ -16,7 +16,6 @@ import com.microsoft.azure.arm.model.Updatable;
 import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.implementation.AppPlatformManager;
-import org.joda.time.DateTime;
 
 /**
  * Type representing AppResource.
@@ -26,6 +25,16 @@ public interface AppResource extends HasInner<AppResourceInner>, Indexable, Upda
      * @return the id value.
      */
     String id();
+
+    /**
+     * @return the identity value.
+     */
+    ManagedIdentityProperties identity();
+
+    /**
+     * @return the location value.
+     */
+    String location();
 
     /**
      * @return the name value.
@@ -45,7 +54,7 @@ public interface AppResource extends HasInner<AppResourceInner>, Indexable, Upda
     /**
      * The entirety of the AppResource definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithResourceGroupName, DefinitionStages.WithServiceName, DefinitionStages.WithProperties, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithResourceGroupName, DefinitionStages.WithServiceName, DefinitionStages.WithCreate {
     }
 
     /**
@@ -79,18 +88,43 @@ public interface AppResource extends HasInner<AppResourceInner>, Indexable, Upda
             * @param serviceName The name of the Service resource
             * @return the next definition stage
             */
-            WithProperties withServiceName(String serviceName);
+            WithCreate withServiceName(String serviceName);
+        }
+
+        /**
+         * The stage of the appresource definition allowing to specify Identity.
+         */
+        interface WithIdentity {
+            /**
+             * Specifies identity.
+             * @param identity The Managed Identity type of the app resource
+             * @return the next definition stage
+             */
+            WithCreate withIdentity(ManagedIdentityProperties identity);
+        }
+
+        /**
+         * The stage of the appresource definition allowing to specify Location.
+         */
+        interface WithLocation {
+            /**
+             * Specifies location.
+             * @param location The GEO location of the application, always the same with its parent resource.
+ ARM use this property to route the MSI request to regional MSI RP
+             * @return the next definition stage
+             */
+            WithCreate withLocation(String location);
         }
 
         /**
          * The stage of the appresource definition allowing to specify Properties.
          */
         interface WithProperties {
-           /**
-            * Specifies properties.
-            * @param properties Properties of the App resource
-            * @return the next definition stage
-            */
+            /**
+             * Specifies properties.
+             * @param properties Properties of the App resource
+             * @return the next definition stage
+             */
             WithCreate withProperties(AppResourceProperties properties);
         }
 
@@ -99,19 +133,92 @@ public interface AppResource extends HasInner<AppResourceInner>, Indexable, Upda
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<AppResource> {
+        interface WithCreate extends Creatable<AppResource>, DefinitionStages.WithIdentity, DefinitionStages.WithLocation, DefinitionStages.WithProperties {
         }
     }
     /**
      * The template for a AppResource update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<AppResource>, UpdateStages.WithProperties {
+    interface Update extends Appliable<AppResource>, UpdateStages.WithXMsIdentityUrl, UpdateStages.WithXMsIdentityPrincipalId, UpdateStages.WithXMsHomeTenantId, UpdateStages.WithXMsClientTenantId, UpdateStages.WithIdentity, UpdateStages.WithLocation, UpdateStages.WithProperties {
     }
 
     /**
      * Grouping of AppResource update stages.
      */
     interface UpdateStages {
+        /**
+         * The stage of the appresource update allowing to specify XMsIdentityUrl.
+         */
+        interface WithXMsIdentityUrl {
+            /**
+             * Specifies xMsIdentityUrl.
+             * @param xMsIdentityUrl The URL to the data plane of MSI for the given resource
+             * @return the next update stage
+             */
+            Update withXMsIdentityUrl(String xMsIdentityUrl);
+        }
+
+        /**
+         * The stage of the appresource update allowing to specify XMsIdentityPrincipalId.
+         */
+        interface WithXMsIdentityPrincipalId {
+            /**
+             * Specifies xMsIdentityPrincipalId.
+             * @param xMsIdentityPrincipalId The object id of the identity resource
+             * @return the next update stage
+             */
+            Update withXMsIdentityPrincipalId(String xMsIdentityPrincipalId);
+        }
+
+        /**
+         * The stage of the appresource update allowing to specify XMsHomeTenantId.
+         */
+        interface WithXMsHomeTenantId {
+            /**
+             * Specifies xMsHomeTenantId.
+             * @param xMsHomeTenantId The tenant id of the resource
+             * @return the next update stage
+             */
+            Update withXMsHomeTenantId(String xMsHomeTenantId);
+        }
+
+        /**
+         * The stage of the appresource update allowing to specify XMsClientTenantId.
+         */
+        interface WithXMsClientTenantId {
+            /**
+             * Specifies xMsClientTenantId.
+             * @param xMsClientTenantId he tenant id of the caller that made the request to ARM
+             * @return the next update stage
+             */
+            Update withXMsClientTenantId(String xMsClientTenantId);
+        }
+
+        /**
+         * The stage of the appresource update allowing to specify Identity.
+         */
+        interface WithIdentity {
+            /**
+             * Specifies identity.
+             * @param identity The Managed Identity type of the app resource
+             * @return the next update stage
+             */
+            Update withIdentity(ManagedIdentityProperties identity);
+        }
+
+        /**
+         * The stage of the appresource update allowing to specify Location.
+         */
+        interface WithLocation {
+            /**
+             * Specifies location.
+             * @param location The GEO location of the application, always the same with its parent resource.
+ ARM use this property to route the MSI request to regional MSI RP
+             * @return the next update stage
+             */
+            Update withLocation(String location);
+        }
+
         /**
          * The stage of the appresource update allowing to specify Properties.
          */

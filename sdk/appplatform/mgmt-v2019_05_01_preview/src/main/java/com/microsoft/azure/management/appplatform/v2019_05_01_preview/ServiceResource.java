@@ -12,6 +12,7 @@ import com.microsoft.azure.arm.model.HasInner;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.implementation.AppPlatformManager;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.implementation.ServiceResourceInner;
+import com.microsoft.azure.management.appplatform.v2019_05_01_preview.implementation.SkuInner;
 import java.util.Map;
 
 /**
@@ -22,6 +23,11 @@ public interface ServiceResource extends HasInner<ServiceResourceInner>, HasMana
      * @return the id value.
      */
     String id();
+
+    /**
+     * @return the identity value.
+     */
+    ManagedIdentityProperties identity();
 
     /**
      * @return the location value.
@@ -37,6 +43,11 @@ public interface ServiceResource extends HasInner<ServiceResourceInner>, HasMana
      * @return the properties value.
      */
     ClusterResourceProperties properties();
+
+    /**
+     * @return the sku value.
+     */
+    SkuInner sku();
 
     /**
      * @return the tags value.

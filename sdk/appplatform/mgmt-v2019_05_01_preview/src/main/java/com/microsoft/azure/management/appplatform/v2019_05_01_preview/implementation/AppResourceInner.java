@@ -9,6 +9,7 @@
 package com.microsoft.azure.management.appplatform.v2019_05_01_preview.implementation;
 
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.AppResourceProperties;
+import com.microsoft.azure.management.appplatform.v2019_05_01_preview.ManagedIdentityProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.azure.ProxyResource;
 
@@ -21,6 +22,20 @@ public class AppResourceInner extends ProxyResource {
      */
     @JsonProperty(value = "properties")
     private AppResourceProperties properties;
+
+    /**
+     * The Managed Identity type of the app resource.
+     */
+    @JsonProperty(value = "identity")
+    private ManagedIdentityProperties identity;
+
+    /**
+     * The GEO location of the application, always the same with its parent
+     * resource.
+     * ARM use this property to route the MSI request to regional MSI RP.
+     */
+    @JsonProperty(value = "location")
+    private String location;
 
     /**
      * Get properties of the App resource.
@@ -39,6 +54,48 @@ public class AppResourceInner extends ProxyResource {
      */
     public AppResourceInner withProperties(AppResourceProperties properties) {
         this.properties = properties;
+        return this;
+    }
+
+    /**
+     * Get the Managed Identity type of the app resource.
+     *
+     * @return the identity value
+     */
+    public ManagedIdentityProperties identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the Managed Identity type of the app resource.
+     *
+     * @param identity the identity value to set
+     * @return the AppResourceInner object itself.
+     */
+    public AppResourceInner withIdentity(ManagedIdentityProperties identity) {
+        this.identity = identity;
+        return this;
+    }
+
+    /**
+     * Get the GEO location of the application, always the same with its parent resource.
+     ARM use this property to route the MSI request to regional MSI RP.
+     *
+     * @return the location value
+     */
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Set the GEO location of the application, always the same with its parent resource.
+     ARM use this property to route the MSI request to regional MSI RP.
+     *
+     * @param location the location value to set
+     * @return the AppResourceInner object itself.
+     */
+    public AppResourceInner withLocation(String location) {
+        this.location = location;
         return this;
     }
 

@@ -10,6 +10,7 @@ package com.microsoft.azure.management.appplatform.v2019_05_01_preview.implement
 
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.ServiceResource;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
+import com.microsoft.azure.management.appplatform.v2019_05_01_preview.ManagedIdentityProperties;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.ClusterResourceProperties;
 import java.util.Map;
 
@@ -31,6 +32,11 @@ class ServiceResourceImpl extends WrapperImpl<ServiceResourceInner> implements S
     }
 
     @Override
+    public ManagedIdentityProperties identity() {
+        return this.inner().identity();
+    }
+
+    @Override
     public String location() {
         return this.inner().location();
     }
@@ -43,6 +49,11 @@ class ServiceResourceImpl extends WrapperImpl<ServiceResourceInner> implements S
     @Override
     public ClusterResourceProperties properties() {
         return this.inner().properties();
+    }
+
+    @Override
+    public SkuInner sku() {
+        return this.inner().sku();
     }
 
     @Override

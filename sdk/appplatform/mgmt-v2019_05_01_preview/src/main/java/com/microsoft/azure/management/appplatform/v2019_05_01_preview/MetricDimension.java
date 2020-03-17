@@ -27,6 +27,13 @@ public class MetricDimension {
     private String displayName;
 
     /**
+     * Whether this dimension should be included for the Shoebox export
+     * scenario.
+     */
+    @JsonProperty(value = "toBeExportedForShoebox")
+    private Boolean toBeExportedForShoebox;
+
+    /**
      * Get name of the dimension.
      *
      * @return the name value
@@ -63,6 +70,26 @@ public class MetricDimension {
      */
     public MetricDimension withDisplayName(String displayName) {
         this.displayName = displayName;
+        return this;
+    }
+
+    /**
+     * Get whether this dimension should be included for the Shoebox export scenario.
+     *
+     * @return the toBeExportedForShoebox value
+     */
+    public Boolean toBeExportedForShoebox() {
+        return this.toBeExportedForShoebox;
+    }
+
+    /**
+     * Set whether this dimension should be included for the Shoebox export scenario.
+     *
+     * @param toBeExportedForShoebox the toBeExportedForShoebox value to set
+     * @return the MetricDimension object itself.
+     */
+    public MetricDimension withToBeExportedForShoebox(Boolean toBeExportedForShoebox) {
+        this.toBeExportedForShoebox = toBeExportedForShoebox;
         return this;
     }
 
