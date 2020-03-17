@@ -18,6 +18,12 @@ import com.microsoft.rest.serializer.JsonFlatten;
 @JsonFlatten
 public class ServerUpdateParameters {
     /**
+     * The Azure Active Directory identity of the server.
+     */
+    @JsonProperty(value = "identity")
+    private ResourceIdentity identity;
+
+    /**
      * The SKU (pricing tier) of the server.
      */
     @JsonProperty(value = "sku")
@@ -36,7 +42,7 @@ public class ServerUpdateParameters {
     private String administratorLoginPassword;
 
     /**
-     * The version of a server. Possible values include: '5.6', '5.7'.
+     * The version of a server. Possible values include: '5.6', '5.7', '8.0'.
      */
     @JsonProperty(value = "properties.version")
     private ServerVersion version;
@@ -49,6 +55,13 @@ public class ServerUpdateParameters {
     private SslEnforcementEnum sslEnforcement;
 
     /**
+     * Enforce a minimal Tls version for the server. Possible values include:
+     * 'TLS1_0', 'TLS1_1', 'TLS1_2', 'TLSEnforcementDisabled'.
+     */
+    @JsonProperty(value = "properties.minimalTlsVersion")
+    private MinimalTlsVersionEnum minimalTlsVersion;
+
+    /**
      * The replication role of the server.
      */
     @JsonProperty(value = "properties.replicationRole")
@@ -59,6 +72,26 @@ public class ServerUpdateParameters {
      */
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
+
+    /**
+     * Get the Azure Active Directory identity of the server.
+     *
+     * @return the identity value
+     */
+    public ResourceIdentity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the Azure Active Directory identity of the server.
+     *
+     * @param identity the identity value to set
+     * @return the ServerUpdateParameters object itself.
+     */
+    public ServerUpdateParameters withIdentity(ResourceIdentity identity) {
+        this.identity = identity;
+        return this;
+    }
 
     /**
      * Get the SKU (pricing tier) of the server.
@@ -121,7 +154,7 @@ public class ServerUpdateParameters {
     }
 
     /**
-     * Get the version of a server. Possible values include: '5.6', '5.7'.
+     * Get the version of a server. Possible values include: '5.6', '5.7', '8.0'.
      *
      * @return the version value
      */
@@ -130,7 +163,7 @@ public class ServerUpdateParameters {
     }
 
     /**
-     * Set the version of a server. Possible values include: '5.6', '5.7'.
+     * Set the version of a server. Possible values include: '5.6', '5.7', '8.0'.
      *
      * @param version the version value to set
      * @return the ServerUpdateParameters object itself.
@@ -157,6 +190,26 @@ public class ServerUpdateParameters {
      */
     public ServerUpdateParameters withSslEnforcement(SslEnforcementEnum sslEnforcement) {
         this.sslEnforcement = sslEnforcement;
+        return this;
+    }
+
+    /**
+     * Get enforce a minimal Tls version for the server. Possible values include: 'TLS1_0', 'TLS1_1', 'TLS1_2', 'TLSEnforcementDisabled'.
+     *
+     * @return the minimalTlsVersion value
+     */
+    public MinimalTlsVersionEnum minimalTlsVersion() {
+        return this.minimalTlsVersion;
+    }
+
+    /**
+     * Set enforce a minimal Tls version for the server. Possible values include: 'TLS1_0', 'TLS1_1', 'TLS1_2', 'TLSEnforcementDisabled'.
+     *
+     * @param minimalTlsVersion the minimalTlsVersion value to set
+     * @return the ServerUpdateParameters object itself.
+     */
+    public ServerUpdateParameters withMinimalTlsVersion(MinimalTlsVersionEnum minimalTlsVersion) {
+        this.minimalTlsVersion = minimalTlsVersion;
         return this;
     }
 
