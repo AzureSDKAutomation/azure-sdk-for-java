@@ -15,6 +15,7 @@ import com.microsoft.azure.management.applicationinsights.v2015_05_01.Applicatio
 import com.microsoft.azure.management.applicationinsights.v2015_05_01.FlowType;
 import com.microsoft.azure.management.applicationinsights.v2015_05_01.RequestSource;
 import org.joda.time.DateTime;
+import com.microsoft.azure.management.applicationinsights.v2015_05_01.PublicNetworkAccessType;
 
 class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<ApplicationInsightsComponent, ApplicationInsightsComponentInner, ApplicationInsightsComponentImpl, InsightsManager> implements ApplicationInsightsComponent, ApplicationInsightsComponent.Definition, ApplicationInsightsComponent.Update {
     ApplicationInsightsComponentImpl(String name, ApplicationInsightsComponentInner inner, InsightsManager manager) {
@@ -63,8 +64,18 @@ class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<Applica
     }
 
     @Override
+    public String connectionString() {
+        return this.inner().connectionString();
+    }
+
+    @Override
     public DateTime creationDate() {
         return this.inner().creationDate();
+    }
+
+    @Override
+    public Boolean disableIpMasking() {
+        return this.inner().disableIpMasking();
     }
 
     @Override
@@ -83,6 +94,11 @@ class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<Applica
     }
 
     @Override
+    public Boolean immediatePurgeDataOn30Days() {
+        return this.inner().immediatePurgeDataOn30Days();
+    }
+
+    @Override
     public String instrumentationKey() {
         return this.inner().instrumentationKey();
     }
@@ -98,8 +114,23 @@ class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<Applica
     }
 
     @Override
+    public PublicNetworkAccessType publicNetworkAccessForIngestion() {
+        return this.inner().publicNetworkAccessForIngestion();
+    }
+
+    @Override
+    public PublicNetworkAccessType publicNetworkAccessForQuery() {
+        return this.inner().publicNetworkAccessForQuery();
+    }
+
+    @Override
     public RequestSource requestSource() {
         return this.inner().requestSource();
+    }
+
+    @Override
+    public Integer retentionInDays() {
+        return this.inner().retentionInDays();
     }
 
     @Override
@@ -125,6 +156,12 @@ class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<Applica
     }
 
     @Override
+    public ApplicationInsightsComponentImpl withDisableIpMasking(Boolean disableIpMasking) {
+        this.inner().withDisableIpMasking(disableIpMasking);
+        return this;
+    }
+
+    @Override
     public ApplicationInsightsComponentImpl withFlowType(FlowType flowType) {
         this.inner().withFlowType(flowType);
         return this;
@@ -137,8 +174,32 @@ class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<Applica
     }
 
     @Override
+    public ApplicationInsightsComponentImpl withImmediatePurgeDataOn30Days(Boolean immediatePurgeDataOn30Days) {
+        this.inner().withImmediatePurgeDataOn30Days(immediatePurgeDataOn30Days);
+        return this;
+    }
+
+    @Override
+    public ApplicationInsightsComponentImpl withPublicNetworkAccessForIngestion(PublicNetworkAccessType publicNetworkAccessForIngestion) {
+        this.inner().withPublicNetworkAccessForIngestion(publicNetworkAccessForIngestion);
+        return this;
+    }
+
+    @Override
+    public ApplicationInsightsComponentImpl withPublicNetworkAccessForQuery(PublicNetworkAccessType publicNetworkAccessForQuery) {
+        this.inner().withPublicNetworkAccessForQuery(publicNetworkAccessForQuery);
+        return this;
+    }
+
+    @Override
     public ApplicationInsightsComponentImpl withRequestSource(RequestSource requestSource) {
         this.inner().withRequestSource(requestSource);
+        return this;
+    }
+
+    @Override
+    public ApplicationInsightsComponentImpl withRetentionInDays(Integer retentionInDays) {
+        this.inner().withRetentionInDays(retentionInDays);
         return this;
     }
 
