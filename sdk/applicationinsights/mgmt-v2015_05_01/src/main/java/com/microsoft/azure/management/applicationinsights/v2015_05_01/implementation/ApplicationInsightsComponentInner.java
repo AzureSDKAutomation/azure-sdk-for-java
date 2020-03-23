@@ -12,6 +12,7 @@ import com.microsoft.azure.management.applicationinsights.v2015_05_01.Applicatio
 import com.microsoft.azure.management.applicationinsights.v2015_05_01.FlowType;
 import com.microsoft.azure.management.applicationinsights.v2015_05_01.RequestSource;
 import org.joda.time.DateTime;
+import com.microsoft.azure.management.applicationinsights.v2015_05_01.PublicNetworkAccessType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.management.applicationinsights.v2015_05_01.ComponentsResource;
@@ -117,6 +118,44 @@ public class ApplicationInsightsComponentInner extends ComponentsResource {
      */
     @JsonProperty(value = "properties.SamplingPercentage")
     private Double samplingPercentage;
+
+    /**
+     * Application Insights component connection string.
+     */
+    @JsonProperty(value = "properties.ConnectionString", access = JsonProperty.Access.WRITE_ONLY)
+    private String connectionString;
+
+    /**
+     * Retention period in days.
+     */
+    @JsonProperty(value = "properties.RetentionInDays")
+    private Integer retentionInDays;
+
+    /**
+     * Disable IP masking.
+     */
+    @JsonProperty(value = "properties.DisableIpMasking")
+    private Boolean disableIpMasking;
+
+    /**
+     * Purge data immediately after 30 days.
+     */
+    @JsonProperty(value = "properties.ImmediatePurgeDataOn30Days")
+    private Boolean immediatePurgeDataOn30Days;
+
+    /**
+     * The network access type for accessing Application Insights ingestion.
+     * Possible values include: 'Enabled', 'Disabled'.
+     */
+    @JsonProperty(value = "properties.publicNetworkAccessForIngestion")
+    private PublicNetworkAccessType publicNetworkAccessForIngestion;
+
+    /**
+     * The network access type for accessing Application Insights query.
+     * Possible values include: 'Enabled', 'Disabled'.
+     */
+    @JsonProperty(value = "properties.publicNetworkAccessForQuery")
+    private PublicNetworkAccessType publicNetworkAccessForQuery;
 
     /**
      * Get the kind of application that this component refers to, used to customize UI. This value is a freeform string, values should typically be one of the following: web, ios, other, store, java, phone.
@@ -298,6 +337,115 @@ public class ApplicationInsightsComponentInner extends ComponentsResource {
      */
     public ApplicationInsightsComponentInner withSamplingPercentage(Double samplingPercentage) {
         this.samplingPercentage = samplingPercentage;
+        return this;
+    }
+
+    /**
+     * Get application Insights component connection string.
+     *
+     * @return the connectionString value
+     */
+    public String connectionString() {
+        return this.connectionString;
+    }
+
+    /**
+     * Get retention period in days.
+     *
+     * @return the retentionInDays value
+     */
+    public Integer retentionInDays() {
+        return this.retentionInDays;
+    }
+
+    /**
+     * Set retention period in days.
+     *
+     * @param retentionInDays the retentionInDays value to set
+     * @return the ApplicationInsightsComponentInner object itself.
+     */
+    public ApplicationInsightsComponentInner withRetentionInDays(Integer retentionInDays) {
+        this.retentionInDays = retentionInDays;
+        return this;
+    }
+
+    /**
+     * Get disable IP masking.
+     *
+     * @return the disableIpMasking value
+     */
+    public Boolean disableIpMasking() {
+        return this.disableIpMasking;
+    }
+
+    /**
+     * Set disable IP masking.
+     *
+     * @param disableIpMasking the disableIpMasking value to set
+     * @return the ApplicationInsightsComponentInner object itself.
+     */
+    public ApplicationInsightsComponentInner withDisableIpMasking(Boolean disableIpMasking) {
+        this.disableIpMasking = disableIpMasking;
+        return this;
+    }
+
+    /**
+     * Get purge data immediately after 30 days.
+     *
+     * @return the immediatePurgeDataOn30Days value
+     */
+    public Boolean immediatePurgeDataOn30Days() {
+        return this.immediatePurgeDataOn30Days;
+    }
+
+    /**
+     * Set purge data immediately after 30 days.
+     *
+     * @param immediatePurgeDataOn30Days the immediatePurgeDataOn30Days value to set
+     * @return the ApplicationInsightsComponentInner object itself.
+     */
+    public ApplicationInsightsComponentInner withImmediatePurgeDataOn30Days(Boolean immediatePurgeDataOn30Days) {
+        this.immediatePurgeDataOn30Days = immediatePurgeDataOn30Days;
+        return this;
+    }
+
+    /**
+     * Get possible values include: 'Enabled', 'Disabled'.
+     *
+     * @return the publicNetworkAccessForIngestion value
+     */
+    public PublicNetworkAccessType publicNetworkAccessForIngestion() {
+        return this.publicNetworkAccessForIngestion;
+    }
+
+    /**
+     * Set possible values include: 'Enabled', 'Disabled'.
+     *
+     * @param publicNetworkAccessForIngestion the publicNetworkAccessForIngestion value to set
+     * @return the ApplicationInsightsComponentInner object itself.
+     */
+    public ApplicationInsightsComponentInner withPublicNetworkAccessForIngestion(PublicNetworkAccessType publicNetworkAccessForIngestion) {
+        this.publicNetworkAccessForIngestion = publicNetworkAccessForIngestion;
+        return this;
+    }
+
+    /**
+     * Get possible values include: 'Enabled', 'Disabled'.
+     *
+     * @return the publicNetworkAccessForQuery value
+     */
+    public PublicNetworkAccessType publicNetworkAccessForQuery() {
+        return this.publicNetworkAccessForQuery;
+    }
+
+    /**
+     * Set possible values include: 'Enabled', 'Disabled'.
+     *
+     * @param publicNetworkAccessForQuery the publicNetworkAccessForQuery value to set
+     * @return the ApplicationInsightsComponentInner object itself.
+     */
+    public ApplicationInsightsComponentInner withPublicNetworkAccessForQuery(PublicNetworkAccessType publicNetworkAccessForQuery) {
+        this.publicNetworkAccessForQuery = publicNetworkAccessForQuery;
         return this;
     }
 
