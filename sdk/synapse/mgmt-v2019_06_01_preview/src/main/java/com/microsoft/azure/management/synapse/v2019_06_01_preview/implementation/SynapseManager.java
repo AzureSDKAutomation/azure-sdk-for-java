@@ -42,6 +42,8 @@ import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolVulnera
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.Workspaces;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceAadAdmins;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManagedIdentitySqlControlSettings;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.PrivateLinkResources;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.PrivateEndpointConnections;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -75,6 +77,8 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
     private Workspaces workspaces;
     private WorkspaceAadAdmins workspaceAadAdmins;
     private WorkspaceManagedIdentitySqlControlSettings workspaceManagedIdentitySqlControlSettings;
+    private PrivateLinkResources privateLinkResources;
+    private PrivateEndpointConnections privateEndpointConnections;
     /**
     * Get a Configurable instance that can be used to create SynapseManager with optional configuration.
     *
@@ -380,6 +384,26 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
             this.workspaceManagedIdentitySqlControlSettings = new WorkspaceManagedIdentitySqlControlSettingsImpl(this);
         }
         return this.workspaceManagedIdentitySqlControlSettings;
+    }
+
+    /**
+     * @return Entry point to manage PrivateLinkResources.
+     */
+    public PrivateLinkResources privateLinkResources() {
+        if (this.privateLinkResources == null) {
+            this.privateLinkResources = new PrivateLinkResourcesImpl(this);
+        }
+        return this.privateLinkResources;
+    }
+
+    /**
+     * @return Entry point to manage PrivateEndpointConnections.
+     */
+    public PrivateEndpointConnections privateEndpointConnections() {
+        if (this.privateEndpointConnections == null) {
+            this.privateEndpointConnections = new PrivateEndpointConnectionsImpl(this);
+        }
+        return this.privateEndpointConnections;
     }
 
     /**
