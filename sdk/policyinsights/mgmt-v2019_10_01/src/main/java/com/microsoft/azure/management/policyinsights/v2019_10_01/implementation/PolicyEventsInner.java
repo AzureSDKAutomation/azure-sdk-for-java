@@ -69,7 +69,7 @@ public class PolicyEventsInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policyinsights.v2019_10_01.PolicyEvents listQueryResultsForResource" })
         @POST("{resourceId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults")
-        Observable<Response<ResponseBody>> listQueryResultsForResource(@Path("policyEventsResource") String policyEventsResource, @Path(value = "resourceId", encoded = true) String resourceId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Query("$top") Integer top, @Query("$orderby") String orderBy, @Query("$select") String select, @Query("$from") DateTime from, @Query("$to") DateTime to, @Query("$filter") String filter, @Query("$apply") String apply, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listQueryResultsForResource(@Path("policyEventsResource") String policyEventsResource, @Path(value = "resourceId", encoded = true) String resourceId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Query("$top") Integer top, @Query("$orderby") String orderBy, @Query("$select") String select, @Query("$from") DateTime from, @Query("$to") DateTime to, @Query("$filter") String filter, @Query("$apply") String apply, @Query("$expand") String expand, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policyinsights.v2019_10_01.PolicyEvents listQueryResultsForPolicySetDefinition" })
         @POST("subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults")
@@ -147,7 +147,7 @@ public class PolicyEventsInner {
         }
         final String policyEventsResource = "default";
         final String managementGroupsNamespace = "Microsoft.Management";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         final QueryOptions queryOptions = null;
         Integer top = null;
         String orderBy = null;
@@ -229,7 +229,7 @@ public class PolicyEventsInner {
         Validator.validate(queryOptions);
         final String policyEventsResource = "default";
         final String managementGroupsNamespace = "Microsoft.Management";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         Integer top = null;
         if (queryOptions != null) {
             top = queryOptions.top();
@@ -332,7 +332,7 @@ public class PolicyEventsInner {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String policyEventsResource = "default";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         final QueryOptions queryOptions = null;
         Integer top = null;
         String orderBy = null;
@@ -413,7 +413,7 @@ public class PolicyEventsInner {
         }
         Validator.validate(queryOptions);
         final String policyEventsResource = "default";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         Integer top = null;
         if (queryOptions != null) {
             top = queryOptions.top();
@@ -523,7 +523,7 @@ public class PolicyEventsInner {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
         final String policyEventsResource = "default";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         final QueryOptions queryOptions = null;
         Integer top = null;
         String orderBy = null;
@@ -611,7 +611,7 @@ public class PolicyEventsInner {
         }
         Validator.validate(queryOptions);
         final String policyEventsResource = "default";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         Integer top = null;
         if (queryOptions != null) {
             top = queryOptions.top();
@@ -714,7 +714,7 @@ public class PolicyEventsInner {
             throw new IllegalArgumentException("Parameter resourceId is required and cannot be null.");
         }
         final String policyEventsResource = "default";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         final QueryOptions queryOptions = null;
         Integer top = null;
         String orderBy = null;
@@ -723,7 +723,8 @@ public class PolicyEventsInner {
         DateTime to = null;
         String filter = null;
         String apply = null;
-        return service.listQueryResultsForResource(policyEventsResource, resourceId, apiVersion, this.client.acceptLanguage(), top, orderBy, select, from, to, filter, apply, this.client.userAgent())
+        String expand = null;
+        return service.listQueryResultsForResource(policyEventsResource, resourceId, apiVersion, this.client.acceptLanguage(), top, orderBy, select, from, to, filter, apply, expand, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyEventsQueryResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyEventsQueryResultsInner>> call(Response<ResponseBody> response) {
@@ -795,7 +796,7 @@ public class PolicyEventsInner {
         }
         Validator.validate(queryOptions);
         final String policyEventsResource = "default";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         Integer top = null;
         if (queryOptions != null) {
             top = queryOptions.top();
@@ -824,7 +825,11 @@ public class PolicyEventsInner {
         if (queryOptions != null) {
             apply = queryOptions.apply();
         }
-        return service.listQueryResultsForResource(policyEventsResource, resourceId, apiVersion, this.client.acceptLanguage(), top, orderBy, select, from, to, filter, apply, this.client.userAgent())
+        String expand = null;
+        if (queryOptions != null) {
+            expand = queryOptions.expand();
+        }
+        return service.listQueryResultsForResource(policyEventsResource, resourceId, apiVersion, this.client.acceptLanguage(), top, orderBy, select, from, to, filter, apply, expand, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyEventsQueryResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyEventsQueryResultsInner>> call(Response<ResponseBody> response) {
@@ -906,7 +911,7 @@ public class PolicyEventsInner {
         }
         final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         final QueryOptions queryOptions = null;
         Integer top = null;
         String orderBy = null;
@@ -995,7 +1000,7 @@ public class PolicyEventsInner {
         Validator.validate(queryOptions);
         final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         Integer top = null;
         if (queryOptions != null) {
             top = queryOptions.top();
@@ -1106,7 +1111,7 @@ public class PolicyEventsInner {
         }
         final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         final QueryOptions queryOptions = null;
         Integer top = null;
         String orderBy = null;
@@ -1195,7 +1200,7 @@ public class PolicyEventsInner {
         Validator.validate(queryOptions);
         final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         Integer top = null;
         if (queryOptions != null) {
             top = queryOptions.top();
@@ -1306,7 +1311,7 @@ public class PolicyEventsInner {
         }
         final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         final QueryOptions queryOptions = null;
         Integer top = null;
         String orderBy = null;
@@ -1395,7 +1400,7 @@ public class PolicyEventsInner {
         Validator.validate(queryOptions);
         final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         Integer top = null;
         if (queryOptions != null) {
             top = queryOptions.top();
@@ -1513,7 +1518,7 @@ public class PolicyEventsInner {
         }
         final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         final QueryOptions queryOptions = null;
         Integer top = null;
         String orderBy = null;
@@ -1609,7 +1614,7 @@ public class PolicyEventsInner {
         Validator.validate(queryOptions);
         final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         Integer top = null;
         if (queryOptions != null) {
             top = queryOptions.top();
@@ -1711,7 +1716,7 @@ public class PolicyEventsInner {
         if (scope == null) {
             throw new IllegalArgumentException("Parameter scope is required and cannot be null.");
         }
-        final String apiVersion = "2018-04-04";
+        final String apiVersion = "2019-10-01";
         return service.getMetadata(scope, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
                 @Override

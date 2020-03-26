@@ -64,8 +64,8 @@ public class QueryOptions {
     private String apply;
 
     /**
-     * The $expand query parameter. For example, to expand
-     * policyEvaluationDetails, use $expand=policyEvaluationDetails.
+     * The $expand query parameter. For example, to expand components use
+     * $expand=components.
      */
     @JsonProperty(value = "")
     private String expand;
@@ -211,7 +211,7 @@ public class QueryOptions {
     }
 
     /**
-     * Get the $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails.
+     * Get the $expand query parameter. For example, to expand components use $expand=components.
      *
      * @return the expand value
      */
@@ -220,7 +220,7 @@ public class QueryOptions {
     }
 
     /**
-     * Set the $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails.
+     * Set the $expand query parameter. For example, to expand components use $expand=components.
      *
      * @param expand the expand value to set
      * @return the QueryOptions object itself.
