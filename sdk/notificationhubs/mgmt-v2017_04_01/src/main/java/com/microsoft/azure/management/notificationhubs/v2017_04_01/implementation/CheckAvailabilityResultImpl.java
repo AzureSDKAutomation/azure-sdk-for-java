@@ -10,7 +10,6 @@ package com.microsoft.azure.management.notificationhubs.v2017_04_01.implementati
 
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.CheckAvailabilityResult;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
 import java.util.Map;
 
 class CheckAvailabilityResultImpl extends WrapperImpl<CheckAvailabilityResultInner> implements CheckAvailabilityResult {
@@ -43,11 +42,6 @@ class CheckAvailabilityResultImpl extends WrapperImpl<CheckAvailabilityResultInn
     @Override
     public String name() {
         return this.inner().name();
-    }
-
-    @Override
-    public Sku sku() {
-        return this.inner().sku();
     }
 
     @Override

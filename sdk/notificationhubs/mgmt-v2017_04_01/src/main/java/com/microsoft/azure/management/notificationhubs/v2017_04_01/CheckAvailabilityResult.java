@@ -39,11 +39,6 @@ public interface CheckAvailabilityResult extends HasInner<CheckAvailabilityResul
     String name();
 
     /**
-     * @return the sku value.
-     */
-    Sku sku();
-
-    /**
      * @return the tags value.
      */
     Map<String, String> tags();

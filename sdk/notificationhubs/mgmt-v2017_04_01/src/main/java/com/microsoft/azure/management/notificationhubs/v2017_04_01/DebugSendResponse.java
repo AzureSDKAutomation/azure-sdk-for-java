@@ -44,11 +44,6 @@ public interface DebugSendResponse extends HasInner<DebugSendResponseInner>, Has
     Object results();
 
     /**
-     * @return the sku value.
-     */
-    Sku sku();
-
-    /**
      * @return the success value.
      */
     Double success();

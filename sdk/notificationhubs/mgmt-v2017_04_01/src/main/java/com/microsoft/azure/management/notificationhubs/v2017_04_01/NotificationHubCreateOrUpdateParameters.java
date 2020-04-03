@@ -75,12 +75,6 @@ public class NotificationHubCreateOrUpdateParameters extends Resource {
     private BaiduCredential baiduCredential;
 
     /**
-     * The sku of the created namespace.
-     */
-    @JsonProperty(value = "sku")
-    private Sku sku;
-
-    /**
      * Get the NotificationHub name.
      *
      * @return the notificationHubCreateOrUpdateParametersName value
@@ -257,26 +251,6 @@ public class NotificationHubCreateOrUpdateParameters extends Resource {
      */
     public NotificationHubCreateOrUpdateParameters withBaiduCredential(BaiduCredential baiduCredential) {
         this.baiduCredential = baiduCredential;
-        return this;
-    }
-
-    /**
-     * Get the sku of the created namespace.
-     *
-     * @return the sku value
-     */
-    public Sku sku() {
-        return this.sku;
-    }
-
-    /**
-     * Set the sku of the created namespace.
-     *
-     * @param sku the sku value to set
-     * @return the NotificationHubCreateOrUpdateParameters object itself.
-     */
-    public NotificationHubCreateOrUpdateParameters withSku(Sku sku) {
-        this.sku = sku;
         return this;
     }
 

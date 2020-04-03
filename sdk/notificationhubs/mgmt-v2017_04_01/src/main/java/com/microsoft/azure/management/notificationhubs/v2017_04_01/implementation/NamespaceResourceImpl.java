@@ -14,8 +14,8 @@ import rx.Observable;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.NamespacePatchParameters;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.NamespaceCreateOrUpdateParameters;
 import org.joda.time.DateTime;
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.NamespaceType;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
+import com.microsoft.azure.management.notificationhubs.v2017_04_01.NamespaceType;
 import rx.functions.Func1;
 
 class NamespaceResourceImpl extends GroupableResourceCoreImpl<NamespaceResource, NamespaceResourceInner, NamespaceResourceImpl, NotificationHubsManager> implements NamespaceResource, NamespaceResource.Definition, NamespaceResource.Update {
@@ -114,6 +114,11 @@ class NamespaceResourceImpl extends GroupableResourceCoreImpl<NamespaceResource,
     }
 
     @Override
+    public String region() {
+        return this.inner().region();
+    }
+
+    @Override
     public String scaleUnit() {
         return this.inner().scaleUnit();
     }
@@ -168,8 +173,8 @@ class NamespaceResourceImpl extends GroupableResourceCoreImpl<NamespaceResource,
     }
 
     @Override
-    public NamespaceResourceImpl withNamespaceCreateOrUpdateParametersName(String namespaceCreateOrUpdateParametersName) {
-        this.createParameter.withNamespaceCreateOrUpdateParametersName(namespaceCreateOrUpdateParametersName);
+    public NamespaceResourceImpl withNamespaceResourceName(String namespaceResourceName) {
+        this.createParameter.withNamespaceResourceName(namespaceResourceName);
         return this;
     }
 
@@ -182,6 +187,12 @@ class NamespaceResourceImpl extends GroupableResourceCoreImpl<NamespaceResource,
     @Override
     public NamespaceResourceImpl withProvisioningState(String provisioningState) {
         this.createParameter.withProvisioningState(provisioningState);
+        return this;
+    }
+
+    @Override
+    public NamespaceResourceImpl withRegion(String region) {
+        this.createParameter.withRegion(region);
         return this;
     }
 

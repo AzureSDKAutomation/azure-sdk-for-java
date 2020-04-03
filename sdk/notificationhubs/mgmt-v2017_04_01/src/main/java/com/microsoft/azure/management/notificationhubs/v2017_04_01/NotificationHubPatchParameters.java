@@ -75,12 +75,6 @@ public class NotificationHubPatchParameters extends Resource {
     private BaiduCredential baiduCredential;
 
     /**
-     * The sku of the created namespace.
-     */
-    @JsonProperty(value = "sku")
-    private Sku sku;
-
-    /**
      * Get the NotificationHub name.
      *
      * @return the notificationHubPatchParametersName value
@@ -257,26 +251,6 @@ public class NotificationHubPatchParameters extends Resource {
      */
     public NotificationHubPatchParameters withBaiduCredential(BaiduCredential baiduCredential) {
         this.baiduCredential = baiduCredential;
-        return this;
-    }
-
-    /**
-     * Get the sku of the created namespace.
-     *
-     * @return the sku value
-     */
-    public Sku sku() {
-        return this.sku;
-    }
-
-    /**
-     * Set the sku of the created namespace.
-     *
-     * @param sku the sku value to set
-     * @return the NotificationHubPatchParameters object itself.
-     */
-    public NotificationHubPatchParameters withSku(Sku sku) {
-        this.sku = sku;
         return this;
     }
 

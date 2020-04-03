@@ -80,11 +80,6 @@ public interface NotificationHubResource extends HasInner<NotificationHubResourc
     String registrationTtl();
 
     /**
-     * @return the sku value.
-     */
-    Sku sku();
-
-    /**
      * @return the tags value.
      */
     Map<String, String> tags();
@@ -237,18 +232,6 @@ public interface NotificationHubResource extends HasInner<NotificationHubResourc
         }
 
         /**
-         * The stage of the notificationhubresource definition allowing to specify Sku.
-         */
-        interface WithSku {
-            /**
-             * Specifies sku.
-             * @param sku The sku of the created namespace
-             * @return the next definition stage
-             */
-            WithCreate withSku(Sku sku);
-        }
-
-        /**
          * The stage of the notificationhubresource definition allowing to specify Tags.
          */
         interface WithTags {
@@ -277,13 +260,13 @@ public interface NotificationHubResource extends HasInner<NotificationHubResourc
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<NotificationHubResource>, DefinitionStages.WithAdmCredential, DefinitionStages.WithApnsCredential, DefinitionStages.WithAuthorizationRules, DefinitionStages.WithBaiduCredential, DefinitionStages.WithGcmCredential, DefinitionStages.WithLocation, DefinitionStages.WithMpnsCredential, DefinitionStages.WithNotificationHubCreateOrUpdateParametersName, DefinitionStages.WithRegistrationTtl, DefinitionStages.WithSku, DefinitionStages.WithTags, DefinitionStages.WithWnsCredential {
+        interface WithCreate extends Creatable<NotificationHubResource>, DefinitionStages.WithAdmCredential, DefinitionStages.WithApnsCredential, DefinitionStages.WithAuthorizationRules, DefinitionStages.WithBaiduCredential, DefinitionStages.WithGcmCredential, DefinitionStages.WithLocation, DefinitionStages.WithMpnsCredential, DefinitionStages.WithNotificationHubCreateOrUpdateParametersName, DefinitionStages.WithRegistrationTtl, DefinitionStages.WithTags, DefinitionStages.WithWnsCredential {
         }
     }
     /**
      * The template for a NotificationHubResource update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<NotificationHubResource>, UpdateStages.WithAdmCredential, UpdateStages.WithApnsCredential, UpdateStages.WithAuthorizationRules, UpdateStages.WithBaiduCredential, UpdateStages.WithGcmCredential, UpdateStages.WithLocation, UpdateStages.WithMpnsCredential, UpdateStages.WithNotificationHubPatchParametersName, UpdateStages.WithRegistrationTtl, UpdateStages.WithSku, UpdateStages.WithTags, UpdateStages.WithWnsCredential {
+    interface Update extends Appliable<NotificationHubResource>, UpdateStages.WithAdmCredential, UpdateStages.WithApnsCredential, UpdateStages.WithAuthorizationRules, UpdateStages.WithBaiduCredential, UpdateStages.WithGcmCredential, UpdateStages.WithLocation, UpdateStages.WithMpnsCredential, UpdateStages.WithNotificationHubPatchParametersName, UpdateStages.WithRegistrationTtl, UpdateStages.WithTags, UpdateStages.WithWnsCredential {
     }
 
     /**
@@ -396,18 +379,6 @@ public interface NotificationHubResource extends HasInner<NotificationHubResourc
              * @return the next update stage
              */
             Update withRegistrationTtl(String registrationTtl);
-        }
-
-        /**
-         * The stage of the notificationhubresource update allowing to specify Sku.
-         */
-        interface WithSku {
-            /**
-             * Specifies sku.
-             * @param sku The sku of the created namespace
-             * @return the next update stage
-             */
-            Update withSku(Sku sku);
         }
 
         /**

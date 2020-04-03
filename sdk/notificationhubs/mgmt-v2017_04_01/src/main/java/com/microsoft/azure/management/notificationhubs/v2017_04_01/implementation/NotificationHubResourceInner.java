@@ -16,7 +16,6 @@ import com.microsoft.azure.management.notificationhubs.v2017_04_01.GcmCredential
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.MpnsCredential;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.AdmCredential;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.BaiduCredential;
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.rest.SkipParentValidation;
@@ -81,12 +80,6 @@ public class NotificationHubResourceInner extends Resource {
      */
     @JsonProperty(value = "properties.baiduCredential")
     private BaiduCredential baiduCredential;
-
-    /**
-     * The sku of the created namespace.
-     */
-    @JsonProperty(value = "sku")
-    private Sku sku;
 
     /**
      * Get the NotificationHub name.
@@ -265,26 +258,6 @@ public class NotificationHubResourceInner extends Resource {
      */
     public NotificationHubResourceInner withBaiduCredential(BaiduCredential baiduCredential) {
         this.baiduCredential = baiduCredential;
-        return this;
-    }
-
-    /**
-     * Get the sku of the created namespace.
-     *
-     * @return the sku value
-     */
-    public Sku sku() {
-        return this.sku;
-    }
-
-    /**
-     * Set the sku of the created namespace.
-     *
-     * @param sku the sku value to set
-     * @return the NotificationHubResourceInner object itself.
-     */
-    public NotificationHubResourceInner withSku(Sku sku) {
-        this.sku = sku;
         return this;
     }
 

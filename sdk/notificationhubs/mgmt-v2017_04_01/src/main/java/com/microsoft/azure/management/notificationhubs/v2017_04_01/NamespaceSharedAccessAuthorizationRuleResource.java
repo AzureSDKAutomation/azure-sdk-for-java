@@ -85,11 +85,6 @@ public interface NamespaceSharedAccessAuthorizationRuleResource extends HasInner
     String secondaryKey();
 
     /**
-     * @return the sku value.
-     */
-    Sku sku();
-
-    /**
      * @return the tags value.
      */
     Map<String, String> tags();
