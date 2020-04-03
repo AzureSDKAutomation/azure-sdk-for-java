@@ -22,7 +22,6 @@ import com.microsoft.azure.management.notificationhubs.v2017_04_01.BaiduCredenti
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.GcmCredential;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.MpnsCredential;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.WnsCredential;
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
 import rx.functions.Func1;
 
 class NotificationHubResourceImpl extends CreatableUpdatableImpl<NotificationHubResource, NotificationHubResourceInner, NotificationHubResourceImpl> implements NotificationHubResource, NotificationHubResource.Definition, NotificationHubResource.Update {
@@ -48,7 +47,7 @@ class NotificationHubResourceImpl extends CreatableUpdatableImpl<NotificationHub
         this.manager = manager;
         // Set resource name
         this.notificationHubName = inner.name();
-        // resource ancestor names
+        // set resource ancestor and positional variables
         this.resourceGroupName = IdParsingUtils.getValueFromIdByName(inner.id(), "resourceGroups");
         this.namespaceName = IdParsingUtils.getValueFromIdByName(inner.id(), "namespaces");
         this.notificationHubName = IdParsingUtils.getValueFromIdByName(inner.id(), "notificationHubs");
@@ -162,11 +161,6 @@ class NotificationHubResourceImpl extends CreatableUpdatableImpl<NotificationHub
     }
 
     @Override
-    public Sku sku() {
-        return this.inner().sku();
-    }
-
-    @Override
     public Map<String, String> tags() {
         return this.inner().getTags();
     }
@@ -276,16 +270,6 @@ class NotificationHubResourceImpl extends CreatableUpdatableImpl<NotificationHub
             this.createParameter.withRegistrationTtl(registrationTtl);
         } else {
             this.updateParameter.withRegistrationTtl(registrationTtl);
-        }
-        return this;
-    }
-
-    @Override
-    public NotificationHubResourceImpl withSku(Sku sku) {
-        if (isInCreateMode()) {
-            this.createParameter.withSku(sku);
-        } else {
-            this.updateParameter.withSku(sku);
         }
         return this;
     }

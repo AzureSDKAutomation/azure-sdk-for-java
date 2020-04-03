@@ -8,7 +8,6 @@
 
 package com.microsoft.azure.management.notificationhubs.v2017_04_01.implementation;
 
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.rest.SkipParentValidation;
@@ -37,12 +36,6 @@ public class DebugSendResponseInner extends Resource {
      */
     @JsonProperty(value = "properties.results")
     private Object results;
-
-    /**
-     * The sku of the created namespace.
-     */
-    @JsonProperty(value = "sku")
-    private Sku sku;
 
     /**
      * Get successful send.
@@ -101,26 +94,6 @@ public class DebugSendResponseInner extends Resource {
      */
     public DebugSendResponseInner withResults(Object results) {
         this.results = results;
-        return this;
-    }
-
-    /**
-     * Get the sku of the created namespace.
-     *
-     * @return the sku value
-     */
-    public Sku sku() {
-        return this.sku;
-    }
-
-    /**
-     * Set the sku of the created namespace.
-     *
-     * @param sku the sku value to set
-     * @return the DebugSendResponseInner object itself.
-     */
-    public DebugSendResponseInner withSku(Sku sku) {
-        this.sku = sku;
         return this;
     }
 

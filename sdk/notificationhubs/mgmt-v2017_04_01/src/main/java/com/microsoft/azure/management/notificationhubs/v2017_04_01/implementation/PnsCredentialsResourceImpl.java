@@ -15,7 +15,6 @@ import com.microsoft.azure.management.notificationhubs.v2017_04_01.ApnsCredentia
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.BaiduCredential;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.GcmCredential;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.MpnsCredential;
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
 import java.util.Map;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.WnsCredential;
 
@@ -69,11 +68,6 @@ class PnsCredentialsResourceImpl extends WrapperImpl<PnsCredentialsResourceInner
     @Override
     public String name() {
         return this.inner().name();
-    }
-
-    @Override
-    public Sku sku() {
-        return this.inner().sku();
     }
 
     @Override

@@ -10,7 +10,6 @@ package com.microsoft.azure.management.notificationhubs.v2017_04_01.implementati
 
 import java.util.List;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.AccessRights;
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.rest.SkipParentValidation;
@@ -77,12 +76,6 @@ public class SharedAccessAuthorizationRuleResourceInner extends Resource {
      */
     @JsonProperty(value = "properties.revision", access = JsonProperty.Access.WRITE_ONLY)
     private Integer revision;
-
-    /**
-     * The sku of the created namespace.
-     */
-    @JsonProperty(value = "sku")
-    private Sku sku;
 
     /**
      * Get the rights associated with the rule.
@@ -174,26 +167,6 @@ public class SharedAccessAuthorizationRuleResourceInner extends Resource {
      */
     public Integer revision() {
         return this.revision;
-    }
-
-    /**
-     * Get the sku of the created namespace.
-     *
-     * @return the sku value
-     */
-    public Sku sku() {
-        return this.sku;
-    }
-
-    /**
-     * Set the sku of the created namespace.
-     *
-     * @param sku the sku value to set
-     * @return the SharedAccessAuthorizationRuleResourceInner object itself.
-     */
-    public SharedAccessAuthorizationRuleResourceInner withSku(Sku sku) {
-        this.sku = sku;
-        return this;
     }
 
 }

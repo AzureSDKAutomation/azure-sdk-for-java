@@ -14,7 +14,6 @@ import rx.Observable;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.SharedAccessAuthorizationRuleProperties;
 import java.util.List;
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.AccessRights;
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
 import java.util.Map;
 import rx.functions.Func1;
 
@@ -41,7 +40,7 @@ class NamespaceSharedAccessAuthorizationRuleResourceImpl extends CreatableUpdata
         this.manager = manager;
         // Set resource name
         this.authorizationRuleName = inner.name();
-        // resource ancestor names
+        // set resource ancestor and positional variables
         this.resourceGroupName = IdParsingUtils.getValueFromIdByName(inner.id(), "resourceGroups");
         this.namespaceName = IdParsingUtils.getValueFromIdByName(inner.id(), "namespaces");
         this.authorizationRuleName = IdParsingUtils.getValueFromIdByName(inner.id(), "AuthorizationRules");
@@ -157,11 +156,6 @@ class NamespaceSharedAccessAuthorizationRuleResourceImpl extends CreatableUpdata
     @Override
     public String secondaryKey() {
         return this.inner().secondaryKey();
-    }
-
-    @Override
-    public Sku sku() {
-        return this.inner().sku();
     }
 
     @Override

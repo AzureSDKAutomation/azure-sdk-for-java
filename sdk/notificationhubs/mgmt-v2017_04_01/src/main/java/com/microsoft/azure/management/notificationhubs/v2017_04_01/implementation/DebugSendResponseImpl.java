@@ -10,7 +10,6 @@ package com.microsoft.azure.management.notificationhubs.v2017_04_01.implementati
 
 import com.microsoft.azure.management.notificationhubs.v2017_04_01.DebugSendResponse;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
-import com.microsoft.azure.management.notificationhubs.v2017_04_01.Sku;
 import java.util.Map;
 
 class DebugSendResponseImpl extends WrapperImpl<DebugSendResponseInner> implements DebugSendResponse {
@@ -48,11 +47,6 @@ class DebugSendResponseImpl extends WrapperImpl<DebugSendResponseInner> implemen
     @Override
     public Object results() {
         return this.inner().results();
-    }
-
-    @Override
-    public Sku sku() {
-        return this.inner().sku();
     }
 
     @Override
