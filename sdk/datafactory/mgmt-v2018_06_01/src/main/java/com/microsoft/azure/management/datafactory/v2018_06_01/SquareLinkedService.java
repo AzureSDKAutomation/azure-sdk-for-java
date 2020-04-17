@@ -30,7 +30,7 @@ public class SquareLinkedService extends LinkedServiceInner {
     /**
      * The client ID associated with your Square application.
      */
-    @JsonProperty(value = "typeProperties.clientId", required = true)
+    @JsonProperty(value = "typeProperties.clientId")
     private Object clientId;
 
     /**
@@ -40,10 +40,23 @@ public class SquareLinkedService extends LinkedServiceInner {
     private SecretBase clientSecret;
 
     /**
-     * The redirect URL assigned in the Square application dashboard. (i.e.
-     * http://localhost:2500).
+     * The access token for OAuth 2.0 authentication.
      */
-    @JsonProperty(value = "typeProperties.redirectUri", required = true)
+    @JsonProperty(value = "typeProperties.accessToken")
+    private SecretBase accessToken;
+
+    /**
+     * The OAuth 2.0 refresh token associated with your Square application,
+     * used to refresh the access token when it expires.
+     */
+    @JsonProperty(value = "typeProperties.refreshToken")
+    private SecretBase refreshToken;
+
+    /**
+     * The redirect URL assigned in the Square application dashboard. (i.e.
+     * http://localhost:2500) [Deprecated].
+     */
+    @JsonProperty(value = "typeProperties.redirectUri")
     private Object redirectUri;
 
     /**
@@ -137,7 +150,47 @@ public class SquareLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Get the redirect URL assigned in the Square application dashboard. (i.e. http://localhost:2500).
+     * Get the access token for OAuth 2.0 authentication.
+     *
+     * @return the accessToken value
+     */
+    public SecretBase accessToken() {
+        return this.accessToken;
+    }
+
+    /**
+     * Set the access token for OAuth 2.0 authentication.
+     *
+     * @param accessToken the accessToken value to set
+     * @return the SquareLinkedService object itself.
+     */
+    public SquareLinkedService withAccessToken(SecretBase accessToken) {
+        this.accessToken = accessToken;
+        return this;
+    }
+
+    /**
+     * Get the OAuth 2.0 refresh token associated with your Square application, used to refresh the access token when it expires.
+     *
+     * @return the refreshToken value
+     */
+    public SecretBase refreshToken() {
+        return this.refreshToken;
+    }
+
+    /**
+     * Set the OAuth 2.0 refresh token associated with your Square application, used to refresh the access token when it expires.
+     *
+     * @param refreshToken the refreshToken value to set
+     * @return the SquareLinkedService object itself.
+     */
+    public SquareLinkedService withRefreshToken(SecretBase refreshToken) {
+        this.refreshToken = refreshToken;
+        return this;
+    }
+
+    /**
+     * Get the redirect URL assigned in the Square application dashboard. (i.e. http://localhost:2500) [Deprecated].
      *
      * @return the redirectUri value
      */
@@ -146,7 +199,7 @@ public class SquareLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Set the redirect URL assigned in the Square application dashboard. (i.e. http://localhost:2500).
+     * Set the redirect URL assigned in the Square application dashboard. (i.e. http://localhost:2500) [Deprecated].
      *
      * @param redirectUri the redirectUri value to set
      * @return the SquareLinkedService object itself.
