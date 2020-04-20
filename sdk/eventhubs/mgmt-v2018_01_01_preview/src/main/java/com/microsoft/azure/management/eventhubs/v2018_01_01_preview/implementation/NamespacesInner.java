@@ -47,7 +47,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /** The Retrofit service to perform REST calls. */
     private NamespacesService service;
     /** The service client containing this operation class. */
-    private EventHub2018PreviewManagementClientImpl client;
+    private EventHubManagementClientImpl client;
 
     /**
      * Initializes an instance of NamespacesInner.
@@ -55,7 +55,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public NamespacesInner(Retrofit retrofit, EventHub2018PreviewManagementClientImpl client) {
+    public NamespacesInner(Retrofit retrofit, EventHubManagementClientImpl client) {
         this.service = retrofit.create(NamespacesService.class);
         this.client = client;
     }
@@ -65,6 +65,22 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
      * used by Retrofit to perform actually REST calls.
      */
     interface NamespacesService {
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces listIPFilterRules" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules")
+        Observable<Response<ResponseBody>> listIPFilterRules(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces createOrUpdateIpFilterRule" })
+        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}")
+        Observable<Response<ResponseBody>> createOrUpdateIpFilterRule(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("ipFilterRuleName") String ipFilterRuleName, @Path("subscriptionId") String subscriptionId, @Body IpFilterRuleInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces deleteIpFilterRule" })
+        @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}", method = "DELETE", hasBody = true)
+        Observable<Response<ResponseBody>> deleteIpFilterRule(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("ipFilterRuleName") String ipFilterRuleName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces getIpFilterRule" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}")
+        Observable<Response<ResponseBody>> getIpFilterRule(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("ipFilterRuleName") String ipFilterRuleName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces")
         Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -97,22 +113,6 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}")
         Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Body EHNamespaceInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces listIPFilterRules" })
-        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules")
-        Observable<Response<ResponseBody>> listIPFilterRules(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces createOrUpdateIpFilterRule" })
-        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}")
-        Observable<Response<ResponseBody>> createOrUpdateIpFilterRule(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("ipFilterRuleName") String ipFilterRuleName, @Path("subscriptionId") String subscriptionId, @Body IpFilterRuleInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces deleteIpFilterRule" })
-        @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteIpFilterRule(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("ipFilterRuleName") String ipFilterRuleName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces getIpFilterRule" })
-        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}")
-        Observable<Response<ResponseBody>> getIpFilterRule(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("ipFilterRuleName") String ipFilterRuleName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces listVirtualNetworkRules" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/virtualnetworkrules")
         Observable<Response<ResponseBody>> listVirtualNetworkRules(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -137,6 +137,10 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets/default")
         Observable<Response<ResponseBody>> getNetworkRuleSet(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces listIPFilterRulesNext" })
+        @GET
+        Observable<Response<ResponseBody>> listIPFilterRulesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces listNext" })
         @GET
         Observable<Response<ResponseBody>> listNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -145,14 +149,420 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
         @GET
         Observable<Response<ResponseBody>> listByResourceGroupNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces listIPFilterRulesNext" })
-        @GET
-        Observable<Response<ResponseBody>> listIPFilterRulesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces listVirtualNetworkRulesNext" })
         @GET
         Observable<Response<ResponseBody>> listVirtualNetworkRulesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+    }
+
+    /**
+     * Gets a list of IP Filter rules for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;IpFilterRuleInner&gt; object if successful.
+     */
+    public PagedList<IpFilterRuleInner> listIPFilterRules(final String resourceGroupName, final String namespaceName) {
+        ServiceResponse<Page<IpFilterRuleInner>> response = listIPFilterRulesSinglePageAsync(resourceGroupName, namespaceName).toBlocking().single();
+        return new PagedList<IpFilterRuleInner>(response.body()) {
+            @Override
+            public Page<IpFilterRuleInner> nextPage(String nextPageLink) {
+                return listIPFilterRulesNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Gets a list of IP Filter rules for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<IpFilterRuleInner>> listIPFilterRulesAsync(final String resourceGroupName, final String namespaceName, final ListOperationCallback<IpFilterRuleInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listIPFilterRulesSinglePageAsync(resourceGroupName, namespaceName),
+            new Func1<String, Observable<ServiceResponse<Page<IpFilterRuleInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<IpFilterRuleInner>>> call(String nextPageLink) {
+                    return listIPFilterRulesNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Gets a list of IP Filter rules for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;IpFilterRuleInner&gt; object
+     */
+    public Observable<Page<IpFilterRuleInner>> listIPFilterRulesAsync(final String resourceGroupName, final String namespaceName) {
+        return listIPFilterRulesWithServiceResponseAsync(resourceGroupName, namespaceName)
+            .map(new Func1<ServiceResponse<Page<IpFilterRuleInner>>, Page<IpFilterRuleInner>>() {
+                @Override
+                public Page<IpFilterRuleInner> call(ServiceResponse<Page<IpFilterRuleInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Gets a list of IP Filter rules for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;IpFilterRuleInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<IpFilterRuleInner>>> listIPFilterRulesWithServiceResponseAsync(final String resourceGroupName, final String namespaceName) {
+        return listIPFilterRulesSinglePageAsync(resourceGroupName, namespaceName)
+            .concatMap(new Func1<ServiceResponse<Page<IpFilterRuleInner>>, Observable<ServiceResponse<Page<IpFilterRuleInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<IpFilterRuleInner>>> call(ServiceResponse<Page<IpFilterRuleInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listIPFilterRulesNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Gets a list of IP Filter rules for a Namespace.
+     *
+    ServiceResponse<PageImpl1<IpFilterRuleInner>> * @param resourceGroupName Name of the resource group within the azure subscription.
+    ServiceResponse<PageImpl1<IpFilterRuleInner>> * @param namespaceName The Namespace name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;IpFilterRuleInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<IpFilterRuleInner>>> listIPFilterRulesSinglePageAsync(final String resourceGroupName, final String namespaceName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listIPFilterRules(resourceGroupName, namespaceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<IpFilterRuleInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<IpFilterRuleInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl1<IpFilterRuleInner>> result = listIPFilterRulesDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<IpFilterRuleInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl1<IpFilterRuleInner>> listIPFilterRulesDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<IpFilterRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<IpFilterRuleInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Creates or updates an IpFilterRule for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @param parameters The Namespace IpFilterRule.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the IpFilterRuleInner object if successful.
+     */
+    public IpFilterRuleInner createOrUpdateIpFilterRule(String resourceGroupName, String namespaceName, String ipFilterRuleName, IpFilterRuleInner parameters) {
+        return createOrUpdateIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName, parameters).toBlocking().single().body();
+    }
+
+    /**
+     * Creates or updates an IpFilterRule for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @param parameters The Namespace IpFilterRule.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<IpFilterRuleInner> createOrUpdateIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, IpFilterRuleInner parameters, final ServiceCallback<IpFilterRuleInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName, parameters), serviceCallback);
+    }
+
+    /**
+     * Creates or updates an IpFilterRule for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @param parameters The Namespace IpFilterRule.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the IpFilterRuleInner object
+     */
+    public Observable<IpFilterRuleInner> createOrUpdateIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, IpFilterRuleInner parameters) {
+        return createOrUpdateIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName, parameters).map(new Func1<ServiceResponse<IpFilterRuleInner>, IpFilterRuleInner>() {
+            @Override
+            public IpFilterRuleInner call(ServiceResponse<IpFilterRuleInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Creates or updates an IpFilterRule for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @param parameters The Namespace IpFilterRule.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the IpFilterRuleInner object
+     */
+    public Observable<ServiceResponse<IpFilterRuleInner>> createOrUpdateIpFilterRuleWithServiceResponseAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, IpFilterRuleInner parameters) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (ipFilterRuleName == null) {
+            throw new IllegalArgumentException("Parameter ipFilterRuleName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (parameters == null) {
+            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Validator.validate(parameters);
+        return service.createOrUpdateIpFilterRule(resourceGroupName, namespaceName, ipFilterRuleName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<IpFilterRuleInner>>>() {
+                @Override
+                public Observable<ServiceResponse<IpFilterRuleInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<IpFilterRuleInner> clientResponse = createOrUpdateIpFilterRuleDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<IpFilterRuleInner> createOrUpdateIpFilterRuleDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<IpFilterRuleInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<IpFilterRuleInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Deletes an IpFilterRule for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    public void deleteIpFilterRule(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
+        deleteIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName).toBlocking().single().body();
+    }
+
+    /**
+     * Deletes an IpFilterRule for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Void> deleteIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName), serviceCallback);
+    }
+
+    /**
+     * Deletes an IpFilterRule for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> deleteIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
+        return deleteIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Deletes an IpFilterRule for a Namespace.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> deleteIpFilterRuleWithServiceResponseAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (ipFilterRuleName == null) {
+            throw new IllegalArgumentException("Parameter ipFilterRuleName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.deleteIpFilterRule(resourceGroupName, namespaceName, ipFilterRuleName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = deleteIpFilterRuleDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<Void> deleteIpFilterRuleDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Gets an IpFilterRule for a Namespace by rule name.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the IpFilterRuleInner object if successful.
+     */
+    public IpFilterRuleInner getIpFilterRule(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
+        return getIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName).toBlocking().single().body();
+    }
+
+    /**
+     * Gets an IpFilterRule for a Namespace by rule name.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<IpFilterRuleInner> getIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, final ServiceCallback<IpFilterRuleInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName), serviceCallback);
+    }
+
+    /**
+     * Gets an IpFilterRule for a Namespace by rule name.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the IpFilterRuleInner object
+     */
+    public Observable<IpFilterRuleInner> getIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
+        return getIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName).map(new Func1<ServiceResponse<IpFilterRuleInner>, IpFilterRuleInner>() {
+            @Override
+            public IpFilterRuleInner call(ServiceResponse<IpFilterRuleInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Gets an IpFilterRule for a Namespace by rule name.
+     *
+     * @param resourceGroupName Name of the resource group within the azure subscription.
+     * @param namespaceName The Namespace name
+     * @param ipFilterRuleName The IP Filter Rule name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the IpFilterRuleInner object
+     */
+    public Observable<ServiceResponse<IpFilterRuleInner>> getIpFilterRuleWithServiceResponseAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (ipFilterRuleName == null) {
+            throw new IllegalArgumentException("Parameter ipFilterRuleName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getIpFilterRule(resourceGroupName, namespaceName, ipFilterRuleName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<IpFilterRuleInner>>>() {
+                @Override
+                public Observable<ServiceResponse<IpFilterRuleInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<IpFilterRuleInner> clientResponse = getIpFilterRuleDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<IpFilterRuleInner> getIpFilterRuleDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<IpFilterRuleInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<IpFilterRuleInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
     }
 
     /**
@@ -246,7 +656,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
                 @Override
                 public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<EHNamespaceInner>> result = listDelegate(response);
+                        ServiceResponse<PageImpl1<EHNamespaceInner>> result = listDelegate(response);
                         return Observable.just(new ServiceResponse<Page<EHNamespaceInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -255,9 +665,9 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
             });
     }
 
-    private ServiceResponse<PageImpl<EHNamespaceInner>> listDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<EHNamespaceInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<EHNamespaceInner>>() { }.getType())
+    private ServiceResponse<PageImpl1<EHNamespaceInner>> listDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<EHNamespaceInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<EHNamespaceInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -265,7 +675,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -284,7 +694,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -304,7 +714,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
      */
@@ -321,7 +731,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
      */
@@ -342,7 +752,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Lists the available Namespaces within a resource group.
      *
-    ServiceResponse<PageImpl<EHNamespaceInner>> * @param resourceGroupName Name of the resource group within the Azure subscription.
+    ServiceResponse<PageImpl1<EHNamespaceInner>> * @param resourceGroupName Name of the resource group within the azure subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;EHNamespaceInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -361,7 +771,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
                 @Override
                 public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<EHNamespaceInner>> result = listByResourceGroupDelegate(response);
+                        ServiceResponse<PageImpl1<EHNamespaceInner>> result = listByResourceGroupDelegate(response);
                         return Observable.just(new ServiceResponse<Page<EHNamespaceInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -370,9 +780,9 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
             });
     }
 
-    private ServiceResponse<PageImpl<EHNamespaceInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<EHNamespaceInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<EHNamespaceInner>>() { }.getType())
+    private ServiceResponse<PageImpl1<EHNamespaceInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<EHNamespaceInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<EHNamespaceInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -380,7 +790,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -395,7 +805,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -409,7 +819,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -427,7 +837,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -457,7 +867,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -472,7 +882,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -486,7 +896,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -504,7 +914,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for creating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -553,7 +963,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -566,7 +976,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -579,7 +989,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -596,7 +1006,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -621,7 +1031,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -634,7 +1044,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -647,7 +1057,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -664,7 +1074,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -708,7 +1118,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets the description of the specified namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -722,7 +1132,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets the description of the specified namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -735,7 +1145,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets the description of the specified namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EHNamespaceInner object
@@ -752,7 +1162,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets the description of the specified namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EHNamespaceInner object
@@ -795,7 +1205,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for updating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -810,7 +1220,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for updating a namespace resource.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -824,7 +1234,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for updating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -842,7 +1252,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters Parameters for updating a namespace resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -889,419 +1299,9 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     }
 
     /**
-     * Gets a list of IP Filter rules for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PagedList&lt;IpFilterRuleInner&gt; object if successful.
-     */
-    public PagedList<IpFilterRuleInner> listIPFilterRules(final String resourceGroupName, final String namespaceName) {
-        ServiceResponse<Page<IpFilterRuleInner>> response = listIPFilterRulesSinglePageAsync(resourceGroupName, namespaceName).toBlocking().single();
-        return new PagedList<IpFilterRuleInner>(response.body()) {
-            @Override
-            public Page<IpFilterRuleInner> nextPage(String nextPageLink) {
-                return listIPFilterRulesNextSinglePageAsync(nextPageLink).toBlocking().single().body();
-            }
-        };
-    }
-
-    /**
-     * Gets a list of IP Filter rules for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<List<IpFilterRuleInner>> listIPFilterRulesAsync(final String resourceGroupName, final String namespaceName, final ListOperationCallback<IpFilterRuleInner> serviceCallback) {
-        return AzureServiceFuture.fromPageResponse(
-            listIPFilterRulesSinglePageAsync(resourceGroupName, namespaceName),
-            new Func1<String, Observable<ServiceResponse<Page<IpFilterRuleInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<IpFilterRuleInner>>> call(String nextPageLink) {
-                    return listIPFilterRulesNextSinglePageAsync(nextPageLink);
-                }
-            },
-            serviceCallback);
-    }
-
-    /**
-     * Gets a list of IP Filter rules for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;IpFilterRuleInner&gt; object
-     */
-    public Observable<Page<IpFilterRuleInner>> listIPFilterRulesAsync(final String resourceGroupName, final String namespaceName) {
-        return listIPFilterRulesWithServiceResponseAsync(resourceGroupName, namespaceName)
-            .map(new Func1<ServiceResponse<Page<IpFilterRuleInner>>, Page<IpFilterRuleInner>>() {
-                @Override
-                public Page<IpFilterRuleInner> call(ServiceResponse<Page<IpFilterRuleInner>> response) {
-                    return response.body();
-                }
-            });
-    }
-
-    /**
-     * Gets a list of IP Filter rules for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;IpFilterRuleInner&gt; object
-     */
-    public Observable<ServiceResponse<Page<IpFilterRuleInner>>> listIPFilterRulesWithServiceResponseAsync(final String resourceGroupName, final String namespaceName) {
-        return listIPFilterRulesSinglePageAsync(resourceGroupName, namespaceName)
-            .concatMap(new Func1<ServiceResponse<Page<IpFilterRuleInner>>, Observable<ServiceResponse<Page<IpFilterRuleInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<IpFilterRuleInner>>> call(ServiceResponse<Page<IpFilterRuleInner>> page) {
-                    String nextPageLink = page.body().nextPageLink();
-                    if (nextPageLink == null) {
-                        return Observable.just(page);
-                    }
-                    return Observable.just(page).concatWith(listIPFilterRulesNextWithServiceResponseAsync(nextPageLink));
-                }
-            });
-    }
-
-    /**
-     * Gets a list of IP Filter rules for a Namespace.
-     *
-    ServiceResponse<PageImpl<IpFilterRuleInner>> * @param resourceGroupName Name of the resource group within the Azure subscription.
-    ServiceResponse<PageImpl<IpFilterRuleInner>> * @param namespaceName The Namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;IpFilterRuleInner&gt; object wrapped in {@link ServiceResponse} if successful.
-     */
-    public Observable<ServiceResponse<Page<IpFilterRuleInner>>> listIPFilterRulesSinglePageAsync(final String resourceGroupName, final String namespaceName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listIPFilterRules(resourceGroupName, namespaceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<IpFilterRuleInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<IpFilterRuleInner>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<PageImpl<IpFilterRuleInner>> result = listIPFilterRulesDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<IpFilterRuleInner>>(result.body(), result.response()));
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<PageImpl<IpFilterRuleInner>> listIPFilterRulesDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<IpFilterRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<IpFilterRuleInner>>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Creates or updates an IpFilterRule for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @param parameters The Namespace IpFilterRule.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the IpFilterRuleInner object if successful.
-     */
-    public IpFilterRuleInner createOrUpdateIpFilterRule(String resourceGroupName, String namespaceName, String ipFilterRuleName, IpFilterRuleInner parameters) {
-        return createOrUpdateIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName, parameters).toBlocking().single().body();
-    }
-
-    /**
-     * Creates or updates an IpFilterRule for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @param parameters The Namespace IpFilterRule.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<IpFilterRuleInner> createOrUpdateIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, IpFilterRuleInner parameters, final ServiceCallback<IpFilterRuleInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName, parameters), serviceCallback);
-    }
-
-    /**
-     * Creates or updates an IpFilterRule for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @param parameters The Namespace IpFilterRule.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the IpFilterRuleInner object
-     */
-    public Observable<IpFilterRuleInner> createOrUpdateIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, IpFilterRuleInner parameters) {
-        return createOrUpdateIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName, parameters).map(new Func1<ServiceResponse<IpFilterRuleInner>, IpFilterRuleInner>() {
-            @Override
-            public IpFilterRuleInner call(ServiceResponse<IpFilterRuleInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Creates or updates an IpFilterRule for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @param parameters The Namespace IpFilterRule.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the IpFilterRuleInner object
-     */
-    public Observable<ServiceResponse<IpFilterRuleInner>> createOrUpdateIpFilterRuleWithServiceResponseAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, IpFilterRuleInner parameters) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (ipFilterRuleName == null) {
-            throw new IllegalArgumentException("Parameter ipFilterRuleName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (parameters == null) {
-            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(parameters);
-        return service.createOrUpdateIpFilterRule(resourceGroupName, namespaceName, ipFilterRuleName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<IpFilterRuleInner>>>() {
-                @Override
-                public Observable<ServiceResponse<IpFilterRuleInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<IpFilterRuleInner> clientResponse = createOrUpdateIpFilterRuleDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<IpFilterRuleInner> createOrUpdateIpFilterRuleDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<IpFilterRuleInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<IpFilterRuleInner>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Deletes an IpFilterRule for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    public void deleteIpFilterRule(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
-        deleteIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName).toBlocking().single().body();
-    }
-
-    /**
-     * Deletes an IpFilterRule for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<Void> deleteIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(deleteIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName), serviceCallback);
-    }
-
-    /**
-     * Deletes an IpFilterRule for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> deleteIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
-        return deleteIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Deletes an IpFilterRule for a Namespace.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> deleteIpFilterRuleWithServiceResponseAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (ipFilterRuleName == null) {
-            throw new IllegalArgumentException("Parameter ipFilterRuleName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.deleteIpFilterRule(resourceGroupName, namespaceName, ipFilterRuleName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = deleteIpFilterRuleDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> deleteIpFilterRuleDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Gets an IpFilterRule for a Namespace by rule name.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the IpFilterRuleInner object if successful.
-     */
-    public IpFilterRuleInner getIpFilterRule(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
-        return getIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName).toBlocking().single().body();
-    }
-
-    /**
-     * Gets an IpFilterRule for a Namespace by rule name.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<IpFilterRuleInner> getIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName, final ServiceCallback<IpFilterRuleInner> serviceCallback) {
-        return ServiceFuture.fromResponse(getIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName), serviceCallback);
-    }
-
-    /**
-     * Gets an IpFilterRule for a Namespace by rule name.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the IpFilterRuleInner object
-     */
-    public Observable<IpFilterRuleInner> getIpFilterRuleAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
-        return getIpFilterRuleWithServiceResponseAsync(resourceGroupName, namespaceName, ipFilterRuleName).map(new Func1<ServiceResponse<IpFilterRuleInner>, IpFilterRuleInner>() {
-            @Override
-            public IpFilterRuleInner call(ServiceResponse<IpFilterRuleInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Gets an IpFilterRule for a Namespace by rule name.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
-     * @param namespaceName The Namespace name
-     * @param ipFilterRuleName The IP Filter Rule name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the IpFilterRuleInner object
-     */
-    public Observable<ServiceResponse<IpFilterRuleInner>> getIpFilterRuleWithServiceResponseAsync(String resourceGroupName, String namespaceName, String ipFilterRuleName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (ipFilterRuleName == null) {
-            throw new IllegalArgumentException("Parameter ipFilterRuleName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getIpFilterRule(resourceGroupName, namespaceName, ipFilterRuleName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<IpFilterRuleInner>>>() {
-                @Override
-                public Observable<ServiceResponse<IpFilterRuleInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<IpFilterRuleInner> clientResponse = getIpFilterRuleDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<IpFilterRuleInner> getIpFilterRuleDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<IpFilterRuleInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<IpFilterRuleInner>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -1321,7 +1321,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1342,7 +1342,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;VirtualNetworkRuleInner&gt; object
@@ -1360,7 +1360,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;VirtualNetworkRuleInner&gt; object
@@ -1382,8 +1382,8 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-    ServiceResponse<PageImpl<VirtualNetworkRuleInner>> * @param resourceGroupName Name of the resource group within the Azure subscription.
-    ServiceResponse<PageImpl<VirtualNetworkRuleInner>> * @param namespaceName The Namespace name
+    ServiceResponse<PageImpl1<VirtualNetworkRuleInner>> * @param resourceGroupName Name of the resource group within the azure subscription.
+    ServiceResponse<PageImpl1<VirtualNetworkRuleInner>> * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualNetworkRuleInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -1405,7 +1405,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
                 @Override
                 public Observable<ServiceResponse<Page<VirtualNetworkRuleInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<VirtualNetworkRuleInner>> result = listVirtualNetworkRulesDelegate(response);
+                        ServiceResponse<PageImpl1<VirtualNetworkRuleInner>> result = listVirtualNetworkRulesDelegate(response);
                         return Observable.just(new ServiceResponse<Page<VirtualNetworkRuleInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1414,9 +1414,9 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
             });
     }
 
-    private ServiceResponse<PageImpl<VirtualNetworkRuleInner>> listVirtualNetworkRulesDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualNetworkRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<VirtualNetworkRuleInner>>() { }.getType())
+    private ServiceResponse<PageImpl1<VirtualNetworkRuleInner>> listVirtualNetworkRulesDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<VirtualNetworkRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<VirtualNetworkRuleInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -1424,7 +1424,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1439,7 +1439,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1453,7 +1453,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1471,7 +1471,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1513,7 +1513,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param virtualNetworkSubnetId ARM ID of Virtual Network Subnet
@@ -1529,7 +1529,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param virtualNetworkSubnetId ARM ID of Virtual Network Subnet
@@ -1544,7 +1544,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param virtualNetworkSubnetId ARM ID of Virtual Network Subnet
@@ -1563,7 +1563,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Creates or updates an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param virtualNetworkSubnetId ARM ID of Virtual Network Subnet
@@ -1612,7 +1612,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1626,7 +1626,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1640,7 +1640,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1658,7 +1658,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Deletes an VirtualNetworkRule for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1705,7 +1705,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1720,7 +1720,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1734,7 +1734,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1752,7 +1752,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets an VirtualNetworkRule for a Namespace by rule name.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param virtualNetworkRuleName The Virtual Network Rule name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1798,7 +1798,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1813,7 +1813,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1827,7 +1827,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1845,7 +1845,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Create or update NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param parameters The Namespace IpFilterRule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1892,7 +1892,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -1906,7 +1906,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1919,7 +1919,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the NetworkRuleSetInner object
@@ -1936,7 +1936,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets NetworkRuleSet for a Namespace.
      *
-     * @param resourceGroupName Name of the resource group within the Azure subscription.
+     * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param namespaceName The Namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the NetworkRuleSetInner object
@@ -1971,228 +1971,6 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     private ServiceResponse<NetworkRuleSetInner> getNetworkRuleSetDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<NetworkRuleSetInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<NetworkRuleSetInner>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
-     *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PagedList&lt;EHNamespaceInner&gt; object if successful.
-     */
-    public PagedList<EHNamespaceInner> listNext(final String nextPageLink) {
-        ServiceResponse<Page<EHNamespaceInner>> response = listNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<EHNamespaceInner>(response.body()) {
-            @Override
-            public Page<EHNamespaceInner> nextPage(String nextPageLink) {
-                return listNextSinglePageAsync(nextPageLink).toBlocking().single().body();
-            }
-        };
-    }
-
-    /**
-     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
-     *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<List<EHNamespaceInner>> listNextAsync(final String nextPageLink, final ServiceFuture<List<EHNamespaceInner>> serviceFuture, final ListOperationCallback<EHNamespaceInner> serviceCallback) {
-        return AzureServiceFuture.fromPageResponse(
-            listNextSinglePageAsync(nextPageLink),
-            new Func1<String, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(String nextPageLink) {
-                    return listNextSinglePageAsync(nextPageLink);
-                }
-            },
-            serviceCallback);
-    }
-
-    /**
-     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
-     *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
-     */
-    public Observable<Page<EHNamespaceInner>> listNextAsync(final String nextPageLink) {
-        return listNextWithServiceResponseAsync(nextPageLink)
-            .map(new Func1<ServiceResponse<Page<EHNamespaceInner>>, Page<EHNamespaceInner>>() {
-                @Override
-                public Page<EHNamespaceInner> call(ServiceResponse<Page<EHNamespaceInner>> response) {
-                    return response.body();
-                }
-            });
-    }
-
-    /**
-     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
-     *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
-     */
-    public Observable<ServiceResponse<Page<EHNamespaceInner>>> listNextWithServiceResponseAsync(final String nextPageLink) {
-        return listNextSinglePageAsync(nextPageLink)
-            .concatMap(new Func1<ServiceResponse<Page<EHNamespaceInner>>, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(ServiceResponse<Page<EHNamespaceInner>> page) {
-                    String nextPageLink = page.body().nextPageLink();
-                    if (nextPageLink == null) {
-                        return Observable.just(page);
-                    }
-                    return Observable.just(page).concatWith(listNextWithServiceResponseAsync(nextPageLink));
-                }
-            });
-    }
-
-    /**
-     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
-     *
-    ServiceResponse<PageImpl<EHNamespaceInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;EHNamespaceInner&gt; object wrapped in {@link ServiceResponse} if successful.
-     */
-    public Observable<ServiceResponse<Page<EHNamespaceInner>>> listNextSinglePageAsync(final String nextPageLink) {
-        if (nextPageLink == null) {
-            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
-        }
-        String nextUrl = String.format("%s", nextPageLink);
-        return service.listNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<PageImpl<EHNamespaceInner>> result = listNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<EHNamespaceInner>>(result.body(), result.response()));
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<PageImpl<EHNamespaceInner>> listNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<EHNamespaceInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<EHNamespaceInner>>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Lists the available Namespaces within a resource group.
-     *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PagedList&lt;EHNamespaceInner&gt; object if successful.
-     */
-    public PagedList<EHNamespaceInner> listByResourceGroupNext(final String nextPageLink) {
-        ServiceResponse<Page<EHNamespaceInner>> response = listByResourceGroupNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<EHNamespaceInner>(response.body()) {
-            @Override
-            public Page<EHNamespaceInner> nextPage(String nextPageLink) {
-                return listByResourceGroupNextSinglePageAsync(nextPageLink).toBlocking().single().body();
-            }
-        };
-    }
-
-    /**
-     * Lists the available Namespaces within a resource group.
-     *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<List<EHNamespaceInner>> listByResourceGroupNextAsync(final String nextPageLink, final ServiceFuture<List<EHNamespaceInner>> serviceFuture, final ListOperationCallback<EHNamespaceInner> serviceCallback) {
-        return AzureServiceFuture.fromPageResponse(
-            listByResourceGroupNextSinglePageAsync(nextPageLink),
-            new Func1<String, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(String nextPageLink) {
-                    return listByResourceGroupNextSinglePageAsync(nextPageLink);
-                }
-            },
-            serviceCallback);
-    }
-
-    /**
-     * Lists the available Namespaces within a resource group.
-     *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
-     */
-    public Observable<Page<EHNamespaceInner>> listByResourceGroupNextAsync(final String nextPageLink) {
-        return listByResourceGroupNextWithServiceResponseAsync(nextPageLink)
-            .map(new Func1<ServiceResponse<Page<EHNamespaceInner>>, Page<EHNamespaceInner>>() {
-                @Override
-                public Page<EHNamespaceInner> call(ServiceResponse<Page<EHNamespaceInner>> response) {
-                    return response.body();
-                }
-            });
-    }
-
-    /**
-     * Lists the available Namespaces within a resource group.
-     *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
-     */
-    public Observable<ServiceResponse<Page<EHNamespaceInner>>> listByResourceGroupNextWithServiceResponseAsync(final String nextPageLink) {
-        return listByResourceGroupNextSinglePageAsync(nextPageLink)
-            .concatMap(new Func1<ServiceResponse<Page<EHNamespaceInner>>, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(ServiceResponse<Page<EHNamespaceInner>> page) {
-                    String nextPageLink = page.body().nextPageLink();
-                    if (nextPageLink == null) {
-                        return Observable.just(page);
-                    }
-                    return Observable.just(page).concatWith(listByResourceGroupNextWithServiceResponseAsync(nextPageLink));
-                }
-            });
-    }
-
-    /**
-     * Lists the available Namespaces within a resource group.
-     *
-    ServiceResponse<PageImpl<EHNamespaceInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;EHNamespaceInner&gt; object wrapped in {@link ServiceResponse} if successful.
-     */
-    public Observable<ServiceResponse<Page<EHNamespaceInner>>> listByResourceGroupNextSinglePageAsync(final String nextPageLink) {
-        if (nextPageLink == null) {
-            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
-        }
-        String nextUrl = String.format("%s", nextPageLink);
-        return service.listByResourceGroupNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<PageImpl<EHNamespaceInner>> result = listByResourceGroupNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<EHNamespaceInner>>(result.body(), result.response()));
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<PageImpl<EHNamespaceInner>> listByResourceGroupNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<EHNamespaceInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<EHNamespaceInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -2278,7 +2056,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of IP Filter rules for a Namespace.
      *
-    ServiceResponse<PageImpl<IpFilterRuleInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl1<IpFilterRuleInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;IpFilterRuleInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -2292,7 +2070,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
                 @Override
                 public Observable<ServiceResponse<Page<IpFilterRuleInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<IpFilterRuleInner>> result = listIPFilterRulesNextDelegate(response);
+                        ServiceResponse<PageImpl1<IpFilterRuleInner>> result = listIPFilterRulesNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<IpFilterRuleInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2301,9 +2079,231 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
             });
     }
 
-    private ServiceResponse<PageImpl<IpFilterRuleInner>> listIPFilterRulesNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<IpFilterRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<IpFilterRuleInner>>() { }.getType())
+    private ServiceResponse<PageImpl1<IpFilterRuleInner>> listIPFilterRulesNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<IpFilterRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<IpFilterRuleInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;EHNamespaceInner&gt; object if successful.
+     */
+    public PagedList<EHNamespaceInner> listNext(final String nextPageLink) {
+        ServiceResponse<Page<EHNamespaceInner>> response = listNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<EHNamespaceInner>(response.body()) {
+            @Override
+            public Page<EHNamespaceInner> nextPage(String nextPageLink) {
+                return listNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<EHNamespaceInner>> listNextAsync(final String nextPageLink, final ServiceFuture<List<EHNamespaceInner>> serviceFuture, final ListOperationCallback<EHNamespaceInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(String nextPageLink) {
+                    return listNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
+     */
+    public Observable<Page<EHNamespaceInner>> listNextAsync(final String nextPageLink) {
+        return listNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<EHNamespaceInner>>, Page<EHNamespaceInner>>() {
+                @Override
+                public Page<EHNamespaceInner> call(ServiceResponse<Page<EHNamespaceInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<EHNamespaceInner>>> listNextWithServiceResponseAsync(final String nextPageLink) {
+        return listNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<EHNamespaceInner>>, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(ServiceResponse<Page<EHNamespaceInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
+     *
+    ServiceResponse<PageImpl1<EHNamespaceInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;EHNamespaceInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<EHNamespaceInner>>> listNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl1<EHNamespaceInner>> result = listNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<EHNamespaceInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl1<EHNamespaceInner>> listNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<EHNamespaceInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<EHNamespaceInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the available Namespaces within a resource group.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;EHNamespaceInner&gt; object if successful.
+     */
+    public PagedList<EHNamespaceInner> listByResourceGroupNext(final String nextPageLink) {
+        ServiceResponse<Page<EHNamespaceInner>> response = listByResourceGroupNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<EHNamespaceInner>(response.body()) {
+            @Override
+            public Page<EHNamespaceInner> nextPage(String nextPageLink) {
+                return listByResourceGroupNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the available Namespaces within a resource group.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<EHNamespaceInner>> listByResourceGroupNextAsync(final String nextPageLink, final ServiceFuture<List<EHNamespaceInner>> serviceFuture, final ListOperationCallback<EHNamespaceInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByResourceGroupNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(String nextPageLink) {
+                    return listByResourceGroupNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the available Namespaces within a resource group.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
+     */
+    public Observable<Page<EHNamespaceInner>> listByResourceGroupNextAsync(final String nextPageLink) {
+        return listByResourceGroupNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<EHNamespaceInner>>, Page<EHNamespaceInner>>() {
+                @Override
+                public Page<EHNamespaceInner> call(ServiceResponse<Page<EHNamespaceInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the available Namespaces within a resource group.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;EHNamespaceInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<EHNamespaceInner>>> listByResourceGroupNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByResourceGroupNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<EHNamespaceInner>>, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(ServiceResponse<Page<EHNamespaceInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByResourceGroupNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the available Namespaces within a resource group.
+     *
+    ServiceResponse<PageImpl1<EHNamespaceInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;EHNamespaceInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<EHNamespaceInner>>> listByResourceGroupNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByResourceGroupNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<EHNamespaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<EHNamespaceInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl1<EHNamespaceInner>> result = listByResourceGroupNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<EHNamespaceInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl1<EHNamespaceInner>> listByResourceGroupNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<EHNamespaceInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<EHNamespaceInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -2389,7 +2389,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
     /**
      * Gets a list of VirtualNetwork rules for a Namespace.
      *
-    ServiceResponse<PageImpl<VirtualNetworkRuleInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl1<VirtualNetworkRuleInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualNetworkRuleInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -2403,7 +2403,7 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
                 @Override
                 public Observable<ServiceResponse<Page<VirtualNetworkRuleInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<VirtualNetworkRuleInner>> result = listVirtualNetworkRulesNextDelegate(response);
+                        ServiceResponse<PageImpl1<VirtualNetworkRuleInner>> result = listVirtualNetworkRulesNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<VirtualNetworkRuleInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2412,9 +2412,9 @@ public class NamespacesInner implements InnerSupportsGet<EHNamespaceInner>, Inne
             });
     }
 
-    private ServiceResponse<PageImpl<VirtualNetworkRuleInner>> listVirtualNetworkRulesNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualNetworkRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<VirtualNetworkRuleInner>>() { }.getType())
+    private ServiceResponse<PageImpl1<VirtualNetworkRuleInner>> listVirtualNetworkRulesNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<VirtualNetworkRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<VirtualNetworkRuleInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }

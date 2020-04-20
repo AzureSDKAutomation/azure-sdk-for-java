@@ -16,21 +16,21 @@ import com.microsoft.azure.management.apigeneration.Beta.SinceVersion;
 import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
-import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Operations;
 import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Clusters;
-import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Configurations;
 import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Namespaces;
+import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Operations;
+import com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Configurations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
 /**
  * Entry point to Azure EventHubs resource management.
  */
-public final class EventHubsManager extends ManagerCore<EventHubsManager, EventHub2018PreviewManagementClientImpl> {
-    private Operations operations;
+public final class EventHubsManager extends ManagerCore<EventHubsManager, EventHubManagementClientImpl> {
     private Clusters clusters;
-    private Configurations configurations;
     private Namespaces namespaces;
+    private Operations operations;
+    private Configurations configurations;
     /**
     * Get a Configurable instance that can be used to create EventHubsManager with optional configuration.
     *
@@ -79,16 +79,6 @@ public final class EventHubsManager extends ManagerCore<EventHubsManager, EventH
     }
 
     /**
-     * @return Entry point to manage Operations.
-     */
-    public Operations operations() {
-        if (this.operations == null) {
-            this.operations = new OperationsImpl(this);
-        }
-        return this.operations;
-    }
-
-    /**
      * @return Entry point to manage Clusters.
      */
     public Clusters clusters() {
@@ -99,16 +89,6 @@ public final class EventHubsManager extends ManagerCore<EventHubsManager, EventH
     }
 
     /**
-     * @return Entry point to manage Configurations.
-     */
-    public Configurations configurations() {
-        if (this.configurations == null) {
-            this.configurations = new ConfigurationsImpl(this);
-        }
-        return this.configurations;
-    }
-
-    /**
      * @return Entry point to manage Namespaces.
      */
     public Namespaces namespaces() {
@@ -116,6 +96,26 @@ public final class EventHubsManager extends ManagerCore<EventHubsManager, EventH
             this.namespaces = new NamespacesImpl(this);
         }
         return this.namespaces;
+    }
+
+    /**
+     * @return Entry point to manage Operations.
+     */
+    public Operations operations() {
+        if (this.operations == null) {
+            this.operations = new OperationsImpl(this);
+        }
+        return this.operations;
+    }
+
+    /**
+     * @return Entry point to manage Configurations.
+     */
+    public Configurations configurations() {
+        if (this.configurations == null) {
+            this.configurations = new ConfigurationsImpl(this);
+        }
+        return this.configurations;
     }
 
     /**
@@ -130,6 +130,6 @@ public final class EventHubsManager extends ManagerCore<EventHubsManager, EventH
         super(
             restClient,
             subscriptionId,
-            new EventHub2018PreviewManagementClientImpl(restClient).withSubscriptionId(subscriptionId));
+            new EventHubManagementClientImpl(restClient).withSubscriptionId(subscriptionId));
     }
 }
