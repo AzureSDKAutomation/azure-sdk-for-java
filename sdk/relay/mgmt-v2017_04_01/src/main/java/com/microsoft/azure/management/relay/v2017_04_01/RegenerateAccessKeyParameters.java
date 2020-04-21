@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Parameters supplied to the regenerate authorization rule operation,
- * specifies which key neeeds to be reset.
+ * specifies which key needs to be reset.
  */
 public class RegenerateAccessKeyParameters {
     /**

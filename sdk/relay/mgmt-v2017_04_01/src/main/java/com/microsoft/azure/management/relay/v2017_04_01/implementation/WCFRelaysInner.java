@@ -65,22 +65,6 @@ public class WCFRelaysInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface WCFRelaysService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays listByNamespace" })
-        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays")
-        Observable<Response<ResponseBody>> listByNamespace(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays createOrUpdate" })
-        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("relayName") String relayName, @Path("subscriptionId") String subscriptionId, @Body WcfRelayInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays delete" })
-        @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("relayName") String relayName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays get" })
-        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}")
-        Observable<Response<ResponseBody>> get(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("relayName") String relayName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays listAuthorizationRules" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules")
         Observable<Response<ResponseBody>> listAuthorizationRules(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("relayName") String relayName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -105,425 +89,30 @@ public class WCFRelaysInner {
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}/regenerateKeys")
         Observable<Response<ResponseBody>> regenerateKeys(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("relayName") String relayName, @Path("authorizationRuleName") String authorizationRuleName, @Path("subscriptionId") String subscriptionId, @Body RegenerateAccessKeyParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays listByNamespaceNext" })
-        @GET
-        Observable<Response<ResponseBody>> listByNamespaceNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays listByNamespace" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays")
+        Observable<Response<ResponseBody>> listByNamespace(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays createOrUpdate" })
+        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}")
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("relayName") String relayName, @Path("subscriptionId") String subscriptionId, @Body WcfRelayInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays delete" })
+        @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}", method = "DELETE", hasBody = true)
+        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("relayName") String relayName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays get" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}")
+        Observable<Response<ResponseBody>> get(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("relayName") String relayName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays listAuthorizationRulesNext" })
         @GET
         Observable<Response<ResponseBody>> listAuthorizationRulesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-    }
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.WCFRelays listByNamespaceNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByNamespaceNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-    /**
-     * Lists the WCF relays within the namespace.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PagedList&lt;WcfRelayInner&gt; object if successful.
-     */
-    public PagedList<WcfRelayInner> listByNamespace(final String resourceGroupName, final String namespaceName) {
-        ServiceResponse<Page<WcfRelayInner>> response = listByNamespaceSinglePageAsync(resourceGroupName, namespaceName).toBlocking().single();
-        return new PagedList<WcfRelayInner>(response.body()) {
-            @Override
-            public Page<WcfRelayInner> nextPage(String nextPageLink) {
-                return listByNamespaceNextSinglePageAsync(nextPageLink).toBlocking().single().body();
-            }
-        };
-    }
-
-    /**
-     * Lists the WCF relays within the namespace.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<List<WcfRelayInner>> listByNamespaceAsync(final String resourceGroupName, final String namespaceName, final ListOperationCallback<WcfRelayInner> serviceCallback) {
-        return AzureServiceFuture.fromPageResponse(
-            listByNamespaceSinglePageAsync(resourceGroupName, namespaceName),
-            new Func1<String, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<WcfRelayInner>>> call(String nextPageLink) {
-                    return listByNamespaceNextSinglePageAsync(nextPageLink);
-                }
-            },
-            serviceCallback);
-    }
-
-    /**
-     * Lists the WCF relays within the namespace.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;WcfRelayInner&gt; object
-     */
-    public Observable<Page<WcfRelayInner>> listByNamespaceAsync(final String resourceGroupName, final String namespaceName) {
-        return listByNamespaceWithServiceResponseAsync(resourceGroupName, namespaceName)
-            .map(new Func1<ServiceResponse<Page<WcfRelayInner>>, Page<WcfRelayInner>>() {
-                @Override
-                public Page<WcfRelayInner> call(ServiceResponse<Page<WcfRelayInner>> response) {
-                    return response.body();
-                }
-            });
-    }
-
-    /**
-     * Lists the WCF relays within the namespace.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;WcfRelayInner&gt; object
-     */
-    public Observable<ServiceResponse<Page<WcfRelayInner>>> listByNamespaceWithServiceResponseAsync(final String resourceGroupName, final String namespaceName) {
-        return listByNamespaceSinglePageAsync(resourceGroupName, namespaceName)
-            .concatMap(new Func1<ServiceResponse<Page<WcfRelayInner>>, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<WcfRelayInner>>> call(ServiceResponse<Page<WcfRelayInner>> page) {
-                    String nextPageLink = page.body().nextPageLink();
-                    if (nextPageLink == null) {
-                        return Observable.just(page);
-                    }
-                    return Observable.just(page).concatWith(listByNamespaceNextWithServiceResponseAsync(nextPageLink));
-                }
-            });
-    }
-
-    /**
-     * Lists the WCF relays within the namespace.
-     *
-    ServiceResponse<PageImpl<WcfRelayInner>> * @param resourceGroupName Name of the Resource group within the Azure subscription.
-    ServiceResponse<PageImpl<WcfRelayInner>> * @param namespaceName The namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;WcfRelayInner&gt; object wrapped in {@link ServiceResponse} if successful.
-     */
-    public Observable<ServiceResponse<Page<WcfRelayInner>>> listByNamespaceSinglePageAsync(final String resourceGroupName, final String namespaceName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByNamespace(resourceGroupName, namespaceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<WcfRelayInner>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<PageImpl<WcfRelayInner>> result = listByNamespaceDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<WcfRelayInner>>(result.body(), result.response()));
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<PageImpl<WcfRelayInner>> listByNamespaceDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<WcfRelayInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<WcfRelayInner>>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Creates or updates a WCF relay. This operation is idempotent.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @param parameters Parameters supplied to create a WCF relay.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the WcfRelayInner object if successful.
-     */
-    public WcfRelayInner createOrUpdate(String resourceGroupName, String namespaceName, String relayName, WcfRelayInner parameters) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, relayName, parameters).toBlocking().single().body();
-    }
-
-    /**
-     * Creates or updates a WCF relay. This operation is idempotent.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @param parameters Parameters supplied to create a WCF relay.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<WcfRelayInner> createOrUpdateAsync(String resourceGroupName, String namespaceName, String relayName, WcfRelayInner parameters, final ServiceCallback<WcfRelayInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, relayName, parameters), serviceCallback);
-    }
-
-    /**
-     * Creates or updates a WCF relay. This operation is idempotent.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @param parameters Parameters supplied to create a WCF relay.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the WcfRelayInner object
-     */
-    public Observable<WcfRelayInner> createOrUpdateAsync(String resourceGroupName, String namespaceName, String relayName, WcfRelayInner parameters) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, relayName, parameters).map(new Func1<ServiceResponse<WcfRelayInner>, WcfRelayInner>() {
-            @Override
-            public WcfRelayInner call(ServiceResponse<WcfRelayInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Creates or updates a WCF relay. This operation is idempotent.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @param parameters Parameters supplied to create a WCF relay.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the WcfRelayInner object
-     */
-    public Observable<ServiceResponse<WcfRelayInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String namespaceName, String relayName, WcfRelayInner parameters) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (relayName == null) {
-            throw new IllegalArgumentException("Parameter relayName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (parameters == null) {
-            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(parameters);
-        return service.createOrUpdate(resourceGroupName, namespaceName, relayName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<WcfRelayInner>>>() {
-                @Override
-                public Observable<ServiceResponse<WcfRelayInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<WcfRelayInner> clientResponse = createOrUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<WcfRelayInner> createOrUpdateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<WcfRelayInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<WcfRelayInner>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Deletes a WCF relay.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    public void delete(String resourceGroupName, String namespaceName, String relayName) {
-        deleteWithServiceResponseAsync(resourceGroupName, namespaceName, relayName).toBlocking().single().body();
-    }
-
-    /**
-     * Deletes a WCF relay.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<Void> deleteAsync(String resourceGroupName, String namespaceName, String relayName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(deleteWithServiceResponseAsync(resourceGroupName, namespaceName, relayName), serviceCallback);
-    }
-
-    /**
-     * Deletes a WCF relay.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> deleteAsync(String resourceGroupName, String namespaceName, String relayName) {
-        return deleteWithServiceResponseAsync(resourceGroupName, namespaceName, relayName).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Deletes a WCF relay.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync(String resourceGroupName, String namespaceName, String relayName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (relayName == null) {
-            throw new IllegalArgumentException("Parameter relayName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.delete(resourceGroupName, namespaceName, relayName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = deleteDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Returns the description for the specified WCF relay.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the WcfRelayInner object if successful.
-     */
-    public WcfRelayInner get(String resourceGroupName, String namespaceName, String relayName) {
-        return getWithServiceResponseAsync(resourceGroupName, namespaceName, relayName).toBlocking().single().body();
-    }
-
-    /**
-     * Returns the description for the specified WCF relay.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<WcfRelayInner> getAsync(String resourceGroupName, String namespaceName, String relayName, final ServiceCallback<WcfRelayInner> serviceCallback) {
-        return ServiceFuture.fromResponse(getWithServiceResponseAsync(resourceGroupName, namespaceName, relayName), serviceCallback);
-    }
-
-    /**
-     * Returns the description for the specified WCF relay.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the WcfRelayInner object
-     */
-    public Observable<WcfRelayInner> getAsync(String resourceGroupName, String namespaceName, String relayName) {
-        return getWithServiceResponseAsync(resourceGroupName, namespaceName, relayName).map(new Func1<ServiceResponse<WcfRelayInner>, WcfRelayInner>() {
-            @Override
-            public WcfRelayInner call(ServiceResponse<WcfRelayInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Returns the description for the specified WCF relay.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param relayName The relay name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the WcfRelayInner object
-     */
-    public Observable<ServiceResponse<WcfRelayInner>> getWithServiceResponseAsync(String resourceGroupName, String namespaceName, String relayName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (relayName == null) {
-            throw new IllegalArgumentException("Parameter relayName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, namespaceName, relayName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<WcfRelayInner>>>() {
-                @Override
-                public Observable<ServiceResponse<WcfRelayInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<WcfRelayInner> clientResponse = getDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<WcfRelayInner> getDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<WcfRelayInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<WcfRelayInner>() { }.getType())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
     }
 
     /**
@@ -1178,14 +767,15 @@ public class WCFRelaysInner {
     /**
      * Lists the WCF relays within the namespace.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;WcfRelayInner&gt; object if successful.
      */
-    public PagedList<WcfRelayInner> listByNamespaceNext(final String nextPageLink) {
-        ServiceResponse<Page<WcfRelayInner>> response = listByNamespaceNextSinglePageAsync(nextPageLink).toBlocking().single();
+    public PagedList<WcfRelayInner> listByNamespace(final String resourceGroupName, final String namespaceName) {
+        ServiceResponse<Page<WcfRelayInner>> response = listByNamespaceSinglePageAsync(resourceGroupName, namespaceName).toBlocking().single();
         return new PagedList<WcfRelayInner>(response.body()) {
             @Override
             public Page<WcfRelayInner> nextPage(String nextPageLink) {
@@ -1197,15 +787,15 @@ public class WCFRelaysInner {
     /**
      * Lists the WCF relays within the namespace.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<WcfRelayInner>> listByNamespaceNextAsync(final String nextPageLink, final ServiceFuture<List<WcfRelayInner>> serviceFuture, final ListOperationCallback<WcfRelayInner> serviceCallback) {
+    public ServiceFuture<List<WcfRelayInner>> listByNamespaceAsync(final String resourceGroupName, final String namespaceName, final ListOperationCallback<WcfRelayInner> serviceCallback) {
         return AzureServiceFuture.fromPageResponse(
-            listByNamespaceNextSinglePageAsync(nextPageLink),
+            listByNamespaceSinglePageAsync(resourceGroupName, namespaceName),
             new Func1<String, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<WcfRelayInner>>> call(String nextPageLink) {
@@ -1218,12 +808,13 @@ public class WCFRelaysInner {
     /**
      * Lists the WCF relays within the namespace.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;WcfRelayInner&gt; object
      */
-    public Observable<Page<WcfRelayInner>> listByNamespaceNextAsync(final String nextPageLink) {
-        return listByNamespaceNextWithServiceResponseAsync(nextPageLink)
+    public Observable<Page<WcfRelayInner>> listByNamespaceAsync(final String resourceGroupName, final String namespaceName) {
+        return listByNamespaceWithServiceResponseAsync(resourceGroupName, namespaceName)
             .map(new Func1<ServiceResponse<Page<WcfRelayInner>>, Page<WcfRelayInner>>() {
                 @Override
                 public Page<WcfRelayInner> call(ServiceResponse<Page<WcfRelayInner>> response) {
@@ -1235,12 +826,13 @@ public class WCFRelaysInner {
     /**
      * Lists the WCF relays within the namespace.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;WcfRelayInner&gt; object
      */
-    public Observable<ServiceResponse<Page<WcfRelayInner>>> listByNamespaceNextWithServiceResponseAsync(final String nextPageLink) {
-        return listByNamespaceNextSinglePageAsync(nextPageLink)
+    public Observable<ServiceResponse<Page<WcfRelayInner>>> listByNamespaceWithServiceResponseAsync(final String resourceGroupName, final String namespaceName) {
+        return listByNamespaceSinglePageAsync(resourceGroupName, namespaceName)
             .concatMap(new Func1<ServiceResponse<Page<WcfRelayInner>>, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<WcfRelayInner>>> call(ServiceResponse<Page<WcfRelayInner>> page) {
@@ -1256,21 +848,30 @@ public class WCFRelaysInner {
     /**
      * Lists the WCF relays within the namespace.
      *
-    ServiceResponse<PageImpl<WcfRelayInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<WcfRelayInner>> * @param resourceGroupName Name of the Resource group within the Azure subscription.
+    ServiceResponse<PageImpl<WcfRelayInner>> * @param namespaceName The namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;WcfRelayInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public Observable<ServiceResponse<Page<WcfRelayInner>>> listByNamespaceNextSinglePageAsync(final String nextPageLink) {
-        if (nextPageLink == null) {
-            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+    public Observable<ServiceResponse<Page<WcfRelayInner>>> listByNamespaceSinglePageAsync(final String resourceGroupName, final String namespaceName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
-        String nextUrl = String.format("%s", nextPageLink);
-        return service.listByNamespaceNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByNamespace(resourceGroupName, namespaceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<WcfRelayInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<WcfRelayInner>> result = listByNamespaceNextDelegate(response);
+                        ServiceResponse<PageImpl<WcfRelayInner>> result = listByNamespaceDelegate(response);
                         return Observable.just(new ServiceResponse<Page<WcfRelayInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1279,9 +880,297 @@ public class WCFRelaysInner {
             });
     }
 
-    private ServiceResponse<PageImpl<WcfRelayInner>> listByNamespaceNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+    private ServiceResponse<PageImpl<WcfRelayInner>> listByNamespaceDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<WcfRelayInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<WcfRelayInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Creates or updates a WCF relay. This operation is idempotent.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @param parameters Parameters supplied to create a WCF relay.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the WcfRelayInner object if successful.
+     */
+    public WcfRelayInner createOrUpdate(String resourceGroupName, String namespaceName, String relayName, WcfRelayInner parameters) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, relayName, parameters).toBlocking().single().body();
+    }
+
+    /**
+     * Creates or updates a WCF relay. This operation is idempotent.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @param parameters Parameters supplied to create a WCF relay.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<WcfRelayInner> createOrUpdateAsync(String resourceGroupName, String namespaceName, String relayName, WcfRelayInner parameters, final ServiceCallback<WcfRelayInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, relayName, parameters), serviceCallback);
+    }
+
+    /**
+     * Creates or updates a WCF relay. This operation is idempotent.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @param parameters Parameters supplied to create a WCF relay.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the WcfRelayInner object
+     */
+    public Observable<WcfRelayInner> createOrUpdateAsync(String resourceGroupName, String namespaceName, String relayName, WcfRelayInner parameters) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, relayName, parameters).map(new Func1<ServiceResponse<WcfRelayInner>, WcfRelayInner>() {
+            @Override
+            public WcfRelayInner call(ServiceResponse<WcfRelayInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Creates or updates a WCF relay. This operation is idempotent.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @param parameters Parameters supplied to create a WCF relay.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the WcfRelayInner object
+     */
+    public Observable<ServiceResponse<WcfRelayInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String namespaceName, String relayName, WcfRelayInner parameters) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (relayName == null) {
+            throw new IllegalArgumentException("Parameter relayName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (parameters == null) {
+            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Validator.validate(parameters);
+        return service.createOrUpdate(resourceGroupName, namespaceName, relayName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<WcfRelayInner>>>() {
+                @Override
+                public Observable<ServiceResponse<WcfRelayInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<WcfRelayInner> clientResponse = createOrUpdateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<WcfRelayInner> createOrUpdateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<WcfRelayInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<WcfRelayInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Deletes a WCF relay.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    public void delete(String resourceGroupName, String namespaceName, String relayName) {
+        deleteWithServiceResponseAsync(resourceGroupName, namespaceName, relayName).toBlocking().single().body();
+    }
+
+    /**
+     * Deletes a WCF relay.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Void> deleteAsync(String resourceGroupName, String namespaceName, String relayName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteWithServiceResponseAsync(resourceGroupName, namespaceName, relayName), serviceCallback);
+    }
+
+    /**
+     * Deletes a WCF relay.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> deleteAsync(String resourceGroupName, String namespaceName, String relayName) {
+        return deleteWithServiceResponseAsync(resourceGroupName, namespaceName, relayName).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Deletes a WCF relay.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync(String resourceGroupName, String namespaceName, String relayName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (relayName == null) {
+            throw new IllegalArgumentException("Parameter relayName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.delete(resourceGroupName, namespaceName, relayName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = deleteDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Returns the description for the specified WCF relay.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the WcfRelayInner object if successful.
+     */
+    public WcfRelayInner get(String resourceGroupName, String namespaceName, String relayName) {
+        return getWithServiceResponseAsync(resourceGroupName, namespaceName, relayName).toBlocking().single().body();
+    }
+
+    /**
+     * Returns the description for the specified WCF relay.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<WcfRelayInner> getAsync(String resourceGroupName, String namespaceName, String relayName, final ServiceCallback<WcfRelayInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getWithServiceResponseAsync(resourceGroupName, namespaceName, relayName), serviceCallback);
+    }
+
+    /**
+     * Returns the description for the specified WCF relay.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the WcfRelayInner object
+     */
+    public Observable<WcfRelayInner> getAsync(String resourceGroupName, String namespaceName, String relayName) {
+        return getWithServiceResponseAsync(resourceGroupName, namespaceName, relayName).map(new Func1<ServiceResponse<WcfRelayInner>, WcfRelayInner>() {
+            @Override
+            public WcfRelayInner call(ServiceResponse<WcfRelayInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Returns the description for the specified WCF relay.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param relayName The relay name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the WcfRelayInner object
+     */
+    public Observable<ServiceResponse<WcfRelayInner>> getWithServiceResponseAsync(String resourceGroupName, String namespaceName, String relayName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (relayName == null) {
+            throw new IllegalArgumentException("Parameter relayName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.get(resourceGroupName, namespaceName, relayName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<WcfRelayInner>>>() {
+                @Override
+                public Observable<ServiceResponse<WcfRelayInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<WcfRelayInner> clientResponse = getDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<WcfRelayInner> getDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<WcfRelayInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<WcfRelayInner>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -1394,6 +1283,117 @@ public class WCFRelaysInner {
         return this.client.restClient().responseBuilderFactory().<PageImpl<AuthorizationRuleInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<AuthorizationRuleInner>>() { }.getType())
                 .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the WCF relays within the namespace.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;WcfRelayInner&gt; object if successful.
+     */
+    public PagedList<WcfRelayInner> listByNamespaceNext(final String nextPageLink) {
+        ServiceResponse<Page<WcfRelayInner>> response = listByNamespaceNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<WcfRelayInner>(response.body()) {
+            @Override
+            public Page<WcfRelayInner> nextPage(String nextPageLink) {
+                return listByNamespaceNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the WCF relays within the namespace.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<WcfRelayInner>> listByNamespaceNextAsync(final String nextPageLink, final ServiceFuture<List<WcfRelayInner>> serviceFuture, final ListOperationCallback<WcfRelayInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByNamespaceNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<WcfRelayInner>>> call(String nextPageLink) {
+                    return listByNamespaceNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the WCF relays within the namespace.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;WcfRelayInner&gt; object
+     */
+    public Observable<Page<WcfRelayInner>> listByNamespaceNextAsync(final String nextPageLink) {
+        return listByNamespaceNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<WcfRelayInner>>, Page<WcfRelayInner>>() {
+                @Override
+                public Page<WcfRelayInner> call(ServiceResponse<Page<WcfRelayInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the WCF relays within the namespace.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;WcfRelayInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<WcfRelayInner>>> listByNamespaceNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByNamespaceNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<WcfRelayInner>>, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<WcfRelayInner>>> call(ServiceResponse<Page<WcfRelayInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByNamespaceNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the WCF relays within the namespace.
+     *
+    ServiceResponse<PageImpl<WcfRelayInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;WcfRelayInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<WcfRelayInner>>> listByNamespaceNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByNamespaceNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<WcfRelayInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<WcfRelayInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<WcfRelayInner>> result = listByNamespaceNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<WcfRelayInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<WcfRelayInner>> listByNamespaceNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<WcfRelayInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<WcfRelayInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 

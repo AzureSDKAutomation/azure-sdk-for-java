@@ -12,7 +12,7 @@ import com.microsoft.azure.management.relay.v2017_04_01.WcfRelay;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import org.joda.time.DateTime;
-import com.microsoft.azure.management.relay.v2017_04_01.Relaytype;
+import com.microsoft.azure.management.relay.v2017_04_01.RelayType;
 
 class WcfRelayImpl extends CreatableUpdatableImpl<WcfRelay, WcfRelayInner, WcfRelayImpl> implements WcfRelay, WcfRelay.Definition, WcfRelay.Update {
     private final RelayManager manager;
@@ -97,7 +97,7 @@ class WcfRelayImpl extends CreatableUpdatableImpl<WcfRelay, WcfRelayInner, WcfRe
     }
 
     @Override
-    public Relaytype relayType() {
+    public RelayType relayType() {
         return this.inner().relayType();
     }
 
@@ -134,7 +134,7 @@ class WcfRelayImpl extends CreatableUpdatableImpl<WcfRelay, WcfRelayInner, WcfRe
     }
 
     @Override
-    public WcfRelayImpl withRelayType(Relaytype relayType) {
+    public WcfRelayImpl withRelayType(RelayType relayType) {
         this.inner().withRelayType(relayType);
         return this;
     }

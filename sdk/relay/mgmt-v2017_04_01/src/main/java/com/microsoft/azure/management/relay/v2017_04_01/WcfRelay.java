@@ -51,7 +51,7 @@ public interface WcfRelay extends HasInner<WcfRelayInner>, Indexable, Refreshabl
     /**
      * @return the relayType value.
      */
-    Relaytype relayType();
+    RelayType relayType();
 
     /**
      * @return the requiresClientAuthorization value.
@@ -116,7 +116,7 @@ public interface WcfRelay extends HasInner<WcfRelayInner>, Indexable, Refreshabl
              * @param relayType WCF relay type. Possible values include: 'NetTcp', 'Http'
              * @return the next definition stage
              */
-            WithCreate withRelayType(Relaytype relayType);
+            WithCreate withRelayType(RelayType relayType);
         }
 
         /**
@@ -149,7 +149,7 @@ public interface WcfRelay extends HasInner<WcfRelayInner>, Indexable, Refreshabl
         interface WithUserMetadata {
             /**
              * Specifies userMetadata.
-             * @param userMetadata The usermetadata is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored
+             * @param userMetadata The user meta data is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored
              * @return the next definition stage
              */
             WithCreate withUserMetadata(String userMetadata);
@@ -182,7 +182,7 @@ public interface WcfRelay extends HasInner<WcfRelayInner>, Indexable, Refreshabl
              * @param relayType WCF relay type. Possible values include: 'NetTcp', 'Http'
              * @return the next update stage
              */
-            Update withRelayType(Relaytype relayType);
+            Update withRelayType(RelayType relayType);
         }
 
         /**
@@ -215,7 +215,7 @@ public interface WcfRelay extends HasInner<WcfRelayInner>, Indexable, Refreshabl
         interface WithUserMetadata {
             /**
              * Specifies userMetadata.
-             * @param userMetadata The usermetadata is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored
+             * @param userMetadata The user meta data is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored
              * @return the next update stage
              */
             Update withUserMetadata(String userMetadata);

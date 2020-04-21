@@ -9,7 +9,7 @@
 package com.microsoft.azure.management.relay.v2017_04_01.implementation;
 
 import org.joda.time.DateTime;
-import com.microsoft.azure.management.relay.v2017_04_01.Relaytype;
+import com.microsoft.azure.management.relay.v2017_04_01.RelayType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -48,7 +48,7 @@ public class WcfRelayInner extends ProxyResource {
      * WCF relay type. Possible values include: 'NetTcp', 'Http'.
      */
     @JsonProperty(value = "properties.relayType")
-    private Relaytype relayType;
+    private RelayType relayType;
 
     /**
      * Returns true if client authorization is needed for this relay;
@@ -65,10 +65,10 @@ public class WcfRelayInner extends ProxyResource {
     private Boolean requiresTransportSecurity;
 
     /**
-     * The usermetadata is a placeholder to store user-defined string data for
-     * the WCF Relay endpoint. For example, it can be used to store descriptive
-     * data, such as list of teams and their contact information. Also,
-     * user-defined configuration settings can be stored.
+     * The user meta data is a placeholder to store user-defined string data
+     * for the WCF Relay endpoint. For example, it can be used to store
+     * descriptive data, such as list of teams and their contact information.
+     * Also, user-defined configuration settings can be stored.
      */
     @JsonProperty(value = "properties.userMetadata")
     private String userMetadata;
@@ -114,7 +114,7 @@ public class WcfRelayInner extends ProxyResource {
      *
      * @return the relayType value
      */
-    public Relaytype relayType() {
+    public RelayType relayType() {
         return this.relayType;
     }
 
@@ -124,7 +124,7 @@ public class WcfRelayInner extends ProxyResource {
      * @param relayType the relayType value to set
      * @return the WcfRelayInner object itself.
      */
-    public WcfRelayInner withRelayType(Relaytype relayType) {
+    public WcfRelayInner withRelayType(RelayType relayType) {
         this.relayType = relayType;
         return this;
     }
@@ -170,7 +170,7 @@ public class WcfRelayInner extends ProxyResource {
     }
 
     /**
-     * Get the usermetadata is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored.
+     * Get the user meta data is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored.
      *
      * @return the userMetadata value
      */
@@ -179,7 +179,7 @@ public class WcfRelayInner extends ProxyResource {
     }
 
     /**
-     * Set the usermetadata is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored.
+     * Set the user meta data is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored.
      *
      * @param userMetadata the userMetadata value to set
      * @return the WcfRelayInner object itself.
