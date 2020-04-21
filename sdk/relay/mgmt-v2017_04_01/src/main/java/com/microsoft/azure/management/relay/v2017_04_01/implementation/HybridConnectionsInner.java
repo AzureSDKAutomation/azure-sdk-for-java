@@ -64,22 +64,6 @@ public class HybridConnectionsInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface HybridConnectionsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections listByNamespace" })
-        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections")
-        Observable<Response<ResponseBody>> listByNamespace(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections createOrUpdate" })
-        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("hybridConnectionName") String hybridConnectionName, @Path("subscriptionId") String subscriptionId, @Body HybridConnectionInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections delete" })
-        @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("hybridConnectionName") String hybridConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections get" })
-        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}")
-        Observable<Response<ResponseBody>> get(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("hybridConnectionName") String hybridConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections listAuthorizationRules" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules")
         Observable<Response<ResponseBody>> listAuthorizationRules(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("hybridConnectionName") String hybridConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -104,424 +88,30 @@ public class HybridConnectionsInner {
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}/regenerateKeys")
         Observable<Response<ResponseBody>> regenerateKeys(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("hybridConnectionName") String hybridConnectionName, @Path("authorizationRuleName") String authorizationRuleName, @Path("subscriptionId") String subscriptionId, @Body RegenerateAccessKeyParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections listByNamespaceNext" })
-        @GET
-        Observable<Response<ResponseBody>> listByNamespaceNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections listByNamespace" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections")
+        Observable<Response<ResponseBody>> listByNamespace(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections createOrUpdate" })
+        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}")
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("hybridConnectionName") String hybridConnectionName, @Path("subscriptionId") String subscriptionId, @Body HybridConnectionInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections delete" })
+        @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}", method = "DELETE", hasBody = true)
+        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("hybridConnectionName") String hybridConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections get" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}")
+        Observable<Response<ResponseBody>> get(@Path("resourceGroupName") String resourceGroupName, @Path("namespaceName") String namespaceName, @Path("hybridConnectionName") String hybridConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections listAuthorizationRulesNext" })
         @GET
         Observable<Response<ResponseBody>> listAuthorizationRulesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-    }
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.relay.v2017_04_01.HybridConnections listByNamespaceNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByNamespaceNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-    /**
-     * Lists the hybrid connection within the namespace.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PagedList&lt;HybridConnectionInner&gt; object if successful.
-     */
-    public PagedList<HybridConnectionInner> listByNamespace(final String resourceGroupName, final String namespaceName) {
-        ServiceResponse<Page<HybridConnectionInner>> response = listByNamespaceSinglePageAsync(resourceGroupName, namespaceName).toBlocking().single();
-        return new PagedList<HybridConnectionInner>(response.body()) {
-            @Override
-            public Page<HybridConnectionInner> nextPage(String nextPageLink) {
-                return listByNamespaceNextSinglePageAsync(nextPageLink).toBlocking().single().body();
-            }
-        };
-    }
-
-    /**
-     * Lists the hybrid connection within the namespace.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<List<HybridConnectionInner>> listByNamespaceAsync(final String resourceGroupName, final String namespaceName, final ListOperationCallback<HybridConnectionInner> serviceCallback) {
-        return AzureServiceFuture.fromPageResponse(
-            listByNamespaceSinglePageAsync(resourceGroupName, namespaceName),
-            new Func1<String, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(String nextPageLink) {
-                    return listByNamespaceNextSinglePageAsync(nextPageLink);
-                }
-            },
-            serviceCallback);
-    }
-
-    /**
-     * Lists the hybrid connection within the namespace.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;HybridConnectionInner&gt; object
-     */
-    public Observable<Page<HybridConnectionInner>> listByNamespaceAsync(final String resourceGroupName, final String namespaceName) {
-        return listByNamespaceWithServiceResponseAsync(resourceGroupName, namespaceName)
-            .map(new Func1<ServiceResponse<Page<HybridConnectionInner>>, Page<HybridConnectionInner>>() {
-                @Override
-                public Page<HybridConnectionInner> call(ServiceResponse<Page<HybridConnectionInner>> response) {
-                    return response.body();
-                }
-            });
-    }
-
-    /**
-     * Lists the hybrid connection within the namespace.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;HybridConnectionInner&gt; object
-     */
-    public Observable<ServiceResponse<Page<HybridConnectionInner>>> listByNamespaceWithServiceResponseAsync(final String resourceGroupName, final String namespaceName) {
-        return listByNamespaceSinglePageAsync(resourceGroupName, namespaceName)
-            .concatMap(new Func1<ServiceResponse<Page<HybridConnectionInner>>, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(ServiceResponse<Page<HybridConnectionInner>> page) {
-                    String nextPageLink = page.body().nextPageLink();
-                    if (nextPageLink == null) {
-                        return Observable.just(page);
-                    }
-                    return Observable.just(page).concatWith(listByNamespaceNextWithServiceResponseAsync(nextPageLink));
-                }
-            });
-    }
-
-    /**
-     * Lists the hybrid connection within the namespace.
-     *
-    ServiceResponse<PageImpl<HybridConnectionInner>> * @param resourceGroupName Name of the Resource group within the Azure subscription.
-    ServiceResponse<PageImpl<HybridConnectionInner>> * @param namespaceName The namespace name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;HybridConnectionInner&gt; object wrapped in {@link ServiceResponse} if successful.
-     */
-    public Observable<ServiceResponse<Page<HybridConnectionInner>>> listByNamespaceSinglePageAsync(final String resourceGroupName, final String namespaceName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByNamespace(resourceGroupName, namespaceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<PageImpl<HybridConnectionInner>> result = listByNamespaceDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<HybridConnectionInner>>(result.body(), result.response()));
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<PageImpl<HybridConnectionInner>> listByNamespaceDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<HybridConnectionInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<HybridConnectionInner>>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Creates or updates a service hybrid connection. This operation is idempotent.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @param parameters Parameters supplied to create a hybrid connection.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the HybridConnectionInner object if successful.
-     */
-    public HybridConnectionInner createOrUpdate(String resourceGroupName, String namespaceName, String hybridConnectionName, HybridConnectionInner parameters) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName, parameters).toBlocking().single().body();
-    }
-
-    /**
-     * Creates or updates a service hybrid connection. This operation is idempotent.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @param parameters Parameters supplied to create a hybrid connection.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<HybridConnectionInner> createOrUpdateAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, HybridConnectionInner parameters, final ServiceCallback<HybridConnectionInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName, parameters), serviceCallback);
-    }
-
-    /**
-     * Creates or updates a service hybrid connection. This operation is idempotent.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @param parameters Parameters supplied to create a hybrid connection.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the HybridConnectionInner object
-     */
-    public Observable<HybridConnectionInner> createOrUpdateAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, HybridConnectionInner parameters) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName, parameters).map(new Func1<ServiceResponse<HybridConnectionInner>, HybridConnectionInner>() {
-            @Override
-            public HybridConnectionInner call(ServiceResponse<HybridConnectionInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Creates or updates a service hybrid connection. This operation is idempotent.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @param parameters Parameters supplied to create a hybrid connection.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the HybridConnectionInner object
-     */
-    public Observable<ServiceResponse<HybridConnectionInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, HybridConnectionInner parameters) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (hybridConnectionName == null) {
-            throw new IllegalArgumentException("Parameter hybridConnectionName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (parameters == null) {
-            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(parameters);
-        return service.createOrUpdate(resourceGroupName, namespaceName, hybridConnectionName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<HybridConnectionInner>>>() {
-                @Override
-                public Observable<ServiceResponse<HybridConnectionInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<HybridConnectionInner> clientResponse = createOrUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<HybridConnectionInner> createOrUpdateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<HybridConnectionInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<HybridConnectionInner>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Deletes a hybrid connection.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    public void delete(String resourceGroupName, String namespaceName, String hybridConnectionName) {
-        deleteWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName).toBlocking().single().body();
-    }
-
-    /**
-     * Deletes a hybrid connection.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<Void> deleteAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(deleteWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName), serviceCallback);
-    }
-
-    /**
-     * Deletes a hybrid connection.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> deleteAsync(String resourceGroupName, String namespaceName, String hybridConnectionName) {
-        return deleteWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Deletes a hybrid connection.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync(String resourceGroupName, String namespaceName, String hybridConnectionName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (hybridConnectionName == null) {
-            throw new IllegalArgumentException("Parameter hybridConnectionName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.delete(resourceGroupName, namespaceName, hybridConnectionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = deleteDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
-    }
-
-    /**
-     * Returns the description for the specified hybrid connection.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the HybridConnectionInner object if successful.
-     */
-    public HybridConnectionInner get(String resourceGroupName, String namespaceName, String hybridConnectionName) {
-        return getWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName).toBlocking().single().body();
-    }
-
-    /**
-     * Returns the description for the specified hybrid connection.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<HybridConnectionInner> getAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, final ServiceCallback<HybridConnectionInner> serviceCallback) {
-        return ServiceFuture.fromResponse(getWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName), serviceCallback);
-    }
-
-    /**
-     * Returns the description for the specified hybrid connection.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the HybridConnectionInner object
-     */
-    public Observable<HybridConnectionInner> getAsync(String resourceGroupName, String namespaceName, String hybridConnectionName) {
-        return getWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName).map(new Func1<ServiceResponse<HybridConnectionInner>, HybridConnectionInner>() {
-            @Override
-            public HybridConnectionInner call(ServiceResponse<HybridConnectionInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Returns the description for the specified hybrid connection.
-     *
-     * @param resourceGroupName Name of the Resource group within the Azure subscription.
-     * @param namespaceName The namespace name
-     * @param hybridConnectionName The hybrid connection name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the HybridConnectionInner object
-     */
-    public Observable<ServiceResponse<HybridConnectionInner>> getWithServiceResponseAsync(String resourceGroupName, String namespaceName, String hybridConnectionName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (namespaceName == null) {
-            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
-        }
-        if (hybridConnectionName == null) {
-            throw new IllegalArgumentException("Parameter hybridConnectionName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, namespaceName, hybridConnectionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<HybridConnectionInner>>>() {
-                @Override
-                public Observable<ServiceResponse<HybridConnectionInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<HybridConnectionInner> clientResponse = getDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<HybridConnectionInner> getDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<HybridConnectionInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<HybridConnectionInner>() { }.getType())
-                .registerError(ErrorResponseException.class)
-                .build(response);
     }
 
     /**
@@ -1176,14 +766,15 @@ public class HybridConnectionsInner {
     /**
      * Lists the hybrid connection within the namespace.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;HybridConnectionInner&gt; object if successful.
      */
-    public PagedList<HybridConnectionInner> listByNamespaceNext(final String nextPageLink) {
-        ServiceResponse<Page<HybridConnectionInner>> response = listByNamespaceNextSinglePageAsync(nextPageLink).toBlocking().single();
+    public PagedList<HybridConnectionInner> listByNamespace(final String resourceGroupName, final String namespaceName) {
+        ServiceResponse<Page<HybridConnectionInner>> response = listByNamespaceSinglePageAsync(resourceGroupName, namespaceName).toBlocking().single();
         return new PagedList<HybridConnectionInner>(response.body()) {
             @Override
             public Page<HybridConnectionInner> nextPage(String nextPageLink) {
@@ -1195,15 +786,15 @@ public class HybridConnectionsInner {
     /**
      * Lists the hybrid connection within the namespace.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<HybridConnectionInner>> listByNamespaceNextAsync(final String nextPageLink, final ServiceFuture<List<HybridConnectionInner>> serviceFuture, final ListOperationCallback<HybridConnectionInner> serviceCallback) {
+    public ServiceFuture<List<HybridConnectionInner>> listByNamespaceAsync(final String resourceGroupName, final String namespaceName, final ListOperationCallback<HybridConnectionInner> serviceCallback) {
         return AzureServiceFuture.fromPageResponse(
-            listByNamespaceNextSinglePageAsync(nextPageLink),
+            listByNamespaceSinglePageAsync(resourceGroupName, namespaceName),
             new Func1<String, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(String nextPageLink) {
@@ -1216,12 +807,13 @@ public class HybridConnectionsInner {
     /**
      * Lists the hybrid connection within the namespace.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;HybridConnectionInner&gt; object
      */
-    public Observable<Page<HybridConnectionInner>> listByNamespaceNextAsync(final String nextPageLink) {
-        return listByNamespaceNextWithServiceResponseAsync(nextPageLink)
+    public Observable<Page<HybridConnectionInner>> listByNamespaceAsync(final String resourceGroupName, final String namespaceName) {
+        return listByNamespaceWithServiceResponseAsync(resourceGroupName, namespaceName)
             .map(new Func1<ServiceResponse<Page<HybridConnectionInner>>, Page<HybridConnectionInner>>() {
                 @Override
                 public Page<HybridConnectionInner> call(ServiceResponse<Page<HybridConnectionInner>> response) {
@@ -1233,12 +825,13 @@ public class HybridConnectionsInner {
     /**
      * Lists the hybrid connection within the namespace.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;HybridConnectionInner&gt; object
      */
-    public Observable<ServiceResponse<Page<HybridConnectionInner>>> listByNamespaceNextWithServiceResponseAsync(final String nextPageLink) {
-        return listByNamespaceNextSinglePageAsync(nextPageLink)
+    public Observable<ServiceResponse<Page<HybridConnectionInner>>> listByNamespaceWithServiceResponseAsync(final String resourceGroupName, final String namespaceName) {
+        return listByNamespaceSinglePageAsync(resourceGroupName, namespaceName)
             .concatMap(new Func1<ServiceResponse<Page<HybridConnectionInner>>, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(ServiceResponse<Page<HybridConnectionInner>> page) {
@@ -1254,21 +847,30 @@ public class HybridConnectionsInner {
     /**
      * Lists the hybrid connection within the namespace.
      *
-    ServiceResponse<PageImpl<HybridConnectionInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<HybridConnectionInner>> * @param resourceGroupName Name of the Resource group within the Azure subscription.
+    ServiceResponse<PageImpl<HybridConnectionInner>> * @param namespaceName The namespace name
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;HybridConnectionInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public Observable<ServiceResponse<Page<HybridConnectionInner>>> listByNamespaceNextSinglePageAsync(final String nextPageLink) {
-        if (nextPageLink == null) {
-            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+    public Observable<ServiceResponse<Page<HybridConnectionInner>>> listByNamespaceSinglePageAsync(final String resourceGroupName, final String namespaceName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
-        String nextUrl = String.format("%s", nextPageLink);
-        return service.listByNamespaceNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByNamespace(resourceGroupName, namespaceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<HybridConnectionInner>> result = listByNamespaceNextDelegate(response);
+                        ServiceResponse<PageImpl<HybridConnectionInner>> result = listByNamespaceDelegate(response);
                         return Observable.just(new ServiceResponse<Page<HybridConnectionInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1277,9 +879,296 @@ public class HybridConnectionsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<HybridConnectionInner>> listByNamespaceNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+    private ServiceResponse<PageImpl<HybridConnectionInner>> listByNamespaceDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<HybridConnectionInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<HybridConnectionInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Creates or updates a service hybrid connection. This operation is idempotent.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @param parameters Parameters supplied to create a hybrid connection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the HybridConnectionInner object if successful.
+     */
+    public HybridConnectionInner createOrUpdate(String resourceGroupName, String namespaceName, String hybridConnectionName, HybridConnectionInner parameters) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName, parameters).toBlocking().single().body();
+    }
+
+    /**
+     * Creates or updates a service hybrid connection. This operation is idempotent.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @param parameters Parameters supplied to create a hybrid connection.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<HybridConnectionInner> createOrUpdateAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, HybridConnectionInner parameters, final ServiceCallback<HybridConnectionInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName, parameters), serviceCallback);
+    }
+
+    /**
+     * Creates or updates a service hybrid connection. This operation is idempotent.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @param parameters Parameters supplied to create a hybrid connection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the HybridConnectionInner object
+     */
+    public Observable<HybridConnectionInner> createOrUpdateAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, HybridConnectionInner parameters) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName, parameters).map(new Func1<ServiceResponse<HybridConnectionInner>, HybridConnectionInner>() {
+            @Override
+            public HybridConnectionInner call(ServiceResponse<HybridConnectionInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Creates or updates a service hybrid connection. This operation is idempotent.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @param parameters Parameters supplied to create a hybrid connection.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the HybridConnectionInner object
+     */
+    public Observable<ServiceResponse<HybridConnectionInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, HybridConnectionInner parameters) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (hybridConnectionName == null) {
+            throw new IllegalArgumentException("Parameter hybridConnectionName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (parameters == null) {
+            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Validator.validate(parameters);
+        return service.createOrUpdate(resourceGroupName, namespaceName, hybridConnectionName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<HybridConnectionInner>>>() {
+                @Override
+                public Observable<ServiceResponse<HybridConnectionInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<HybridConnectionInner> clientResponse = createOrUpdateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<HybridConnectionInner> createOrUpdateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<HybridConnectionInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<HybridConnectionInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Deletes a hybrid connection.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    public void delete(String resourceGroupName, String namespaceName, String hybridConnectionName) {
+        deleteWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName).toBlocking().single().body();
+    }
+
+    /**
+     * Deletes a hybrid connection.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Void> deleteAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName), serviceCallback);
+    }
+
+    /**
+     * Deletes a hybrid connection.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> deleteAsync(String resourceGroupName, String namespaceName, String hybridConnectionName) {
+        return deleteWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Deletes a hybrid connection.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync(String resourceGroupName, String namespaceName, String hybridConnectionName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (hybridConnectionName == null) {
+            throw new IllegalArgumentException("Parameter hybridConnectionName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.delete(resourceGroupName, namespaceName, hybridConnectionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = deleteDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Returns the description for the specified hybrid connection.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the HybridConnectionInner object if successful.
+     */
+    public HybridConnectionInner get(String resourceGroupName, String namespaceName, String hybridConnectionName) {
+        return getWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName).toBlocking().single().body();
+    }
+
+    /**
+     * Returns the description for the specified hybrid connection.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<HybridConnectionInner> getAsync(String resourceGroupName, String namespaceName, String hybridConnectionName, final ServiceCallback<HybridConnectionInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName), serviceCallback);
+    }
+
+    /**
+     * Returns the description for the specified hybrid connection.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the HybridConnectionInner object
+     */
+    public Observable<HybridConnectionInner> getAsync(String resourceGroupName, String namespaceName, String hybridConnectionName) {
+        return getWithServiceResponseAsync(resourceGroupName, namespaceName, hybridConnectionName).map(new Func1<ServiceResponse<HybridConnectionInner>, HybridConnectionInner>() {
+            @Override
+            public HybridConnectionInner call(ServiceResponse<HybridConnectionInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Returns the description for the specified hybrid connection.
+     *
+     * @param resourceGroupName Name of the Resource group within the Azure subscription.
+     * @param namespaceName The namespace name
+     * @param hybridConnectionName The hybrid connection name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the HybridConnectionInner object
+     */
+    public Observable<ServiceResponse<HybridConnectionInner>> getWithServiceResponseAsync(String resourceGroupName, String namespaceName, String hybridConnectionName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (namespaceName == null) {
+            throw new IllegalArgumentException("Parameter namespaceName is required and cannot be null.");
+        }
+        if (hybridConnectionName == null) {
+            throw new IllegalArgumentException("Parameter hybridConnectionName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.get(resourceGroupName, namespaceName, hybridConnectionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<HybridConnectionInner>>>() {
+                @Override
+                public Observable<ServiceResponse<HybridConnectionInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<HybridConnectionInner> clientResponse = getDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<HybridConnectionInner> getDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<HybridConnectionInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<HybridConnectionInner>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -1391,6 +1280,117 @@ public class HybridConnectionsInner {
     private ServiceResponse<PageImpl<AuthorizationRuleInner>> listAuthorizationRulesNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<AuthorizationRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<AuthorizationRuleInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the hybrid connection within the namespace.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;HybridConnectionInner&gt; object if successful.
+     */
+    public PagedList<HybridConnectionInner> listByNamespaceNext(final String nextPageLink) {
+        ServiceResponse<Page<HybridConnectionInner>> response = listByNamespaceNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<HybridConnectionInner>(response.body()) {
+            @Override
+            public Page<HybridConnectionInner> nextPage(String nextPageLink) {
+                return listByNamespaceNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the hybrid connection within the namespace.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<HybridConnectionInner>> listByNamespaceNextAsync(final String nextPageLink, final ServiceFuture<List<HybridConnectionInner>> serviceFuture, final ListOperationCallback<HybridConnectionInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByNamespaceNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(String nextPageLink) {
+                    return listByNamespaceNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the hybrid connection within the namespace.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;HybridConnectionInner&gt; object
+     */
+    public Observable<Page<HybridConnectionInner>> listByNamespaceNextAsync(final String nextPageLink) {
+        return listByNamespaceNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<HybridConnectionInner>>, Page<HybridConnectionInner>>() {
+                @Override
+                public Page<HybridConnectionInner> call(ServiceResponse<Page<HybridConnectionInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the hybrid connection within the namespace.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;HybridConnectionInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<HybridConnectionInner>>> listByNamespaceNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByNamespaceNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<HybridConnectionInner>>, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(ServiceResponse<Page<HybridConnectionInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByNamespaceNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the hybrid connection within the namespace.
+     *
+    ServiceResponse<PageImpl<HybridConnectionInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;HybridConnectionInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<HybridConnectionInner>>> listByNamespaceNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByNamespaceNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<HybridConnectionInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<HybridConnectionInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<HybridConnectionInner>> result = listByNamespaceNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<HybridConnectionInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<HybridConnectionInner>> listByNamespaceNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<HybridConnectionInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<HybridConnectionInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }

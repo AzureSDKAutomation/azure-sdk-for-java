@@ -16,10 +16,10 @@ import com.microsoft.azure.management.apigeneration.Beta.SinceVersion;
 import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
-import com.microsoft.azure.management.relay.v2017_04_01.Operations;
 import com.microsoft.azure.management.relay.v2017_04_01.Namespaces;
 import com.microsoft.azure.management.relay.v2017_04_01.HybridConnections;
 import com.microsoft.azure.management.relay.v2017_04_01.WCFRelays;
+import com.microsoft.azure.management.relay.v2017_04_01.Operations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -27,10 +27,10 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
  * Entry point to Azure Relay resource management.
  */
 public final class RelayManager extends ManagerCore<RelayManager, RelayManagementClientImpl> {
-    private Operations operations;
     private Namespaces namespaces;
     private HybridConnections hybridConnections;
     private WCFRelays wCFRelays;
+    private Operations operations;
     /**
     * Get a Configurable instance that can be used to create RelayManager with optional configuration.
     *
@@ -79,16 +79,6 @@ public final class RelayManager extends ManagerCore<RelayManager, RelayManagemen
     }
 
     /**
-     * @return Entry point to manage Operations.
-     */
-    public Operations operations() {
-        if (this.operations == null) {
-            this.operations = new OperationsImpl(this);
-        }
-        return this.operations;
-    }
-
-    /**
      * @return Entry point to manage Namespaces.
      */
     public Namespaces namespaces() {
@@ -116,6 +106,16 @@ public final class RelayManager extends ManagerCore<RelayManager, RelayManagemen
             this.wCFRelays = new WCFRelaysImpl(this);
         }
         return this.wCFRelays;
+    }
+
+    /**
+     * @return Entry point to manage Operations.
+     */
+    public Operations operations() {
+        if (this.operations == null) {
+            this.operations = new OperationsImpl(this);
+        }
+        return this.operations;
     }
 
     /**

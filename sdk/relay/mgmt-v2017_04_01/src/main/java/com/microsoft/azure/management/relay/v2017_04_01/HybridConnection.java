@@ -110,7 +110,7 @@ public interface HybridConnection extends HasInner<HybridConnectionInner>, Index
         interface WithUserMetadata {
             /**
              * Specifies userMetadata.
-             * @param userMetadata The usermetadata is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored
+             * @param userMetadata The user meta data is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored
              * @return the next definition stage
              */
             WithCreate withUserMetadata(String userMetadata);
@@ -152,7 +152,7 @@ public interface HybridConnection extends HasInner<HybridConnectionInner>, Index
         interface WithUserMetadata {
             /**
              * Specifies userMetadata.
-             * @param userMetadata The usermetadata is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored
+             * @param userMetadata The user meta data is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored
              * @return the next update stage
              */
             Update withUserMetadata(String userMetadata);

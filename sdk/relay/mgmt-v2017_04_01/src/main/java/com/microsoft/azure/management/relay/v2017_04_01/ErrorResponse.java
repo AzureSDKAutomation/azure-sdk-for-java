@@ -11,7 +11,7 @@ package com.microsoft.azure.management.relay.v2017_04_01;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Error reponse indicates Relay service is not able to process the incoming
+ * Error response indicates Relay service is not able to process the incoming
  * request. The reason is provided in the error message.
  */
 public class ErrorResponse {

@@ -133,19 +133,6 @@ public class RelayManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The OperationsInner object to access its operations.
-     */
-    private OperationsInner operations;
-
-    /**
-     * Gets the OperationsInner object to access its operations.
-     * @return the OperationsInner object.
-     */
-    public OperationsInner operations() {
-        return this.operations;
-    }
-
-    /**
      * The NamespacesInner object to access its operations.
      */
     private NamespacesInner namespaces;
@@ -185,6 +172,19 @@ public class RelayManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The OperationsInner object to access its operations.
+     */
+    private OperationsInner operations;
+
+    /**
+     * Gets the OperationsInner object to access its operations.
+     * @return the OperationsInner object.
+     */
+    public OperationsInner operations() {
+        return this.operations;
+    }
+
+    /**
      * Initializes an instance of RelayManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -219,10 +219,10 @@ public class RelayManagementClientImpl extends AzureServiceClient {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.operations = new OperationsInner(restClient().retrofit(), this);
         this.namespaces = new NamespacesInner(restClient().retrofit(), this);
         this.hybridConnections = new HybridConnectionsInner(restClient().retrofit(), this);
         this.wCFRelays = new WCFRelaysInner(restClient().retrofit(), this);
+        this.operations = new OperationsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

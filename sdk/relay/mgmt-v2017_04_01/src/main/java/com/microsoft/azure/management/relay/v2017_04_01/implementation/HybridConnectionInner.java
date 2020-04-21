@@ -45,8 +45,8 @@ public class HybridConnectionInner extends ProxyResource {
     private Boolean requiresClientAuthorization;
 
     /**
-     * The usermetadata is a placeholder to store user-defined string data for
-     * the hybrid connection endpoint. For example, it can be used to store
+     * The user meta data is a placeholder to store user-defined string data
+     * for the hybrid connection endpoint. For example, it can be used to store
      * descriptive data, such as a list of teams and their contact information.
      * Also, user-defined configuration settings can be stored.
      */
@@ -101,7 +101,7 @@ public class HybridConnectionInner extends ProxyResource {
     }
 
     /**
-     * Get the usermetadata is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored.
+     * Get the user meta data is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored.
      *
      * @return the userMetadata value
      */
@@ -110,7 +110,7 @@ public class HybridConnectionInner extends ProxyResource {
     }
 
     /**
-     * Set the usermetadata is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored.
+     * Set the user meta data is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored.
      *
      * @param userMetadata the userMetadata value to set
      * @return the HybridConnectionInner object itself.
