@@ -28,34 +28,43 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     private Object endpoint;
 
     /**
-     * The company ID of the QuickBooks company to authorize.
+     * The company ID associated with your QuickBooks account.
      */
     @JsonProperty(value = "typeProperties.companyId", required = true)
     private Object companyId;
 
     /**
-     * The consumer key for OAuth 1.0 authentication.
+     * The client ID associated with your QuickBooks application.
      */
     @JsonProperty(value = "typeProperties.consumerKey", required = true)
     private Object consumerKey;
 
     /**
-     * The consumer secret for OAuth 1.0 authentication.
+     * The client secret associated with your QuickBooks application.
      */
     @JsonProperty(value = "typeProperties.consumerSecret", required = true)
     private SecretBase consumerSecret;
 
     /**
-     * The access token for OAuth 1.0 authentication.
+     * The access token for OAuth 2.0 authentication. This is deprecated from
+     * OAuth 2.0.
      */
-    @JsonProperty(value = "typeProperties.accessToken", required = true)
+    @JsonProperty(value = "typeProperties.accessToken")
     private SecretBase accessToken;
 
     /**
-     * The access token secret for OAuth 1.0 authentication.
+     * The access token secret for OAuth 1.0 authentication. This is deprecated
+     * from OAuth 2.0.
      */
-    @JsonProperty(value = "typeProperties.accessTokenSecret", required = true)
+    @JsonProperty(value = "typeProperties.accessTokenSecret")
     private SecretBase accessTokenSecret;
+
+    /**
+     * The OAuth 2.0 refresh token associated with your QuickBooks
+     * application,used to refresh the access token when it expires.
+     */
+    @JsonProperty(value = "typeProperties.refreshToken", required = true)
+    private SecretBase refreshToken;
 
     /**
      * Specifies whether the data source endpoints are encrypted using HTTPS.
@@ -93,7 +102,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Get the company ID of the QuickBooks company to authorize.
+     * Get the company ID associated with your QuickBooks account.
      *
      * @return the companyId value
      */
@@ -102,7 +111,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Set the company ID of the QuickBooks company to authorize.
+     * Set the company ID associated with your QuickBooks account.
      *
      * @param companyId the companyId value to set
      * @return the QuickBooksLinkedService object itself.
@@ -113,7 +122,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Get the consumer key for OAuth 1.0 authentication.
+     * Get the client ID associated with your QuickBooks application.
      *
      * @return the consumerKey value
      */
@@ -122,7 +131,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Set the consumer key for OAuth 1.0 authentication.
+     * Set the client ID associated with your QuickBooks application.
      *
      * @param consumerKey the consumerKey value to set
      * @return the QuickBooksLinkedService object itself.
@@ -133,7 +142,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Get the consumer secret for OAuth 1.0 authentication.
+     * Get the client secret associated with your QuickBooks application.
      *
      * @return the consumerSecret value
      */
@@ -142,7 +151,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Set the consumer secret for OAuth 1.0 authentication.
+     * Set the client secret associated with your QuickBooks application.
      *
      * @param consumerSecret the consumerSecret value to set
      * @return the QuickBooksLinkedService object itself.
@@ -153,7 +162,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Get the access token for OAuth 1.0 authentication.
+     * Get the access token for OAuth 2.0 authentication. This is deprecated from OAuth 2.0.
      *
      * @return the accessToken value
      */
@@ -162,7 +171,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Set the access token for OAuth 1.0 authentication.
+     * Set the access token for OAuth 2.0 authentication. This is deprecated from OAuth 2.0.
      *
      * @param accessToken the accessToken value to set
      * @return the QuickBooksLinkedService object itself.
@@ -173,7 +182,7 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Get the access token secret for OAuth 1.0 authentication.
+     * Get the access token secret for OAuth 1.0 authentication. This is deprecated from OAuth 2.0.
      *
      * @return the accessTokenSecret value
      */
@@ -182,13 +191,33 @@ public class QuickBooksLinkedService extends LinkedServiceInner {
     }
 
     /**
-     * Set the access token secret for OAuth 1.0 authentication.
+     * Set the access token secret for OAuth 1.0 authentication. This is deprecated from OAuth 2.0.
      *
      * @param accessTokenSecret the accessTokenSecret value to set
      * @return the QuickBooksLinkedService object itself.
      */
     public QuickBooksLinkedService withAccessTokenSecret(SecretBase accessTokenSecret) {
         this.accessTokenSecret = accessTokenSecret;
+        return this;
+    }
+
+    /**
+     * Get the OAuth 2.0 refresh token associated with your QuickBooks application,used to refresh the access token when it expires.
+     *
+     * @return the refreshToken value
+     */
+    public SecretBase refreshToken() {
+        return this.refreshToken;
+    }
+
+    /**
+     * Set the OAuth 2.0 refresh token associated with your QuickBooks application,used to refresh the access token when it expires.
+     *
+     * @param refreshToken the refreshToken value to set
+     * @return the QuickBooksLinkedService object itself.
+     */
+    public QuickBooksLinkedService withRefreshToken(SecretBase refreshToken) {
+        this.refreshToken = refreshToken;
         return this;
     }
 
