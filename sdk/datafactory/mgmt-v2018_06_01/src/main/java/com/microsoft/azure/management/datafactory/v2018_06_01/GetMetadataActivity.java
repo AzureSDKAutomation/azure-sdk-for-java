@@ -28,6 +28,12 @@ public class GetMetadataActivity extends ExecutionActivity {
     private DatasetReference dataset;
 
     /**
+     * GetMetadata activity binary store settings.
+     */
+    @JsonProperty(value = "typeProperties.storeSettings")
+    private StoreReadSettings storeSettings;
+
+    /**
      * Fields of metadata to get from dataset.
      */
     @JsonProperty(value = "typeProperties.fieldList")
@@ -50,6 +56,26 @@ public class GetMetadataActivity extends ExecutionActivity {
      */
     public GetMetadataActivity withDataset(DatasetReference dataset) {
         this.dataset = dataset;
+        return this;
+    }
+
+    /**
+     * Get getMetadata activity binary store settings.
+     *
+     * @return the storeSettings value
+     */
+    public StoreReadSettings storeSettings() {
+        return this.storeSettings;
+    }
+
+    /**
+     * Set getMetadata activity binary store settings.
+     *
+     * @param storeSettings the storeSettings value to set
+     * @return the GetMetadataActivity object itself.
+     */
+    public GetMetadataActivity withStoreSettings(StoreReadSettings storeSettings) {
+        this.storeSettings = storeSettings;
         return this;
     }
 
