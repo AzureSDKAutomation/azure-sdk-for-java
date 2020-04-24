@@ -12,7 +12,10 @@ import com.microsoft.azure.management.signalr.v2018_10_01.ResourceSku;
 import java.util.List;
 import com.microsoft.azure.management.signalr.v2018_10_01.SignalRFeature;
 import com.microsoft.azure.management.signalr.v2018_10_01.SignalRCorsSettings;
+import com.microsoft.azure.management.signalr.v2018_10_01.ServerlessUpstreamSettings;
+import com.microsoft.azure.management.signalr.v2018_10_01.SignalRNetworkACLs;
 import com.microsoft.azure.management.signalr.v2018_10_01.ProvisioningState;
+import com.microsoft.azure.management.signalr.v2018_10_01.ServiceKind;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.rest.SkipParentValidation;
@@ -59,6 +62,18 @@ public class SignalRResourceInner extends Resource {
     private SignalRCorsSettings cors;
 
     /**
+     * Upstream settings when the Azure SignalR is in server-less mode.
+     */
+    @JsonProperty(value = "properties.upstream")
+    private ServerlessUpstreamSettings upstream;
+
+    /**
+     * Network ACLs.
+     */
+    @JsonProperty(value = "properties.networkACLs")
+    private SignalRNetworkACLs networkACLs;
+
+    /**
      * Provisioning state of the resource. Possible values include: 'Unknown',
      * 'Succeeded', 'Failed', 'Canceled', 'Running', 'Creating', 'Updating',
      * 'Deleting', 'Moving'.
@@ -98,6 +113,20 @@ public class SignalRResourceInner extends Resource {
      */
     @JsonProperty(value = "properties.version")
     private String version;
+
+    /**
+     * Private endpoint connections to the SignalR resource.
+     */
+    @JsonProperty(value = "properties.privateEndpointConnections")
+    private List<PrivateEndpointConnectionInner> privateEndpointConnections;
+
+    /**
+     * The kind of the service - e.g. "SignalR", or "RawWebSockets" for
+     * "Microsoft.SignalRService/SignalR". Possible values include: 'SignalR',
+     * 'RawWebSockets'.
+     */
+    @JsonProperty(value = "kind", access = JsonProperty.Access.WRITE_ONLY)
+    private ServiceKind kind;
 
     /**
      * Get sKU of the service.
@@ -190,6 +219,46 @@ public class SignalRResourceInner extends Resource {
     }
 
     /**
+     * Get upstream settings when the Azure SignalR is in server-less mode.
+     *
+     * @return the upstream value
+     */
+    public ServerlessUpstreamSettings upstream() {
+        return this.upstream;
+    }
+
+    /**
+     * Set upstream settings when the Azure SignalR is in server-less mode.
+     *
+     * @param upstream the upstream value to set
+     * @return the SignalRResourceInner object itself.
+     */
+    public SignalRResourceInner withUpstream(ServerlessUpstreamSettings upstream) {
+        this.upstream = upstream;
+        return this;
+    }
+
+    /**
+     * Get network ACLs.
+     *
+     * @return the networkACLs value
+     */
+    public SignalRNetworkACLs networkACLs() {
+        return this.networkACLs;
+    }
+
+    /**
+     * Set network ACLs.
+     *
+     * @param networkACLs the networkACLs value to set
+     * @return the SignalRResourceInner object itself.
+     */
+    public SignalRResourceInner withNetworkACLs(SignalRNetworkACLs networkACLs) {
+        this.networkACLs = networkACLs;
+        return this;
+    }
+
+    /**
      * Get provisioning state of the resource. Possible values include: 'Unknown', 'Succeeded', 'Failed', 'Canceled', 'Running', 'Creating', 'Updating', 'Deleting', 'Moving'.
      *
      * @return the provisioningState value
@@ -252,6 +321,35 @@ public class SignalRResourceInner extends Resource {
     public SignalRResourceInner withVersion(String version) {
         this.version = version;
         return this;
+    }
+
+    /**
+     * Get private endpoint connections to the SignalR resource.
+     *
+     * @return the privateEndpointConnections value
+     */
+    public List<PrivateEndpointConnectionInner> privateEndpointConnections() {
+        return this.privateEndpointConnections;
+    }
+
+    /**
+     * Set private endpoint connections to the SignalR resource.
+     *
+     * @param privateEndpointConnections the privateEndpointConnections value to set
+     * @return the SignalRResourceInner object itself.
+     */
+    public SignalRResourceInner withPrivateEndpointConnections(List<PrivateEndpointConnectionInner> privateEndpointConnections) {
+        this.privateEndpointConnections = privateEndpointConnections;
+        return this;
+    }
+
+    /**
+     * Get the kind of the service - e.g. "SignalR", or "RawWebSockets" for "Microsoft.SignalRService/SignalR". Possible values include: 'SignalR', 'RawWebSockets'.
+     *
+     * @return the kind value
+     */
+    public ServiceKind kind() {
+        return this.kind;
     }
 
 }
