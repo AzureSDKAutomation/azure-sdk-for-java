@@ -10,6 +10,8 @@ package com.microsoft.azure.management.signalr.v2018_10_01.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 
@@ -159,6 +161,32 @@ public class SignalRManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The SignalRPrivateEndpointConnectionsInner object to access its operations.
+     */
+    private SignalRPrivateEndpointConnectionsInner signalRPrivateEndpointConnections;
+
+    /**
+     * Gets the SignalRPrivateEndpointConnectionsInner object to access its operations.
+     * @return the SignalRPrivateEndpointConnectionsInner object.
+     */
+    public SignalRPrivateEndpointConnectionsInner signalRPrivateEndpointConnections() {
+        return this.signalRPrivateEndpointConnections;
+    }
+
+    /**
+     * The SignalRPrivateLinkResourcesInner object to access its operations.
+     */
+    private SignalRPrivateLinkResourcesInner signalRPrivateLinkResources;
+
+    /**
+     * Gets the SignalRPrivateLinkResourcesInner object to access its operations.
+     * @return the SignalRPrivateLinkResourcesInner object.
+     */
+    public SignalRPrivateLinkResourcesInner signalRPrivateLinkResources() {
+        return this.signalRPrivateLinkResources;
+    }
+
+    /**
      * The UsagesInner object to access its operations.
      */
     private UsagesInner usages;
@@ -208,6 +236,8 @@ public class SignalRManagementClientImpl extends AzureServiceClient {
         this.generateClientRequestId = true;
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.signalRs = new SignalRsInner(restClient().retrofit(), this);
+        this.signalRPrivateEndpointConnections = new SignalRPrivateEndpointConnectionsInner(restClient().retrofit(), this);
+        this.signalRPrivateLinkResources = new SignalRPrivateLinkResourcesInner(restClient().retrofit(), this);
         this.usages = new UsagesInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }

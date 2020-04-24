@@ -8,14 +8,13 @@
 
 package com.microsoft.azure.management.signalr.v2018_10_01.implementation;
 
-import com.microsoft.azure.management.signalr.v2018_10_01.Operation;
+import com.microsoft.azure.management.signalr.v2018_10_01.PrivateLinkResource;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
-import com.microsoft.azure.management.signalr.v2018_10_01.OperationDisplay;
-import com.microsoft.azure.management.signalr.v2018_10_01.OperationProperties;
+import java.util.List;
 
-class OperationImpl extends WrapperImpl<OperationInner> implements Operation {
+class PrivateLinkResourceImpl extends WrapperImpl<PrivateLinkResourceInner> implements PrivateLinkResource {
     private final SignalRServiceManager manager;
-    OperationImpl(OperationInner inner, SignalRServiceManager manager) {
+    PrivateLinkResourceImpl(PrivateLinkResourceInner inner, SignalRServiceManager manager) {
         super(inner);
         this.manager = manager;
     }
@@ -26,13 +25,13 @@ class OperationImpl extends WrapperImpl<OperationInner> implements Operation {
     }
 
     @Override
-    public OperationDisplay display() {
-        return this.inner().display();
+    public String groupId() {
+        return this.inner().groupId();
     }
 
     @Override
-    public Boolean isDataAction() {
-        return this.inner().isDataAction();
+    public String id() {
+        return this.inner().id();
     }
 
     @Override
@@ -41,13 +40,18 @@ class OperationImpl extends WrapperImpl<OperationInner> implements Operation {
     }
 
     @Override
-    public String origin() {
-        return this.inner().origin();
+    public List<String> requiredMembers() {
+        return this.inner().requiredMembers();
     }
 
     @Override
-    public OperationProperties properties() {
-        return this.inner().properties();
+    public List<String> requiredZoneNames() {
+        return this.inner().requiredZoneNames();
+    }
+
+    @Override
+    public String type() {
+        return this.inner().type();
     }
 
 }

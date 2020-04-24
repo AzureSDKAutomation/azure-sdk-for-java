@@ -9,18 +9,19 @@
 package com.microsoft.azure.management.signalr.v2018_10_01;
 
 import com.microsoft.azure.arm.model.HasInner;
-import com.microsoft.azure.management.signalr.v2018_10_01.implementation.SignalRUsageInner;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.signalr.v2018_10_01.implementation.SignalRServiceManager;
+import com.microsoft.azure.management.signalr.v2018_10_01.implementation.PrivateLinkResourceInner;
+import java.util.List;
 
 /**
- * Type representing SignalRUsage.
+ * Type representing PrivateLinkResource.
  */
-public interface SignalRUsage extends HasInner<SignalRUsageInner>, HasManager<SignalRServiceManager> {
+public interface PrivateLinkResource extends HasInner<PrivateLinkResourceInner>, HasManager<SignalRServiceManager> {
     /**
-     * @return the currentValue value.
+     * @return the groupId value.
      */
-    Long currentValue();
+    String groupId();
 
     /**
      * @return the id value.
@@ -28,18 +29,23 @@ public interface SignalRUsage extends HasInner<SignalRUsageInner>, HasManager<Si
     String id();
 
     /**
-     * @return the limit value.
-     */
-    Long limit();
-
-    /**
      * @return the name value.
      */
-    SignalRUsageName name();
+    String name();
 
     /**
-     * @return the unit value.
+     * @return the requiredMembers value.
      */
-    String unit();
+    List<String> requiredMembers();
+
+    /**
+     * @return the requiredZoneNames value.
+     */
+    List<String> requiredZoneNames();
+
+    /**
+     * @return the type value.
+     */
+    String type();
 
 }

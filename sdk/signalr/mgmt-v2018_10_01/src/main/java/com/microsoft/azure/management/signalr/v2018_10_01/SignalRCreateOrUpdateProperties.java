@@ -44,6 +44,18 @@ public class SignalRCreateOrUpdateProperties {
     private SignalRCorsSettings cors;
 
     /**
+     * Upstream settings when the Azure SignalR is in server-less mode.
+     */
+    @JsonProperty(value = "upstream")
+    private ServerlessUpstreamSettings upstream;
+
+    /**
+     * Network ACLs.
+     */
+    @JsonProperty(value = "networkACLs")
+    private SignalRNetworkACLs networkACLs;
+
+    /**
      * Get prefix for the hostName of the SignalR service. Retained for future use.
      The hostname will be of format: &amp;lt;hostNamePrefix&amp;gt;.service.signalr.net.
      *
@@ -110,6 +122,46 @@ public class SignalRCreateOrUpdateProperties {
      */
     public SignalRCreateOrUpdateProperties withCors(SignalRCorsSettings cors) {
         this.cors = cors;
+        return this;
+    }
+
+    /**
+     * Get upstream settings when the Azure SignalR is in server-less mode.
+     *
+     * @return the upstream value
+     */
+    public ServerlessUpstreamSettings upstream() {
+        return this.upstream;
+    }
+
+    /**
+     * Set upstream settings when the Azure SignalR is in server-less mode.
+     *
+     * @param upstream the upstream value to set
+     * @return the SignalRCreateOrUpdateProperties object itself.
+     */
+    public SignalRCreateOrUpdateProperties withUpstream(ServerlessUpstreamSettings upstream) {
+        this.upstream = upstream;
+        return this;
+    }
+
+    /**
+     * Get network ACLs.
+     *
+     * @return the networkACLs value
+     */
+    public SignalRNetworkACLs networkACLs() {
+        return this.networkACLs;
+    }
+
+    /**
+     * Set network ACLs.
+     *
+     * @param networkACLs the networkACLs value to set
+     * @return the SignalRCreateOrUpdateProperties object itself.
+     */
+    public SignalRCreateOrUpdateProperties withNetworkACLs(SignalRNetworkACLs networkACLs) {
+        this.networkACLs = networkACLs;
         return this;
     }
 

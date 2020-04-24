@@ -26,6 +26,13 @@ public class SignalRCreateParameters extends SignalRUpdateParameters {
     private String location;
 
     /**
+     * The kind of the service. (e.g. signalr vs. rawwebsockets). Possible
+     * values include: 'SignalR', 'RawWebSockets'.
+     */
+    @JsonProperty(value = "kind")
+    private ServiceKind kind;
+
+    /**
      * Get azure GEO region: e.g. West US | East US | North Central US | South Central US | West Europe | North Europe | East Asia | Southeast Asia | etc.
      The geo region of a resource never changes after it is created.
      *
@@ -44,6 +51,26 @@ public class SignalRCreateParameters extends SignalRUpdateParameters {
      */
     public SignalRCreateParameters withLocation(String location) {
         this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the kind of the service. (e.g. signalr vs. rawwebsockets). Possible values include: 'SignalR', 'RawWebSockets'.
+     *
+     * @return the kind value
+     */
+    public ServiceKind kind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind of the service. (e.g. signalr vs. rawwebsockets). Possible values include: 'SignalR', 'RawWebSockets'.
+     *
+     * @param kind the kind value to set
+     * @return the SignalRCreateParameters object itself.
+     */
+    public SignalRCreateParameters withKind(ServiceKind kind) {
+        this.kind = kind;
         return this;
     }
 
