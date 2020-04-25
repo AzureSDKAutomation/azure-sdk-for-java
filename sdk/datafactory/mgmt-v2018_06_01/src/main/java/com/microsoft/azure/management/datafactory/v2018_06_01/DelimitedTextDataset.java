@@ -57,10 +57,11 @@ public class DelimitedTextDataset extends DatasetInner {
     private Object compressionCodec;
 
     /**
-     * The data compression method used for DelimitedText.
+     * The data compression method used for DelimitedText. Possible values
+     * include: 'Optimal', 'Fastest'.
      */
     @JsonProperty(value = "typeProperties.compressionLevel")
-    private Object compressionLevel;
+    private DatasetCompressionLevel compressionLevel;
 
     /**
      * The quote character. Type: string (or Expression with resultType
@@ -193,21 +194,21 @@ public class DelimitedTextDataset extends DatasetInner {
     }
 
     /**
-     * Get the data compression method used for DelimitedText.
+     * Get the data compression method used for DelimitedText. Possible values include: 'Optimal', 'Fastest'.
      *
      * @return the compressionLevel value
      */
-    public Object compressionLevel() {
+    public DatasetCompressionLevel compressionLevel() {
         return this.compressionLevel;
     }
 
     /**
-     * Set the data compression method used for DelimitedText.
+     * Set the data compression method used for DelimitedText. Possible values include: 'Optimal', 'Fastest'.
      *
      * @param compressionLevel the compressionLevel value to set
      * @return the DelimitedTextDataset object itself.
      */
-    public DelimitedTextDataset withCompressionLevel(Object compressionLevel) {
+    public DelimitedTextDataset withCompressionLevel(DatasetCompressionLevel compressionLevel) {
         this.compressionLevel = compressionLevel;
         return this;
     }
