@@ -19,27 +19,28 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("Deflate")
 public class DatasetDeflateCompression extends DatasetCompression {
     /**
-     * The Deflate compression level.
+     * The Deflate compression level. Possible values include: 'Optimal',
+     * 'Fastest'.
      */
     @JsonProperty(value = "level")
-    private Object level;
+    private DatasetCompressionLevel level;
 
     /**
-     * Get the Deflate compression level.
+     * Get the Deflate compression level. Possible values include: 'Optimal', 'Fastest'.
      *
      * @return the level value
      */
-    public Object level() {
+    public DatasetCompressionLevel level() {
         return this.level;
     }
 
     /**
-     * Set the Deflate compression level.
+     * Set the Deflate compression level. Possible values include: 'Optimal', 'Fastest'.
      *
      * @param level the level value to set
      * @return the DatasetDeflateCompression object itself.
      */
-    public DatasetDeflateCompression withLevel(Object level) {
+    public DatasetDeflateCompression withLevel(DatasetCompressionLevel level) {
         this.level = level;
         return this;
     }

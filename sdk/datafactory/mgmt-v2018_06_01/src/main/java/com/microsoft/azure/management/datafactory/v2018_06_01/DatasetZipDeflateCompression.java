@@ -19,27 +19,28 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("ZipDeflate")
 public class DatasetZipDeflateCompression extends DatasetCompression {
     /**
-     * The ZipDeflate compression level.
+     * The ZipDeflate compression level. Possible values include: 'Optimal',
+     * 'Fastest'.
      */
     @JsonProperty(value = "level")
-    private Object level;
+    private DatasetCompressionLevel level;
 
     /**
-     * Get the ZipDeflate compression level.
+     * Get the ZipDeflate compression level. Possible values include: 'Optimal', 'Fastest'.
      *
      * @return the level value
      */
-    public Object level() {
+    public DatasetCompressionLevel level() {
         return this.level;
     }
 
     /**
-     * Set the ZipDeflate compression level.
+     * Set the ZipDeflate compression level. Possible values include: 'Optimal', 'Fastest'.
      *
      * @param level the level value to set
      * @return the DatasetZipDeflateCompression object itself.
      */
-    public DatasetZipDeflateCompression withLevel(Object level) {
+    public DatasetZipDeflateCompression withLevel(DatasetCompressionLevel level) {
         this.level = level;
         return this;
     }
