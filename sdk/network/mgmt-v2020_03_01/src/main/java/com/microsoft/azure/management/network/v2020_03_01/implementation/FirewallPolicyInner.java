@@ -12,6 +12,7 @@ import java.util.List;
 import com.microsoft.azure.SubResource;
 import com.microsoft.azure.management.network.v2020_03_01.ProvisioningState;
 import com.microsoft.azure.management.network.v2020_03_01.AzureFirewallThreatIntelMode;
+import com.microsoft.azure.management.network.v2020_03_01.FirewallPolicyThreatIntelWhitelist;
 import com.microsoft.azure.management.network.v2020_03_01.FirewallPolicyIntrusionSystemMode;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
@@ -62,6 +63,12 @@ public class FirewallPolicyInner extends Resource {
      */
     @JsonProperty(value = "properties.threatIntelMode")
     private AzureFirewallThreatIntelMode threatIntelMode;
+
+    /**
+     * ThreatIntel Whitelist for Firewall Policy.
+     */
+    @JsonProperty(value = "properties.threatIntelWhitelist")
+    private FirewallPolicyThreatIntelWhitelist threatIntelWhitelist;
 
     /**
      * The operation mode for Intrusion system. Possible values include:
@@ -155,6 +162,26 @@ public class FirewallPolicyInner extends Resource {
      */
     public FirewallPolicyInner withThreatIntelMode(AzureFirewallThreatIntelMode threatIntelMode) {
         this.threatIntelMode = threatIntelMode;
+        return this;
+    }
+
+    /**
+     * Get threatIntel Whitelist for Firewall Policy.
+     *
+     * @return the threatIntelWhitelist value
+     */
+    public FirewallPolicyThreatIntelWhitelist threatIntelWhitelist() {
+        return this.threatIntelWhitelist;
+    }
+
+    /**
+     * Set threatIntel Whitelist for Firewall Policy.
+     *
+     * @param threatIntelWhitelist the threatIntelWhitelist value to set
+     * @return the FirewallPolicyInner object itself.
+     */
+    public FirewallPolicyInner withThreatIntelWhitelist(FirewallPolicyThreatIntelWhitelist threatIntelWhitelist) {
+        this.threatIntelWhitelist = threatIntelWhitelist;
         return this;
     }
 
