@@ -15,6 +15,7 @@ import java.util.List;
 import com.microsoft.azure.SubResource;
 import com.microsoft.azure.management.network.v2020_03_01.ProvisioningState;
 import com.microsoft.azure.management.network.v2020_03_01.AzureFirewallThreatIntelMode;
+import com.microsoft.azure.management.network.v2020_03_01.FirewallPolicyThreatIntelWhitelist;
 import com.microsoft.azure.management.network.v2020_03_01.FirewallPolicyIntrusionSystemMode;
 
 class FirewallPolicyImpl extends GroupableResourceCoreImpl<FirewallPolicy, FirewallPolicyInner, FirewallPolicyImpl, NetworkManager> implements FirewallPolicy, FirewallPolicy.Definition, FirewallPolicy.Update {
@@ -89,6 +90,11 @@ class FirewallPolicyImpl extends GroupableResourceCoreImpl<FirewallPolicy, Firew
     }
 
     @Override
+    public FirewallPolicyThreatIntelWhitelist threatIntelWhitelist() {
+        return this.inner().threatIntelWhitelist();
+    }
+
+    @Override
     public FirewallPolicyImpl withBasePolicy(SubResource basePolicy) {
         this.inner().withBasePolicy(basePolicy);
         return this;
@@ -103,6 +109,12 @@ class FirewallPolicyImpl extends GroupableResourceCoreImpl<FirewallPolicy, Firew
     @Override
     public FirewallPolicyImpl withThreatIntelMode(AzureFirewallThreatIntelMode threatIntelMode) {
         this.inner().withThreatIntelMode(threatIntelMode);
+        return this;
+    }
+
+    @Override
+    public FirewallPolicyImpl withThreatIntelWhitelist(FirewallPolicyThreatIntelWhitelist threatIntelWhitelist) {
+        this.inner().withThreatIntelWhitelist(threatIntelWhitelist);
         return this;
     }
 

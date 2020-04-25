@@ -67,6 +67,11 @@ public interface FirewallPolicy extends HasInner<FirewallPolicyInner>, Resource,
     AzureFirewallThreatIntelMode threatIntelMode();
 
     /**
+     * @return the threatIntelWhitelist value.
+     */
+    FirewallPolicyThreatIntelWhitelist threatIntelWhitelist();
+
+    /**
      * The entirety of the FirewallPolicy definition.
      */
     interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithCreate {
@@ -125,17 +130,29 @@ public interface FirewallPolicy extends HasInner<FirewallPolicyInner>, Resource,
         }
 
         /**
+         * The stage of the firewallpolicy definition allowing to specify ThreatIntelWhitelist.
+         */
+        interface WithThreatIntelWhitelist {
+            /**
+             * Specifies threatIntelWhitelist.
+             * @param threatIntelWhitelist ThreatIntel Whitelist for Firewall Policy
+             * @return the next definition stage
+             */
+            WithCreate withThreatIntelWhitelist(FirewallPolicyThreatIntelWhitelist threatIntelWhitelist);
+        }
+
+        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<FirewallPolicy>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithBasePolicy, DefinitionStages.WithIntrusionSystemMode, DefinitionStages.WithThreatIntelMode {
+        interface WithCreate extends Creatable<FirewallPolicy>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithBasePolicy, DefinitionStages.WithIntrusionSystemMode, DefinitionStages.WithThreatIntelMode, DefinitionStages.WithThreatIntelWhitelist {
         }
     }
     /**
      * The template for a FirewallPolicy update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<FirewallPolicy>, Resource.UpdateWithTags<Update>, UpdateStages.WithBasePolicy, UpdateStages.WithIntrusionSystemMode, UpdateStages.WithThreatIntelMode {
+    interface Update extends Appliable<FirewallPolicy>, Resource.UpdateWithTags<Update>, UpdateStages.WithBasePolicy, UpdateStages.WithIntrusionSystemMode, UpdateStages.WithThreatIntelMode, UpdateStages.WithThreatIntelWhitelist {
     }
 
     /**
@@ -176,6 +193,18 @@ public interface FirewallPolicy extends HasInner<FirewallPolicyInner>, Resource,
              * @return the next update stage
              */
             Update withThreatIntelMode(AzureFirewallThreatIntelMode threatIntelMode);
+        }
+
+        /**
+         * The stage of the firewallpolicy update allowing to specify ThreatIntelWhitelist.
+         */
+        interface WithThreatIntelWhitelist {
+            /**
+             * Specifies threatIntelWhitelist.
+             * @param threatIntelWhitelist ThreatIntel Whitelist for Firewall Policy
+             * @return the next update stage
+             */
+            Update withThreatIntelWhitelist(FirewallPolicyThreatIntelWhitelist threatIntelWhitelist);
         }
 
     }
