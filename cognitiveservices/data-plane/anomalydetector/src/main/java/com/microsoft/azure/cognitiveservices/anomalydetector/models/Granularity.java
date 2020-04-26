@@ -31,7 +31,10 @@ public enum Granularity {
     HOURLY("hourly"),
 
     /** Enum value minutely. */
-    MINUTELY("minutely");
+    MINUTELY("minutely"),
+
+    /** Enum value secondly. */
+    SECONDLY("secondly");
 
     /** The actual serialized value for a Granularity instance. */
     private String value;

@@ -26,7 +26,7 @@ public class Request {
 
     /**
      * Possible values include: 'yearly', 'monthly', 'weekly', 'daily',
-     * 'hourly', 'minutely'.
+     * 'hourly', 'minutely', 'secondly'.
      */
     @JsonProperty(value = "granularity", required = true)
     private Granularity granularity;
@@ -82,7 +82,7 @@ public class Request {
     }
 
     /**
-     * Get possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely'.
+     * Get possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely', 'secondly'.
      *
      * @return the granularity value
      */
@@ -91,7 +91,7 @@ public class Request {
     }
 
     /**
-     * Set possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely'.
+     * Set possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely', 'secondly'.
      *
      * @param granularity the granularity value to set
      * @return the Request object itself.

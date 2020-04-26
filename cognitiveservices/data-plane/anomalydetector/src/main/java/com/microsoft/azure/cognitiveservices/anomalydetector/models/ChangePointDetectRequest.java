@@ -23,10 +23,10 @@ public class ChangePointDetectRequest {
     private List<Point> series;
 
     /**
-     * Can only be one of yearly, monthly, weekly, daily, hourly or minutely.
-     * Granularity is used for verify whether input series is valid. Possible
-     * values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly',
-     * 'minutely'.
+     * Can only be one of yearly, monthly, weekly, daily, hourly, minutely or
+     * secondly. Granularity is used for verify whether input series is valid.
+     * Possible values include: 'yearly', 'monthly', 'weekly', 'daily',
+     * 'hourly', 'minutely', 'secondly'.
      */
     @JsonProperty(value = "granularity", required = true)
     private Granularity granularity;
@@ -82,7 +82,7 @@ public class ChangePointDetectRequest {
     }
 
     /**
-     * Get can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid. Possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely'.
+     * Get can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid. Possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely', 'secondly'.
      *
      * @return the granularity value
      */
@@ -91,7 +91,7 @@ public class ChangePointDetectRequest {
     }
 
     /**
-     * Set can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid. Possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely'.
+     * Set can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid. Possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely', 'secondly'.
      *
      * @param granularity the granularity value to set
      * @return the ChangePointDetectRequest object itself.
