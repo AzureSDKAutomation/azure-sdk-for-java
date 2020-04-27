@@ -51,6 +51,18 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
         return this;
     }
 
+    /** The API version to use for this operation. */
+    private String apiVersion;
+
+    /**
+     * Gets The API version to use for this operation.
+     *
+     * @return the apiVersion value.
+     */
+    public String apiVersion() {
+        return this.apiVersion;
+    }
+
     /** The ID of the target subscription. */
     private String subscriptionId1;
 
@@ -447,6 +459,7 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
+        this.apiVersion = "2020-03-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;

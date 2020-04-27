@@ -69,7 +69,7 @@ public class CollectionsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -86,7 +86,7 @@ public class CollectionsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -102,7 +102,7 @@ public class CollectionsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -122,7 +122,7 @@ public class CollectionsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -146,11 +146,13 @@ public class CollectionsInner {
         if (collectionRid == null) {
             throw new IllegalArgumentException("Parameter collectionRid is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (filter == null) {
             throw new IllegalArgumentException("Parameter filter is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MetricInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<MetricInner>>> call(Response<ResponseBody> response) {
@@ -179,7 +181,7 @@ public class CollectionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -195,7 +197,7 @@ public class CollectionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -210,7 +212,7 @@ public class CollectionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -229,7 +231,7 @@ public class CollectionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -252,9 +254,11 @@ public class CollectionsInner {
         if (collectionRid == null) {
             throw new IllegalArgumentException("Parameter collectionRid is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         final String filter = null;
-        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UsageInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<UsageInner>>> call(Response<ResponseBody> response) {
@@ -276,7 +280,7 @@ public class CollectionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -293,7 +297,7 @@ public class CollectionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -309,7 +313,7 @@ public class CollectionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -329,7 +333,7 @@ public class CollectionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -353,8 +357,10 @@ public class CollectionsInner {
         if (collectionRid == null) {
             throw new IllegalArgumentException("Parameter collectionRid is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UsageInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<UsageInner>>> call(Response<ResponseBody> response) {
@@ -383,7 +389,7 @@ public class CollectionsInner {
     /**
      * Retrieves metric definitions for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -399,7 +405,7 @@ public class CollectionsInner {
     /**
      * Retrieves metric definitions for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -414,7 +420,7 @@ public class CollectionsInner {
     /**
      * Retrieves metric definitions for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -433,7 +439,7 @@ public class CollectionsInner {
     /**
      * Retrieves metric definitions for the given collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -456,8 +462,10 @@ public class CollectionsInner {
         if (collectionRid == null) {
             throw new IllegalArgumentException("Parameter collectionRid is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMetricDefinitions(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listMetricDefinitions(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MetricDefinitionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<MetricDefinitionInner>>> call(Response<ResponseBody> response) {

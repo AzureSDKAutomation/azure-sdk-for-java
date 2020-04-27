@@ -69,7 +69,7 @@ public class DatabasesInner {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
@@ -85,7 +85,7 @@ public class DatabasesInner {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
@@ -100,7 +100,7 @@ public class DatabasesInner {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
@@ -119,7 +119,7 @@ public class DatabasesInner {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
@@ -139,11 +139,13 @@ public class DatabasesInner {
         if (databaseRid == null) {
             throw new IllegalArgumentException("Parameter databaseRid is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (filter == null) {
             throw new IllegalArgumentException("Parameter filter is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MetricInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<MetricInner>>> call(Response<ResponseBody> response) {
@@ -172,7 +174,7 @@ public class DatabasesInner {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -187,7 +189,7 @@ public class DatabasesInner {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -201,7 +203,7 @@ public class DatabasesInner {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -219,7 +221,7 @@ public class DatabasesInner {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -238,9 +240,11 @@ public class DatabasesInner {
         if (databaseRid == null) {
             throw new IllegalArgumentException("Parameter databaseRid is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         final String filter = null;
-        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UsageInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<UsageInner>>> call(Response<ResponseBody> response) {
@@ -262,7 +266,7 @@ public class DatabasesInner {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
@@ -278,7 +282,7 @@ public class DatabasesInner {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
@@ -293,7 +297,7 @@ public class DatabasesInner {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
@@ -312,7 +316,7 @@ public class DatabasesInner {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
@@ -332,8 +336,10 @@ public class DatabasesInner {
         if (databaseRid == null) {
             throw new IllegalArgumentException("Parameter databaseRid is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UsageInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<UsageInner>>> call(Response<ResponseBody> response) {
@@ -362,7 +368,7 @@ public class DatabasesInner {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -377,7 +383,7 @@ public class DatabasesInner {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -391,7 +397,7 @@ public class DatabasesInner {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -409,7 +415,7 @@ public class DatabasesInner {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -428,8 +434,10 @@ public class DatabasesInner {
         if (databaseRid == null) {
             throw new IllegalArgumentException("Parameter databaseRid is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMetricDefinitions(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listMetricDefinitions(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MetricDefinitionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<MetricDefinitionInner>>> call(Response<ResponseBody> response) {

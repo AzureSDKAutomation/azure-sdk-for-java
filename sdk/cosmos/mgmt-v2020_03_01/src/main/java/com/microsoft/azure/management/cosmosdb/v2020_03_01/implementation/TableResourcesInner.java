@@ -99,7 +99,7 @@ public class TableResourcesInner {
     /**
      * Lists the Tables under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -113,7 +113,7 @@ public class TableResourcesInner {
     /**
      * Lists the Tables under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -126,7 +126,7 @@ public class TableResourcesInner {
     /**
      * Lists the Tables under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;TableGetResultsInner&gt; object
@@ -143,7 +143,7 @@ public class TableResourcesInner {
     /**
      * Lists the Tables under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;TableGetResultsInner&gt; object
@@ -158,8 +158,10 @@ public class TableResourcesInner {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listTables(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listTables(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<TableGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<TableGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -188,7 +190,7 @@ public class TableResourcesInner {
     /**
      * Gets the Tables under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -203,7 +205,7 @@ public class TableResourcesInner {
     /**
      * Gets the Tables under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -217,7 +219,7 @@ public class TableResourcesInner {
     /**
      * Gets the Tables under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -235,7 +237,7 @@ public class TableResourcesInner {
     /**
      * Gets the Tables under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -254,8 +256,10 @@ public class TableResourcesInner {
         if (tableName == null) {
             throw new IllegalArgumentException("Parameter tableName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<TableGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<TableGetResultsInner>> call(Response<ResponseBody> response) {
@@ -279,7 +283,7 @@ public class TableResourcesInner {
     /**
      * Create or update an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param createUpdateTableParameters The parameters to provide for the current Table.
@@ -295,7 +299,7 @@ public class TableResourcesInner {
     /**
      * Create or update an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param createUpdateTableParameters The parameters to provide for the current Table.
@@ -310,7 +314,7 @@ public class TableResourcesInner {
     /**
      * Create or update an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param createUpdateTableParameters The parameters to provide for the current Table.
@@ -329,7 +333,7 @@ public class TableResourcesInner {
     /**
      * Create or update an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param createUpdateTableParameters The parameters to provide for the current Table.
@@ -349,19 +353,21 @@ public class TableResourcesInner {
         if (tableName == null) {
             throw new IllegalArgumentException("Parameter tableName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateTableParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateTableParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateTableParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createUpdateTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, apiVersion, createUpdateTableParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createUpdateTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, this.client.apiVersion(), createUpdateTableParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<TableGetResultsInner>() { }.getType());
     }
 
     /**
      * Create or update an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param createUpdateTableParameters The parameters to provide for the current Table.
@@ -377,7 +383,7 @@ public class TableResourcesInner {
     /**
      * Create or update an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param createUpdateTableParameters The parameters to provide for the current Table.
@@ -392,7 +398,7 @@ public class TableResourcesInner {
     /**
      * Create or update an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param createUpdateTableParameters The parameters to provide for the current Table.
@@ -411,7 +417,7 @@ public class TableResourcesInner {
     /**
      * Create or update an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param createUpdateTableParameters The parameters to provide for the current Table.
@@ -431,12 +437,14 @@ public class TableResourcesInner {
         if (tableName == null) {
             throw new IllegalArgumentException("Parameter tableName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateTableParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateTableParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateTableParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateUpdateTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, apiVersion, createUpdateTableParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateUpdateTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, this.client.apiVersion(), createUpdateTableParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<TableGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<TableGetResultsInner>> call(Response<ResponseBody> response) {
@@ -461,7 +469,7 @@ public class TableResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -475,7 +483,7 @@ public class TableResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -489,7 +497,7 @@ public class TableResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -507,7 +515,7 @@ public class TableResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -526,15 +534,17 @@ public class TableResourcesInner {
         if (tableName == null) {
             throw new IllegalArgumentException("Parameter tableName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.deleteTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.deleteTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -548,7 +558,7 @@ public class TableResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -562,7 +572,7 @@ public class TableResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -580,7 +590,7 @@ public class TableResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -599,8 +609,10 @@ public class TableResourcesInner {
         if (tableName == null) {
             throw new IllegalArgumentException("Parameter tableName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDeleteTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDeleteTable(this.client.subscriptionId(), resourceGroupName, accountName, tableName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -625,7 +637,7 @@ public class TableResourcesInner {
     /**
      * Gets the RUs per second of the Table under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -640,7 +652,7 @@ public class TableResourcesInner {
     /**
      * Gets the RUs per second of the Table under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -654,7 +666,7 @@ public class TableResourcesInner {
     /**
      * Gets the RUs per second of the Table under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -672,7 +684,7 @@ public class TableResourcesInner {
     /**
      * Gets the RUs per second of the Table under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -691,8 +703,10 @@ public class TableResourcesInner {
         if (tableName == null) {
             throw new IllegalArgumentException("Parameter tableName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getTableThroughput(this.client.subscriptionId(), resourceGroupName, accountName, tableName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getTableThroughput(this.client.subscriptionId(), resourceGroupName, accountName, tableName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
@@ -716,7 +730,7 @@ public class TableResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current Table.
@@ -732,7 +746,7 @@ public class TableResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current Table.
@@ -747,7 +761,7 @@ public class TableResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current Table.
@@ -766,7 +780,7 @@ public class TableResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current Table.
@@ -786,19 +800,21 @@ public class TableResourcesInner {
         if (tableName == null) {
             throw new IllegalArgumentException("Parameter tableName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.updateTableThroughput(this.client.subscriptionId(), resourceGroupName, accountName, tableName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.updateTableThroughput(this.client.subscriptionId(), resourceGroupName, accountName, tableName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ThroughputSettingsGetResultsInner>() { }.getType());
     }
 
     /**
      * Update RUs per second of an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current Table.
@@ -814,7 +830,7 @@ public class TableResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current Table.
@@ -829,7 +845,7 @@ public class TableResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current Table.
@@ -848,7 +864,7 @@ public class TableResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB Table.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param tableName Cosmos DB table name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current Table.
@@ -868,12 +884,14 @@ public class TableResourcesInner {
         if (tableName == null) {
             throw new IllegalArgumentException("Parameter tableName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginUpdateTableThroughput(this.client.subscriptionId(), resourceGroupName, accountName, tableName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginUpdateTableThroughput(this.client.subscriptionId(), resourceGroupName, accountName, tableName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {

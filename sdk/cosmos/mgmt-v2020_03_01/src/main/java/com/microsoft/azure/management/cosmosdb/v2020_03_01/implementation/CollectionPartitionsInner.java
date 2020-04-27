@@ -65,7 +65,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -82,7 +82,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -98,7 +98,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -118,7 +118,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -142,11 +142,13 @@ public class CollectionPartitionsInner {
         if (collectionRid == null) {
             throw new IllegalArgumentException("Parameter collectionRid is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (filter == null) {
             throw new IllegalArgumentException("Parameter filter is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<PartitionMetricInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<PartitionMetricInner>>> call(Response<ResponseBody> response) {
@@ -175,7 +177,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -191,7 +193,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -206,7 +208,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -225,7 +227,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -248,9 +250,11 @@ public class CollectionPartitionsInner {
         if (collectionRid == null) {
             throw new IllegalArgumentException("Parameter collectionRid is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         final String filter = null;
-        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<PartitionUsageInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<PartitionUsageInner>>> call(Response<ResponseBody> response) {
@@ -272,7 +276,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -289,7 +293,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -305,7 +309,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -325,7 +329,7 @@ public class CollectionPartitionsInner {
     /**
      * Retrieves the usages (most recent storage data) for the given collection, split by partition.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -349,8 +353,10 @@ public class CollectionPartitionsInner {
         if (collectionRid == null) {
             throw new IllegalArgumentException("Parameter collectionRid is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, databaseRid, collectionRid, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<PartitionUsageInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<PartitionUsageInner>>> call(Response<ResponseBody> response) {
