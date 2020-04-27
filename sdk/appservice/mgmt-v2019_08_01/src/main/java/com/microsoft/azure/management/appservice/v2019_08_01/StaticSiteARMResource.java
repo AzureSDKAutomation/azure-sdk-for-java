@@ -19,6 +19,7 @@ import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.CertificateRegistrationManager;
 import java.util.List;
+import com.microsoft.azure.management.appservice.v2019_08_01.implementation.PrivateEndpointConnectionResourceInner;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.StaticSiteARMResourceInner;
 
 /**
@@ -49,6 +50,11 @@ public interface StaticSiteARMResource extends HasInner<StaticSiteARMResourceInn
      * @return the kind value.
      */
     String kind();
+
+    /**
+     * @return the privateEndpointConnections value.
+     */
+    List<PrivateEndpointConnectionResource> privateEndpointConnections();
 
     /**
      * @return the repositoryToken value.

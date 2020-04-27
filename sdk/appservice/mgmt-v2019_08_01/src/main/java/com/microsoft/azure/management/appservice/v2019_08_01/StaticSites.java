@@ -152,8 +152,8 @@ public interface StaticSites extends SupportsCreating<StaticSiteARMResource.Defi
     Completable deleteStaticSiteBuildAsync(String resourceGroupName, String name, String prId);
 
     /**
-     * Gets the application settings of a static site.
-     * Description for Gets the application settings of a static site.
+     * Gets the application settings of a static site build.
+     * Description for Gets the application settings of a static site build.
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the static site.

@@ -34301,7 +34301,7 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the site.
-     * @param privateEndpointConnectionName the String value
+     * @param privateEndpointConnectionName Name of the private endpoint connection.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws DefaultErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -34317,7 +34317,7 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the site.
-     * @param privateEndpointConnectionName the String value
+     * @param privateEndpointConnectionName Name of the private endpoint connection.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -34332,7 +34332,7 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the site.
-     * @param privateEndpointConnectionName the String value
+     * @param privateEndpointConnectionName Name of the private endpoint connection.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PrivateEndpointConnectionResourceInner object
      */
@@ -34351,7 +34351,7 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the site.
-     * @param privateEndpointConnectionName the String value
+     * @param privateEndpointConnectionName Name of the private endpoint connection.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PrivateEndpointConnectionResourceInner object
      */

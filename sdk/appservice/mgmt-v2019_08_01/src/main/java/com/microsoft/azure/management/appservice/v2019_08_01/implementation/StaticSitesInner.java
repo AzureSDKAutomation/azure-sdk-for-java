@@ -1728,8 +1728,8 @@ public class StaticSitesInner implements InnerSupportsGet<StaticSiteARMResourceI
     }
 
     /**
-     * Gets the application settings of a static site.
-     * Description for Gets the application settings of a static site.
+     * Gets the application settings of a static site build.
+     * Description for Gets the application settings of a static site build.
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the static site.
@@ -1744,8 +1744,8 @@ public class StaticSitesInner implements InnerSupportsGet<StaticSiteARMResourceI
     }
 
     /**
-     * Gets the application settings of a static site.
-     * Description for Gets the application settings of a static site.
+     * Gets the application settings of a static site build.
+     * Description for Gets the application settings of a static site build.
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the static site.
@@ -1759,8 +1759,8 @@ public class StaticSitesInner implements InnerSupportsGet<StaticSiteARMResourceI
     }
 
     /**
-     * Gets the application settings of a static site.
-     * Description for Gets the application settings of a static site.
+     * Gets the application settings of a static site build.
+     * Description for Gets the application settings of a static site build.
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the static site.
@@ -1778,8 +1778,8 @@ public class StaticSitesInner implements InnerSupportsGet<StaticSiteARMResourceI
     }
 
     /**
-     * Gets the application settings of a static site.
-     * Description for Gets the application settings of a static site.
+     * Gets the application settings of a static site build.
+     * Description for Gets the application settings of a static site build.
      *
      * @param resourceGroupName Name of the resource group to which the resource belongs.
      * @param name Name of the static site.

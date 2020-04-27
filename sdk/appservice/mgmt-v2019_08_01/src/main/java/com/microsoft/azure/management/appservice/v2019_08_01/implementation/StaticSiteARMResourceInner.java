@@ -58,6 +58,12 @@ public class StaticSiteARMResourceInner extends Resource {
     private StaticSiteBuildProperties buildProperties;
 
     /**
+     * Private endpoint connections referencing this resource.
+     */
+    @JsonProperty(value = "properties.privateEndpointConnections", access = JsonProperty.Access.WRITE_ONLY)
+    private List<PrivateEndpointConnectionResourceInner> privateEndpointConnections;
+
+    /**
      * The sku property.
      */
     @JsonProperty(value = "sku")
@@ -165,6 +171,15 @@ public class StaticSiteARMResourceInner extends Resource {
     public StaticSiteARMResourceInner withBuildProperties(StaticSiteBuildProperties buildProperties) {
         this.buildProperties = buildProperties;
         return this;
+    }
+
+    /**
+     * Get private endpoint connections referencing this resource.
+     *
+     * @return the privateEndpointConnections value
+     */
+    public List<PrivateEndpointConnectionResourceInner> privateEndpointConnections() {
+        return this.privateEndpointConnections;
     }
 
     /**
