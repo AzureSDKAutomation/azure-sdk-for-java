@@ -177,7 +177,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -191,7 +191,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -204,7 +204,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountGetResultsInner object
@@ -221,7 +221,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountGetResultsInner object
@@ -236,8 +236,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getByResourceGroup(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getByResourceGroup(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseAccountGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseAccountGetResultsInner>> call(Response<ResponseBody> response) {
@@ -262,7 +264,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Updates the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param updateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -277,7 +279,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Updates the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param updateParameters The parameters to provide for the current database account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -291,7 +293,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Updates the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param updateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -309,7 +311,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Updates the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param updateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -325,19 +327,21 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateParameters == null) {
             throw new IllegalArgumentException("Parameter updateParameters is required and cannot be null.");
         }
         Validator.validate(updateParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, updateParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), updateParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DatabaseAccountGetResultsInner>() { }.getType());
     }
 
     /**
      * Updates the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param updateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -352,7 +356,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Updates the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param updateParameters The parameters to provide for the current database account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -366,7 +370,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Updates the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param updateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -384,7 +388,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Updates the properties of an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param updateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -400,12 +404,14 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateParameters == null) {
             throw new IllegalArgumentException("Parameter updateParameters is required and cannot be null.");
         }
         Validator.validate(updateParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, updateParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), updateParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseAccountGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseAccountGetResultsInner>> call(Response<ResponseBody> response) {
@@ -429,7 +435,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param createUpdateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -444,7 +450,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param createUpdateParameters The parameters to provide for the current database account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -458,7 +464,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param createUpdateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -476,7 +482,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param createUpdateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -492,19 +498,21 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, createUpdateParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), createUpdateParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DatabaseAccountGetResultsInner>() { }.getType());
     }
 
     /**
      * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param createUpdateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -519,7 +527,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param createUpdateParameters The parameters to provide for the current database account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -533,7 +541,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param createUpdateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -551,7 +559,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param createUpdateParameters The parameters to provide for the current database account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -567,12 +575,14 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, createUpdateParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), createUpdateParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseAccountGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseAccountGetResultsInner>> call(Response<ResponseBody> response) {
@@ -596,7 +606,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Deletes an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -609,7 +619,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Deletes an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -622,7 +632,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Deletes an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -639,7 +649,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Deletes an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -654,15 +664,17 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.delete(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.delete(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -675,7 +687,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Deletes an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -688,7 +700,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Deletes an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -705,7 +717,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Deletes an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -720,8 +732,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDelete(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDelete(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -746,7 +760,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param failoverPolicies List of failover policies.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -760,7 +774,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param failoverPolicies List of failover policies.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -774,7 +788,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param failoverPolicies List of failover policies.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -792,7 +806,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param failoverPolicies List of failover policies.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -808,21 +822,23 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (failoverPolicies == null) {
             throw new IllegalArgumentException("Parameter failoverPolicies is required and cannot be null.");
         }
         Validator.validate(failoverPolicies);
-        final String apiVersion = "2020-03-01";
         FailoverPolicies failoverParameters = new FailoverPolicies();
         failoverParameters.withFailoverPolicies(failoverPolicies);
-        Observable<Response<ResponseBody>> observable = service.failoverPriorityChange(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), failoverParameters, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.failoverPriorityChange(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), failoverParameters, this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param failoverPolicies List of failover policies.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -836,7 +852,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param failoverPolicies List of failover policies.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -850,7 +866,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param failoverPolicies List of failover policies.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -868,7 +884,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param failoverPolicies List of failover policies.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -884,14 +900,16 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (failoverPolicies == null) {
             throw new IllegalArgumentException("Parameter failoverPolicies is required and cannot be null.");
         }
         Validator.validate(failoverPolicies);
-        final String apiVersion = "2020-03-01";
         FailoverPolicies failoverParameters = new FailoverPolicies();
         failoverParameters.withFailoverPolicies(failoverPolicies);
-        return service.beginFailoverPriorityChange(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), failoverParameters, this.client.userAgent())
+        return service.beginFailoverPriorityChange(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), failoverParameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -965,8 +983,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.list(this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<DatabaseAccountGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<DatabaseAccountGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -995,7 +1015,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists all the Azure Cosmos DB database accounts available under the given resource group.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @return the PagedList<DatabaseAccountGetResultsInner> object if successful.
      */
     public PagedList<DatabaseAccountGetResultsInner> listByResourceGroup(String resourceGroupName) {
@@ -1013,7 +1033,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists all the Azure Cosmos DB database accounts available under the given resource group.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceFuture} object
      */
@@ -1024,7 +1044,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists all the Azure Cosmos DB database accounts available under the given resource group.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @return the observable to the List&lt;DatabaseAccountGetResultsInner&gt; object
      */
     public Observable<Page<DatabaseAccountGetResultsInner>> listByResourceGroupAsync(String resourceGroupName) {
@@ -1041,7 +1061,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists all the Azure Cosmos DB database accounts available under the given resource group.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @return the observable to the List&lt;DatabaseAccountGetResultsInner&gt; object
      */
     public Observable<ServiceResponse<List<DatabaseAccountGetResultsInner>>> listByResourceGroupWithServiceResponseAsync(String resourceGroupName) {
@@ -1051,8 +1071,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<DatabaseAccountGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<DatabaseAccountGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -1081,7 +1103,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -1095,7 +1117,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1108,7 +1130,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountListKeysResultInner object
@@ -1125,7 +1147,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountListKeysResultInner object
@@ -1140,8 +1162,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listKeys(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listKeys(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseAccountListKeysResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseAccountListKeysResultInner>> call(Response<ResponseBody> response) {
@@ -1165,7 +1189,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the connection strings for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -1179,7 +1203,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the connection strings for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1192,7 +1216,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the connection strings for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountListConnectionStringsResultInner object
@@ -1209,7 +1233,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the connection strings for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountListConnectionStringsResultInner object
@@ -1224,8 +1248,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listConnectionStrings(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listConnectionStrings(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseAccountListConnectionStringsResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseAccountListConnectionStringsResultInner>> call(Response<ResponseBody> response) {
@@ -1249,7 +1275,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Offline the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1263,7 +1289,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Offline the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1277,7 +1303,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Offline the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1295,7 +1321,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Offline the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1311,20 +1337,22 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (region == null) {
             throw new IllegalArgumentException("Parameter region is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
         RegionForOnlineOffline regionParameterForOffline = new RegionForOnlineOffline();
         regionParameterForOffline.withRegion(region);
-        Observable<Response<ResponseBody>> observable = service.offlineRegion(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), regionParameterForOffline, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.offlineRegion(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), regionParameterForOffline, this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Offline the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1338,7 +1366,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Offline the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1352,7 +1380,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Offline the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1370,7 +1398,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Offline the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1386,13 +1414,15 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (region == null) {
             throw new IllegalArgumentException("Parameter region is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
         RegionForOnlineOffline regionParameterForOffline = new RegionForOnlineOffline();
         regionParameterForOffline.withRegion(region);
-        return service.beginOfflineRegion(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), regionParameterForOffline, this.client.userAgent())
+        return service.beginOfflineRegion(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), regionParameterForOffline, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1417,7 +1447,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Online the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1431,7 +1461,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Online the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1445,7 +1475,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Online the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1463,7 +1493,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Online the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1479,20 +1509,22 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (region == null) {
             throw new IllegalArgumentException("Parameter region is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
         RegionForOnlineOffline regionParameterForOnline = new RegionForOnlineOffline();
         regionParameterForOnline.withRegion(region);
-        Observable<Response<ResponseBody>> observable = service.onlineRegion(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), regionParameterForOnline, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.onlineRegion(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), regionParameterForOnline, this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Online the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1506,7 +1538,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Online the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1520,7 +1552,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Online the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1538,7 +1570,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Online the specified region for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param region Cosmos DB region, with spaces between words and each word capitalized.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1554,13 +1586,15 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (region == null) {
             throw new IllegalArgumentException("Parameter region is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
         RegionForOnlineOffline regionParameterForOnline = new RegionForOnlineOffline();
         regionParameterForOnline.withRegion(region);
-        return service.beginOnlineRegion(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), regionParameterForOnline, this.client.userAgent())
+        return service.beginOnlineRegion(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), regionParameterForOnline, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1585,7 +1619,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the read-only access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -1599,7 +1633,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the read-only access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1612,7 +1646,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the read-only access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountListReadOnlyKeysResultInner object
@@ -1629,7 +1663,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the read-only access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountListReadOnlyKeysResultInner object
@@ -1644,8 +1678,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getReadOnlyKeys(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getReadOnlyKeys(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseAccountListReadOnlyKeysResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseAccountListReadOnlyKeysResultInner>> call(Response<ResponseBody> response) {
@@ -1669,7 +1705,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the read-only access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -1683,7 +1719,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the read-only access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1696,7 +1732,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the read-only access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountListReadOnlyKeysResultInner object
@@ -1713,7 +1749,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Lists the read-only access keys for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatabaseAccountListReadOnlyKeysResultInner object
@@ -1728,8 +1764,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listReadOnlyKeys(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listReadOnlyKeys(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseAccountListReadOnlyKeysResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseAccountListReadOnlyKeysResultInner>> call(Response<ResponseBody> response) {
@@ -1753,7 +1791,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Regenerates an access key for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param keyKind The access key to regenerate. Possible values include: 'primary', 'secondary', 'primaryReadonly', 'secondaryReadonly'
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1767,7 +1805,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Regenerates an access key for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param keyKind The access key to regenerate. Possible values include: 'primary', 'secondary', 'primaryReadonly', 'secondaryReadonly'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1781,7 +1819,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Regenerates an access key for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param keyKind The access key to regenerate. Possible values include: 'primary', 'secondary', 'primaryReadonly', 'secondaryReadonly'
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1799,7 +1837,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Regenerates an access key for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param keyKind The access key to regenerate. Possible values include: 'primary', 'secondary', 'primaryReadonly', 'secondaryReadonly'
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1815,20 +1853,22 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (keyKind == null) {
             throw new IllegalArgumentException("Parameter keyKind is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
         DatabaseAccountRegenerateKeyParameters keyToRegenerate = new DatabaseAccountRegenerateKeyParameters();
         keyToRegenerate.withKeyKind(keyKind);
-        Observable<Response<ResponseBody>> observable = service.regenerateKey(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), keyToRegenerate, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.regenerateKey(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), keyToRegenerate, this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Regenerates an access key for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param keyKind The access key to regenerate. Possible values include: 'primary', 'secondary', 'primaryReadonly', 'secondaryReadonly'
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1842,7 +1882,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Regenerates an access key for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param keyKind The access key to regenerate. Possible values include: 'primary', 'secondary', 'primaryReadonly', 'secondaryReadonly'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1856,7 +1896,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Regenerates an access key for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param keyKind The access key to regenerate. Possible values include: 'primary', 'secondary', 'primaryReadonly', 'secondaryReadonly'
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1874,7 +1914,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Regenerates an access key for the specified Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param keyKind The access key to regenerate. Possible values include: 'primary', 'secondary', 'primaryReadonly', 'secondaryReadonly'
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1890,13 +1930,15 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (keyKind == null) {
             throw new IllegalArgumentException("Parameter keyKind is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
         DatabaseAccountRegenerateKeyParameters keyToRegenerate = new DatabaseAccountRegenerateKeyParameters();
         keyToRegenerate.withKeyKind(keyKind);
-        return service.beginRegenerateKey(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), keyToRegenerate, this.client.userAgent())
+        return service.beginRegenerateKey(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), keyToRegenerate, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1970,8 +2012,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.checkNameExists(accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.checkNameExists(accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
                 public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
@@ -1996,7 +2040,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the metrics determined by the given filter for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -2011,7 +2055,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the metrics determined by the given filter for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2025,7 +2069,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the metrics determined by the given filter for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -2043,7 +2087,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the metrics determined by the given filter for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -2059,11 +2103,13 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (filter == null) {
             throw new IllegalArgumentException("Parameter filter is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MetricInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<MetricInner>>> call(Response<ResponseBody> response) {
@@ -2092,7 +2138,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the usages (most recent data) for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -2106,7 +2152,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the usages (most recent data) for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -2119,7 +2165,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the usages (most recent data) for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;UsageInner&gt; object
@@ -2136,7 +2182,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the usages (most recent data) for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;UsageInner&gt; object
@@ -2151,9 +2197,11 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         final String filter = null;
-        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UsageInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<UsageInner>>> call(Response<ResponseBody> response) {
@@ -2175,7 +2223,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the usages (most recent data) for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -2190,7 +2238,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the usages (most recent data) for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2204,7 +2252,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the usages (most recent data) for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -2222,7 +2270,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves the usages (most recent data) for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -2238,8 +2286,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listUsages(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UsageInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<UsageInner>>> call(Response<ResponseBody> response) {
@@ -2268,7 +2318,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves metric definitions for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -2282,7 +2332,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves metric definitions for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -2295,7 +2345,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves metric definitions for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;MetricDefinitionInner&gt; object
@@ -2312,7 +2362,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
     /**
      * Retrieves metric definitions for the given database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;MetricDefinitionInner&gt; object
@@ -2327,8 +2377,10 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountGe
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMetricDefinitions(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listMetricDefinitions(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MetricDefinitionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<MetricDefinitionInner>>> call(Response<ResponseBody> response) {

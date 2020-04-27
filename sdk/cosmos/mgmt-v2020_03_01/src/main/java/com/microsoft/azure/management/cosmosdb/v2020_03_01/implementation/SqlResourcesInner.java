@@ -211,7 +211,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL databases under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -225,7 +225,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL databases under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -238,7 +238,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL databases under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;SqlDatabaseGetResultsInner&gt; object
@@ -255,7 +255,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL databases under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;SqlDatabaseGetResultsInner&gt; object
@@ -270,8 +270,10 @@ public class SqlResourcesInner {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listSqlDatabases(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listSqlDatabases(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<SqlDatabaseGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<SqlDatabaseGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -300,7 +302,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -315,7 +317,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -329,7 +331,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -347,7 +349,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -366,8 +368,10 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlDatabaseGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlDatabaseGetResultsInner>> call(Response<ResponseBody> response) {
@@ -391,7 +395,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateSqlDatabaseParameters The parameters to provide for the current SQL database.
@@ -407,7 +411,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateSqlDatabaseParameters The parameters to provide for the current SQL database.
@@ -422,7 +426,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateSqlDatabaseParameters The parameters to provide for the current SQL database.
@@ -441,7 +445,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateSqlDatabaseParameters The parameters to provide for the current SQL database.
@@ -461,19 +465,21 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlDatabaseParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlDatabaseParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlDatabaseParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createUpdateSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, createUpdateSqlDatabaseParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createUpdateSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), createUpdateSqlDatabaseParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SqlDatabaseGetResultsInner>() { }.getType());
     }
 
     /**
      * Create or update an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateSqlDatabaseParameters The parameters to provide for the current SQL database.
@@ -489,7 +495,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateSqlDatabaseParameters The parameters to provide for the current SQL database.
@@ -504,7 +510,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateSqlDatabaseParameters The parameters to provide for the current SQL database.
@@ -523,7 +529,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateSqlDatabaseParameters The parameters to provide for the current SQL database.
@@ -543,12 +549,14 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlDatabaseParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlDatabaseParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlDatabaseParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateUpdateSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, createUpdateSqlDatabaseParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateUpdateSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), createUpdateSqlDatabaseParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlDatabaseGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlDatabaseGetResultsInner>> call(Response<ResponseBody> response) {
@@ -573,7 +581,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -587,7 +595,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -601,7 +609,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -619,7 +627,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -638,15 +646,17 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.deleteSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.deleteSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -660,7 +670,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -674,7 +684,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -692,7 +702,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -711,8 +721,10 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDeleteSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDeleteSqlDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -737,7 +749,7 @@ public class SqlResourcesInner {
     /**
      * Gets the RUs per second of the SQL database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -752,7 +764,7 @@ public class SqlResourcesInner {
     /**
      * Gets the RUs per second of the SQL database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -766,7 +778,7 @@ public class SqlResourcesInner {
     /**
      * Gets the RUs per second of the SQL database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -784,7 +796,7 @@ public class SqlResourcesInner {
     /**
      * Gets the RUs per second of the SQL database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -803,8 +815,10 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getSqlDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getSqlDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
@@ -828,7 +842,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current SQL database.
@@ -844,7 +858,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current SQL database.
@@ -859,7 +873,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current SQL database.
@@ -878,7 +892,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current SQL database.
@@ -898,19 +912,21 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.updateSqlDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.updateSqlDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ThroughputSettingsGetResultsInner>() { }.getType());
     }
 
     /**
      * Update RUs per second of an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current SQL database.
@@ -926,7 +942,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current SQL database.
@@ -941,7 +957,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current SQL database.
@@ -960,7 +976,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The parameters to provide for the RUs per second of the current SQL database.
@@ -980,12 +996,14 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginUpdateSqlDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginUpdateSqlDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
@@ -1010,7 +1028,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1025,7 +1043,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1039,7 +1057,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1057,7 +1075,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1076,8 +1094,10 @@ public class SqlResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listSqlContainers(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listSqlContainers(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<SqlContainerGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<SqlContainerGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -1106,7 +1126,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1122,7 +1142,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1137,7 +1157,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1156,7 +1176,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1179,8 +1199,10 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlContainerGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlContainerGetResultsInner>> call(Response<ResponseBody> response) {
@@ -1204,7 +1226,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1221,7 +1243,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1237,7 +1259,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1257,7 +1279,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1281,19 +1303,21 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlContainerParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlContainerParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlContainerParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createUpdateSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, createUpdateSqlContainerParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createUpdateSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), createUpdateSqlContainerParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SqlContainerGetResultsInner>() { }.getType());
     }
 
     /**
      * Create or update an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1310,7 +1334,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1326,7 +1350,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1346,7 +1370,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1370,12 +1394,14 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlContainerParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlContainerParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlContainerParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateUpdateSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, createUpdateSqlContainerParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateUpdateSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), createUpdateSqlContainerParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlContainerGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlContainerGetResultsInner>> call(Response<ResponseBody> response) {
@@ -1400,7 +1426,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1415,7 +1441,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1430,7 +1456,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1449,7 +1475,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1472,15 +1498,17 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.deleteSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.deleteSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1495,7 +1523,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1510,7 +1538,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1529,7 +1557,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1552,8 +1580,10 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDeleteSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDeleteSqlContainer(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1578,7 +1608,7 @@ public class SqlResourcesInner {
     /**
      * Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1594,7 +1624,7 @@ public class SqlResourcesInner {
     /**
      * Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1609,7 +1639,7 @@ public class SqlResourcesInner {
     /**
      * Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1628,7 +1658,7 @@ public class SqlResourcesInner {
     /**
      * Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1651,8 +1681,10 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getSqlContainerThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getSqlContainerThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
@@ -1676,7 +1708,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1693,7 +1725,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1709,7 +1741,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1729,7 +1761,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1753,19 +1785,21 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.updateSqlContainerThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.updateSqlContainerThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ThroughputSettingsGetResultsInner>() { }.getType());
     }
 
     /**
      * Update RUs per second of an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1782,7 +1816,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1798,7 +1832,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1818,7 +1852,7 @@ public class SqlResourcesInner {
     /**
      * Update RUs per second of an Azure Cosmos DB SQL container.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1842,12 +1876,14 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginUpdateSqlContainerThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginUpdateSqlContainerThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
@@ -1872,7 +1908,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1888,7 +1924,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1903,7 +1939,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1922,7 +1958,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1945,8 +1981,10 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listSqlStoredProcedures(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listSqlStoredProcedures(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<SqlStoredProcedureGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<SqlStoredProcedureGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -1975,7 +2013,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -1992,7 +2030,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2008,7 +2046,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2028,7 +2066,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2055,8 +2093,10 @@ public class SqlResourcesInner {
         if (storedProcedureName == null) {
             throw new IllegalArgumentException("Parameter storedProcedureName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlStoredProcedureGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlStoredProcedureGetResultsInner>> call(Response<ResponseBody> response) {
@@ -2080,7 +2120,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2098,7 +2138,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2115,7 +2155,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2136,7 +2176,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2164,19 +2204,21 @@ public class SqlResourcesInner {
         if (storedProcedureName == null) {
             throw new IllegalArgumentException("Parameter storedProcedureName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlStoredProcedureParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlStoredProcedureParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlStoredProcedureParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createUpdateSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, apiVersion, createUpdateSqlStoredProcedureParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createUpdateSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, this.client.apiVersion(), createUpdateSqlStoredProcedureParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SqlStoredProcedureGetResultsInner>() { }.getType());
     }
 
     /**
      * Create or update an Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2194,7 +2236,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2211,7 +2253,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2232,7 +2274,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2260,12 +2302,14 @@ public class SqlResourcesInner {
         if (storedProcedureName == null) {
             throw new IllegalArgumentException("Parameter storedProcedureName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlStoredProcedureParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlStoredProcedureParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlStoredProcedureParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateUpdateSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, apiVersion, createUpdateSqlStoredProcedureParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateUpdateSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, this.client.apiVersion(), createUpdateSqlStoredProcedureParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlStoredProcedureGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlStoredProcedureGetResultsInner>> call(Response<ResponseBody> response) {
@@ -2290,7 +2334,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2306,7 +2350,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2322,7 +2366,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2342,7 +2386,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2369,15 +2413,17 @@ public class SqlResourcesInner {
         if (storedProcedureName == null) {
             throw new IllegalArgumentException("Parameter storedProcedureName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.deleteSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.deleteSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2393,7 +2439,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2409,7 +2455,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2429,7 +2475,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL storedProcedure.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2456,8 +2502,10 @@ public class SqlResourcesInner {
         if (storedProcedureName == null) {
             throw new IllegalArgumentException("Parameter storedProcedureName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDeleteSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDeleteSqlStoredProcedure(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, storedProcedureName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -2482,7 +2530,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2498,7 +2546,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2513,7 +2561,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2532,7 +2580,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2555,8 +2603,10 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listSqlUserDefinedFunctions(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listSqlUserDefinedFunctions(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<SqlUserDefinedFunctionGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<SqlUserDefinedFunctionGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -2585,7 +2635,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2602,7 +2652,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2618,7 +2668,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2638,7 +2688,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2665,8 +2715,10 @@ public class SqlResourcesInner {
         if (userDefinedFunctionName == null) {
             throw new IllegalArgumentException("Parameter userDefinedFunctionName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlUserDefinedFunctionGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlUserDefinedFunctionGetResultsInner>> call(Response<ResponseBody> response) {
@@ -2690,7 +2742,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2708,7 +2760,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2725,7 +2777,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2746,7 +2798,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2774,19 +2826,21 @@ public class SqlResourcesInner {
         if (userDefinedFunctionName == null) {
             throw new IllegalArgumentException("Parameter userDefinedFunctionName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlUserDefinedFunctionParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlUserDefinedFunctionParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlUserDefinedFunctionParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createUpdateSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, apiVersion, createUpdateSqlUserDefinedFunctionParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createUpdateSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, this.client.apiVersion(), createUpdateSqlUserDefinedFunctionParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SqlUserDefinedFunctionGetResultsInner>() { }.getType());
     }
 
     /**
      * Create or update an Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2804,7 +2858,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2821,7 +2875,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2842,7 +2896,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2870,12 +2924,14 @@ public class SqlResourcesInner {
         if (userDefinedFunctionName == null) {
             throw new IllegalArgumentException("Parameter userDefinedFunctionName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlUserDefinedFunctionParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlUserDefinedFunctionParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlUserDefinedFunctionParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateUpdateSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, apiVersion, createUpdateSqlUserDefinedFunctionParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateUpdateSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, this.client.apiVersion(), createUpdateSqlUserDefinedFunctionParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlUserDefinedFunctionGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlUserDefinedFunctionGetResultsInner>> call(Response<ResponseBody> response) {
@@ -2900,7 +2956,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2916,7 +2972,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2932,7 +2988,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2952,7 +3008,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -2979,15 +3035,17 @@ public class SqlResourcesInner {
         if (userDefinedFunctionName == null) {
             throw new IllegalArgumentException("Parameter userDefinedFunctionName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.deleteSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.deleteSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3003,7 +3061,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3019,7 +3077,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3039,7 +3097,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3066,8 +3124,10 @@ public class SqlResourcesInner {
         if (userDefinedFunctionName == null) {
             throw new IllegalArgumentException("Parameter userDefinedFunctionName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDeleteSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDeleteSqlUserDefinedFunction(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, userDefinedFunctionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -3092,7 +3152,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL trigger under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3108,7 +3168,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL trigger under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3123,7 +3183,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL trigger under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3142,7 +3202,7 @@ public class SqlResourcesInner {
     /**
      * Lists the SQL trigger under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3165,8 +3225,10 @@ public class SqlResourcesInner {
         if (containerName == null) {
             throw new IllegalArgumentException("Parameter containerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listSqlTriggers(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listSqlTriggers(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<SqlTriggerGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<SqlTriggerGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -3195,7 +3257,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL trigger under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3212,7 +3274,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL trigger under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3228,7 +3290,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL trigger under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3248,7 +3310,7 @@ public class SqlResourcesInner {
     /**
      * Gets the SQL trigger under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3275,8 +3337,10 @@ public class SqlResourcesInner {
         if (triggerName == null) {
             throw new IllegalArgumentException("Parameter triggerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlTriggerGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlTriggerGetResultsInner>> call(Response<ResponseBody> response) {
@@ -3300,7 +3364,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3318,7 +3382,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3335,7 +3399,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3356,7 +3420,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3384,19 +3448,21 @@ public class SqlResourcesInner {
         if (triggerName == null) {
             throw new IllegalArgumentException("Parameter triggerName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlTriggerParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlTriggerParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlTriggerParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createUpdateSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, apiVersion, createUpdateSqlTriggerParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createUpdateSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, this.client.apiVersion(), createUpdateSqlTriggerParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SqlTriggerGetResultsInner>() { }.getType());
     }
 
     /**
      * Create or update an Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3414,7 +3480,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3431,7 +3497,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3452,7 +3518,7 @@ public class SqlResourcesInner {
     /**
      * Create or update an Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3480,12 +3546,14 @@ public class SqlResourcesInner {
         if (triggerName == null) {
             throw new IllegalArgumentException("Parameter triggerName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateSqlTriggerParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateSqlTriggerParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateSqlTriggerParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateUpdateSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, apiVersion, createUpdateSqlTriggerParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateUpdateSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, this.client.apiVersion(), createUpdateSqlTriggerParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SqlTriggerGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SqlTriggerGetResultsInner>> call(Response<ResponseBody> response) {
@@ -3510,7 +3578,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3526,7 +3594,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3542,7 +3610,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3562,7 +3630,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3589,15 +3657,17 @@ public class SqlResourcesInner {
         if (triggerName == null) {
             throw new IllegalArgumentException("Parameter triggerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.deleteSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.deleteSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3613,7 +3683,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3629,7 +3699,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3649,7 +3719,7 @@ public class SqlResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB SQL trigger.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param containerName Cosmos DB container name.
@@ -3676,8 +3746,10 @@ public class SqlResourcesInner {
         if (triggerName == null) {
             throw new IllegalArgumentException("Parameter triggerName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDeleteSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDeleteSqlTrigger(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, containerName, triggerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {

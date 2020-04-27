@@ -61,7 +61,7 @@ public class PercentileSourceTargetsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param sourceRegion Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized.
      * @param targetRegion Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.
@@ -78,7 +78,7 @@ public class PercentileSourceTargetsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param sourceRegion Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized.
      * @param targetRegion Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.
@@ -94,7 +94,7 @@ public class PercentileSourceTargetsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param sourceRegion Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized.
      * @param targetRegion Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.
@@ -114,7 +114,7 @@ public class PercentileSourceTargetsInner {
     /**
      * Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param sourceRegion Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized.
      * @param targetRegion Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.
@@ -138,11 +138,13 @@ public class PercentileSourceTargetsInner {
         if (targetRegion == null) {
             throw new IllegalArgumentException("Parameter targetRegion is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (filter == null) {
             throw new IllegalArgumentException("Parameter filter is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, sourceRegion, targetRegion, apiVersion, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listMetrics(this.client.subscriptionId(), resourceGroupName, accountName, sourceRegion, targetRegion, this.client.apiVersion(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<PercentileMetricInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<PercentileMetricInner>>> call(Response<ResponseBody> response) {

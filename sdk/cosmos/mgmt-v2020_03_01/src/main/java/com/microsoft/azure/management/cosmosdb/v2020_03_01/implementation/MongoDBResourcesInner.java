@@ -136,7 +136,7 @@ public class MongoDBResourcesInner {
     /**
      * Lists the MongoDB databases under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -150,7 +150,7 @@ public class MongoDBResourcesInner {
     /**
      * Lists the MongoDB databases under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -163,7 +163,7 @@ public class MongoDBResourcesInner {
     /**
      * Lists the MongoDB databases under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;MongoDBDatabaseGetResultsInner&gt; object
@@ -180,7 +180,7 @@ public class MongoDBResourcesInner {
     /**
      * Lists the MongoDB databases under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;MongoDBDatabaseGetResultsInner&gt; object
@@ -195,8 +195,10 @@ public class MongoDBResourcesInner {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMongoDBDatabases(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listMongoDBDatabases(this.client.subscriptionId(), resourceGroupName, accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MongoDBDatabaseGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<MongoDBDatabaseGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -225,7 +227,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -240,7 +242,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -254,7 +256,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -272,7 +274,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -291,8 +293,10 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<MongoDBDatabaseGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<MongoDBDatabaseGetResultsInner>> call(Response<ResponseBody> response) {
@@ -316,7 +320,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or updates Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateMongoDBDatabaseParameters The parameters to provide for the current MongoDB database.
@@ -332,7 +336,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or updates Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateMongoDBDatabaseParameters The parameters to provide for the current MongoDB database.
@@ -347,7 +351,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or updates Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateMongoDBDatabaseParameters The parameters to provide for the current MongoDB database.
@@ -366,7 +370,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or updates Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateMongoDBDatabaseParameters The parameters to provide for the current MongoDB database.
@@ -386,19 +390,21 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateMongoDBDatabaseParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateMongoDBDatabaseParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateMongoDBDatabaseParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createUpdateMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, createUpdateMongoDBDatabaseParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createUpdateMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), createUpdateMongoDBDatabaseParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<MongoDBDatabaseGetResultsInner>() { }.getType());
     }
 
     /**
      * Create or updates Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateMongoDBDatabaseParameters The parameters to provide for the current MongoDB database.
@@ -414,7 +420,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or updates Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateMongoDBDatabaseParameters The parameters to provide for the current MongoDB database.
@@ -429,7 +435,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or updates Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateMongoDBDatabaseParameters The parameters to provide for the current MongoDB database.
@@ -448,7 +454,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or updates Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param createUpdateMongoDBDatabaseParameters The parameters to provide for the current MongoDB database.
@@ -468,12 +474,14 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateMongoDBDatabaseParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateMongoDBDatabaseParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateMongoDBDatabaseParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateUpdateMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, createUpdateMongoDBDatabaseParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateUpdateMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), createUpdateMongoDBDatabaseParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<MongoDBDatabaseGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<MongoDBDatabaseGetResultsInner>> call(Response<ResponseBody> response) {
@@ -498,7 +506,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -512,7 +520,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -526,7 +534,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -544,7 +552,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -563,15 +571,17 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.deleteMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.deleteMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -585,7 +595,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -599,7 +609,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -617,7 +627,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -636,8 +646,10 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDeleteMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDeleteMongoDBDatabase(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -662,7 +674,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -677,7 +689,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -691,7 +703,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -709,7 +721,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -728,8 +740,10 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getMongoDBDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getMongoDBDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
@@ -753,7 +767,7 @@ public class MongoDBResourcesInner {
     /**
      * Update RUs per second of the an Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The RUs per second of the parameters to provide for the current MongoDB database.
@@ -769,7 +783,7 @@ public class MongoDBResourcesInner {
     /**
      * Update RUs per second of the an Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The RUs per second of the parameters to provide for the current MongoDB database.
@@ -784,7 +798,7 @@ public class MongoDBResourcesInner {
     /**
      * Update RUs per second of the an Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The RUs per second of the parameters to provide for the current MongoDB database.
@@ -803,7 +817,7 @@ public class MongoDBResourcesInner {
     /**
      * Update RUs per second of the an Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The RUs per second of the parameters to provide for the current MongoDB database.
@@ -823,19 +837,21 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.updateMongoDBDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.updateMongoDBDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ThroughputSettingsGetResultsInner>() { }.getType());
     }
 
     /**
      * Update RUs per second of the an Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The RUs per second of the parameters to provide for the current MongoDB database.
@@ -851,7 +867,7 @@ public class MongoDBResourcesInner {
     /**
      * Update RUs per second of the an Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The RUs per second of the parameters to provide for the current MongoDB database.
@@ -866,7 +882,7 @@ public class MongoDBResourcesInner {
     /**
      * Update RUs per second of the an Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The RUs per second of the parameters to provide for the current MongoDB database.
@@ -885,7 +901,7 @@ public class MongoDBResourcesInner {
     /**
      * Update RUs per second of the an Azure Cosmos DB MongoDB database.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param updateThroughputParameters The RUs per second of the parameters to provide for the current MongoDB database.
@@ -905,12 +921,14 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginUpdateMongoDBDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginUpdateMongoDBDatabaseThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
@@ -935,7 +953,7 @@ public class MongoDBResourcesInner {
     /**
      * Lists the MongoDB collection under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -950,7 +968,7 @@ public class MongoDBResourcesInner {
     /**
      * Lists the MongoDB collection under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -964,7 +982,7 @@ public class MongoDBResourcesInner {
     /**
      * Lists the MongoDB collection under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -982,7 +1000,7 @@ public class MongoDBResourcesInner {
     /**
      * Lists the MongoDB collection under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1001,8 +1019,10 @@ public class MongoDBResourcesInner {
         if (databaseName == null) {
             throw new IllegalArgumentException("Parameter databaseName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.listMongoDBCollections(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listMongoDBCollections(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MongoDBCollectionGetResultsInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<MongoDBCollectionGetResultsInner>>> call(Response<ResponseBody> response) {
@@ -1031,7 +1051,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the MongoDB collection under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1047,7 +1067,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the MongoDB collection under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1062,7 +1082,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the MongoDB collection under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1081,7 +1101,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the MongoDB collection under an existing Azure Cosmos DB database account.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1104,8 +1124,10 @@ public class MongoDBResourcesInner {
         if (collectionName == null) {
             throw new IllegalArgumentException("Parameter collectionName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<MongoDBCollectionGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<MongoDBCollectionGetResultsInner>> call(Response<ResponseBody> response) {
@@ -1129,7 +1151,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or update an Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1146,7 +1168,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or update an Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1162,7 +1184,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or update an Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1182,7 +1204,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or update an Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1206,19 +1228,21 @@ public class MongoDBResourcesInner {
         if (collectionName == null) {
             throw new IllegalArgumentException("Parameter collectionName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateMongoDBCollectionParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateMongoDBCollectionParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateMongoDBCollectionParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.createUpdateMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, apiVersion, createUpdateMongoDBCollectionParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createUpdateMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, this.client.apiVersion(), createUpdateMongoDBCollectionParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<MongoDBCollectionGetResultsInner>() { }.getType());
     }
 
     /**
      * Create or update an Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1235,7 +1259,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or update an Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1251,7 +1275,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or update an Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1271,7 +1295,7 @@ public class MongoDBResourcesInner {
     /**
      * Create or update an Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1295,12 +1319,14 @@ public class MongoDBResourcesInner {
         if (collectionName == null) {
             throw new IllegalArgumentException("Parameter collectionName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (createUpdateMongoDBCollectionParameters == null) {
             throw new IllegalArgumentException("Parameter createUpdateMongoDBCollectionParameters is required and cannot be null.");
         }
         Validator.validate(createUpdateMongoDBCollectionParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginCreateUpdateMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, apiVersion, createUpdateMongoDBCollectionParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateUpdateMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, this.client.apiVersion(), createUpdateMongoDBCollectionParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<MongoDBCollectionGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<MongoDBCollectionGetResultsInner>> call(Response<ResponseBody> response) {
@@ -1325,7 +1351,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1340,7 +1366,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1355,7 +1381,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1374,7 +1400,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1397,15 +1423,17 @@ public class MongoDBResourcesInner {
         if (collectionName == null) {
             throw new IllegalArgumentException("Parameter collectionName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.deleteMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.deleteMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
      * Deletes an existing Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1420,7 +1448,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1435,7 +1463,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1454,7 +1482,7 @@ public class MongoDBResourcesInner {
     /**
      * Deletes an existing Azure Cosmos DB MongoDB Collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1477,8 +1505,10 @@ public class MongoDBResourcesInner {
         if (collectionName == null) {
             throw new IllegalArgumentException("Parameter collectionName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.beginDeleteMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.beginDeleteMongoDBCollection(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1503,7 +1533,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1519,7 +1549,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1534,7 +1564,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1553,7 +1583,7 @@ public class MongoDBResourcesInner {
     /**
      * Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1576,8 +1606,10 @@ public class MongoDBResourcesInner {
         if (collectionName == null) {
             throw new IllegalArgumentException("Parameter collectionName is required and cannot be null.");
         }
-        final String apiVersion = "2020-03-01";
-        return service.getMongoDBCollectionThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getMongoDBCollectionThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
@@ -1601,7 +1633,7 @@ public class MongoDBResourcesInner {
     /**
      * Update the RUs per second of an Azure Cosmos DB MongoDB collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1618,7 +1650,7 @@ public class MongoDBResourcesInner {
     /**
      * Update the RUs per second of an Azure Cosmos DB MongoDB collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1634,7 +1666,7 @@ public class MongoDBResourcesInner {
     /**
      * Update the RUs per second of an Azure Cosmos DB MongoDB collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1654,7 +1686,7 @@ public class MongoDBResourcesInner {
     /**
      * Update the RUs per second of an Azure Cosmos DB MongoDB collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1678,19 +1710,21 @@ public class MongoDBResourcesInner {
         if (collectionName == null) {
             throw new IllegalArgumentException("Parameter collectionName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        Observable<Response<ResponseBody>> observable = service.updateMongoDBCollectionThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.updateMongoDBCollectionThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ThroughputSettingsGetResultsInner>() { }.getType());
     }
 
     /**
      * Update the RUs per second of an Azure Cosmos DB MongoDB collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1707,7 +1741,7 @@ public class MongoDBResourcesInner {
     /**
      * Update the RUs per second of an Azure Cosmos DB MongoDB collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1723,7 +1757,7 @@ public class MongoDBResourcesInner {
     /**
      * Update the RUs per second of an Azure Cosmos DB MongoDB collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1743,7 +1777,7 @@ public class MongoDBResourcesInner {
     /**
      * Update the RUs per second of an Azure Cosmos DB MongoDB collection.
      *
-     * @param resourceGroupName Name of an Azure resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param accountName Cosmos DB database account name.
      * @param databaseName Cosmos DB database name.
      * @param collectionName Cosmos DB collection name.
@@ -1767,12 +1801,14 @@ public class MongoDBResourcesInner {
         if (collectionName == null) {
             throw new IllegalArgumentException("Parameter collectionName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (updateThroughputParameters == null) {
             throw new IllegalArgumentException("Parameter updateThroughputParameters is required and cannot be null.");
         }
         Validator.validate(updateThroughputParameters);
-        final String apiVersion = "2020-03-01";
-        return service.beginUpdateMongoDBCollectionThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, apiVersion, updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginUpdateMongoDBCollectionThroughput(this.client.subscriptionId(), resourceGroupName, accountName, databaseName, collectionName, this.client.apiVersion(), updateThroughputParameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ThroughputSettingsGetResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ThroughputSettingsGetResultsInner>> call(Response<ResponseBody> response) {
