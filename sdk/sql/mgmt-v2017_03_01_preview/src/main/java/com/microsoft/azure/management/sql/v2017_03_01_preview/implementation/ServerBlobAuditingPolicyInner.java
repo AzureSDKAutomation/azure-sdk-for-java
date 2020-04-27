@@ -37,9 +37,17 @@ public class ServerBlobAuditingPolicyInner extends ProxyResource {
     private String storageEndpoint;
 
     /**
-     * Specifies the identifier key of the auditing storage account. If state
-     * is Enabled and storageEndpoint is specified, storageAccountAccessKey is
-     * required.
+     * Specifies the identifier key of the auditing storage account.
+     * If state is Enabled and storageEndpoint is specified, not specifying the
+     * storageAccountAccessKey will use SQL server system-assigned managed
+     * identity to access the storage.
+     * Prerequisites for using managed identity authentication:
+     * 1. Assign SQL Server a system-assigned managed identity in Azure Active
+     * Directory (AAD).
+     * 2. Grant SQL Server identity access to the storage account by adding
+     * 'Storage Blob Data Contributor' RBAC role to the server identity.
+     * For more information, see [Auditing to storage using Managed Identity
+     * authentication](https://go.microsoft.com/fwlink/?linkid=2114355).
      */
     @JsonProperty(value = "properties.storageAccountAccessKey")
     private String storageAccountAccessKey;
@@ -213,7 +221,12 @@ public class ServerBlobAuditingPolicyInner extends ProxyResource {
     }
 
     /**
-     * Get specifies the identifier key of the auditing storage account. If state is Enabled and storageEndpoint is specified, storageAccountAccessKey is required.
+     * Get specifies the identifier key of the auditing storage account.
+     If state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.
+     Prerequisites for using managed identity authentication:
+     1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).
+     2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.
+     For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355).
      *
      * @return the storageAccountAccessKey value
      */
@@ -222,7 +235,12 @@ public class ServerBlobAuditingPolicyInner extends ProxyResource {
     }
 
     /**
-     * Set specifies the identifier key of the auditing storage account. If state is Enabled and storageEndpoint is specified, storageAccountAccessKey is required.
+     * Set specifies the identifier key of the auditing storage account.
+     If state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.
+     Prerequisites for using managed identity authentication:
+     1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).
+     2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.
+     For more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355).
      *
      * @param storageAccountAccessKey the storageAccountAccessKey value to set
      * @return the ServerBlobAuditingPolicyInner object itself.
