@@ -15,6 +15,8 @@ import com.microsoft.azure.management.appservice.v2019_08_01.StaticSitePatchReso
 import java.util.List;
 import com.microsoft.azure.management.appservice.v2019_08_01.StaticSiteBuildProperties;
 import com.microsoft.azure.management.appservice.v2019_08_01.SkuDescription;
+import java.util.ArrayList;
+import com.microsoft.azure.management.appservice.v2019_08_01.PrivateEndpointConnectionResource;
 import rx.functions.Func1;
 
 class StaticSiteARMResourceImpl extends GroupableResourceCoreImpl<StaticSiteARMResource, StaticSiteARMResourceInner, StaticSiteARMResourceImpl, CertificateRegistrationManager> implements StaticSiteARMResource, StaticSiteARMResource.Definition, StaticSiteARMResource.Update {
@@ -90,6 +92,17 @@ class StaticSiteARMResourceImpl extends GroupableResourceCoreImpl<StaticSiteARMR
     @Override
     public String kind() {
         return this.inner().kind();
+    }
+
+    @Override
+    public List<PrivateEndpointConnectionResource> privateEndpointConnections() {
+        List<PrivateEndpointConnectionResource> lst = new ArrayList<PrivateEndpointConnectionResource>();
+        if (this.inner().privateEndpointConnections() != null) {
+            for (PrivateEndpointConnectionResourceInner inner : this.inner().privateEndpointConnections()) {
+                lst.add( new PrivateEndpointConnectionResourceImpl(inner, manager()));
+            }
+        }
+        return lst;
     }
 
     @Override
