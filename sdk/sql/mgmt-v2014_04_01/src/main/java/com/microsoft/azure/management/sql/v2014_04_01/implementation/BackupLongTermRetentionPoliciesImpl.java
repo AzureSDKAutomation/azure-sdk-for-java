@@ -63,14 +63,10 @@ class BackupLongTermRetentionPoliciesImpl extends WrapperImpl<BackupLongTermRete
     public Observable<BackupLongTermRetentionPolicy> getAsync(String resourceGroupName, String serverName, String databaseName) {
         BackupLongTermRetentionPoliciesInner client = this.inner();
         return client.getAsync(resourceGroupName, serverName, databaseName)
-        .flatMap(new Func1<BackupLongTermRetentionPolicyInner, Observable<BackupLongTermRetentionPolicy>>() {
+        .map(new Func1<BackupLongTermRetentionPolicyInner, BackupLongTermRetentionPolicy>() {
             @Override
-            public Observable<BackupLongTermRetentionPolicy> call(BackupLongTermRetentionPolicyInner inner) {
-                if (inner == null) {
-                    return Observable.empty();
-                } else {
-                    return Observable.just((BackupLongTermRetentionPolicy)wrapModel(inner));
-                }
+            public BackupLongTermRetentionPolicy call(BackupLongTermRetentionPolicyInner inner) {
+                return wrapModel(inner);
             }
        });
     }
