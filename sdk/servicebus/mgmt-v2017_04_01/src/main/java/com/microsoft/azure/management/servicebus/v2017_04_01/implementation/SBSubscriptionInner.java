@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import com.microsoft.azure.management.servicebus.v2017_04_01.MessageCountDetails;
 import org.joda.time.Period;
 import com.microsoft.azure.management.servicebus.v2017_04_01.EntityStatus;
+import com.microsoft.azure.management.servicebus.v2017_04_01.SBClientAffineProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -133,6 +134,19 @@ public class SBSubscriptionInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.forwardDeadLetteredMessagesTo")
     private String forwardDeadLetteredMessagesTo;
+
+    /**
+     * Value that indicates whether the subscription has an affinity to the
+     * client id.
+     */
+    @JsonProperty(value = "properties.isClientAffine")
+    private Boolean isClientAffine;
+
+    /**
+     * Properties specific to client affine subscriptions.
+     */
+    @JsonProperty(value = "properties.clientAffineProperties")
+    private SBClientAffineProperties clientAffineProperties;
 
     /**
      * Get number of messages.
@@ -416,6 +430,46 @@ public class SBSubscriptionInner extends ProxyResource {
      */
     public SBSubscriptionInner withForwardDeadLetteredMessagesTo(String forwardDeadLetteredMessagesTo) {
         this.forwardDeadLetteredMessagesTo = forwardDeadLetteredMessagesTo;
+        return this;
+    }
+
+    /**
+     * Get value that indicates whether the subscription has an affinity to the client id.
+     *
+     * @return the isClientAffine value
+     */
+    public Boolean isClientAffine() {
+        return this.isClientAffine;
+    }
+
+    /**
+     * Set value that indicates whether the subscription has an affinity to the client id.
+     *
+     * @param isClientAffine the isClientAffine value to set
+     * @return the SBSubscriptionInner object itself.
+     */
+    public SBSubscriptionInner withIsClientAffine(Boolean isClientAffine) {
+        this.isClientAffine = isClientAffine;
+        return this;
+    }
+
+    /**
+     * Get properties specific to client affine subscriptions.
+     *
+     * @return the clientAffineProperties value
+     */
+    public SBClientAffineProperties clientAffineProperties() {
+        return this.clientAffineProperties;
+    }
+
+    /**
+     * Set properties specific to client affine subscriptions.
+     *
+     * @param clientAffineProperties the clientAffineProperties value to set
+     * @return the SBSubscriptionInner object itself.
+     */
+    public SBSubscriptionInner withClientAffineProperties(SBClientAffineProperties clientAffineProperties) {
+        this.clientAffineProperties = clientAffineProperties;
         return this;
     }
 

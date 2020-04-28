@@ -35,6 +35,11 @@ public interface SBSubscription extends HasInner<SBSubscriptionInner>, Indexable
     Period autoDeleteOnIdle();
 
     /**
+     * @return the clientAffineProperties value.
+     */
+    SBClientAffineProperties clientAffineProperties();
+
+    /**
      * @return the countDetails value.
      */
     MessageCountDetails countDetails();
@@ -83,6 +88,11 @@ public interface SBSubscription extends HasInner<SBSubscriptionInner>, Indexable
      * @return the id value.
      */
     String id();
+
+    /**
+     * @return the isClientAffine value.
+     */
+    Boolean isClientAffine();
 
     /**
      * @return the lockDuration value.
@@ -164,6 +174,18 @@ public interface SBSubscription extends HasInner<SBSubscriptionInner>, Indexable
              * @return the next definition stage
              */
             WithCreate withAutoDeleteOnIdle(Period autoDeleteOnIdle);
+        }
+
+        /**
+         * The stage of the sbsubscription definition allowing to specify ClientAffineProperties.
+         */
+        interface WithClientAffineProperties {
+            /**
+             * Specifies clientAffineProperties.
+             * @param clientAffineProperties Properties specific to client affine subscriptions
+             * @return the next definition stage
+             */
+            WithCreate withClientAffineProperties(SBClientAffineProperties clientAffineProperties);
         }
 
         /**
@@ -251,6 +273,18 @@ public interface SBSubscription extends HasInner<SBSubscriptionInner>, Indexable
         }
 
         /**
+         * The stage of the sbsubscription definition allowing to specify IsClientAffine.
+         */
+        interface WithIsClientAffine {
+            /**
+             * Specifies isClientAffine.
+             * @param isClientAffine Value that indicates whether the subscription has an affinity to the client id
+             * @return the next definition stage
+             */
+            WithCreate withIsClientAffine(Boolean isClientAffine);
+        }
+
+        /**
          * The stage of the sbsubscription definition allowing to specify LockDuration.
          */
         interface WithLockDuration {
@@ -303,13 +337,13 @@ public interface SBSubscription extends HasInner<SBSubscriptionInner>, Indexable
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<SBSubscription>, DefinitionStages.WithAutoDeleteOnIdle, DefinitionStages.WithDeadLetteringOnFilterEvaluationExceptions, DefinitionStages.WithDeadLetteringOnMessageExpiration, DefinitionStages.WithDefaultMessageTimeToLive, DefinitionStages.WithDuplicateDetectionHistoryTimeWindow, DefinitionStages.WithEnableBatchedOperations, DefinitionStages.WithForwardDeadLetteredMessagesTo, DefinitionStages.WithForwardTo, DefinitionStages.WithLockDuration, DefinitionStages.WithMaxDeliveryCount, DefinitionStages.WithRequiresSession, DefinitionStages.WithStatus {
+        interface WithCreate extends Creatable<SBSubscription>, DefinitionStages.WithAutoDeleteOnIdle, DefinitionStages.WithClientAffineProperties, DefinitionStages.WithDeadLetteringOnFilterEvaluationExceptions, DefinitionStages.WithDeadLetteringOnMessageExpiration, DefinitionStages.WithDefaultMessageTimeToLive, DefinitionStages.WithDuplicateDetectionHistoryTimeWindow, DefinitionStages.WithEnableBatchedOperations, DefinitionStages.WithForwardDeadLetteredMessagesTo, DefinitionStages.WithForwardTo, DefinitionStages.WithIsClientAffine, DefinitionStages.WithLockDuration, DefinitionStages.WithMaxDeliveryCount, DefinitionStages.WithRequiresSession, DefinitionStages.WithStatus {
         }
     }
     /**
      * The template for a SBSubscription update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<SBSubscription>, UpdateStages.WithAutoDeleteOnIdle, UpdateStages.WithDeadLetteringOnFilterEvaluationExceptions, UpdateStages.WithDeadLetteringOnMessageExpiration, UpdateStages.WithDefaultMessageTimeToLive, UpdateStages.WithDuplicateDetectionHistoryTimeWindow, UpdateStages.WithEnableBatchedOperations, UpdateStages.WithForwardDeadLetteredMessagesTo, UpdateStages.WithForwardTo, UpdateStages.WithLockDuration, UpdateStages.WithMaxDeliveryCount, UpdateStages.WithRequiresSession, UpdateStages.WithStatus {
+    interface Update extends Appliable<SBSubscription>, UpdateStages.WithAutoDeleteOnIdle, UpdateStages.WithClientAffineProperties, UpdateStages.WithDeadLetteringOnFilterEvaluationExceptions, UpdateStages.WithDeadLetteringOnMessageExpiration, UpdateStages.WithDefaultMessageTimeToLive, UpdateStages.WithDuplicateDetectionHistoryTimeWindow, UpdateStages.WithEnableBatchedOperations, UpdateStages.WithForwardDeadLetteredMessagesTo, UpdateStages.WithForwardTo, UpdateStages.WithIsClientAffine, UpdateStages.WithLockDuration, UpdateStages.WithMaxDeliveryCount, UpdateStages.WithRequiresSession, UpdateStages.WithStatus {
     }
 
     /**
@@ -326,6 +360,18 @@ public interface SBSubscription extends HasInner<SBSubscriptionInner>, Indexable
              * @return the next update stage
              */
             Update withAutoDeleteOnIdle(Period autoDeleteOnIdle);
+        }
+
+        /**
+         * The stage of the sbsubscription update allowing to specify ClientAffineProperties.
+         */
+        interface WithClientAffineProperties {
+            /**
+             * Specifies clientAffineProperties.
+             * @param clientAffineProperties Properties specific to client affine subscriptions
+             * @return the next update stage
+             */
+            Update withClientAffineProperties(SBClientAffineProperties clientAffineProperties);
         }
 
         /**
@@ -410,6 +456,18 @@ public interface SBSubscription extends HasInner<SBSubscriptionInner>, Indexable
              * @return the next update stage
              */
             Update withForwardTo(String forwardTo);
+        }
+
+        /**
+         * The stage of the sbsubscription update allowing to specify IsClientAffine.
+         */
+        interface WithIsClientAffine {
+            /**
+             * Specifies isClientAffine.
+             * @param isClientAffine Value that indicates whether the subscription has an affinity to the client id
+             * @return the next update stage
+             */
+            Update withIsClientAffine(Boolean isClientAffine);
         }
 
         /**

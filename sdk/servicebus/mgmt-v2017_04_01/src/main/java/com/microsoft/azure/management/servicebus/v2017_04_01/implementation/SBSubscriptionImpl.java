@@ -15,6 +15,7 @@ import org.joda.time.DateTime;
 import com.microsoft.azure.management.servicebus.v2017_04_01.MessageCountDetails;
 import org.joda.time.Period;
 import com.microsoft.azure.management.servicebus.v2017_04_01.EntityStatus;
+import com.microsoft.azure.management.servicebus.v2017_04_01.SBClientAffineProperties;
 
 class SBSubscriptionImpl extends CreatableUpdatableImpl<SBSubscription, SBSubscriptionInner, SBSubscriptionImpl> implements SBSubscription, SBSubscription.Definition, SBSubscription.Update {
     private final ServiceBusManager manager;
@@ -86,6 +87,11 @@ class SBSubscriptionImpl extends CreatableUpdatableImpl<SBSubscription, SBSubscr
     }
 
     @Override
+    public SBClientAffineProperties clientAffineProperties() {
+        return this.inner().clientAffineProperties();
+    }
+
+    @Override
     public MessageCountDetails countDetails() {
         return this.inner().countDetails();
     }
@@ -133,6 +139,11 @@ class SBSubscriptionImpl extends CreatableUpdatableImpl<SBSubscription, SBSubscr
     @Override
     public String id() {
         return this.inner().id();
+    }
+
+    @Override
+    public Boolean isClientAffine() {
+        return this.inner().isClientAffine();
     }
 
     @Override
@@ -190,6 +201,12 @@ class SBSubscriptionImpl extends CreatableUpdatableImpl<SBSubscription, SBSubscr
     }
 
     @Override
+    public SBSubscriptionImpl withClientAffineProperties(SBClientAffineProperties clientAffineProperties) {
+        this.inner().withClientAffineProperties(clientAffineProperties);
+        return this;
+    }
+
+    @Override
     public SBSubscriptionImpl withDeadLetteringOnFilterEvaluationExceptions(Boolean deadLetteringOnFilterEvaluationExceptions) {
         this.inner().withDeadLetteringOnFilterEvaluationExceptions(deadLetteringOnFilterEvaluationExceptions);
         return this;
@@ -228,6 +245,12 @@ class SBSubscriptionImpl extends CreatableUpdatableImpl<SBSubscription, SBSubscr
     @Override
     public SBSubscriptionImpl withForwardTo(String forwardTo) {
         this.inner().withForwardTo(forwardTo);
+        return this;
+    }
+
+    @Override
+    public SBSubscriptionImpl withIsClientAffine(Boolean isClientAffine) {
+        this.inner().withIsClientAffine(isClientAffine);
         return this;
     }
 
