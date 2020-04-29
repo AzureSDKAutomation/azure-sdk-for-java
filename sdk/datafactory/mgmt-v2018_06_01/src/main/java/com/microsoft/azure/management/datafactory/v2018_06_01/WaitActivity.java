@@ -21,27 +21,28 @@ import com.microsoft.rest.serializer.JsonFlatten;
 @JsonFlatten
 public class WaitActivity extends ControlActivity {
     /**
-     * Duration in seconds.
+     * Duration in seconds. Type: integer (or Expression with resultType
+     * integer).
      */
     @JsonProperty(value = "typeProperties.waitTimeInSeconds", required = true)
-    private int waitTimeInSeconds;
+    private Object waitTimeInSeconds;
 
     /**
-     * Get duration in seconds.
+     * Get duration in seconds. Type: integer (or Expression with resultType integer).
      *
      * @return the waitTimeInSeconds value
      */
-    public int waitTimeInSeconds() {
+    public Object waitTimeInSeconds() {
         return this.waitTimeInSeconds;
     }
 
     /**
-     * Set duration in seconds.
+     * Set duration in seconds. Type: integer (or Expression with resultType integer).
      *
      * @param waitTimeInSeconds the waitTimeInSeconds value to set
      * @return the WaitActivity object itself.
      */
-    public WaitActivity withWaitTimeInSeconds(int waitTimeInSeconds) {
+    public WaitActivity withWaitTimeInSeconds(Object waitTimeInSeconds) {
         this.waitTimeInSeconds = waitTimeInSeconds;
         return this;
     }
