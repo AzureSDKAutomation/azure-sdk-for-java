@@ -63,6 +63,52 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
         return this.apiVersion;
     }
 
+    /** The API version to use for this operation. */
+    private String apiVersion1;
+
+    /**
+     * Gets The API version to use for this operation.
+     *
+     * @return the apiVersion1 value.
+     */
+    public String apiVersion1() {
+        return this.apiVersion1;
+    }
+
+    /**
+     * Sets The API version to use for this operation.
+     *
+     * @param apiVersion1 the apiVersion1 value.
+     * @return the service client itself
+     */
+    public CosmosDBManagementClientImpl withApiVersion1(String apiVersion1) {
+        this.apiVersion1 = apiVersion1;
+        return this;
+    }
+
+    /** The ID of the target subscription. */
+    private String subscriptionId1;
+
+    /**
+     * Gets The ID of the target subscription.
+     *
+     * @return the subscriptionId1 value.
+     */
+    public String subscriptionId1() {
+        return this.subscriptionId1;
+    }
+
+    /**
+     * Sets The ID of the target subscription.
+     *
+     * @param subscriptionId1 the subscriptionId1 value.
+     * @return the service client itself
+     */
+    public CosmosDBManagementClientImpl withSubscriptionId1(String subscriptionId1) {
+        this.subscriptionId1 = subscriptionId1;
+        return this;
+    }
+
     /** The preferred language for the response. */
     private String acceptLanguage;
 
