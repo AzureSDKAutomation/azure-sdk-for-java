@@ -28,6 +28,12 @@ public class ManagementPolicyAction {
     private ManagementPolicySnapShot snapshot;
 
     /**
+     * The management policy action for version.
+     */
+    @JsonProperty(value = "version")
+    private ManagementPolicyVersion version;
+
+    /**
      * Get the management policy action for base blob.
      *
      * @return the baseBlob value
@@ -64,6 +70,26 @@ public class ManagementPolicyAction {
      */
     public ManagementPolicyAction withSnapshot(ManagementPolicySnapShot snapshot) {
         this.snapshot = snapshot;
+        return this;
+    }
+
+    /**
+     * Get the management policy action for version.
+     *
+     * @return the version value
+     */
+    public ManagementPolicyVersion version() {
+        return this.version;
+    }
+
+    /**
+     * Set the management policy action for version.
+     *
+     * @param version the version value to set
+     * @return the ManagementPolicyAction object itself.
+     */
+    public ManagementPolicyAction withVersion(ManagementPolicyVersion version) {
+        this.version = version;
         return this;
     }
 

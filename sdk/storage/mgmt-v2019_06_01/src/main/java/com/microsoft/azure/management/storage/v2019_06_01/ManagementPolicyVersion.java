@@ -11,31 +11,31 @@ package com.microsoft.azure.management.storage.v2019_06_01;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Management policy action for snapshot.
+ * Management policy action for blob version.
  */
-public class ManagementPolicySnapShot {
+public class ManagementPolicyVersion {
     /**
-     * The function to tier blob snapshot to cool storage. Support blob
-     * snapshot currently at Hot tier.
+     * The function to tier blob version to cool storage. Support blob version
+     * currently at Hot tier.
      */
     @JsonProperty(value = "tierToCool")
     private DateAfterCreation tierToCool;
 
     /**
-     * The function to tier blob snapshot to archive storage. Support blob
-     * snapshot currently at Hot or Cool tier.
+     * The function to tier blob version to archive storage. Support blob
+     * version currently at Hot or Cool tier.
      */
     @JsonProperty(value = "tierToArchive")
     private DateAfterCreation tierToArchive;
 
     /**
-     * The function to delete the blob snapshot.
+     * The function to delete the blob version.
      */
     @JsonProperty(value = "delete")
     private DateAfterCreation delete;
 
     /**
-     * Get the function to tier blob snapshot to cool storage. Support blob snapshot currently at Hot tier.
+     * Get the function to tier blob version to cool storage. Support blob version currently at Hot tier.
      *
      * @return the tierToCool value
      */
@@ -44,18 +44,18 @@ public class ManagementPolicySnapShot {
     }
 
     /**
-     * Set the function to tier blob snapshot to cool storage. Support blob snapshot currently at Hot tier.
+     * Set the function to tier blob version to cool storage. Support blob version currently at Hot tier.
      *
      * @param tierToCool the tierToCool value to set
-     * @return the ManagementPolicySnapShot object itself.
+     * @return the ManagementPolicyVersion object itself.
      */
-    public ManagementPolicySnapShot withTierToCool(DateAfterCreation tierToCool) {
+    public ManagementPolicyVersion withTierToCool(DateAfterCreation tierToCool) {
         this.tierToCool = tierToCool;
         return this;
     }
 
     /**
-     * Get the function to tier blob snapshot to archive storage. Support blob snapshot currently at Hot or Cool tier.
+     * Get the function to tier blob version to archive storage. Support blob version currently at Hot or Cool tier.
      *
      * @return the tierToArchive value
      */
@@ -64,18 +64,18 @@ public class ManagementPolicySnapShot {
     }
 
     /**
-     * Set the function to tier blob snapshot to archive storage. Support blob snapshot currently at Hot or Cool tier.
+     * Set the function to tier blob version to archive storage. Support blob version currently at Hot or Cool tier.
      *
      * @param tierToArchive the tierToArchive value to set
-     * @return the ManagementPolicySnapShot object itself.
+     * @return the ManagementPolicyVersion object itself.
      */
-    public ManagementPolicySnapShot withTierToArchive(DateAfterCreation tierToArchive) {
+    public ManagementPolicyVersion withTierToArchive(DateAfterCreation tierToArchive) {
         this.tierToArchive = tierToArchive;
         return this;
     }
 
     /**
-     * Get the function to delete the blob snapshot.
+     * Get the function to delete the blob version.
      *
      * @return the delete value
      */
@@ -84,12 +84,12 @@ public class ManagementPolicySnapShot {
     }
 
     /**
-     * Set the function to delete the blob snapshot.
+     * Set the function to delete the blob version.
      *
      * @param delete the delete value to set
-     * @return the ManagementPolicySnapShot object itself.
+     * @return the ManagementPolicyVersion object itself.
      */
-    public ManagementPolicySnapShot withDelete(DateAfterCreation delete) {
+    public ManagementPolicyVersion withDelete(DateAfterCreation delete) {
         this.delete = delete;
         return this;
     }
