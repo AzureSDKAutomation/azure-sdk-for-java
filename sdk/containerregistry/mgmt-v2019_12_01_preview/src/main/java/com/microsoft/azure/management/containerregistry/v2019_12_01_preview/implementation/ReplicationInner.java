@@ -34,6 +34,15 @@ public class ReplicationInner extends Resource {
     private Status status;
 
     /**
+     * Specifies whether the replication's regional endpoint is enabled.
+     * Requests will not be routed to a replication whose regional endpoint is
+     * disabled, however its data will continue to be synced with other
+     * replications.
+     */
+    @JsonProperty(value = "properties.regionEndpointEnabled")
+    private Boolean regionEndpointEnabled;
+
+    /**
      * Get the provisioning state of the replication at the time the operation was called. Possible values include: 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled'.
      *
      * @return the provisioningState value
@@ -49,6 +58,26 @@ public class ReplicationInner extends Resource {
      */
     public Status status() {
         return this.status;
+    }
+
+    /**
+     * Get specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.
+     *
+     * @return the regionEndpointEnabled value
+     */
+    public Boolean regionEndpointEnabled() {
+        return this.regionEndpointEnabled;
+    }
+
+    /**
+     * Set specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.
+     *
+     * @param regionEndpointEnabled the regionEndpointEnabled value to set
+     * @return the ReplicationInner object itself.
+     */
+    public ReplicationInner withRegionEndpointEnabled(Boolean regionEndpointEnabled) {
+        this.regionEndpointEnabled = regionEndpointEnabled;
+        return this;
     }
 
 }
