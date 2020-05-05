@@ -26,7 +26,7 @@ public class ServicesProperties {
     /**
      * The access policies of the service instance.
      */
-    @JsonProperty(value = "accessPolicies", required = true)
+    @JsonProperty(value = "accessPolicies")
     private List<ServiceAccessPolicyEntry> accessPolicies;
 
     /**
