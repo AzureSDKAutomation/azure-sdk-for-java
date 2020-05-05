@@ -38,7 +38,7 @@ public class HostPoolInner extends Resource {
 
     /**
      * HostPool type for desktop. Possible values include: 'Personal',
-     * 'Shared'.
+     * 'Pooled'.
      */
     @JsonProperty(value = "properties.hostPoolType")
     private HostPoolType hostPoolType;
@@ -146,7 +146,7 @@ public class HostPoolInner extends Resource {
     }
 
     /**
-     * Get hostPool type for desktop. Possible values include: 'Personal', 'Shared'.
+     * Get hostPool type for desktop. Possible values include: 'Personal', 'Pooled'.
      *
      * @return the hostPoolType value
      */
@@ -155,7 +155,7 @@ public class HostPoolInner extends Resource {
     }
 
     /**
-     * Set hostPool type for desktop. Possible values include: 'Personal', 'Shared'.
+     * Set hostPool type for desktop. Possible values include: 'Personal', 'Pooled'.
      *
      * @param hostPoolType the hostPoolType value to set
      * @return the HostPoolInner object itself.

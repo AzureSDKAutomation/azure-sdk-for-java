@@ -154,7 +154,7 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
         interface WithHostPoolType {
             /**
              * Specifies hostPoolType.
-             * @param hostPoolType HostPool type for desktop. Possible values include: 'Personal', 'Shared'
+             * @param hostPoolType HostPool type for desktop. Possible values include: 'Personal', 'Pooled'
              * @return the next definition stage
              */
             WithCreate withHostPoolType(HostPoolType hostPoolType);

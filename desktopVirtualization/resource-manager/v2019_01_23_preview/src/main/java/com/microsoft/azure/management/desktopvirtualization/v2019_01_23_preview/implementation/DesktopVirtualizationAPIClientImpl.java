@@ -306,7 +306,7 @@ public class DesktopVirtualizationAPIClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2019-01-23-preview";
+        this.apiVersion = "2019-12-10-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
@@ -331,6 +331,6 @@ public class DesktopVirtualizationAPIClientImpl extends AzureServiceClient {
      */
     @Override
     public String userAgent() {
-        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "DesktopVirtualizationAPIClient", "2019-01-23-preview");
+        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "DesktopVirtualizationAPIClient", "2019-12-10-preview");
     }
 }

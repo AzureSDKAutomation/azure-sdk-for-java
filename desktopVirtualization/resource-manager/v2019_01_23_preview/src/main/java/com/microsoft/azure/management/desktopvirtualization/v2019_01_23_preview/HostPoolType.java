@@ -19,8 +19,8 @@ public final class HostPoolType extends ExpandableStringEnum<HostPoolType> {
     /** Static value Personal for HostPoolType. */
     public static final HostPoolType PERSONAL = fromString("Personal");
 
-    /** Static value Shared for HostPoolType. */
-    public static final HostPoolType SHARED = fromString("Shared");
+    /** Static value Pooled for HostPoolType. */
+    public static final HostPoolType POOLED = fromString("Pooled");
 
     /**
      * Creates or finds a HostPoolType from its string representation.
