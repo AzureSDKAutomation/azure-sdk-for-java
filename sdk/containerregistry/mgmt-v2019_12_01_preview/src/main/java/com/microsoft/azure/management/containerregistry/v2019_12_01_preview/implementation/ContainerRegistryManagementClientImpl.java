@@ -121,6 +121,19 @@ public class ContainerRegistryManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The ExportPipelinesInner object to access its operations.
+     */
+    private ExportPipelinesInner exportPipelines;
+
+    /**
+     * Gets the ExportPipelinesInner object to access its operations.
+     * @return the ExportPipelinesInner object.
+     */
+    public ExportPipelinesInner exportPipelines() {
+        return this.exportPipelines;
+    }
+
+    /**
      * The RegistriesInner object to access its operations.
      */
     private RegistriesInner registries;
@@ -134,6 +147,19 @@ public class ContainerRegistryManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The ImportPipelinesInner object to access its operations.
+     */
+    private ImportPipelinesInner importPipelines;
+
+    /**
+     * Gets the ImportPipelinesInner object to access its operations.
+     * @return the ImportPipelinesInner object.
+     */
+    public ImportPipelinesInner importPipelines() {
+        return this.importPipelines;
+    }
+
+    /**
      * The OperationsInner object to access its operations.
      */
     private OperationsInner operations;
@@ -144,6 +170,19 @@ public class ContainerRegistryManagementClientImpl extends AzureServiceClient {
      */
     public OperationsInner operations() {
         return this.operations;
+    }
+
+    /**
+     * The PipelineRunsInner object to access its operations.
+     */
+    private PipelineRunsInner pipelineRuns;
+
+    /**
+     * Gets the PipelineRunsInner object to access its operations.
+     * @return the PipelineRunsInner object.
+     */
+    public PipelineRunsInner pipelineRuns() {
+        return this.pipelineRuns;
     }
 
     /**
@@ -297,8 +336,11 @@ public class ContainerRegistryManagementClientImpl extends AzureServiceClient {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.exportPipelines = new ExportPipelinesInner(restClient().retrofit(), this);
         this.registries = new RegistriesInner(restClient().retrofit(), this);
+        this.importPipelines = new ImportPipelinesInner(restClient().retrofit(), this);
         this.operations = new OperationsInner(restClient().retrofit(), this);
+        this.pipelineRuns = new PipelineRunsInner(restClient().retrofit(), this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsInner(restClient().retrofit(), this);
         this.replications = new ReplicationsInner(restClient().retrofit(), this);
         this.webhooks = new WebhooksInner(restClient().retrofit(), this);

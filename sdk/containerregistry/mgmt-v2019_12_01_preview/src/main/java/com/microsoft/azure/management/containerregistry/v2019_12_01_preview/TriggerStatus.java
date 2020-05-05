@@ -16,11 +16,11 @@ import com.microsoft.rest.ExpandableStringEnum;
  * Defines values for TriggerStatus.
  */
 public final class TriggerStatus extends ExpandableStringEnum<TriggerStatus> {
-    /** Static value Disabled for TriggerStatus. */
-    public static final TriggerStatus DISABLED = fromString("Disabled");
-
     /** Static value Enabled for TriggerStatus. */
     public static final TriggerStatus ENABLED = fromString("Enabled");
+
+    /** Static value Disabled for TriggerStatus. */
+    public static final TriggerStatus DISABLED = fromString("Disabled");
 
     /**
      * Creates or finds a TriggerStatus from its string representation.

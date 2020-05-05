@@ -35,8 +35,8 @@ public class BaseImageTriggerUpdateParameters {
     private UpdateTriggerPayloadType updateTriggerPayloadType;
 
     /**
-     * The current status of trigger. Possible values include: 'Disabled',
-     * 'Enabled'.
+     * The current status of trigger. Possible values include: 'Enabled',
+     * 'Disabled'.
      */
     @JsonProperty(value = "status")
     private TriggerStatus status;
@@ -108,7 +108,7 @@ public class BaseImageTriggerUpdateParameters {
     }
 
     /**
-     * Get the current status of trigger. Possible values include: 'Disabled', 'Enabled'.
+     * Get the current status of trigger. Possible values include: 'Enabled', 'Disabled'.
      *
      * @return the status value
      */
@@ -117,7 +117,7 @@ public class BaseImageTriggerUpdateParameters {
     }
 
     /**
-     * Set the current status of trigger. Possible values include: 'Disabled', 'Enabled'.
+     * Set the current status of trigger. Possible values include: 'Enabled', 'Disabled'.
      *
      * @param status the status value to set
      * @return the BaseImageTriggerUpdateParameters object itself.

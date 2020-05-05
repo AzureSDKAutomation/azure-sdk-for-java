@@ -16,8 +16,11 @@ import com.microsoft.azure.management.apigeneration.Beta.SinceVersion;
 import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ExportPipelines;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Registries;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ImportPipelines;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Operations;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.PipelineRuns;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.PrivateEndpointConnections;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Replications;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Webhooks;
@@ -34,8 +37,11 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
  * Entry point to Azure ContainerRegistry resource management.
  */
 public final class ContainerRegistryManager extends ManagerCore<ContainerRegistryManager, ContainerRegistryManagementClientImpl> {
+    private ExportPipelines exportPipelines;
     private Registries registries;
+    private ImportPipelines importPipelines;
     private Operations operations;
+    private PipelineRuns pipelineRuns;
     private PrivateEndpointConnections privateEndpointConnections;
     private Replications replications;
     private Webhooks webhooks;
@@ -93,6 +99,16 @@ public final class ContainerRegistryManager extends ManagerCore<ContainerRegistr
     }
 
     /**
+     * @return Entry point to manage ExportPipelines.
+     */
+    public ExportPipelines exportPipelines() {
+        if (this.exportPipelines == null) {
+            this.exportPipelines = new ExportPipelinesImpl(this);
+        }
+        return this.exportPipelines;
+    }
+
+    /**
      * @return Entry point to manage Registries.
      */
     public Registries registries() {
@@ -103,6 +119,16 @@ public final class ContainerRegistryManager extends ManagerCore<ContainerRegistr
     }
 
     /**
+     * @return Entry point to manage ImportPipelines.
+     */
+    public ImportPipelines importPipelines() {
+        if (this.importPipelines == null) {
+            this.importPipelines = new ImportPipelinesImpl(this);
+        }
+        return this.importPipelines;
+    }
+
+    /**
      * @return Entry point to manage Operations.
      */
     public Operations operations() {
@@ -110,6 +136,16 @@ public final class ContainerRegistryManager extends ManagerCore<ContainerRegistr
             this.operations = new OperationsImpl(this);
         }
         return this.operations;
+    }
+
+    /**
+     * @return Entry point to manage PipelineRuns.
+     */
+    public PipelineRuns pipelineRuns() {
+        if (this.pipelineRuns == null) {
+            this.pipelineRuns = new PipelineRunsImpl(this);
+        }
+        return this.pipelineRuns;
     }
 
     /**

@@ -21,8 +21,8 @@ public class TimerTrigger {
     private String schedule;
 
     /**
-     * The current status of trigger. Possible values include: 'Disabled',
-     * 'Enabled'.
+     * The current status of trigger. Possible values include: 'Enabled',
+     * 'Disabled'.
      */
     @JsonProperty(value = "status")
     private TriggerStatus status;
@@ -54,7 +54,7 @@ public class TimerTrigger {
     }
 
     /**
-     * Get the current status of trigger. Possible values include: 'Disabled', 'Enabled'.
+     * Get the current status of trigger. Possible values include: 'Enabled', 'Disabled'.
      *
      * @return the status value
      */
@@ -63,7 +63,7 @@ public class TimerTrigger {
     }
 
     /**
-     * Set the current status of trigger. Possible values include: 'Disabled', 'Enabled'.
+     * Set the current status of trigger. Possible values include: 'Enabled', 'Disabled'.
      *
      * @param status the status value to set
      * @return the TimerTrigger object itself.
