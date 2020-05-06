@@ -27,6 +27,12 @@ public class KeyVaultProperties {
     private String keyVaultUri;
 
     /**
+     * Key Version.
+     */
+    @JsonProperty(value = "keyVersion")
+    private String keyVersion;
+
+    /**
      * Get name of the Key from KeyVault.
      *
      * @return the keyName value
@@ -63,6 +69,26 @@ public class KeyVaultProperties {
      */
     public KeyVaultProperties withKeyVaultUri(String keyVaultUri) {
         this.keyVaultUri = keyVaultUri;
+        return this;
+    }
+
+    /**
+     * Get key Version.
+     *
+     * @return the keyVersion value
+     */
+    public String keyVersion() {
+        return this.keyVersion;
+    }
+
+    /**
+     * Set key Version.
+     *
+     * @param keyVersion the keyVersion value to set
+     * @return the KeyVaultProperties object itself.
+     */
+    public KeyVaultProperties withKeyVersion(String keyVersion) {
+        this.keyVersion = keyVersion;
         return this;
     }
 
