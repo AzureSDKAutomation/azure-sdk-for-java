@@ -15,14 +15,12 @@ import com.microsoft.azure.management.desktopvirtualization.v2019_01_23_preview.
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
-import com.microsoft.rest.SkipParentValidation;
 import com.microsoft.azure.Resource;
 
 /**
  * Represents a HostPool definition.
  */
 @JsonFlatten
-@SkipParentValidation
 public class HostPoolInner extends Resource {
     /**
      * Friendly name of HostPool.
@@ -38,7 +36,7 @@ public class HostPoolInner extends Resource {
 
     /**
      * HostPool type for desktop. Possible values include: 'Personal',
-     * 'Shared'.
+     * 'Pooled'.
      */
     @JsonProperty(value = "properties.hostPoolType")
     private HostPoolType hostPoolType;
@@ -146,7 +144,7 @@ public class HostPoolInner extends Resource {
     }
 
     /**
-     * Get hostPool type for desktop. Possible values include: 'Personal', 'Shared'.
+     * Get hostPool type for desktop. Possible values include: 'Personal', 'Pooled'.
      *
      * @return the hostPoolType value
      */
@@ -155,7 +153,7 @@ public class HostPoolInner extends Resource {
     }
 
     /**
-     * Set hostPool type for desktop. Possible values include: 'Personal', 'Shared'.
+     * Set hostPool type for desktop. Possible values include: 'Personal', 'Pooled'.
      *
      * @param hostPoolType the hostPoolType value to set
      * @return the HostPoolInner object itself.
