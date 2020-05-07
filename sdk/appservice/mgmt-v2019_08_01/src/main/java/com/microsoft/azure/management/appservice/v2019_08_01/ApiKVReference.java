@@ -50,7 +50,7 @@ public class ApiKVReference {
      * Possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
      */
     @JsonProperty(value = "identityType")
-    private ManagedServiceIdentityType identityType;
+    private KeyVaultReferenceIdentityType identityType;
 
     /**
      * The details property.
@@ -175,7 +175,7 @@ public class ApiKVReference {
      *
      * @return the identityType value
      */
-    public ManagedServiceIdentityType identityType() {
+    public KeyVaultReferenceIdentityType identityType() {
         return this.identityType;
     }
 
@@ -185,7 +185,7 @@ public class ApiKVReference {
      * @param identityType the identityType value to set
      * @return the ApiKVReference object itself.
      */
-    public ApiKVReference withIdentityType(ManagedServiceIdentityType identityType) {
+    public ApiKVReference withIdentityType(KeyVaultReferenceIdentityType identityType) {
         this.identityType = identityType;
         return this;
     }

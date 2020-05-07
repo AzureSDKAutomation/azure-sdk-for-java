@@ -9,7 +9,7 @@
 package com.microsoft.azure.management.appservice.v2019_08_01.implementation;
 
 import com.microsoft.azure.management.appservice.v2019_08_01.ResolveStatus;
-import com.microsoft.azure.management.appservice.v2019_08_01.ManagedServiceIdentityType;
+import com.microsoft.azure.management.appservice.v2019_08_01.KeyVaultReferenceIdentityType;
 import com.microsoft.azure.management.appservice.v2019_08_01.ConfigReferenceSource;
 import com.microsoft.azure.management.appservice.v2019_08_01.ConfigReferenceLocation;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -57,7 +57,7 @@ public class KeyVaultReferenceResourceInner extends ProxyOnlyResource {
      * Possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
      */
     @JsonProperty(value = "properties.identityType")
-    private ManagedServiceIdentityType identityType;
+    private KeyVaultReferenceIdentityType identityType;
 
     /**
      * The details property.
@@ -182,7 +182,7 @@ public class KeyVaultReferenceResourceInner extends ProxyOnlyResource {
      *
      * @return the identityType value
      */
-    public ManagedServiceIdentityType identityType() {
+    public KeyVaultReferenceIdentityType identityType() {
         return this.identityType;
     }
 
@@ -192,7 +192,7 @@ public class KeyVaultReferenceResourceInner extends ProxyOnlyResource {
      * @param identityType the identityType value to set
      * @return the KeyVaultReferenceResourceInner object itself.
      */
-    public KeyVaultReferenceResourceInner withIdentityType(ManagedServiceIdentityType identityType) {
+    public KeyVaultReferenceResourceInner withIdentityType(KeyVaultReferenceIdentityType identityType) {
         this.identityType = identityType;
         return this;
     }
