@@ -11,14 +11,12 @@ package com.microsoft.azure.management.desktopvirtualization.v2019_01_23_preview
 import com.microsoft.azure.management.desktopvirtualization.v2019_01_23_preview.ApplicationGroupType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
-import com.microsoft.rest.SkipParentValidation;
 import com.microsoft.azure.Resource;
 
 /**
  * Represents a ApplicationGroup definition.
  */
 @JsonFlatten
-@SkipParentValidation
 public class ApplicationGroupInner extends Resource {
     /**
      * Description of ApplicationGroup.
@@ -35,7 +33,7 @@ public class ApplicationGroupInner extends Resource {
     /**
      * HostPool arm path of ApplicationGroup.
      */
-    @JsonProperty(value = "properties.hostPoolArmPath")
+    @JsonProperty(value = "properties.hostPoolArmPath", required = true)
     private String hostPoolArmPath;
 
     /**
@@ -48,7 +46,7 @@ public class ApplicationGroupInner extends Resource {
      * Resource Type of ApplicationGroup. Possible values include: 'RemoteApp',
      * 'Desktop'.
      */
-    @JsonProperty(value = "properties.applicationGroupType")
+    @JsonProperty(value = "properties.applicationGroupType", required = true)
     private ApplicationGroupType applicationGroupType;
 
     /**

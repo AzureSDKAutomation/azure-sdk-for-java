@@ -90,7 +90,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
     /**
      * The entirety of the ApplicationGroupApplication definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithApplicationGroup, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithApplicationGroup, DefinitionStages.WithCommandLineSetting, DefinitionStages.WithCreate {
     }
 
     /**
@@ -113,7 +113,19 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
             * @param applicationGroupName The name of the application group
             * @return the next definition stage
             */
-            WithCreate withExistingApplicationGroup(String resourceGroupName, String applicationGroupName);
+            WithCommandLineSetting withExistingApplicationGroup(String resourceGroupName, String applicationGroupName);
+        }
+
+        /**
+         * The stage of the applicationgroupapplication definition allowing to specify CommandLineSetting.
+         */
+        interface WithCommandLineSetting {
+           /**
+            * Specifies commandLineSetting.
+            * @param commandLineSetting Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all. Possible values include: 'DoNotAllow', 'Allow', 'Require'
+            * @return the next definition stage
+            */
+            WithCreate withCommandLineSetting(CommandLineSetting commandLineSetting);
         }
 
         /**
@@ -126,18 +138,6 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
              * @return the next definition stage
              */
             WithCreate withCommandLineArguments(String commandLineArguments);
-        }
-
-        /**
-         * The stage of the applicationgroupapplication definition allowing to specify CommandLineSetting.
-         */
-        interface WithCommandLineSetting {
-            /**
-             * Specifies commandLineSetting.
-             * @param commandLineSetting Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all. Possible values include: 'DoNotAllow', 'Allow', 'Require'
-             * @return the next definition stage
-             */
-            WithCreate withCommandLineSetting(CommandLineSetting commandLineSetting);
         }
 
         /**
@@ -217,7 +217,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ApplicationGroupApplication>, DefinitionStages.WithCommandLineArguments, DefinitionStages.WithCommandLineSetting, DefinitionStages.WithDescription, DefinitionStages.WithFilePath, DefinitionStages.WithFriendlyName, DefinitionStages.WithIconIndex, DefinitionStages.WithIconPath, DefinitionStages.WithShowInPortal {
+        interface WithCreate extends Creatable<ApplicationGroupApplication>, DefinitionStages.WithCommandLineArguments, DefinitionStages.WithDescription, DefinitionStages.WithFilePath, DefinitionStages.WithFriendlyName, DefinitionStages.WithIconIndex, DefinitionStages.WithIconPath, DefinitionStages.WithShowInPortal {
         }
     }
     /**

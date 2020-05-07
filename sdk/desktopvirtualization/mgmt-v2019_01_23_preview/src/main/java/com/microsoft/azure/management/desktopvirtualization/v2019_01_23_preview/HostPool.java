@@ -93,7 +93,7 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
     /**
      * The entirety of the HostPool definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithHostPoolType, DefinitionStages.WithLoadBalancerType, DefinitionStages.WithPersonalDesktopAssignmentType, DefinitionStages.WithCreate {
     }
 
     /**
@@ -109,7 +109,43 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
         /**
          * The stage of the HostPool definition allowing to specify the resource group.
          */
-        interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithCreate> {
+        interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithHostPoolType> {
+        }
+
+        /**
+         * The stage of the hostpool definition allowing to specify HostPoolType.
+         */
+        interface WithHostPoolType {
+           /**
+            * Specifies hostPoolType.
+            * @param hostPoolType HostPool type for desktop. Possible values include: 'Personal', 'Pooled'
+            * @return the next definition stage
+*/
+            WithLoadBalancerType withHostPoolType(HostPoolType hostPoolType);
+        }
+
+        /**
+         * The stage of the hostpool definition allowing to specify LoadBalancerType.
+         */
+        interface WithLoadBalancerType {
+           /**
+            * Specifies loadBalancerType.
+            * @param loadBalancerType The type of the load balancer. Possible values include: 'BreadthFirst', 'DepthFirst', 'Persistent'
+            * @return the next definition stage
+*/
+            WithPersonalDesktopAssignmentType withLoadBalancerType(LoadBalancerType loadBalancerType);
+        }
+
+        /**
+         * The stage of the hostpool definition allowing to specify PersonalDesktopAssignmentType.
+         */
+        interface WithPersonalDesktopAssignmentType {
+           /**
+            * Specifies personalDesktopAssignmentType.
+            * @param personalDesktopAssignmentType PersonalDesktopAssignment type for HostPool. Possible values include: 'Automatic', 'Direct'
+            * @return the next definition stage
+*/
+            WithCreate withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType);
         }
 
         /**
@@ -149,30 +185,6 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
         }
 
         /**
-         * The stage of the hostpool definition allowing to specify HostPoolType.
-         */
-        interface WithHostPoolType {
-            /**
-             * Specifies hostPoolType.
-             * @param hostPoolType HostPool type for desktop. Possible values include: 'Personal', 'Shared'
-             * @return the next definition stage
-             */
-            WithCreate withHostPoolType(HostPoolType hostPoolType);
-        }
-
-        /**
-         * The stage of the hostpool definition allowing to specify LoadBalancerType.
-         */
-        interface WithLoadBalancerType {
-            /**
-             * Specifies loadBalancerType.
-             * @param loadBalancerType The type of the load balancer. Possible values include: 'BreadthFirst', 'DepthFirst', 'Persistent'
-             * @return the next definition stage
-             */
-            WithCreate withLoadBalancerType(LoadBalancerType loadBalancerType);
-        }
-
-        /**
          * The stage of the hostpool definition allowing to specify MaxSessionLimit.
          */
         interface WithMaxSessionLimit {
@@ -182,18 +194,6 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
              * @return the next definition stage
              */
             WithCreate withMaxSessionLimit(Integer maxSessionLimit);
-        }
-
-        /**
-         * The stage of the hostpool definition allowing to specify PersonalDesktopAssignmentType.
-         */
-        interface WithPersonalDesktopAssignmentType {
-            /**
-             * Specifies personalDesktopAssignmentType.
-             * @param personalDesktopAssignmentType PersonalDesktopAssignment type for HostPool. Possible values include: 'Automatic', 'Direct'
-             * @return the next definition stage
-             */
-            WithCreate withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType);
         }
 
         /**
@@ -261,7 +261,7 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<HostPool>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithCustomRdpProperty, DefinitionStages.WithDescription, DefinitionStages.WithFriendlyName, DefinitionStages.WithHostPoolType, DefinitionStages.WithLoadBalancerType, DefinitionStages.WithMaxSessionLimit, DefinitionStages.WithPersonalDesktopAssignmentType, DefinitionStages.WithRegistrationInfo, DefinitionStages.WithRing, DefinitionStages.WithSsoContext, DefinitionStages.WithValidationEnvironment, DefinitionStages.WithVmTemplate {
+        interface WithCreate extends Creatable<HostPool>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithCustomRdpProperty, DefinitionStages.WithDescription, DefinitionStages.WithFriendlyName, DefinitionStages.WithMaxSessionLimit, DefinitionStages.WithRegistrationInfo, DefinitionStages.WithRing, DefinitionStages.WithSsoContext, DefinitionStages.WithValidationEnvironment, DefinitionStages.WithVmTemplate {
         }
     }
     /**

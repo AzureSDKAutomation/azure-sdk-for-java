@@ -42,7 +42,7 @@ public class ApplicationInner extends ProxyResource {
      * specified at publish time, or no command line arguments at all. Possible
      * values include: 'DoNotAllow', 'Allow', 'Require'.
      */
-    @JsonProperty(value = "properties.commandLineSetting")
+    @JsonProperty(value = "properties.commandLineSetting", required = true)
     private CommandLineSetting commandLineSetting;
 
     /**

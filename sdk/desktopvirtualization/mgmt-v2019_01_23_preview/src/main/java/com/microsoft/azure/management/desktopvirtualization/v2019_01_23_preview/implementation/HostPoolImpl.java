@@ -160,6 +160,26 @@ class HostPoolImpl extends GroupableResourceCoreImpl<HostPool, HostPoolInner, Ho
     }
 
     @Override
+    public HostPoolImpl withLoadBalancerType(LoadBalancerType loadBalancerType) {
+        if (isInCreateMode()) {
+            this.inner().withLoadBalancerType(loadBalancerType);
+        } else {
+            this.updateParameter.withLoadBalancerType(loadBalancerType);
+        }
+        return this;
+    }
+
+    @Override
+    public HostPoolImpl withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType) {
+        if (isInCreateMode()) {
+            this.inner().withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
+        } else {
+            this.updateParameter.withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
+        }
+        return this;
+    }
+
+    @Override
     public HostPoolImpl withCustomRdpProperty(String customRdpProperty) {
         if (isInCreateMode()) {
             this.inner().withCustomRdpProperty(customRdpProperty);
@@ -190,31 +210,11 @@ class HostPoolImpl extends GroupableResourceCoreImpl<HostPool, HostPoolInner, Ho
     }
 
     @Override
-    public HostPoolImpl withLoadBalancerType(LoadBalancerType loadBalancerType) {
-        if (isInCreateMode()) {
-            this.inner().withLoadBalancerType(loadBalancerType);
-        } else {
-            this.updateParameter.withLoadBalancerType(loadBalancerType);
-        }
-        return this;
-    }
-
-    @Override
     public HostPoolImpl withMaxSessionLimit(Integer maxSessionLimit) {
         if (isInCreateMode()) {
             this.inner().withMaxSessionLimit(maxSessionLimit);
         } else {
             this.updateParameter.withMaxSessionLimit(maxSessionLimit);
-        }
-        return this;
-    }
-
-    @Override
-    public HostPoolImpl withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType) {
-        if (isInCreateMode()) {
-            this.inner().withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
-        } else {
-            this.updateParameter.withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
         }
         return this;
     }

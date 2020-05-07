@@ -171,21 +171,21 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withCommandLineArguments(String commandLineArguments) {
-        if (isInCreateMode()) {
-            this.inner().withCommandLineArguments(commandLineArguments);
-        } else {
-            this.updateParameter.withCommandLineArguments(commandLineArguments);
-        }
-        return this;
-    }
-
-    @Override
     public ApplicationGroupApplicationImpl withCommandLineSetting(CommandLineSetting commandLineSetting) {
         if (isInCreateMode()) {
             this.inner().withCommandLineSetting(commandLineSetting);
         } else {
             this.updateParameter.withCommandLineSetting(commandLineSetting);
+        }
+        return this;
+    }
+
+    @Override
+    public ApplicationGroupApplicationImpl withCommandLineArguments(String commandLineArguments) {
+        if (isInCreateMode()) {
+            this.inner().withCommandLineArguments(commandLineArguments);
+        } else {
+            this.updateParameter.withCommandLineArguments(commandLineArguments);
         }
         return this;
     }

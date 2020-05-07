@@ -15,28 +15,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class RegistrationInfoPatch {
     /**
-     * Update registration token.
+     * The type of resetting the token. Possible values include: 'Delete',
+     * 'None', 'Update'.
      */
-    @JsonProperty(value = "resetToken")
-    private Boolean resetToken;
+    @JsonProperty(value = "registrationTokenOperation")
+    private RegistrationTokenOperation registrationTokenOperation;
 
     /**
-     * Get update registration token.
+     * Get the type of resetting the token. Possible values include: 'Delete', 'None', 'Update'.
      *
-     * @return the resetToken value
+     * @return the registrationTokenOperation value
      */
-    public Boolean resetToken() {
-        return this.resetToken;
+    public RegistrationTokenOperation registrationTokenOperation() {
+        return this.registrationTokenOperation;
     }
 
     /**
-     * Set update registration token.
+     * Set the type of resetting the token. Possible values include: 'Delete', 'None', 'Update'.
      *
-     * @param resetToken the resetToken value to set
+     * @param registrationTokenOperation the registrationTokenOperation value to set
      * @return the RegistrationInfoPatch object itself.
      */
-    public RegistrationInfoPatch withResetToken(Boolean resetToken) {
-        this.resetToken = resetToken;
+    public RegistrationInfoPatch withRegistrationTokenOperation(RegistrationTokenOperation registrationTokenOperation) {
+        this.registrationTokenOperation = registrationTokenOperation;
         return this;
     }
 

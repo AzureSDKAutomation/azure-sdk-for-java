@@ -52,7 +52,7 @@ public interface ApplicationGroup extends HasInner<ApplicationGroupInner>, Resou
     /**
      * The entirety of the ApplicationGroup definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithApplicationGroupType, DefinitionStages.WithHostPoolArmPath, DefinitionStages.WithCreate {
     }
 
     /**
@@ -68,19 +68,31 @@ public interface ApplicationGroup extends HasInner<ApplicationGroupInner>, Resou
         /**
          * The stage of the ApplicationGroup definition allowing to specify the resource group.
          */
-        interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithCreate> {
+        interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithApplicationGroupType> {
         }
 
         /**
          * The stage of the applicationgroup definition allowing to specify ApplicationGroupType.
          */
         interface WithApplicationGroupType {
-            /**
-             * Specifies applicationGroupType.
-             * @param applicationGroupType Resource Type of ApplicationGroup. Possible values include: 'RemoteApp', 'Desktop'
-             * @return the next definition stage
-             */
-            WithCreate withApplicationGroupType(ApplicationGroupType applicationGroupType);
+           /**
+            * Specifies applicationGroupType.
+            * @param applicationGroupType Resource Type of ApplicationGroup. Possible values include: 'RemoteApp', 'Desktop'
+            * @return the next definition stage
+*/
+            WithHostPoolArmPath withApplicationGroupType(ApplicationGroupType applicationGroupType);
+        }
+
+        /**
+         * The stage of the applicationgroup definition allowing to specify HostPoolArmPath.
+         */
+        interface WithHostPoolArmPath {
+           /**
+            * Specifies hostPoolArmPath.
+            * @param hostPoolArmPath HostPool arm path of ApplicationGroup
+            * @return the next definition stage
+*/
+            WithCreate withHostPoolArmPath(String hostPoolArmPath);
         }
 
         /**
@@ -108,23 +120,11 @@ public interface ApplicationGroup extends HasInner<ApplicationGroupInner>, Resou
         }
 
         /**
-         * The stage of the applicationgroup definition allowing to specify HostPoolArmPath.
-         */
-        interface WithHostPoolArmPath {
-            /**
-             * Specifies hostPoolArmPath.
-             * @param hostPoolArmPath HostPool arm path of ApplicationGroup
-             * @return the next definition stage
-             */
-            WithCreate withHostPoolArmPath(String hostPoolArmPath);
-        }
-
-        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ApplicationGroup>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithApplicationGroupType, DefinitionStages.WithDescription, DefinitionStages.WithFriendlyName, DefinitionStages.WithHostPoolArmPath {
+        interface WithCreate extends Creatable<ApplicationGroup>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithDescription, DefinitionStages.WithFriendlyName {
         }
     }
     /**

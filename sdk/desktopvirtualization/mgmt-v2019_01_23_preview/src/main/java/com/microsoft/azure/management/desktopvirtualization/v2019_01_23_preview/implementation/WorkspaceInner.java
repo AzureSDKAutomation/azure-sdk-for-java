@@ -11,14 +11,12 @@ package com.microsoft.azure.management.desktopvirtualization.v2019_01_23_preview
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
-import com.microsoft.rest.SkipParentValidation;
 import com.microsoft.azure.Resource;
 
 /**
  * Represents a Workspace definition.
  */
 @JsonFlatten
-@SkipParentValidation
 public class WorkspaceInner extends Resource {
     /**
      * Description of Workspace.
