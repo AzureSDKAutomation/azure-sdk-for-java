@@ -10,7 +10,7 @@ package com.microsoft.azure.management.appservice.v2019_08_01.implementation;
 
 import com.microsoft.azure.management.appservice.v2019_08_01.KeyVaultReferenceResource;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
-import com.microsoft.azure.management.appservice.v2019_08_01.ManagedServiceIdentityType;
+import com.microsoft.azure.management.appservice.v2019_08_01.KeyVaultReferenceIdentityType;
 import com.microsoft.azure.management.appservice.v2019_08_01.ConfigReferenceLocation;
 import com.microsoft.azure.management.appservice.v2019_08_01.ConfigReferenceSource;
 import com.microsoft.azure.management.appservice.v2019_08_01.ResolveStatus;
@@ -38,7 +38,7 @@ class KeyVaultReferenceResourceImpl extends WrapperImpl<KeyVaultReferenceResourc
     }
 
     @Override
-    public ManagedServiceIdentityType identityType() {
+    public KeyVaultReferenceIdentityType identityType() {
         return this.inner().identityType();
     }
 

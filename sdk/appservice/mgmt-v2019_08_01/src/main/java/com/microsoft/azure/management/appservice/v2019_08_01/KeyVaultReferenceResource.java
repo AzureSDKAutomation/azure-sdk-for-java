@@ -30,7 +30,7 @@ public interface KeyVaultReferenceResource extends HasInner<KeyVaultReferenceRes
     /**
      * @return the identityType value.
      */
-    ManagedServiceIdentityType identityType();
+    KeyVaultReferenceIdentityType identityType();
 
     /**
      * @return the kind value.
