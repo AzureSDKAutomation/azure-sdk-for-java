@@ -116,6 +116,11 @@ class ManagedInstanceImpl extends GroupableResourceCoreImpl<ManagedInstance, Man
     }
 
     @Override
+    public String maintenanceConfigurationId() {
+        return this.inner().maintenanceConfigurationId();
+    }
+
+    @Override
     public ManagedServerCreateMode managedInstanceCreateMode() {
         return this.inner().managedInstanceCreateMode();
     }
@@ -237,6 +242,16 @@ class ManagedInstanceImpl extends GroupableResourceCoreImpl<ManagedInstance, Man
             this.inner().withLicenseType(licenseType);
         } else {
             this.updateParameter.withLicenseType(licenseType);
+        }
+        return this;
+    }
+
+    @Override
+    public ManagedInstanceImpl withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        if (isInCreateMode()) {
+            this.inner().withMaintenanceConfigurationId(maintenanceConfigurationId);
+        } else {
+            this.updateParameter.withMaintenanceConfigurationId(maintenanceConfigurationId);
         }
         return this;
     }

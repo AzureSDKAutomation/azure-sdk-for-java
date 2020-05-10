@@ -160,6 +160,13 @@ public class ManagedInstanceUpdate {
     private String instancePoolId;
 
     /**
+     * Specifies maintenance configuration id to apply to this managed
+     * instance.
+     */
+    @JsonProperty(value = "properties.maintenanceConfigurationId")
+    private String maintenanceConfigurationId;
+
+    /**
      * Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'.
      */
     @JsonProperty(value = "properties.minimalTlsVersion")
@@ -529,6 +536,26 @@ public class ManagedInstanceUpdate {
      */
     public ManagedInstanceUpdate withInstancePoolId(String instancePoolId) {
         this.instancePoolId = instancePoolId;
+        return this;
+    }
+
+    /**
+     * Get specifies maintenance configuration id to apply to this managed instance.
+     *
+     * @return the maintenanceConfigurationId value
+     */
+    public String maintenanceConfigurationId() {
+        return this.maintenanceConfigurationId;
+    }
+
+    /**
+     * Set specifies maintenance configuration id to apply to this managed instance.
+     *
+     * @param maintenanceConfigurationId the maintenanceConfigurationId value to set
+     * @return the ManagedInstanceUpdate object itself.
+     */
+    public ManagedInstanceUpdate withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        this.maintenanceConfigurationId = maintenanceConfigurationId;
         return this;
     }
 
