@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.storage.v2019_06_01.TableServices;
 import rx.Observable;
 import rx.functions.Func1;
+import com.microsoft.azure.management.storage.v2019_06_01.ListTableServices;
 import com.microsoft.azure.management.storage.v2019_06_01.TableServiceProperties;
 
 class TableServicesImpl extends WrapperImpl<TableServicesInner> implements TableServices {
@@ -38,6 +39,18 @@ class TableServicesImpl extends WrapperImpl<TableServicesInner> implements Table
 
     private TableServicePropertiesImpl wrapModel(String name) {
         return new TableServicePropertiesImpl(name, this.manager());
+    }
+
+    @Override
+    public Observable<ListTableServices> listAsync(String resourceGroupName, String accountName) {
+        TableServicesInner client = this.inner();
+        return client.listAsync(resourceGroupName, accountName)
+        .map(new Func1<ListTableServicesInner, ListTableServices>() {
+            @Override
+            public ListTableServices call(ListTableServicesInner inner) {
+                return new ListTableServicesImpl(inner, manager());
+            }
+        });
     }
 
     @Override

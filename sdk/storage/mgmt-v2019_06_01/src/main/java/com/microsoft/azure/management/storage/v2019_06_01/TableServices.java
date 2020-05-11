@@ -18,6 +18,16 @@ import com.microsoft.azure.arm.model.HasInner;
  */
 public interface TableServices extends SupportsCreating<TableServiceProperties.DefinitionStages.Blank>, HasInner<TableServicesInner> {
     /**
+     * List all table services for the storage account.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<ListTableServices> listAsync(String resourceGroupName, String accountName);
+
+    /**
      * Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.

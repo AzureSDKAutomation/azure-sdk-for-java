@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.storage.v2019_06_01.QueueServices;
 import rx.Observable;
 import rx.functions.Func1;
+import com.microsoft.azure.management.storage.v2019_06_01.ListQueueServices;
 import com.microsoft.azure.management.storage.v2019_06_01.QueueServiceProperties;
 
 class QueueServicesImpl extends WrapperImpl<QueueServicesInner> implements QueueServices {
@@ -38,6 +39,18 @@ class QueueServicesImpl extends WrapperImpl<QueueServicesInner> implements Queue
 
     private QueueServicePropertiesImpl wrapModel(String name) {
         return new QueueServicePropertiesImpl(name, this.manager());
+    }
+
+    @Override
+    public Observable<ListQueueServices> listAsync(String resourceGroupName, String accountName) {
+        QueueServicesInner client = this.inner();
+        return client.listAsync(resourceGroupName, accountName)
+        .map(new Func1<ListQueueServicesInner, ListQueueServices>() {
+            @Override
+            public ListQueueServices call(ListQueueServicesInner inner) {
+                return new ListQueueServicesImpl(inner, manager());
+            }
+        });
     }
 
     @Override
