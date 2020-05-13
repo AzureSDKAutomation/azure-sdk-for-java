@@ -11,6 +11,9 @@ package com.microsoft.azure.management.search.v2020_03_13;
 import com.microsoft.azure.arm.model.HasInner;
 import com.microsoft.azure.management.search.v2020_03_13.implementation.SharedPrivateLinkResourceInner;
 import com.microsoft.azure.arm.model.Indexable;
+import com.microsoft.azure.arm.model.Refreshable;
+import com.microsoft.azure.arm.model.Updatable;
+import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.search.v2020_03_13.implementation.SearchManager;
@@ -19,7 +22,12 @@ import java.util.UUID;
 /**
  * Type representing SharedPrivateLinkResource.
  */
-public interface SharedPrivateLinkResource extends HasInner<SharedPrivateLinkResourceInner>, Indexable, HasManager<SearchManager> {
+public interface SharedPrivateLinkResource extends HasInner<SharedPrivateLinkResourceInner>, Indexable, Refreshable<SharedPrivateLinkResource>, Updatable<SharedPrivateLinkResource.Update>, HasManager<SearchManager> {
+    /**
+     * @return the id value.
+     */
+    String id();
+
     /**
      * @return the name value.
      */
@@ -31,9 +39,14 @@ public interface SharedPrivateLinkResource extends HasInner<SharedPrivateLinkRes
     SharedPrivateLinkResourceProperties properties();
 
     /**
+     * @return the type value.
+     */
+    String type();
+
+    /**
      * The entirety of the SharedPrivateLinkResource definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithSearchService, DefinitionStages.WithSearchManagementRequestOptions, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithSearchService, DefinitionStages.WithProperties, DefinitionStages.WithSearchManagementRequestOptions, DefinitionStages.WithCreate {
     }
 
     /**
@@ -56,7 +69,19 @@ public interface SharedPrivateLinkResource extends HasInner<SharedPrivateLinkRes
             * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group
             * @return the next definition stage
             */
-            WithSearchManagementRequestOptions withExistingSearchService(String resourceGroupName, String searchServiceName);
+            WithProperties withExistingSearchService(String resourceGroupName, String searchServiceName);
+        }
+
+        /**
+         * The stage of the sharedprivatelinkresource definition allowing to specify Properties.
+         */
+        interface WithProperties {
+           /**
+            * Specifies properties.
+            * @param properties Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service
+            * @return the next definition stage
+            */
+            WithSearchManagementRequestOptions withProperties(SharedPrivateLinkResourceProperties properties);
         }
 
         /**
@@ -72,35 +97,46 @@ public interface SharedPrivateLinkResource extends HasInner<SharedPrivateLinkRes
         }
 
         /**
-         * The stage of the sharedprivatelinkresource definition allowing to specify Name.
+         * The stage of the definition which contains all the minimum required inputs for
+         * the resource to be created (via {@link WithCreate#create()}), but also allows
+         * for any other optional settings to be specified.
          */
-        interface WithName {
-            /**
-             * Specifies name.
-             * @param name The name of the shared private link resource
-             * @return the next definition stage
-             */
-            WithCreate withName(String name);
+        interface WithCreate extends Creatable<SharedPrivateLinkResource> {
         }
+    }
+    /**
+     * The template for a SharedPrivateLinkResource update operation, containing all the settings that can be modified.
+     */
+    interface Update extends Appliable<SharedPrivateLinkResource>, UpdateStages.WithProperties, UpdateStages.WithSearchManagementRequestOptions {
+    }
 
+    /**
+     * Grouping of SharedPrivateLinkResource update stages.
+     */
+    interface UpdateStages {
         /**
-         * The stage of the sharedprivatelinkresource definition allowing to specify Properties.
+         * The stage of the sharedprivatelinkresource update allowing to specify Properties.
          */
         interface WithProperties {
             /**
              * Specifies properties.
              * @param properties Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service
-             * @return the next definition stage
+             * @return the next update stage
              */
-            WithCreate withProperties(SharedPrivateLinkResourceProperties properties);
+            Update withProperties(SharedPrivateLinkResourceProperties properties);
         }
 
         /**
-         * The stage of the definition which contains all the minimum required inputs for
-         * the resource to be created (via {@link WithCreate#create()}), but also allows
-         * for any other optional settings to be specified.
+         * The stage of the sharedprivatelinkresource update allowing to specify SearchManagementRequestOptions.
          */
-        interface WithCreate extends Creatable<SharedPrivateLinkResource>, DefinitionStages.WithName, DefinitionStages.WithProperties {
+        interface WithSearchManagementRequestOptions {
+            /**
+             * Specifies searchManagementRequestOptions.
+             * @param searchManagementRequestOptions Additional parameters for the operation
+             * @return the next update stage
+             */
+            Update withSearchManagementRequestOptions(SearchManagementRequestOptions searchManagementRequestOptions);
         }
+
     }
 }

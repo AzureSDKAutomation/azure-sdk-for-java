@@ -14,6 +14,7 @@ import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.search.v2020_03_13.SearchManagementRequestOptions;
+import com.microsoft.azure.management.search.v2020_03_13.SharedPrivateLinkResourceProperties;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
@@ -65,7 +66,7 @@ public class SharedPrivateLinkResourcesInner {
     interface SharedPrivateLinkResourcesService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.search.v2020_03_13.SharedPrivateLinkResources createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("searchServiceName") String searchServiceName, @Path("sharedPrivateLinkResourceName") String sharedPrivateLinkResourceName, @Path("subscriptionId") String subscriptionId, @Body SharedPrivateLinkResourceInner sharedPrivateLinkResource, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("x-ms-client-request-id") UUID clientRequestId, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("searchServiceName") String searchServiceName, @Path("sharedPrivateLinkResourceName") String sharedPrivateLinkResourceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("x-ms-client-request-id") UUID clientRequestId, @Body SharedPrivateLinkResourceInner sharedPrivateLinkResource, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.search.v2020_03_13.SharedPrivateLinkResources get" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}")
@@ -91,14 +92,13 @@ public class SharedPrivateLinkResourcesInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param sharedPrivateLinkResourceName The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
-     * @param sharedPrivateLinkResource The definition of the shared private link resource to create or update.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SharedPrivateLinkResourceInner object if successful.
      */
-    public SharedPrivateLinkResourceInner createOrUpdate(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceInner sharedPrivateLinkResource) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, sharedPrivateLinkResource).toBlocking().single().body();
+    public SharedPrivateLinkResourceInner createOrUpdate(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName).toBlocking().single().body();
     }
 
     /**
@@ -107,13 +107,12 @@ public class SharedPrivateLinkResourcesInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param sharedPrivateLinkResourceName The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
-     * @param sharedPrivateLinkResource The definition of the shared private link resource to create or update.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SharedPrivateLinkResourceInner> createOrUpdateAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceInner sharedPrivateLinkResource, final ServiceCallback<SharedPrivateLinkResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, sharedPrivateLinkResource), serviceCallback);
+    public ServiceFuture<SharedPrivateLinkResourceInner> createOrUpdateAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, final ServiceCallback<SharedPrivateLinkResourceInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName), serviceCallback);
     }
 
     /**
@@ -122,12 +121,11 @@ public class SharedPrivateLinkResourcesInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param sharedPrivateLinkResourceName The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
-     * @param sharedPrivateLinkResource The definition of the shared private link resource to create or update.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SharedPrivateLinkResourceInner object
      */
-    public Observable<SharedPrivateLinkResourceInner> createOrUpdateAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceInner sharedPrivateLinkResource) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, sharedPrivateLinkResource).map(new Func1<ServiceResponse<SharedPrivateLinkResourceInner>, SharedPrivateLinkResourceInner>() {
+    public Observable<SharedPrivateLinkResourceInner> createOrUpdateAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName).map(new Func1<ServiceResponse<SharedPrivateLinkResourceInner>, SharedPrivateLinkResourceInner>() {
             @Override
             public SharedPrivateLinkResourceInner call(ServiceResponse<SharedPrivateLinkResourceInner> response) {
                 return response.body();
@@ -141,11 +139,10 @@ public class SharedPrivateLinkResourcesInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param sharedPrivateLinkResourceName The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
-     * @param sharedPrivateLinkResource The definition of the shared private link resource to create or update.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SharedPrivateLinkResourceInner object
      */
-    public Observable<ServiceResponse<SharedPrivateLinkResourceInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceInner sharedPrivateLinkResource) {
+    public Observable<ServiceResponse<SharedPrivateLinkResourceInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -158,16 +155,15 @@ public class SharedPrivateLinkResourcesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (sharedPrivateLinkResource == null) {
-            throw new IllegalArgumentException("Parameter sharedPrivateLinkResource is required and cannot be null.");
-        }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(sharedPrivateLinkResource);
+        final SharedPrivateLinkResourceProperties properties = null;
         final SearchManagementRequestOptions searchManagementRequestOptions = null;
         UUID clientRequestId = null;
-        return service.createOrUpdate(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, this.client.subscriptionId(), sharedPrivateLinkResource, this.client.apiVersion(), this.client.acceptLanguage(), clientRequestId, this.client.userAgent())
+        SharedPrivateLinkResourceInner sharedPrivateLinkResource = new SharedPrivateLinkResourceInner();
+        sharedPrivateLinkResource.withProperties(null);
+        return service.createOrUpdate(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), clientRequestId, sharedPrivateLinkResource, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SharedPrivateLinkResourceInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SharedPrivateLinkResourceInner>> call(Response<ResponseBody> response) {
@@ -187,15 +183,15 @@ public class SharedPrivateLinkResourcesInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param sharedPrivateLinkResourceName The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
-     * @param sharedPrivateLinkResource The definition of the shared private link resource to create or update.
+     * @param properties Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service.
      * @param searchManagementRequestOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SharedPrivateLinkResourceInner object if successful.
      */
-    public SharedPrivateLinkResourceInner createOrUpdate(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceInner sharedPrivateLinkResource, SearchManagementRequestOptions searchManagementRequestOptions) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, sharedPrivateLinkResource, searchManagementRequestOptions).toBlocking().single().body();
+    public SharedPrivateLinkResourceInner createOrUpdate(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceProperties properties, SearchManagementRequestOptions searchManagementRequestOptions) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, properties, searchManagementRequestOptions).toBlocking().single().body();
     }
 
     /**
@@ -204,14 +200,14 @@ public class SharedPrivateLinkResourcesInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param sharedPrivateLinkResourceName The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
-     * @param sharedPrivateLinkResource The definition of the shared private link resource to create or update.
+     * @param properties Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service.
      * @param searchManagementRequestOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SharedPrivateLinkResourceInner> createOrUpdateAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceInner sharedPrivateLinkResource, SearchManagementRequestOptions searchManagementRequestOptions, final ServiceCallback<SharedPrivateLinkResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, sharedPrivateLinkResource, searchManagementRequestOptions), serviceCallback);
+    public ServiceFuture<SharedPrivateLinkResourceInner> createOrUpdateAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceProperties properties, SearchManagementRequestOptions searchManagementRequestOptions, final ServiceCallback<SharedPrivateLinkResourceInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, properties, searchManagementRequestOptions), serviceCallback);
     }
 
     /**
@@ -220,13 +216,13 @@ public class SharedPrivateLinkResourcesInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param sharedPrivateLinkResourceName The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
-     * @param sharedPrivateLinkResource The definition of the shared private link resource to create or update.
+     * @param properties Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service.
      * @param searchManagementRequestOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SharedPrivateLinkResourceInner object
      */
-    public Observable<SharedPrivateLinkResourceInner> createOrUpdateAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceInner sharedPrivateLinkResource, SearchManagementRequestOptions searchManagementRequestOptions) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, sharedPrivateLinkResource, searchManagementRequestOptions).map(new Func1<ServiceResponse<SharedPrivateLinkResourceInner>, SharedPrivateLinkResourceInner>() {
+    public Observable<SharedPrivateLinkResourceInner> createOrUpdateAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceProperties properties, SearchManagementRequestOptions searchManagementRequestOptions) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, properties, searchManagementRequestOptions).map(new Func1<ServiceResponse<SharedPrivateLinkResourceInner>, SharedPrivateLinkResourceInner>() {
             @Override
             public SharedPrivateLinkResourceInner call(ServiceResponse<SharedPrivateLinkResourceInner> response) {
                 return response.body();
@@ -240,12 +236,12 @@ public class SharedPrivateLinkResourcesInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param sharedPrivateLinkResourceName The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
-     * @param sharedPrivateLinkResource The definition of the shared private link resource to create or update.
+     * @param properties Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service.
      * @param searchManagementRequestOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SharedPrivateLinkResourceInner object
      */
-    public Observable<ServiceResponse<SharedPrivateLinkResourceInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceInner sharedPrivateLinkResource, SearchManagementRequestOptions searchManagementRequestOptions) {
+    public Observable<ServiceResponse<SharedPrivateLinkResourceInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, String sharedPrivateLinkResourceName, SharedPrivateLinkResourceProperties properties, SearchManagementRequestOptions searchManagementRequestOptions) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -258,19 +254,18 @@ public class SharedPrivateLinkResourcesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (sharedPrivateLinkResource == null) {
-            throw new IllegalArgumentException("Parameter sharedPrivateLinkResource is required and cannot be null.");
-        }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(sharedPrivateLinkResource);
+        Validator.validate(properties);
         Validator.validate(searchManagementRequestOptions);
         UUID clientRequestId = null;
         if (searchManagementRequestOptions != null) {
             clientRequestId = searchManagementRequestOptions.clientRequestId();
         }
-        return service.createOrUpdate(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, this.client.subscriptionId(), sharedPrivateLinkResource, this.client.apiVersion(), this.client.acceptLanguage(), clientRequestId, this.client.userAgent())
+        SharedPrivateLinkResourceInner sharedPrivateLinkResource = new SharedPrivateLinkResourceInner();
+        sharedPrivateLinkResource.withProperties(properties);
+        return service.createOrUpdate(resourceGroupName, searchServiceName, sharedPrivateLinkResourceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), clientRequestId, sharedPrivateLinkResource, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SharedPrivateLinkResourceInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SharedPrivateLinkResourceInner>> call(Response<ResponseBody> response) {

@@ -45,37 +45,13 @@ public interface PrivateEndpointConnection extends HasInner<PrivateEndpointConne
     /**
      * The template for a PrivateEndpointConnection update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<PrivateEndpointConnection>, UpdateStages.WithSearchManagementRequestOptions, UpdateStages.WithId, UpdateStages.WithProperties {
+    interface Update extends Appliable<PrivateEndpointConnection>, UpdateStages.WithProperties, UpdateStages.WithSearchManagementRequestOptions {
     }
 
     /**
      * Grouping of PrivateEndpointConnection update stages.
      */
     interface UpdateStages {
-        /**
-         * The stage of the privateendpointconnection update allowing to specify SearchManagementRequestOptions.
-         */
-        interface WithSearchManagementRequestOptions {
-            /**
-             * Specifies searchManagementRequestOptions.
-             * @param searchManagementRequestOptions Additional parameters for the operation
-             * @return the next update stage
-             */
-            Update withSearchManagementRequestOptions(SearchManagementRequestOptions searchManagementRequestOptions);
-        }
-
-        /**
-         * The stage of the privateendpointconnection update allowing to specify Id.
-         */
-        interface WithId {
-            /**
-             * Specifies id.
-             * @param id The ID of the private endpoint connection. This can be used with the Azure Resource Manager to link resources together
-             * @return the next update stage
-             */
-            Update withId(String id);
-        }
-
         /**
          * The stage of the privateendpointconnection update allowing to specify Properties.
          */
@@ -86,6 +62,18 @@ public interface PrivateEndpointConnection extends HasInner<PrivateEndpointConne
              * @return the next update stage
              */
             Update withProperties(PrivateEndpointConnectionProperties properties);
+        }
+
+        /**
+         * The stage of the privateendpointconnection update allowing to specify SearchManagementRequestOptions.
+         */
+        interface WithSearchManagementRequestOptions {
+            /**
+             * Specifies searchManagementRequestOptions.
+             * @param searchManagementRequestOptions Additional parameters for the operation
+             * @return the next update stage
+             */
+            Update withSearchManagementRequestOptions(SearchManagementRequestOptions searchManagementRequestOptions);
         }
 
     }

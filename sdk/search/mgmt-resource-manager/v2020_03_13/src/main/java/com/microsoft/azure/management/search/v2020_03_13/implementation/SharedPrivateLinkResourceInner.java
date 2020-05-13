@@ -10,44 +10,19 @@ package com.microsoft.azure.management.search.v2020_03_13.implementation;
 
 import com.microsoft.azure.management.search.v2020_03_13.SharedPrivateLinkResourceProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.azure.ProxyResource;
 
 /**
  * Describes a Shared Private Link Resource managed by the Azure Cognitive
  * Search service.
  */
-public class SharedPrivateLinkResourceInner {
-    /**
-     * The name of the shared private link resource.
-     */
-    @JsonProperty(value = "name")
-    private String name;
-
+public class SharedPrivateLinkResourceInner extends ProxyResource {
     /**
      * Describes the properties of a Shared Private Link Resource managed by
      * the Azure Cognitive Search service.
      */
     @JsonProperty(value = "properties")
     private SharedPrivateLinkResourceProperties properties;
-
-    /**
-     * Get the name of the shared private link resource.
-     *
-     * @return the name value
-     */
-    public String name() {
-        return this.name;
-    }
-
-    /**
-     * Set the name of the shared private link resource.
-     *
-     * @param name the name value to set
-     * @return the SharedPrivateLinkResourceInner object itself.
-     */
-    public SharedPrivateLinkResourceInner withName(String name) {
-        this.name = name;
-        return this;
-    }
 
     /**
      * Get describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service.

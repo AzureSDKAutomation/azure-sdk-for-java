@@ -11,9 +11,9 @@ package com.microsoft.azure.management.search.v2020_03_13.implementation;
 import com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnection;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
+import com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnectionProperties;
 import com.microsoft.azure.management.search.v2020_03_13.SearchManagementRequestOptions;
 import java.util.UUID;
-import com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnectionProperties;
 import rx.functions.Func1;
 
 class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpointConnection, PrivateEndpointConnectionInner, PrivateEndpointConnectionImpl> implements PrivateEndpointConnection, PrivateEndpointConnection.Update {
@@ -21,6 +21,7 @@ class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpoi
     private String resourceGroupName;
     private String searchServiceName;
     private String privateEndpointConnectionName;
+    private PrivateEndpointConnectionProperties uproperties;
     private SearchManagementRequestOptions usearchManagementRequestOptions;
 
     PrivateEndpointConnectionImpl(String name, SearchManager manager) {
@@ -29,6 +30,7 @@ class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpoi
         // Set resource name
         this.privateEndpointConnectionName = name;
         //
+        this.uproperties = new PrivateEndpointConnectionProperties();
         this.usearchManagementRequestOptions = new SearchManagementRequestOptions();
     }
 
@@ -42,6 +44,7 @@ class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpoi
         this.searchServiceName = IdParsingUtils.getValueFromIdByName(inner.id(), "searchServices");
         this.privateEndpointConnectionName = IdParsingUtils.getValueFromIdByName(inner.id(), "privateEndpointConnections");
         //
+        this.uproperties = new PrivateEndpointConnectionProperties();
         this.usearchManagementRequestOptions = new SearchManagementRequestOptions();
     }
 
@@ -59,7 +62,7 @@ class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpoi
     @Override
     public Observable<PrivateEndpointConnection> updateResourceAsync() {
         PrivateEndpointConnectionsInner client = this.manager().inner().privateEndpointConnections();
-        return client.updateAsync(this.resourceGroupName, this.searchServiceName, this.privateEndpointConnectionName, this.inner(), this.usearchManagementRequestOptions)
+        return client.updateAsync(this.resourceGroupName, this.searchServiceName, this.privateEndpointConnectionName, this.uproperties, this.usearchManagementRequestOptions)
             .map(new Func1<PrivateEndpointConnectionInner, PrivateEndpointConnectionInner>() {
                @Override
                public PrivateEndpointConnectionInner call(PrivateEndpointConnectionInner resource) {
@@ -82,6 +85,7 @@ class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpoi
     }
 
     private void resetCreateUpdateParameters() {
+        this.uproperties = new PrivateEndpointConnectionProperties();
         this.usearchManagementRequestOptions = new SearchManagementRequestOptions();
     }
 
@@ -106,20 +110,14 @@ class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpoi
     }
 
     @Override
+    public PrivateEndpointConnectionImpl withProperties(PrivateEndpointConnectionProperties properties) {
+        this.uproperties = properties;
+        return this;
+    }
+
+    @Override
     public PrivateEndpointConnectionImpl withSearchManagementRequestOptions(SearchManagementRequestOptions searchManagementRequestOptions) {
         this.usearchManagementRequestOptions = searchManagementRequestOptions;
-        return this;
-    }
-
-    @Override
-    public PrivateEndpointConnectionImpl withId(String id) {
-        this.inner().withId(id);
-        return this;
-    }
-
-    @Override
-    public PrivateEndpointConnectionImpl withProperties(PrivateEndpointConnectionProperties properties) {
-        this.inner().withProperties(properties);
         return this;
     }
 

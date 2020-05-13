@@ -10,75 +10,19 @@ package com.microsoft.azure.management.search.v2020_03_13.implementation;
 
 import com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnectionProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.azure.ProxyResource;
 
 /**
  * Describes an existing Private Endpoint connection to the Azure Cognitive
  * Search service.
  */
-public class PrivateEndpointConnectionInner {
-    /**
-     * The ID of the private endpoint connection. This can be used with the
-     * Azure Resource Manager to link resources together.
-     */
-    @JsonProperty(value = "id")
-    private String id;
-
-    /**
-     * The name of the private endpoint connection.
-     */
-    @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
-    private String name;
-
-    /**
-     * The resource type.
-     */
-    @JsonProperty(value = "type", access = JsonProperty.Access.WRITE_ONLY)
-    private String type;
-
+public class PrivateEndpointConnectionInner extends ProxyResource {
     /**
      * Describes the properties of an existing Private Endpoint connection to
      * the Azure Cognitive Search service.
      */
     @JsonProperty(value = "properties")
     private PrivateEndpointConnectionProperties properties;
-
-    /**
-     * Get the ID of the private endpoint connection. This can be used with the Azure Resource Manager to link resources together.
-     *
-     * @return the id value
-     */
-    public String id() {
-        return this.id;
-    }
-
-    /**
-     * Set the ID of the private endpoint connection. This can be used with the Azure Resource Manager to link resources together.
-     *
-     * @param id the id value to set
-     * @return the PrivateEndpointConnectionInner object itself.
-     */
-    public PrivateEndpointConnectionInner withId(String id) {
-        this.id = id;
-        return this;
-    }
-
-    /**
-     * Get the name of the private endpoint connection.
-     *
-     * @return the name value
-     */
-    public String name() {
-        return this.name;
-    }
-
-    /**
-     * Get the resource type.
-     *
-     * @return the type value
-     */
-    public String type() {
-        return this.type;
-    }
 
     /**
      * Get describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service.

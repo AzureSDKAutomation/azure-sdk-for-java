@@ -13,6 +13,7 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnectionProperties;
 import com.microsoft.azure.management.search.v2020_03_13.SearchManagementRequestOptions;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
@@ -65,7 +66,7 @@ public class PrivateEndpointConnectionsInner {
     interface PrivateEndpointConnectionsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnections update" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/privateEndpointConnections/{privateEndpointConnectionName}")
-        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("searchServiceName") String searchServiceName, @Path("privateEndpointConnectionName") String privateEndpointConnectionName, @Path("subscriptionId") String subscriptionId, @Body PrivateEndpointConnectionInner privateEndpointConnection, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("x-ms-client-request-id") UUID clientRequestId, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("searchServiceName") String searchServiceName, @Path("privateEndpointConnectionName") String privateEndpointConnectionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("x-ms-client-request-id") UUID clientRequestId, @Body PrivateEndpointConnectionInner privateEndpointConnection, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnections get" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/privateEndpointConnections/{privateEndpointConnectionName}")
@@ -91,14 +92,13 @@ public class PrivateEndpointConnectionsInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param privateEndpointConnectionName The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.
-     * @param privateEndpointConnection The definition of the private endpoint connection to update.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PrivateEndpointConnectionInner object if successful.
      */
-    public PrivateEndpointConnectionInner update(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionInner privateEndpointConnection) {
-        return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, privateEndpointConnection).toBlocking().single().body();
+    public PrivateEndpointConnectionInner update(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName) {
+        return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName).toBlocking().single().body();
     }
 
     /**
@@ -107,13 +107,12 @@ public class PrivateEndpointConnectionsInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param privateEndpointConnectionName The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.
-     * @param privateEndpointConnection The definition of the private endpoint connection to update.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<PrivateEndpointConnectionInner> updateAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionInner privateEndpointConnection, final ServiceCallback<PrivateEndpointConnectionInner> serviceCallback) {
-        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, privateEndpointConnection), serviceCallback);
+    public ServiceFuture<PrivateEndpointConnectionInner> updateAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, final ServiceCallback<PrivateEndpointConnectionInner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName), serviceCallback);
     }
 
     /**
@@ -122,12 +121,11 @@ public class PrivateEndpointConnectionsInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param privateEndpointConnectionName The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.
-     * @param privateEndpointConnection The definition of the private endpoint connection to update.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PrivateEndpointConnectionInner object
      */
-    public Observable<PrivateEndpointConnectionInner> updateAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionInner privateEndpointConnection) {
-        return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, privateEndpointConnection).map(new Func1<ServiceResponse<PrivateEndpointConnectionInner>, PrivateEndpointConnectionInner>() {
+    public Observable<PrivateEndpointConnectionInner> updateAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName) {
+        return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName).map(new Func1<ServiceResponse<PrivateEndpointConnectionInner>, PrivateEndpointConnectionInner>() {
             @Override
             public PrivateEndpointConnectionInner call(ServiceResponse<PrivateEndpointConnectionInner> response) {
                 return response.body();
@@ -141,11 +139,10 @@ public class PrivateEndpointConnectionsInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param privateEndpointConnectionName The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.
-     * @param privateEndpointConnection The definition of the private endpoint connection to update.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PrivateEndpointConnectionInner object
      */
-    public Observable<ServiceResponse<PrivateEndpointConnectionInner>> updateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionInner privateEndpointConnection) {
+    public Observable<ServiceResponse<PrivateEndpointConnectionInner>> updateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -158,16 +155,15 @@ public class PrivateEndpointConnectionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (privateEndpointConnection == null) {
-            throw new IllegalArgumentException("Parameter privateEndpointConnection is required and cannot be null.");
-        }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(privateEndpointConnection);
+        final PrivateEndpointConnectionProperties properties = null;
         final SearchManagementRequestOptions searchManagementRequestOptions = null;
         UUID clientRequestId = null;
-        return service.update(resourceGroupName, searchServiceName, privateEndpointConnectionName, this.client.subscriptionId(), privateEndpointConnection, this.client.apiVersion(), this.client.acceptLanguage(), clientRequestId, this.client.userAgent())
+        PrivateEndpointConnectionInner privateEndpointConnection = new PrivateEndpointConnectionInner();
+        privateEndpointConnection.withProperties(null);
+        return service.update(resourceGroupName, searchServiceName, privateEndpointConnectionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), clientRequestId, privateEndpointConnection, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PrivateEndpointConnectionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PrivateEndpointConnectionInner>> call(Response<ResponseBody> response) {
@@ -187,15 +183,15 @@ public class PrivateEndpointConnectionsInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param privateEndpointConnectionName The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.
-     * @param privateEndpointConnection The definition of the private endpoint connection to update.
+     * @param properties Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service.
      * @param searchManagementRequestOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PrivateEndpointConnectionInner object if successful.
      */
-    public PrivateEndpointConnectionInner update(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionInner privateEndpointConnection, SearchManagementRequestOptions searchManagementRequestOptions) {
-        return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, privateEndpointConnection, searchManagementRequestOptions).toBlocking().single().body();
+    public PrivateEndpointConnectionInner update(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionProperties properties, SearchManagementRequestOptions searchManagementRequestOptions) {
+        return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, properties, searchManagementRequestOptions).toBlocking().single().body();
     }
 
     /**
@@ -204,14 +200,14 @@ public class PrivateEndpointConnectionsInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param privateEndpointConnectionName The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.
-     * @param privateEndpointConnection The definition of the private endpoint connection to update.
+     * @param properties Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service.
      * @param searchManagementRequestOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<PrivateEndpointConnectionInner> updateAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionInner privateEndpointConnection, SearchManagementRequestOptions searchManagementRequestOptions, final ServiceCallback<PrivateEndpointConnectionInner> serviceCallback) {
-        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, privateEndpointConnection, searchManagementRequestOptions), serviceCallback);
+    public ServiceFuture<PrivateEndpointConnectionInner> updateAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionProperties properties, SearchManagementRequestOptions searchManagementRequestOptions, final ServiceCallback<PrivateEndpointConnectionInner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, properties, searchManagementRequestOptions), serviceCallback);
     }
 
     /**
@@ -220,13 +216,13 @@ public class PrivateEndpointConnectionsInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param privateEndpointConnectionName The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.
-     * @param privateEndpointConnection The definition of the private endpoint connection to update.
+     * @param properties Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service.
      * @param searchManagementRequestOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PrivateEndpointConnectionInner object
      */
-    public Observable<PrivateEndpointConnectionInner> updateAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionInner privateEndpointConnection, SearchManagementRequestOptions searchManagementRequestOptions) {
-        return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, privateEndpointConnection, searchManagementRequestOptions).map(new Func1<ServiceResponse<PrivateEndpointConnectionInner>, PrivateEndpointConnectionInner>() {
+    public Observable<PrivateEndpointConnectionInner> updateAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionProperties properties, SearchManagementRequestOptions searchManagementRequestOptions) {
+        return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, privateEndpointConnectionName, properties, searchManagementRequestOptions).map(new Func1<ServiceResponse<PrivateEndpointConnectionInner>, PrivateEndpointConnectionInner>() {
             @Override
             public PrivateEndpointConnectionInner call(ServiceResponse<PrivateEndpointConnectionInner> response) {
                 return response.body();
@@ -240,12 +236,12 @@ public class PrivateEndpointConnectionsInner {
      * @param resourceGroupName The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.
      * @param searchServiceName The name of the Azure Cognitive Search service associated with the specified resource group.
      * @param privateEndpointConnectionName The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.
-     * @param privateEndpointConnection The definition of the private endpoint connection to update.
+     * @param properties Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service.
      * @param searchManagementRequestOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PrivateEndpointConnectionInner object
      */
-    public Observable<ServiceResponse<PrivateEndpointConnectionInner>> updateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionInner privateEndpointConnection, SearchManagementRequestOptions searchManagementRequestOptions) {
+    public Observable<ServiceResponse<PrivateEndpointConnectionInner>> updateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, String privateEndpointConnectionName, PrivateEndpointConnectionProperties properties, SearchManagementRequestOptions searchManagementRequestOptions) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -258,19 +254,18 @@ public class PrivateEndpointConnectionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (privateEndpointConnection == null) {
-            throw new IllegalArgumentException("Parameter privateEndpointConnection is required and cannot be null.");
-        }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(privateEndpointConnection);
+        Validator.validate(properties);
         Validator.validate(searchManagementRequestOptions);
         UUID clientRequestId = null;
         if (searchManagementRequestOptions != null) {
             clientRequestId = searchManagementRequestOptions.clientRequestId();
         }
-        return service.update(resourceGroupName, searchServiceName, privateEndpointConnectionName, this.client.subscriptionId(), privateEndpointConnection, this.client.apiVersion(), this.client.acceptLanguage(), clientRequestId, this.client.userAgent())
+        PrivateEndpointConnectionInner privateEndpointConnection = new PrivateEndpointConnectionInner();
+        privateEndpointConnection.withProperties(properties);
+        return service.update(resourceGroupName, searchServiceName, privateEndpointConnectionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), clientRequestId, privateEndpointConnection, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PrivateEndpointConnectionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PrivateEndpointConnectionInner>> call(Response<ResponseBody> response) {
