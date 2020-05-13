@@ -13,6 +13,7 @@ import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.PartnerTopic
 import rx.Observable;
 import java.util.Map;
 import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.PartnerTopicActivationState;
+import org.joda.time.DateTime;
 import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.PartnerTopicProvisioningState;
 
 class PartnerTopicImpl extends GroupableResourceCoreImpl<PartnerTopic, PartnerTopicInner, PartnerTopicImpl, EventGridManager> implements PartnerTopic, PartnerTopic.Update {
@@ -49,6 +50,16 @@ class PartnerTopicImpl extends GroupableResourceCoreImpl<PartnerTopic, PartnerTo
     @Override
     public PartnerTopicActivationState activationState() {
         return this.inner().activationState();
+    }
+
+    @Override
+    public DateTime expirationTimeIfNotActivatedUtc() {
+        return this.inner().expirationTimeIfNotActivatedUtc();
+    }
+
+    @Override
+    public String partnerTopicFriendlyDescription() {
+        return this.inner().partnerTopicFriendlyDescription();
     }
 
     @Override
