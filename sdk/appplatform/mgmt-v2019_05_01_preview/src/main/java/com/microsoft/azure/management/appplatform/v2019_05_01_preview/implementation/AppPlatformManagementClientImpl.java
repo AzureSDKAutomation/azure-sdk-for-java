@@ -226,6 +226,19 @@ public class AppPlatformManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The SkusInner object to access its operations.
+     */
+    private SkusInner skus;
+
+    /**
+     * Gets the SkusInner object to access its operations.
+     * @return the SkusInner object.
+     */
+    public SkusInner skus() {
+        return this.skus;
+    }
+
+    /**
      * Initializes an instance of AppPlatformManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -267,6 +280,7 @@ public class AppPlatformManagementClientImpl extends AzureServiceClient {
         this.customDomains = new CustomDomainsInner(restClient().retrofit(), this);
         this.deployments = new DeploymentsInner(restClient().retrofit(), this);
         this.operations = new OperationsInner(restClient().retrofit(), this);
+        this.skus = new SkusInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
