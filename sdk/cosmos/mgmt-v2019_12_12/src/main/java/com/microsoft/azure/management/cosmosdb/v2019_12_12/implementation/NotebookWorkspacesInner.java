@@ -166,7 +166,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         return service.listByDatabaseAccount(this.client.subscriptionId(), resourceGroupName, accountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<NotebookWorkspaceInner>>>>() {
                 @Override
@@ -256,7 +256,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         return service.get(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<NotebookWorkspaceInner>>>() {
                 @Override
@@ -341,7 +341,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), notebookCreateUpdateParameters, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<NotebookWorkspaceInner>() { }.getType());
     }
@@ -409,7 +409,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), notebookCreateUpdateParameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<NotebookWorkspaceInner>>>() {
                 @Override
@@ -493,7 +493,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         Observable<Response<ResponseBody>> observable = service.delete(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
@@ -560,7 +560,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         return service.beginDelete(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -646,7 +646,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         return service.listConnectionInfo(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<NotebookWorkspaceConnectionInfoResultInner>>>() {
                 @Override
@@ -730,7 +730,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         Observable<Response<ResponseBody>> observable = service.regenerateAuthToken(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
@@ -797,7 +797,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         return service.beginRegenerateAuthToken(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -882,7 +882,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         Observable<Response<ResponseBody>> observable = service.start(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
@@ -949,7 +949,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         final String notebookWorkspaceName = "default";
-        final String apiVersion = "2019-08-01";
+        final String apiVersion = "2019-12-12";
         return service.beginStart(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
