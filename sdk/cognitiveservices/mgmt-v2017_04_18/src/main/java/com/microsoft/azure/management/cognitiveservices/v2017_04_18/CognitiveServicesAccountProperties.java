@@ -37,6 +37,14 @@ public class CognitiveServicesAccountProperties {
     private String internalId;
 
     /**
+     * Gets the capabilities of the cognitive services account. Each item
+     * indicates the capability of a specific feature. The values are read-only
+     * and for reference only.
+     */
+    @JsonProperty(value = "capabilities", access = JsonProperty.Access.WRITE_ONLY)
+    private List<SkuCapability> capabilities;
+
+    /**
      * Optional subdomain name used for token-based authentication.
      */
     @JsonProperty(value = "customSubDomainName")
@@ -107,6 +115,15 @@ public class CognitiveServicesAccountProperties {
      */
     public String internalId() {
         return this.internalId;
+    }
+
+    /**
+     * Get gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only.
+     *
+     * @return the capabilities value
+     */
+    public List<SkuCapability> capabilities() {
+        return this.capabilities;
     }
 
     /**
