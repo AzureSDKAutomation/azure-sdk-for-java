@@ -19,6 +19,7 @@ import com.microsoft.azure.management.appservice.v2019_08_01.implementation.KeyI
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.RelayServiceConnectionEntityInner;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.SwiftVirtualNetworkInner;
 import com.microsoft.azure.management.appservice.v2019_08_01.BackupItem;
+import com.microsoft.azure.management.appservice.v2019_08_01.implementation.CsmPublishingCredentialsPoliciesEntityInner;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.SiteAuthSettingsInner;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.AzureStoragePropertyDictionaryResourceInner;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.ConnectionStringDictionaryInner;
@@ -987,6 +988,63 @@ public interface WebApps {
      * @return the observable for the request
      */
     Completable restoreSlotAsync(String resourceGroupName, String name, String backupId, String slot, RestoreRequestInner request);
+
+    /**
+     * Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<CsmPublishingCredentialsPoliciesCollection> getBasicPublishingCredentialsPoliciesAsync(String resourceGroupName, String name);
+
+    /**
+     * Returns whether FTP is allowed on the site or not.
+     * Description for Returns whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<CsmPublishingCredentialsPoliciesEntity> getFtpAllowedAsync(String resourceGroupName, String name);
+
+    /**
+     * Updates whether FTP is allowed on the site or not.
+     * Description for Updates whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<CsmPublishingCredentialsPoliciesEntity> updateFtpAllowedAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity);
+
+    /**
+     * Returns whether Scm basic auth is allowed on the site or not.
+     * Description for Returns whether Scm basic auth is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<CsmPublishingCredentialsPoliciesEntity> getScmAllowedAsync(String resourceGroupName, String name);
+
+    /**
+     * Updates whether user publishing credentials are allowed on the site or not.
+     * Description for Updates whether user publishing credentials are allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<CsmPublishingCredentialsPoliciesEntity> updateScmAllowedAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity);
 
     /**
      * Replaces the application settings of an app.

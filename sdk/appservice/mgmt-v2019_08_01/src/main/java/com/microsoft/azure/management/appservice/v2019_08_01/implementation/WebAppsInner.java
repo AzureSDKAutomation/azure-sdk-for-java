@@ -144,6 +144,26 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/{backupId}/restore")
         Observable<Response<ResponseBody>> beginRestore(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("backupId") String backupId, @Path("subscriptionId") String subscriptionId, @Body RestoreRequestInner request, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps getBasicPublishingCredentialsPolicies" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies")
+        Observable<Response<ResponseBody>> getBasicPublishingCredentialsPolicies(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps getFtpAllowed" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/ftp")
+        Observable<Response<ResponseBody>> getFtpAllowed(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps updateFtpAllowed" })
+        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/ftp")
+        Observable<Response<ResponseBody>> updateFtpAllowed(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Body CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps getScmAllowed" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/scm")
+        Observable<Response<ResponseBody>> getScmAllowed(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps updateScmAllowed" })
+        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/scm")
+        Observable<Response<ResponseBody>> updateScmAllowed(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Body CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps listConfigurations" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config")
         Observable<Response<ResponseBody>> listConfigurations(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -3808,6 +3828,472 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
         return this.client.restClient().responseBuilderFactory().<Void, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .registerError(DefaultErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the CsmPublishingCredentialsPoliciesCollectionInner object if successful.
+     */
+    public CsmPublishingCredentialsPoliciesCollectionInner getBasicPublishingCredentialsPolicies(String resourceGroupName, String name) {
+        return getBasicPublishingCredentialsPoliciesWithServiceResponseAsync(resourceGroupName, name).toBlocking().single().body();
+    }
+
+    /**
+     * Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<CsmPublishingCredentialsPoliciesCollectionInner> getBasicPublishingCredentialsPoliciesAsync(String resourceGroupName, String name, final ServiceCallback<CsmPublishingCredentialsPoliciesCollectionInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getBasicPublishingCredentialsPoliciesWithServiceResponseAsync(resourceGroupName, name), serviceCallback);
+    }
+
+    /**
+     * Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesCollectionInner object
+     */
+    public Observable<CsmPublishingCredentialsPoliciesCollectionInner> getBasicPublishingCredentialsPoliciesAsync(String resourceGroupName, String name) {
+        return getBasicPublishingCredentialsPoliciesWithServiceResponseAsync(resourceGroupName, name).map(new Func1<ServiceResponse<CsmPublishingCredentialsPoliciesCollectionInner>, CsmPublishingCredentialsPoliciesCollectionInner>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesCollectionInner call(ServiceResponse<CsmPublishingCredentialsPoliciesCollectionInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesCollectionInner object
+     */
+    public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesCollectionInner>> getBasicPublishingCredentialsPoliciesWithServiceResponseAsync(String resourceGroupName, String name) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getBasicPublishingCredentialsPolicies(resourceGroupName, name, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CsmPublishingCredentialsPoliciesCollectionInner>>>() {
+                @Override
+                public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesCollectionInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<CsmPublishingCredentialsPoliciesCollectionInner> clientResponse = getBasicPublishingCredentialsPoliciesDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<CsmPublishingCredentialsPoliciesCollectionInner> getBasicPublishingCredentialsPoliciesDelegate(Response<ResponseBody> response) throws DefaultErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<CsmPublishingCredentialsPoliciesCollectionInner, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<CsmPublishingCredentialsPoliciesCollectionInner>() { }.getType())
+                .registerError(DefaultErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Returns whether FTP is allowed on the site or not.
+     * Description for Returns whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the CsmPublishingCredentialsPoliciesEntityInner object if successful.
+     */
+    public CsmPublishingCredentialsPoliciesEntityInner getFtpAllowed(String resourceGroupName, String name) {
+        return getFtpAllowedWithServiceResponseAsync(resourceGroupName, name).toBlocking().single().body();
+    }
+
+    /**
+     * Returns whether FTP is allowed on the site or not.
+     * Description for Returns whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<CsmPublishingCredentialsPoliciesEntityInner> getFtpAllowedAsync(String resourceGroupName, String name, final ServiceCallback<CsmPublishingCredentialsPoliciesEntityInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getFtpAllowedWithServiceResponseAsync(resourceGroupName, name), serviceCallback);
+    }
+
+    /**
+     * Returns whether FTP is allowed on the site or not.
+     * Description for Returns whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesEntityInner object
+     */
+    public Observable<CsmPublishingCredentialsPoliciesEntityInner> getFtpAllowedAsync(String resourceGroupName, String name) {
+        return getFtpAllowedWithServiceResponseAsync(resourceGroupName, name).map(new Func1<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>, CsmPublishingCredentialsPoliciesEntityInner>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesEntityInner call(ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Returns whether FTP is allowed on the site or not.
+     * Description for Returns whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesEntityInner object
+     */
+    public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>> getFtpAllowedWithServiceResponseAsync(String resourceGroupName, String name) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getFtpAllowed(resourceGroupName, name, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>>>() {
+                @Override
+                public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> clientResponse = getFtpAllowedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> getFtpAllowedDelegate(Response<ResponseBody> response) throws DefaultErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<CsmPublishingCredentialsPoliciesEntityInner, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<CsmPublishingCredentialsPoliciesEntityInner>() { }.getType())
+                .registerError(DefaultErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Updates whether FTP is allowed on the site or not.
+     * Description for Updates whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the CsmPublishingCredentialsPoliciesEntityInner object if successful.
+     */
+    public CsmPublishingCredentialsPoliciesEntityInner updateFtpAllowed(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity) {
+        return updateFtpAllowedWithServiceResponseAsync(resourceGroupName, name, csmPublishingAccessPoliciesEntity).toBlocking().single().body();
+    }
+
+    /**
+     * Updates whether FTP is allowed on the site or not.
+     * Description for Updates whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<CsmPublishingCredentialsPoliciesEntityInner> updateFtpAllowedAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity, final ServiceCallback<CsmPublishingCredentialsPoliciesEntityInner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateFtpAllowedWithServiceResponseAsync(resourceGroupName, name, csmPublishingAccessPoliciesEntity), serviceCallback);
+    }
+
+    /**
+     * Updates whether FTP is allowed on the site or not.
+     * Description for Updates whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesEntityInner object
+     */
+    public Observable<CsmPublishingCredentialsPoliciesEntityInner> updateFtpAllowedAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity) {
+        return updateFtpAllowedWithServiceResponseAsync(resourceGroupName, name, csmPublishingAccessPoliciesEntity).map(new Func1<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>, CsmPublishingCredentialsPoliciesEntityInner>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesEntityInner call(ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Updates whether FTP is allowed on the site or not.
+     * Description for Updates whether FTP is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesEntityInner object
+     */
+    public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>> updateFtpAllowedWithServiceResponseAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (csmPublishingAccessPoliciesEntity == null) {
+            throw new IllegalArgumentException("Parameter csmPublishingAccessPoliciesEntity is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Validator.validate(csmPublishingAccessPoliciesEntity);
+        return service.updateFtpAllowed(resourceGroupName, name, this.client.subscriptionId(), csmPublishingAccessPoliciesEntity, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>>>() {
+                @Override
+                public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> clientResponse = updateFtpAllowedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> updateFtpAllowedDelegate(Response<ResponseBody> response) throws DefaultErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<CsmPublishingCredentialsPoliciesEntityInner, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<CsmPublishingCredentialsPoliciesEntityInner>() { }.getType())
+                .registerError(DefaultErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Returns whether Scm basic auth is allowed on the site or not.
+     * Description for Returns whether Scm basic auth is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the CsmPublishingCredentialsPoliciesEntityInner object if successful.
+     */
+    public CsmPublishingCredentialsPoliciesEntityInner getScmAllowed(String resourceGroupName, String name) {
+        return getScmAllowedWithServiceResponseAsync(resourceGroupName, name).toBlocking().single().body();
+    }
+
+    /**
+     * Returns whether Scm basic auth is allowed on the site or not.
+     * Description for Returns whether Scm basic auth is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<CsmPublishingCredentialsPoliciesEntityInner> getScmAllowedAsync(String resourceGroupName, String name, final ServiceCallback<CsmPublishingCredentialsPoliciesEntityInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getScmAllowedWithServiceResponseAsync(resourceGroupName, name), serviceCallback);
+    }
+
+    /**
+     * Returns whether Scm basic auth is allowed on the site or not.
+     * Description for Returns whether Scm basic auth is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesEntityInner object
+     */
+    public Observable<CsmPublishingCredentialsPoliciesEntityInner> getScmAllowedAsync(String resourceGroupName, String name) {
+        return getScmAllowedWithServiceResponseAsync(resourceGroupName, name).map(new Func1<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>, CsmPublishingCredentialsPoliciesEntityInner>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesEntityInner call(ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Returns whether Scm basic auth is allowed on the site or not.
+     * Description for Returns whether Scm basic auth is allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesEntityInner object
+     */
+    public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>> getScmAllowedWithServiceResponseAsync(String resourceGroupName, String name) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getScmAllowed(resourceGroupName, name, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>>>() {
+                @Override
+                public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> clientResponse = getScmAllowedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> getScmAllowedDelegate(Response<ResponseBody> response) throws DefaultErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<CsmPublishingCredentialsPoliciesEntityInner, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<CsmPublishingCredentialsPoliciesEntityInner>() { }.getType())
+                .registerError(DefaultErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Updates whether user publishing credentials are allowed on the site or not.
+     * Description for Updates whether user publishing credentials are allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the CsmPublishingCredentialsPoliciesEntityInner object if successful.
+     */
+    public CsmPublishingCredentialsPoliciesEntityInner updateScmAllowed(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity) {
+        return updateScmAllowedWithServiceResponseAsync(resourceGroupName, name, csmPublishingAccessPoliciesEntity).toBlocking().single().body();
+    }
+
+    /**
+     * Updates whether user publishing credentials are allowed on the site or not.
+     * Description for Updates whether user publishing credentials are allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<CsmPublishingCredentialsPoliciesEntityInner> updateScmAllowedAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity, final ServiceCallback<CsmPublishingCredentialsPoliciesEntityInner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateScmAllowedWithServiceResponseAsync(resourceGroupName, name, csmPublishingAccessPoliciesEntity), serviceCallback);
+    }
+
+    /**
+     * Updates whether user publishing credentials are allowed on the site or not.
+     * Description for Updates whether user publishing credentials are allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesEntityInner object
+     */
+    public Observable<CsmPublishingCredentialsPoliciesEntityInner> updateScmAllowedAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity) {
+        return updateScmAllowedWithServiceResponseAsync(resourceGroupName, name, csmPublishingAccessPoliciesEntity).map(new Func1<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>, CsmPublishingCredentialsPoliciesEntityInner>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesEntityInner call(ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Updates whether user publishing credentials are allowed on the site or not.
+     * Description for Updates whether user publishing credentials are allowed on the site or not.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param csmPublishingAccessPoliciesEntity the CsmPublishingCredentialsPoliciesEntityInner value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CsmPublishingCredentialsPoliciesEntityInner object
+     */
+    public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>> updateScmAllowedWithServiceResponseAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (csmPublishingAccessPoliciesEntity == null) {
+            throw new IllegalArgumentException("Parameter csmPublishingAccessPoliciesEntity is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Validator.validate(csmPublishingAccessPoliciesEntity);
+        return service.updateScmAllowed(resourceGroupName, name, this.client.subscriptionId(), csmPublishingAccessPoliciesEntity, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>>>() {
+                @Override
+                public Observable<ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> clientResponse = updateScmAllowedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<CsmPublishingCredentialsPoliciesEntityInner> updateScmAllowedDelegate(Response<ResponseBody> response) throws DefaultErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<CsmPublishingCredentialsPoliciesEntityInner, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<CsmPublishingCredentialsPoliciesEntityInner>() { }.getType())
                 .registerError(DefaultErrorResponseException.class)
                 .build(response);
     }

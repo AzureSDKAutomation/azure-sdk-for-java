@@ -54,7 +54,8 @@ public class KeyVaultReferenceResourceInner extends ProxyOnlyResource {
     private String secretVersion;
 
     /**
-     * Possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
+     * Possible values include: 'SystemAssigned', 'UserAssigned',
+     * 'SystemAssigned, UserAssigned', 'None'.
      */
     @JsonProperty(value = "properties.identityType")
     private ManagedServiceIdentityType identityType;
@@ -178,7 +179,7 @@ public class KeyVaultReferenceResourceInner extends ProxyOnlyResource {
     }
 
     /**
-     * Get possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
+     * Get possible values include: 'SystemAssigned', 'UserAssigned', 'SystemAssigned, UserAssigned', 'None'.
      *
      * @return the identityType value
      */
@@ -187,7 +188,7 @@ public class KeyVaultReferenceResourceInner extends ProxyOnlyResource {
     }
 
     /**
-     * Set possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
+     * Set possible values include: 'SystemAssigned', 'UserAssigned', 'SystemAssigned, UserAssigned', 'None'.
      *
      * @param identityType the identityType value to set
      * @return the KeyVaultReferenceResourceInner object itself.

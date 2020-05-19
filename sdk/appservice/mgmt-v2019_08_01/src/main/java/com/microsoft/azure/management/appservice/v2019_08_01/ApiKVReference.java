@@ -47,7 +47,8 @@ public class ApiKVReference {
     private String secretVersion;
 
     /**
-     * Possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
+     * Possible values include: 'SystemAssigned', 'UserAssigned',
+     * 'SystemAssigned, UserAssigned', 'None'.
      */
     @JsonProperty(value = "identityType")
     private ManagedServiceIdentityType identityType;
@@ -171,7 +172,7 @@ public class ApiKVReference {
     }
 
     /**
-     * Get possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
+     * Get possible values include: 'SystemAssigned', 'UserAssigned', 'SystemAssigned, UserAssigned', 'None'.
      *
      * @return the identityType value
      */
@@ -180,7 +181,7 @@ public class ApiKVReference {
     }
 
     /**
-     * Set possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
+     * Set possible values include: 'SystemAssigned', 'UserAssigned', 'SystemAssigned, UserAssigned', 'None'.
      *
      * @param identityType the identityType value to set
      * @return the ApiKVReference object itself.

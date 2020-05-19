@@ -42,6 +42,8 @@ import com.microsoft.azure.management.appservice.v2019_08_01.CsmPublishingProfil
 import com.microsoft.azure.management.appservice.v2019_08_01.DeletedAppRestoreRequest;
 import com.microsoft.azure.management.appservice.v2019_08_01.SnapshotRestoreRequest;
 import com.microsoft.azure.management.appservice.v2019_08_01.CsmCopySlotEntity;
+import com.microsoft.azure.management.appservice.v2019_08_01.CsmPublishingCredentialsPoliciesCollection;
+import com.microsoft.azure.management.appservice.v2019_08_01.CsmPublishingCredentialsPoliciesEntity;
 import com.microsoft.azure.management.appservice.v2019_08_01.KeyVaultReferenceCollection;
 import com.microsoft.azure.management.appservice.v2019_08_01.KeyVaultReferenceResource;
 import com.microsoft.azure.management.appservice.v2019_08_01.SiteAuthSettings;
@@ -1236,6 +1238,66 @@ class WebAppsImpl extends WrapperImpl<WebAppsInner> implements WebApps {
     public Completable restoreSlotAsync(String resourceGroupName, String name, String backupId, String slot, RestoreRequestInner request) {
         WebAppsInner client = this.inner();
         return client.restoreSlotAsync(resourceGroupName, name, backupId, slot, request).toCompletable();
+    }
+
+    @Override
+    public Observable<CsmPublishingCredentialsPoliciesCollection> getBasicPublishingCredentialsPoliciesAsync(String resourceGroupName, String name) {
+        WebAppsInner client = this.inner();
+        return client.getBasicPublishingCredentialsPoliciesAsync(resourceGroupName, name)
+        .map(new Func1<CsmPublishingCredentialsPoliciesCollectionInner, CsmPublishingCredentialsPoliciesCollection>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesCollection call(CsmPublishingCredentialsPoliciesCollectionInner inner) {
+                return new CsmPublishingCredentialsPoliciesCollectionImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<CsmPublishingCredentialsPoliciesEntity> getFtpAllowedAsync(String resourceGroupName, String name) {
+        WebAppsInner client = this.inner();
+        return client.getFtpAllowedAsync(resourceGroupName, name)
+        .map(new Func1<CsmPublishingCredentialsPoliciesEntityInner, CsmPublishingCredentialsPoliciesEntity>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesEntity call(CsmPublishingCredentialsPoliciesEntityInner inner) {
+                return new CsmPublishingCredentialsPoliciesEntityImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<CsmPublishingCredentialsPoliciesEntity> updateFtpAllowedAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity) {
+        WebAppsInner client = this.inner();
+        return client.updateFtpAllowedAsync(resourceGroupName, name, csmPublishingAccessPoliciesEntity)
+        .map(new Func1<CsmPublishingCredentialsPoliciesEntityInner, CsmPublishingCredentialsPoliciesEntity>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesEntity call(CsmPublishingCredentialsPoliciesEntityInner inner) {
+                return new CsmPublishingCredentialsPoliciesEntityImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<CsmPublishingCredentialsPoliciesEntity> getScmAllowedAsync(String resourceGroupName, String name) {
+        WebAppsInner client = this.inner();
+        return client.getScmAllowedAsync(resourceGroupName, name)
+        .map(new Func1<CsmPublishingCredentialsPoliciesEntityInner, CsmPublishingCredentialsPoliciesEntity>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesEntity call(CsmPublishingCredentialsPoliciesEntityInner inner) {
+                return new CsmPublishingCredentialsPoliciesEntityImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<CsmPublishingCredentialsPoliciesEntity> updateScmAllowedAsync(String resourceGroupName, String name, CsmPublishingCredentialsPoliciesEntityInner csmPublishingAccessPoliciesEntity) {
+        WebAppsInner client = this.inner();
+        return client.updateScmAllowedAsync(resourceGroupName, name, csmPublishingAccessPoliciesEntity)
+        .map(new Func1<CsmPublishingCredentialsPoliciesEntityInner, CsmPublishingCredentialsPoliciesEntity>() {
+            @Override
+            public CsmPublishingCredentialsPoliciesEntity call(CsmPublishingCredentialsPoliciesEntityInner inner) {
+                return new CsmPublishingCredentialsPoliciesEntityImpl(inner, manager());
+            }
+        });
     }
 
     @Override
