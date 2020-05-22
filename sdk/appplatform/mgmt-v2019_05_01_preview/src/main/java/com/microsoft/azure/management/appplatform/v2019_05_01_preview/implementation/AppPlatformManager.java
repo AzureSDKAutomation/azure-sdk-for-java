@@ -23,7 +23,6 @@ import com.microsoft.azure.management.appplatform.v2019_05_01_preview.Certificat
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.CustomDomains;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.Operations;
-import com.microsoft.azure.management.appplatform.v2019_05_01_preview.Skus;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -38,7 +37,6 @@ public final class AppPlatformManager extends ManagerCore<AppPlatformManager, Ap
     private CustomDomains customDomains;
     private Deployments deployments;
     private Operations operations;
-    private Skus skus;
     /**
     * Get a Configurable instance that can be used to create AppPlatformManager with optional configuration.
     *
@@ -154,16 +152,6 @@ public final class AppPlatformManager extends ManagerCore<AppPlatformManager, Ap
             this.operations = new OperationsImpl(this);
         }
         return this.operations;
-    }
-
-    /**
-     * @return Entry point to manage Skus.
-     */
-    public Skus skus() {
-        if (this.skus == null) {
-            this.skus = new SkusImpl(this);
-        }
-        return this.skus;
     }
 
     /**
