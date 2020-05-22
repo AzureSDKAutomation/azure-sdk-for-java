@@ -24,6 +24,11 @@ class RunGetLogResultImpl extends WrapperImpl<RunGetLogResultInner> implements R
     }
 
     @Override
+    public String logArtifactLink() {
+        return this.inner().logArtifactLink();
+    }
+
+    @Override
     public String logLink() {
         return this.inner().logLink();
     }
