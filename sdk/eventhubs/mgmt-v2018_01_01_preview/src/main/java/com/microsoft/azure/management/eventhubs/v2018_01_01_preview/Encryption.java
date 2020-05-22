@@ -8,7 +8,6 @@
 
 package com.microsoft.azure.management.eventhubs.v2018_01_01_preview;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -19,7 +18,7 @@ public class Encryption {
      * Properties of KeyVault.
      */
     @JsonProperty(value = "keyVaultProperties")
-    private List<KeyVaultProperties> keyVaultProperties;
+    private KeyVaultProperties keyVaultProperties;
 
     /**
      * Enumerates the possible value of keySource for Encryption. Possible
@@ -33,7 +32,7 @@ public class Encryption {
      *
      * @return the keyVaultProperties value
      */
-    public List<KeyVaultProperties> keyVaultProperties() {
+    public KeyVaultProperties keyVaultProperties() {
         return this.keyVaultProperties;
     }
 
@@ -43,7 +42,7 @@ public class Encryption {
      * @param keyVaultProperties the keyVaultProperties value to set
      * @return the Encryption object itself.
      */
-    public Encryption withKeyVaultProperties(List<KeyVaultProperties> keyVaultProperties) {
+    public Encryption withKeyVaultProperties(KeyVaultProperties keyVaultProperties) {
         this.keyVaultProperties = keyVaultProperties;
         return this;
     }
