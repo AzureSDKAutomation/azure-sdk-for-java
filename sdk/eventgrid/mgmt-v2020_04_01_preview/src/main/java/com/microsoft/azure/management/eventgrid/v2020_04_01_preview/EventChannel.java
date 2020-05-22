@@ -17,7 +17,6 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.implementation.EventGridManager;
-import org.joda.time.DateTime;
 
 /**
  * Type representing EventChannel.
@@ -27,11 +26,6 @@ public interface EventChannel extends HasInner<EventChannelInner>, Indexable, Re
      * @return the destination value.
      */
     EventChannelDestination destination();
-
-    /**
-     * @return the expirationTimeIfNotActivatedUtc value.
-     */
-    DateTime expirationTimeIfNotActivatedUtc();
 
     /**
      * @return the filter value.
@@ -47,16 +41,6 @@ public interface EventChannel extends HasInner<EventChannelInner>, Indexable, Re
      * @return the name value.
      */
     String name();
-
-    /**
-     * @return the partnerTopicFriendlyDescription value.
-     */
-    String partnerTopicFriendlyDescription();
-
-    /**
-     * @return the partnerTopicReadinessState value.
-     */
-    PartnerTopicReadinessState partnerTopicReadinessState();
 
     /**
      * @return the provisioningState value.
@@ -115,19 +99,6 @@ public interface EventChannel extends HasInner<EventChannelInner>, Indexable, Re
         }
 
         /**
-         * The stage of the eventchannel definition allowing to specify ExpirationTimeIfNotActivatedUtc.
-         */
-        interface WithExpirationTimeIfNotActivatedUtc {
-            /**
-             * Specifies expirationTimeIfNotActivatedUtc.
-             * @param expirationTimeIfNotActivatedUtc Expiration time of the event channel. If this timer expires while the corresponding partner topic is never activated,
- the event channel and corresponding partner topic are deleted
-             * @return the next definition stage
-             */
-            WithCreate withExpirationTimeIfNotActivatedUtc(DateTime expirationTimeIfNotActivatedUtc);
-        }
-
-        /**
          * The stage of the eventchannel definition allowing to specify Filter.
          */
         interface WithFilter {
@@ -137,19 +108,6 @@ public interface EventChannel extends HasInner<EventChannelInner>, Indexable, Re
              * @return the next definition stage
              */
             WithCreate withFilter(EventChannelFilter filter);
-        }
-
-        /**
-         * The stage of the eventchannel definition allowing to specify PartnerTopicFriendlyDescription.
-         */
-        interface WithPartnerTopicFriendlyDescription {
-            /**
-             * Specifies partnerTopicFriendlyDescription.
-             * @param partnerTopicFriendlyDescription Friendly description about the topic. This can be set by the publisher/partner to show custom description for the customer partner topic.
- This will be helpful to remove any ambiguity of the origin of creation of the partner topic for the customer
-             * @return the next definition stage
-             */
-            WithCreate withPartnerTopicFriendlyDescription(String partnerTopicFriendlyDescription);
         }
 
         /**
@@ -169,13 +127,13 @@ public interface EventChannel extends HasInner<EventChannelInner>, Indexable, Re
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<EventChannel>, DefinitionStages.WithDestination, DefinitionStages.WithExpirationTimeIfNotActivatedUtc, DefinitionStages.WithFilter, DefinitionStages.WithPartnerTopicFriendlyDescription, DefinitionStages.WithSource {
+        interface WithCreate extends Creatable<EventChannel>, DefinitionStages.WithDestination, DefinitionStages.WithFilter, DefinitionStages.WithSource {
         }
     }
     /**
      * The template for a EventChannel update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<EventChannel>, UpdateStages.WithDestination, UpdateStages.WithExpirationTimeIfNotActivatedUtc, UpdateStages.WithFilter, UpdateStages.WithPartnerTopicFriendlyDescription, UpdateStages.WithSource {
+    interface Update extends Appliable<EventChannel>, UpdateStages.WithDestination, UpdateStages.WithFilter, UpdateStages.WithSource {
     }
 
     /**
@@ -195,19 +153,6 @@ public interface EventChannel extends HasInner<EventChannelInner>, Indexable, Re
         }
 
         /**
-         * The stage of the eventchannel update allowing to specify ExpirationTimeIfNotActivatedUtc.
-         */
-        interface WithExpirationTimeIfNotActivatedUtc {
-            /**
-             * Specifies expirationTimeIfNotActivatedUtc.
-             * @param expirationTimeIfNotActivatedUtc Expiration time of the event channel. If this timer expires while the corresponding partner topic is never activated,
- the event channel and corresponding partner topic are deleted
-             * @return the next update stage
-             */
-            Update withExpirationTimeIfNotActivatedUtc(DateTime expirationTimeIfNotActivatedUtc);
-        }
-
-        /**
          * The stage of the eventchannel update allowing to specify Filter.
          */
         interface WithFilter {
@@ -217,19 +162,6 @@ public interface EventChannel extends HasInner<EventChannelInner>, Indexable, Re
              * @return the next update stage
              */
             Update withFilter(EventChannelFilter filter);
-        }
-
-        /**
-         * The stage of the eventchannel update allowing to specify PartnerTopicFriendlyDescription.
-         */
-        interface WithPartnerTopicFriendlyDescription {
-            /**
-             * Specifies partnerTopicFriendlyDescription.
-             * @param partnerTopicFriendlyDescription Friendly description about the topic. This can be set by the publisher/partner to show custom description for the customer partner topic.
- This will be helpful to remove any ambiguity of the origin of creation of the partner topic for the customer
-             * @return the next update stage
-             */
-            Update withPartnerTopicFriendlyDescription(String partnerTopicFriendlyDescription);
         }
 
         /**
