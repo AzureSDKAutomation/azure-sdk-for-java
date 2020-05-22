@@ -11,18 +11,15 @@ package com.microsoft.azure.management.containerregistry.v2019_12_01_preview.imp
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Replication;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
-import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ReplicationUpdateParameters;
 import java.util.Map;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ProvisioningState;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Status;
-import rx.functions.Func1;
 
 class ReplicationImpl extends CreatableUpdatableImpl<Replication, ReplicationInner, ReplicationImpl> implements Replication, Replication.Definition, Replication.Update {
     private final ContainerRegistryManager manager;
     private String resourceGroupName;
     private String registryName;
     private String replicationName;
-    private ReplicationUpdateParameters updateParameter;
 
     ReplicationImpl(String name, ContainerRegistryManager manager) {
         super(name, new ReplicationInner());
@@ -30,7 +27,6 @@ class ReplicationImpl extends CreatableUpdatableImpl<Replication, ReplicationInn
         // Set resource name
         this.replicationName = name;
         //
-        this.updateParameter = new ReplicationUpdateParameters();
     }
 
     ReplicationImpl(ReplicationInner inner, ContainerRegistryManager manager) {
@@ -43,7 +39,6 @@ class ReplicationImpl extends CreatableUpdatableImpl<Replication, ReplicationInn
         this.registryName = IdParsingUtils.getValueFromIdByName(inner.id(), "registries");
         this.replicationName = IdParsingUtils.getValueFromIdByName(inner.id(), "replications");
         //
-        this.updateParameter = new ReplicationUpdateParameters();
     }
 
     @Override
@@ -55,27 +50,13 @@ class ReplicationImpl extends CreatableUpdatableImpl<Replication, ReplicationInn
     public Observable<Replication> createResourceAsync() {
         ReplicationsInner client = this.manager().inner().replications();
         return client.createAsync(this.resourceGroupName, this.registryName, this.replicationName, this.inner())
-            .map(new Func1<ReplicationInner, ReplicationInner>() {
-               @Override
-               public ReplicationInner call(ReplicationInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<Replication> updateResourceAsync() {
         ReplicationsInner client = this.manager().inner().replications();
-        return client.updateAsync(this.resourceGroupName, this.registryName, this.replicationName, this.updateParameter)
-            .map(new Func1<ReplicationInner, ReplicationInner>() {
-               @Override
-               public ReplicationInner call(ReplicationInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
+        return client.createAsync(this.resourceGroupName, this.registryName, this.replicationName, this.inner())
             .map(innerToFluentMap(this));
     }
 
@@ -90,9 +71,6 @@ class ReplicationImpl extends CreatableUpdatableImpl<Replication, ReplicationInn
         return this.inner().id() == null;
     }
 
-    private void resetCreateUpdateParameters() {
-        this.updateParameter = new ReplicationUpdateParameters();
-    }
 
     @Override
     public String id() {
@@ -112,11 +90,6 @@ class ReplicationImpl extends CreatableUpdatableImpl<Replication, ReplicationInn
     @Override
     public ProvisioningState provisioningState() {
         return this.inner().provisioningState();
-    }
-
-    @Override
-    public Boolean regionEndpointEnabled() {
-        return this.inner().regionEndpointEnabled();
     }
 
     @Override
@@ -148,22 +121,8 @@ class ReplicationImpl extends CreatableUpdatableImpl<Replication, ReplicationInn
     }
 
     @Override
-    public ReplicationImpl withRegionEndpointEnabled(Boolean regionEndpointEnabled) {
-        if (isInCreateMode()) {
-            this.inner().withRegionEndpointEnabled(regionEndpointEnabled);
-        } else {
-            this.updateParameter.withRegionEndpointEnabled(regionEndpointEnabled);
-        }
-        return this;
-    }
-
-    @Override
     public ReplicationImpl withTags(Map<String, String> tags) {
-        if (isInCreateMode()) {
-            this.inner().withTags(tags);
-        } else {
-            this.updateParameter.withTags(tags);
-        }
+        this.inner().withTags(tags);
         return this;
     }
 
