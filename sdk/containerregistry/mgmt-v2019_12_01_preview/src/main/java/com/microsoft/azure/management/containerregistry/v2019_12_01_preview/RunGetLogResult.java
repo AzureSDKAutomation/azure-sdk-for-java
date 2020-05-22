@@ -18,6 +18,11 @@ import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.impl
  */
 public interface RunGetLogResult extends HasInner<RunGetLogResultInner>, HasManager<ContainerRegistryManager> {
     /**
+     * @return the logArtifactLink value.
+     */
+    String logArtifactLink();
+
+    /**
      * @return the logLink value.
      */
     String logLink();
