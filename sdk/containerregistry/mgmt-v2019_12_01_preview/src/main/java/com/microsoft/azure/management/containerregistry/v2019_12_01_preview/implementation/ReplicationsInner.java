@@ -22,6 +22,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -85,11 +86,11 @@ public class ReplicationsInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Replications update" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}")
-        Observable<Response<ResponseBody>> update(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("registryName") String registryName, @Path("replicationName") String replicationName, @Query("api-version") String apiVersion, @Body ReplicationUpdateParameters replicationUpdateParameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> update(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("registryName") String registryName, @Path("replicationName") String replicationName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ReplicationUpdateParameters replicationUpdateParameters, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Replications beginUpdate" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}")
-        Observable<Response<ResponseBody>> beginUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("registryName") String registryName, @Path("replicationName") String replicationName, @Query("api-version") String apiVersion, @Body ReplicationUpdateParameters replicationUpdateParameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("registryName") String registryName, @Path("replicationName") String replicationName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ReplicationUpdateParameters replicationUpdateParameters, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Replications list" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications")
@@ -545,14 +546,13 @@ public class ReplicationsInner {
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
      * @param replicationName The name of the replication.
-     * @param replicationUpdateParameters The parameters for updating a replication.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ReplicationInner object if successful.
      */
-    public ReplicationInner update(String resourceGroupName, String registryName, String replicationName, ReplicationUpdateParameters replicationUpdateParameters) {
-        return updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, replicationUpdateParameters).toBlocking().last().body();
+    public ReplicationInner update(String resourceGroupName, String registryName, String replicationName) {
+        return updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName).toBlocking().last().body();
     }
 
     /**
@@ -561,13 +561,12 @@ public class ReplicationsInner {
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
      * @param replicationName The name of the replication.
-     * @param replicationUpdateParameters The parameters for updating a replication.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ReplicationInner> updateAsync(String resourceGroupName, String registryName, String replicationName, ReplicationUpdateParameters replicationUpdateParameters, final ServiceCallback<ReplicationInner> serviceCallback) {
-        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, replicationUpdateParameters), serviceCallback);
+    public ServiceFuture<ReplicationInner> updateAsync(String resourceGroupName, String registryName, String replicationName, final ServiceCallback<ReplicationInner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName), serviceCallback);
     }
 
     /**
@@ -576,12 +575,11 @@ public class ReplicationsInner {
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
      * @param replicationName The name of the replication.
-     * @param replicationUpdateParameters The parameters for updating a replication.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ReplicationInner> updateAsync(String resourceGroupName, String registryName, String replicationName, ReplicationUpdateParameters replicationUpdateParameters) {
-        return updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, replicationUpdateParameters).map(new Func1<ServiceResponse<ReplicationInner>, ReplicationInner>() {
+    public Observable<ReplicationInner> updateAsync(String resourceGroupName, String registryName, String replicationName) {
+        return updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName).map(new Func1<ServiceResponse<ReplicationInner>, ReplicationInner>() {
             @Override
             public ReplicationInner call(ServiceResponse<ReplicationInner> response) {
                 return response.body();
@@ -595,11 +593,10 @@ public class ReplicationsInner {
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
      * @param replicationName The name of the replication.
-     * @param replicationUpdateParameters The parameters for updating a replication.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ReplicationInner>> updateWithServiceResponseAsync(String resourceGroupName, String registryName, String replicationName, ReplicationUpdateParameters replicationUpdateParameters) {
+    public Observable<ServiceResponse<ReplicationInner>> updateWithServiceResponseAsync(String resourceGroupName, String registryName, String replicationName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -612,12 +609,91 @@ public class ReplicationsInner {
         if (replicationName == null) {
             throw new IllegalArgumentException("Parameter replicationName is required and cannot be null.");
         }
-        if (replicationUpdateParameters == null) {
-            throw new IllegalArgumentException("Parameter replicationUpdateParameters is required and cannot be null.");
-        }
-        Validator.validate(replicationUpdateParameters);
         final String apiVersion = "2019-12-01-preview";
-        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, registryName, replicationName, apiVersion, replicationUpdateParameters, this.client.acceptLanguage(), this.client.userAgent());
+        final Map<String, String> tags = null;
+        ReplicationUpdateParameters replicationUpdateParameters = new ReplicationUpdateParameters();
+        replicationUpdateParameters.withTags(null);
+        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, registryName, replicationName, apiVersion, this.client.acceptLanguage(), replicationUpdateParameters, this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ReplicationInner>() { }.getType());
+    }
+    /**
+     * Updates a replication for a container registry with the specified parameters.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param registryName The name of the container registry.
+     * @param replicationName The name of the replication.
+     * @param tags The tags for the replication.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the ReplicationInner object if successful.
+     */
+    public ReplicationInner update(String resourceGroupName, String registryName, String replicationName, Map<String, String> tags) {
+        return updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, tags).toBlocking().last().body();
+    }
+
+    /**
+     * Updates a replication for a container registry with the specified parameters.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param registryName The name of the container registry.
+     * @param replicationName The name of the replication.
+     * @param tags The tags for the replication.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<ReplicationInner> updateAsync(String resourceGroupName, String registryName, String replicationName, Map<String, String> tags, final ServiceCallback<ReplicationInner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, tags), serviceCallback);
+    }
+
+    /**
+     * Updates a replication for a container registry with the specified parameters.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param registryName The name of the container registry.
+     * @param replicationName The name of the replication.
+     * @param tags The tags for the replication.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<ReplicationInner> updateAsync(String resourceGroupName, String registryName, String replicationName, Map<String, String> tags) {
+        return updateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, tags).map(new Func1<ServiceResponse<ReplicationInner>, ReplicationInner>() {
+            @Override
+            public ReplicationInner call(ServiceResponse<ReplicationInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Updates a replication for a container registry with the specified parameters.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param registryName The name of the container registry.
+     * @param replicationName The name of the replication.
+     * @param tags The tags for the replication.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<ReplicationInner>> updateWithServiceResponseAsync(String resourceGroupName, String registryName, String replicationName, Map<String, String> tags) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (registryName == null) {
+            throw new IllegalArgumentException("Parameter registryName is required and cannot be null.");
+        }
+        if (replicationName == null) {
+            throw new IllegalArgumentException("Parameter replicationName is required and cannot be null.");
+        }
+        Validator.validate(tags);
+        final String apiVersion = "2019-12-01-preview";
+        ReplicationUpdateParameters replicationUpdateParameters = new ReplicationUpdateParameters();
+        replicationUpdateParameters.withTags(tags);
+        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, registryName, replicationName, apiVersion, this.client.acceptLanguage(), replicationUpdateParameters, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ReplicationInner>() { }.getType());
     }
 
@@ -627,14 +703,13 @@ public class ReplicationsInner {
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
      * @param replicationName The name of the replication.
-     * @param replicationUpdateParameters The parameters for updating a replication.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ReplicationInner object if successful.
      */
-    public ReplicationInner beginUpdate(String resourceGroupName, String registryName, String replicationName, ReplicationUpdateParameters replicationUpdateParameters) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, replicationUpdateParameters).toBlocking().single().body();
+    public ReplicationInner beginUpdate(String resourceGroupName, String registryName, String replicationName) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName).toBlocking().single().body();
     }
 
     /**
@@ -643,13 +718,12 @@ public class ReplicationsInner {
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
      * @param replicationName The name of the replication.
-     * @param replicationUpdateParameters The parameters for updating a replication.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ReplicationInner> beginUpdateAsync(String resourceGroupName, String registryName, String replicationName, ReplicationUpdateParameters replicationUpdateParameters, final ServiceCallback<ReplicationInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, replicationUpdateParameters), serviceCallback);
+    public ServiceFuture<ReplicationInner> beginUpdateAsync(String resourceGroupName, String registryName, String replicationName, final ServiceCallback<ReplicationInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName), serviceCallback);
     }
 
     /**
@@ -658,12 +732,11 @@ public class ReplicationsInner {
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
      * @param replicationName The name of the replication.
-     * @param replicationUpdateParameters The parameters for updating a replication.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ReplicationInner object
      */
-    public Observable<ReplicationInner> beginUpdateAsync(String resourceGroupName, String registryName, String replicationName, ReplicationUpdateParameters replicationUpdateParameters) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, replicationUpdateParameters).map(new Func1<ServiceResponse<ReplicationInner>, ReplicationInner>() {
+    public Observable<ReplicationInner> beginUpdateAsync(String resourceGroupName, String registryName, String replicationName) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName).map(new Func1<ServiceResponse<ReplicationInner>, ReplicationInner>() {
             @Override
             public ReplicationInner call(ServiceResponse<ReplicationInner> response) {
                 return response.body();
@@ -677,11 +750,10 @@ public class ReplicationsInner {
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
      * @param replicationName The name of the replication.
-     * @param replicationUpdateParameters The parameters for updating a replication.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ReplicationInner object
      */
-    public Observable<ServiceResponse<ReplicationInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String registryName, String replicationName, ReplicationUpdateParameters replicationUpdateParameters) {
+    public Observable<ServiceResponse<ReplicationInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String registryName, String replicationName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -694,12 +766,102 @@ public class ReplicationsInner {
         if (replicationName == null) {
             throw new IllegalArgumentException("Parameter replicationName is required and cannot be null.");
         }
-        if (replicationUpdateParameters == null) {
-            throw new IllegalArgumentException("Parameter replicationUpdateParameters is required and cannot be null.");
-        }
-        Validator.validate(replicationUpdateParameters);
         final String apiVersion = "2019-12-01-preview";
-        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, registryName, replicationName, apiVersion, replicationUpdateParameters, this.client.acceptLanguage(), this.client.userAgent())
+        final Map<String, String> tags = null;
+        ReplicationUpdateParameters replicationUpdateParameters = new ReplicationUpdateParameters();
+        replicationUpdateParameters.withTags(null);
+        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, registryName, replicationName, apiVersion, this.client.acceptLanguage(), replicationUpdateParameters, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ReplicationInner>>>() {
+                @Override
+                public Observable<ServiceResponse<ReplicationInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ReplicationInner> clientResponse = beginUpdateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Updates a replication for a container registry with the specified parameters.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param registryName The name of the container registry.
+     * @param replicationName The name of the replication.
+     * @param tags The tags for the replication.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the ReplicationInner object if successful.
+     */
+    public ReplicationInner beginUpdate(String resourceGroupName, String registryName, String replicationName, Map<String, String> tags) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, tags).toBlocking().single().body();
+    }
+
+    /**
+     * Updates a replication for a container registry with the specified parameters.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param registryName The name of the container registry.
+     * @param replicationName The name of the replication.
+     * @param tags The tags for the replication.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<ReplicationInner> beginUpdateAsync(String resourceGroupName, String registryName, String replicationName, Map<String, String> tags, final ServiceCallback<ReplicationInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, tags), serviceCallback);
+    }
+
+    /**
+     * Updates a replication for a container registry with the specified parameters.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param registryName The name of the container registry.
+     * @param replicationName The name of the replication.
+     * @param tags The tags for the replication.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ReplicationInner object
+     */
+    public Observable<ReplicationInner> beginUpdateAsync(String resourceGroupName, String registryName, String replicationName, Map<String, String> tags) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, registryName, replicationName, tags).map(new Func1<ServiceResponse<ReplicationInner>, ReplicationInner>() {
+            @Override
+            public ReplicationInner call(ServiceResponse<ReplicationInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Updates a replication for a container registry with the specified parameters.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param registryName The name of the container registry.
+     * @param replicationName The name of the replication.
+     * @param tags The tags for the replication.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ReplicationInner object
+     */
+    public Observable<ServiceResponse<ReplicationInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String registryName, String replicationName, Map<String, String> tags) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (registryName == null) {
+            throw new IllegalArgumentException("Parameter registryName is required and cannot be null.");
+        }
+        if (replicationName == null) {
+            throw new IllegalArgumentException("Parameter replicationName is required and cannot be null.");
+        }
+        Validator.validate(tags);
+        final String apiVersion = "2019-12-01-preview";
+        ReplicationUpdateParameters replicationUpdateParameters = new ReplicationUpdateParameters();
+        replicationUpdateParameters.withTags(tags);
+        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, registryName, replicationName, apiVersion, this.client.acceptLanguage(), replicationUpdateParameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ReplicationInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ReplicationInner>> call(Response<ResponseBody> response) {

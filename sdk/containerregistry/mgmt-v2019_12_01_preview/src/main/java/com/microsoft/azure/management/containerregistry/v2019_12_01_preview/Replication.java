@@ -44,11 +44,6 @@ public interface Replication extends HasInner<ReplicationInner>, Indexable, Refr
     ProvisioningState provisioningState();
 
     /**
-     * @return the regionEndpointEnabled value.
-     */
-    Boolean regionEndpointEnabled();
-
-    /**
      * @return the status value.
      */
     Status status();
@@ -105,18 +100,6 @@ public interface Replication extends HasInner<ReplicationInner>, Indexable, Refr
         }
 
         /**
-         * The stage of the replication definition allowing to specify RegionEndpointEnabled.
-         */
-        interface WithRegionEndpointEnabled {
-            /**
-             * Specifies regionEndpointEnabled.
-             * @param regionEndpointEnabled Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications
-             * @return the next definition stage
-             */
-            WithCreate withRegionEndpointEnabled(Boolean regionEndpointEnabled);
-        }
-
-        /**
          * The stage of the replication definition allowing to specify Tags.
          */
         interface WithTags {
@@ -133,13 +116,13 @@ public interface Replication extends HasInner<ReplicationInner>, Indexable, Refr
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<Replication>, DefinitionStages.WithRegionEndpointEnabled, DefinitionStages.WithTags {
+        interface WithCreate extends Creatable<Replication>, DefinitionStages.WithTags {
         }
     }
     /**
      * The template for a Replication update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<Replication>, UpdateStages.WithRegionEndpointEnabled, UpdateStages.WithTags {
+    interface Update extends Appliable<Replication>, UpdateStages.WithTags {
     }
 
     /**
@@ -147,24 +130,12 @@ public interface Replication extends HasInner<ReplicationInner>, Indexable, Refr
      */
     interface UpdateStages {
         /**
-         * The stage of the replication update allowing to specify RegionEndpointEnabled.
-         */
-        interface WithRegionEndpointEnabled {
-            /**
-             * Specifies regionEndpointEnabled.
-             * @param regionEndpointEnabled Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications
-             * @return the next update stage
-             */
-            Update withRegionEndpointEnabled(Boolean regionEndpointEnabled);
-        }
-
-        /**
          * The stage of the replication update allowing to specify Tags.
          */
         interface WithTags {
             /**
              * Specifies tags.
-             * @param tags The tags for the replication
+             * @param tags The tags of the resource
              * @return the next update stage
              */
             Update withTags(Map<String, String> tags);

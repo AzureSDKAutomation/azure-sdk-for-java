@@ -10,27 +10,16 @@ package com.microsoft.azure.management.containerregistry.v2019_12_01_preview;
 
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
  * The parameters for updating a replication.
  */
-@JsonFlatten
 public class ReplicationUpdateParameters {
     /**
      * The tags for the replication.
      */
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
-
-    /**
-     * Specifies whether the replication's regional endpoint is enabled.
-     * Requests will not be routed to a replication whose regional endpoint is
-     * disabled, however its data will continue to be synced with other
-     * replications.
-     */
-    @JsonProperty(value = "properties.regionEndpointEnabled")
-    private Boolean regionEndpointEnabled;
 
     /**
      * Get the tags for the replication.
@@ -49,26 +38,6 @@ public class ReplicationUpdateParameters {
      */
     public ReplicationUpdateParameters withTags(Map<String, String> tags) {
         this.tags = tags;
-        return this;
-    }
-
-    /**
-     * Get specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.
-     *
-     * @return the regionEndpointEnabled value
-     */
-    public Boolean regionEndpointEnabled() {
-        return this.regionEndpointEnabled;
-    }
-
-    /**
-     * Set specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.
-     *
-     * @param regionEndpointEnabled the regionEndpointEnabled value to set
-     * @return the ReplicationUpdateParameters object itself.
-     */
-    public ReplicationUpdateParameters withRegionEndpointEnabled(Boolean regionEndpointEnabled) {
-        this.regionEndpointEnabled = regionEndpointEnabled;
         return this;
     }
 
