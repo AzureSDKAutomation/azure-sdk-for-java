@@ -47,6 +47,12 @@ public class ClusterResourceProperties {
     private String serviceId;
 
     /**
+     * Network profile of the Service.
+     */
+    @JsonProperty(value = "networkProfile")
+    private NetworkProfile networkProfile;
+
+    /**
      * Get provisioning state of the Service. Possible values include: 'Creating', 'Updating', 'Deleting', 'Deleted', 'Succeeded', 'Failed', 'Moving', 'Moved', 'MoveFailed'.
      *
      * @return the provisioningState value
@@ -111,6 +117,26 @@ public class ClusterResourceProperties {
      */
     public String serviceId() {
         return this.serviceId;
+    }
+
+    /**
+     * Get network profile of the Service.
+     *
+     * @return the networkProfile value
+     */
+    public NetworkProfile networkProfile() {
+        return this.networkProfile;
+    }
+
+    /**
+     * Set network profile of the Service.
+     *
+     * @param networkProfile the networkProfile value to set
+     * @return the ClusterResourceProperties object itself.
+     */
+    public ClusterResourceProperties withNetworkProfile(NetworkProfile networkProfile) {
+        this.networkProfile = networkProfile;
+        return this;
     }
 
 }
