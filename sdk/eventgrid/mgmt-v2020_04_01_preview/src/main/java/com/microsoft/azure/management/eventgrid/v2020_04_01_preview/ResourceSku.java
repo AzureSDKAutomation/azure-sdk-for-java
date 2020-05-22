@@ -15,14 +15,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ResourceSku {
     /**
-     * The Sku name of the resource. The possible values are: Basic or Premium.
-     * Possible values include: 'Basic', 'Premium'.
+     * the Sku name of the resource.
+     * the possible values: Basic; Premium. Possible values include: 'Basic',
+     * 'Premium'.
      */
     @JsonProperty(value = "name")
     private Sku name;
 
     /**
-     * Get the Sku name of the resource. The possible values are: Basic or Premium. Possible values include: 'Basic', 'Premium'.
+     * Get the Sku name of the resource.
+     the possible values: Basic; Premium. Possible values include: 'Basic', 'Premium'.
      *
      * @return the name value
      */
@@ -31,7 +33,8 @@ public class ResourceSku {
     }
 
     /**
-     * Set the Sku name of the resource. The possible values are: Basic or Premium. Possible values include: 'Basic', 'Premium'.
+     * Set the Sku name of the resource.
+     the possible values: Basic; Premium. Possible values include: 'Basic', 'Premium'.
      *
      * @param name the name value to set
      * @return the ResourceSku object itself.

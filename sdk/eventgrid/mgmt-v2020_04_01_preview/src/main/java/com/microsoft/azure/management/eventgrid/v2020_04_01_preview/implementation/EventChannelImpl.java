@@ -14,8 +14,6 @@ import rx.Observable;
 import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.EventChannelSource;
 import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.EventChannelDestination;
 import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.EventChannelProvisioningState;
-import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.PartnerTopicReadinessState;
-import org.joda.time.DateTime;
 import com.microsoft.azure.management.eventgrid.v2020_04_01_preview.EventChannelFilter;
 
 class EventChannelImpl extends CreatableUpdatableImpl<EventChannel, EventChannelInner, EventChannelImpl> implements EventChannel, EventChannel.Definition, EventChannel.Update {
@@ -81,11 +79,6 @@ class EventChannelImpl extends CreatableUpdatableImpl<EventChannel, EventChannel
     }
 
     @Override
-    public DateTime expirationTimeIfNotActivatedUtc() {
-        return this.inner().expirationTimeIfNotActivatedUtc();
-    }
-
-    @Override
     public EventChannelFilter filter() {
         return this.inner().filter();
     }
@@ -98,16 +91,6 @@ class EventChannelImpl extends CreatableUpdatableImpl<EventChannel, EventChannel
     @Override
     public String name() {
         return this.inner().name();
-    }
-
-    @Override
-    public String partnerTopicFriendlyDescription() {
-        return this.inner().partnerTopicFriendlyDescription();
-    }
-
-    @Override
-    public PartnerTopicReadinessState partnerTopicReadinessState() {
-        return this.inner().partnerTopicReadinessState();
     }
 
     @Override
@@ -139,20 +122,8 @@ class EventChannelImpl extends CreatableUpdatableImpl<EventChannel, EventChannel
     }
 
     @Override
-    public EventChannelImpl withExpirationTimeIfNotActivatedUtc(DateTime expirationTimeIfNotActivatedUtc) {
-        this.inner().withExpirationTimeIfNotActivatedUtc(expirationTimeIfNotActivatedUtc);
-        return this;
-    }
-
-    @Override
     public EventChannelImpl withFilter(EventChannelFilter filter) {
         this.inner().withFilter(filter);
-        return this;
-    }
-
-    @Override
-    public EventChannelImpl withPartnerTopicFriendlyDescription(String partnerTopicFriendlyDescription) {
-        this.inner().withPartnerTopicFriendlyDescription(partnerTopicFriendlyDescription);
         return this;
     }
 
