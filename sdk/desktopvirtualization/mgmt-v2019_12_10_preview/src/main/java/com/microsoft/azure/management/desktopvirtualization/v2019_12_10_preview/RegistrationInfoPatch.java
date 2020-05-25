@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview;
 
+import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,11 +16,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class RegistrationInfoPatch {
     /**
+     * Expiration time of registration token.
+     */
+    @JsonProperty(value = "expirationTime")
+    private DateTime expirationTime;
+
+    /**
      * The type of resetting the token. Possible values include: 'Delete',
      * 'None', 'Update'.
      */
     @JsonProperty(value = "registrationTokenOperation")
     private RegistrationTokenOperation registrationTokenOperation;
+
+    /**
+     * Get expiration time of registration token.
+     *
+     * @return the expirationTime value
+     */
+    public DateTime expirationTime() {
+        return this.expirationTime;
+    }
+
+    /**
+     * Set expiration time of registration token.
+     *
+     * @param expirationTime the expirationTime value to set
+     * @return the RegistrationInfoPatch object itself.
+     */
+    public RegistrationInfoPatch withExpirationTime(DateTime expirationTime) {
+        this.expirationTime = expirationTime;
+        return this;
+    }
 
     /**
      * Get the type of resetting the token. Possible values include: 'Delete', 'None', 'Update'.
