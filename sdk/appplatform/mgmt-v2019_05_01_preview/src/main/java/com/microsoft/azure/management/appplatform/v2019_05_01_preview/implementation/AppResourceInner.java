@@ -9,7 +9,6 @@
 package com.microsoft.azure.management.appplatform.v2019_05_01_preview.implementation;
 
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.AppResourceProperties;
-import com.microsoft.azure.management.appplatform.v2019_05_01_preview.ManagedIdentityProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.azure.ProxyResource;
 
@@ -22,12 +21,6 @@ public class AppResourceInner extends ProxyResource {
      */
     @JsonProperty(value = "properties")
     private AppResourceProperties properties;
-
-    /**
-     * The Managed Identity type of the app resource.
-     */
-    @JsonProperty(value = "identity")
-    private ManagedIdentityProperties identity;
 
     /**
      * The GEO location of the application, always the same with its parent
@@ -53,26 +46,6 @@ public class AppResourceInner extends ProxyResource {
      */
     public AppResourceInner withProperties(AppResourceProperties properties) {
         this.properties = properties;
-        return this;
-    }
-
-    /**
-     * Get the Managed Identity type of the app resource.
-     *
-     * @return the identity value
-     */
-    public ManagedIdentityProperties identity() {
-        return this.identity;
-    }
-
-    /**
-     * Set the Managed Identity type of the app resource.
-     *
-     * @param identity the identity value to set
-     * @return the AppResourceInner object itself.
-     */
-    public AppResourceInner withIdentity(ManagedIdentityProperties identity) {
-        this.identity = identity;
         return this;
     }
 
