@@ -189,7 +189,7 @@ public class DeviceServicesImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2019-06-01";
+        this.apiVersion = "2019-06-02";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
@@ -205,6 +205,6 @@ public class DeviceServicesImpl extends AzureServiceClient {
      */
     @Override
     public String userAgent() {
-        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "DeviceServices", "2019-06-01");
+        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "DeviceServices", "2019-06-02");
     }
 }
