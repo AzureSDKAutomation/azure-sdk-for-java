@@ -13,7 +13,6 @@ import com.microsoft.azure.management.appplatform.v2019_05_01_preview.AppResourc
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.AppResourceProperties;
-import com.microsoft.azure.management.appplatform.v2019_05_01_preview.ManagedIdentityProperties;
 
 class AppResourceImpl extends CreatableUpdatableImpl<AppResource, AppResourceInner, AppResourceImpl> implements AppResource, AppResource.Definition, AppResource.Update {
     private String resourceGroupName;
@@ -78,11 +77,6 @@ class AppResourceImpl extends CreatableUpdatableImpl<AppResource, AppResourceInn
     }
 
     @Override
-    public ManagedIdentityProperties identity() {
-        return this.inner().identity();
-    }
-
-    @Override
     public String location() {
         return this.inner().location();
     }
@@ -111,12 +105,6 @@ class AppResourceImpl extends CreatableUpdatableImpl<AppResource, AppResourceInn
     @Override
     public AppResourceImpl withServiceName(String serviceName) {
         this.serviceName = serviceName;
-        return this;
-    }
-
-    @Override
-    public AppResourceImpl withIdentity(ManagedIdentityProperties identity) {
-        this.inner().withIdentity(identity);
         return this;
     }
 

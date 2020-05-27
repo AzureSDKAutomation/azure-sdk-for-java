@@ -27,11 +27,6 @@ public interface AppResource extends HasInner<AppResourceInner>, Indexable, Upda
     String id();
 
     /**
-     * @return the identity value.
-     */
-    ManagedIdentityProperties identity();
-
-    /**
      * @return the location value.
      */
     String location();
@@ -92,18 +87,6 @@ public interface AppResource extends HasInner<AppResourceInner>, Indexable, Upda
         }
 
         /**
-         * The stage of the appresource definition allowing to specify Identity.
-         */
-        interface WithIdentity {
-            /**
-             * Specifies identity.
-             * @param identity The Managed Identity type of the app resource
-             * @return the next definition stage
-             */
-            WithCreate withIdentity(ManagedIdentityProperties identity);
-        }
-
-        /**
          * The stage of the appresource definition allowing to specify Location.
          */
         interface WithLocation {
@@ -132,31 +115,19 @@ public interface AppResource extends HasInner<AppResourceInner>, Indexable, Upda
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<AppResource>, DefinitionStages.WithIdentity, DefinitionStages.WithLocation, DefinitionStages.WithProperties {
+        interface WithCreate extends Creatable<AppResource>, DefinitionStages.WithLocation, DefinitionStages.WithProperties {
         }
     }
     /**
      * The template for a AppResource update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<AppResource>, UpdateStages.WithIdentity, UpdateStages.WithLocation, UpdateStages.WithProperties {
+    interface Update extends Appliable<AppResource>, UpdateStages.WithLocation, UpdateStages.WithProperties {
     }
 
     /**
      * Grouping of AppResource update stages.
      */
     interface UpdateStages {
-        /**
-         * The stage of the appresource update allowing to specify Identity.
-         */
-        interface WithIdentity {
-            /**
-             * Specifies identity.
-             * @param identity The Managed Identity type of the app resource
-             * @return the next update stage
-             */
-            Update withIdentity(ManagedIdentityProperties identity);
-        }
-
         /**
          * The stage of the appresource update allowing to specify Location.
          */
