@@ -88,7 +88,7 @@ class AgentPoolImpl extends CreatableUpdatableImpl<AgentPool, AgentPoolInner, Ag
     }
 
     @Override
-    public int count() {
+    public Integer count() {
         return this.inner().count();
     }
 
@@ -205,18 +205,6 @@ class AgentPoolImpl extends CreatableUpdatableImpl<AgentPool, AgentPoolInner, Ag
     }
 
     @Override
-    public AgentPoolImpl withCount(int count) {
-        this.inner().withCount(count);
-        return this;
-    }
-
-    @Override
-    public AgentPoolImpl withVmSize(ContainerServiceVMSizeTypes vmSize) {
-        this.inner().withVmSize(vmSize);
-        return this;
-    }
-
-    @Override
     public AgentPoolImpl withAgentPoolType(AgentPoolType agentPoolType) {
         this.inner().withAgentPoolType(agentPoolType);
         return this;
@@ -225,6 +213,12 @@ class AgentPoolImpl extends CreatableUpdatableImpl<AgentPool, AgentPoolInner, Ag
     @Override
     public AgentPoolImpl withAvailabilityZones(List<String> availabilityZones) {
         this.inner().withAvailabilityZones(availabilityZones);
+        return this;
+    }
+
+    @Override
+    public AgentPoolImpl withCount(Integer count) {
+        this.inner().withCount(count);
         return this;
     }
 
@@ -315,6 +309,12 @@ class AgentPoolImpl extends CreatableUpdatableImpl<AgentPool, AgentPoolInner, Ag
     @Override
     public AgentPoolImpl withTags(Map<String, String> tags) {
         this.inner().withTags(tags);
+        return this;
+    }
+
+    @Override
+    public AgentPoolImpl withVmSize(ContainerServiceVMSizeTypes vmSize) {
+        this.inner().withVmSize(vmSize);
         return this;
     }
 
