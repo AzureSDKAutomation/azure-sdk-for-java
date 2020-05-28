@@ -78,11 +78,11 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Clusters put" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}")
-        Observable<Response<ResponseBody>> put(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("clusterName") String clusterName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> put(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("clusterName") String clusterName, @Body ClusterInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Clusters beginPut" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}")
-        Observable<Response<ResponseBody>> beginPut(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("clusterName") String clusterName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginPut(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("clusterName") String clusterName, @Body ClusterInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.eventhubs.v2018_01_01_preview.Clusters patch" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}")
@@ -391,13 +391,14 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      *
      * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
+     * @param parameters Parameters for creating a eventhub cluster resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ClusterInner object if successful.
      */
-    public ClusterInner put(String resourceGroupName, String clusterName) {
-        return putWithServiceResponseAsync(resourceGroupName, clusterName).toBlocking().last().body();
+    public ClusterInner put(String resourceGroupName, String clusterName, ClusterInner parameters) {
+        return putWithServiceResponseAsync(resourceGroupName, clusterName, parameters).toBlocking().last().body();
     }
 
     /**
@@ -405,12 +406,13 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      *
      * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
+     * @param parameters Parameters for creating a eventhub cluster resource.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ClusterInner> putAsync(String resourceGroupName, String clusterName, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(putWithServiceResponseAsync(resourceGroupName, clusterName), serviceCallback);
+    public ServiceFuture<ClusterInner> putAsync(String resourceGroupName, String clusterName, ClusterInner parameters, final ServiceCallback<ClusterInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putWithServiceResponseAsync(resourceGroupName, clusterName, parameters), serviceCallback);
     }
 
     /**
@@ -418,11 +420,12 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      *
      * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
+     * @param parameters Parameters for creating a eventhub cluster resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ClusterInner> putAsync(String resourceGroupName, String clusterName) {
-        return putWithServiceResponseAsync(resourceGroupName, clusterName).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
+    public Observable<ClusterInner> putAsync(String resourceGroupName, String clusterName, ClusterInner parameters) {
+        return putWithServiceResponseAsync(resourceGroupName, clusterName, parameters).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
             @Override
             public ClusterInner call(ServiceResponse<ClusterInner> response) {
                 return response.body();
@@ -435,10 +438,11 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      *
      * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
+     * @param parameters Parameters for creating a eventhub cluster resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ClusterInner>> putWithServiceResponseAsync(String resourceGroupName, String clusterName) {
+    public Observable<ServiceResponse<ClusterInner>> putWithServiceResponseAsync(String resourceGroupName, String clusterName, ClusterInner parameters) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -448,8 +452,12 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
         if (clusterName == null) {
             throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
         }
+        if (parameters == null) {
+            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
+        }
+        Validator.validate(parameters);
         final String apiVersion = "2018-01-01-preview";
-        Observable<Response<ResponseBody>> observable = service.put(this.client.subscriptionId(), resourceGroupName, clusterName, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.put(this.client.subscriptionId(), resourceGroupName, clusterName, parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ClusterInner>() { }.getType());
     }
 
@@ -458,13 +466,14 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      *
      * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
+     * @param parameters Parameters for creating a eventhub cluster resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ClusterInner object if successful.
      */
-    public ClusterInner beginPut(String resourceGroupName, String clusterName) {
-        return beginPutWithServiceResponseAsync(resourceGroupName, clusterName).toBlocking().single().body();
+    public ClusterInner beginPut(String resourceGroupName, String clusterName, ClusterInner parameters) {
+        return beginPutWithServiceResponseAsync(resourceGroupName, clusterName, parameters).toBlocking().single().body();
     }
 
     /**
@@ -472,12 +481,13 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      *
      * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
+     * @param parameters Parameters for creating a eventhub cluster resource.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ClusterInner> beginPutAsync(String resourceGroupName, String clusterName, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginPutWithServiceResponseAsync(resourceGroupName, clusterName), serviceCallback);
+    public ServiceFuture<ClusterInner> beginPutAsync(String resourceGroupName, String clusterName, ClusterInner parameters, final ServiceCallback<ClusterInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutWithServiceResponseAsync(resourceGroupName, clusterName, parameters), serviceCallback);
     }
 
     /**
@@ -485,11 +495,12 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      *
      * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
+     * @param parameters Parameters for creating a eventhub cluster resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
      */
-    public Observable<ClusterInner> beginPutAsync(String resourceGroupName, String clusterName) {
-        return beginPutWithServiceResponseAsync(resourceGroupName, clusterName).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
+    public Observable<ClusterInner> beginPutAsync(String resourceGroupName, String clusterName, ClusterInner parameters) {
+        return beginPutWithServiceResponseAsync(resourceGroupName, clusterName, parameters).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
             @Override
             public ClusterInner call(ServiceResponse<ClusterInner> response) {
                 return response.body();
@@ -502,10 +513,11 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      *
      * @param resourceGroupName Name of the resource group within the azure subscription.
      * @param clusterName The name of the Event Hubs Cluster.
+     * @param parameters Parameters for creating a eventhub cluster resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
      */
-    public Observable<ServiceResponse<ClusterInner>> beginPutWithServiceResponseAsync(String resourceGroupName, String clusterName) {
+    public Observable<ServiceResponse<ClusterInner>> beginPutWithServiceResponseAsync(String resourceGroupName, String clusterName, ClusterInner parameters) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -515,8 +527,12 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
         if (clusterName == null) {
             throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
         }
+        if (parameters == null) {
+            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
+        }
+        Validator.validate(parameters);
         final String apiVersion = "2018-01-01-preview";
-        return service.beginPut(this.client.subscriptionId(), resourceGroupName, clusterName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginPut(this.client.subscriptionId(), resourceGroupName, clusterName, parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ClusterInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ClusterInner>> call(Response<ResponseBody> response) {
