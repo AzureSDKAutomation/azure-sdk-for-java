@@ -21,14 +21,14 @@ class ClusterImpl extends GroupableResourceCoreImpl<Cluster, ClusterInner, Clust
     @Override
     public Observable<Cluster> createResourceAsync() {
         ClustersInner client = this.manager().inner().clusters();
-        return client.putAsync(this.resourceGroupName(), this.name(), this.inner())
+        return client.createOrUpdateAsync(this.resourceGroupName(), this.name(), this.inner())
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<Cluster> updateResourceAsync() {
         ClustersInner client = this.manager().inner().clusters();
-        return client.patchAsync(this.resourceGroupName(), this.name(), this.inner())
+        return client.updateAsync(this.resourceGroupName(), this.name(), this.inner())
             .map(innerToFluentMap(this));
     }
 
