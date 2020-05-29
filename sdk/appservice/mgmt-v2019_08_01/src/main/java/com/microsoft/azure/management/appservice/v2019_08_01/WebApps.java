@@ -12,6 +12,7 @@ import rx.Observable;
 import com.microsoft.azure.management.appservice.v2019_08_01.Sites;
 import rx.Completable;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.BackupRequestInner;
+import com.microsoft.azure.management.appservice.v2019_08_01.implementation.SiteAuthSettingsV2Inner;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.StringDictionaryInner;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.SiteConfigResourceInner;
 import com.microsoft.azure.management.appservice.v2019_08_01.implementation.RestoreRequestInner;
@@ -244,6 +245,29 @@ public interface WebApps {
      * @return the observable for the request
      */
     Observable<SiteConfigResource> listConfigurationsAsync(final String resourceGroupName, final String name);
+
+    /**
+     * Updates site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Updates site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of web app.
+     * @param siteAuthSettingsV2 Auth settings associated with web app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<SiteAuthSettingsV2> updateAuthSettingsV2Async(String resourceGroupName, String name, SiteAuthSettingsV2Inner siteAuthSettingsV2);
+
+    /**
+     * Gets site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Gets site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<SiteAuthSettingsV2> getAuthSettingsV2Async(String resourceGroupName, String name);
 
     /**
      * Updates the backup configuration of an app.
