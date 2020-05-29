@@ -184,6 +184,14 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettings/list")
         Observable<Response<ResponseBody>> getAuthSettings(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps updateAuthSettingsV2" })
+        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettingsV2")
+        Observable<Response<ResponseBody>> updateAuthSettingsV2(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Body SiteAuthSettingsV2Inner siteAuthSettingsV2, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps getAuthSettingsV2" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettingsV2/list")
+        Observable<Response<ResponseBody>> getAuthSettingsV2(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps updateAzureStorageAccounts" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/azurestorageaccounts")
         Observable<Response<ResponseBody>> updateAzureStorageAccounts(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Body AzureStoragePropertyDictionaryResourceInner azureStorageAccounts, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -4798,6 +4806,194 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
     private ServiceResponse<SiteAuthSettingsInner> getAuthSettingsDelegate(Response<ResponseBody> response) throws DefaultErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<SiteAuthSettingsInner, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<SiteAuthSettingsInner>() { }.getType())
+                .registerError(DefaultErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Updates site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Updates site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of web app.
+     * @param siteAuthSettingsV2 Auth settings associated with web app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the SiteAuthSettingsV2Inner object if successful.
+     */
+    public SiteAuthSettingsV2Inner updateAuthSettingsV2(String resourceGroupName, String name, SiteAuthSettingsV2Inner siteAuthSettingsV2) {
+        return updateAuthSettingsV2WithServiceResponseAsync(resourceGroupName, name, siteAuthSettingsV2).toBlocking().single().body();
+    }
+
+    /**
+     * Updates site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Updates site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of web app.
+     * @param siteAuthSettingsV2 Auth settings associated with web app.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<SiteAuthSettingsV2Inner> updateAuthSettingsV2Async(String resourceGroupName, String name, SiteAuthSettingsV2Inner siteAuthSettingsV2, final ServiceCallback<SiteAuthSettingsV2Inner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateAuthSettingsV2WithServiceResponseAsync(resourceGroupName, name, siteAuthSettingsV2), serviceCallback);
+    }
+
+    /**
+     * Updates site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Updates site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of web app.
+     * @param siteAuthSettingsV2 Auth settings associated with web app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SiteAuthSettingsV2Inner object
+     */
+    public Observable<SiteAuthSettingsV2Inner> updateAuthSettingsV2Async(String resourceGroupName, String name, SiteAuthSettingsV2Inner siteAuthSettingsV2) {
+        return updateAuthSettingsV2WithServiceResponseAsync(resourceGroupName, name, siteAuthSettingsV2).map(new Func1<ServiceResponse<SiteAuthSettingsV2Inner>, SiteAuthSettingsV2Inner>() {
+            @Override
+            public SiteAuthSettingsV2Inner call(ServiceResponse<SiteAuthSettingsV2Inner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Updates site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Updates site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of web app.
+     * @param siteAuthSettingsV2 Auth settings associated with web app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SiteAuthSettingsV2Inner object
+     */
+    public Observable<ServiceResponse<SiteAuthSettingsV2Inner>> updateAuthSettingsV2WithServiceResponseAsync(String resourceGroupName, String name, SiteAuthSettingsV2Inner siteAuthSettingsV2) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (siteAuthSettingsV2 == null) {
+            throw new IllegalArgumentException("Parameter siteAuthSettingsV2 is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        Validator.validate(siteAuthSettingsV2);
+        return service.updateAuthSettingsV2(resourceGroupName, name, this.client.subscriptionId(), siteAuthSettingsV2, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SiteAuthSettingsV2Inner>>>() {
+                @Override
+                public Observable<ServiceResponse<SiteAuthSettingsV2Inner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<SiteAuthSettingsV2Inner> clientResponse = updateAuthSettingsV2Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<SiteAuthSettingsV2Inner> updateAuthSettingsV2Delegate(Response<ResponseBody> response) throws DefaultErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<SiteAuthSettingsV2Inner, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<SiteAuthSettingsV2Inner>() { }.getType())
+                .registerError(DefaultErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Gets site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Gets site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the SiteAuthSettingsV2Inner object if successful.
+     */
+    public SiteAuthSettingsV2Inner getAuthSettingsV2(String resourceGroupName, String name) {
+        return getAuthSettingsV2WithServiceResponseAsync(resourceGroupName, name).toBlocking().single().body();
+    }
+
+    /**
+     * Gets site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Gets site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<SiteAuthSettingsV2Inner> getAuthSettingsV2Async(String resourceGroupName, String name, final ServiceCallback<SiteAuthSettingsV2Inner> serviceCallback) {
+        return ServiceFuture.fromResponse(getAuthSettingsV2WithServiceResponseAsync(resourceGroupName, name), serviceCallback);
+    }
+
+    /**
+     * Gets site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Gets site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SiteAuthSettingsV2Inner object
+     */
+    public Observable<SiteAuthSettingsV2Inner> getAuthSettingsV2Async(String resourceGroupName, String name) {
+        return getAuthSettingsV2WithServiceResponseAsync(resourceGroupName, name).map(new Func1<ServiceResponse<SiteAuthSettingsV2Inner>, SiteAuthSettingsV2Inner>() {
+            @Override
+            public SiteAuthSettingsV2Inner call(ServiceResponse<SiteAuthSettingsV2Inner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Gets site's Authentication / Authorization settings for apps via the V2 format.
+     * Description for Gets site's Authentication / Authorization settings for apps via the V2 format.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SiteAuthSettingsV2Inner object
+     */
+    public Observable<ServiceResponse<SiteAuthSettingsV2Inner>> getAuthSettingsV2WithServiceResponseAsync(String resourceGroupName, String name) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getAuthSettingsV2(resourceGroupName, name, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SiteAuthSettingsV2Inner>>>() {
+                @Override
+                public Observable<ServiceResponse<SiteAuthSettingsV2Inner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<SiteAuthSettingsV2Inner> clientResponse = getAuthSettingsV2Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<SiteAuthSettingsV2Inner> getAuthSettingsV2Delegate(Response<ResponseBody> response) throws DefaultErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<SiteAuthSettingsV2Inner, DefaultErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<SiteAuthSettingsV2Inner>() { }.getType())
                 .registerError(DefaultErrorResponseException.class)
                 .build(response);
     }

@@ -20,6 +20,7 @@ import java.util.List;
 import com.microsoft.azure.management.appservice.v2019_08_01.CustomHostnameAnalysisResult;
 import com.microsoft.azure.management.appservice.v2019_08_01.BackupItem;
 import com.microsoft.azure.management.appservice.v2019_08_01.SiteConfigResource;
+import com.microsoft.azure.management.appservice.v2019_08_01.SiteAuthSettingsV2;
 import com.microsoft.azure.management.appservice.v2019_08_01.BackupRequest;
 import com.microsoft.azure.management.appservice.v2019_08_01.StringDictionary;
 import com.microsoft.azure.management.appservice.v2019_08_01.RestoreRequest;
@@ -602,6 +603,30 @@ class WebAppsImpl extends WrapperImpl<WebAppsInner> implements WebApps {
             @Override
             public SiteConfigResource call(SiteConfigResourceInner inner) {
                 return new SiteConfigResourceImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<SiteAuthSettingsV2> updateAuthSettingsV2Async(String resourceGroupName, String name, SiteAuthSettingsV2Inner siteAuthSettingsV2) {
+        WebAppsInner client = this.inner();
+        return client.updateAuthSettingsV2Async(resourceGroupName, name, siteAuthSettingsV2)
+        .map(new Func1<SiteAuthSettingsV2Inner, SiteAuthSettingsV2>() {
+            @Override
+            public SiteAuthSettingsV2 call(SiteAuthSettingsV2Inner inner) {
+                return new SiteAuthSettingsV2Impl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<SiteAuthSettingsV2> getAuthSettingsV2Async(String resourceGroupName, String name) {
+        WebAppsInner client = this.inner();
+        return client.getAuthSettingsV2Async(resourceGroupName, name)
+        .map(new Func1<SiteAuthSettingsV2Inner, SiteAuthSettingsV2>() {
+            @Override
+            public SiteAuthSettingsV2 call(SiteAuthSettingsV2Inner inner) {
+                return new SiteAuthSettingsV2Impl(inner, manager());
             }
         });
     }
