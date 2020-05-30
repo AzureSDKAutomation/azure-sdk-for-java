@@ -81,11 +81,11 @@ public class InvoicesInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.Invoices downloadInvoice" })
         @POST("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download")
-        Observable<Response<ResponseBody>> downloadInvoice(@Path("billingAccountName") String billingAccountName, @Path("invoiceName") String invoiceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> downloadInvoice(@Path("billingAccountName") String billingAccountName, @Path("invoiceName") String invoiceName, @Query("api-version") String apiVersion, @Query("downloadToken") String downloadToken, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.Invoices beginDownloadInvoice" })
         @POST("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download")
-        Observable<Response<ResponseBody>> beginDownloadInvoice(@Path("billingAccountName") String billingAccountName, @Path("invoiceName") String invoiceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDownloadInvoice(@Path("billingAccountName") String billingAccountName, @Path("invoiceName") String invoiceName, @Query("api-version") String apiVersion, @Query("downloadToken") String downloadToken, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.Invoices listByBillingSubscription" })
         @GET("providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices")
@@ -545,13 +545,14 @@ public class InvoicesInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DownloadUrlInner object if successful.
      */
-    public DownloadUrlInner downloadInvoice(String billingAccountName, String invoiceName) {
-        return downloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName).toBlocking().last().body();
+    public DownloadUrlInner downloadInvoice(String billingAccountName, String invoiceName, String downloadToken) {
+        return downloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName, downloadToken).toBlocking().last().body();
     }
 
     /**
@@ -559,12 +560,13 @@ public class InvoicesInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DownloadUrlInner> downloadInvoiceAsync(String billingAccountName, String invoiceName, final ServiceCallback<DownloadUrlInner> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(downloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName), serviceCallback);
+    public ServiceFuture<DownloadUrlInner> downloadInvoiceAsync(String billingAccountName, String invoiceName, String downloadToken, final ServiceCallback<DownloadUrlInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(downloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName, downloadToken), serviceCallback);
     }
 
     /**
@@ -572,11 +574,12 @@ public class InvoicesInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<DownloadUrlInner> downloadInvoiceAsync(String billingAccountName, String invoiceName) {
-        return downloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName).map(new Func1<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>, DownloadUrlInner>() {
+    public Observable<DownloadUrlInner> downloadInvoiceAsync(String billingAccountName, String invoiceName, String downloadToken) {
+        return downloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName, downloadToken).map(new Func1<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>, DownloadUrlInner>() {
             @Override
             public DownloadUrlInner call(ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders> response) {
                 return response.body();
@@ -589,10 +592,11 @@ public class InvoicesInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>> downloadInvoiceWithServiceResponseAsync(String billingAccountName, String invoiceName) {
+    public Observable<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>> downloadInvoiceWithServiceResponseAsync(String billingAccountName, String invoiceName, String downloadToken) {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
@@ -602,7 +606,10 @@ public class InvoicesInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Observable<Response<ResponseBody>> observable = service.downloadInvoice(billingAccountName, invoiceName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        if (downloadToken == null) {
+            throw new IllegalArgumentException("Parameter downloadToken is required and cannot be null.");
+        }
+        Observable<Response<ResponseBody>> observable = service.downloadInvoice(billingAccountName, invoiceName, this.client.apiVersion(), downloadToken, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.LOCATION), new TypeToken<DownloadUrlInner>() { }.getType(), InvoicesDownloadInvoiceHeaders.class);
     }
 
@@ -611,13 +618,14 @@ public class InvoicesInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DownloadUrlInner object if successful.
      */
-    public DownloadUrlInner beginDownloadInvoice(String billingAccountName, String invoiceName) {
-        return beginDownloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName).toBlocking().single().body();
+    public DownloadUrlInner beginDownloadInvoice(String billingAccountName, String invoiceName, String downloadToken) {
+        return beginDownloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName, downloadToken).toBlocking().single().body();
     }
 
     /**
@@ -625,12 +633,13 @@ public class InvoicesInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DownloadUrlInner> beginDownloadInvoiceAsync(String billingAccountName, String invoiceName, final ServiceCallback<DownloadUrlInner> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginDownloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName), serviceCallback);
+    public ServiceFuture<DownloadUrlInner> beginDownloadInvoiceAsync(String billingAccountName, String invoiceName, String downloadToken, final ServiceCallback<DownloadUrlInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDownloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName, downloadToken), serviceCallback);
     }
 
     /**
@@ -638,11 +647,12 @@ public class InvoicesInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DownloadUrlInner object
      */
-    public Observable<DownloadUrlInner> beginDownloadInvoiceAsync(String billingAccountName, String invoiceName) {
-        return beginDownloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName).map(new Func1<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>, DownloadUrlInner>() {
+    public Observable<DownloadUrlInner> beginDownloadInvoiceAsync(String billingAccountName, String invoiceName, String downloadToken) {
+        return beginDownloadInvoiceWithServiceResponseAsync(billingAccountName, invoiceName, downloadToken).map(new Func1<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>, DownloadUrlInner>() {
             @Override
             public DownloadUrlInner call(ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders> response) {
                 return response.body();
@@ -655,10 +665,11 @@ public class InvoicesInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DownloadUrlInner object
      */
-    public Observable<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>> beginDownloadInvoiceWithServiceResponseAsync(String billingAccountName, String invoiceName) {
+    public Observable<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>> beginDownloadInvoiceWithServiceResponseAsync(String billingAccountName, String invoiceName, String downloadToken) {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
@@ -668,7 +679,10 @@ public class InvoicesInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.beginDownloadInvoice(billingAccountName, invoiceName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        if (downloadToken == null) {
+            throw new IllegalArgumentException("Parameter downloadToken is required and cannot be null.");
+        }
+        return service.beginDownloadInvoice(billingAccountName, invoiceName, this.client.apiVersion(), downloadToken, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>>>() {
                 @Override
                 public Observable<ServiceResponseWithHeaders<DownloadUrlInner, InvoicesDownloadInvoiceHeaders>> call(Response<ResponseBody> response) {

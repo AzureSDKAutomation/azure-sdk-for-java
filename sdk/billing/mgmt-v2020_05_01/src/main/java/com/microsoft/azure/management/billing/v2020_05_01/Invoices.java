@@ -42,10 +42,11 @@ public interface Invoices extends HasInner<InvoicesInner> {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param invoiceName The ID that uniquely identifies an invoice.
+     * @param downloadToken Download token with document source and document ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<DownloadUrl> downloadInvoiceAsync(String billingAccountName, String invoiceName);
+    Observable<DownloadUrl> downloadInvoiceAsync(String billingAccountName, String invoiceName, String downloadToken);
 
     /**
      * Lists the invoices for a subscription.
