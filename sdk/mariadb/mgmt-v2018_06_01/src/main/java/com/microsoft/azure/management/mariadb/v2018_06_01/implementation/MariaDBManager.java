@@ -25,7 +25,6 @@ import com.microsoft.azure.management.mariadb.v2018_06_01.Configurations;
 import com.microsoft.azure.management.mariadb.v2018_06_01.LogFiles;
 import com.microsoft.azure.management.mariadb.v2018_06_01.LocationBasedPerformanceTiers;
 import com.microsoft.azure.management.mariadb.v2018_06_01.CheckNameAvailabilitys;
-import com.microsoft.azure.management.mariadb.v2018_06_01.ServerSecurityAlertPolicies;
 import com.microsoft.azure.management.mariadb.v2018_06_01.Operations;
 import com.microsoft.azure.management.mariadb.v2018_06_01.QueryTexts;
 import com.microsoft.azure.management.mariadb.v2018_06_01.TopQueryStatistics;
@@ -52,7 +51,6 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
     private LogFiles logFiles;
     private LocationBasedPerformanceTiers locationBasedPerformanceTiers;
     private CheckNameAvailabilitys checkNameAvailabilitys;
-    private ServerSecurityAlertPolicies serverSecurityAlertPolicies;
     private Operations operations;
     private QueryTexts queryTexts;
     private TopQueryStatistics topQueryStatistics;
@@ -198,16 +196,6 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
             this.checkNameAvailabilitys = new CheckNameAvailabilitysImpl(this);
         }
         return this.checkNameAvailabilitys;
-    }
-
-    /**
-     * @return Entry point to manage ServerSecurityAlertPolicies.
-     */
-    public ServerSecurityAlertPolicies serverSecurityAlertPolicies() {
-        if (this.serverSecurityAlertPolicies == null) {
-            this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesImpl(this);
-        }
-        return this.serverSecurityAlertPolicies;
     }
 
     /**

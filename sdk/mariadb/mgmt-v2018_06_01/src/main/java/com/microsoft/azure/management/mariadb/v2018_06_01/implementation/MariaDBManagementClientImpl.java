@@ -267,19 +267,6 @@ public class MariaDBManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The ServerSecurityAlertPoliciesInner object to access its operations.
-     */
-    private ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies;
-
-    /**
-     * Gets the ServerSecurityAlertPoliciesInner object to access its operations.
-     * @return the ServerSecurityAlertPoliciesInner object.
-     */
-    public ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies() {
-        return this.serverSecurityAlertPolicies;
-    }
-
-    /**
      * The OperationsInner object to access its operations.
      */
     private OperationsInner operations;
@@ -453,7 +440,6 @@ public class MariaDBManagementClientImpl extends AzureServiceClient {
         this.logFiles = new LogFilesInner(restClient().retrofit(), this);
         this.locationBasedPerformanceTiers = new LocationBasedPerformanceTiersInner(restClient().retrofit(), this);
         this.checkNameAvailabilitys = new CheckNameAvailabilitysInner(restClient().retrofit(), this);
-        this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesInner(restClient().retrofit(), this);
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.queryTexts = new QueryTextsInner(restClient().retrofit(), this);
         this.topQueryStatistics = new TopQueryStatisticsInner(restClient().retrofit(), this);
