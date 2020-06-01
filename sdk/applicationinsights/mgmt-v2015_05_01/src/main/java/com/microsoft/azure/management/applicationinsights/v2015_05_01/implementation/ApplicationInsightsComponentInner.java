@@ -14,6 +14,7 @@ import com.microsoft.azure.management.applicationinsights.v2015_05_01.RequestSou
 import org.joda.time.DateTime;
 import java.util.List;
 import com.microsoft.azure.management.applicationinsights.v2015_05_01.PrivateLinkScopedResource;
+import com.microsoft.azure.management.applicationinsights.v2015_05_01.IngestionMode;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.management.applicationinsights.v2015_05_01.ComponentsResource;
@@ -149,6 +150,14 @@ public class ApplicationInsightsComponentInner extends ComponentsResource {
      */
     @JsonProperty(value = "properties.PrivateLinkScopedResources", access = JsonProperty.Access.WRITE_ONLY)
     private List<PrivateLinkScopedResource> privateLinkScopedResources;
+
+    /**
+     * Indicates the flow of the ingestion. Possible values include:
+     * 'ApplicationInsights', 'ApplicationInsightsWithDiagnosticSettings',
+     * 'LogAnalytics'.
+     */
+    @JsonProperty(value = "properties.IngestionMode")
+    private IngestionMode ingestionMode;
 
     /**
      * Get the kind of application that this component refers to, used to customize UI. This value is a freeform string, values should typically be one of the following: web, ios, other, store, java, phone.
@@ -409,6 +418,26 @@ public class ApplicationInsightsComponentInner extends ComponentsResource {
      */
     public List<PrivateLinkScopedResource> privateLinkScopedResources() {
         return this.privateLinkScopedResources;
+    }
+
+    /**
+     * Get indicates the flow of the ingestion. Possible values include: 'ApplicationInsights', 'ApplicationInsightsWithDiagnosticSettings', 'LogAnalytics'.
+     *
+     * @return the ingestionMode value
+     */
+    public IngestionMode ingestionMode() {
+        return this.ingestionMode;
+    }
+
+    /**
+     * Set indicates the flow of the ingestion. Possible values include: 'ApplicationInsights', 'ApplicationInsightsWithDiagnosticSettings', 'LogAnalytics'.
+     *
+     * @param ingestionMode the ingestionMode value to set
+     * @return the ApplicationInsightsComponentInner object itself.
+     */
+    public ApplicationInsightsComponentInner withIngestionMode(IngestionMode ingestionMode) {
+        this.ingestionMode = ingestionMode;
+        return this;
     }
 
 }

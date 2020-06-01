@@ -17,6 +17,7 @@ import com.microsoft.azure.management.applicationinsights.v2015_05_01.RequestSou
 import org.joda.time.DateTime;
 import java.util.List;
 import com.microsoft.azure.management.applicationinsights.v2015_05_01.PrivateLinkScopedResource;
+import com.microsoft.azure.management.applicationinsights.v2015_05_01.IngestionMode;
 
 class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<ApplicationInsightsComponent, ApplicationInsightsComponentInner, ApplicationInsightsComponentImpl, InsightsManager> implements ApplicationInsightsComponent, ApplicationInsightsComponent.Definition, ApplicationInsightsComponent.Update {
     ApplicationInsightsComponentImpl(String name, ApplicationInsightsComponentInner inner, InsightsManager manager) {
@@ -100,6 +101,11 @@ class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<Applica
     }
 
     @Override
+    public IngestionMode ingestionMode() {
+        return this.inner().ingestionMode();
+    }
+
+    @Override
     public String instrumentationKey() {
         return this.inner().instrumentationKey();
     }
@@ -172,6 +178,12 @@ class ApplicationInsightsComponentImpl extends GroupableResourceCoreImpl<Applica
     @Override
     public ApplicationInsightsComponentImpl withImmediatePurgeDataOn30Days(Boolean immediatePurgeDataOn30Days) {
         this.inner().withImmediatePurgeDataOn30Days(immediatePurgeDataOn30Days);
+        return this;
+    }
+
+    @Override
+    public ApplicationInsightsComponentImpl withIngestionMode(IngestionMode ingestionMode) {
+        this.inner().withIngestionMode(ingestionMode);
         return this;
     }
 

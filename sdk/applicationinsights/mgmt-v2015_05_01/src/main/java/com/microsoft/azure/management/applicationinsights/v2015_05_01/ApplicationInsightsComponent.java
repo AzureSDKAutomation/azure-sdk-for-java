@@ -77,6 +77,11 @@ public interface ApplicationInsightsComponent extends HasInner<ApplicationInsigh
     Boolean immediatePurgeDataOn30Days();
 
     /**
+     * @return the ingestionMode value.
+     */
+    IngestionMode ingestionMode();
+
+    /**
      * @return the instrumentationKey value.
      */
     String instrumentationKey();
@@ -211,6 +216,18 @@ public interface ApplicationInsightsComponent extends HasInner<ApplicationInsigh
         }
 
         /**
+         * The stage of the applicationinsightscomponent definition allowing to specify IngestionMode.
+         */
+        interface WithIngestionMode {
+            /**
+             * Specifies ingestionMode.
+             * @param ingestionMode Indicates the flow of the ingestion. Possible values include: 'ApplicationInsights', 'ApplicationInsightsWithDiagnosticSettings', 'LogAnalytics'
+             * @return the next definition stage
+             */
+            WithCreate withIngestionMode(IngestionMode ingestionMode);
+        }
+
+        /**
          * The stage of the applicationinsightscomponent definition allowing to specify RequestSource.
          */
         interface WithRequestSource {
@@ -251,13 +268,13 @@ public interface ApplicationInsightsComponent extends HasInner<ApplicationInsigh
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ApplicationInsightsComponent>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithDisableIpMasking, DefinitionStages.WithFlowType, DefinitionStages.WithHockeyAppId, DefinitionStages.WithImmediatePurgeDataOn30Days, DefinitionStages.WithRequestSource, DefinitionStages.WithRetentionInDays, DefinitionStages.WithSamplingPercentage {
+        interface WithCreate extends Creatable<ApplicationInsightsComponent>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithDisableIpMasking, DefinitionStages.WithFlowType, DefinitionStages.WithHockeyAppId, DefinitionStages.WithImmediatePurgeDataOn30Days, DefinitionStages.WithIngestionMode, DefinitionStages.WithRequestSource, DefinitionStages.WithRetentionInDays, DefinitionStages.WithSamplingPercentage {
         }
     }
     /**
      * The template for a ApplicationInsightsComponent update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ApplicationInsightsComponent>, Resource.UpdateWithTags<Update>, UpdateStages.WithDisableIpMasking, UpdateStages.WithFlowType, UpdateStages.WithHockeyAppId, UpdateStages.WithImmediatePurgeDataOn30Days, UpdateStages.WithRequestSource, UpdateStages.WithRetentionInDays, UpdateStages.WithSamplingPercentage {
+    interface Update extends Appliable<ApplicationInsightsComponent>, Resource.UpdateWithTags<Update>, UpdateStages.WithDisableIpMasking, UpdateStages.WithFlowType, UpdateStages.WithHockeyAppId, UpdateStages.WithImmediatePurgeDataOn30Days, UpdateStages.WithIngestionMode, UpdateStages.WithRequestSource, UpdateStages.WithRetentionInDays, UpdateStages.WithSamplingPercentage {
     }
 
     /**
@@ -310,6 +327,18 @@ public interface ApplicationInsightsComponent extends HasInner<ApplicationInsigh
              * @return the next update stage
              */
             Update withImmediatePurgeDataOn30Days(Boolean immediatePurgeDataOn30Days);
+        }
+
+        /**
+         * The stage of the applicationinsightscomponent update allowing to specify IngestionMode.
+         */
+        interface WithIngestionMode {
+            /**
+             * Specifies ingestionMode.
+             * @param ingestionMode Indicates the flow of the ingestion. Possible values include: 'ApplicationInsights', 'ApplicationInsightsWithDiagnosticSettings', 'LogAnalytics'
+             * @return the next update stage
+             */
+            Update withIngestionMode(IngestionMode ingestionMode);
         }
 
         /**
