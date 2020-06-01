@@ -53,6 +53,14 @@ public class FtpReadSettings extends StoreReadSettings {
     private Object partitionRootPath;
 
     /**
+     * Indicates whether the source files need to be deleted after copy
+     * completion. Default is false. Type: boolean (or Expression with
+     * resultType boolean).
+     */
+    @JsonProperty(value = "deleteFilesAfterCompletion")
+    private Object deleteFilesAfterCompletion;
+
+    /**
      * Point to a text file that lists each file (relative path to the path
      * configured in the dataset) that you want to copy. Type: string (or
      * Expression with resultType string).
@@ -163,6 +171,26 @@ public class FtpReadSettings extends StoreReadSettings {
      */
     public FtpReadSettings withPartitionRootPath(Object partitionRootPath) {
         this.partitionRootPath = partitionRootPath;
+        return this;
+    }
+
+    /**
+     * Get indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean).
+     *
+     * @return the deleteFilesAfterCompletion value
+     */
+    public Object deleteFilesAfterCompletion() {
+        return this.deleteFilesAfterCompletion;
+    }
+
+    /**
+     * Set indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean).
+     *
+     * @param deleteFilesAfterCompletion the deleteFilesAfterCompletion value to set
+     * @return the FtpReadSettings object itself.
+     */
+    public FtpReadSettings withDeleteFilesAfterCompletion(Object deleteFilesAfterCompletion) {
+        this.deleteFilesAfterCompletion = deleteFilesAfterCompletion;
         return this;
     }
 

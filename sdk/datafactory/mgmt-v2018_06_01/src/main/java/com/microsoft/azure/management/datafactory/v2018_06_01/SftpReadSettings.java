@@ -61,6 +61,14 @@ public class SftpReadSettings extends StoreReadSettings {
     private Object fileListPath;
 
     /**
+     * Indicates whether the source files need to be deleted after copy
+     * completion. Default is false. Type: boolean (or Expression with
+     * resultType boolean).
+     */
+    @JsonProperty(value = "deleteFilesAfterCompletion")
+    private Object deleteFilesAfterCompletion;
+
+    /**
      * The start of file's modified datetime. Type: string (or Expression with
      * resultType string).
      */
@@ -191,6 +199,26 @@ public class SftpReadSettings extends StoreReadSettings {
      */
     public SftpReadSettings withFileListPath(Object fileListPath) {
         this.fileListPath = fileListPath;
+        return this;
+    }
+
+    /**
+     * Get indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean).
+     *
+     * @return the deleteFilesAfterCompletion value
+     */
+    public Object deleteFilesAfterCompletion() {
+        return this.deleteFilesAfterCompletion;
+    }
+
+    /**
+     * Set indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean).
+     *
+     * @param deleteFilesAfterCompletion the deleteFilesAfterCompletion value to set
+     * @return the SftpReadSettings object itself.
+     */
+    public SftpReadSettings withDeleteFilesAfterCompletion(Object deleteFilesAfterCompletion) {
+        this.deleteFilesAfterCompletion = deleteFilesAfterCompletion;
         return this;
     }
 

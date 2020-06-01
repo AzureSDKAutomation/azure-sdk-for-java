@@ -61,6 +61,14 @@ public class AzureBlobFSReadSettings extends StoreReadSettings {
     private Object partitionRootPath;
 
     /**
+     * Indicates whether the source files need to be deleted after copy
+     * completion. Default is false. Type: boolean (or Expression with
+     * resultType boolean).
+     */
+    @JsonProperty(value = "deleteFilesAfterCompletion")
+    private Object deleteFilesAfterCompletion;
+
+    /**
      * The start of file's modified datetime. Type: string (or Expression with
      * resultType string).
      */
@@ -191,6 +199,26 @@ public class AzureBlobFSReadSettings extends StoreReadSettings {
      */
     public AzureBlobFSReadSettings withPartitionRootPath(Object partitionRootPath) {
         this.partitionRootPath = partitionRootPath;
+        return this;
+    }
+
+    /**
+     * Get indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean).
+     *
+     * @return the deleteFilesAfterCompletion value
+     */
+    public Object deleteFilesAfterCompletion() {
+        return this.deleteFilesAfterCompletion;
+    }
+
+    /**
+     * Set indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean).
+     *
+     * @param deleteFilesAfterCompletion the deleteFilesAfterCompletion value to set
+     * @return the AzureBlobFSReadSettings object itself.
+     */
+    public AzureBlobFSReadSettings withDeleteFilesAfterCompletion(Object deleteFilesAfterCompletion) {
+        this.deleteFilesAfterCompletion = deleteFilesAfterCompletion;
         return this;
     }
 

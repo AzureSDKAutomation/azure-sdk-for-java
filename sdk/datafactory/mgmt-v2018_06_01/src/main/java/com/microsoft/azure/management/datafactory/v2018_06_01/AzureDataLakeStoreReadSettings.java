@@ -48,6 +48,24 @@ public class AzureDataLakeStoreReadSettings extends StoreReadSettings {
     private Object fileListPath;
 
     /**
+     * Lists files after the value (exclusive) based on file/folder names’
+     * lexicographical order. Applies under the folderPath in data set, and
+     * filter files/sub-folders under the folderPath. Type: string (or
+     * Expression with resultType string).
+     */
+    @JsonProperty(value = "listAfter")
+    private Object listAfter;
+
+    /**
+     * Lists files before the value (inclusive) based on file/folder names’
+     * lexicographical order. Applies under the folderPath in data set, and
+     * filter files/sub-folders under the folderPath. Type: string (or
+     * Expression with resultType string).
+     */
+    @JsonProperty(value = "listBefore")
+    private Object listBefore;
+
+    /**
      * Indicates whether to enable partition discovery.
      */
     @JsonProperty(value = "enablePartitionDiscovery")
@@ -59,6 +77,14 @@ public class AzureDataLakeStoreReadSettings extends StoreReadSettings {
      */
     @JsonProperty(value = "partitionRootPath")
     private Object partitionRootPath;
+
+    /**
+     * Indicates whether the source files need to be deleted after copy
+     * completion. Default is false. Type: boolean (or Expression with
+     * resultType boolean).
+     */
+    @JsonProperty(value = "deleteFilesAfterCompletion")
+    private Object deleteFilesAfterCompletion;
 
     /**
      * The start of file's modified datetime. Type: string (or Expression with
@@ -155,6 +181,46 @@ public class AzureDataLakeStoreReadSettings extends StoreReadSettings {
     }
 
     /**
+     * Get lists files after the value (exclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string).
+     *
+     * @return the listAfter value
+     */
+    public Object listAfter() {
+        return this.listAfter;
+    }
+
+    /**
+     * Set lists files after the value (exclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string).
+     *
+     * @param listAfter the listAfter value to set
+     * @return the AzureDataLakeStoreReadSettings object itself.
+     */
+    public AzureDataLakeStoreReadSettings withListAfter(Object listAfter) {
+        this.listAfter = listAfter;
+        return this;
+    }
+
+    /**
+     * Get lists files before the value (inclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string).
+     *
+     * @return the listBefore value
+     */
+    public Object listBefore() {
+        return this.listBefore;
+    }
+
+    /**
+     * Set lists files before the value (inclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string).
+     *
+     * @param listBefore the listBefore value to set
+     * @return the AzureDataLakeStoreReadSettings object itself.
+     */
+    public AzureDataLakeStoreReadSettings withListBefore(Object listBefore) {
+        this.listBefore = listBefore;
+        return this;
+    }
+
+    /**
      * Get indicates whether to enable partition discovery.
      *
      * @return the enablePartitionDiscovery value
@@ -191,6 +257,26 @@ public class AzureDataLakeStoreReadSettings extends StoreReadSettings {
      */
     public AzureDataLakeStoreReadSettings withPartitionRootPath(Object partitionRootPath) {
         this.partitionRootPath = partitionRootPath;
+        return this;
+    }
+
+    /**
+     * Get indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean).
+     *
+     * @return the deleteFilesAfterCompletion value
+     */
+    public Object deleteFilesAfterCompletion() {
+        return this.deleteFilesAfterCompletion;
+    }
+
+    /**
+     * Set indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean).
+     *
+     * @param deleteFilesAfterCompletion the deleteFilesAfterCompletion value to set
+     * @return the AzureDataLakeStoreReadSettings object itself.
+     */
+    public AzureDataLakeStoreReadSettings withDeleteFilesAfterCompletion(Object deleteFilesAfterCompletion) {
+        this.deleteFilesAfterCompletion = deleteFilesAfterCompletion;
         return this;
     }
 
