@@ -12,6 +12,8 @@ import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagedInstanceOpe
 import com.microsoft.azure.arm.model.implementation.IndexableRefreshableWrapperImpl;
 import rx.Observable;
 import org.joda.time.DateTime;
+import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagedInstanceOperationParametersPair;
+import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagedInstanceOperationSteps;
 import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagementOperationState;
 
 class ManagedInstanceOperationImpl extends IndexableRefreshableWrapperImpl<ManagedInstanceOperation, ManagedInstanceOperationInner> implements ManagedInstanceOperation {
@@ -100,6 +102,16 @@ class ManagedInstanceOperationImpl extends IndexableRefreshableWrapperImpl<Manag
     @Override
     public String operationFriendlyName() {
         return this.inner().operationFriendlyName();
+    }
+
+    @Override
+    public ManagedInstanceOperationParametersPair operationParameters() {
+        return this.inner().operationParameters();
+    }
+
+    @Override
+    public ManagedInstanceOperationSteps operationSteps() {
+        return this.inner().operationSteps();
     }
 
     @Override

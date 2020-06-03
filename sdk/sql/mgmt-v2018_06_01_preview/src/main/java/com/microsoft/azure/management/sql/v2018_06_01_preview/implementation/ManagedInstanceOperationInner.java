@@ -10,6 +10,8 @@ package com.microsoft.azure.management.sql.v2018_06_01_preview.implementation;
 
 import org.joda.time.DateTime;
 import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagementOperationState;
+import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagedInstanceOperationParametersPair;
+import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagedInstanceOperationSteps;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -97,6 +99,18 @@ public class ManagedInstanceOperationInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.isCancellable", access = JsonProperty.Access.WRITE_ONLY)
     private Boolean isCancellable;
+
+    /**
+     * The operation parameters.
+     */
+    @JsonProperty(value = "properties.operationParameters", access = JsonProperty.Access.WRITE_ONLY)
+    private ManagedInstanceOperationParametersPair operationParameters;
+
+    /**
+     * The operation steps.
+     */
+    @JsonProperty(value = "properties.operationSteps", access = JsonProperty.Access.WRITE_ONLY)
+    private ManagedInstanceOperationSteps operationSteps;
 
     /**
      * Get the name of the managed instance the operation is being performed on.
@@ -213,6 +227,24 @@ public class ManagedInstanceOperationInner extends ProxyResource {
      */
     public Boolean isCancellable() {
         return this.isCancellable;
+    }
+
+    /**
+     * Get the operation parameters.
+     *
+     * @return the operationParameters value
+     */
+    public ManagedInstanceOperationParametersPair operationParameters() {
+        return this.operationParameters;
+    }
+
+    /**
+     * Get the operation steps.
+     *
+     * @return the operationSteps value
+     */
+    public ManagedInstanceOperationSteps operationSteps() {
+        return this.operationSteps;
     }
 
 }

@@ -81,6 +81,16 @@ public interface ManagedInstanceOperation extends HasInner<ManagedInstanceOperat
     String operationFriendlyName();
 
     /**
+     * @return the operationParameters value.
+     */
+    ManagedInstanceOperationParametersPair operationParameters();
+
+    /**
+     * @return the operationSteps value.
+     */
+    ManagedInstanceOperationSteps operationSteps();
+
+    /**
      * @return the percentComplete value.
      */
     Integer percentComplete();
