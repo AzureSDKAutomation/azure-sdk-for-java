@@ -17,7 +17,7 @@ public class SkuInner {
     /**
      * Name of the Sku.
      */
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
