@@ -11,6 +11,7 @@
 package com.microsoft.azure.management.recoveryservices.backup.v2020_02_02;
 
 import org.joda.time.DateTime;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -99,6 +100,21 @@ public class AzureVmWorkloadProtectedItem extends ProtectedItemInner {
      */
     @JsonProperty(value = "protectedItemHealthStatus")
     private ProtectedItemHealthStatus protectedItemHealthStatus;
+
+    /**
+     * Health status of protected item. Possible values include: 'Passed',
+     * 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded',
+     * 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy',
+     * 'Invalid'.
+     */
+    @JsonProperty(value = "healthStatus")
+    private HealthStatus healthStatus;
+
+    /**
+     * Health details on this backup item.
+     */
+    @JsonProperty(value = "healthDetails")
+    private List<HealthDetails> healthDetails;
 
     /**
      * Additional information for this backup item.
@@ -323,6 +339,46 @@ public class AzureVmWorkloadProtectedItem extends ProtectedItemInner {
      */
     public AzureVmWorkloadProtectedItem withProtectedItemHealthStatus(ProtectedItemHealthStatus protectedItemHealthStatus) {
         this.protectedItemHealthStatus = protectedItemHealthStatus;
+        return this;
+    }
+
+    /**
+     * Get health status of protected item. Possible values include: 'Passed', 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded', 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy', 'Invalid'.
+     *
+     * @return the healthStatus value
+     */
+    public HealthStatus healthStatus() {
+        return this.healthStatus;
+    }
+
+    /**
+     * Set health status of protected item. Possible values include: 'Passed', 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded', 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy', 'Invalid'.
+     *
+     * @param healthStatus the healthStatus value to set
+     * @return the AzureVmWorkloadProtectedItem object itself.
+     */
+    public AzureVmWorkloadProtectedItem withHealthStatus(HealthStatus healthStatus) {
+        this.healthStatus = healthStatus;
+        return this;
+    }
+
+    /**
+     * Get health details on this backup item.
+     *
+     * @return the healthDetails value
+     */
+    public List<HealthDetails> healthDetails() {
+        return this.healthDetails;
+    }
+
+    /**
+     * Set health details on this backup item.
+     *
+     * @param healthDetails the healthDetails value to set
+     * @return the AzureVmWorkloadProtectedItem object itself.
+     */
+    public AzureVmWorkloadProtectedItem withHealthDetails(List<HealthDetails> healthDetails) {
+        this.healthDetails = healthDetails;
         return this;
     }
 

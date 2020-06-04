@@ -27,6 +27,21 @@ public final class HealthStatus extends ExpandableStringEnum<HealthStatus> {
     /** Static value ActionSuggested for HealthStatus. */
     public static final HealthStatus ACTION_SUGGESTED = fromString("ActionSuggested");
 
+    /** Static value Healthy for HealthStatus. */
+    public static final HealthStatus HEALTHY = fromString("Healthy");
+
+    /** Static value TransientDegraded for HealthStatus. */
+    public static final HealthStatus TRANSIENT_DEGRADED = fromString("TransientDegraded");
+
+    /** Static value PersistentDegraded for HealthStatus. */
+    public static final HealthStatus PERSISTENT_DEGRADED = fromString("PersistentDegraded");
+
+    /** Static value TransientUnhealthy for HealthStatus. */
+    public static final HealthStatus TRANSIENT_UNHEALTHY = fromString("TransientUnhealthy");
+
+    /** Static value PersistentUnhealthy for HealthStatus. */
+    public static final HealthStatus PERSISTENT_UNHEALTHY = fromString("PersistentUnhealthy");
+
     /** Static value Invalid for HealthStatus. */
     public static final HealthStatus INVALID = fromString("Invalid");
 

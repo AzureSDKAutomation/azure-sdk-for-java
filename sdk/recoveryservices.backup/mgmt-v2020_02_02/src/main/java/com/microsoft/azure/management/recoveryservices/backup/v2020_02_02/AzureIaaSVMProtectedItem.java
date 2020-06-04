@@ -56,7 +56,9 @@ public class AzureIaaSVMProtectedItem extends ProtectedItemInner {
 
     /**
      * Health status of protected item. Possible values include: 'Passed',
-     * 'ActionRequired', 'ActionSuggested', 'Invalid'.
+     * 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded',
+     * 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy',
+     * 'Invalid'.
      */
     @JsonProperty(value = "healthStatus")
     private HealthStatus healthStatus;
@@ -178,7 +180,7 @@ public class AzureIaaSVMProtectedItem extends ProtectedItemInner {
     }
 
     /**
-     * Get health status of protected item. Possible values include: 'Passed', 'ActionRequired', 'ActionSuggested', 'Invalid'.
+     * Get health status of protected item. Possible values include: 'Passed', 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded', 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy', 'Invalid'.
      *
      * @return the healthStatus value
      */
@@ -187,7 +189,7 @@ public class AzureIaaSVMProtectedItem extends ProtectedItemInner {
     }
 
     /**
-     * Set health status of protected item. Possible values include: 'Passed', 'ActionRequired', 'ActionSuggested', 'Invalid'.
+     * Set health status of protected item. Possible values include: 'Passed', 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded', 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy', 'Invalid'.
      *
      * @param healthStatus the healthStatus value to set
      * @return the AzureIaaSVMProtectedItem object itself.
