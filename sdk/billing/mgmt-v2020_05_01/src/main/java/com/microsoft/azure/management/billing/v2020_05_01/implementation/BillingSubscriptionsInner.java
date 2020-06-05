@@ -90,15 +90,15 @@ public class BillingSubscriptionsInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.BillingSubscriptions move" })
         @POST("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/move")
-        Observable<Response<ResponseBody>> move(@Path("billingAccountName") String billingAccountName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Body TransferBillingSubscriptionRequestProperties parameters, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> move(@Path("billingAccountName") String billingAccountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body TransferBillingSubscriptionRequestProperties parameters, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.BillingSubscriptions beginMove" })
         @POST("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/move")
-        Observable<Response<ResponseBody>> beginMove(@Path("billingAccountName") String billingAccountName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Body TransferBillingSubscriptionRequestProperties parameters, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginMove(@Path("billingAccountName") String billingAccountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body TransferBillingSubscriptionRequestProperties parameters, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.BillingSubscriptions validateMove" })
         @POST("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/validateMoveEligibility")
-        Observable<Response<ResponseBody>> validateMove(@Path("billingAccountName") String billingAccountName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Body TransferBillingSubscriptionRequestProperties parameters, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> validateMove(@Path("billingAccountName") String billingAccountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body TransferBillingSubscriptionRequestProperties parameters, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.BillingSubscriptions listByCustomerNext" })
         @GET
@@ -823,12 +823,15 @@ public class BillingSubscriptionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (destinationInvoiceSectionId == null) {
             throw new IllegalArgumentException("Parameter destinationInvoiceSectionId is required and cannot be null.");
         }
         TransferBillingSubscriptionRequestProperties parameters = new TransferBillingSubscriptionRequestProperties();
         parameters.withDestinationInvoiceSectionId(destinationInvoiceSectionId);
-        Observable<Response<ResponseBody>> observable = service.move(billingAccountName, this.client.subscriptionId(), this.client.acceptLanguage(), parameters, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.move(billingAccountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<BillingSubscriptionInner>() { }.getType(), BillingSubscriptionsMoveHeaders.class);
     }
 
@@ -891,12 +894,15 @@ public class BillingSubscriptionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (destinationInvoiceSectionId == null) {
             throw new IllegalArgumentException("Parameter destinationInvoiceSectionId is required and cannot be null.");
         }
         TransferBillingSubscriptionRequestProperties parameters = new TransferBillingSubscriptionRequestProperties();
         parameters.withDestinationInvoiceSectionId(destinationInvoiceSectionId);
-        return service.beginMove(billingAccountName, this.client.subscriptionId(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.beginMove(billingAccountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<BillingSubscriptionInner, BillingSubscriptionsMoveHeaders>>>() {
                 @Override
                 public Observable<ServiceResponseWithHeaders<BillingSubscriptionInner, BillingSubscriptionsMoveHeaders>> call(Response<ResponseBody> response) {
@@ -977,12 +983,15 @@ public class BillingSubscriptionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         if (destinationInvoiceSectionId == null) {
             throw new IllegalArgumentException("Parameter destinationInvoiceSectionId is required and cannot be null.");
         }
         TransferBillingSubscriptionRequestProperties parameters = new TransferBillingSubscriptionRequestProperties();
         parameters.withDestinationInvoiceSectionId(destinationInvoiceSectionId);
-        return service.validateMove(billingAccountName, this.client.subscriptionId(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.validateMove(billingAccountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ValidateSubscriptionTransferEligibilityResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ValidateSubscriptionTransferEligibilityResultInner>> call(Response<ResponseBody> response) {
