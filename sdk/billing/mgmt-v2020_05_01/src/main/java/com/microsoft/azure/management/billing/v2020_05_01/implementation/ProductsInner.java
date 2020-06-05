@@ -94,7 +94,7 @@ public class ProductsInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.Products validateMove" })
         @POST("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}/validateMoveEligibility")
-        Observable<Response<ResponseBody>> validateMove(@Path("billingAccountName") String billingAccountName, @Path("productName") String productName, @Header("accept-language") String acceptLanguage, @Body TransferProductRequestProperties parameters, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> validateMove(@Path("billingAccountName") String billingAccountName, @Path("productName") String productName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body TransferProductRequestProperties parameters, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2020_05_01.Products listByCustomerNext" })
         @GET
@@ -1353,10 +1353,13 @@ public class ProductsInner {
         if (productName == null) {
             throw new IllegalArgumentException("Parameter productName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         final String destinationInvoiceSectionId = null;
         TransferProductRequestProperties parameters = new TransferProductRequestProperties();
         parameters.withDestinationInvoiceSectionId(null);
-        return service.validateMove(billingAccountName, productName, this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.validateMove(billingAccountName, productName, this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ValidateProductTransferEligibilityResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ValidateProductTransferEligibilityResultInner>> call(Response<ResponseBody> response) {
@@ -1433,9 +1436,12 @@ public class ProductsInner {
         if (productName == null) {
             throw new IllegalArgumentException("Parameter productName is required and cannot be null.");
         }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
         TransferProductRequestProperties parameters = new TransferProductRequestProperties();
         parameters.withDestinationInvoiceSectionId(destinationInvoiceSectionId);
-        return service.validateMove(billingAccountName, productName, this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.validateMove(billingAccountName, productName, this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ValidateProductTransferEligibilityResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ValidateProductTransferEligibilityResultInner>> call(Response<ResponseBody> response) {
