@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview;
 
+import java.util.Map;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
@@ -21,7 +22,7 @@ public class WorkspacePatch {
      * tags to be updated.
      */
     @JsonProperty(value = "tags")
-    private Object tags;
+    private Map<String, String> tags;
 
     /**
      * Description of Workspace.
@@ -46,7 +47,7 @@ public class WorkspacePatch {
      *
      * @return the tags value
      */
-    public Object tags() {
+    public Map<String, String> tags() {
         return this.tags;
     }
 
@@ -56,7 +57,7 @@ public class WorkspacePatch {
      * @param tags the tags value to set
      * @return the WorkspacePatch object itself.
      */
-    public WorkspacePatch withTags(Object tags) {
+    public WorkspacePatch withTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
     }

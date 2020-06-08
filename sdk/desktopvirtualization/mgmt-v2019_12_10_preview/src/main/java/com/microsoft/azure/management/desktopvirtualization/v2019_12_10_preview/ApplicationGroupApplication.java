@@ -17,6 +17,7 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.implementation.DesktopVirtualizationManager;
+import java.util.Map;
 
 /**
  * Type representing ApplicationGroupApplication.
@@ -335,7 +336,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
              * @param tags tags to be updated
              * @return the next update stage
              */
-            Update withTags(Object tags);
+            Update withTags(Map<String, String> tags);
         }
 
     }

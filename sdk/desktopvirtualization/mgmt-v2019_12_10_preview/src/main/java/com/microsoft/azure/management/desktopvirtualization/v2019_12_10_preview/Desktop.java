@@ -16,6 +16,7 @@ import com.microsoft.azure.arm.model.Updatable;
 import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.implementation.DesktopVirtualizationManager;
+import java.util.Map;
 
 /**
  * Type representing Desktop.
@@ -99,7 +100,7 @@ public interface Desktop extends HasInner<DesktopInner>, Indexable, Refreshable<
              * @param tags tags to be updated
              * @return the next update stage
              */
-            Update withTags(Object tags);
+            Update withTags(Map<String, String> tags);
         }
 
     }

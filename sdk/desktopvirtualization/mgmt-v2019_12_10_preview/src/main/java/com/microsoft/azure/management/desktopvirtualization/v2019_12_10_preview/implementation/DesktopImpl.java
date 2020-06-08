@@ -12,6 +12,7 @@ import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.DesktopPatch;
+import java.util.Map;
 import rx.functions.Func1;
 
 class DesktopImpl extends CreatableUpdatableImpl<Desktop, DesktopInner, DesktopImpl> implements Desktop, Desktop.Update {
@@ -131,7 +132,7 @@ class DesktopImpl extends CreatableUpdatableImpl<Desktop, DesktopInner, DesktopI
     }
 
     @Override
-    public DesktopImpl withTags(Object tags) {
+    public DesktopImpl withTags(Map<String, String> tags) {
         this.updateParameter.withTags(tags);
         return this;
     }

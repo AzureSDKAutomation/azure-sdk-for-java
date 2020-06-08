@@ -12,6 +12,7 @@ import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.ApplicationPatch;
+import java.util.Map;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.CommandLineSetting;
 import rx.functions.Func1;
 
@@ -165,7 +166,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withTags(Object tags) {
+    public ApplicationGroupApplicationImpl withTags(Map<String, String> tags) {
         this.updateParameter.withTags(tags);
         return this;
     }

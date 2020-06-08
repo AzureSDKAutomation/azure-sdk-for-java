@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview;
 
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 
@@ -20,7 +21,7 @@ public class DesktopPatch {
      * tags to be updated.
      */
     @JsonProperty(value = "tags")
-    private Object tags;
+    private Map<String, String> tags;
 
     /**
      * Description of Desktop.
@@ -39,7 +40,7 @@ public class DesktopPatch {
      *
      * @return the tags value
      */
-    public Object tags() {
+    public Map<String, String> tags() {
         return this.tags;
     }
 
@@ -49,7 +50,7 @@ public class DesktopPatch {
      * @param tags the tags value to set
      * @return the DesktopPatch object itself.
      */
-    public DesktopPatch withTags(Object tags) {
+    public DesktopPatch withTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
     }

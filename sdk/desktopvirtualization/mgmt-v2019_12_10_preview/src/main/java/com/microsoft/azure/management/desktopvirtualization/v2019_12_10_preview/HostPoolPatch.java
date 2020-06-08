@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview;
 
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -21,7 +22,7 @@ public class HostPoolPatch extends ProxyResource {
      * tags to be updated.
      */
     @JsonProperty(value = "tags")
-    private Object tags;
+    private Map<String, String> tags;
 
     /**
      * Friendly name of HostPool.
@@ -90,7 +91,7 @@ public class HostPoolPatch extends ProxyResource {
      *
      * @return the tags value
      */
-    public Object tags() {
+    public Map<String, String> tags() {
         return this.tags;
     }
 
@@ -100,7 +101,7 @@ public class HostPoolPatch extends ProxyResource {
      * @param tags the tags value to set
      * @return the HostPoolPatch object itself.
      */
-    public HostPoolPatch withTags(Object tags) {
+    public HostPoolPatch withTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
     }

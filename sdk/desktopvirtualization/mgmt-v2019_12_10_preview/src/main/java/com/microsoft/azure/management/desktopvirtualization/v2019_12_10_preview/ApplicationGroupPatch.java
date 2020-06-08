@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview;
 
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -21,7 +22,7 @@ public class ApplicationGroupPatch extends ProxyResource {
      * tags to be updated.
      */
     @JsonProperty(value = "tags")
-    private Object tags;
+    private Map<String, String> tags;
 
     /**
      * Description of ApplicationGroup.
@@ -40,7 +41,7 @@ public class ApplicationGroupPatch extends ProxyResource {
      *
      * @return the tags value
      */
-    public Object tags() {
+    public Map<String, String> tags() {
         return this.tags;
     }
 
@@ -50,7 +51,7 @@ public class ApplicationGroupPatch extends ProxyResource {
      * @param tags the tags value to set
      * @return the ApplicationGroupPatch object itself.
      */
-    public ApplicationGroupPatch withTags(Object tags) {
+    public ApplicationGroupPatch withTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
     }
