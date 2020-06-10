@@ -60,6 +60,11 @@ public interface Webhook extends HasInner<WebhookInner>, Indexable, Refreshable<
     WebhookStatus status();
 
     /**
+     * @return the systemData value.
+     */
+    SystemData systemData();
+
+    /**
      * @return the tags value.
      */
     Map<String, String> tags();

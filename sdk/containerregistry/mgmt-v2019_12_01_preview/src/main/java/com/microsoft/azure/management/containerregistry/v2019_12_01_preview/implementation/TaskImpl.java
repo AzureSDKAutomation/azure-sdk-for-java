@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.TaskUpdateParameters;
 import java.util.Map;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.IdentityProperties;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ProvisioningState;
 import org.joda.time.DateTime;
@@ -162,6 +163,11 @@ class TaskImpl extends CreatableUpdatableImpl<Task, TaskInner, TaskImpl> impleme
     @Override
     public TaskStepProperties step() {
         return this.inner().step();
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override

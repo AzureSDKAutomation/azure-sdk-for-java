@@ -12,6 +12,7 @@ import com.microsoft.azure.arm.resources.models.implementation.GroupableResource
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Registry;
 import rx.Observable;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.RegistryUpdateParameters;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Sku;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.IdentityProperties;
 import org.joda.time.DateTime;
@@ -156,6 +157,11 @@ class RegistryImpl extends GroupableResourceCoreImpl<Registry, RegistryInner, Re
     @Override
     public StorageAccountProperties storageAccount() {
         return this.inner().storageAccount();
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override

@@ -10,6 +10,7 @@ package com.microsoft.azure.management.containerregistry.v2019_12_01_preview.imp
 
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ProvisioningState;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Status;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -41,6 +42,12 @@ public class ReplicationInner extends Resource {
      */
     @JsonProperty(value = "properties.regionEndpointEnabled")
     private Boolean regionEndpointEnabled;
+
+    /**
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get the provisioning state of the replication at the time the operation was called. Possible values include: 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled'.
@@ -78,6 +85,15 @@ public class ReplicationInner extends Resource {
     public ReplicationInner withRegionEndpointEnabled(Boolean regionEndpointEnabled) {
         this.regionEndpointEnabled = regionEndpointEnabled;
         return this;
+    }
+
+    /**
+     * Get metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
 }

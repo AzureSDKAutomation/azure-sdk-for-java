@@ -17,6 +17,7 @@ import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Agen
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.TaskStepProperties;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.TriggerProperties;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Credentials;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -95,6 +96,12 @@ public class TaskInner extends Resource {
      */
     @JsonProperty(value = "properties.credentials")
     private Credentials credentials;
+
+    /**
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get identity for the resource.
@@ -292,6 +299,15 @@ public class TaskInner extends Resource {
     public TaskInner withCredentials(Credentials credentials) {
         this.credentials = credentials;
         return this;
+    }
+
+    /**
+     * Get metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
 }

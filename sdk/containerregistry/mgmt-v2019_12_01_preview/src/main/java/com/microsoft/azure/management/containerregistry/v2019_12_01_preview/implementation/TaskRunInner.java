@@ -11,6 +11,7 @@ package com.microsoft.azure.management.containerregistry.v2019_12_01_preview.imp
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.IdentityProperties;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ProvisioningState;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.RunRequest;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -52,6 +53,12 @@ public class TaskRunInner extends Resource {
      */
     @JsonProperty(value = "properties.forceUpdateTag")
     private String forceUpdateTag;
+
+    /**
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get identity for the resource.
@@ -129,6 +136,15 @@ public class TaskRunInner extends Resource {
     public TaskRunInner withForceUpdateTag(String forceUpdateTag) {
         this.forceUpdateTag = forceUpdateTag;
         return this;
+    }
+
+    /**
+     * Get metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
 }

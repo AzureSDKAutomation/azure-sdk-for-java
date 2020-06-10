@@ -12,6 +12,7 @@ import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Webh
 import java.util.List;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.WebhookAction;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ProvisioningState;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -50,6 +51,12 @@ public class WebhookInner extends Resource {
      */
     @JsonProperty(value = "properties.provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private ProvisioningState provisioningState;
+
+    /**
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get the status of the webhook at the time the operation was called. Possible values include: 'enabled', 'disabled'.
@@ -118,6 +125,15 @@ public class WebhookInner extends Resource {
      */
     public ProvisioningState provisioningState() {
         return this.provisioningState;
+    }
+
+    /**
+     * Get metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
 }
