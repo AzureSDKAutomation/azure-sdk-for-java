@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.TaskRunUpdateParameters;
 import java.util.Map;
+import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.SystemData;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.IdentityProperties;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.ProvisioningState;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.RunRequest;
@@ -139,6 +140,11 @@ class TaskRunImpl extends CreatableUpdatableImpl<TaskRun, TaskRunInner, TaskRunI
         } else {
             return null;
         }
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override

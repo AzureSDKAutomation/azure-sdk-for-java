@@ -54,6 +54,11 @@ public interface AgentPool extends HasInner<AgentPoolInner>, Indexable, Refresha
     ProvisioningState provisioningState();
 
     /**
+     * @return the systemData value.
+     */
+    SystemData systemData();
+
+    /**
      * @return the tags value.
      */
     Map<String, String> tags();
