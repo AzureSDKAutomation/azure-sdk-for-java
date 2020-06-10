@@ -102,6 +102,11 @@ public interface Registry extends HasInner<RegistryInner>, Resource, GroupableRe
     StorageAccountProperties storageAccount();
 
     /**
+     * @return the systemData value.
+     */
+    SystemData systemData();
+
+    /**
      * The entirety of the Registry definition.
      */
     interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithSku, DefinitionStages.WithCreate {

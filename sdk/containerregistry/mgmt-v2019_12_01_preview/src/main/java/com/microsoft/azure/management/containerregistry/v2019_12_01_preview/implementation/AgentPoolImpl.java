@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.AgentPoolUpdateParameters;
 import java.util.Map;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.OS;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ProvisioningState;
 import rx.functions.Func1;
@@ -122,6 +123,11 @@ class AgentPoolImpl extends CreatableUpdatableImpl<AgentPool, AgentPoolInner, Ag
     @Override
     public ProvisioningState provisioningState() {
         return this.inner().provisioningState();
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override

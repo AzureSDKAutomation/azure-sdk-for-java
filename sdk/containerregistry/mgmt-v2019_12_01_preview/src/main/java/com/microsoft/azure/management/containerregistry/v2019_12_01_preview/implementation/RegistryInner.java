@@ -19,6 +19,7 @@ import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Poli
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.EncryptionProperty;
 import java.util.List;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.PublicNetworkAccess;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -123,6 +124,12 @@ public class RegistryInner extends Resource {
      */
     @JsonProperty(value = "properties.publicNetworkAccess")
     private PublicNetworkAccess publicNetworkAccess;
+
+    /**
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get the SKU of the container registry.
@@ -356,6 +363,15 @@ public class RegistryInner extends Resource {
     public RegistryInner withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess) {
         this.publicNetworkAccess = publicNetworkAccess;
         return this;
+    }
+
+    /**
+     * Get metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
 }

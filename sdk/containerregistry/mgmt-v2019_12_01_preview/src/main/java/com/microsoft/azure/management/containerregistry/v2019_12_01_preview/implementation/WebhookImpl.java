@@ -18,6 +18,7 @@ import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Webh
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.WebhookAction;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ProvisioningState;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.WebhookStatus;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import rx.functions.Func1;
 
 class WebhookImpl extends CreatableUpdatableImpl<Webhook, WebhookInner, WebhookImpl> implements Webhook, Webhook.Definition, Webhook.Update {
@@ -134,6 +135,11 @@ class WebhookImpl extends CreatableUpdatableImpl<Webhook, WebhookInner, WebhookI
     @Override
     public WebhookStatus status() {
         return this.inner().status();
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override

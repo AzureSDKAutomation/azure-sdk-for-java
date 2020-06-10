@@ -85,6 +85,11 @@ public interface Task extends HasInner<TaskInner>, Indexable, Refreshable<Task>,
     TaskStepProperties step();
 
     /**
+     * @return the systemData value.
+     */
+    SystemData systemData();
+
+    /**
      * @return the tags value.
      */
     Map<String, String> tags();

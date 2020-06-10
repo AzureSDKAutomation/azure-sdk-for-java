@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ReplicationUpdateParameters;
 import java.util.Map;
+import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.SystemData;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.ProvisioningState;
 import com.microsoft.azure.management.containerregistry.v2019_12_01_preview.Status;
 import rx.functions.Func1;
@@ -122,6 +123,11 @@ class ReplicationImpl extends CreatableUpdatableImpl<Replication, ReplicationInn
     @Override
     public Status status() {
         return this.inner().status();
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override
