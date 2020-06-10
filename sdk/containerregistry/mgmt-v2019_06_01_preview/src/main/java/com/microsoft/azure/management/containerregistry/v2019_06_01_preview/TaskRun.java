@@ -64,6 +64,11 @@ public interface TaskRun extends HasInner<TaskRunInner>, Indexable, Refreshable<
     Run runResult();
 
     /**
+     * @return the systemData value.
+     */
+    SystemData systemData();
+
+    /**
      * @return the tags value.
      */
     Map<String, String> tags();
