@@ -15,6 +15,7 @@ import com.microsoft.azure.arm.resources.collection.SupportsGettingByResourceGro
 import rx.Observable;
 import com.microsoft.azure.arm.resources.collection.SupportsListingByResourceGroup;
 import com.microsoft.azure.arm.collection.SupportsListing;
+import rx.Completable;
 import com.microsoft.azure.management.storagecache.v2020_03_01.implementation.CachesInner;
 import com.microsoft.azure.arm.model.HasInner;
 
@@ -30,7 +31,7 @@ public interface Caches extends SupportsCreating<Cache.DefinitionStages.Blank>, 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<Object> flushAsync(String resourceGroupName, String cacheName);
+    Completable flushAsync(String resourceGroupName, String cacheName);
 
     /**
      * Tells a Stopped state Cache to transition to Active state.
@@ -40,7 +41,7 @@ public interface Caches extends SupportsCreating<Cache.DefinitionStages.Blank>, 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<Object> startAsync(String resourceGroupName, String cacheName);
+    Completable startAsync(String resourceGroupName, String cacheName);
 
     /**
      * Tells an Active Cache to transition to Stopped state.
@@ -50,7 +51,17 @@ public interface Caches extends SupportsCreating<Cache.DefinitionStages.Blank>, 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<Object> stopAsync(String resourceGroupName, String cacheName);
+    Completable stopAsync(String resourceGroupName, String cacheName);
+
+    /**
+     * Forces a GSI to complete on the specified cache.
+     *
+     * @param resourceGroupName Target resource group.
+     * @param cacheName Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Completable forceGsiAsync(String resourceGroupName, String cacheName);
 
     /**
      * Upgrade a Cache's firmware if a new version is available. Otherwise, this operation has no effect.
@@ -60,6 +71,6 @@ public interface Caches extends SupportsCreating<Cache.DefinitionStages.Blank>, 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<Object> upgradeFirmwareAsync(String resourceGroupName, String cacheName);
+    Completable upgradeFirmwareAsync(String resourceGroupName, String cacheName);
 
 }
