@@ -469,7 +469,7 @@ public class AvailabilitySetsInner implements InnerSupportsGet<AvailabilitySetIn
     /**
      * Lists all availability sets in a subscription.
      *
-     * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     * @param expand The expand expression to apply to the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -488,7 +488,7 @@ public class AvailabilitySetsInner implements InnerSupportsGet<AvailabilitySetIn
     /**
      * Lists all availability sets in a subscription.
      *
-     * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     * @param expand The expand expression to apply to the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -508,7 +508,7 @@ public class AvailabilitySetsInner implements InnerSupportsGet<AvailabilitySetIn
     /**
      * Lists all availability sets in a subscription.
      *
-     * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     * @param expand The expand expression to apply to the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;AvailabilitySetInner&gt; object
      */
@@ -525,7 +525,7 @@ public class AvailabilitySetsInner implements InnerSupportsGet<AvailabilitySetIn
     /**
      * Lists all availability sets in a subscription.
      *
-     * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     * @param expand The expand expression to apply to the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;AvailabilitySetInner&gt; object
      */
@@ -546,7 +546,7 @@ public class AvailabilitySetsInner implements InnerSupportsGet<AvailabilitySetIn
     /**
      * Lists all availability sets in a subscription.
      *
-    ServiceResponse<PageImpl<AvailabilitySetInner>> * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+    ServiceResponse<PageImpl<AvailabilitySetInner>> * @param expand The expand expression to apply to the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;AvailabilitySetInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
