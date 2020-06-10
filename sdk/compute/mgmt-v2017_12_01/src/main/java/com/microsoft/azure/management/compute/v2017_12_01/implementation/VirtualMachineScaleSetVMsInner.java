@@ -1339,9 +1339,9 @@ public class VirtualMachineScaleSetVMsInner {
      *
      * @param resourceGroupName The name of the resource group.
      * @param virtualMachineScaleSetName The name of the VM scale set.
-     * @param filter The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-     * @param select The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-     * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     * @param filter The filter to apply to the operation.
+     * @param select The list parameters.
+     * @param expand The expand expression to apply to the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -1362,9 +1362,9 @@ public class VirtualMachineScaleSetVMsInner {
      *
      * @param resourceGroupName The name of the resource group.
      * @param virtualMachineScaleSetName The name of the VM scale set.
-     * @param filter The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-     * @param select The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-     * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     * @param filter The filter to apply to the operation.
+     * @param select The list parameters.
+     * @param expand The expand expression to apply to the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -1386,9 +1386,9 @@ public class VirtualMachineScaleSetVMsInner {
      *
      * @param resourceGroupName The name of the resource group.
      * @param virtualMachineScaleSetName The name of the VM scale set.
-     * @param filter The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-     * @param select The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-     * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     * @param filter The filter to apply to the operation.
+     * @param select The list parameters.
+     * @param expand The expand expression to apply to the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;VirtualMachineScaleSetVMInner&gt; object
      */
@@ -1407,9 +1407,9 @@ public class VirtualMachineScaleSetVMsInner {
      *
      * @param resourceGroupName The name of the resource group.
      * @param virtualMachineScaleSetName The name of the VM scale set.
-     * @param filter The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-     * @param select The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-     * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     * @param filter The filter to apply to the operation.
+     * @param select The list parameters.
+     * @param expand The expand expression to apply to the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;VirtualMachineScaleSetVMInner&gt; object
      */
@@ -1432,9 +1432,9 @@ public class VirtualMachineScaleSetVMsInner {
      *
     ServiceResponse<PageImpl1<VirtualMachineScaleSetVMInner>> * @param resourceGroupName The name of the resource group.
     ServiceResponse<PageImpl1<VirtualMachineScaleSetVMInner>> * @param virtualMachineScaleSetName The name of the VM scale set.
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetVMInner>> * @param filter The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetVMInner>> * @param select The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetVMInner>> * @param expand The expand expression to apply to the operation. Allowed values are 'instanceView'.
+    ServiceResponse<PageImpl1<VirtualMachineScaleSetVMInner>> * @param filter The filter to apply to the operation.
+    ServiceResponse<PageImpl1<VirtualMachineScaleSetVMInner>> * @param select The list parameters.
+    ServiceResponse<PageImpl1<VirtualMachineScaleSetVMInner>> * @param expand The expand expression to apply to the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualMachineScaleSetVMInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
