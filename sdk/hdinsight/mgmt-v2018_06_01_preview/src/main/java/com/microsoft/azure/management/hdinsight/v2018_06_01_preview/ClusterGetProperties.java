@@ -103,6 +103,12 @@ public class ClusterGetProperties {
     private DiskEncryptionProperties diskEncryptionProperties;
 
     /**
+     * The encryption-in-transit properties.
+     */
+    @JsonProperty(value = "encryptionInTransitProperties")
+    private EncryptionInTransitProperties encryptionInTransitProperties;
+
+    /**
      * The minimal supported tls version.
      */
     @JsonProperty(value = "minSupportedTlsVersion")
@@ -385,6 +391,26 @@ public class ClusterGetProperties {
      */
     public ClusterGetProperties withDiskEncryptionProperties(DiskEncryptionProperties diskEncryptionProperties) {
         this.diskEncryptionProperties = diskEncryptionProperties;
+        return this;
+    }
+
+    /**
+     * Get the encryption-in-transit properties.
+     *
+     * @return the encryptionInTransitProperties value
+     */
+    public EncryptionInTransitProperties encryptionInTransitProperties() {
+        return this.encryptionInTransitProperties;
+    }
+
+    /**
+     * Set the encryption-in-transit properties.
+     *
+     * @param encryptionInTransitProperties the encryptionInTransitProperties value to set
+     * @return the ClusterGetProperties object itself.
+     */
+    public ClusterGetProperties withEncryptionInTransitProperties(EncryptionInTransitProperties encryptionInTransitProperties) {
+        this.encryptionInTransitProperties = encryptionInTransitProperties;
         return this;
     }
 
