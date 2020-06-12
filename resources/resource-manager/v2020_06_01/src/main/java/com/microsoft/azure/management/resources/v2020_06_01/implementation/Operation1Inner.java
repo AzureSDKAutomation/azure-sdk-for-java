@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Microsoft.Resources operation.
  */
-public class OperationInner {
+public class Operation1Inner {
     /**
      * Operation name: {provider}/{resource}/{operation}.
      */
@@ -40,9 +40,9 @@ public class OperationInner {
      * Set operation name: {provider}/{resource}/{operation}.
      *
      * @param name the name value to set
-     * @return the OperationInner object itself.
+     * @return the Operation1Inner object itself.
      */
-    public OperationInner withName(String name) {
+    public Operation1Inner withName(String name) {
         this.name = name;
         return this;
     }
@@ -60,9 +60,9 @@ public class OperationInner {
      * Set the object that represents the operation.
      *
      * @param display the display value to set
-     * @return the OperationInner object itself.
+     * @return the Operation1Inner object itself.
      */
-    public OperationInner withDisplay(OperationDisplay display) {
+    public Operation1Inner withDisplay(OperationDisplay display) {
         this.display = display;
         return this;
     }

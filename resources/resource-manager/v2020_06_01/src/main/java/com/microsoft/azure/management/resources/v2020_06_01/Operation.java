@@ -8,23 +8,49 @@
 
 package com.microsoft.azure.management.resources.v2020_06_01;
 
-import com.microsoft.azure.arm.model.HasInner;
-import com.microsoft.azure.arm.resources.models.HasManager;
-import com.microsoft.azure.management.resources.v2020_06_01.implementation.ResourcesManager;
-import com.microsoft.azure.management.resources.v2020_06_01.implementation.OperationInner;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Type representing Operation.
+ * Defines values for Operation.
  */
-public interface Operation extends HasInner<OperationInner>, HasManager<ResourcesManager> {
-    /**
-     * @return the display value.
-     */
-    OperationDisplay display();
+public enum Operation {
+    /** The 'replace' option replaces the entire set of existing tags with a new set. */
+    REPLACE("Replace"),
+
+    /** The 'merge' option allows adding tags with new names and updating the values of tags with existing names. */
+    MERGE("Merge"),
+
+    /** The 'delete' option allows selectively deleting tags based on given names or name/value pairs. */
+    DELETE("Delete");
+
+    /** The actual serialized value for a Operation instance. */
+    private String value;
+
+    Operation(String value) {
+        this.value = value;
+    }
 
     /**
-     * @return the name value.
+     * Parses a serialized value to a Operation instance.
+     *
+     * @param value the serialized value to parse.
+     * @return the parsed Operation object, or null if unable to parse.
      */
-    String name();
+    @JsonCreator
+    public static Operation fromString(String value) {
+        Operation[] items = Operation.values();
+        for (Operation item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
 
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.value;
+    }
 }

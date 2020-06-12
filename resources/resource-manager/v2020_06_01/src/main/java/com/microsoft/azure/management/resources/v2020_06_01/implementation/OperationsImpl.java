@@ -14,7 +14,7 @@ import com.microsoft.azure.management.resources.v2020_06_01.Operations;
 import rx.functions.Func1;
 import rx.Observable;
 import com.microsoft.azure.Page;
-import com.microsoft.azure.management.resources.v2020_06_01.Operation;
+import com.microsoft.azure.management.resources.v2020_06_01.Operation1;
 
 class OperationsImpl extends WrapperImpl<OperationsInner> implements Operations {
     private final ResourcesManager manager;
@@ -29,19 +29,19 @@ class OperationsImpl extends WrapperImpl<OperationsInner> implements Operations 
     }
 
     @Override
-    public Observable<Operation> listAsync() {
+    public Observable<Operation1> listAsync() {
         OperationsInner client = this.inner();
         return client.listAsync()
-        .flatMapIterable(new Func1<Page<OperationInner>, Iterable<OperationInner>>() {
+        .flatMapIterable(new Func1<Page<Operation1Inner>, Iterable<Operation1Inner>>() {
             @Override
-            public Iterable<OperationInner> call(Page<OperationInner> page) {
+            public Iterable<Operation1Inner> call(Page<Operation1Inner> page) {
                 return page.items();
             }
         })
-        .map(new Func1<OperationInner, Operation>() {
+        .map(new Func1<Operation1Inner, Operation1>() {
             @Override
-            public Operation call(OperationInner inner) {
-                return new OperationImpl(inner, manager());
+            public Operation1 call(Operation1Inner inner) {
+                return new Operation1Impl(inner, manager());
             }
         });
     }

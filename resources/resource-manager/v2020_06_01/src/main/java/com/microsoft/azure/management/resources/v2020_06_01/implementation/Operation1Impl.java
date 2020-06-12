@@ -8,13 +8,13 @@
 
 package com.microsoft.azure.management.resources.v2020_06_01.implementation;
 
-import com.microsoft.azure.management.resources.v2020_06_01.Operation;
+import com.microsoft.azure.management.resources.v2020_06_01.Operation1;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.resources.v2020_06_01.OperationDisplay;
 
-class OperationImpl extends WrapperImpl<OperationInner> implements Operation {
+class Operation1Impl extends WrapperImpl<Operation1Inner> implements Operation1 {
     private final ResourcesManager manager;
-    OperationImpl(OperationInner inner, ResourcesManager manager) {
+    Operation1Impl(Operation1Inner inner, ResourcesManager manager) {
         super(inner);
         this.manager = manager;
     }
