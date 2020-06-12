@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingProfiles;
 import rx.Observable;
 import rx.functions.Func1;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.DetachPaymentMethodEligibilityResult;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingProfileListResult;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingProfile;
 
@@ -39,6 +40,18 @@ class BillingProfilesImpl extends WrapperImpl<BillingProfilesInner> implements B
 
     private BillingProfileImpl wrapModel(String name) {
         return new BillingProfileImpl(name, this.manager());
+    }
+
+    @Override
+    public Observable<DetachPaymentMethodEligibilityResult> getEligibilityToDetachPaymentMethodAsync(String billingAccountName, String billingProfileName) {
+        BillingProfilesInner client = this.inner();
+        return client.getEligibilityToDetachPaymentMethodAsync(billingAccountName, billingProfileName)
+        .map(new Func1<DetachPaymentMethodEligibilityResultInner, DetachPaymentMethodEligibilityResult>() {
+            @Override
+            public DetachPaymentMethodEligibilityResult call(DetachPaymentMethodEligibilityResultInner inner) {
+                return new DetachPaymentMethodEligibilityResultImpl(inner, manager());
+            }
+        });
     }
 
     @Override

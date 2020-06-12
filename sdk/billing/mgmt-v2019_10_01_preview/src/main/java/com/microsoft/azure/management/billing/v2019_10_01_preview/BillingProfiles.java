@@ -18,6 +18,16 @@ import com.microsoft.azure.arm.model.HasInner;
  */
 public interface BillingProfiles extends SupportsCreating<BillingProfile.DefinitionStages.Blank>, HasInner<BillingProfilesInner> {
     /**
+     * Validates if the default payment method can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param billingProfileName The ID that uniquely identifies a billing profile.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<DetachPaymentMethodEligibilityResult> getEligibilityToDetachPaymentMethodAsync(String billingAccountName, String billingProfileName);
+
+    /**
      * Lists the billing profiles that a user has access to. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.

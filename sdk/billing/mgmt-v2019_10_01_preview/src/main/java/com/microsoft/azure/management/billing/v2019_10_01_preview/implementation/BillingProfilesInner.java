@@ -59,6 +59,10 @@ public class BillingProfilesInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface BillingProfilesService {
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingProfiles getEligibilityToDetachPaymentMethod" })
+        @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDetachPaymentMethodEligibility")
+        Observable<Response<ResponseBody>> getEligibilityToDetachPaymentMethod(@Path("billingAccountName") String billingAccountName, @Path("billingProfileName") String billingProfileName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingProfiles listByBillingAccount" })
         @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles")
         Observable<Response<ResponseBody>> listByBillingAccount(@Path("billingAccountName") String billingAccountName, @Query("api-version") String apiVersion, @Query("$expand") String expand, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -83,6 +87,89 @@ public class BillingProfilesInner {
         @PATCH("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}")
         Observable<Response<ResponseBody>> beginUpdate(@Path("billingAccountName") String billingAccountName, @Path("billingProfileName") String billingProfileName, @Query("api-version") String apiVersion, @Body BillingProfileInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+    }
+
+    /**
+     * Validates if the default payment method can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param billingProfileName The ID that uniquely identifies a billing profile.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the DetachPaymentMethodEligibilityResultInner object if successful.
+     */
+    public DetachPaymentMethodEligibilityResultInner getEligibilityToDetachPaymentMethod(String billingAccountName, String billingProfileName) {
+        return getEligibilityToDetachPaymentMethodWithServiceResponseAsync(billingAccountName, billingProfileName).toBlocking().single().body();
+    }
+
+    /**
+     * Validates if the default payment method can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param billingProfileName The ID that uniquely identifies a billing profile.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<DetachPaymentMethodEligibilityResultInner> getEligibilityToDetachPaymentMethodAsync(String billingAccountName, String billingProfileName, final ServiceCallback<DetachPaymentMethodEligibilityResultInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getEligibilityToDetachPaymentMethodWithServiceResponseAsync(billingAccountName, billingProfileName), serviceCallback);
+    }
+
+    /**
+     * Validates if the default payment method can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param billingProfileName The ID that uniquely identifies a billing profile.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DetachPaymentMethodEligibilityResultInner object
+     */
+    public Observable<DetachPaymentMethodEligibilityResultInner> getEligibilityToDetachPaymentMethodAsync(String billingAccountName, String billingProfileName) {
+        return getEligibilityToDetachPaymentMethodWithServiceResponseAsync(billingAccountName, billingProfileName).map(new Func1<ServiceResponse<DetachPaymentMethodEligibilityResultInner>, DetachPaymentMethodEligibilityResultInner>() {
+            @Override
+            public DetachPaymentMethodEligibilityResultInner call(ServiceResponse<DetachPaymentMethodEligibilityResultInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Validates if the default payment method can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param billingProfileName The ID that uniquely identifies a billing profile.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DetachPaymentMethodEligibilityResultInner object
+     */
+    public Observable<ServiceResponse<DetachPaymentMethodEligibilityResultInner>> getEligibilityToDetachPaymentMethodWithServiceResponseAsync(String billingAccountName, String billingProfileName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (billingProfileName == null) {
+            throw new IllegalArgumentException("Parameter billingProfileName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getEligibilityToDetachPaymentMethod(billingAccountName, billingProfileName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DetachPaymentMethodEligibilityResultInner>>>() {
+                @Override
+                public Observable<ServiceResponse<DetachPaymentMethodEligibilityResultInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<DetachPaymentMethodEligibilityResultInner> clientResponse = getEligibilityToDetachPaymentMethodDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<DetachPaymentMethodEligibilityResultInner> getEligibilityToDetachPaymentMethodDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<DetachPaymentMethodEligibilityResultInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<DetachPaymentMethodEligibilityResultInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
     }
 
     /**
