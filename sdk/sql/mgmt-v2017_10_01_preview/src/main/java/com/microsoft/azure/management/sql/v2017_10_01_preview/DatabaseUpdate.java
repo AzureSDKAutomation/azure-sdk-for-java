@@ -277,6 +277,12 @@ public class DatabaseUpdate {
     private DateTime resumedDate;
 
     /**
+     * Maintenance configuration id assigned to the database.
+     */
+    @JsonProperty(value = "properties.maintenanceConfigurationId")
+    private String maintenanceConfigurationId;
+
+    /**
      * Resource tags.
      */
     @JsonProperty(value = "tags")
@@ -804,6 +810,26 @@ public class DatabaseUpdate {
      */
     public DateTime resumedDate() {
         return this.resumedDate;
+    }
+
+    /**
+     * Get maintenance configuration id assigned to the database.
+     *
+     * @return the maintenanceConfigurationId value
+     */
+    public String maintenanceConfigurationId() {
+        return this.maintenanceConfigurationId;
+    }
+
+    /**
+     * Set maintenance configuration id assigned to the database.
+     *
+     * @param maintenanceConfigurationId the maintenanceConfigurationId value to set
+     * @return the DatabaseUpdate object itself.
+     */
+    public DatabaseUpdate withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        this.maintenanceConfigurationId = maintenanceConfigurationId;
+        return this;
     }
 
     /**

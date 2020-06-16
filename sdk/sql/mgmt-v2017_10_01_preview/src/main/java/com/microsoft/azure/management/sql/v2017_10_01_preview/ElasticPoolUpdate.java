@@ -51,6 +51,12 @@ public class ElasticPoolUpdate {
     private ElasticPoolLicenseType licenseType;
 
     /**
+     * Maintenance configuration id assigned to the elastic pool.
+     */
+    @JsonProperty(value = "properties.maintenanceConfigurationId")
+    private String maintenanceConfigurationId;
+
+    /**
      * Resource tags.
      */
     @JsonProperty(value = "tags")
@@ -153,6 +159,26 @@ public class ElasticPoolUpdate {
      */
     public ElasticPoolUpdate withLicenseType(ElasticPoolLicenseType licenseType) {
         this.licenseType = licenseType;
+        return this;
+    }
+
+    /**
+     * Get maintenance configuration id assigned to the elastic pool.
+     *
+     * @return the maintenanceConfigurationId value
+     */
+    public String maintenanceConfigurationId() {
+        return this.maintenanceConfigurationId;
+    }
+
+    /**
+     * Set maintenance configuration id assigned to the elastic pool.
+     *
+     * @param maintenanceConfigurationId the maintenanceConfigurationId value to set
+     * @return the ElasticPoolUpdate object itself.
+     */
+    public ElasticPoolUpdate withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        this.maintenanceConfigurationId = maintenanceConfigurationId;
         return this;
     }
 

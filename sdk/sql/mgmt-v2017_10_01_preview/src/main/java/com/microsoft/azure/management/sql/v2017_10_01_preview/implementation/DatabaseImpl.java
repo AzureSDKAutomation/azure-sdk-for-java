@@ -187,6 +187,11 @@ class DatabaseImpl extends CreatableUpdatableImpl<Database, DatabaseInner, Datab
     }
 
     @Override
+    public String maintenanceConfigurationId() {
+        return this.inner().maintenanceConfigurationId();
+    }
+
+    @Override
     public String managedBy() {
         return this.inner().managedBy();
     }
@@ -375,6 +380,16 @@ class DatabaseImpl extends CreatableUpdatableImpl<Database, DatabaseInner, Datab
             this.inner().withLongTermRetentionBackupResourceId(longTermRetentionBackupResourceId);
         } else {
             this.updateParameter.withLongTermRetentionBackupResourceId(longTermRetentionBackupResourceId);
+        }
+        return this;
+    }
+
+    @Override
+    public DatabaseImpl withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        if (isInCreateMode()) {
+            this.inner().withMaintenanceConfigurationId(maintenanceConfigurationId);
+        } else {
+            this.updateParameter.withMaintenanceConfigurationId(maintenanceConfigurationId);
         }
         return this;
     }

@@ -123,6 +123,11 @@ class ElasticPoolImpl extends CreatableUpdatableImpl<ElasticPool, ElasticPoolInn
     }
 
     @Override
+    public String maintenanceConfigurationId() {
+        return this.inner().maintenanceConfigurationId();
+    }
+
+    @Override
     public Long maxSizeBytes() {
         return this.inner().maxSizeBytes();
     }
@@ -181,6 +186,16 @@ class ElasticPoolImpl extends CreatableUpdatableImpl<ElasticPool, ElasticPoolInn
             this.inner().withLicenseType(licenseType);
         } else {
             this.updateParameter.withLicenseType(licenseType);
+        }
+        return this;
+    }
+
+    @Override
+    public ElasticPoolImpl withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        if (isInCreateMode()) {
+            this.inner().withMaintenanceConfigurationId(maintenanceConfigurationId);
+        } else {
+            this.updateParameter.withMaintenanceConfigurationId(maintenanceConfigurationId);
         }
         return this;
     }
