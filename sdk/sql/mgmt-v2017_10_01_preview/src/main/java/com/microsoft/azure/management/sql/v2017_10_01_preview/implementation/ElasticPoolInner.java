@@ -85,6 +85,12 @@ public class ElasticPoolInner extends Resource {
     private ElasticPoolLicenseType licenseType;
 
     /**
+     * Maintenance configuration id assigned to the elastic pool.
+     */
+    @JsonProperty(value = "properties.maintenanceConfigurationId")
+    private String maintenanceConfigurationId;
+
+    /**
      * Get the elastic pool SKU.
      The list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or the following command:
      ```azurecli
@@ -216,6 +222,26 @@ public class ElasticPoolInner extends Resource {
      */
     public ElasticPoolInner withLicenseType(ElasticPoolLicenseType licenseType) {
         this.licenseType = licenseType;
+        return this;
+    }
+
+    /**
+     * Get maintenance configuration id assigned to the elastic pool.
+     *
+     * @return the maintenanceConfigurationId value
+     */
+    public String maintenanceConfigurationId() {
+        return this.maintenanceConfigurationId;
+    }
+
+    /**
+     * Set maintenance configuration id assigned to the elastic pool.
+     *
+     * @param maintenanceConfigurationId the maintenanceConfigurationId value to set
+     * @return the ElasticPoolInner object itself.
+     */
+    public ElasticPoolInner withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        this.maintenanceConfigurationId = maintenanceConfigurationId;
         return this;
     }
 

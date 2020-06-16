@@ -309,6 +309,12 @@ public class DatabaseInner extends Resource {
     private DateTime resumedDate;
 
     /**
+     * Maintenance configuration id assigned to the database.
+     */
+    @JsonProperty(value = "properties.maintenanceConfigurationId")
+    private String maintenanceConfigurationId;
+
+    /**
      * Get the database SKU.
      The list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or one of the following commands:
      ```azurecli
@@ -862,6 +868,26 @@ public class DatabaseInner extends Resource {
      */
     public DateTime resumedDate() {
         return this.resumedDate;
+    }
+
+    /**
+     * Get maintenance configuration id assigned to the database.
+     *
+     * @return the maintenanceConfigurationId value
+     */
+    public String maintenanceConfigurationId() {
+        return this.maintenanceConfigurationId;
+    }
+
+    /**
+     * Set maintenance configuration id assigned to the database.
+     *
+     * @param maintenanceConfigurationId the maintenanceConfigurationId value to set
+     * @return the DatabaseInner object itself.
+     */
+    public DatabaseInner withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        this.maintenanceConfigurationId = maintenanceConfigurationId;
+        return this;
     }
 
 }
