@@ -9,7 +9,6 @@
 package com.microsoft.azure.management.billing.v2019_10_01_preview.implementation;
 
 import java.util.List;
-import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissionsProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -20,15 +19,30 @@ public class BillingPermissionsListResultInner {
      * The list of billingPermissions a caller has on a billing account.
      */
     @JsonProperty(value = "value", access = JsonProperty.Access.WRITE_ONLY)
-    private List<BillingPermissionsProperties> value;
+    private List<BillingPermissionsPropertiesInner> value;
+
+    /**
+     * The link (url) to the next page of results.
+     */
+    @JsonProperty(value = "nextLink", access = JsonProperty.Access.WRITE_ONLY)
+    private String nextLink;
 
     /**
      * Get the list of billingPermissions a caller has on a billing account.
      *
      * @return the value value
      */
-    public List<BillingPermissionsProperties> value() {
+    public List<BillingPermissionsPropertiesInner> value() {
         return this.value;
+    }
+
+    /**
+     * Get the link (url) to the next page of results.
+     *
+     * @return the nextLink value
+     */
+    public String nextLink() {
+        return this.nextLink;
     }
 
 }

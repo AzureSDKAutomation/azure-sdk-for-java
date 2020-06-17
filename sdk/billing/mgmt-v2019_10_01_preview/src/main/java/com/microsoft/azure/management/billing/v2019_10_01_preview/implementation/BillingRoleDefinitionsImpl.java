@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleDefinitions;
 import rx.Observable;
 import rx.functions.Func1;
+import com.microsoft.azure.Page;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleDefinition;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleDefinitionListResult;
 
@@ -57,13 +58,25 @@ class BillingRoleDefinitionsImpl extends WrapperImpl<BillingRoleDefinitionsInner
     }
 
     @Override
-    public Observable<BillingRoleDefinitionListResult> listByBillingAccountAsync(String billingAccountName) {
+    public Observable<BillingRoleDefinition> getByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleDefinitionName) {
         BillingRoleDefinitionsInner client = this.inner();
-        return client.listByBillingAccountAsync(billingAccountName)
-        .map(new Func1<BillingRoleDefinitionListResultInner, BillingRoleDefinitionListResult>() {
+        return client.getByDepartmentAsync(billingAccountName, departmentName, billingRoleDefinitionName)
+        .map(new Func1<BillingRoleDefinitionInner, BillingRoleDefinition>() {
             @Override
-            public BillingRoleDefinitionListResult call(BillingRoleDefinitionListResultInner inner) {
-                return new BillingRoleDefinitionListResultImpl(inner, manager());
+            public BillingRoleDefinition call(BillingRoleDefinitionInner inner) {
+                return new BillingRoleDefinitionImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingRoleDefinition> getByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleDefinitionName) {
+        BillingRoleDefinitionsInner client = this.inner();
+        return client.getByEnrollmentAccountAsync(billingAccountName, enrollmentAccountName, billingRoleDefinitionName)
+        .map(new Func1<BillingRoleDefinitionInner, BillingRoleDefinition>() {
+            @Override
+            public BillingRoleDefinition call(BillingRoleDefinitionInner inner) {
+                return new BillingRoleDefinitionImpl(inner, manager());
             }
         });
     }
@@ -88,6 +101,60 @@ class BillingRoleDefinitionsImpl extends WrapperImpl<BillingRoleDefinitionsInner
             @Override
             public BillingRoleDefinitionListResult call(BillingRoleDefinitionListResultInner inner) {
                 return new BillingRoleDefinitionListResultImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingRoleDefinition> listByDepartmentAsync(final String billingAccountName, final String departmentName) {
+        BillingRoleDefinitionsInner client = this.inner();
+        return client.listByDepartmentAsync(billingAccountName, departmentName)
+        .flatMapIterable(new Func1<Page<BillingRoleDefinitionInner>, Iterable<BillingRoleDefinitionInner>>() {
+            @Override
+            public Iterable<BillingRoleDefinitionInner> call(Page<BillingRoleDefinitionInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingRoleDefinitionInner, BillingRoleDefinition>() {
+            @Override
+            public BillingRoleDefinition call(BillingRoleDefinitionInner inner) {
+                return new BillingRoleDefinitionImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingRoleDefinition> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName) {
+        BillingRoleDefinitionsInner client = this.inner();
+        return client.listByEnrollmentAccountAsync(billingAccountName, enrollmentAccountName)
+        .flatMapIterable(new Func1<Page<BillingRoleDefinitionInner>, Iterable<BillingRoleDefinitionInner>>() {
+            @Override
+            public Iterable<BillingRoleDefinitionInner> call(Page<BillingRoleDefinitionInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingRoleDefinitionInner, BillingRoleDefinition>() {
+            @Override
+            public BillingRoleDefinition call(BillingRoleDefinitionInner inner) {
+                return new BillingRoleDefinitionImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingRoleDefinition> listByBillingAccountAsync(final String billingAccountName) {
+        BillingRoleDefinitionsInner client = this.inner();
+        return client.listByBillingAccountAsync(billingAccountName)
+        .flatMapIterable(new Func1<Page<BillingRoleDefinitionInner>, Iterable<BillingRoleDefinitionInner>>() {
+            @Override
+            public Iterable<BillingRoleDefinitionInner> call(Page<BillingRoleDefinitionInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingRoleDefinitionInner, BillingRoleDefinition>() {
+            @Override
+            public BillingRoleDefinition call(BillingRoleDefinitionInner inner) {
+                return wrapModel(inner);
             }
         });
     }

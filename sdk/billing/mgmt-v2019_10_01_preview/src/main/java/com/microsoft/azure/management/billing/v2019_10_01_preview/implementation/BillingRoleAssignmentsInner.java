@@ -10,13 +10,18 @@ package com.microsoft.azure.management.billing.v2019_10_01_preview.implementatio
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.AzureServiceFuture;
+import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignmentPayload;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.ErrorResponseException;
+import com.microsoft.azure.Page;
+import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
+import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -26,6 +31,7 @@ import retrofit2.http.HTTP;
 import retrofit2.http.Path;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
@@ -80,6 +86,22 @@ public class BillingRoleAssignmentsInner {
         @HTTP(path = "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRoleAssignments/{billingRoleAssignmentName}", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteByBillingProfile(@Path("billingAccountName") String billingAccountName, @Path("billingProfileName") String billingProfileName, @Path("billingRoleAssignmentName") String billingRoleAssignmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments getByDepartment" })
+        @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/billingRoleAssignments/{billingRoleAssignmentName}")
+        Observable<Response<ResponseBody>> getByDepartment(@Path("billingAccountName") String billingAccountName, @Path("departmentName") String departmentName, @Path("billingRoleAssignmentName") String billingRoleAssignmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments deleteByDepartment" })
+        @HTTP(path = "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/billingRoleAssignments/{billingRoleAssignmentName}", method = "DELETE", hasBody = true)
+        Observable<Response<ResponseBody>> deleteByDepartment(@Path("billingAccountName") String billingAccountName, @Path("departmentName") String departmentName, @Path("billingRoleAssignmentName") String billingRoleAssignmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments getByEnrollmentAccount" })
+        @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleAssignments/{billingRoleAssignmentName}")
+        Observable<Response<ResponseBody>> getByEnrollmentAccount(@Path("billingAccountName") String billingAccountName, @Path("enrollmentAccountName") String enrollmentAccountName, @Path("billingRoleAssignmentName") String billingRoleAssignmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments deleteByEnrollmentAccount" })
+        @HTTP(path = "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleAssignments/{billingRoleAssignmentName}", method = "DELETE", hasBody = true)
+        Observable<Response<ResponseBody>> deleteByEnrollmentAccount(@Path("billingAccountName") String billingAccountName, @Path("enrollmentAccountName") String enrollmentAccountName, @Path("billingRoleAssignmentName") String billingRoleAssignmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments listByBillingAccount" })
         @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleAssignments")
         Observable<Response<ResponseBody>> listByBillingAccount(@Path("billingAccountName") String billingAccountName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -104,10 +126,30 @@ public class BillingRoleAssignmentsInner {
         @POST("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/createBillingRoleAssignment")
         Observable<Response<ResponseBody>> addByBillingProfile(@Path("billingAccountName") String billingAccountName, @Path("billingProfileName") String billingProfileName, @Query("api-version") String apiVersion, @Body BillingRoleAssignmentPayload parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments listByDepartment" })
+        @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/billingRoleAssignments")
+        Observable<Response<ResponseBody>> listByDepartment(@Path("billingAccountName") String billingAccountName, @Path("departmentName") String departmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments listByEnrollmentAccount" })
+        @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleAssignments")
+        Observable<Response<ResponseBody>> listByEnrollmentAccount(@Path("billingAccountName") String billingAccountName, @Path("enrollmentAccountName") String enrollmentAccountName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments listByBillingAccountNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByBillingAccountNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments listByDepartmentNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByDepartmentNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments listByEnrollmentAccountNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByEnrollmentAccountNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
     }
 
     /**
-     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
@@ -121,7 +163,7 @@ public class BillingRoleAssignmentsInner {
     }
 
     /**
-     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
@@ -134,7 +176,7 @@ public class BillingRoleAssignmentsInner {
     }
 
     /**
-     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
@@ -151,7 +193,7 @@ public class BillingRoleAssignmentsInner {
     }
 
     /**
-     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
@@ -647,66 +689,80 @@ public class BillingRoleAssignmentsInner {
     }
 
     /**
-     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the BillingRoleAssignmentListResultInner object if successful.
+     * @return the BillingRoleAssignmentInner object if successful.
      */
-    public BillingRoleAssignmentListResultInner listByBillingAccount(String billingAccountName) {
-        return listByBillingAccountWithServiceResponseAsync(billingAccountName).toBlocking().single().body();
+    public BillingRoleAssignmentInner getByDepartment(String billingAccountName, String departmentName, String billingRoleAssignmentName) {
+        return getByDepartmentWithServiceResponseAsync(billingAccountName, departmentName, billingRoleAssignmentName).toBlocking().single().body();
     }
 
     /**
-     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<BillingRoleAssignmentListResultInner> listByBillingAccountAsync(String billingAccountName, final ServiceCallback<BillingRoleAssignmentListResultInner> serviceCallback) {
-        return ServiceFuture.fromResponse(listByBillingAccountWithServiceResponseAsync(billingAccountName), serviceCallback);
+    public ServiceFuture<BillingRoleAssignmentInner> getByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName, final ServiceCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getByDepartmentWithServiceResponseAsync(billingAccountName, departmentName, billingRoleAssignmentName), serviceCallback);
     }
 
     /**
-     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BillingRoleAssignmentListResultInner object
+     * @return the observable to the BillingRoleAssignmentInner object
      */
-    public Observable<BillingRoleAssignmentListResultInner> listByBillingAccountAsync(String billingAccountName) {
-        return listByBillingAccountWithServiceResponseAsync(billingAccountName).map(new Func1<ServiceResponse<BillingRoleAssignmentListResultInner>, BillingRoleAssignmentListResultInner>() {
+    public Observable<BillingRoleAssignmentInner> getByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName) {
+        return getByDepartmentWithServiceResponseAsync(billingAccountName, departmentName, billingRoleAssignmentName).map(new Func1<ServiceResponse<BillingRoleAssignmentInner>, BillingRoleAssignmentInner>() {
             @Override
-            public BillingRoleAssignmentListResultInner call(ServiceResponse<BillingRoleAssignmentListResultInner> response) {
+            public BillingRoleAssignmentInner call(ServiceResponse<BillingRoleAssignmentInner> response) {
                 return response.body();
             }
         });
     }
 
     /**
-     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BillingRoleAssignmentListResultInner object
+     * @return the observable to the BillingRoleAssignmentInner object
      */
-    public Observable<ServiceResponse<BillingRoleAssignmentListResultInner>> listByBillingAccountWithServiceResponseAsync(String billingAccountName) {
+    public Observable<ServiceResponse<BillingRoleAssignmentInner>> getByDepartmentWithServiceResponseAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName) {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (departmentName == null) {
+            throw new IllegalArgumentException("Parameter departmentName is required and cannot be null.");
+        }
+        if (billingRoleAssignmentName == null) {
+            throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
         }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.listByBillingAccount(billingAccountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentListResultInner>>>() {
+        return service.getByDepartment(billingAccountName, departmentName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
                 @Override
-                public Observable<ServiceResponse<BillingRoleAssignmentListResultInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<BillingRoleAssignmentListResultInner> clientResponse = listByBillingAccountDelegate(response);
+                        ServiceResponse<BillingRoleAssignmentInner> clientResponse = getByDepartmentDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -715,9 +771,391 @@ public class BillingRoleAssignmentsInner {
             });
     }
 
-    private ServiceResponse<BillingRoleAssignmentListResultInner> listByBillingAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<BillingRoleAssignmentListResultInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<BillingRoleAssignmentListResultInner>() { }.getType())
+    private ServiceResponse<BillingRoleAssignmentInner> getByDepartmentDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<BillingRoleAssignmentInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<BillingRoleAssignmentInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Deletes a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the BillingRoleAssignmentInner object if successful.
+     */
+    public BillingRoleAssignmentInner deleteByDepartment(String billingAccountName, String departmentName, String billingRoleAssignmentName) {
+        return deleteByDepartmentWithServiceResponseAsync(billingAccountName, departmentName, billingRoleAssignmentName).toBlocking().single().body();
+    }
+
+    /**
+     * Deletes a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<BillingRoleAssignmentInner> deleteByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName, final ServiceCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteByDepartmentWithServiceResponseAsync(billingAccountName, departmentName, billingRoleAssignmentName), serviceCallback);
+    }
+
+    /**
+     * Deletes a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BillingRoleAssignmentInner object
+     */
+    public Observable<BillingRoleAssignmentInner> deleteByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName) {
+        return deleteByDepartmentWithServiceResponseAsync(billingAccountName, departmentName, billingRoleAssignmentName).map(new Func1<ServiceResponse<BillingRoleAssignmentInner>, BillingRoleAssignmentInner>() {
+            @Override
+            public BillingRoleAssignmentInner call(ServiceResponse<BillingRoleAssignmentInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Deletes a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BillingRoleAssignmentInner object
+     */
+    public Observable<ServiceResponse<BillingRoleAssignmentInner>> deleteByDepartmentWithServiceResponseAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (departmentName == null) {
+            throw new IllegalArgumentException("Parameter departmentName is required and cannot be null.");
+        }
+        if (billingRoleAssignmentName == null) {
+            throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.deleteByDepartment(billingAccountName, departmentName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
+                @Override
+                public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<BillingRoleAssignmentInner> clientResponse = deleteByDepartmentDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<BillingRoleAssignmentInner> deleteByDepartmentDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<BillingRoleAssignmentInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<BillingRoleAssignmentInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the BillingRoleAssignmentInner object if successful.
+     */
+    public BillingRoleAssignmentInner getByEnrollmentAccount(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName) {
+        return getByEnrollmentAccountWithServiceResponseAsync(billingAccountName, enrollmentAccountName, billingRoleAssignmentName).toBlocking().single().body();
+    }
+
+    /**
+     * Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<BillingRoleAssignmentInner> getByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName, final ServiceCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getByEnrollmentAccountWithServiceResponseAsync(billingAccountName, enrollmentAccountName, billingRoleAssignmentName), serviceCallback);
+    }
+
+    /**
+     * Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BillingRoleAssignmentInner object
+     */
+    public Observable<BillingRoleAssignmentInner> getByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName) {
+        return getByEnrollmentAccountWithServiceResponseAsync(billingAccountName, enrollmentAccountName, billingRoleAssignmentName).map(new Func1<ServiceResponse<BillingRoleAssignmentInner>, BillingRoleAssignmentInner>() {
+            @Override
+            public BillingRoleAssignmentInner call(ServiceResponse<BillingRoleAssignmentInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BillingRoleAssignmentInner object
+     */
+    public Observable<ServiceResponse<BillingRoleAssignmentInner>> getByEnrollmentAccountWithServiceResponseAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (enrollmentAccountName == null) {
+            throw new IllegalArgumentException("Parameter enrollmentAccountName is required and cannot be null.");
+        }
+        if (billingRoleAssignmentName == null) {
+            throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.getByEnrollmentAccount(billingAccountName, enrollmentAccountName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
+                @Override
+                public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<BillingRoleAssignmentInner> clientResponse = getByEnrollmentAccountDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<BillingRoleAssignmentInner> getByEnrollmentAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<BillingRoleAssignmentInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<BillingRoleAssignmentInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Deletes a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the BillingRoleAssignmentInner object if successful.
+     */
+    public BillingRoleAssignmentInner deleteByEnrollmentAccount(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName) {
+        return deleteByEnrollmentAccountWithServiceResponseAsync(billingAccountName, enrollmentAccountName, billingRoleAssignmentName).toBlocking().single().body();
+    }
+
+    /**
+     * Deletes a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<BillingRoleAssignmentInner> deleteByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName, final ServiceCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteByEnrollmentAccountWithServiceResponseAsync(billingAccountName, enrollmentAccountName, billingRoleAssignmentName), serviceCallback);
+    }
+
+    /**
+     * Deletes a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BillingRoleAssignmentInner object
+     */
+    public Observable<BillingRoleAssignmentInner> deleteByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName) {
+        return deleteByEnrollmentAccountWithServiceResponseAsync(billingAccountName, enrollmentAccountName, billingRoleAssignmentName).map(new Func1<ServiceResponse<BillingRoleAssignmentInner>, BillingRoleAssignmentInner>() {
+            @Override
+            public BillingRoleAssignmentInner call(ServiceResponse<BillingRoleAssignmentInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Deletes a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BillingRoleAssignmentInner object
+     */
+    public Observable<ServiceResponse<BillingRoleAssignmentInner>> deleteByEnrollmentAccountWithServiceResponseAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (enrollmentAccountName == null) {
+            throw new IllegalArgumentException("Parameter enrollmentAccountName is required and cannot be null.");
+        }
+        if (billingRoleAssignmentName == null) {
+            throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.deleteByEnrollmentAccount(billingAccountName, enrollmentAccountName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
+                @Override
+                public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<BillingRoleAssignmentInner> clientResponse = deleteByEnrollmentAccountDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<BillingRoleAssignmentInner> deleteByEnrollmentAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<BillingRoleAssignmentInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<BillingRoleAssignmentInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object if successful.
+     */
+    public PagedList<BillingRoleAssignmentInner> listByBillingAccount(final String billingAccountName) {
+        ServiceResponse<Page<BillingRoleAssignmentInner>> response = listByBillingAccountSinglePageAsync(billingAccountName).toBlocking().single();
+        return new PagedList<BillingRoleAssignmentInner>(response.body()) {
+            @Override
+            public Page<BillingRoleAssignmentInner> nextPage(String nextPageLink) {
+                return listByBillingAccountNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingRoleAssignmentInner>> listByBillingAccountAsync(final String billingAccountName, final ListOperationCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByBillingAccountSinglePageAsync(billingAccountName),
+            new Func1<String, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(String nextPageLink) {
+                    return listByBillingAccountNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<Page<BillingRoleAssignmentInner>> listByBillingAccountAsync(final String billingAccountName) {
+        return listByBillingAccountWithServiceResponseAsync(billingAccountName)
+            .map(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Page<BillingRoleAssignmentInner>>() {
+                @Override
+                public Page<BillingRoleAssignmentInner> call(ServiceResponse<Page<BillingRoleAssignmentInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByBillingAccountWithServiceResponseAsync(final String billingAccountName) {
+        return listByBillingAccountSinglePageAsync(billingAccountName)
+            .concatMap(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(ServiceResponse<Page<BillingRoleAssignmentInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByBillingAccountNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+    ServiceResponse<PageImpl<BillingRoleAssignmentInner>> * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByBillingAccountSinglePageAsync(final String billingAccountName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByBillingAccount(billingAccountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingRoleAssignmentInner>> result = listByBillingAccountDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingRoleAssignmentInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingRoleAssignmentInner>> listByBillingAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingRoleAssignmentInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingRoleAssignmentInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -1164,6 +1602,579 @@ public class BillingRoleAssignmentsInner {
     private ServiceResponse<BillingRoleAssignmentListResultInner> addByBillingProfileDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<BillingRoleAssignmentListResultInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(201, new TypeToken<BillingRoleAssignmentListResultInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object if successful.
+     */
+    public PagedList<BillingRoleAssignmentInner> listByDepartment(final String billingAccountName, final String departmentName) {
+        ServiceResponse<Page<BillingRoleAssignmentInner>> response = listByDepartmentSinglePageAsync(billingAccountName, departmentName).toBlocking().single();
+        return new PagedList<BillingRoleAssignmentInner>(response.body()) {
+            @Override
+            public Page<BillingRoleAssignmentInner> nextPage(String nextPageLink) {
+                return listByDepartmentNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingRoleAssignmentInner>> listByDepartmentAsync(final String billingAccountName, final String departmentName, final ListOperationCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByDepartmentSinglePageAsync(billingAccountName, departmentName),
+            new Func1<String, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(String nextPageLink) {
+                    return listByDepartmentNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<Page<BillingRoleAssignmentInner>> listByDepartmentAsync(final String billingAccountName, final String departmentName) {
+        return listByDepartmentWithServiceResponseAsync(billingAccountName, departmentName)
+            .map(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Page<BillingRoleAssignmentInner>>() {
+                @Override
+                public Page<BillingRoleAssignmentInner> call(ServiceResponse<Page<BillingRoleAssignmentInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByDepartmentWithServiceResponseAsync(final String billingAccountName, final String departmentName) {
+        return listByDepartmentSinglePageAsync(billingAccountName, departmentName)
+            .concatMap(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(ServiceResponse<Page<BillingRoleAssignmentInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByDepartmentNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+    ServiceResponse<PageImpl<BillingRoleAssignmentInner>> * @param billingAccountName The ID that uniquely identifies a billing account.
+    ServiceResponse<PageImpl<BillingRoleAssignmentInner>> * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByDepartmentSinglePageAsync(final String billingAccountName, final String departmentName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (departmentName == null) {
+            throw new IllegalArgumentException("Parameter departmentName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByDepartment(billingAccountName, departmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingRoleAssignmentInner>> result = listByDepartmentDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingRoleAssignmentInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingRoleAssignmentInner>> listByDepartmentDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingRoleAssignmentInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingRoleAssignmentInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object if successful.
+     */
+    public PagedList<BillingRoleAssignmentInner> listByEnrollmentAccount(final String billingAccountName, final String enrollmentAccountName) {
+        ServiceResponse<Page<BillingRoleAssignmentInner>> response = listByEnrollmentAccountSinglePageAsync(billingAccountName, enrollmentAccountName).toBlocking().single();
+        return new PagedList<BillingRoleAssignmentInner>(response.body()) {
+            @Override
+            public Page<BillingRoleAssignmentInner> nextPage(String nextPageLink) {
+                return listByEnrollmentAccountNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingRoleAssignmentInner>> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName, final ListOperationCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByEnrollmentAccountSinglePageAsync(billingAccountName, enrollmentAccountName),
+            new Func1<String, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(String nextPageLink) {
+                    return listByEnrollmentAccountNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<Page<BillingRoleAssignmentInner>> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName) {
+        return listByEnrollmentAccountWithServiceResponseAsync(billingAccountName, enrollmentAccountName)
+            .map(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Page<BillingRoleAssignmentInner>>() {
+                @Override
+                public Page<BillingRoleAssignmentInner> call(ServiceResponse<Page<BillingRoleAssignmentInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByEnrollmentAccountWithServiceResponseAsync(final String billingAccountName, final String enrollmentAccountName) {
+        return listByEnrollmentAccountSinglePageAsync(billingAccountName, enrollmentAccountName)
+            .concatMap(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(ServiceResponse<Page<BillingRoleAssignmentInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByEnrollmentAccountNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+    ServiceResponse<PageImpl<BillingRoleAssignmentInner>> * @param billingAccountName The ID that uniquely identifies a billing account.
+    ServiceResponse<PageImpl<BillingRoleAssignmentInner>> * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByEnrollmentAccountSinglePageAsync(final String billingAccountName, final String enrollmentAccountName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (enrollmentAccountName == null) {
+            throw new IllegalArgumentException("Parameter enrollmentAccountName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByEnrollmentAccount(billingAccountName, enrollmentAccountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingRoleAssignmentInner>> result = listByEnrollmentAccountDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingRoleAssignmentInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingRoleAssignmentInner>> listByEnrollmentAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingRoleAssignmentInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingRoleAssignmentInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object if successful.
+     */
+    public PagedList<BillingRoleAssignmentInner> listByBillingAccountNext(final String nextPageLink) {
+        ServiceResponse<Page<BillingRoleAssignmentInner>> response = listByBillingAccountNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<BillingRoleAssignmentInner>(response.body()) {
+            @Override
+            public Page<BillingRoleAssignmentInner> nextPage(String nextPageLink) {
+                return listByBillingAccountNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingRoleAssignmentInner>> listByBillingAccountNextAsync(final String nextPageLink, final ServiceFuture<List<BillingRoleAssignmentInner>> serviceFuture, final ListOperationCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByBillingAccountNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(String nextPageLink) {
+                    return listByBillingAccountNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<Page<BillingRoleAssignmentInner>> listByBillingAccountNextAsync(final String nextPageLink) {
+        return listByBillingAccountNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Page<BillingRoleAssignmentInner>>() {
+                @Override
+                public Page<BillingRoleAssignmentInner> call(ServiceResponse<Page<BillingRoleAssignmentInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByBillingAccountNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByBillingAccountNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(ServiceResponse<Page<BillingRoleAssignmentInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByBillingAccountNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+    ServiceResponse<PageImpl<BillingRoleAssignmentInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByBillingAccountNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByBillingAccountNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingRoleAssignmentInner>> result = listByBillingAccountNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingRoleAssignmentInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingRoleAssignmentInner>> listByBillingAccountNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingRoleAssignmentInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingRoleAssignmentInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object if successful.
+     */
+    public PagedList<BillingRoleAssignmentInner> listByDepartmentNext(final String nextPageLink) {
+        ServiceResponse<Page<BillingRoleAssignmentInner>> response = listByDepartmentNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<BillingRoleAssignmentInner>(response.body()) {
+            @Override
+            public Page<BillingRoleAssignmentInner> nextPage(String nextPageLink) {
+                return listByDepartmentNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingRoleAssignmentInner>> listByDepartmentNextAsync(final String nextPageLink, final ServiceFuture<List<BillingRoleAssignmentInner>> serviceFuture, final ListOperationCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByDepartmentNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(String nextPageLink) {
+                    return listByDepartmentNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<Page<BillingRoleAssignmentInner>> listByDepartmentNextAsync(final String nextPageLink) {
+        return listByDepartmentNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Page<BillingRoleAssignmentInner>>() {
+                @Override
+                public Page<BillingRoleAssignmentInner> call(ServiceResponse<Page<BillingRoleAssignmentInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByDepartmentNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByDepartmentNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(ServiceResponse<Page<BillingRoleAssignmentInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByDepartmentNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+    ServiceResponse<PageImpl<BillingRoleAssignmentInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByDepartmentNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByDepartmentNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingRoleAssignmentInner>> result = listByDepartmentNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingRoleAssignmentInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingRoleAssignmentInner>> listByDepartmentNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingRoleAssignmentInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingRoleAssignmentInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object if successful.
+     */
+    public PagedList<BillingRoleAssignmentInner> listByEnrollmentAccountNext(final String nextPageLink) {
+        ServiceResponse<Page<BillingRoleAssignmentInner>> response = listByEnrollmentAccountNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<BillingRoleAssignmentInner>(response.body()) {
+            @Override
+            public Page<BillingRoleAssignmentInner> nextPage(String nextPageLink) {
+                return listByEnrollmentAccountNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingRoleAssignmentInner>> listByEnrollmentAccountNextAsync(final String nextPageLink, final ServiceFuture<List<BillingRoleAssignmentInner>> serviceFuture, final ListOperationCallback<BillingRoleAssignmentInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByEnrollmentAccountNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(String nextPageLink) {
+                    return listByEnrollmentAccountNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<Page<BillingRoleAssignmentInner>> listByEnrollmentAccountNextAsync(final String nextPageLink) {
+        return listByEnrollmentAccountNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Page<BillingRoleAssignmentInner>>() {
+                @Override
+                public Page<BillingRoleAssignmentInner> call(ServiceResponse<Page<BillingRoleAssignmentInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingRoleAssignmentInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByEnrollmentAccountNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByEnrollmentAccountNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<BillingRoleAssignmentInner>>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(ServiceResponse<Page<BillingRoleAssignmentInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByEnrollmentAccountNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+    ServiceResponse<PageImpl<BillingRoleAssignmentInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingRoleAssignmentInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> listByEnrollmentAccountNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByEnrollmentAccountNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingRoleAssignmentInner>> result = listByEnrollmentAccountNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingRoleAssignmentInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingRoleAssignmentInner>> listByEnrollmentAccountNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingRoleAssignmentInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingRoleAssignmentInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }

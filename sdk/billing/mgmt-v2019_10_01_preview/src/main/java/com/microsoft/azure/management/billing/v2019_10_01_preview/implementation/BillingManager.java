@@ -40,6 +40,7 @@ import com.microsoft.azure.management.billing.v2019_10_01_preview.RecipientTrans
 import com.microsoft.azure.management.billing.v2019_10_01_preview.Operations;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleDefinitions;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.EnrollmentAccountRoleAssignments;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.Agreements;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
@@ -72,6 +73,7 @@ public final class BillingManager extends ManagerCore<BillingManager, BillingMan
     private Operations operations;
     private BillingRoleDefinitions billingRoleDefinitions;
     private BillingRoleAssignments billingRoleAssignments;
+    private EnrollmentAccountRoleAssignments enrollmentAccountRoleAssignments;
     private Agreements agreements;
     /**
     * Get a Configurable instance that can be used to create BillingManager with optional configuration.
@@ -358,6 +360,16 @@ public final class BillingManager extends ManagerCore<BillingManager, BillingMan
             this.billingRoleAssignments = new BillingRoleAssignmentsImpl(this);
         }
         return this.billingRoleAssignments;
+    }
+
+    /**
+     * @return Entry point to manage EnrollmentAccountRoleAssignments.
+     */
+    public EnrollmentAccountRoleAssignments enrollmentAccountRoleAssignments() {
+        if (this.enrollmentAccountRoleAssignments == null) {
+            this.enrollmentAccountRoleAssignments = new EnrollmentAccountRoleAssignmentsImpl(this);
+        }
+        return this.enrollmentAccountRoleAssignments;
     }
 
     /**

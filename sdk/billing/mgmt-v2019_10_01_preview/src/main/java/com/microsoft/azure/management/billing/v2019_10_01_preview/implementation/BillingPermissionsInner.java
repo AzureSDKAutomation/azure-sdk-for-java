@@ -10,17 +10,23 @@ package com.microsoft.azure.management.billing.v2019_10_01_preview.implementatio
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.AzureServiceFuture;
+import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.ErrorResponseException;
+import com.microsoft.azure.Page;
+import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
+import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
@@ -66,6 +72,26 @@ public class BillingPermissionsInner {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissions listByBillingProfile" })
         @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingPermissions")
         Observable<Response<ResponseBody>> listByBillingProfile(@Path("billingAccountName") String billingAccountName, @Path("billingProfileName") String billingProfileName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissions listByDepartment" })
+        @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/billingPermissions")
+        Observable<Response<ResponseBody>> listByDepartment(@Path("billingAccountName") String billingAccountName, @Path("departmentName") String departmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissions listByEnrollmentAccount" })
+        @GET("providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingPermissions")
+        Observable<Response<ResponseBody>> listByEnrollmentAccount(@Path("billingAccountName") String billingAccountName, @Path("enrollmentAccountName") String enrollmentAccountName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissions listByBillingAccountNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByBillingAccountNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissions listByDepartmentNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByDepartmentNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissions listByEnrollmentAccountNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByEnrollmentAccountNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -159,10 +185,16 @@ public class BillingPermissionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the BillingPermissionsListResultInner object if successful.
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object if successful.
      */
-    public BillingPermissionsListResultInner listByBillingAccount(String billingAccountName) {
-        return listByBillingAccountWithServiceResponseAsync(billingAccountName).toBlocking().single().body();
+    public PagedList<BillingPermissionsPropertiesInner> listByBillingAccount(final String billingAccountName) {
+        ServiceResponse<Page<BillingPermissionsPropertiesInner>> response = listByBillingAccountSinglePageAsync(billingAccountName).toBlocking().single();
+        return new PagedList<BillingPermissionsPropertiesInner>(response.body()) {
+            @Override
+            public Page<BillingPermissionsPropertiesInner> nextPage(String nextPageLink) {
+                return listByBillingAccountNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
     }
 
     /**
@@ -173,8 +205,16 @@ public class BillingPermissionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<BillingPermissionsListResultInner> listByBillingAccountAsync(String billingAccountName, final ServiceCallback<BillingPermissionsListResultInner> serviceCallback) {
-        return ServiceFuture.fromResponse(listByBillingAccountWithServiceResponseAsync(billingAccountName), serviceCallback);
+    public ServiceFuture<List<BillingPermissionsPropertiesInner>> listByBillingAccountAsync(final String billingAccountName, final ListOperationCallback<BillingPermissionsPropertiesInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByBillingAccountSinglePageAsync(billingAccountName),
+            new Func1<String, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(String nextPageLink) {
+                    return listByBillingAccountNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
     }
 
     /**
@@ -182,15 +222,16 @@ public class BillingPermissionsInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BillingPermissionsListResultInner object
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
      */
-    public Observable<BillingPermissionsListResultInner> listByBillingAccountAsync(String billingAccountName) {
-        return listByBillingAccountWithServiceResponseAsync(billingAccountName).map(new Func1<ServiceResponse<BillingPermissionsListResultInner>, BillingPermissionsListResultInner>() {
-            @Override
-            public BillingPermissionsListResultInner call(ServiceResponse<BillingPermissionsListResultInner> response) {
-                return response.body();
-            }
-        });
+    public Observable<Page<BillingPermissionsPropertiesInner>> listByBillingAccountAsync(final String billingAccountName) {
+        return listByBillingAccountWithServiceResponseAsync(billingAccountName)
+            .map(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Page<BillingPermissionsPropertiesInner>>() {
+                @Override
+                public Page<BillingPermissionsPropertiesInner> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> response) {
+                    return response.body();
+                }
+            });
     }
 
     /**
@@ -198,9 +239,30 @@ public class BillingPermissionsInner {
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BillingPermissionsListResultInner object
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
      */
-    public Observable<ServiceResponse<BillingPermissionsListResultInner>> listByBillingAccountWithServiceResponseAsync(String billingAccountName) {
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByBillingAccountWithServiceResponseAsync(final String billingAccountName) {
+        return listByBillingAccountSinglePageAsync(billingAccountName)
+            .concatMap(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByBillingAccountNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a billing account.
+     *
+    ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByBillingAccountSinglePageAsync(final String billingAccountName) {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
@@ -208,12 +270,12 @@ public class BillingPermissionsInner {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.listByBillingAccount(billingAccountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingPermissionsListResultInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<BillingPermissionsListResultInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<BillingPermissionsListResultInner> clientResponse = listByBillingAccountDelegate(response);
-                        return Observable.just(clientResponse);
+                        ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> result = listByBillingAccountDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingPermissionsPropertiesInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -221,9 +283,9 @@ public class BillingPermissionsInner {
             });
     }
 
-    private ServiceResponse<BillingPermissionsListResultInner> listByBillingAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<BillingPermissionsListResultInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<BillingPermissionsListResultInner>() { }.getType())
+    private ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> listByBillingAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingPermissionsPropertiesInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingPermissionsPropertiesInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -397,6 +459,579 @@ public class BillingPermissionsInner {
     private ServiceResponse<BillingPermissionsListResultInner> listByBillingProfileDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<BillingPermissionsListResultInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<BillingPermissionsListResultInner>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object if successful.
+     */
+    public PagedList<BillingPermissionsPropertiesInner> listByDepartment(final String billingAccountName, final String departmentName) {
+        ServiceResponse<Page<BillingPermissionsPropertiesInner>> response = listByDepartmentSinglePageAsync(billingAccountName, departmentName).toBlocking().single();
+        return new PagedList<BillingPermissionsPropertiesInner>(response.body()) {
+            @Override
+            public Page<BillingPermissionsPropertiesInner> nextPage(String nextPageLink) {
+                return listByDepartmentNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingPermissionsPropertiesInner>> listByDepartmentAsync(final String billingAccountName, final String departmentName, final ListOperationCallback<BillingPermissionsPropertiesInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByDepartmentSinglePageAsync(billingAccountName, departmentName),
+            new Func1<String, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(String nextPageLink) {
+                    return listByDepartmentNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<Page<BillingPermissionsPropertiesInner>> listByDepartmentAsync(final String billingAccountName, final String departmentName) {
+        return listByDepartmentWithServiceResponseAsync(billingAccountName, departmentName)
+            .map(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Page<BillingPermissionsPropertiesInner>>() {
+                @Override
+                public Page<BillingPermissionsPropertiesInner> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByDepartmentWithServiceResponseAsync(final String billingAccountName, final String departmentName) {
+        return listByDepartmentSinglePageAsync(billingAccountName, departmentName)
+            .concatMap(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByDepartmentNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+    ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> * @param billingAccountName The ID that uniquely identifies a billing account.
+    ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByDepartmentSinglePageAsync(final String billingAccountName, final String departmentName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (departmentName == null) {
+            throw new IllegalArgumentException("Parameter departmentName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByDepartment(billingAccountName, departmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> result = listByDepartmentDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingPermissionsPropertiesInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> listByDepartmentDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingPermissionsPropertiesInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingPermissionsPropertiesInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object if successful.
+     */
+    public PagedList<BillingPermissionsPropertiesInner> listByEnrollmentAccount(final String billingAccountName, final String enrollmentAccountName) {
+        ServiceResponse<Page<BillingPermissionsPropertiesInner>> response = listByEnrollmentAccountSinglePageAsync(billingAccountName, enrollmentAccountName).toBlocking().single();
+        return new PagedList<BillingPermissionsPropertiesInner>(response.body()) {
+            @Override
+            public Page<BillingPermissionsPropertiesInner> nextPage(String nextPageLink) {
+                return listByEnrollmentAccountNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingPermissionsPropertiesInner>> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName, final ListOperationCallback<BillingPermissionsPropertiesInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByEnrollmentAccountSinglePageAsync(billingAccountName, enrollmentAccountName),
+            new Func1<String, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(String nextPageLink) {
+                    return listByEnrollmentAccountNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<Page<BillingPermissionsPropertiesInner>> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName) {
+        return listByEnrollmentAccountWithServiceResponseAsync(billingAccountName, enrollmentAccountName)
+            .map(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Page<BillingPermissionsPropertiesInner>>() {
+                @Override
+                public Page<BillingPermissionsPropertiesInner> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByEnrollmentAccountWithServiceResponseAsync(final String billingAccountName, final String enrollmentAccountName) {
+        return listByEnrollmentAccountSinglePageAsync(billingAccountName, enrollmentAccountName)
+            .concatMap(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByEnrollmentAccountNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+    ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> * @param billingAccountName The ID that uniquely identifies a billing account.
+    ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByEnrollmentAccountSinglePageAsync(final String billingAccountName, final String enrollmentAccountName) {
+        if (billingAccountName == null) {
+            throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
+        }
+        if (enrollmentAccountName == null) {
+            throw new IllegalArgumentException("Parameter enrollmentAccountName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByEnrollmentAccount(billingAccountName, enrollmentAccountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> result = listByEnrollmentAccountDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingPermissionsPropertiesInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> listByEnrollmentAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingPermissionsPropertiesInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingPermissionsPropertiesInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a billing account.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object if successful.
+     */
+    public PagedList<BillingPermissionsPropertiesInner> listByBillingAccountNext(final String nextPageLink) {
+        ServiceResponse<Page<BillingPermissionsPropertiesInner>> response = listByBillingAccountNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<BillingPermissionsPropertiesInner>(response.body()) {
+            @Override
+            public Page<BillingPermissionsPropertiesInner> nextPage(String nextPageLink) {
+                return listByBillingAccountNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a billing account.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingPermissionsPropertiesInner>> listByBillingAccountNextAsync(final String nextPageLink, final ServiceFuture<List<BillingPermissionsPropertiesInner>> serviceFuture, final ListOperationCallback<BillingPermissionsPropertiesInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByBillingAccountNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(String nextPageLink) {
+                    return listByBillingAccountNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a billing account.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<Page<BillingPermissionsPropertiesInner>> listByBillingAccountNextAsync(final String nextPageLink) {
+        return listByBillingAccountNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Page<BillingPermissionsPropertiesInner>>() {
+                @Override
+                public Page<BillingPermissionsPropertiesInner> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a billing account.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByBillingAccountNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByBillingAccountNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByBillingAccountNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a billing account.
+     *
+    ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByBillingAccountNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByBillingAccountNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> result = listByBillingAccountNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingPermissionsPropertiesInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> listByBillingAccountNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingPermissionsPropertiesInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingPermissionsPropertiesInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object if successful.
+     */
+    public PagedList<BillingPermissionsPropertiesInner> listByDepartmentNext(final String nextPageLink) {
+        ServiceResponse<Page<BillingPermissionsPropertiesInner>> response = listByDepartmentNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<BillingPermissionsPropertiesInner>(response.body()) {
+            @Override
+            public Page<BillingPermissionsPropertiesInner> nextPage(String nextPageLink) {
+                return listByDepartmentNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingPermissionsPropertiesInner>> listByDepartmentNextAsync(final String nextPageLink, final ServiceFuture<List<BillingPermissionsPropertiesInner>> serviceFuture, final ListOperationCallback<BillingPermissionsPropertiesInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByDepartmentNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(String nextPageLink) {
+                    return listByDepartmentNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<Page<BillingPermissionsPropertiesInner>> listByDepartmentNextAsync(final String nextPageLink) {
+        return listByDepartmentNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Page<BillingPermissionsPropertiesInner>>() {
+                @Override
+                public Page<BillingPermissionsPropertiesInner> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByDepartmentNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByDepartmentNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByDepartmentNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+    ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByDepartmentNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByDepartmentNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> result = listByDepartmentNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingPermissionsPropertiesInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> listByDepartmentNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingPermissionsPropertiesInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingPermissionsPropertiesInner>>() { }.getType())
+                .registerError(ErrorResponseException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object if successful.
+     */
+    public PagedList<BillingPermissionsPropertiesInner> listByEnrollmentAccountNext(final String nextPageLink) {
+        ServiceResponse<Page<BillingPermissionsPropertiesInner>> response = listByEnrollmentAccountNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<BillingPermissionsPropertiesInner>(response.body()) {
+            @Override
+            public Page<BillingPermissionsPropertiesInner> nextPage(String nextPageLink) {
+                return listByEnrollmentAccountNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<BillingPermissionsPropertiesInner>> listByEnrollmentAccountNextAsync(final String nextPageLink, final ServiceFuture<List<BillingPermissionsPropertiesInner>> serviceFuture, final ListOperationCallback<BillingPermissionsPropertiesInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByEnrollmentAccountNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(String nextPageLink) {
+                    return listByEnrollmentAccountNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<Page<BillingPermissionsPropertiesInner>> listByEnrollmentAccountNextAsync(final String nextPageLink) {
+        return listByEnrollmentAccountNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Page<BillingPermissionsPropertiesInner>>() {
+                @Override
+                public Page<BillingPermissionsPropertiesInner> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;BillingPermissionsPropertiesInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByEnrollmentAccountNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByEnrollmentAccountNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<BillingPermissionsPropertiesInner>>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(ServiceResponse<Page<BillingPermissionsPropertiesInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByEnrollmentAccountNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+    ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;BillingPermissionsPropertiesInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> listByEnrollmentAccountNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByEnrollmentAccountNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<BillingPermissionsPropertiesInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> result = listByEnrollmentAccountNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<BillingPermissionsPropertiesInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<BillingPermissionsPropertiesInner>> listByEnrollmentAccountNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<BillingPermissionsPropertiesInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<BillingPermissionsPropertiesInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }

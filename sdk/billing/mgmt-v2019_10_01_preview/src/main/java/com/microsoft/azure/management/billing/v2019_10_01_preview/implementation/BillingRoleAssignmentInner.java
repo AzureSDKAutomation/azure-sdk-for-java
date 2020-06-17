@@ -36,6 +36,14 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     private String createdByPrincipalId;
 
     /**
+     * The email address of the user who created the role assignment. This is
+     * supported only for billing accounts with agreement type Enterprise
+     * Agreement.
+     */
+    @JsonProperty(value = "properties.createdByUserEmailAddress", access = JsonProperty.Access.WRITE_ONLY)
+    private String createdByUserEmailAddress;
+
+    /**
      * The name of the role assignment.
      */
     @JsonProperty(value = "properties.name", access = JsonProperty.Access.WRITE_ONLY)
@@ -44,20 +52,42 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     /**
      * The principal id of the user to whom the role was assigned.
      */
-    @JsonProperty(value = "properties.principalId", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.principalId")
     private String principalId;
+
+    /**
+     * The principal tenant id of the user to whom the role was assigned.
+     */
+    @JsonProperty(value = "properties.principalTenantId")
+    private String principalTenantId;
 
     /**
      * The ID of the role definition.
      */
-    @JsonProperty(value = "properties.roleDefinitionName", access = JsonProperty.Access.WRITE_ONLY)
-    private String roleDefinitionName;
+    @JsonProperty(value = "properties.roleDefinitionId")
+    private String roleDefinitionId;
 
     /**
      * The scope at which the role was assigned.
      */
     @JsonProperty(value = "properties.scope", access = JsonProperty.Access.WRITE_ONLY)
     private String scope;
+
+    /**
+     * The email address of the user to whom the role was assigned. This is
+     * supported only for billing accounts with agreement type Enterprise
+     * Agreement.
+     */
+    @JsonProperty(value = "properties.userEmailAddress")
+    private String userEmailAddress;
+
+    /**
+     * The authentication type of the user, whether Organization or MSA, of the
+     * user to whom the role was assigned. This is supported only for billing
+     * accounts with agreement type Enterprise Agreement.
+     */
+    @JsonProperty(value = "properties.userAuthenticationType")
+    private String userAuthenticationType;
 
     /**
      * Get the date the role assignment was created.
@@ -87,6 +117,15 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     }
 
     /**
+     * Get the email address of the user who created the role assignment. This is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @return the createdByUserEmailAddress value
+     */
+    public String createdByUserEmailAddress() {
+        return this.createdByUserEmailAddress;
+    }
+
+    /**
      * Get the name of the role assignment.
      *
      * @return the billingRoleAssignmentName value
@@ -105,12 +144,54 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     }
 
     /**
+     * Set the principal id of the user to whom the role was assigned.
+     *
+     * @param principalId the principalId value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withPrincipalId(String principalId) {
+        this.principalId = principalId;
+        return this;
+    }
+
+    /**
+     * Get the principal tenant id of the user to whom the role was assigned.
+     *
+     * @return the principalTenantId value
+     */
+    public String principalTenantId() {
+        return this.principalTenantId;
+    }
+
+    /**
+     * Set the principal tenant id of the user to whom the role was assigned.
+     *
+     * @param principalTenantId the principalTenantId value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withPrincipalTenantId(String principalTenantId) {
+        this.principalTenantId = principalTenantId;
+        return this;
+    }
+
+    /**
      * Get the ID of the role definition.
      *
-     * @return the roleDefinitionName value
+     * @return the roleDefinitionId value
      */
-    public String roleDefinitionName() {
-        return this.roleDefinitionName;
+    public String roleDefinitionId() {
+        return this.roleDefinitionId;
+    }
+
+    /**
+     * Set the ID of the role definition.
+     *
+     * @param roleDefinitionId the roleDefinitionId value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withRoleDefinitionId(String roleDefinitionId) {
+        this.roleDefinitionId = roleDefinitionId;
+        return this;
     }
 
     /**
@@ -120,6 +201,46 @@ public class BillingRoleAssignmentInner extends ProxyResource {
      */
     public String scope() {
         return this.scope;
+    }
+
+    /**
+     * Get the email address of the user to whom the role was assigned. This is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @return the userEmailAddress value
+     */
+    public String userEmailAddress() {
+        return this.userEmailAddress;
+    }
+
+    /**
+     * Set the email address of the user to whom the role was assigned. This is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param userEmailAddress the userEmailAddress value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withUserEmailAddress(String userEmailAddress) {
+        this.userEmailAddress = userEmailAddress;
+        return this;
+    }
+
+    /**
+     * Get the authentication type of the user, whether Organization or MSA, of the user to whom the role was assigned. This is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @return the userAuthenticationType value
+     */
+    public String userAuthenticationType() {
+        return this.userAuthenticationType;
+    }
+
+    /**
+     * Set the authentication type of the user, whether Organization or MSA, of the user to whom the role was assigned. This is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param userAuthenticationType the userAuthenticationType value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withUserAuthenticationType(String userAuthenticationType) {
+        this.userAuthenticationType = userAuthenticationType;
+        return this;
     }
 
 }

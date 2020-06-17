@@ -8,13 +8,13 @@
 
 package com.microsoft.azure.management.billing.v2019_10_01_preview.implementation;
 
-import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignmentListResult;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissionsProperties;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import java.util.List;
 
-class BillingRoleAssignmentListResultImpl extends WrapperImpl<BillingRoleAssignmentListResultInner> implements BillingRoleAssignmentListResult {
+class BillingPermissionsPropertiesImpl extends WrapperImpl<BillingPermissionsPropertiesInner> implements BillingPermissionsProperties {
     private final BillingManager manager;
-    BillingRoleAssignmentListResultImpl(BillingRoleAssignmentListResultInner inner, BillingManager manager) {
+    BillingPermissionsPropertiesImpl(BillingPermissionsPropertiesInner inner, BillingManager manager) {
         super(inner);
         this.manager = manager;
     }
@@ -25,13 +25,13 @@ class BillingRoleAssignmentListResultImpl extends WrapperImpl<BillingRoleAssignm
     }
 
     @Override
-    public String nextLink() {
-        return this.inner().nextLink();
+    public List<String> actions() {
+        return this.inner().actions();
     }
 
     @Override
-    public List<BillingRoleAssignmentInner> value() {
-        return this.inner().value();
+    public List<String> notActions() {
+        return this.inner().notActions();
     }
 
 }

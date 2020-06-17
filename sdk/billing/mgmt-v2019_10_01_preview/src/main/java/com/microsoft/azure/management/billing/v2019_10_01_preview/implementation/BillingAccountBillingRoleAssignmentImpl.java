@@ -8,16 +8,16 @@
 
 package com.microsoft.azure.management.billing.v2019_10_01_preview.implementation;
 
-import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignment;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingAccountBillingRoleAssignment;
 import com.microsoft.azure.arm.model.implementation.IndexableRefreshableWrapperImpl;
 import rx.Observable;
 
-class BillingRoleAssignmentImpl extends IndexableRefreshableWrapperImpl<BillingRoleAssignment, BillingRoleAssignmentInner> implements BillingRoleAssignment {
+class BillingAccountBillingRoleAssignmentImpl extends IndexableRefreshableWrapperImpl<BillingAccountBillingRoleAssignment, BillingRoleAssignmentInner> implements BillingAccountBillingRoleAssignment {
     private final BillingManager manager;
     private String billingAccountName;
     private String billingRoleAssignmentName;
 
-    BillingRoleAssignmentImpl(BillingRoleAssignmentInner inner,  BillingManager manager) {
+    BillingAccountBillingRoleAssignmentImpl(BillingRoleAssignmentInner inner,  BillingManager manager) {
         super(null, inner);
         this.manager = manager;
         // set resource ancestor and positional variables
@@ -54,6 +54,11 @@ class BillingRoleAssignmentImpl extends IndexableRefreshableWrapperImpl<BillingR
     }
 
     @Override
+    public String createdByUserEmailAddress() {
+        return this.inner().createdByUserEmailAddress();
+    }
+
+    @Override
     public String createdOn() {
         return this.inner().createdOn();
     }
@@ -74,8 +79,13 @@ class BillingRoleAssignmentImpl extends IndexableRefreshableWrapperImpl<BillingR
     }
 
     @Override
-    public String roleDefinitionName() {
-        return this.inner().roleDefinitionName();
+    public String principalTenantId() {
+        return this.inner().principalTenantId();
+    }
+
+    @Override
+    public String roleDefinitionId() {
+        return this.inner().roleDefinitionId();
     }
 
     @Override
@@ -86,6 +96,16 @@ class BillingRoleAssignmentImpl extends IndexableRefreshableWrapperImpl<BillingR
     @Override
     public String type() {
         return this.inner().type();
+    }
+
+    @Override
+    public String userAuthenticationType() {
+        return this.inner().userAuthenticationType();
+    }
+
+    @Override
+    public String userEmailAddress() {
+        return this.inner().userEmailAddress();
     }
 
 }

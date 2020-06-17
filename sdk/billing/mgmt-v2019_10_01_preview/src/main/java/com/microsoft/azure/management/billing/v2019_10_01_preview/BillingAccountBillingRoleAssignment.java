@@ -16,9 +16,9 @@ import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.implementation.BillingManager;
 
 /**
- * Type representing BillingRoleAssignment.
+ * Type representing BillingAccountBillingRoleAssignment.
  */
-public interface BillingRoleAssignment extends HasInner<BillingRoleAssignmentInner>, Indexable, Refreshable<BillingRoleAssignment>, HasManager<BillingManager> {
+public interface BillingAccountBillingRoleAssignment extends HasInner<BillingRoleAssignmentInner>, Indexable, Refreshable<BillingAccountBillingRoleAssignment>, HasManager<BillingManager> {
     /**
      * @return the billingRoleAssignmentName value.
      */
@@ -33,6 +33,11 @@ public interface BillingRoleAssignment extends HasInner<BillingRoleAssignmentInn
      * @return the createdByPrincipalTenantId value.
      */
     String createdByPrincipalTenantId();
+
+    /**
+     * @return the createdByUserEmailAddress value.
+     */
+    String createdByUserEmailAddress();
 
     /**
      * @return the createdOn value.
@@ -55,9 +60,14 @@ public interface BillingRoleAssignment extends HasInner<BillingRoleAssignmentInn
     String principalId();
 
     /**
-     * @return the roleDefinitionName value.
+     * @return the principalTenantId value.
      */
-    String roleDefinitionName();
+    String principalTenantId();
+
+    /**
+     * @return the roleDefinitionId value.
+     */
+    String roleDefinitionId();
 
     /**
      * @return the scope value.
@@ -68,5 +78,15 @@ public interface BillingRoleAssignment extends HasInner<BillingRoleAssignmentInn
      * @return the type value.
      */
     String type();
+
+    /**
+     * @return the userAuthenticationType value.
+     */
+    String userAuthenticationType();
+
+    /**
+     * @return the userEmailAddress value.
+     */
+    String userEmailAddress();
 
 }

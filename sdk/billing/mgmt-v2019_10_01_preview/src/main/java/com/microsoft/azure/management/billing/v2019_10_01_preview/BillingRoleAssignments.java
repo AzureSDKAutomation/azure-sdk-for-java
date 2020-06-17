@@ -27,7 +27,7 @@ public interface BillingRoleAssignments extends HasInner<BillingRoleAssignmentsI
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<BillingRoleAssignment> getByInvoiceSectionAsync(String billingAccountName, String billingProfileName, String invoiceSectionName, String billingRoleAssignmentName);
+    Observable<BillingAccountBillingRoleAssignment> getByInvoiceSectionAsync(String billingAccountName, String billingProfileName, String invoiceSectionName, String billingRoleAssignmentName);
 
     /**
      * Deletes a role assignment for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
@@ -39,7 +39,7 @@ public interface BillingRoleAssignments extends HasInner<BillingRoleAssignmentsI
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<BillingRoleAssignment> deleteByInvoiceSectionAsync(String billingAccountName, String billingProfileName, String invoiceSectionName, String billingRoleAssignmentName);
+    Observable<BillingAccountBillingRoleAssignment> deleteByInvoiceSectionAsync(String billingAccountName, String billingProfileName, String invoiceSectionName, String billingRoleAssignmentName);
 
     /**
      * Gets a role assignment for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
@@ -50,7 +50,7 @@ public interface BillingRoleAssignments extends HasInner<BillingRoleAssignmentsI
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<BillingRoleAssignment> getByBillingProfileAsync(String billingAccountName, String billingProfileName, String billingRoleAssignmentName);
+    Observable<BillingAccountBillingRoleAssignment> getByBillingProfileAsync(String billingAccountName, String billingProfileName, String billingRoleAssignmentName);
 
     /**
      * Deletes a role assignment for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
@@ -61,16 +61,51 @@ public interface BillingRoleAssignments extends HasInner<BillingRoleAssignmentsI
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<BillingRoleAssignment> deleteByBillingProfileAsync(String billingAccountName, String billingProfileName, String billingRoleAssignmentName);
+    Observable<BillingAccountBillingRoleAssignment> deleteByBillingProfileAsync(String billingAccountName, String billingProfileName, String billingRoleAssignmentName);
 
     /**
-     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Gets a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<BillingRoleAssignmentListResult> listByBillingAccountAsync(String billingAccountName);
+    Observable<BillingAccountBillingRoleAssignment> getByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName);
+
+    /**
+     * Deletes a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<BillingAccountBillingRoleAssignment> deleteByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName);
+
+    /**
+     * Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<BillingAccountBillingRoleAssignment> getByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName);
+
+    /**
+     * Deletes a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<BillingAccountBillingRoleAssignment> deleteByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName);
 
     /**
      * Lists the role assignments for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
@@ -94,14 +129,43 @@ public interface BillingRoleAssignments extends HasInner<BillingRoleAssignmentsI
     Observable<BillingRoleAssignmentListResult> listByBillingProfileAsync(String billingAccountName, String billingProfileName);
 
     /**
-     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<BillingAccountBillingRoleAssignment> listByDepartmentAsync(final String billingAccountName, final String departmentName);
+
+    /**
+     * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<BillingAccountBillingRoleAssignment> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName);
+
+    /**
+     * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
      *
      * @param billingAccountName The ID that uniquely identifies a billing account.
      * @param billingRoleAssignmentName The ID that uniquely identifies a role assignment.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<BillingRoleAssignment> getByBillingAccountAsync(String billingAccountName, String billingRoleAssignmentName);
+    Observable<BillingAccountBillingRoleAssignment> getByBillingAccountAsync(String billingAccountName, String billingRoleAssignmentName);
+
+    /**
+     * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<BillingAccountBillingRoleAssignment> listByBillingAccountAsync(final String billingAccountName);
 
     /**
      * Deletes a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.

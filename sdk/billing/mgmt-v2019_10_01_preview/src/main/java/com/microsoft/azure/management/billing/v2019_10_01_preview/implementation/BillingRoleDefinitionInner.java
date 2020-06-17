@@ -9,7 +9,6 @@
 package com.microsoft.azure.management.billing.v2019_10_01_preview.implementation;
 
 import java.util.List;
-import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissionsProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -29,7 +28,7 @@ public class BillingRoleDefinitionInner extends ProxyResource {
      * The billingPermissions the role has.
      */
     @JsonProperty(value = "properties.permissions")
-    private List<BillingPermissionsProperties> permissions;
+    private List<BillingPermissionsPropertiesInner> permissions;
 
     /**
      * The name of the role.
@@ -51,7 +50,7 @@ public class BillingRoleDefinitionInner extends ProxyResource {
      *
      * @return the permissions value
      */
-    public List<BillingPermissionsProperties> permissions() {
+    public List<BillingPermissionsPropertiesInner> permissions() {
         return this.permissions;
     }
 
@@ -61,7 +60,7 @@ public class BillingRoleDefinitionInner extends ProxyResource {
      * @param permissions the permissions value to set
      * @return the BillingRoleDefinitionInner object itself.
      */
-    public BillingRoleDefinitionInner withPermissions(List<BillingPermissionsProperties> permissions) {
+    public BillingRoleDefinitionInner withPermissions(List<BillingPermissionsPropertiesInner> permissions) {
         this.permissions = permissions;
         return this;
     }

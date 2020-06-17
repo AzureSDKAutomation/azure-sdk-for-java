@@ -20,6 +20,11 @@ import java.util.List;
  */
 public interface BillingRoleAssignmentListResult extends HasInner<BillingRoleAssignmentListResultInner>, HasManager<BillingManager> {
     /**
+     * @return the nextLink value.
+     */
+    String nextLink();
+
+    /**
      * @return the value value.
      */
     List<BillingRoleAssignmentInner> value();

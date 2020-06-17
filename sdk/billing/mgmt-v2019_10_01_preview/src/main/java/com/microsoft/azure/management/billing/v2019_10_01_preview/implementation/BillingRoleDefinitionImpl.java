@@ -11,8 +11,9 @@ package com.microsoft.azure.management.billing.v2019_10_01_preview.implementatio
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleDefinition;
 import com.microsoft.azure.arm.model.implementation.IndexableRefreshableWrapperImpl;
 import rx.Observable;
-import java.util.List;
+import java.util.ArrayList;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissionsProperties;
+import java.util.List;
 
 class BillingRoleDefinitionImpl extends IndexableRefreshableWrapperImpl<BillingRoleDefinition, BillingRoleDefinitionInner> implements BillingRoleDefinition {
     private final BillingManager manager;
@@ -57,7 +58,13 @@ class BillingRoleDefinitionImpl extends IndexableRefreshableWrapperImpl<BillingR
 
     @Override
     public List<BillingPermissionsProperties> permissions() {
-        return this.inner().permissions();
+        List<BillingPermissionsProperties> lst = new ArrayList<BillingPermissionsProperties>();
+        if (this.inner().permissions() != null) {
+            for (BillingPermissionsPropertiesInner inner : this.inner().permissions()) {
+                lst.add( new BillingPermissionsPropertiesImpl(inner, manager()));
+            }
+        }
+        return lst;
     }
 
     @Override

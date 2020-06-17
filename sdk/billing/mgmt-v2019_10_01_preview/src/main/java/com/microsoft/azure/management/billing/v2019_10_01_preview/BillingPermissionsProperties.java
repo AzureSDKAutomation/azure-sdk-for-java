@@ -8,42 +8,24 @@
 
 package com.microsoft.azure.management.billing.v2019_10_01_preview;
 
+import com.microsoft.azure.arm.model.HasInner;
+import com.microsoft.azure.arm.resources.models.HasManager;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.implementation.BillingManager;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.implementation.BillingPermissionsPropertiesInner;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The set of allowed action and not allowed actions a caller has on a billing
- * account.
+ * Type representing BillingPermissionsProperties.
  */
-public class BillingPermissionsProperties {
+public interface BillingPermissionsProperties extends HasInner<BillingPermissionsPropertiesInner>, HasManager<BillingManager> {
     /**
-     * The set of actions that the caller is allowed to perform.
+     * @return the actions value.
      */
-    @JsonProperty(value = "actions", access = JsonProperty.Access.WRITE_ONLY)
-    private List<String> actions;
+    List<String> actions();
 
     /**
-     * The set of actions that the caller is not allowed to perform.
+     * @return the notActions value.
      */
-    @JsonProperty(value = "notActions", access = JsonProperty.Access.WRITE_ONLY)
-    private List<String> notActions;
-
-    /**
-     * Get the set of actions that the caller is allowed to perform.
-     *
-     * @return the actions value
-     */
-    public List<String> actions() {
-        return this.actions;
-    }
-
-    /**
-     * Get the set of actions that the caller is not allowed to perform.
-     *
-     * @return the notActions value
-     */
-    public List<String> notActions() {
-        return this.notActions;
-    }
+    List<String> notActions();
 
 }

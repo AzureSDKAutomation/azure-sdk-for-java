@@ -13,7 +13,9 @@ import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissions;
 import rx.functions.Func1;
 import rx.Observable;
+import com.microsoft.azure.Page;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissionsListResult;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissionsProperties;
 
 class BillingPermissionsImpl extends WrapperImpl<BillingPermissionsInner> implements BillingPermissions {
     private final BillingManager manager;
@@ -40,13 +42,19 @@ class BillingPermissionsImpl extends WrapperImpl<BillingPermissionsInner> implem
     }
 
     @Override
-    public Observable<BillingPermissionsListResult> listByBillingAccountAsync(String billingAccountName) {
+    public Observable<BillingPermissionsProperties> listByBillingAccountAsync(final String billingAccountName) {
         BillingPermissionsInner client = this.inner();
         return client.listByBillingAccountAsync(billingAccountName)
-        .map(new Func1<BillingPermissionsListResultInner, BillingPermissionsListResult>() {
+        .flatMapIterable(new Func1<Page<BillingPermissionsPropertiesInner>, Iterable<BillingPermissionsPropertiesInner>>() {
             @Override
-            public BillingPermissionsListResult call(BillingPermissionsListResultInner inner) {
-                return new BillingPermissionsListResultImpl(inner, manager());
+            public Iterable<BillingPermissionsPropertiesInner> call(Page<BillingPermissionsPropertiesInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingPermissionsPropertiesInner, BillingPermissionsProperties>() {
+            @Override
+            public BillingPermissionsProperties call(BillingPermissionsPropertiesInner inner) {
+                return new BillingPermissionsPropertiesImpl(inner, manager());
             }
         });
     }
@@ -71,6 +79,42 @@ class BillingPermissionsImpl extends WrapperImpl<BillingPermissionsInner> implem
             @Override
             public BillingPermissionsListResult call(BillingPermissionsListResultInner inner) {
                 return new BillingPermissionsListResultImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingPermissionsProperties> listByDepartmentAsync(final String billingAccountName, final String departmentName) {
+        BillingPermissionsInner client = this.inner();
+        return client.listByDepartmentAsync(billingAccountName, departmentName)
+        .flatMapIterable(new Func1<Page<BillingPermissionsPropertiesInner>, Iterable<BillingPermissionsPropertiesInner>>() {
+            @Override
+            public Iterable<BillingPermissionsPropertiesInner> call(Page<BillingPermissionsPropertiesInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingPermissionsPropertiesInner, BillingPermissionsProperties>() {
+            @Override
+            public BillingPermissionsProperties call(BillingPermissionsPropertiesInner inner) {
+                return new BillingPermissionsPropertiesImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingPermissionsProperties> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName) {
+        BillingPermissionsInner client = this.inner();
+        return client.listByEnrollmentAccountAsync(billingAccountName, enrollmentAccountName)
+        .flatMapIterable(new Func1<Page<BillingPermissionsPropertiesInner>, Iterable<BillingPermissionsPropertiesInner>>() {
+            @Override
+            public Iterable<BillingPermissionsPropertiesInner> call(Page<BillingPermissionsPropertiesInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingPermissionsPropertiesInner, BillingPermissionsProperties>() {
+            @Override
+            public BillingPermissionsProperties call(BillingPermissionsPropertiesInner inner) {
+                return new BillingPermissionsPropertiesImpl(inner, manager());
             }
         });
     }

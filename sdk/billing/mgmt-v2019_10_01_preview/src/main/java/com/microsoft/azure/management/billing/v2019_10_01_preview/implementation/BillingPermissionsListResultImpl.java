@@ -11,7 +11,6 @@ package com.microsoft.azure.management.billing.v2019_10_01_preview.implementatio
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissionsListResult;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import java.util.List;
-import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingPermissionsProperties;
 
 class BillingPermissionsListResultImpl extends WrapperImpl<BillingPermissionsListResultInner> implements BillingPermissionsListResult {
     private final BillingManager manager;
@@ -26,7 +25,12 @@ class BillingPermissionsListResultImpl extends WrapperImpl<BillingPermissionsLis
     }
 
     @Override
-    public List<BillingPermissionsProperties> value() {
+    public String nextLink() {
+        return this.inner().nextLink();
+    }
+
+    @Override
+    public List<BillingPermissionsPropertiesInner> value() {
         return this.inner().value();
     }
 

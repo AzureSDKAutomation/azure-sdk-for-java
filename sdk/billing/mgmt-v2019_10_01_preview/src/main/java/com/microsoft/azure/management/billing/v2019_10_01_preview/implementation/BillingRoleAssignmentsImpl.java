@@ -14,7 +14,8 @@ import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAss
 import rx.Completable;
 import rx.Observable;
 import rx.functions.Func1;
-import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignment;
+import com.microsoft.azure.Page;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingAccountBillingRoleAssignment;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignmentListResult;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignmentPayload;
 
@@ -30,66 +31,102 @@ class BillingRoleAssignmentsImpl extends WrapperImpl<BillingRoleAssignmentsInner
         return this.manager;
     }
 
-    private BillingRoleAssignmentImpl wrapModel(BillingRoleAssignmentInner inner) {
-        return  new BillingRoleAssignmentImpl(inner, manager());
+    private BillingAccountBillingRoleAssignmentImpl wrapModel(BillingRoleAssignmentInner inner) {
+        return  new BillingAccountBillingRoleAssignmentImpl(inner, manager());
     }
 
     @Override
-    public Observable<BillingRoleAssignment> getByInvoiceSectionAsync(String billingAccountName, String billingProfileName, String invoiceSectionName, String billingRoleAssignmentName) {
+    public Observable<BillingAccountBillingRoleAssignment> getByInvoiceSectionAsync(String billingAccountName, String billingProfileName, String invoiceSectionName, String billingRoleAssignmentName) {
         BillingRoleAssignmentsInner client = this.inner();
         return client.getByInvoiceSectionAsync(billingAccountName, billingProfileName, invoiceSectionName, billingRoleAssignmentName)
-        .map(new Func1<BillingRoleAssignmentInner, BillingRoleAssignment>() {
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
             @Override
-            public BillingRoleAssignment call(BillingRoleAssignmentInner inner) {
-                return new BillingRoleAssignmentImpl(inner, manager());
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
             }
         });
     }
 
     @Override
-    public Observable<BillingRoleAssignment> deleteByInvoiceSectionAsync(String billingAccountName, String billingProfileName, String invoiceSectionName, String billingRoleAssignmentName) {
+    public Observable<BillingAccountBillingRoleAssignment> deleteByInvoiceSectionAsync(String billingAccountName, String billingProfileName, String invoiceSectionName, String billingRoleAssignmentName) {
         BillingRoleAssignmentsInner client = this.inner();
         return client.deleteByInvoiceSectionAsync(billingAccountName, billingProfileName, invoiceSectionName, billingRoleAssignmentName)
-        .map(new Func1<BillingRoleAssignmentInner, BillingRoleAssignment>() {
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
             @Override
-            public BillingRoleAssignment call(BillingRoleAssignmentInner inner) {
-                return new BillingRoleAssignmentImpl(inner, manager());
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
             }
         });
     }
 
     @Override
-    public Observable<BillingRoleAssignment> getByBillingProfileAsync(String billingAccountName, String billingProfileName, String billingRoleAssignmentName) {
+    public Observable<BillingAccountBillingRoleAssignment> getByBillingProfileAsync(String billingAccountName, String billingProfileName, String billingRoleAssignmentName) {
         BillingRoleAssignmentsInner client = this.inner();
         return client.getByBillingProfileAsync(billingAccountName, billingProfileName, billingRoleAssignmentName)
-        .map(new Func1<BillingRoleAssignmentInner, BillingRoleAssignment>() {
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
             @Override
-            public BillingRoleAssignment call(BillingRoleAssignmentInner inner) {
-                return new BillingRoleAssignmentImpl(inner, manager());
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
             }
         });
     }
 
     @Override
-    public Observable<BillingRoleAssignment> deleteByBillingProfileAsync(String billingAccountName, String billingProfileName, String billingRoleAssignmentName) {
+    public Observable<BillingAccountBillingRoleAssignment> deleteByBillingProfileAsync(String billingAccountName, String billingProfileName, String billingRoleAssignmentName) {
         BillingRoleAssignmentsInner client = this.inner();
         return client.deleteByBillingProfileAsync(billingAccountName, billingProfileName, billingRoleAssignmentName)
-        .map(new Func1<BillingRoleAssignmentInner, BillingRoleAssignment>() {
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
             @Override
-            public BillingRoleAssignment call(BillingRoleAssignmentInner inner) {
-                return new BillingRoleAssignmentImpl(inner, manager());
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
             }
         });
     }
 
     @Override
-    public Observable<BillingRoleAssignmentListResult> listByBillingAccountAsync(String billingAccountName) {
+    public Observable<BillingAccountBillingRoleAssignment> getByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName) {
         BillingRoleAssignmentsInner client = this.inner();
-        return client.listByBillingAccountAsync(billingAccountName)
-        .map(new Func1<BillingRoleAssignmentListResultInner, BillingRoleAssignmentListResult>() {
+        return client.getByDepartmentAsync(billingAccountName, departmentName, billingRoleAssignmentName)
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
             @Override
-            public BillingRoleAssignmentListResult call(BillingRoleAssignmentListResultInner inner) {
-                return new BillingRoleAssignmentListResultImpl(inner, manager());
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingAccountBillingRoleAssignment> deleteByDepartmentAsync(String billingAccountName, String departmentName, String billingRoleAssignmentName) {
+        BillingRoleAssignmentsInner client = this.inner();
+        return client.deleteByDepartmentAsync(billingAccountName, departmentName, billingRoleAssignmentName)
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
+            @Override
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingAccountBillingRoleAssignment> getByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName) {
+        BillingRoleAssignmentsInner client = this.inner();
+        return client.getByEnrollmentAccountAsync(billingAccountName, enrollmentAccountName, billingRoleAssignmentName)
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
+            @Override
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingAccountBillingRoleAssignment> deleteByEnrollmentAccountAsync(String billingAccountName, String enrollmentAccountName, String billingRoleAssignmentName) {
+        BillingRoleAssignmentsInner client = this.inner();
+        return client.deleteByEnrollmentAccountAsync(billingAccountName, enrollmentAccountName, billingRoleAssignmentName)
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
+            @Override
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
             }
         });
     }
@@ -119,16 +156,70 @@ class BillingRoleAssignmentsImpl extends WrapperImpl<BillingRoleAssignmentsInner
     }
 
     @Override
-    public Observable<BillingRoleAssignment> getByBillingAccountAsync(String billingAccountName, String billingRoleAssignmentName) {
+    public Observable<BillingAccountBillingRoleAssignment> listByDepartmentAsync(final String billingAccountName, final String departmentName) {
+        BillingRoleAssignmentsInner client = this.inner();
+        return client.listByDepartmentAsync(billingAccountName, departmentName)
+        .flatMapIterable(new Func1<Page<BillingRoleAssignmentInner>, Iterable<BillingRoleAssignmentInner>>() {
+            @Override
+            public Iterable<BillingRoleAssignmentInner> call(Page<BillingRoleAssignmentInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
+            @Override
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingAccountBillingRoleAssignment> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName) {
+        BillingRoleAssignmentsInner client = this.inner();
+        return client.listByEnrollmentAccountAsync(billingAccountName, enrollmentAccountName)
+        .flatMapIterable(new Func1<Page<BillingRoleAssignmentInner>, Iterable<BillingRoleAssignmentInner>>() {
+            @Override
+            public Iterable<BillingRoleAssignmentInner> call(Page<BillingRoleAssignmentInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
+            @Override
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return new BillingAccountBillingRoleAssignmentImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingAccountBillingRoleAssignment> listByBillingAccountAsync(final String billingAccountName) {
+        BillingRoleAssignmentsInner client = this.inner();
+        return client.listByBillingAccountAsync(billingAccountName)
+        .flatMapIterable(new Func1<Page<BillingRoleAssignmentInner>, Iterable<BillingRoleAssignmentInner>>() {
+            @Override
+            public Iterable<BillingRoleAssignmentInner> call(Page<BillingRoleAssignmentInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<BillingRoleAssignmentInner, BillingAccountBillingRoleAssignment>() {
+            @Override
+            public BillingAccountBillingRoleAssignment call(BillingRoleAssignmentInner inner) {
+                return wrapModel(inner);
+            }
+        });
+    }
+
+    @Override
+    public Observable<BillingAccountBillingRoleAssignment> getByBillingAccountAsync(String billingAccountName, String billingRoleAssignmentName) {
         BillingRoleAssignmentsInner client = this.inner();
         return client.getByBillingAccountAsync(billingAccountName, billingRoleAssignmentName)
-        .flatMap(new Func1<BillingRoleAssignmentInner, Observable<BillingRoleAssignment>>() {
+        .flatMap(new Func1<BillingRoleAssignmentInner, Observable<BillingAccountBillingRoleAssignment>>() {
             @Override
-            public Observable<BillingRoleAssignment> call(BillingRoleAssignmentInner inner) {
+            public Observable<BillingAccountBillingRoleAssignment> call(BillingRoleAssignmentInner inner) {
                 if (inner == null) {
                     return Observable.empty();
                 } else {
-                    return Observable.just((BillingRoleAssignment)wrapModel(inner));
+                    return Observable.just((BillingAccountBillingRoleAssignment)wrapModel(inner));
                 }
             }
        });

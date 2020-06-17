@@ -25,6 +25,11 @@ class BillingRoleDefinitionListResultImpl extends WrapperImpl<BillingRoleDefinit
     }
 
     @Override
+    public String nextLink() {
+        return this.inner().nextLink();
+    }
+
+    @Override
     public List<BillingRoleDefinitionInner> value() {
         return this.inner().value();
     }

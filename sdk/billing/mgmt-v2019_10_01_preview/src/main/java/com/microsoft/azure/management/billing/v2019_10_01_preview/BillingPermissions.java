@@ -31,7 +31,7 @@ public interface BillingPermissions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<BillingPermissionsListResult> listByBillingAccountAsync(String billingAccountName);
+    Observable<BillingPermissionsProperties> listByBillingAccountAsync(final String billingAccountName);
 
     /**
      * Lists the billing permissions the caller has on an invoice section.
@@ -53,5 +53,25 @@ public interface BillingPermissions {
      * @return the observable for the request
      */
     Observable<BillingPermissionsListResult> listByBillingProfileAsync(String billingAccountName, String billingProfileName);
+
+    /**
+     * Lists the billing permissions the caller has on a department.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param departmentName The ID that uniquely identifies a department.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<BillingPermissionsProperties> listByDepartmentAsync(final String billingAccountName, final String departmentName);
+
+    /**
+     * Lists the billing permissions the caller has on an enrollment account.
+     *
+     * @param billingAccountName The ID that uniquely identifies a billing account.
+     * @param enrollmentAccountName The ID that uniquely identifies an enrollment account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<BillingPermissionsProperties> listByEnrollmentAccountAsync(final String billingAccountName, final String enrollmentAccountName);
 
 }

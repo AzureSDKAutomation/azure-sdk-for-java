@@ -22,12 +22,27 @@ public class BillingRoleAssignmentListResultInner {
     private List<BillingRoleAssignmentInner> value;
 
     /**
+     * The link (url) to the next page of results.
+     */
+    @JsonProperty(value = "nextLink", access = JsonProperty.Access.WRITE_ONLY)
+    private String nextLink;
+
+    /**
      * Get the list of role assignments.
      *
      * @return the value value
      */
     public List<BillingRoleAssignmentInner> value() {
         return this.value;
+    }
+
+    /**
+     * Get the link (url) to the next page of results.
+     *
+     * @return the nextLink value
+     */
+    public String nextLink() {
+        return this.nextLink;
     }
 
 }
