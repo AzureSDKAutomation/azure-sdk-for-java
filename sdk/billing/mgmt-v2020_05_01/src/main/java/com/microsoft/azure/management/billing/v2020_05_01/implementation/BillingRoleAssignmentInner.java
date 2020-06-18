@@ -44,19 +44,19 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     /**
      * The principal id of the user to whom the role was assigned.
      */
-    @JsonProperty(value = "properties.principalId", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.principalId")
     private String principalId;
 
     /**
      * The principal tenant id of the user to whom the role was assigned.
      */
-    @JsonProperty(value = "properties.principalTenantId", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.principalTenantId")
     private String principalTenantId;
 
     /**
      * The ID of the role definition.
      */
-    @JsonProperty(value = "properties.roleDefinitionId", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.roleDefinitionId")
     private String roleDefinitionId;
 
     /**
@@ -68,13 +68,13 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     /**
      * The authentication type.
      */
-    @JsonProperty(value = "properties.userAuthenticationType", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.userAuthenticationType")
     private String userAuthenticationType;
 
     /**
      * The email address of the user.
      */
-    @JsonProperty(value = "properties.userEmailAddress", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.userEmailAddress")
     private String userEmailAddress;
 
     /**
@@ -123,6 +123,17 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     }
 
     /**
+     * Set the principal id of the user to whom the role was assigned.
+     *
+     * @param principalId the principalId value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withPrincipalId(String principalId) {
+        this.principalId = principalId;
+        return this;
+    }
+
+    /**
      * Get the principal tenant id of the user to whom the role was assigned.
      *
      * @return the principalTenantId value
@@ -132,12 +143,34 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     }
 
     /**
+     * Set the principal tenant id of the user to whom the role was assigned.
+     *
+     * @param principalTenantId the principalTenantId value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withPrincipalTenantId(String principalTenantId) {
+        this.principalTenantId = principalTenantId;
+        return this;
+    }
+
+    /**
      * Get the ID of the role definition.
      *
      * @return the roleDefinitionId value
      */
     public String roleDefinitionId() {
         return this.roleDefinitionId;
+    }
+
+    /**
+     * Set the ID of the role definition.
+     *
+     * @param roleDefinitionId the roleDefinitionId value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withRoleDefinitionId(String roleDefinitionId) {
+        this.roleDefinitionId = roleDefinitionId;
+        return this;
     }
 
     /**
@@ -159,12 +192,34 @@ public class BillingRoleAssignmentInner extends ProxyResource {
     }
 
     /**
+     * Set the authentication type.
+     *
+     * @param userAuthenticationType the userAuthenticationType value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withUserAuthenticationType(String userAuthenticationType) {
+        this.userAuthenticationType = userAuthenticationType;
+        return this;
+    }
+
+    /**
      * Get the email address of the user.
      *
      * @return the userEmailAddress value
      */
     public String userEmailAddress() {
         return this.userEmailAddress;
+    }
+
+    /**
+     * Set the email address of the user.
+     *
+     * @param userEmailAddress the userEmailAddress value to set
+     * @return the BillingRoleAssignmentInner object itself.
+     */
+    public BillingRoleAssignmentInner withUserEmailAddress(String userEmailAddress) {
+        this.userEmailAddress = userEmailAddress;
+        return this;
     }
 
 }
