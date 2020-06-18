@@ -30,6 +30,29 @@ public class PolicyInsightsClientImpl extends AzureServiceClient {
         return this.azureClient;
     }
 
+    /** The ID of the target subscription. */
+    private String subscriptionId2;
+
+    /**
+     * Gets The ID of the target subscription.
+     *
+     * @return the subscriptionId2 value.
+     */
+    public String subscriptionId2() {
+        return this.subscriptionId2;
+    }
+
+    /**
+     * Sets The ID of the target subscription.
+     *
+     * @param subscriptionId2 the subscriptionId2 value.
+     * @return the service client itself
+     */
+    public PolicyInsightsClientImpl withSubscriptionId2(String subscriptionId2) {
+        this.subscriptionId2 = subscriptionId2;
+        return this;
+    }
+
     /** The preferred language for the response. */
     private String acceptLanguage;
 
@@ -178,6 +201,19 @@ public class PolicyInsightsClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The AttestationsInner object to access its operations.
+     */
+    private AttestationsInner attestations;
+
+    /**
+     * Gets the AttestationsInner object to access its operations.
+     * @return the AttestationsInner object.
+     */
+    public AttestationsInner attestations() {
+        return this.attestations;
+    }
+
+    /**
      * Initializes an instance of PolicyInsightsClient client.
      *
      * @param credentials the management credentials for Azure
@@ -217,6 +253,7 @@ public class PolicyInsightsClientImpl extends AzureServiceClient {
         this.policyStates = new PolicyStatesInner(restClient().retrofit(), this);
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.policyMetadatas = new PolicyMetadatasInner(restClient().retrofit(), this);
+        this.attestations = new AttestationsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

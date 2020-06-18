@@ -22,6 +22,7 @@ import com.microsoft.azure.management.policyinsights.v2019_10_01.PolicyEvents;
 import com.microsoft.azure.management.policyinsights.v2019_10_01.PolicyStates;
 import com.microsoft.azure.management.policyinsights.v2019_10_01.Operations;
 import com.microsoft.azure.management.policyinsights.v2019_10_01.PolicyMetadatas;
+import com.microsoft.azure.management.policyinsights.v2019_10_01.Attestations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -35,6 +36,7 @@ public final class PolicyInsightsManager extends ManagerCore<PolicyInsightsManag
     private PolicyStates policyStates;
     private Operations operations;
     private PolicyMetadatas policyMetadatas;
+    private Attestations attestations;
     /**
     * Get a Configurable instance that can be used to create PolicyInsightsManager with optional configuration.
     *
@@ -137,6 +139,16 @@ public final class PolicyInsightsManager extends ManagerCore<PolicyInsightsManag
             this.policyMetadatas = new PolicyMetadatasImpl(this);
         }
         return this.policyMetadatas;
+    }
+
+    /**
+     * @return Entry point to manage Attestations.
+     */
+    public Attestations attestations() {
+        if (this.attestations == null) {
+            this.attestations = new AttestationsImpl(this);
+        }
+        return this.attestations;
     }
 
     /**
