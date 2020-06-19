@@ -87,6 +87,14 @@ public class HostPoolPatch extends ProxyResource {
     private String ssoContext;
 
     /**
+     * The type of preferred application group type, default to Desktop
+     * Application Group. Possible values include: 'None', 'Desktop',
+     * 'RailApplications'.
+     */
+    @JsonProperty(value = "properties.preferredAppGroupType")
+    private PreferredAppGroupType preferredAppGroupType;
+
+    /**
      * Get tags to be updated.
      *
      * @return the tags value
@@ -303,6 +311,26 @@ public class HostPoolPatch extends ProxyResource {
      */
     public HostPoolPatch withSsoContext(String ssoContext) {
         this.ssoContext = ssoContext;
+        return this;
+    }
+
+    /**
+     * Get the type of preferred application group type, default to Desktop Application Group. Possible values include: 'None', 'Desktop', 'RailApplications'.
+     *
+     * @return the preferredAppGroupType value
+     */
+    public PreferredAppGroupType preferredAppGroupType() {
+        return this.preferredAppGroupType;
+    }
+
+    /**
+     * Set the type of preferred application group type, default to Desktop Application Group. Possible values include: 'None', 'Desktop', 'RailApplications'.
+     *
+     * @param preferredAppGroupType the preferredAppGroupType value to set
+     * @return the HostPoolPatch object itself.
+     */
+    public HostPoolPatch withPreferredAppGroupType(PreferredAppGroupType preferredAppGroupType) {
+        this.preferredAppGroupType = preferredAppGroupType;
         return this;
     }
 

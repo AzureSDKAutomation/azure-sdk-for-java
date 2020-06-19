@@ -66,6 +66,11 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
     PersonalDesktopAssignmentType personalDesktopAssignmentType();
 
     /**
+     * @return the preferredAppGroupType value.
+     */
+    PreferredAppGroupType preferredAppGroupType();
+
+    /**
      * @return the registrationInfo value.
      */
     RegistrationInfo registrationInfo();
@@ -93,7 +98,7 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
     /**
      * The entirety of the HostPool definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithHostPoolType, DefinitionStages.WithLoadBalancerType, DefinitionStages.WithPersonalDesktopAssignmentType, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithHostPoolType, DefinitionStages.WithLoadBalancerType, DefinitionStages.WithPersonalDesktopAssignmentType, DefinitionStages.WithPreferredAppGroupType, DefinitionStages.WithCreate {
     }
 
     /**
@@ -145,7 +150,19 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
             * @param personalDesktopAssignmentType PersonalDesktopAssignment type for HostPool. Possible values include: 'Automatic', 'Direct'
             * @return the next definition stage
 */
-            WithCreate withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType);
+            WithPreferredAppGroupType withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType);
+        }
+
+        /**
+         * The stage of the hostpool definition allowing to specify PreferredAppGroupType.
+         */
+        interface WithPreferredAppGroupType {
+           /**
+            * Specifies preferredAppGroupType.
+            * @param preferredAppGroupType The type of preferred application group type, default to Desktop Application Group. Possible values include: 'None', 'Desktop', 'RailApplications'
+            * @return the next definition stage
+*/
+            WithCreate withPreferredAppGroupType(PreferredAppGroupType preferredAppGroupType);
         }
 
         /**
@@ -267,7 +284,7 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
     /**
      * The template for a HostPool update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<HostPool>, Resource.UpdateWithTags<Update>, UpdateStages.WithCustomRdpProperty, UpdateStages.WithDescription, UpdateStages.WithFriendlyName, UpdateStages.WithLoadBalancerType, UpdateStages.WithMaxSessionLimit, UpdateStages.WithPersonalDesktopAssignmentType, UpdateStages.WithRegistrationInfo, UpdateStages.WithRing, UpdateStages.WithSsoContext, UpdateStages.WithValidationEnvironment {
+    interface Update extends Appliable<HostPool>, Resource.UpdateWithTags<Update>, UpdateStages.WithCustomRdpProperty, UpdateStages.WithDescription, UpdateStages.WithFriendlyName, UpdateStages.WithLoadBalancerType, UpdateStages.WithMaxSessionLimit, UpdateStages.WithPersonalDesktopAssignmentType, UpdateStages.WithPreferredAppGroupType, UpdateStages.WithRegistrationInfo, UpdateStages.WithRing, UpdateStages.WithSsoContext, UpdateStages.WithValidationEnvironment {
     }
 
     /**
@@ -344,6 +361,18 @@ public interface HostPool extends HasInner<HostPoolInner>, Resource, GroupableRe
              * @return the next update stage
              */
             Update withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType);
+        }
+
+        /**
+         * The stage of the hostpool update allowing to specify PreferredAppGroupType.
+         */
+        interface WithPreferredAppGroupType {
+            /**
+             * Specifies preferredAppGroupType.
+             * @param preferredAppGroupType The type of preferred application group type, default to Desktop Application Group. Possible values include: 'None', 'Desktop', 'RailApplications'
+             * @return the next update stage
+             */
+            Update withPreferredAppGroupType(PreferredAppGroupType preferredAppGroupType);
         }
 
         /**

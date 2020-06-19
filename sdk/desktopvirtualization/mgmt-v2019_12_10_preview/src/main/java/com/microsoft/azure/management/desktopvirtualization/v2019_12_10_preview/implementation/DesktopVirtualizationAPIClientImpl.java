@@ -159,19 +159,6 @@ public class DesktopVirtualizationAPIClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The ApplicationGroupAssignmentsInner object to access its operations.
-     */
-    private ApplicationGroupAssignmentsInner applicationGroupAssignments;
-
-    /**
-     * Gets the ApplicationGroupAssignmentsInner object to access its operations.
-     * @return the ApplicationGroupAssignmentsInner object.
-     */
-    public ApplicationGroupAssignmentsInner applicationGroupAssignments() {
-        return this.applicationGroupAssignments;
-    }
-
-    /**
      * The ApplicationGroupsInner object to access its operations.
      */
     private ApplicationGroupsInner applicationGroups;
@@ -263,19 +250,6 @@ public class DesktopVirtualizationAPIClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The ActiveApplicationsInner object to access its operations.
-     */
-    private ActiveApplicationsInner activeApplications;
-
-    /**
-     * Gets the ActiveApplicationsInner object to access its operations.
-     * @return the ActiveApplicationsInner object.
-     */
-    public ActiveApplicationsInner activeApplications() {
-        return this.activeApplications;
-    }
-
-    /**
      * Initializes an instance of DesktopVirtualizationAPIClient client.
      *
      * @param credentials the management credentials for Azure
@@ -312,7 +286,6 @@ public class DesktopVirtualizationAPIClientImpl extends AzureServiceClient {
         this.generateClientRequestId = true;
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.workspaces = new WorkspacesInner(restClient().retrofit(), this);
-        this.applicationGroupAssignments = new ApplicationGroupAssignmentsInner(restClient().retrofit(), this);
         this.applicationGroups = new ApplicationGroupsInner(restClient().retrofit(), this);
         this.startMenuItems = new StartMenuItemsInner(restClient().retrofit(), this);
         this.applications = new ApplicationsInner(restClient().retrofit(), this);
@@ -320,7 +293,6 @@ public class DesktopVirtualizationAPIClientImpl extends AzureServiceClient {
         this.hostPools = new HostPoolsInner(restClient().retrofit(), this);
         this.userSessions = new UserSessionsInner(restClient().retrofit(), this);
         this.sessionHosts = new SessionHostsInner(restClient().retrofit(), this);
-        this.activeApplications = new ActiveApplicationsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

@@ -13,6 +13,7 @@ import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.LoadBalancerType;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.RegistrationInfo;
 import java.util.List;
+import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.PreferredAppGroupType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -102,6 +103,14 @@ public class HostPoolInner extends Resource {
      */
     @JsonProperty(value = "properties.ssoContext")
     private String ssoContext;
+
+    /**
+     * The type of preferred application group type, default to Desktop
+     * Application Group. Possible values include: 'None', 'Desktop',
+     * 'RailApplications'.
+     */
+    @JsonProperty(value = "properties.preferredAppGroupType", required = true)
+    private PreferredAppGroupType preferredAppGroupType;
 
     /**
      * Get friendly name of HostPool.
@@ -349,6 +358,26 @@ public class HostPoolInner extends Resource {
      */
     public HostPoolInner withSsoContext(String ssoContext) {
         this.ssoContext = ssoContext;
+        return this;
+    }
+
+    /**
+     * Get the type of preferred application group type, default to Desktop Application Group. Possible values include: 'None', 'Desktop', 'RailApplications'.
+     *
+     * @return the preferredAppGroupType value
+     */
+    public PreferredAppGroupType preferredAppGroupType() {
+        return this.preferredAppGroupType;
+    }
+
+    /**
+     * Set the type of preferred application group type, default to Desktop Application Group. Possible values include: 'None', 'Desktop', 'RailApplications'.
+     *
+     * @param preferredAppGroupType the preferredAppGroupType value to set
+     * @return the HostPoolInner object itself.
+     */
+    public HostPoolInner withPreferredAppGroupType(PreferredAppGroupType preferredAppGroupType) {
+        this.preferredAppGroupType = preferredAppGroupType;
         return this;
     }
 

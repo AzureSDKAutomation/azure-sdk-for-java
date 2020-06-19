@@ -18,7 +18,6 @@ import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.Operations;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.Workspaces;
-import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.ApplicationGroupAssignments;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.ApplicationGroups;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.StartMenuItems;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.Applications;
@@ -26,7 +25,6 @@ import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.HostPools;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.UserSessions;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.SessionHosts;
-import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.ActiveApplications;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -36,7 +34,6 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 public final class DesktopVirtualizationManager extends ManagerCore<DesktopVirtualizationManager, DesktopVirtualizationAPIClientImpl> {
     private Operations operations;
     private Workspaces workspaces;
-    private ApplicationGroupAssignments applicationGroupAssignments;
     private ApplicationGroups applicationGroups;
     private StartMenuItems startMenuItems;
     private Applications applications;
@@ -44,7 +41,6 @@ public final class DesktopVirtualizationManager extends ManagerCore<DesktopVirtu
     private HostPools hostPools;
     private UserSessions userSessions;
     private SessionHosts sessionHosts;
-    private ActiveApplications activeApplications;
     /**
     * Get a Configurable instance that can be used to create DesktopVirtualizationManager with optional configuration.
     *
@@ -110,16 +106,6 @@ public final class DesktopVirtualizationManager extends ManagerCore<DesktopVirtu
             this.workspaces = new WorkspacesImpl(this);
         }
         return this.workspaces;
-    }
-
-    /**
-     * @return Entry point to manage ApplicationGroupAssignments.
-     */
-    public ApplicationGroupAssignments applicationGroupAssignments() {
-        if (this.applicationGroupAssignments == null) {
-            this.applicationGroupAssignments = new ApplicationGroupAssignmentsImpl(this);
-        }
-        return this.applicationGroupAssignments;
     }
 
     /**
@@ -190,16 +176,6 @@ public final class DesktopVirtualizationManager extends ManagerCore<DesktopVirtu
             this.sessionHosts = new SessionHostsImpl(this);
         }
         return this.sessionHosts;
-    }
-
-    /**
-     * @return Entry point to manage ActiveApplications.
-     */
-    public ActiveApplications activeApplications() {
-        if (this.activeApplications == null) {
-            this.activeApplications = new ActiveApplicationsImpl(this);
-        }
-        return this.activeApplications;
     }
 
     /**

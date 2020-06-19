@@ -45,6 +45,12 @@ public class SessionHostInner extends ProxyResource {
     private Boolean allowNewSession;
 
     /**
+     * Resource Id of SessionHost's underlying virtual machine.
+     */
+    @JsonProperty(value = "properties.virtualMachineId", access = JsonProperty.Access.WRITE_ONLY)
+    private String virtualMachineId;
+
+    /**
      * User assigned to SessionHost.
      */
     @JsonProperty(value = "properties.assignedUser")
@@ -172,6 +178,15 @@ public class SessionHostInner extends ProxyResource {
     public SessionHostInner withAllowNewSession(Boolean allowNewSession) {
         this.allowNewSession = allowNewSession;
         return this;
+    }
+
+    /**
+     * Get resource Id of SessionHost's underlying virtual machine.
+     *
+     * @return the virtualMachineId value
+     */
+    public String virtualMachineId() {
+        return this.virtualMachineId;
     }
 
     /**

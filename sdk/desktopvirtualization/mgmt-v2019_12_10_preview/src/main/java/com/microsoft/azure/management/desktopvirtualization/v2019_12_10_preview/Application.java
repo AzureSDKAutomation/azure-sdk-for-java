@@ -20,9 +20,9 @@ import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.
 import java.util.Map;
 
 /**
- * Type representing ApplicationGroupApplication.
+ * Type representing Application.
  */
-public interface ApplicationGroupApplication extends HasInner<ApplicationInner>, Indexable, Refreshable<ApplicationGroupApplication>, Updatable<ApplicationGroupApplication.Update>, HasManager<DesktopVirtualizationManager> {
+public interface Application extends HasInner<ApplicationInner>, Indexable, Refreshable<Application>, Updatable<Application.Update>, HasManager<DesktopVirtualizationManager> {
     /**
      * @return the commandLineArguments value.
      */
@@ -89,23 +89,23 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
     String type();
 
     /**
-     * The entirety of the ApplicationGroupApplication definition.
+     * The entirety of the Application definition.
      */
     interface Definition extends DefinitionStages.Blank, DefinitionStages.WithApplicationGroup, DefinitionStages.WithCommandLineSetting, DefinitionStages.WithCreate {
     }
 
     /**
-     * Grouping of ApplicationGroupApplication definition stages.
+     * Grouping of Application definition stages.
      */
     interface DefinitionStages {
         /**
-         * The first stage of a ApplicationGroupApplication definition.
+         * The first stage of a Application definition.
          */
         interface Blank extends WithApplicationGroup {
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify ApplicationGroup.
+         * The stage of the application definition allowing to specify ApplicationGroup.
          */
         interface WithApplicationGroup {
            /**
@@ -118,7 +118,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify CommandLineSetting.
+         * The stage of the application definition allowing to specify CommandLineSetting.
          */
         interface WithCommandLineSetting {
            /**
@@ -130,7 +130,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify CommandLineArguments.
+         * The stage of the application definition allowing to specify CommandLineArguments.
          */
         interface WithCommandLineArguments {
             /**
@@ -142,7 +142,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify Description.
+         * The stage of the application definition allowing to specify Description.
          */
         interface WithDescription {
             /**
@@ -154,7 +154,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify FilePath.
+         * The stage of the application definition allowing to specify FilePath.
          */
         interface WithFilePath {
             /**
@@ -166,7 +166,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify FriendlyName.
+         * The stage of the application definition allowing to specify FriendlyName.
          */
         interface WithFriendlyName {
             /**
@@ -178,7 +178,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify IconIndex.
+         * The stage of the application definition allowing to specify IconIndex.
          */
         interface WithIconIndex {
             /**
@@ -190,7 +190,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify IconPath.
+         * The stage of the application definition allowing to specify IconPath.
          */
         interface WithIconPath {
             /**
@@ -202,7 +202,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication definition allowing to specify ShowInPortal.
+         * The stage of the application definition allowing to specify ShowInPortal.
          */
         interface WithShowInPortal {
             /**
@@ -218,21 +218,21 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ApplicationGroupApplication>, DefinitionStages.WithCommandLineArguments, DefinitionStages.WithDescription, DefinitionStages.WithFilePath, DefinitionStages.WithFriendlyName, DefinitionStages.WithIconIndex, DefinitionStages.WithIconPath, DefinitionStages.WithShowInPortal {
+        interface WithCreate extends Creatable<Application>, DefinitionStages.WithCommandLineArguments, DefinitionStages.WithDescription, DefinitionStages.WithFilePath, DefinitionStages.WithFriendlyName, DefinitionStages.WithIconIndex, DefinitionStages.WithIconPath, DefinitionStages.WithShowInPortal {
         }
     }
     /**
-     * The template for a ApplicationGroupApplication update operation, containing all the settings that can be modified.
+     * The template for a Application update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ApplicationGroupApplication>, UpdateStages.WithCommandLineArguments, UpdateStages.WithCommandLineSetting, UpdateStages.WithDescription, UpdateStages.WithFilePath, UpdateStages.WithFriendlyName, UpdateStages.WithIconIndex, UpdateStages.WithIconPath, UpdateStages.WithShowInPortal, UpdateStages.WithTags {
+    interface Update extends Appliable<Application>, UpdateStages.WithCommandLineArguments, UpdateStages.WithCommandLineSetting, UpdateStages.WithDescription, UpdateStages.WithFilePath, UpdateStages.WithFriendlyName, UpdateStages.WithIconIndex, UpdateStages.WithIconPath, UpdateStages.WithShowInPortal, UpdateStages.WithTags {
     }
 
     /**
-     * Grouping of ApplicationGroupApplication update stages.
+     * Grouping of Application update stages.
      */
     interface UpdateStages {
         /**
-         * The stage of the applicationgroupapplication update allowing to specify CommandLineArguments.
+         * The stage of the application update allowing to specify CommandLineArguments.
          */
         interface WithCommandLineArguments {
             /**
@@ -244,7 +244,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication update allowing to specify CommandLineSetting.
+         * The stage of the application update allowing to specify CommandLineSetting.
          */
         interface WithCommandLineSetting {
             /**
@@ -256,7 +256,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication update allowing to specify Description.
+         * The stage of the application update allowing to specify Description.
          */
         interface WithDescription {
             /**
@@ -268,7 +268,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication update allowing to specify FilePath.
+         * The stage of the application update allowing to specify FilePath.
          */
         interface WithFilePath {
             /**
@@ -280,7 +280,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication update allowing to specify FriendlyName.
+         * The stage of the application update allowing to specify FriendlyName.
          */
         interface WithFriendlyName {
             /**
@@ -292,7 +292,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication update allowing to specify IconIndex.
+         * The stage of the application update allowing to specify IconIndex.
          */
         interface WithIconIndex {
             /**
@@ -304,7 +304,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication update allowing to specify IconPath.
+         * The stage of the application update allowing to specify IconPath.
          */
         interface WithIconPath {
             /**
@@ -316,7 +316,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication update allowing to specify ShowInPortal.
+         * The stage of the application update allowing to specify ShowInPortal.
          */
         interface WithShowInPortal {
             /**
@@ -328,7 +328,7 @@ public interface ApplicationGroupApplication extends HasInner<ApplicationInner>,
         }
 
         /**
-         * The stage of the applicationgroupapplication update allowing to specify Tags.
+         * The stage of the application update allowing to specify Tags.
          */
         interface WithTags {
             /**

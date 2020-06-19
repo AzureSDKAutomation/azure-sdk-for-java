@@ -8,7 +8,7 @@
 
 package com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.implementation;
 
-import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.ApplicationGroupApplication;
+import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.Application;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.ApplicationPatch;
@@ -16,14 +16,14 @@ import java.util.Map;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.CommandLineSetting;
 import rx.functions.Func1;
 
-class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<ApplicationGroupApplication, ApplicationInner, ApplicationGroupApplicationImpl> implements ApplicationGroupApplication, ApplicationGroupApplication.Definition, ApplicationGroupApplication.Update {
+class ApplicationImpl extends CreatableUpdatableImpl<Application, ApplicationInner, ApplicationImpl> implements Application, Application.Definition, Application.Update {
     private final DesktopVirtualizationManager manager;
     private String resourceGroupName;
     private String applicationGroupName;
     private String applicationName;
     private ApplicationPatch updateParameter;
 
-    ApplicationGroupApplicationImpl(String name, DesktopVirtualizationManager manager) {
+    ApplicationImpl(String name, DesktopVirtualizationManager manager) {
         super(name, new ApplicationInner());
         this.manager = manager;
         // Set resource name
@@ -32,7 +32,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
         this.updateParameter = new ApplicationPatch();
     }
 
-    ApplicationGroupApplicationImpl(ApplicationInner inner, DesktopVirtualizationManager manager) {
+    ApplicationImpl(ApplicationInner inner, DesktopVirtualizationManager manager) {
         super(inner.name(), inner);
         this.manager = manager;
         // Set resource name
@@ -51,7 +51,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public Observable<ApplicationGroupApplication> createResourceAsync() {
+    public Observable<Application> createResourceAsync() {
         ApplicationsInner client = this.manager().inner().applications();
         return client.createOrUpdateAsync(this.resourceGroupName, this.applicationGroupName, this.applicationName, this.inner())
             .map(new Func1<ApplicationInner, ApplicationInner>() {
@@ -65,7 +65,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public Observable<ApplicationGroupApplication> updateResourceAsync() {
+    public Observable<Application> updateResourceAsync() {
         ApplicationsInner client = this.manager().inner().applications();
         return client.updateAsync(this.resourceGroupName, this.applicationGroupName, this.applicationName, this.updateParameter)
             .map(new Func1<ApplicationInner, ApplicationInner>() {
@@ -159,20 +159,20 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withExistingApplicationGroup(String resourceGroupName, String applicationGroupName) {
+    public ApplicationImpl withExistingApplicationGroup(String resourceGroupName, String applicationGroupName) {
         this.resourceGroupName = resourceGroupName;
         this.applicationGroupName = applicationGroupName;
         return this;
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withTags(Map<String, String> tags) {
+    public ApplicationImpl withTags(Map<String, String> tags) {
         this.updateParameter.withTags(tags);
         return this;
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withCommandLineSetting(CommandLineSetting commandLineSetting) {
+    public ApplicationImpl withCommandLineSetting(CommandLineSetting commandLineSetting) {
         if (isInCreateMode()) {
             this.inner().withCommandLineSetting(commandLineSetting);
         } else {
@@ -182,7 +182,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withCommandLineArguments(String commandLineArguments) {
+    public ApplicationImpl withCommandLineArguments(String commandLineArguments) {
         if (isInCreateMode()) {
             this.inner().withCommandLineArguments(commandLineArguments);
         } else {
@@ -192,7 +192,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withDescription(String description) {
+    public ApplicationImpl withDescription(String description) {
         if (isInCreateMode()) {
             this.inner().withDescription(description);
         } else {
@@ -202,7 +202,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withFilePath(String filePath) {
+    public ApplicationImpl withFilePath(String filePath) {
         if (isInCreateMode()) {
             this.inner().withFilePath(filePath);
         } else {
@@ -212,7 +212,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withFriendlyName(String friendlyName) {
+    public ApplicationImpl withFriendlyName(String friendlyName) {
         if (isInCreateMode()) {
             this.inner().withFriendlyName(friendlyName);
         } else {
@@ -222,7 +222,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withIconIndex(Integer iconIndex) {
+    public ApplicationImpl withIconIndex(Integer iconIndex) {
         if (isInCreateMode()) {
             this.inner().withIconIndex(iconIndex);
         } else {
@@ -232,7 +232,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withIconPath(String iconPath) {
+    public ApplicationImpl withIconPath(String iconPath) {
         if (isInCreateMode()) {
             this.inner().withIconPath(iconPath);
         } else {
@@ -242,7 +242,7 @@ class ApplicationGroupApplicationImpl extends CreatableUpdatableImpl<Application
     }
 
     @Override
-    public ApplicationGroupApplicationImpl withShowInPortal(Boolean showInPortal) {
+    public ApplicationImpl withShowInPortal(Boolean showInPortal) {
         if (isInCreateMode()) {
             this.inner().withShowInPortal(showInPortal);
         } else {

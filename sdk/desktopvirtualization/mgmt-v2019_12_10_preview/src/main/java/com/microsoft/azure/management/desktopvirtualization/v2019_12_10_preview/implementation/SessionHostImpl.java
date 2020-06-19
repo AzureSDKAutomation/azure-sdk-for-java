@@ -162,6 +162,11 @@ class SessionHostImpl extends CreatableUpdatableImpl<SessionHost, SessionHostInn
     }
 
     @Override
+    public String virtualMachineId() {
+        return this.inner().virtualMachineId();
+    }
+
+    @Override
     public SessionHostImpl withAllowNewSession(Boolean allowNewSession) {
         this.updateParameter.withAllowNewSession(allowNewSession);
         return this;

@@ -15,7 +15,7 @@ import rx.Completable;
 import rx.Observable;
 import rx.functions.Func1;
 import com.microsoft.azure.Page;
-import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.ApplicationGroupApplication;
+import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.Application;
 
 class ApplicationsImpl extends WrapperImpl<ApplicationsInner> implements Applications {
     private final DesktopVirtualizationManager manager;
@@ -30,20 +30,20 @@ class ApplicationsImpl extends WrapperImpl<ApplicationsInner> implements Applica
     }
 
     @Override
-    public ApplicationGroupApplicationImpl define(String name) {
+    public ApplicationImpl define(String name) {
         return wrapModel(name);
     }
 
-    private ApplicationGroupApplicationImpl wrapModel(ApplicationInner inner) {
-        return  new ApplicationGroupApplicationImpl(inner, manager());
+    private ApplicationImpl wrapModel(ApplicationInner inner) {
+        return  new ApplicationImpl(inner, manager());
     }
 
-    private ApplicationGroupApplicationImpl wrapModel(String name) {
-        return new ApplicationGroupApplicationImpl(name, this.manager());
+    private ApplicationImpl wrapModel(String name) {
+        return new ApplicationImpl(name, this.manager());
     }
 
     @Override
-    public Observable<ApplicationGroupApplication> listAsync(final String resourceGroupName, final String applicationGroupName) {
+    public Observable<Application> listAsync(final String resourceGroupName, final String applicationGroupName) {
         ApplicationsInner client = this.inner();
         return client.listAsync(resourceGroupName, applicationGroupName)
         .flatMapIterable(new Func1<Page<ApplicationInner>, Iterable<ApplicationInner>>() {
@@ -52,25 +52,25 @@ class ApplicationsImpl extends WrapperImpl<ApplicationsInner> implements Applica
                 return page.items();
             }
         })
-        .map(new Func1<ApplicationInner, ApplicationGroupApplication>() {
+        .map(new Func1<ApplicationInner, Application>() {
             @Override
-            public ApplicationGroupApplication call(ApplicationInner inner) {
+            public Application call(ApplicationInner inner) {
                 return wrapModel(inner);
             }
         });
     }
 
     @Override
-    public Observable<ApplicationGroupApplication> getAsync(String resourceGroupName, String applicationGroupName, String applicationName) {
+    public Observable<Application> getAsync(String resourceGroupName, String applicationGroupName, String applicationName) {
         ApplicationsInner client = this.inner();
         return client.getAsync(resourceGroupName, applicationGroupName, applicationName)
-        .flatMap(new Func1<ApplicationInner, Observable<ApplicationGroupApplication>>() {
+        .flatMap(new Func1<ApplicationInner, Observable<Application>>() {
             @Override
-            public Observable<ApplicationGroupApplication> call(ApplicationInner inner) {
+            public Observable<Application> call(ApplicationInner inner) {
                 if (inner == null) {
                     return Observable.empty();
                 } else {
-                    return Observable.just((ApplicationGroupApplication)wrapModel(inner));
+                    return Observable.just((Application)wrapModel(inner));
                 }
             }
        });

@@ -17,7 +17,7 @@ import com.microsoft.azure.arm.model.HasInner;
 /**
  * Type representing Applications.
  */
-public interface Applications extends SupportsCreating<ApplicationGroupApplication.DefinitionStages.Blank>, HasInner<ApplicationsInner> {
+public interface Applications extends SupportsCreating<Application.DefinitionStages.Blank>, HasInner<ApplicationsInner> {
     /**
      * Get an application.
      *
@@ -27,7 +27,7 @@ public interface Applications extends SupportsCreating<ApplicationGroupApplicati
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<ApplicationGroupApplication> getAsync(String resourceGroupName, String applicationGroupName, String applicationName);
+    Observable<Application> getAsync(String resourceGroupName, String applicationGroupName, String applicationName);
 
     /**
      * List applications.
@@ -37,7 +37,7 @@ public interface Applications extends SupportsCreating<ApplicationGroupApplicati
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<ApplicationGroupApplication> listAsync(final String resourceGroupName, final String applicationGroupName);
+    Observable<Application> listAsync(final String resourceGroupName, final String applicationGroupName);
 
     /**
      * Remove an application.

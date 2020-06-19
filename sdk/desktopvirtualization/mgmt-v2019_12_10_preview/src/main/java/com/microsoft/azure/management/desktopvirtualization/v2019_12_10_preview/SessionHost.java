@@ -98,6 +98,11 @@ public interface SessionHost extends HasInner<SessionHostInner>, Indexable, Refr
     UpdateState updateState();
 
     /**
+     * @return the virtualMachineId value.
+     */
+    String virtualMachineId();
+
+    /**
      * The template for a SessionHost update operation, containing all the settings that can be modified.
      */
     interface Update extends Appliable<SessionHost>, UpdateStages.WithAllowNewSession, UpdateStages.WithAssignedUser {

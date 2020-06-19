@@ -17,6 +17,7 @@ import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.LoadBalancerType;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.RegistrationInfo;
 import java.util.List;
+import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.PreferredAppGroupType;
 import com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview.RegistrationInfoPatch;
 import rx.functions.Func1;
 
@@ -111,6 +112,11 @@ class HostPoolImpl extends GroupableResourceCoreImpl<HostPool, HostPoolInner, Ho
     }
 
     @Override
+    public PreferredAppGroupType preferredAppGroupType() {
+        return this.inner().preferredAppGroupType();
+    }
+
+    @Override
     public RegistrationInfo registrationInfo() {
         return this.inner().registrationInfo();
     }
@@ -175,6 +181,16 @@ class HostPoolImpl extends GroupableResourceCoreImpl<HostPool, HostPoolInner, Ho
             this.inner().withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
         } else {
             this.updateParameter.withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
+        }
+        return this;
+    }
+
+    @Override
+    public HostPoolImpl withPreferredAppGroupType(PreferredAppGroupType preferredAppGroupType) {
+        if (isInCreateMode()) {
+            this.inner().withPreferredAppGroupType(preferredAppGroupType);
+        } else {
+            this.updateParameter.withPreferredAppGroupType(preferredAppGroupType);
         }
         return this;
     }
