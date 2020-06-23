@@ -26,13 +26,13 @@ public class ExpressRouteCrossConnectionInner extends Resource {
     /**
      * The name of the primary port.
      */
-    @JsonProperty(value = "properties.primaryAzurePort", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.primaryAzurePort")
     private String primaryAzurePort;
 
     /**
      * The name of the secondary port.
      */
-    @JsonProperty(value = "properties.secondaryAzurePort", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.secondaryAzurePort")
     private String secondaryAzurePort;
 
     /**
@@ -44,13 +44,13 @@ public class ExpressRouteCrossConnectionInner extends Resource {
     /**
      * The peering location of the ExpressRoute circuit.
      */
-    @JsonProperty(value = "properties.peeringLocation")
+    @JsonProperty(value = "properties.peeringLocation", access = JsonProperty.Access.WRITE_ONLY)
     private String peeringLocation;
 
     /**
      * The circuit bandwidth In Mbps.
      */
-    @JsonProperty(value = "properties.bandwidthInMbps")
+    @JsonProperty(value = "properties.bandwidthInMbps", access = JsonProperty.Access.WRITE_ONLY)
     private Integer bandwidthInMbps;
 
     /**
@@ -108,12 +108,34 @@ public class ExpressRouteCrossConnectionInner extends Resource {
     }
 
     /**
+     * Set the name of the primary port.
+     *
+     * @param primaryAzurePort the primaryAzurePort value to set
+     * @return the ExpressRouteCrossConnectionInner object itself.
+     */
+    public ExpressRouteCrossConnectionInner withPrimaryAzurePort(String primaryAzurePort) {
+        this.primaryAzurePort = primaryAzurePort;
+        return this;
+    }
+
+    /**
      * Get the name of the secondary port.
      *
      * @return the secondaryAzurePort value
      */
     public String secondaryAzurePort() {
         return this.secondaryAzurePort;
+    }
+
+    /**
+     * Set the name of the secondary port.
+     *
+     * @param secondaryAzurePort the secondaryAzurePort value to set
+     * @return the ExpressRouteCrossConnectionInner object itself.
+     */
+    public ExpressRouteCrossConnectionInner withSecondaryAzurePort(String secondaryAzurePort) {
+        this.secondaryAzurePort = secondaryAzurePort;
+        return this;
     }
 
     /**
@@ -135,34 +157,12 @@ public class ExpressRouteCrossConnectionInner extends Resource {
     }
 
     /**
-     * Set the peering location of the ExpressRoute circuit.
-     *
-     * @param peeringLocation the peeringLocation value to set
-     * @return the ExpressRouteCrossConnectionInner object itself.
-     */
-    public ExpressRouteCrossConnectionInner withPeeringLocation(String peeringLocation) {
-        this.peeringLocation = peeringLocation;
-        return this;
-    }
-
-    /**
      * Get the circuit bandwidth In Mbps.
      *
      * @return the bandwidthInMbps value
      */
     public Integer bandwidthInMbps() {
         return this.bandwidthInMbps;
-    }
-
-    /**
-     * Set the circuit bandwidth In Mbps.
-     *
-     * @param bandwidthInMbps the bandwidthInMbps value to set
-     * @return the ExpressRouteCrossConnectionInner object itself.
-     */
-    public ExpressRouteCrossConnectionInner withBandwidthInMbps(Integer bandwidthInMbps) {
-        this.bandwidthInMbps = bandwidthInMbps;
-        return this;
     }
 
     /**
