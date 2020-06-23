@@ -10,6 +10,7 @@ package com.microsoft.azure.management.storage.v2019_06_01.implementation;
 
 import com.microsoft.azure.management.storage.v2019_06_01.CorsRules;
 import com.microsoft.azure.management.storage.v2019_06_01.DeleteRetentionPolicy;
+import com.microsoft.azure.management.storage.v2019_06_01.ProtocolSettings;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -33,6 +34,12 @@ public class FileServicePropertiesInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.shareDeleteRetentionPolicy")
     private DeleteRetentionPolicy shareDeleteRetentionPolicy;
+
+    /**
+     * Protocol settings for file service.
+     */
+    @JsonProperty(value = "properties.protocolSettings")
+    private ProtocolSettings protocolSettings;
 
     /**
      * Sku name and tier.
@@ -77,6 +84,26 @@ public class FileServicePropertiesInner extends ProxyResource {
      */
     public FileServicePropertiesInner withShareDeleteRetentionPolicy(DeleteRetentionPolicy shareDeleteRetentionPolicy) {
         this.shareDeleteRetentionPolicy = shareDeleteRetentionPolicy;
+        return this;
+    }
+
+    /**
+     * Get protocol settings for file service.
+     *
+     * @return the protocolSettings value
+     */
+    public ProtocolSettings protocolSettings() {
+        return this.protocolSettings;
+    }
+
+    /**
+     * Set protocol settings for file service.
+     *
+     * @param protocolSettings the protocolSettings value to set
+     * @return the FileServicePropertiesInner object itself.
+     */
+    public FileServicePropertiesInner withProtocolSettings(ProtocolSettings protocolSettings) {
+        this.protocolSettings = protocolSettings;
         return this;
     }
 
