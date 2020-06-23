@@ -51,6 +51,11 @@ public interface SignalRResource extends HasInner<SignalRResourceInner>, HasMana
     String id();
 
     /**
+     * @return the identity value.
+     */
+    ManagedIdentityParameters identity();
+
+    /**
      * @return the kind value.
      */
     ServiceKind kind();
@@ -99,6 +104,11 @@ public interface SignalRResource extends HasInner<SignalRResourceInner>, HasMana
      * @return the tags value.
      */
     Map<String, String> tags();
+
+    /**
+     * @return the tls value.
+     */
+    SignalRTlsSettings tls();
 
     /**
      * @return the type value.

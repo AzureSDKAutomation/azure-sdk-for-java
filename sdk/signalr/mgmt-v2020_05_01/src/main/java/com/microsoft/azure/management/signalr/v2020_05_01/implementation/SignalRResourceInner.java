@@ -15,7 +15,9 @@ import com.microsoft.azure.management.signalr.v2020_05_01.SignalRCorsSettings;
 import com.microsoft.azure.management.signalr.v2020_05_01.ServerlessUpstreamSettings;
 import com.microsoft.azure.management.signalr.v2020_05_01.SignalRNetworkACLs;
 import com.microsoft.azure.management.signalr.v2020_05_01.ProvisioningState;
+import com.microsoft.azure.management.signalr.v2020_05_01.SignalRTlsSettings;
 import com.microsoft.azure.management.signalr.v2020_05_01.ServiceKind;
+import com.microsoft.azure.management.signalr.v2020_05_01.ManagedIdentityParameters;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.rest.SkipParentValidation;
@@ -121,12 +123,24 @@ public class SignalRResourceInner extends Resource {
     private List<PrivateEndpointConnectionInner> privateEndpointConnections;
 
     /**
+     * TLS settings.
+     */
+    @JsonProperty(value = "properties.tls")
+    private SignalRTlsSettings tls;
+
+    /**
      * The kind of the service - e.g. "SignalR", or "RawWebSockets" for
      * "Microsoft.SignalRService/SignalR". Possible values include: 'SignalR',
      * 'RawWebSockets'.
      */
     @JsonProperty(value = "kind")
     private ServiceKind kind;
+
+    /**
+     * The managed identity response.
+     */
+    @JsonProperty(value = "identity")
+    private ManagedIdentityParameters identity;
 
     /**
      * Get the billing information of the resource.(e.g. Free, Standard).
@@ -322,6 +336,26 @@ public class SignalRResourceInner extends Resource {
     }
 
     /**
+     * Get tLS settings.
+     *
+     * @return the tls value
+     */
+    public SignalRTlsSettings tls() {
+        return this.tls;
+    }
+
+    /**
+     * Set tLS settings.
+     *
+     * @param tls the tls value to set
+     * @return the SignalRResourceInner object itself.
+     */
+    public SignalRResourceInner withTls(SignalRTlsSettings tls) {
+        this.tls = tls;
+        return this;
+    }
+
+    /**
      * Get the kind of the service - e.g. "SignalR", or "RawWebSockets" for "Microsoft.SignalRService/SignalR". Possible values include: 'SignalR', 'RawWebSockets'.
      *
      * @return the kind value
@@ -338,6 +372,26 @@ public class SignalRResourceInner extends Resource {
      */
     public SignalRResourceInner withKind(ServiceKind kind) {
         this.kind = kind;
+        return this;
+    }
+
+    /**
+     * Get the managed identity response.
+     *
+     * @return the identity value
+     */
+    public ManagedIdentityParameters identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the managed identity response.
+     *
+     * @param identity the identity value to set
+     * @return the SignalRResourceInner object itself.
+     */
+    public SignalRResourceInner withIdentity(ManagedIdentityParameters identity) {
+        this.identity = identity;
         return this;
     }
 
