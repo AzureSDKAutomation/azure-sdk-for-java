@@ -68,6 +68,13 @@ public class UpstreamTemplate {
     private String urlTemplate;
 
     /**
+     * Gets or sets the auth settings for an upstream. If not set, no auth is
+     * used for upstream messages.
+     */
+    @JsonProperty(value = "auth")
+    private UpstreamAuthSettings auth;
+
+    /**
      * Get gets or sets the matching pattern for hub names. If not set, it matches any hub.
      There are 3 kind of patterns supported:
          1. "*", it to matches any hub name
@@ -170,6 +177,26 @@ public class UpstreamTemplate {
      */
     public UpstreamTemplate withUrlTemplate(String urlTemplate) {
         this.urlTemplate = urlTemplate;
+        return this;
+    }
+
+    /**
+     * Get gets or sets the auth settings for an upstream. If not set, no auth is used for upstream messages.
+     *
+     * @return the auth value
+     */
+    public UpstreamAuthSettings auth() {
+        return this.auth;
+    }
+
+    /**
+     * Set gets or sets the auth settings for an upstream. If not set, no auth is used for upstream messages.
+     *
+     * @param auth the auth value to set
+     * @return the UpstreamTemplate object itself.
+     */
+    public UpstreamTemplate withAuth(UpstreamAuthSettings auth) {
+        this.auth = auth;
         return this;
     }
 

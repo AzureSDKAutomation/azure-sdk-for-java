@@ -13,11 +13,13 @@ import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.signalr.v2020_05_01.SignalRCorsSettings;
 import java.util.List;
 import com.microsoft.azure.management.signalr.v2020_05_01.SignalRFeature;
+import com.microsoft.azure.management.signalr.v2020_05_01.ManagedIdentityParameters;
 import com.microsoft.azure.management.signalr.v2020_05_01.ServiceKind;
 import com.microsoft.azure.management.signalr.v2020_05_01.SignalRNetworkACLs;
 import com.microsoft.azure.management.signalr.v2020_05_01.ProvisioningState;
 import com.microsoft.azure.management.signalr.v2020_05_01.ResourceSku;
 import java.util.Map;
+import com.microsoft.azure.management.signalr.v2020_05_01.SignalRTlsSettings;
 import com.microsoft.azure.management.signalr.v2020_05_01.ServerlessUpstreamSettings;
 
 class SignalRResourceImpl extends WrapperImpl<SignalRResourceInner> implements SignalRResource {
@@ -60,6 +62,11 @@ class SignalRResourceImpl extends WrapperImpl<SignalRResourceInner> implements S
     @Override
     public String id() {
         return this.inner().id();
+    }
+
+    @Override
+    public ManagedIdentityParameters identity() {
+        return this.inner().identity();
     }
 
     @Override
@@ -110,6 +117,11 @@ class SignalRResourceImpl extends WrapperImpl<SignalRResourceInner> implements S
     @Override
     public Map<String, String> tags() {
         return this.inner().getTags();
+    }
+
+    @Override
+    public SignalRTlsSettings tls() {
+        return this.inner().tls();
     }
 
     @Override
