@@ -8,7 +8,7 @@
 
 package com.microsoft.azure.management.databox.implementation;
 
-import com.microsoft.azure.management.databox.Error;
+import com.microsoft.rest.CloudError;
 import com.microsoft.azure.management.databox.AddressValidationStatus;
 import java.util.List;
 import com.microsoft.azure.management.databox.ShippingAddress;
@@ -24,7 +24,7 @@ public class AddressValidationOutputInner {
      * Error code and message of validation response.
      */
     @JsonProperty(value = "properties.error", access = JsonProperty.Access.WRITE_ONLY)
-    private Error error;
+    private CloudError error;
 
     /**
      * The address validation status. Possible values include: 'Valid',
@@ -44,7 +44,7 @@ public class AddressValidationOutputInner {
      *
      * @return the error value
      */
-    public Error error() {
+    public CloudError error() {
         return this.error;
     }
 

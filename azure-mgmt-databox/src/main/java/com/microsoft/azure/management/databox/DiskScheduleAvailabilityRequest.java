@@ -20,13 +20,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 public class DiskScheduleAvailabilityRequest extends ScheduleAvailabilityRequest {
     /**
      * The expected size of the data, which needs to be transferred in this
-     * job, in terabytes.
+     * job, in tera bytes.
      */
     @JsonProperty(value = "expectedDataSizeInTerabytes", required = true)
     private int expectedDataSizeInTerabytes;
 
     /**
-     * Get the expected size of the data, which needs to be transferred in this job, in terabytes.
+     * Get the expected size of the data, which needs to be transferred in this job, in tera bytes.
      *
      * @return the expectedDataSizeInTerabytes value
      */
@@ -35,7 +35,7 @@ public class DiskScheduleAvailabilityRequest extends ScheduleAvailabilityRequest
     }
 
     /**
-     * Set the expected size of the data, which needs to be transferred in this job, in terabytes.
+     * Set the expected size of the data, which needs to be transferred in this job, in tera bytes.
      *
      * @param expectedDataSizeInTerabytes the expectedDataSizeInTerabytes value to set
      * @return the DiskScheduleAvailabilityRequest object itself.

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("ValidatePreferences")
 public class PreferencesValidationRequest extends ValidationInputRequest {
     /**
-     * Preference requested with respect to transport type and data center.
+     * Preference of transport and data center.
      */
     @JsonProperty(value = "preference")
     private Preferences preference;
@@ -32,7 +32,7 @@ public class PreferencesValidationRequest extends ValidationInputRequest {
     private SkuName deviceType;
 
     /**
-     * Get preference requested with respect to transport type and data center.
+     * Get preference of transport and data center.
      *
      * @return the preference value
      */
@@ -41,7 +41,7 @@ public class PreferencesValidationRequest extends ValidationInputRequest {
     }
 
     /**
-     * Set preference requested with respect to transport type and data center.
+     * Set preference of transport and data center.
      *
      * @param preference the preference value to set
      * @return the PreferencesValidationRequest object itself.

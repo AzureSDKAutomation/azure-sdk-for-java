@@ -34,9 +34,9 @@ public interface SkuInformation extends HasInner<SkuInformationInner>, HasManage
     List<SkuCost> costs();
 
     /**
-     * @return the destinationToServiceLocationMap value.
+     * @return the dataLocationToServiceLocationMap value.
      */
-    List<DestinationToServiceLocationMap> destinationToServiceLocationMap();
+    List<DataLocationToServiceLocationMap> dataLocationToServiceLocationMap();
 
     /**
      * @return the disabledReason value.

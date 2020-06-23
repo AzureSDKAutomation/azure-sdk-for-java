@@ -202,7 +202,7 @@ public class DataBoxManagementClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2019-09-01";
+        this.apiVersion = "2020-04-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
@@ -219,6 +219,6 @@ public class DataBoxManagementClientImpl extends AzureServiceClient {
      */
     @Override
     public String userAgent() {
-        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "DataBoxManagementClient", "2019-09-01");
+        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "DataBoxManagementClient", "2020-04-01");
     }
 }

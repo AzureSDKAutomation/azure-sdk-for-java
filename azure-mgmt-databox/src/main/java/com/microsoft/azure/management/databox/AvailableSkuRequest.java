@@ -16,10 +16,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class AvailableSkuRequest {
     /**
-     * Type of the transfer.
+     * Type of the transfer. Possible values include: 'ImportToAzure',
+     * 'ExportFromAzure'.
      */
     @JsonProperty(value = "transferType", required = true)
-    private String transferType;
+    private TransferType transferType;
 
     /**
      * ISO country code. Country for hardware shipment. For codes check:
@@ -42,30 +43,21 @@ public class AvailableSkuRequest {
     private List<SkuName> skuNames;
 
     /**
-     * Creates an instance of AvailableSkuRequest class.
-     * @param country iSO country code. Country for hardware shipment. For codes check: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements.
-     * @param location location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01.
-     */
-    public AvailableSkuRequest() {
-        transferType = "ImportToAzure";
-    }
-
-    /**
-     * Get type of the transfer.
+     * Get type of the transfer. Possible values include: 'ImportToAzure', 'ExportFromAzure'.
      *
      * @return the transferType value
      */
-    public String transferType() {
+    public TransferType transferType() {
         return this.transferType;
     }
 
     /**
-     * Set type of the transfer.
+     * Set type of the transfer. Possible values include: 'ImportToAzure', 'ExportFromAzure'.
      *
      * @param transferType the transferType value to set
      * @return the AvailableSkuRequest object itself.
      */
-    public AvailableSkuRequest withTransferType(String transferType) {
+    public AvailableSkuRequest withTransferType(TransferType transferType) {
         this.transferType = transferType;
         return this;
     }

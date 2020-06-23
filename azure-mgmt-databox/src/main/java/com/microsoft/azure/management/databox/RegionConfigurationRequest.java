@@ -17,7 +17,7 @@ public class RegionConfigurationRequest {
     /**
      * Request body to get the availability for scheduling orders.
      */
-    @JsonProperty(value = "scheduleAvailabilityRequest")
+    @JsonProperty(value = "scheduleAvailabilityRequest", required = true)
     private ScheduleAvailabilityRequest scheduleAvailabilityRequest;
 
     /**

@@ -13,7 +13,7 @@ import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import java.util.List;
 import com.microsoft.azure.management.databox.SkuCapacity;
 import com.microsoft.azure.management.databox.SkuCost;
-import com.microsoft.azure.management.databox.DestinationToServiceLocationMap;
+import com.microsoft.azure.management.databox.DataLocationToServiceLocationMap;
 import com.microsoft.azure.management.databox.SkuDisabledReason;
 import com.microsoft.azure.management.databox.Sku;
 
@@ -45,8 +45,8 @@ class SkuInformationImpl extends WrapperImpl<SkuInformationInner> implements Sku
     }
 
     @Override
-    public List<DestinationToServiceLocationMap> destinationToServiceLocationMap() {
-        return this.inner().destinationToServiceLocationMap();
+    public List<DataLocationToServiceLocationMap> dataLocationToServiceLocationMap() {
+        return this.inner().dataLocationToServiceLocationMap();
     }
 
     @Override

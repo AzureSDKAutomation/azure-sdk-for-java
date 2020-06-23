@@ -73,6 +73,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.DataBox/jobs")
         Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Query("$skipToken") String skipToken, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Jobs listCredentials" })
+        @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials")
+        Observable<Response<ResponseBody>> listCredentials(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("jobName") String jobName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Jobs listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs")
         Observable<Response<ResponseBody>> listByResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Query("$skipToken") String skipToken, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -112,10 +116,6 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Jobs cancel" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/cancel")
         Observable<Response<ResponseBody>> cancel(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("jobName") String jobName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body CancellationReason cancellationReason, @Header("User-Agent") String userAgent);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Jobs listCredentials" })
-        @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials")
-        Observable<Response<ResponseBody>> listCredentials(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("jobName") String jobName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Jobs listNext" })
         @GET
@@ -336,6 +336,97 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
     private ServiceResponse<PageImpl<JobResourceInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<JobResourceInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * This method gets the unencrypted secrets related to the job.
+     *
+     * @param resourceGroupName The Resource Group Name
+     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the List&lt;UnencryptedCredentialsInner&gt; object if successful.
+     */
+    public List<UnencryptedCredentialsInner> listCredentials(String resourceGroupName, String jobName) {
+        return listCredentialsWithServiceResponseAsync(resourceGroupName, jobName).toBlocking().single().body();
+    }
+
+    /**
+     * This method gets the unencrypted secrets related to the job.
+     *
+     * @param resourceGroupName The Resource Group Name
+     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<UnencryptedCredentialsInner>> listCredentialsAsync(String resourceGroupName, String jobName, final ServiceCallback<List<UnencryptedCredentialsInner>> serviceCallback) {
+        return ServiceFuture.fromResponse(listCredentialsWithServiceResponseAsync(resourceGroupName, jobName), serviceCallback);
+    }
+
+    /**
+     * This method gets the unencrypted secrets related to the job.
+     *
+     * @param resourceGroupName The Resource Group Name
+     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;UnencryptedCredentialsInner&gt; object
+     */
+    public Observable<List<UnencryptedCredentialsInner>> listCredentialsAsync(String resourceGroupName, String jobName) {
+        return listCredentialsWithServiceResponseAsync(resourceGroupName, jobName).map(new Func1<ServiceResponse<List<UnencryptedCredentialsInner>>, List<UnencryptedCredentialsInner>>() {
+            @Override
+            public List<UnencryptedCredentialsInner> call(ServiceResponse<List<UnencryptedCredentialsInner>> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * This method gets the unencrypted secrets related to the job.
+     *
+     * @param resourceGroupName The Resource Group Name
+     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;UnencryptedCredentialsInner&gt; object
+     */
+    public Observable<ServiceResponse<List<UnencryptedCredentialsInner>>> listCredentialsWithServiceResponseAsync(String resourceGroupName, String jobName) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (jobName == null) {
+            throw new IllegalArgumentException("Parameter jobName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listCredentials(this.client.subscriptionId(), resourceGroupName, jobName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UnencryptedCredentialsInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<List<UnencryptedCredentialsInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl1<UnencryptedCredentialsInner>> result = listCredentialsDelegate(response);
+                        List<UnencryptedCredentialsInner> items = null;
+                        if (result.body() != null) {
+                            items = result.body().items();
+                        }
+                        ServiceResponse<List<UnencryptedCredentialsInner>> clientResponse = new ServiceResponse<List<UnencryptedCredentialsInner>>(items, result.response());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl1<UnencryptedCredentialsInner>> listCredentialsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<UnencryptedCredentialsInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<UnencryptedCredentialsInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1594,97 +1685,6 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
     private ServiceResponse<Void> cancelDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .build(response);
-    }
-
-    /**
-     * This method gets the unencrypted secrets related to the job.
-     *
-     * @param resourceGroupName The Resource Group Name
-     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the List&lt;UnencryptedCredentialsInner&gt; object if successful.
-     */
-    public List<UnencryptedCredentialsInner> listCredentials(String resourceGroupName, String jobName) {
-        return listCredentialsWithServiceResponseAsync(resourceGroupName, jobName).toBlocking().single().body();
-    }
-
-    /**
-     * This method gets the unencrypted secrets related to the job.
-     *
-     * @param resourceGroupName The Resource Group Name
-     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<List<UnencryptedCredentialsInner>> listCredentialsAsync(String resourceGroupName, String jobName, final ServiceCallback<List<UnencryptedCredentialsInner>> serviceCallback) {
-        return ServiceFuture.fromResponse(listCredentialsWithServiceResponseAsync(resourceGroupName, jobName), serviceCallback);
-    }
-
-    /**
-     * This method gets the unencrypted secrets related to the job.
-     *
-     * @param resourceGroupName The Resource Group Name
-     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;UnencryptedCredentialsInner&gt; object
-     */
-    public Observable<List<UnencryptedCredentialsInner>> listCredentialsAsync(String resourceGroupName, String jobName) {
-        return listCredentialsWithServiceResponseAsync(resourceGroupName, jobName).map(new Func1<ServiceResponse<List<UnencryptedCredentialsInner>>, List<UnencryptedCredentialsInner>>() {
-            @Override
-            public List<UnencryptedCredentialsInner> call(ServiceResponse<List<UnencryptedCredentialsInner>> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * This method gets the unencrypted secrets related to the job.
-     *
-     * @param resourceGroupName The Resource Group Name
-     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;UnencryptedCredentialsInner&gt; object
-     */
-    public Observable<ServiceResponse<List<UnencryptedCredentialsInner>>> listCredentialsWithServiceResponseAsync(String resourceGroupName, String jobName) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (jobName == null) {
-            throw new IllegalArgumentException("Parameter jobName is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listCredentials(this.client.subscriptionId(), resourceGroupName, jobName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UnencryptedCredentialsInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<List<UnencryptedCredentialsInner>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<PageImpl1<UnencryptedCredentialsInner>> result = listCredentialsDelegate(response);
-                        List<UnencryptedCredentialsInner> items = null;
-                        if (result.body() != null) {
-                            items = result.body().items();
-                        }
-                        ServiceResponse<List<UnencryptedCredentialsInner>> clientResponse = new ServiceResponse<List<UnencryptedCredentialsInner>>(items, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<PageImpl1<UnencryptedCredentialsInner>> listCredentialsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<UnencryptedCredentialsInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<UnencryptedCredentialsInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
