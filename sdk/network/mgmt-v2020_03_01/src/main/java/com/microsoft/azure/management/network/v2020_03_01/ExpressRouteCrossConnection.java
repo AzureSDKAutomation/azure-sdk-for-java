@@ -104,18 +104,6 @@ public interface ExpressRouteCrossConnection extends HasInner<ExpressRouteCrossC
         }
 
         /**
-         * The stage of the expressroutecrossconnection definition allowing to specify BandwidthInMbps.
-         */
-        interface WithBandwidthInMbps {
-            /**
-             * Specifies bandwidthInMbps.
-             * @param bandwidthInMbps The circuit bandwidth In Mbps
-             * @return the next definition stage
-             */
-            WithCreate withBandwidthInMbps(Integer bandwidthInMbps);
-        }
-
-        /**
          * The stage of the expressroutecrossconnection definition allowing to specify ExpressRouteCircuit.
          */
         interface WithExpressRouteCircuit {
@@ -128,18 +116,6 @@ public interface ExpressRouteCrossConnection extends HasInner<ExpressRouteCrossC
         }
 
         /**
-         * The stage of the expressroutecrossconnection definition allowing to specify PeeringLocation.
-         */
-        interface WithPeeringLocation {
-            /**
-             * Specifies peeringLocation.
-             * @param peeringLocation The peering location of the ExpressRoute circuit
-             * @return the next definition stage
-             */
-            WithCreate withPeeringLocation(String peeringLocation);
-        }
-
-        /**
          * The stage of the expressroutecrossconnection definition allowing to specify Peerings.
          */
         interface WithPeerings {
@@ -149,6 +125,30 @@ public interface ExpressRouteCrossConnection extends HasInner<ExpressRouteCrossC
              * @return the next definition stage
              */
             WithCreate withPeerings(List<ExpressRouteCrossConnectionPeeringInner> peerings);
+        }
+
+        /**
+         * The stage of the expressroutecrossconnection definition allowing to specify PrimaryAzurePort.
+         */
+        interface WithPrimaryAzurePort {
+            /**
+             * Specifies primaryAzurePort.
+             * @param primaryAzurePort The name of the primary port
+             * @return the next definition stage
+             */
+            WithCreate withPrimaryAzurePort(String primaryAzurePort);
+        }
+
+        /**
+         * The stage of the expressroutecrossconnection definition allowing to specify SecondaryAzurePort.
+         */
+        interface WithSecondaryAzurePort {
+            /**
+             * Specifies secondaryAzurePort.
+             * @param secondaryAzurePort The name of the secondary port
+             * @return the next definition stage
+             */
+            WithCreate withSecondaryAzurePort(String secondaryAzurePort);
         }
 
         /**
@@ -180,31 +180,19 @@ public interface ExpressRouteCrossConnection extends HasInner<ExpressRouteCrossC
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ExpressRouteCrossConnection>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithBandwidthInMbps, DefinitionStages.WithExpressRouteCircuit, DefinitionStages.WithPeeringLocation, DefinitionStages.WithPeerings, DefinitionStages.WithServiceProviderNotes, DefinitionStages.WithServiceProviderProvisioningState {
+        interface WithCreate extends Creatable<ExpressRouteCrossConnection>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithExpressRouteCircuit, DefinitionStages.WithPeerings, DefinitionStages.WithPrimaryAzurePort, DefinitionStages.WithSecondaryAzurePort, DefinitionStages.WithServiceProviderNotes, DefinitionStages.WithServiceProviderProvisioningState {
         }
     }
     /**
      * The template for a ExpressRouteCrossConnection update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ExpressRouteCrossConnection>, Resource.UpdateWithTags<Update>, UpdateStages.WithBandwidthInMbps, UpdateStages.WithExpressRouteCircuit, UpdateStages.WithPeeringLocation, UpdateStages.WithPeerings, UpdateStages.WithServiceProviderNotes, UpdateStages.WithServiceProviderProvisioningState {
+    interface Update extends Appliable<ExpressRouteCrossConnection>, Resource.UpdateWithTags<Update>, UpdateStages.WithExpressRouteCircuit, UpdateStages.WithPeerings, UpdateStages.WithPrimaryAzurePort, UpdateStages.WithSecondaryAzurePort, UpdateStages.WithServiceProviderNotes, UpdateStages.WithServiceProviderProvisioningState {
     }
 
     /**
      * Grouping of ExpressRouteCrossConnection update stages.
      */
     interface UpdateStages {
-        /**
-         * The stage of the expressroutecrossconnection update allowing to specify BandwidthInMbps.
-         */
-        interface WithBandwidthInMbps {
-            /**
-             * Specifies bandwidthInMbps.
-             * @param bandwidthInMbps The circuit bandwidth In Mbps
-             * @return the next update stage
-             */
-            Update withBandwidthInMbps(Integer bandwidthInMbps);
-        }
-
         /**
          * The stage of the expressroutecrossconnection update allowing to specify ExpressRouteCircuit.
          */
@@ -218,18 +206,6 @@ public interface ExpressRouteCrossConnection extends HasInner<ExpressRouteCrossC
         }
 
         /**
-         * The stage of the expressroutecrossconnection update allowing to specify PeeringLocation.
-         */
-        interface WithPeeringLocation {
-            /**
-             * Specifies peeringLocation.
-             * @param peeringLocation The peering location of the ExpressRoute circuit
-             * @return the next update stage
-             */
-            Update withPeeringLocation(String peeringLocation);
-        }
-
-        /**
          * The stage of the expressroutecrossconnection update allowing to specify Peerings.
          */
         interface WithPeerings {
@@ -239,6 +215,30 @@ public interface ExpressRouteCrossConnection extends HasInner<ExpressRouteCrossC
              * @return the next update stage
              */
             Update withPeerings(List<ExpressRouteCrossConnectionPeeringInner> peerings);
+        }
+
+        /**
+         * The stage of the expressroutecrossconnection update allowing to specify PrimaryAzurePort.
+         */
+        interface WithPrimaryAzurePort {
+            /**
+             * Specifies primaryAzurePort.
+             * @param primaryAzurePort The name of the primary port
+             * @return the next update stage
+             */
+            Update withPrimaryAzurePort(String primaryAzurePort);
+        }
+
+        /**
+         * The stage of the expressroutecrossconnection update allowing to specify SecondaryAzurePort.
+         */
+        interface WithSecondaryAzurePort {
+            /**
+             * Specifies secondaryAzurePort.
+             * @param secondaryAzurePort The name of the secondary port
+             * @return the next update stage
+             */
+            Update withSecondaryAzurePort(String secondaryAzurePort);
         }
 
         /**
