@@ -23,8 +23,8 @@ import rx.functions.Func1;
 import com.microsoft.azure.PagedList;
 import com.microsoft.azure.Page;
 import java.util.List;
-import com.microsoft.azure.management.databox.ShipmentPickUpResponse;
 import com.microsoft.azure.management.databox.UnencryptedCredentials;
+import com.microsoft.azure.management.databox.ShipmentPickUpResponse;
 import com.microsoft.azure.management.databox.ShipmentPickUpRequest;
 
 class JobsImpl extends GroupableResourcesCoreImpl<JobResource, JobResourceImpl, JobResourceInner, JobsInner, DataBoxManager>  implements Jobs {
@@ -130,24 +130,6 @@ class JobsImpl extends GroupableResourcesCoreImpl<JobResource, JobResourceImpl, 
     }
 
     @Override
-    public Observable<ShipmentPickUpResponse> bookShipmentPickUpAsync(String resourceGroupName, String jobName, ShipmentPickUpRequest shipmentPickUpRequest) {
-        JobsInner client = this.inner();
-        return client.bookShipmentPickUpAsync(resourceGroupName, jobName, shipmentPickUpRequest)
-        .map(new Func1<ShipmentPickUpResponseInner, ShipmentPickUpResponse>() {
-            @Override
-            public ShipmentPickUpResponse call(ShipmentPickUpResponseInner inner) {
-                return new ShipmentPickUpResponseImpl(inner, manager());
-            }
-        });
-    }
-
-    @Override
-    public Completable cancelAsync(String resourceGroupName, String jobName, String reason) {
-        JobsInner client = this.inner();
-        return client.cancelAsync(resourceGroupName, jobName, reason).toCompletable();
-    }
-
-    @Override
     public Observable<UnencryptedCredentials> listCredentialsAsync(String resourceGroupName, String jobName) {
         JobsInner client = this.inner();
         return client.listCredentialsAsync(resourceGroupName, jobName)
@@ -163,6 +145,24 @@ class JobsImpl extends GroupableResourcesCoreImpl<JobResource, JobResourceImpl, 
                 return new UnencryptedCredentialsImpl(inner, manager());
             }
         });
+    }
+
+    @Override
+    public Observable<ShipmentPickUpResponse> bookShipmentPickUpAsync(String resourceGroupName, String jobName, ShipmentPickUpRequest shipmentPickUpRequest) {
+        JobsInner client = this.inner();
+        return client.bookShipmentPickUpAsync(resourceGroupName, jobName, shipmentPickUpRequest)
+        .map(new Func1<ShipmentPickUpResponseInner, ShipmentPickUpResponse>() {
+            @Override
+            public ShipmentPickUpResponse call(ShipmentPickUpResponseInner inner) {
+                return new ShipmentPickUpResponseImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Completable cancelAsync(String resourceGroupName, String jobName, String reason) {
+        JobsInner client = this.inner();
+        return client.cancelAsync(resourceGroupName, jobName, reason).toCompletable();
     }
 
     @Override

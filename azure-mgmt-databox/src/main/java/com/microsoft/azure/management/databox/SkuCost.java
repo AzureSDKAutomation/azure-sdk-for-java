@@ -27,6 +27,14 @@ public class SkuCost {
     private String meterType;
 
     /**
+     * Multiplier specifies the region specific value to be multiplied with 1$
+     * guid. Eg: Our new regions will be using 1$ shipping guid with
+     * appropriate multiplier specific to region.
+     */
+    @JsonProperty(value = "multiplier", access = JsonProperty.Access.WRITE_ONLY)
+    private Double multiplier;
+
+    /**
      * Get meter id of the Sku.
      *
      * @return the meterId value
@@ -42,6 +50,15 @@ public class SkuCost {
      */
     public String meterType() {
         return this.meterType;
+    }
+
+    /**
+     * Get multiplier specifies the region specific value to be multiplied with 1$ guid. Eg: Our new regions will be using 1$ shipping guid with appropriate multiplier specific to region.
+     *
+     * @return the multiplier value
+     */
+    public Double multiplier() {
+        return this.multiplier;
     }
 
 }

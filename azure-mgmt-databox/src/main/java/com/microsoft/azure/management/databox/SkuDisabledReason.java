@@ -31,7 +31,10 @@ public enum SkuDisabledReason {
     OFFER_TYPE("OfferType"),
 
     /** Subscription has not registered to Microsoft.DataBox and Service does not have the subscription notification. */
-    NO_SUBSCRIPTION_INFO("NoSubscriptionInfo");
+    NO_SUBSCRIPTION_INFO("NoSubscriptionInfo"),
+
+    /** Customer unregistered from the subscription. */
+    CUSTOMER_UNREGISTERED("CustomerUnregistered");
 
     /** The actual serialized value for a SkuDisabledReason instance. */
     private String value;

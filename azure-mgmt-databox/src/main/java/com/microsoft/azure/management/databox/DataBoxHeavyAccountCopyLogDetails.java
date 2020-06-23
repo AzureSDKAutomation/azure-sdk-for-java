@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("DataBoxHeavy")
 public class DataBoxHeavyAccountCopyLogDetails extends CopyLogDetails {
     /**
-     * Destination account name.
+     * Account name.
      */
     @JsonProperty(value = "accountName", access = JsonProperty.Access.WRITE_ONLY)
     private String accountName;
@@ -32,7 +32,14 @@ public class DataBoxHeavyAccountCopyLogDetails extends CopyLogDetails {
     private List<String> copyLogLink;
 
     /**
-     * Get destination account name.
+     * Link for copy verbose logs. This will be set only when the
+     * LogCollectionLevel is set to verbose.
+     */
+    @JsonProperty(value = "copyVerboseLogLink", access = JsonProperty.Access.WRITE_ONLY)
+    private List<String> copyVerboseLogLink;
+
+    /**
+     * Get account name.
      *
      * @return the accountName value
      */
@@ -47,6 +54,15 @@ public class DataBoxHeavyAccountCopyLogDetails extends CopyLogDetails {
      */
     public List<String> copyLogLink() {
         return this.copyLogLink;
+    }
+
+    /**
+     * Get link for copy verbose logs. This will be set only when the LogCollectionLevel is set to verbose.
+     *
+     * @return the copyVerboseLogLink value
+     */
+    public List<String> copyVerboseLogLink() {
+        return this.copyVerboseLogLink;
     }
 
 }

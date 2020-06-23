@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class RegionConfigurationResponseInner {
     /**
-     * Schedule availability for given sku in a region.
+     * Schedule availability response.
      */
     @JsonProperty(value = "scheduleAvailabilityResponse", access = JsonProperty.Access.WRITE_ONLY)
     private ScheduleAvailabilityResponse scheduleAvailabilityResponse;
@@ -29,7 +29,7 @@ public class RegionConfigurationResponseInner {
     private TransportAvailabilityResponse transportAvailabilityResponse;
 
     /**
-     * Get schedule availability for given sku in a region.
+     * Get schedule availability response.
      *
      * @return the scheduleAvailabilityResponse value
      */

@@ -15,13 +15,13 @@ import rx.functions.Func1;
 import rx.Observable;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.management.databox.SkuInformation;
+import com.microsoft.azure.management.databox.RegionConfigurationResponse;
 import com.microsoft.azure.management.databox.AddressValidationOutput;
 import com.microsoft.azure.management.databox.ValidationResponse;
-import com.microsoft.azure.management.databox.RegionConfigurationResponse;
 import com.microsoft.azure.management.databox.AvailableSkuRequest;
+import com.microsoft.azure.management.databox.RegionConfigurationRequest;
 import com.microsoft.azure.management.databox.ValidateAddress;
 import com.microsoft.azure.management.databox.ValidationRequest;
-import com.microsoft.azure.management.databox.RegionConfigurationRequest;
 
 class ServicesImpl extends WrapperImpl<ServicesInner> implements Services {
     private final DataBoxManager manager;
@@ -33,24 +33,6 @@ class ServicesImpl extends WrapperImpl<ServicesInner> implements Services {
 
     public DataBoxManager manager() {
         return this.manager;
-    }
-
-    @Override
-    public Observable<SkuInformation> listAvailableSkusAsync(final String location, final AvailableSkuRequest availableSkuRequest) {
-        ServicesInner client = this.inner();
-        return client.listAvailableSkusAsync(location, availableSkuRequest)
-        .flatMapIterable(new Func1<Page<SkuInformationInner>, Iterable<SkuInformationInner>>() {
-            @Override
-            public Iterable<SkuInformationInner> call(Page<SkuInformationInner> page) {
-                return page.items();
-            }
-        })
-        .map(new Func1<SkuInformationInner, SkuInformation>() {
-            @Override
-            public SkuInformation call(SkuInformationInner inner) {
-                return new SkuInformationImpl(inner, manager());
-            }
-        });
     }
 
     @Override
@@ -72,6 +54,30 @@ class ServicesImpl extends WrapperImpl<ServicesInner> implements Services {
     }
 
     @Override
+    public Observable<RegionConfigurationResponse> regionConfigurationAsync(String location, RegionConfigurationRequest regionConfigurationRequest) {
+        ServicesInner client = this.inner();
+        return client.regionConfigurationAsync(location, regionConfigurationRequest)
+        .map(new Func1<RegionConfigurationResponseInner, RegionConfigurationResponse>() {
+            @Override
+            public RegionConfigurationResponse call(RegionConfigurationResponseInner inner) {
+                return new RegionConfigurationResponseImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<RegionConfigurationResponse> regionConfigurationByResourceGroupAsync(String resourceGroupName, String location, RegionConfigurationRequest regionConfigurationRequest) {
+        ServicesInner client = this.inner();
+        return client.regionConfigurationByResourceGroupAsync(resourceGroupName, location, regionConfigurationRequest)
+        .map(new Func1<RegionConfigurationResponseInner, RegionConfigurationResponse>() {
+            @Override
+            public RegionConfigurationResponse call(RegionConfigurationResponseInner inner) {
+                return new RegionConfigurationResponseImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
     public Observable<AddressValidationOutput> validateAddressMethodAsync(String location, ValidateAddress validateAddress) {
         ServicesInner client = this.inner();
         return client.validateAddressMethodAsync(location, validateAddress)
@@ -79,18 +85,6 @@ class ServicesImpl extends WrapperImpl<ServicesInner> implements Services {
             @Override
             public AddressValidationOutput call(AddressValidationOutputInner inner) {
                 return new AddressValidationOutputImpl(inner, manager());
-            }
-        });
-    }
-
-    @Override
-    public Observable<ValidationResponse> validateInputsByResourceGroupAsync(String resourceGroupName, String location, ValidationRequest validationRequest) {
-        ServicesInner client = this.inner();
-        return client.validateInputsByResourceGroupAsync(resourceGroupName, location, validationRequest)
-        .map(new Func1<ValidationResponseInner, ValidationResponse>() {
-            @Override
-            public ValidationResponse call(ValidationResponseInner inner) {
-                return new ValidationResponseImpl(inner, manager());
             }
         });
     }
@@ -108,13 +102,13 @@ class ServicesImpl extends WrapperImpl<ServicesInner> implements Services {
     }
 
     @Override
-    public Observable<RegionConfigurationResponse> regionConfigurationAsync(String location, RegionConfigurationRequest regionConfigurationRequest) {
+    public Observable<ValidationResponse> validateInputsByResourceGroupAsync(String resourceGroupName, String location, ValidationRequest validationRequest) {
         ServicesInner client = this.inner();
-        return client.regionConfigurationAsync(location, regionConfigurationRequest)
-        .map(new Func1<RegionConfigurationResponseInner, RegionConfigurationResponse>() {
+        return client.validateInputsByResourceGroupAsync(resourceGroupName, location, validationRequest)
+        .map(new Func1<ValidationResponseInner, ValidationResponse>() {
             @Override
-            public RegionConfigurationResponse call(RegionConfigurationResponseInner inner) {
-                return new RegionConfigurationResponseImpl(inner, manager());
+            public ValidationResponse call(ValidationResponseInner inner) {
+                return new ValidationResponseImpl(inner, manager());
             }
         });
     }

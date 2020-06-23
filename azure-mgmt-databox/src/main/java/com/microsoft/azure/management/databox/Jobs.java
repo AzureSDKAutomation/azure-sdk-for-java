@@ -24,6 +24,16 @@ import com.microsoft.azure.arm.model.HasInner;
  */
 public interface Jobs extends SupportsCreating<JobResource.DefinitionStages.Blank>, SupportsDeletingByResourceGroup, SupportsBatchDeletion, SupportsGettingByResourceGroup<JobResource>, SupportsListingByResourceGroup<JobResource>, SupportsListing<JobResource>, HasInner<JobsInner> {
     /**
+     * This method gets the unencrypted secrets related to the job.
+     *
+     * @param resourceGroupName The Resource Group Name
+     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<UnencryptedCredentials> listCredentialsAsync(String resourceGroupName, String jobName);
+
+    /**
      * Book shipment pick up.
      *
      * @param resourceGroupName The Resource Group Name
@@ -44,15 +54,5 @@ public interface Jobs extends SupportsCreating<JobResource.DefinitionStages.Blan
      * @return the observable for the request
      */
     Completable cancelAsync(String resourceGroupName, String jobName, String reason);
-
-    /**
-     * This method gets the unencrypted secrets related to the job.
-     *
-     * @param resourceGroupName The Resource Group Name
-     * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    Observable<UnencryptedCredentials> listCredentialsAsync(String resourceGroupName, String jobName);
 
 }

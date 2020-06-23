@@ -9,7 +9,6 @@
 package com.microsoft.azure.management.databox;
 
 import org.joda.time.DateTime;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -35,7 +34,8 @@ public class JobStages {
 
     /**
      * Status of the job stage. Possible values include: 'None', 'InProgress',
-     * 'Succeeded', 'Failed', 'Cancelled', 'Cancelling', 'SucceededWithErrors'.
+     * 'Succeeded', 'Failed', 'Cancelled', 'Cancelling', 'SucceededWithErrors',
+     * 'WaitingForCustomerAction', 'SucceededWithWarnings'.
      */
     @JsonProperty(value = "stageStatus", access = JsonProperty.Access.WRITE_ONLY)
     private StageStatus stageStatus;
@@ -51,12 +51,6 @@ public class JobStages {
      */
     @JsonProperty(value = "jobStageDetails", access = JsonProperty.Access.WRITE_ONLY)
     private Object jobStageDetails;
-
-    /**
-     * Error details for the stage.
-     */
-    @JsonProperty(value = "errorDetails", access = JsonProperty.Access.WRITE_ONLY)
-    private List<JobErrorDetails> errorDetails;
 
     /**
      * Get name of the job stage. Possible values include: 'DeviceOrdered', 'DevicePrepared', 'Dispatched', 'Delivered', 'PickedUp', 'AtAzureDC', 'DataCopy', 'Completed', 'CompletedWithErrors', 'Cancelled', 'Failed_IssueReportedAtCustomer', 'Failed_IssueDetectedAtAzureDC', 'Aborted', 'CompletedWithWarnings', 'ReadyToDispatchFromAzureDC', 'ReadyToReceiveAtAzureDC'.
@@ -77,7 +71,7 @@ public class JobStages {
     }
 
     /**
-     * Get status of the job stage. Possible values include: 'None', 'InProgress', 'Succeeded', 'Failed', 'Cancelled', 'Cancelling', 'SucceededWithErrors'.
+     * Get status of the job stage. Possible values include: 'None', 'InProgress', 'Succeeded', 'Failed', 'Cancelled', 'Cancelling', 'SucceededWithErrors', 'WaitingForCustomerAction', 'SucceededWithWarnings'.
      *
      * @return the stageStatus value
      */
@@ -101,15 +95,6 @@ public class JobStages {
      */
     public Object jobStageDetails() {
         return this.jobStageDetails;
-    }
-
-    /**
-     * Get error details for the stage.
-     *
-     * @return the errorDetails value
-     */
-    public List<JobErrorDetails> errorDetails() {
-        return this.errorDetails;
     }
 
 }

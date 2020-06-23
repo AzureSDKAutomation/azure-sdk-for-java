@@ -27,7 +27,7 @@ public enum NotificationStageName {
     /** Notification at device picked up from user stage. */
     PICKED_UP("PickedUp"),
 
-    /** Notification at device received at azure datacenter stage. */
+    /** Notification at device received at Azure datacenter stage. */
     AT_AZURE_DC("AtAzureDC"),
 
     /** Notification at data copy started stage. */

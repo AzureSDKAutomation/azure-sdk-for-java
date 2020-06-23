@@ -34,7 +34,13 @@ public enum StageStatus {
     CANCELLING("Cancelling"),
 
     /** Stage has succeeded with errors. */
-    SUCCEEDED_WITH_ERRORS("SucceededWithErrors");
+    SUCCEEDED_WITH_ERRORS("SucceededWithErrors"),
+
+    /** Stage is stuck until customer takes some action. */
+    WAITING_FOR_CUSTOMER_ACTION("WaitingForCustomerAction"),
+
+    /** Stage has succeeded with warnings. */
+    SUCCEEDED_WITH_WARNINGS("SucceededWithWarnings");
 
     /** The actual serialized value for a StageStatus instance. */
     private String value;

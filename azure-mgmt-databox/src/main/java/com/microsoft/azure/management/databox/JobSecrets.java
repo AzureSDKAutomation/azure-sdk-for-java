@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.databox;
 
+import com.microsoft.rest.CloudError;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -27,8 +28,14 @@ public class JobSecrets {
     /**
      * Dc Access Security Code for Customer Managed Shipping.
      */
-    @JsonProperty(value = "dcAccessSecurityCode")
+    @JsonProperty(value = "dcAccessSecurityCode", access = JsonProperty.Access.WRITE_ONLY)
     private DcAccessSecurityCode dcAccessSecurityCode;
+
+    /**
+     * Error while fetching the secrets.
+     */
+    @JsonProperty(value = "error", access = JsonProperty.Access.WRITE_ONLY)
+    private CloudError error;
 
     /**
      * Get dc Access Security Code for Customer Managed Shipping.
@@ -40,14 +47,12 @@ public class JobSecrets {
     }
 
     /**
-     * Set dc Access Security Code for Customer Managed Shipping.
+     * Get error while fetching the secrets.
      *
-     * @param dcAccessSecurityCode the dcAccessSecurityCode value to set
-     * @return the JobSecrets object itself.
+     * @return the error value
      */
-    public JobSecrets withDcAccessSecurityCode(DcAccessSecurityCode dcAccessSecurityCode) {
-        this.dcAccessSecurityCode = dcAccessSecurityCode;
-        return this;
+    public CloudError error() {
+        return this.error;
     }
 
 }

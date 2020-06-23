@@ -25,16 +25,20 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 })
 public class ScheduleAvailabilityRequest {
     /**
-     * Location for data transfer.
-     * For locations check:
+     * Location for data transfer. For locations check:
      * https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01.
      */
     @JsonProperty(value = "storageLocation", required = true)
     private String storageLocation;
 
     /**
-     * Get location for data transfer.
-     For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01.
+     * Country in which storage location should be supported.
+     */
+    @JsonProperty(value = "country")
+    private String country;
+
+    /**
+     * Get location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01.
      *
      * @return the storageLocation value
      */
@@ -43,14 +47,33 @@ public class ScheduleAvailabilityRequest {
     }
 
     /**
-     * Set location for data transfer.
-     For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01.
+     * Set location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01.
      *
      * @param storageLocation the storageLocation value to set
      * @return the ScheduleAvailabilityRequest object itself.
      */
     public ScheduleAvailabilityRequest withStorageLocation(String storageLocation) {
         this.storageLocation = storageLocation;
+        return this;
+    }
+
+    /**
+     * Get country in which storage location should be supported.
+     *
+     * @return the country value
+     */
+    public String country() {
+        return this.country;
+    }
+
+    /**
+     * Set country in which storage location should be supported.
+     *
+     * @param country the country value to set
+     * @return the ScheduleAvailabilityRequest object itself.
+     */
+    public ScheduleAvailabilityRequest withCountry(String country) {
+        this.country = country;
         return this;
     }
 

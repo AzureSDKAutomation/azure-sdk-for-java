@@ -27,6 +27,12 @@ public class UpdateJobDetails {
     private ShippingAddress shippingAddress;
 
     /**
+     * Key encryption key for the job.
+     */
+    @JsonProperty(value = "keyEncryptionKey")
+    private KeyEncryptionKey keyEncryptionKey;
+
+    /**
      * Get contact details for notification and shipping.
      *
      * @return the contactDetails value
@@ -63,6 +69,26 @@ public class UpdateJobDetails {
      */
     public UpdateJobDetails withShippingAddress(ShippingAddress shippingAddress) {
         this.shippingAddress = shippingAddress;
+        return this;
+    }
+
+    /**
+     * Get key encryption key for the job.
+     *
+     * @return the keyEncryptionKey value
+     */
+    public KeyEncryptionKey keyEncryptionKey() {
+        return this.keyEncryptionKey;
+    }
+
+    /**
+     * Set key encryption key for the job.
+     *
+     * @param keyEncryptionKey the keyEncryptionKey value to set
+     * @return the UpdateJobDetails object itself.
+     */
+    public UpdateJobDetails withKeyEncryptionKey(KeyEncryptionKey keyEncryptionKey) {
+        this.keyEncryptionKey = keyEncryptionKey;
         return this;
     }
 
