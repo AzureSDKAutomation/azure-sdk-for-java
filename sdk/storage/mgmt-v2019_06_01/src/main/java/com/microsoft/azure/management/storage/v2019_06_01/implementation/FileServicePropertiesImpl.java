@@ -12,18 +12,13 @@ import com.microsoft.azure.management.storage.v2019_06_01.FileServiceProperties;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.storage.v2019_06_01.CorsRules;
-import java.util.List;
 import com.microsoft.azure.management.storage.v2019_06_01.DeleteRetentionPolicy;
-import rx.functions.Func1;
+import com.microsoft.azure.management.storage.v2019_06_01.ProtocolSettings;
 
 class FileServicePropertiesImpl extends CreatableUpdatableImpl<FileServiceProperties, FileServicePropertiesInner, FileServicePropertiesImpl> implements FileServiceProperties, FileServiceProperties.Definition, FileServiceProperties.Update {
     private final StorageManager manager;
     private String resourceGroupName;
     private String accountName;
-    private CorsRules ccors;
-    private DeleteRetentionPolicy cshareDeleteRetentionPolicy;
-    private CorsRules ucors;
-    private DeleteRetentionPolicy ushareDeleteRetentionPolicy;
 
     FileServicePropertiesImpl(String name, StorageManager manager) {
         super(name, new FileServicePropertiesInner());
@@ -31,10 +26,6 @@ class FileServicePropertiesImpl extends CreatableUpdatableImpl<FileServiceProper
         // Set resource name
         this.accountName = name;
         //
-        this.ccors = new CorsRules();
-        this.cshareDeleteRetentionPolicy = new DeleteRetentionPolicy();
-        this.ucors = new CorsRules();
-        this.ushareDeleteRetentionPolicy = new DeleteRetentionPolicy();
     }
 
     FileServicePropertiesImpl(FileServicePropertiesInner inner, StorageManager manager) {
@@ -46,10 +37,6 @@ class FileServicePropertiesImpl extends CreatableUpdatableImpl<FileServiceProper
         this.resourceGroupName = IdParsingUtils.getValueFromIdByName(inner.id(), "resourceGroups");
         this.accountName = IdParsingUtils.getValueFromIdByName(inner.id(), "storageAccounts");
         //
-        this.ccors = new CorsRules();
-        this.cshareDeleteRetentionPolicy = new DeleteRetentionPolicy();
-        this.ucors = new CorsRules();
-        this.ushareDeleteRetentionPolicy = new DeleteRetentionPolicy();
     }
 
     @Override
@@ -60,28 +47,14 @@ class FileServicePropertiesImpl extends CreatableUpdatableImpl<FileServiceProper
     @Override
     public Observable<FileServiceProperties> createResourceAsync() {
         FileServicesInner client = this.manager().inner().fileServices();
-        return client.setServicePropertiesAsync(this.resourceGroupName, this.accountName, this.ccors, this.cshareDeleteRetentionPolicy)
-            .map(new Func1<FileServicePropertiesInner, FileServicePropertiesInner>() {
-               @Override
-               public FileServicePropertiesInner call(FileServicePropertiesInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
+        return client.setServicePropertiesAsync(this.resourceGroupName, this.accountName, this.inner())
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<FileServiceProperties> updateResourceAsync() {
         FileServicesInner client = this.manager().inner().fileServices();
-        return client.setServicePropertiesAsync(this.resourceGroupName, this.accountName, this.ucors, this.ushareDeleteRetentionPolicy)
-            .map(new Func1<FileServicePropertiesInner, FileServicePropertiesInner>() {
-               @Override
-               public FileServicePropertiesInner call(FileServicePropertiesInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
+        return client.setServicePropertiesAsync(this.resourceGroupName, this.accountName, this.inner())
             .map(innerToFluentMap(this));
     }
 
@@ -96,12 +69,6 @@ class FileServicePropertiesImpl extends CreatableUpdatableImpl<FileServiceProper
         return this.inner().id() == null;
     }
 
-    private void resetCreateUpdateParameters() {
-        this.ccors = new CorsRules();
-        this.cshareDeleteRetentionPolicy = new DeleteRetentionPolicy();
-        this.ucors = new CorsRules();
-        this.ushareDeleteRetentionPolicy = new DeleteRetentionPolicy();
-    }
 
     @Override
     public CorsRules cors() {
@@ -116,6 +83,11 @@ class FileServicePropertiesImpl extends CreatableUpdatableImpl<FileServiceProper
     @Override
     public String name() {
         return this.inner().name();
+    }
+
+    @Override
+    public ProtocolSettings protocolSettings() {
+        return this.inner().protocolSettings();
     }
 
     @Override
@@ -142,21 +114,19 @@ class FileServicePropertiesImpl extends CreatableUpdatableImpl<FileServiceProper
 
     @Override
     public FileServicePropertiesImpl withCors(CorsRules cors) {
-        if (isInCreateMode()) {
-            this.ccors = cors;
-        } else {
-            this.ucors = cors;
-        }
+        this.inner().withCors(cors);
+        return this;
+    }
+
+    @Override
+    public FileServicePropertiesImpl withProtocolSettings(ProtocolSettings protocolSettings) {
+        this.inner().withProtocolSettings(protocolSettings);
         return this;
     }
 
     @Override
     public FileServicePropertiesImpl withShareDeleteRetentionPolicy(DeleteRetentionPolicy shareDeleteRetentionPolicy) {
-        if (isInCreateMode()) {
-            this.cshareDeleteRetentionPolicy = shareDeleteRetentionPolicy;
-        } else {
-            this.ushareDeleteRetentionPolicy = shareDeleteRetentionPolicy;
-        }
+        this.inner().withShareDeleteRetentionPolicy(shareDeleteRetentionPolicy);
         return this;
     }
 

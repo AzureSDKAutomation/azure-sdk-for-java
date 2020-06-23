@@ -17,7 +17,6 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.StorageManager;
-import java.util.List;
 
 /**
  * Type representing FileServiceProperties.
@@ -39,6 +38,11 @@ public interface FileServiceProperties extends HasInner<FileServicePropertiesInn
     String name();
 
     /**
+     * @return the protocolSettings value.
+     */
+    ProtocolSettings protocolSettings();
+
+    /**
      * @return the shareDeleteRetentionPolicy value.
      */
     DeleteRetentionPolicy shareDeleteRetentionPolicy();
@@ -56,7 +60,7 @@ public interface FileServiceProperties extends HasInner<FileServicePropertiesInn
     /**
      * The entirety of the FileServiceProperties definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithStorageAccount, DefinitionStages.WithCors, DefinitionStages.WithShareDeleteRetentionPolicy, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithStorageAccount, DefinitionStages.WithCreate {
     }
 
     /**
@@ -79,30 +83,42 @@ public interface FileServiceProperties extends HasInner<FileServicePropertiesInn
             * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only
             * @return the next definition stage
             */
-            WithCors withExistingStorageAccount(String resourceGroupName, String accountName);
+            WithCreate withExistingStorageAccount(String resourceGroupName, String accountName);
         }
 
         /**
          * The stage of the fileserviceproperties definition allowing to specify Cors.
          */
         interface WithCors {
-           /**
-            * Specifies cors.
-            * @param cors Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service
-            * @return the next definition stage
-            */
-            WithShareDeleteRetentionPolicy withCors(CorsRules cors);
+            /**
+             * Specifies cors.
+             * @param cors Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service
+             * @return the next definition stage
+             */
+            WithCreate withCors(CorsRules cors);
+        }
+
+        /**
+         * The stage of the fileserviceproperties definition allowing to specify ProtocolSettings.
+         */
+        interface WithProtocolSettings {
+            /**
+             * Specifies protocolSettings.
+             * @param protocolSettings Protocol settings for file service
+             * @return the next definition stage
+             */
+            WithCreate withProtocolSettings(ProtocolSettings protocolSettings);
         }
 
         /**
          * The stage of the fileserviceproperties definition allowing to specify ShareDeleteRetentionPolicy.
          */
         interface WithShareDeleteRetentionPolicy {
-           /**
-            * Specifies shareDeleteRetentionPolicy.
-            * @param shareDeleteRetentionPolicy The file service properties for share soft delete
-            * @return the next definition stage
-            */
+            /**
+             * Specifies shareDeleteRetentionPolicy.
+             * @param shareDeleteRetentionPolicy The file service properties for share soft delete
+             * @return the next definition stage
+             */
             WithCreate withShareDeleteRetentionPolicy(DeleteRetentionPolicy shareDeleteRetentionPolicy);
         }
 
@@ -111,13 +127,13 @@ public interface FileServiceProperties extends HasInner<FileServicePropertiesInn
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<FileServiceProperties> {
+        interface WithCreate extends Creatable<FileServiceProperties>, DefinitionStages.WithCors, DefinitionStages.WithProtocolSettings, DefinitionStages.WithShareDeleteRetentionPolicy {
         }
     }
     /**
      * The template for a FileServiceProperties update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<FileServiceProperties>, UpdateStages.WithCors, UpdateStages.WithShareDeleteRetentionPolicy {
+    interface Update extends Appliable<FileServiceProperties>, UpdateStages.WithCors, UpdateStages.WithProtocolSettings, UpdateStages.WithShareDeleteRetentionPolicy {
     }
 
     /**
@@ -134,6 +150,18 @@ public interface FileServiceProperties extends HasInner<FileServicePropertiesInn
              * @return the next update stage
              */
             Update withCors(CorsRules cors);
+        }
+
+        /**
+         * The stage of the fileserviceproperties update allowing to specify ProtocolSettings.
+         */
+        interface WithProtocolSettings {
+            /**
+             * Specifies protocolSettings.
+             * @param protocolSettings Protocol settings for file service
+             * @return the next update stage
+             */
+            Update withProtocolSettings(ProtocolSettings protocolSettings);
         }
 
         /**
