@@ -111,26 +111,26 @@ class ExpressRouteCrossConnectionImpl extends GroupableResourceCoreImpl<ExpressR
     }
 
     @Override
-    public ExpressRouteCrossConnectionImpl withBandwidthInMbps(Integer bandwidthInMbps) {
-        this.inner().withBandwidthInMbps(bandwidthInMbps);
-        return this;
-    }
-
-    @Override
     public ExpressRouteCrossConnectionImpl withExpressRouteCircuit(ExpressRouteCircuitReference expressRouteCircuit) {
         this.inner().withExpressRouteCircuit(expressRouteCircuit);
         return this;
     }
 
     @Override
-    public ExpressRouteCrossConnectionImpl withPeeringLocation(String peeringLocation) {
-        this.inner().withPeeringLocation(peeringLocation);
+    public ExpressRouteCrossConnectionImpl withPeerings(List<ExpressRouteCrossConnectionPeeringInner> peerings) {
+        this.inner().withPeerings(peerings);
         return this;
     }
 
     @Override
-    public ExpressRouteCrossConnectionImpl withPeerings(List<ExpressRouteCrossConnectionPeeringInner> peerings) {
-        this.inner().withPeerings(peerings);
+    public ExpressRouteCrossConnectionImpl withPrimaryAzurePort(String primaryAzurePort) {
+        this.inner().withPrimaryAzurePort(primaryAzurePort);
+        return this;
+    }
+
+    @Override
+    public ExpressRouteCrossConnectionImpl withSecondaryAzurePort(String secondaryAzurePort) {
+        this.inner().withSecondaryAzurePort(secondaryAzurePort);
         return this;
     }
 
