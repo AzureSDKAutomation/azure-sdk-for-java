@@ -27,29 +27,29 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 /**
  * Entry point to Azure SignalRService resource management.
  */
-public final class SignalRManager extends ManagerCore<SignalRManager, SignalRManagementClientImpl> {
+public final class SignalRServiceManager extends ManagerCore<SignalRServiceManager, SignalRManagementClientImpl> {
     private Operations operations;
     private SignalRs signalRs;
     private SignalRPrivateEndpointConnections signalRPrivateEndpointConnections;
     private SignalRPrivateLinkResources signalRPrivateLinkResources;
     private Usages usages;
     /**
-    * Get a Configurable instance that can be used to create SignalRManager with optional configuration.
+    * Get a Configurable instance that can be used to create SignalRServiceManager with optional configuration.
     *
     * @return the instance allowing configurations
     */
     public static Configurable configure() {
-        return new SignalRManager.ConfigurableImpl();
+        return new SignalRServiceManager.ConfigurableImpl();
     }
     /**
-    * Creates an instance of SignalRManager that exposes SignalRService resource management API entry points.
+    * Creates an instance of SignalRServiceManager that exposes SignalRService resource management API entry points.
     *
     * @param credentials the credentials to use
     * @param subscriptionId the subscription UUID
-    * @return the SignalRManager
+    * @return the SignalRServiceManager
     */
-    public static SignalRManager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
-        return new SignalRManager(new RestClient.Builder()
+    public static SignalRServiceManager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
+        return new SignalRServiceManager(new RestClient.Builder()
             .withBaseUrl(credentials.environment(), AzureEnvironment.Endpoint.RESOURCE_MANAGER)
             .withCredentials(credentials)
             .withSerializerAdapter(new AzureJacksonAdapter())
@@ -57,27 +57,27 @@ public final class SignalRManager extends ManagerCore<SignalRManager, SignalRMan
             .build(), subscriptionId);
     }
     /**
-    * Creates an instance of SignalRManager that exposes SignalRService resource management API entry points.
+    * Creates an instance of SignalRServiceManager that exposes SignalRService resource management API entry points.
     *
     * @param restClient the RestClient to be used for API calls.
     * @param subscriptionId the subscription UUID
-    * @return the SignalRManager
+    * @return the SignalRServiceManager
     */
-    public static SignalRManager authenticate(RestClient restClient, String subscriptionId) {
-        return new SignalRManager(restClient, subscriptionId);
+    public static SignalRServiceManager authenticate(RestClient restClient, String subscriptionId) {
+        return new SignalRServiceManager(restClient, subscriptionId);
     }
     /**
     * The interface allowing configurations to be set.
     */
     public interface Configurable extends AzureConfigurable<Configurable> {
         /**
-        * Creates an instance of SignalRManager that exposes SignalRService management API entry points.
+        * Creates an instance of SignalRServiceManager that exposes SignalRService management API entry points.
         *
         * @param credentials the credentials to use
         * @param subscriptionId the subscription UUID
         * @return the interface exposing SignalRService management API entry points that work across subscriptions
         */
-        SignalRManager authenticate(AzureTokenCredentials credentials, String subscriptionId);
+        SignalRServiceManager authenticate(AzureTokenCredentials credentials, String subscriptionId);
     }
 
     /**
@@ -134,11 +134,11 @@ public final class SignalRManager extends ManagerCore<SignalRManager, SignalRMan
     * The implementation for Configurable interface.
     */
     private static final class ConfigurableImpl extends AzureConfigurableCoreImpl<Configurable> implements Configurable {
-        public SignalRManager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
-           return SignalRManager.authenticate(buildRestClient(credentials), subscriptionId);
+        public SignalRServiceManager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
+           return SignalRServiceManager.authenticate(buildRestClient(credentials), subscriptionId);
         }
      }
-    private SignalRManager(RestClient restClient, String subscriptionId) {
+    private SignalRServiceManager(RestClient restClient, String subscriptionId) {
         super(
             restClient,
             subscriptionId,
