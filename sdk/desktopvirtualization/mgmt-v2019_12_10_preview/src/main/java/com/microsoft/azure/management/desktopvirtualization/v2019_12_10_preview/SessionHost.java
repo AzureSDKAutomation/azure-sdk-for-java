@@ -63,6 +63,11 @@ public interface SessionHost extends HasInner<SessionHostInner>, Indexable, Refr
     String osVersion();
 
     /**
+     * @return the resourceId value.
+     */
+    String resourceId();
+
+    /**
      * @return the sessions value.
      */
     Integer sessions();

@@ -127,6 +127,11 @@ class SessionHostImpl extends CreatableUpdatableImpl<SessionHost, SessionHostInn
     }
 
     @Override
+    public String resourceId() {
+        return this.inner().resourceId();
+    }
+
+    @Override
     public Integer sessions() {
         return this.inner().sessions();
     }
