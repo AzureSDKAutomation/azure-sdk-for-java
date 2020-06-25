@@ -55,10 +55,10 @@ public class HopLink {
     private List<ConnectivityIssue> issues;
 
     /**
-     * Provides additional context on links.
+     * Provides additional context on the issue.
      */
     @JsonProperty(value = "context", access = JsonProperty.Access.WRITE_ONLY)
-    private Map<String, String> context;
+    private List<Map<String, String>> context;
 
     /**
      * Resource ID.
@@ -121,11 +121,11 @@ public class HopLink {
     }
 
     /**
-     * Get provides additional context on links.
+     * Get provides additional context on the issue.
      *
      * @return the context value
      */
-    public Map<String, String> context() {
+    public List<Map<String, String>> context() {
         return this.context;
     }
 
