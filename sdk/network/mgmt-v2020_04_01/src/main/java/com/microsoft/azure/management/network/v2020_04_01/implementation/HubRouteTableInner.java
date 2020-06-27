@@ -10,10 +10,10 @@ package com.microsoft.azure.management.network.v2020_04_01.implementation;
 
 import java.util.List;
 import com.microsoft.azure.management.network.v2020_04_01.HubRoute;
+import com.microsoft.azure.SubResource;
 import com.microsoft.azure.management.network.v2020_04_01.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
-import com.microsoft.azure.SubResource;
 
 /**
  * RouteTable resource in a virtual hub.
@@ -36,13 +36,13 @@ public class HubRouteTableInner extends SubResource {
      * List of all connections associated with this route table.
      */
     @JsonProperty(value = "properties.associatedConnections", access = JsonProperty.Access.WRITE_ONLY)
-    private List<String> associatedConnections;
+    private List<SubResource> associatedConnections;
 
     /**
      * List of all connections that advertise to this route table.
      */
     @JsonProperty(value = "properties.propagatingConnections", access = JsonProperty.Access.WRITE_ONLY)
-    private List<String> propagatingConnections;
+    private List<SubResource> propagatingConnections;
 
     /**
      * The provisioning state of the RouteTable resource. Possible values
@@ -115,7 +115,7 @@ public class HubRouteTableInner extends SubResource {
      *
      * @return the associatedConnections value
      */
-    public List<String> associatedConnections() {
+    public List<SubResource> associatedConnections() {
         return this.associatedConnections;
     }
 
@@ -124,7 +124,7 @@ public class HubRouteTableInner extends SubResource {
      *
      * @return the propagatingConnections value
      */
-    public List<String> propagatingConnections() {
+    public List<SubResource> propagatingConnections() {
         return this.propagatingConnections;
     }
 
