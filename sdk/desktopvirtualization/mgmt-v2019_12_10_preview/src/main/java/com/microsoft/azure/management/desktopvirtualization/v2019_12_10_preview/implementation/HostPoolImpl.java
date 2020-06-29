@@ -176,16 +176,6 @@ class HostPoolImpl extends GroupableResourceCoreImpl<HostPool, HostPoolInner, Ho
     }
 
     @Override
-    public HostPoolImpl withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType) {
-        if (isInCreateMode()) {
-            this.inner().withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
-        } else {
-            this.updateParameter.withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
-        }
-        return this;
-    }
-
-    @Override
     public HostPoolImpl withPreferredAppGroupType(PreferredAppGroupType preferredAppGroupType) {
         if (isInCreateMode()) {
             this.inner().withPreferredAppGroupType(preferredAppGroupType);
@@ -231,6 +221,16 @@ class HostPoolImpl extends GroupableResourceCoreImpl<HostPool, HostPoolInner, Ho
             this.inner().withMaxSessionLimit(maxSessionLimit);
         } else {
             this.updateParameter.withMaxSessionLimit(maxSessionLimit);
+        }
+        return this;
+    }
+
+    @Override
+    public HostPoolImpl withPersonalDesktopAssignmentType(PersonalDesktopAssignmentType personalDesktopAssignmentType) {
+        if (isInCreateMode()) {
+            this.inner().withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
+        } else {
+            this.updateParameter.withPersonalDesktopAssignmentType(personalDesktopAssignmentType);
         }
         return this;
     }

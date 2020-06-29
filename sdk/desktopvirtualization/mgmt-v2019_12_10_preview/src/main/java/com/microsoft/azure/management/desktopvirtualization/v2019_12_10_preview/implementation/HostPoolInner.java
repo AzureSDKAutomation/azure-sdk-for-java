@@ -46,7 +46,7 @@ public class HostPoolInner extends Resource {
      * PersonalDesktopAssignment type for HostPool. Possible values include:
      * 'Automatic', 'Direct'.
      */
-    @JsonProperty(value = "properties.personalDesktopAssignmentType", required = true)
+    @JsonProperty(value = "properties.personalDesktopAssignmentType")
     private PersonalDesktopAssignmentType personalDesktopAssignmentType;
 
     /**
