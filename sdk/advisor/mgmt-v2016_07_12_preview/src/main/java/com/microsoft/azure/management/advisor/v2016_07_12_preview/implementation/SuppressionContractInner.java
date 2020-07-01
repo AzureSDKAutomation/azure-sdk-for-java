@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.advisor.v2016_07_12_preview.implementation;
 
+import com.microsoft.azure.management.advisor.v2016_07_12_preview.SuppressionContractProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.SkipParentValidation;
 import com.microsoft.azure.Resource;
@@ -19,54 +20,28 @@ import com.microsoft.azure.Resource;
 @SkipParentValidation
 public class SuppressionContractInner extends Resource {
     /**
-     * The GUID of the suppression.
+     * The properties property.
      */
-    @JsonProperty(value = "suppressionId")
-    private String suppressionId;
+    @JsonProperty(value = "properties")
+    private SuppressionContractProperties properties;
 
     /**
-     * The duration for which the suppression is valid.
-     */
-    @JsonProperty(value = "ttl")
-    private String ttl;
-
-    /**
-     * Get the GUID of the suppression.
+     * Get the properties value.
      *
-     * @return the suppressionId value
+     * @return the properties value
      */
-    public String suppressionId() {
-        return this.suppressionId;
+    public SuppressionContractProperties properties() {
+        return this.properties;
     }
 
     /**
-     * Set the GUID of the suppression.
+     * Set the properties value.
      *
-     * @param suppressionId the suppressionId value to set
+     * @param properties the properties value to set
      * @return the SuppressionContractInner object itself.
      */
-    public SuppressionContractInner withSuppressionId(String suppressionId) {
-        this.suppressionId = suppressionId;
-        return this;
-    }
-
-    /**
-     * Get the duration for which the suppression is valid.
-     *
-     * @return the ttl value
-     */
-    public String ttl() {
-        return this.ttl;
-    }
-
-    /**
-     * Set the duration for which the suppression is valid.
-     *
-     * @param ttl the ttl value to set
-     * @return the SuppressionContractInner object itself.
-     */
-    public SuppressionContractInner withTtl(String ttl) {
-        this.ttl = ttl;
+    public SuppressionContractInner withProperties(SuppressionContractProperties properties) {
+        this.properties = properties;
         return this;
     }
 

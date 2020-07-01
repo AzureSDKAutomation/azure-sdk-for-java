@@ -12,6 +12,7 @@ import com.microsoft.azure.management.advisor.v2016_07_12_preview.SuppressionCon
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import java.util.Map;
+import com.microsoft.azure.management.advisor.v2016_07_12_preview.SuppressionContractProperties;
 
 class SuppressionContractImpl extends CreatableUpdatableImpl<SuppressionContract, SuppressionContractInner, SuppressionContractImpl> implements SuppressionContract, SuppressionContract.Definition, SuppressionContract.Update {
     private final AdvisorManager manager;
@@ -86,18 +87,13 @@ class SuppressionContractImpl extends CreatableUpdatableImpl<SuppressionContract
     }
 
     @Override
-    public String suppressionId() {
-        return this.inner().suppressionId();
+    public SuppressionContractProperties properties() {
+        return this.inner().properties();
     }
 
     @Override
     public Map<String, String> tags() {
         return this.inner().getTags();
-    }
-
-    @Override
-    public String ttl() {
-        return this.inner().ttl();
     }
 
     @Override
@@ -124,20 +120,14 @@ class SuppressionContractImpl extends CreatableUpdatableImpl<SuppressionContract
     }
 
     @Override
-    public SuppressionContractImpl withSuppressionId(String suppressionId) {
-        this.inner().withSuppressionId(suppressionId);
+    public SuppressionContractImpl withProperties(SuppressionContractProperties properties) {
+        this.inner().withProperties(properties);
         return this;
     }
 
     @Override
     public SuppressionContractImpl withTags(Map<String, String> tags) {
         this.inner().withTags(tags);
-        return this;
-    }
-
-    @Override
-    public SuppressionContractImpl withTtl(String ttl) {
-        this.inner().withTtl(ttl);
         return this;
     }
 
