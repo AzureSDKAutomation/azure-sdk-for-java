@@ -39,19 +39,14 @@ public interface SuppressionContract extends HasInner<SuppressionContractInner>,
     String name();
 
     /**
-     * @return the suppressionId value.
+     * @return the properties value.
      */
-    String suppressionId();
+    SuppressionContractProperties properties();
 
     /**
      * @return the tags value.
      */
     Map<String, String> tags();
-
-    /**
-     * @return the ttl value.
-     */
-    String ttl();
 
     /**
      * @return the type value.
@@ -111,15 +106,15 @@ public interface SuppressionContract extends HasInner<SuppressionContractInner>,
         }
 
         /**
-         * The stage of the suppressioncontract definition allowing to specify SuppressionId.
+         * The stage of the suppressioncontract definition allowing to specify Properties.
          */
-        interface WithSuppressionId {
+        interface WithProperties {
             /**
-             * Specifies suppressionId.
-             * @param suppressionId The GUID of the suppression
+             * Specifies properties.
+             * @param properties the properties parameter value
              * @return the next definition stage
              */
-            WithCreate withSuppressionId(String suppressionId);
+            WithCreate withProperties(SuppressionContractProperties properties);
         }
 
         /**
@@ -135,29 +130,17 @@ public interface SuppressionContract extends HasInner<SuppressionContractInner>,
         }
 
         /**
-         * The stage of the suppressioncontract definition allowing to specify Ttl.
-         */
-        interface WithTtl {
-            /**
-             * Specifies ttl.
-             * @param ttl The duration for which the suppression is valid
-             * @return the next definition stage
-             */
-            WithCreate withTtl(String ttl);
-        }
-
-        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<SuppressionContract>, DefinitionStages.WithLocation, DefinitionStages.WithSuppressionId, DefinitionStages.WithTags, DefinitionStages.WithTtl {
+        interface WithCreate extends Creatable<SuppressionContract>, DefinitionStages.WithLocation, DefinitionStages.WithProperties, DefinitionStages.WithTags {
         }
     }
     /**
      * The template for a SuppressionContract update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<SuppressionContract>, UpdateStages.WithLocation, UpdateStages.WithSuppressionId, UpdateStages.WithTags, UpdateStages.WithTtl {
+    interface Update extends Appliable<SuppressionContract>, UpdateStages.WithLocation, UpdateStages.WithProperties, UpdateStages.WithTags {
     }
 
     /**
@@ -177,15 +160,15 @@ public interface SuppressionContract extends HasInner<SuppressionContractInner>,
         }
 
         /**
-         * The stage of the suppressioncontract update allowing to specify SuppressionId.
+         * The stage of the suppressioncontract update allowing to specify Properties.
          */
-        interface WithSuppressionId {
+        interface WithProperties {
             /**
-             * Specifies suppressionId.
-             * @param suppressionId The GUID of the suppression
+             * Specifies properties.
+             * @param properties the properties parameter value
              * @return the next update stage
              */
-            Update withSuppressionId(String suppressionId);
+            Update withProperties(SuppressionContractProperties properties);
         }
 
         /**
@@ -198,18 +181,6 @@ public interface SuppressionContract extends HasInner<SuppressionContractInner>,
              * @return the next update stage
              */
             Update withTags(Map<String, String> tags);
-        }
-
-        /**
-         * The stage of the suppressioncontract update allowing to specify Ttl.
-         */
-        interface WithTtl {
-            /**
-             * Specifies ttl.
-             * @param ttl The duration for which the suppression is valid
-             * @return the next update stage
-             */
-            Update withTtl(String ttl);
         }
 
     }

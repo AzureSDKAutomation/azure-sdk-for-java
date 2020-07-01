@@ -172,6 +172,19 @@ public class AdvisorManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The AdvisorScoresInner object to access its operations.
+     */
+    private AdvisorScoresInner advisorScores;
+
+    /**
+     * Gets the AdvisorScoresInner object to access its operations.
+     * @return the AdvisorScoresInner object.
+     */
+    public AdvisorScoresInner advisorScores() {
+        return this.advisorScores;
+    }
+
+    /**
      * Initializes an instance of AdvisorManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -209,6 +222,7 @@ public class AdvisorManagementClientImpl extends AzureServiceClient {
         this.recommendations = new RecommendationsInner(restClient().retrofit(), this);
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.suppressions = new SuppressionsInner(restClient().retrofit(), this);
+        this.advisorScores = new AdvisorScoresInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

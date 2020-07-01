@@ -19,6 +19,7 @@ import com.microsoft.rest.RestClient;
 import com.microsoft.azure.management.advisor.v2016_07_12_preview.Recommendations;
 import com.microsoft.azure.management.advisor.v2016_07_12_preview.Operations;
 import com.microsoft.azure.management.advisor.v2016_07_12_preview.Suppressions;
+import com.microsoft.azure.management.advisor.v2016_07_12_preview.AdvisorScores;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -29,6 +30,7 @@ public final class AdvisorManager extends ManagerCore<AdvisorManager, AdvisorMan
     private Recommendations recommendations;
     private Operations operations;
     private Suppressions suppressions;
+    private AdvisorScores advisorScores;
     /**
     * Get a Configurable instance that can be used to create AdvisorManager with optional configuration.
     *
@@ -104,6 +106,16 @@ public final class AdvisorManager extends ManagerCore<AdvisorManager, AdvisorMan
             this.suppressions = new SuppressionsImpl(this);
         }
         return this.suppressions;
+    }
+
+    /**
+     * @return Entry point to manage AdvisorScores.
+     */
+    public AdvisorScores advisorScores() {
+        if (this.advisorScores == null) {
+            this.advisorScores = new AdvisorScoresImpl(this);
+        }
+        return this.advisorScores;
     }
 
     /**
