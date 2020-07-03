@@ -107,29 +107,17 @@ public interface User extends HasInner<UserInner>, Indexable, Refreshable<User>,
         }
 
         /**
-         * The stage of the user definition allowing to specify ShareAccessRights.
-         */
-        interface WithShareAccessRights {
-            /**
-             * Specifies shareAccessRights.
-             * @param shareAccessRights List of shares that the user has rights on. This field should not be specified during user creation
-             * @return the next definition stage
-             */
-            WithCreate withShareAccessRights(List<ShareAccessRight> shareAccessRights);
-        }
-
-        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<User>, DefinitionStages.WithEncryptedPassword, DefinitionStages.WithShareAccessRights {
+        interface WithCreate extends Creatable<User>, DefinitionStages.WithEncryptedPassword {
         }
     }
     /**
      * The template for a User update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<User>, UpdateStages.WithEncryptedPassword, UpdateStages.WithShareAccessRights {
+    interface Update extends Appliable<User>, UpdateStages.WithEncryptedPassword {
     }
 
     /**
@@ -146,18 +134,6 @@ public interface User extends HasInner<UserInner>, Indexable, Refreshable<User>,
              * @return the next update stage
              */
             Update withEncryptedPassword(AsymmetricEncryptedSecret encryptedPassword);
-        }
-
-        /**
-         * The stage of the user update allowing to specify ShareAccessRights.
-         */
-        interface WithShareAccessRights {
-            /**
-             * Specifies shareAccessRights.
-             * @param shareAccessRights List of shares that the user has rights on. This field should not be specified during user creation
-             * @return the next update stage
-             */
-            Update withShareAccessRights(List<ShareAccessRight> shareAccessRights);
         }
 
     }

@@ -33,6 +33,12 @@ public class MountPointMap {
     private String mountPoint;
 
     /**
+     * Mounting type. Possible values include: 'Volume', 'HostPath'.
+     */
+    @JsonProperty(value = "mountType", access = JsonProperty.Access.WRITE_ONLY)
+    private MountType mountType;
+
+    /**
      * Role type. Possible values include: 'IOT', 'ASA', 'Functions',
      * 'Cognitive'.
      */
@@ -75,6 +81,15 @@ public class MountPointMap {
      */
     public String mountPoint() {
         return this.mountPoint;
+    }
+
+    /**
+     * Get mounting type. Possible values include: 'Volume', 'HostPath'.
+     *
+     * @return the mountType value
+     */
+    public MountType mountType() {
+        return this.mountType;
     }
 
     /**

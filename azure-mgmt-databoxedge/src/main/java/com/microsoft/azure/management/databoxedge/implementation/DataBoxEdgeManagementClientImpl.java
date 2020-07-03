@@ -146,6 +146,19 @@ public class DataBoxEdgeManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The AvailableSkusInner object to access its operations.
+     */
+    private AvailableSkusInner availableSkus;
+
+    /**
+     * Gets the AvailableSkusInner object to access its operations.
+     * @return the AvailableSkusInner object.
+     */
+    public AvailableSkusInner availableSkus() {
+        return this.availableSkus;
+    }
+
+    /**
      * The DevicesInner object to access its operations.
      */
     private DevicesInner devices;
@@ -371,11 +384,12 @@ public class DataBoxEdgeManagementClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2019-08-01";
+        this.apiVersion = "2020-05-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.operations = new OperationsInner(restClient().retrofit(), this);
+        this.availableSkus = new AvailableSkusInner(restClient().retrofit(), this);
         this.devices = new DevicesInner(restClient().retrofit(), this);
         this.alerts = new AlertsInner(restClient().retrofit(), this);
         this.bandwidthSchedules = new BandwidthSchedulesInner(restClient().retrofit(), this);
@@ -401,6 +415,6 @@ public class DataBoxEdgeManagementClientImpl extends AzureServiceClient {
      */
     @Override
     public String userAgent() {
-        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "DataBoxEdgeManagementClient", "2019-08-01");
+        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "DataBoxEdgeManagementClient", "2020-05-01-preview");
     }
 }

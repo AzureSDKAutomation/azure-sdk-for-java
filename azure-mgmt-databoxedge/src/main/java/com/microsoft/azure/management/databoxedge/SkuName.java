@@ -43,6 +43,18 @@ public final class SkuName extends ExpandableStringEnum<SkuName> {
     /** Static value TMA for SkuName. */
     public static final SkuName TMA = fromString("TMA");
 
+    /** Static value TDC for SkuName. */
+    public static final SkuName TDC = fromString("TDC");
+
+    /** Static value TCA_Large for SkuName. */
+    public static final SkuName TCA_LARGE = fromString("TCA_Large");
+
+    /** Static value TCA_Small for SkuName. */
+    public static final SkuName TCA_SMALL = fromString("TCA_Small");
+
+    /** Static value GPU for SkuName. */
+    public static final SkuName GPU = fromString("GPU");
+
     /**
      * Creates or finds a SkuName from its string representation.
      * @param name a name to look for

@@ -11,20 +11,20 @@ package com.microsoft.azure.management.databoxedge;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The metadata for retrieving price info.
+ * The cost of the SKU.
  */
-public class SkuCost {
+public class SKUCost {
     /**
-     * Used for querying price from commerce.
+     * The meter id.
      */
     @JsonProperty(value = "meterId", access = JsonProperty.Access.WRITE_ONLY)
     private String meterId;
 
     /**
-     * The cost quantity.
+     * The quantity.
      */
     @JsonProperty(value = "quantity", access = JsonProperty.Access.WRITE_ONLY)
-    private Long quantity;
+    private Integer quantity;
 
     /**
      * The extended unit.
@@ -33,7 +33,7 @@ public class SkuCost {
     private String extendedUnit;
 
     /**
-     * Get used for querying price from commerce.
+     * Get the meter id.
      *
      * @return the meterId value
      */
@@ -42,11 +42,11 @@ public class SkuCost {
     }
 
     /**
-     * Get the cost quantity.
+     * Get the quantity.
      *
      * @return the quantity value
      */
-    public Long quantity() {
+    public Integer quantity() {
         return this.quantity;
     }
 

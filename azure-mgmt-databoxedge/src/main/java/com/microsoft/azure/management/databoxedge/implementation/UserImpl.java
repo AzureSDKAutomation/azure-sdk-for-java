@@ -122,10 +122,4 @@ class UserImpl extends CreatableUpdatableImpl<User, UserInner, UserImpl> impleme
         return this;
     }
 
-    @Override
-    public UserImpl withShareAccessRights(List<ShareAccessRight> shareAccessRights) {
-        this.inner().withShareAccessRights(shareAccessRights);
-        return this;
-    }
-
 }

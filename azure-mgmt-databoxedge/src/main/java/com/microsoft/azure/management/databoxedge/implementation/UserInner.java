@@ -32,7 +32,7 @@ public class UserInner extends ARMBaseModel {
      * List of shares that the user has rights on. This field should not be
      * specified during user creation.
      */
-    @JsonProperty(value = "properties.shareAccessRights")
+    @JsonProperty(value = "properties.shareAccessRights", access = JsonProperty.Access.WRITE_ONLY)
     private List<ShareAccessRight> shareAccessRights;
 
     /**
@@ -69,17 +69,6 @@ public class UserInner extends ARMBaseModel {
      */
     public List<ShareAccessRight> shareAccessRights() {
         return this.shareAccessRights;
-    }
-
-    /**
-     * Set list of shares that the user has rights on. This field should not be specified during user creation.
-     *
-     * @param shareAccessRights the shareAccessRights value to set
-     * @return the UserInner object itself.
-     */
-    public UserInner withShareAccessRights(List<ShareAccessRight> shareAccessRights) {
-        this.shareAccessRights = shareAccessRights;
-        return this;
     }
 
     /**

@@ -33,7 +33,7 @@ public class IoTDeviceInfo {
     private String ioTHostHubId;
 
     /**
-     * IoT device authentication info.
+     * Encrypted IoT device/IoT edge device connection string.
      */
     @JsonProperty(value = "authentication")
     private Authentication authentication;
@@ -99,7 +99,7 @@ public class IoTDeviceInfo {
     }
 
     /**
-     * Get ioT device authentication info.
+     * Get encrypted IoT device/IoT edge device connection string.
      *
      * @return the authentication value
      */
@@ -108,7 +108,7 @@ public class IoTDeviceInfo {
     }
 
     /**
-     * Set ioT device authentication info.
+     * Set encrypted IoT device/IoT edge device connection string.
      *
      * @param authentication the authentication value to set
      * @return the IoTDeviceInfo object itself.

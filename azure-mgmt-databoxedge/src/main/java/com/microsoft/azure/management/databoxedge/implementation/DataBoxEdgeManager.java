@@ -17,6 +17,7 @@ import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.azure.management.databoxedge.Operations;
+import com.microsoft.azure.management.databoxedge.AvailableSkus;
 import com.microsoft.azure.management.databoxedge.Devices;
 import com.microsoft.azure.management.databoxedge.Alerts;
 import com.microsoft.azure.management.databoxedge.BandwidthSchedules;
@@ -40,6 +41,7 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
  */
 public final class DataBoxEdgeManager extends ManagerCore<DataBoxEdgeManager, DataBoxEdgeManagementClientImpl> {
     private Operations operations;
+    private AvailableSkus availableSkus;
     private Devices devices;
     private Alerts alerts;
     private BandwidthSchedules bandwidthSchedules;
@@ -110,6 +112,16 @@ public final class DataBoxEdgeManager extends ManagerCore<DataBoxEdgeManager, Da
             this.operations = new OperationsImpl(this);
         }
         return this.operations;
+    }
+
+    /**
+     * @return Entry point to manage AvailableSkus.
+     */
+    public AvailableSkus availableSkus() {
+        if (this.availableSkus == null) {
+            this.availableSkus = new AvailableSkusImpl(this);
+        }
+        return this.availableSkus;
     }
 
     /**

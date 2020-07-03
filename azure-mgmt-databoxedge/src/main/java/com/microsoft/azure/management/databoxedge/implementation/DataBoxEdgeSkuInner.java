@@ -14,12 +14,15 @@ import java.util.List;
 import com.microsoft.azure.management.databoxedge.SkuLocationInfo;
 import com.microsoft.azure.management.databoxedge.SkuCost;
 import com.microsoft.azure.management.databoxedge.SkuRestriction;
+import com.microsoft.azure.management.databoxedge.SkuSignupOption;
+import com.microsoft.azure.management.databoxedge.SkuVersion;
+import com.microsoft.azure.management.databoxedge.SkuAvailability;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * SkuInformation object.
+ * The Sku information.
  */
-public class ResourceTypeSkuInner {
+public class DataBoxEdgeSkuInner {
     /**
      * The type of the resource.
      */
@@ -48,25 +51,31 @@ public class ResourceTypeSkuInner {
     private SkuTier tier;
 
     /**
+     * The Sku kind.
+     */
+    @JsonProperty(value = "size", access = JsonProperty.Access.WRITE_ONLY)
+    private String size;
+
+    /**
      * The Sku family.
      */
     @JsonProperty(value = "family", access = JsonProperty.Access.WRITE_ONLY)
     private String family;
 
     /**
-     * Availability of the SKU for the region.
+     * Availability of the Sku for the region.
      */
     @JsonProperty(value = "locations", access = JsonProperty.Access.WRITE_ONLY)
     private List<String> locations;
 
     /**
-     * The API versions in which SKU is available.
+     * The API versions in which Sku is available.
      */
     @JsonProperty(value = "apiVersions", access = JsonProperty.Access.WRITE_ONLY)
     private List<String> apiVersions;
 
     /**
-     * Availability of the SKU for the location/zone.
+     * Availability of the Sku for the location/zone/site.
      */
     @JsonProperty(value = "locationInfo", access = JsonProperty.Access.WRITE_ONLY)
     private List<SkuLocationInfo> locationInfo;
@@ -78,10 +87,28 @@ public class ResourceTypeSkuInner {
     private List<SkuCost> costs;
 
     /**
-     * Restrictions of the SKU availability.
+     * Restriction info of the SKU.
      */
     @JsonProperty(value = "restrictions", access = JsonProperty.Access.WRITE_ONLY)
     private List<SkuRestriction> restrictions;
+
+    /**
+     * Can the SKU be signed up. Possible values include: 'None', 'Available'.
+     */
+    @JsonProperty(value = "signupOption", access = JsonProperty.Access.WRITE_ONLY)
+    private SkuSignupOption signupOption;
+
+    /**
+     * Sku version. Possible values include: 'Stable', 'Preview'.
+     */
+    @JsonProperty(value = "version", access = JsonProperty.Access.WRITE_ONLY)
+    private SkuVersion version;
+
+    /**
+     * Is SKU available. Possible values include: 'Available', 'Unavailable'.
+     */
+    @JsonProperty(value = "availability", access = JsonProperty.Access.WRITE_ONLY)
+    private SkuAvailability availability;
 
     /**
      * Get the type of the resource.
@@ -120,6 +147,15 @@ public class ResourceTypeSkuInner {
     }
 
     /**
+     * Get the Sku kind.
+     *
+     * @return the size value
+     */
+    public String size() {
+        return this.size;
+    }
+
+    /**
      * Get the Sku family.
      *
      * @return the family value
@@ -129,7 +165,7 @@ public class ResourceTypeSkuInner {
     }
 
     /**
-     * Get availability of the SKU for the region.
+     * Get availability of the Sku for the region.
      *
      * @return the locations value
      */
@@ -138,7 +174,7 @@ public class ResourceTypeSkuInner {
     }
 
     /**
-     * Get the API versions in which SKU is available.
+     * Get the API versions in which Sku is available.
      *
      * @return the apiVersions value
      */
@@ -147,7 +183,7 @@ public class ResourceTypeSkuInner {
     }
 
     /**
-     * Get availability of the SKU for the location/zone.
+     * Get availability of the Sku for the location/zone/site.
      *
      * @return the locationInfo value
      */
@@ -165,12 +201,39 @@ public class ResourceTypeSkuInner {
     }
 
     /**
-     * Get restrictions of the SKU availability.
+     * Get restriction info of the SKU.
      *
      * @return the restrictions value
      */
     public List<SkuRestriction> restrictions() {
         return this.restrictions;
+    }
+
+    /**
+     * Get can the SKU be signed up. Possible values include: 'None', 'Available'.
+     *
+     * @return the signupOption value
+     */
+    public SkuSignupOption signupOption() {
+        return this.signupOption;
+    }
+
+    /**
+     * Get sku version. Possible values include: 'Stable', 'Preview'.
+     *
+     * @return the version value
+     */
+    public SkuVersion version() {
+        return this.version;
+    }
+
+    /**
+     * Get is SKU available. Possible values include: 'Available', 'Unavailable'.
+     *
+     * @return the availability value
+     */
+    public SkuAvailability availability() {
+        return this.availability;
     }
 
 }

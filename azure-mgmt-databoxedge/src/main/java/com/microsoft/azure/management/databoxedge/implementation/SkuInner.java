@@ -19,7 +19,8 @@ public class SkuInner {
     /**
      * SKU name. Possible values include: 'Gateway', 'Edge', 'TEA_1Node',
      * 'TEA_1Node_UPS', 'TEA_1Node_Heater', 'TEA_1Node_UPS_Heater',
-     * 'TEA_4Node_Heater', 'TEA_4Node_UPS_Heater', 'TMA'.
+     * 'TEA_4Node_Heater', 'TEA_4Node_UPS_Heater', 'TMA', 'TDC', 'TCA_Large',
+     * 'TCA_Small', 'GPU'.
      */
     @JsonProperty(value = "name")
     private SkuName name;
@@ -32,7 +33,7 @@ public class SkuInner {
     private SkuTier tier;
 
     /**
-     * Get sKU name. Possible values include: 'Gateway', 'Edge', 'TEA_1Node', 'TEA_1Node_UPS', 'TEA_1Node_Heater', 'TEA_1Node_UPS_Heater', 'TEA_4Node_Heater', 'TEA_4Node_UPS_Heater', 'TMA'.
+     * Get sKU name. Possible values include: 'Gateway', 'Edge', 'TEA_1Node', 'TEA_1Node_UPS', 'TEA_1Node_Heater', 'TEA_1Node_UPS_Heater', 'TEA_4Node_Heater', 'TEA_4Node_UPS_Heater', 'TMA', 'TDC', 'TCA_Large', 'TCA_Small', 'GPU'.
      *
      * @return the name value
      */
@@ -41,7 +42,7 @@ public class SkuInner {
     }
 
     /**
-     * Set sKU name. Possible values include: 'Gateway', 'Edge', 'TEA_1Node', 'TEA_1Node_UPS', 'TEA_1Node_Heater', 'TEA_1Node_UPS_Heater', 'TEA_4Node_Heater', 'TEA_4Node_UPS_Heater', 'TMA'.
+     * Set sKU name. Possible values include: 'Gateway', 'Edge', 'TEA_1Node', 'TEA_1Node_UPS', 'TEA_1Node_Heater', 'TEA_1Node_UPS_Heater', 'TEA_4Node_Heater', 'TEA_4Node_UPS_Heater', 'TMA', 'TDC', 'TCA_Large', 'TCA_Small', 'GPU'.
      *
      * @param name the name value to set
      * @return the SkuInner object itself.

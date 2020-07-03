@@ -48,6 +48,19 @@ public class IoTRole extends RoleInner {
     private List<MountPointMap> shareMappings;
 
     /**
+     * Iot edge agent details to download the agent and bootstrap iot runtime.
+     */
+    @JsonProperty(value = "properties.ioTEdgeAgentInfo")
+    private IoTEdgeAgentInfo ioTEdgeAgentInfo;
+
+    /**
+     * Platform where the Iot runtime is hosted. Possible values include:
+     * 'KubernetesCluster', 'LinuxVM'.
+     */
+    @JsonProperty(value = "properties.hostPlatformType", access = JsonProperty.Access.WRITE_ONLY)
+    private HostPlatformType hostPlatformType;
+
+    /**
      * Role status. Possible values include: 'Enabled', 'Disabled'.
      */
     @JsonProperty(value = "properties.roleStatus", required = true)
@@ -131,6 +144,35 @@ public class IoTRole extends RoleInner {
     public IoTRole withShareMappings(List<MountPointMap> shareMappings) {
         this.shareMappings = shareMappings;
         return this;
+    }
+
+    /**
+     * Get iot edge agent details to download the agent and bootstrap iot runtime.
+     *
+     * @return the ioTEdgeAgentInfo value
+     */
+    public IoTEdgeAgentInfo ioTEdgeAgentInfo() {
+        return this.ioTEdgeAgentInfo;
+    }
+
+    /**
+     * Set iot edge agent details to download the agent and bootstrap iot runtime.
+     *
+     * @param ioTEdgeAgentInfo the ioTEdgeAgentInfo value to set
+     * @return the IoTRole object itself.
+     */
+    public IoTRole withIoTEdgeAgentInfo(IoTEdgeAgentInfo ioTEdgeAgentInfo) {
+        this.ioTEdgeAgentInfo = ioTEdgeAgentInfo;
+        return this;
+    }
+
+    /**
+     * Get platform where the Iot runtime is hosted. Possible values include: 'KubernetesCluster', 'LinuxVM'.
+     *
+     * @return the hostPlatformType value
+     */
+    public HostPlatformType hostPlatformType() {
+        return this.hostPlatformType;
     }
 
     /**
