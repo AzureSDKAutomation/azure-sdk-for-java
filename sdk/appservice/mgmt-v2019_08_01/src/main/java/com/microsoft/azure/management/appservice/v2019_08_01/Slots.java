@@ -47,6 +47,11 @@ public interface Slots extends HasInner<SiteInner>, Indexable, Refreshable<Slots
     String clientCertExclusionPaths();
 
     /**
+     * @return the clientCertMode value.
+     */
+    ClientCertMode clientCertMode();
+
+    /**
      * @return the cloningInfo value.
      */
     CloningInfo cloningInfo();
@@ -319,6 +324,21 @@ public interface Slots extends HasInner<SiteInner>, Indexable, Refreshable<Slots
         }
 
         /**
+         * The stage of the slots definition allowing to specify ClientCertMode.
+         */
+        interface WithClientCertMode {
+            /**
+             * Specifies clientCertMode.
+             * @param clientCertMode This composes with ClientCertEnabled setting.
+ - ClientCertEnabled: false means ClientCert is ignored.
+ - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+ - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted. Possible values include: 'Required', 'Optional'
+             * @return the next definition stage
+             */
+            WithCreate withClientCertMode(ClientCertMode clientCertMode);
+        }
+
+        /**
          * The stage of the slots definition allowing to specify CloningInfo.
          */
         interface WithCloningInfo {
@@ -541,13 +561,13 @@ public interface Slots extends HasInner<SiteInner>, Indexable, Refreshable<Slots
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<Slots>, DefinitionStages.WithClientAffinityEnabled, DefinitionStages.WithClientCertEnabled, DefinitionStages.WithClientCertExclusionPaths, DefinitionStages.WithCloningInfo, DefinitionStages.WithContainerSize, DefinitionStages.WithDailyMemoryTimeQuota, DefinitionStages.WithEnabled, DefinitionStages.WithHostingEnvironmentProfile, DefinitionStages.WithHostNamesDisabled, DefinitionStages.WithHostNameSslStates, DefinitionStages.WithHttpsOnly, DefinitionStages.WithHyperV, DefinitionStages.WithIdentity, DefinitionStages.WithIsXenon, DefinitionStages.WithKind, DefinitionStages.WithRedundancyMode, DefinitionStages.WithReserved, DefinitionStages.WithScmSiteAlsoStopped, DefinitionStages.WithServerFarmId, DefinitionStages.WithSiteConfig, DefinitionStages.WithTags {
+        interface WithCreate extends Creatable<Slots>, DefinitionStages.WithClientAffinityEnabled, DefinitionStages.WithClientCertEnabled, DefinitionStages.WithClientCertExclusionPaths, DefinitionStages.WithClientCertMode, DefinitionStages.WithCloningInfo, DefinitionStages.WithContainerSize, DefinitionStages.WithDailyMemoryTimeQuota, DefinitionStages.WithEnabled, DefinitionStages.WithHostingEnvironmentProfile, DefinitionStages.WithHostNamesDisabled, DefinitionStages.WithHostNameSslStates, DefinitionStages.WithHttpsOnly, DefinitionStages.WithHyperV, DefinitionStages.WithIdentity, DefinitionStages.WithIsXenon, DefinitionStages.WithKind, DefinitionStages.WithRedundancyMode, DefinitionStages.WithReserved, DefinitionStages.WithScmSiteAlsoStopped, DefinitionStages.WithServerFarmId, DefinitionStages.WithSiteConfig, DefinitionStages.WithTags {
         }
     }
     /**
      * The template for a Slots update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<Slots>, UpdateStages.WithClientAffinityEnabled, UpdateStages.WithClientCertEnabled, UpdateStages.WithClientCertExclusionPaths, UpdateStages.WithCloningInfo, UpdateStages.WithContainerSize, UpdateStages.WithDailyMemoryTimeQuota, UpdateStages.WithEnabled, UpdateStages.WithHostingEnvironmentProfile, UpdateStages.WithHostNamesDisabled, UpdateStages.WithHostNameSslStates, UpdateStages.WithHttpsOnly, UpdateStages.WithHyperV, UpdateStages.WithIdentity, UpdateStages.WithIsXenon, UpdateStages.WithKind, UpdateStages.WithRedundancyMode, UpdateStages.WithReserved, UpdateStages.WithScmSiteAlsoStopped, UpdateStages.WithServerFarmId, UpdateStages.WithSiteConfig {
+    interface Update extends Appliable<Slots>, UpdateStages.WithClientAffinityEnabled, UpdateStages.WithClientCertEnabled, UpdateStages.WithClientCertExclusionPaths, UpdateStages.WithClientCertMode, UpdateStages.WithCloningInfo, UpdateStages.WithContainerSize, UpdateStages.WithDailyMemoryTimeQuota, UpdateStages.WithEnabled, UpdateStages.WithHostingEnvironmentProfile, UpdateStages.WithHostNamesDisabled, UpdateStages.WithHostNameSslStates, UpdateStages.WithHttpsOnly, UpdateStages.WithHyperV, UpdateStages.WithIdentity, UpdateStages.WithIsXenon, UpdateStages.WithKind, UpdateStages.WithRedundancyMode, UpdateStages.WithReserved, UpdateStages.WithScmSiteAlsoStopped, UpdateStages.WithServerFarmId, UpdateStages.WithSiteConfig {
     }
 
     /**
@@ -588,6 +608,21 @@ public interface Slots extends HasInner<SiteInner>, Indexable, Refreshable<Slots
              * @return the next update stage
              */
             Update withClientCertExclusionPaths(String clientCertExclusionPaths);
+        }
+
+        /**
+         * The stage of the slots update allowing to specify ClientCertMode.
+         */
+        interface WithClientCertMode {
+            /**
+             * Specifies clientCertMode.
+             * @param clientCertMode This composes with ClientCertEnabled setting.
+ - ClientCertEnabled: false means ClientCert is ignored.
+ - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+ - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted. Possible values include: 'Required', 'Optional'
+             * @return the next update stage
+             */
+            Update withClientCertMode(ClientCertMode clientCertMode);
         }
 
         /**

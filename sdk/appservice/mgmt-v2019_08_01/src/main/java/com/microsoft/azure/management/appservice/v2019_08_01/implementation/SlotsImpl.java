@@ -21,6 +21,7 @@ import com.microsoft.azure.management.appservice.v2019_08_01.SiteAvailabilitySta
 import com.microsoft.azure.management.appservice.v2019_08_01.HostNameSslState;
 import com.microsoft.azure.management.appservice.v2019_08_01.SiteConfig;
 import com.microsoft.azure.management.appservice.v2019_08_01.HostingEnvironmentProfile;
+import com.microsoft.azure.management.appservice.v2019_08_01.ClientCertMode;
 import com.microsoft.azure.management.appservice.v2019_08_01.CloningInfo;
 import com.microsoft.azure.management.appservice.v2019_08_01.SlotSwapStatus;
 import com.microsoft.azure.management.appservice.v2019_08_01.RedundancyMode;
@@ -122,6 +123,11 @@ class SlotsImpl extends CreatableUpdatableImpl<Slots, SiteInner, SlotsImpl> impl
     @Override
     public String clientCertExclusionPaths() {
         return this.inner().clientCertExclusionPaths();
+    }
+
+    @Override
+    public ClientCertMode clientCertMode() {
+        return this.inner().clientCertMode();
     }
 
     @Override
@@ -364,6 +370,16 @@ class SlotsImpl extends CreatableUpdatableImpl<Slots, SiteInner, SlotsImpl> impl
             this.inner().withClientCertExclusionPaths(clientCertExclusionPaths);
         } else {
             this.updateParameter.withClientCertExclusionPaths(clientCertExclusionPaths);
+        }
+        return this;
+    }
+
+    @Override
+    public SlotsImpl withClientCertMode(ClientCertMode clientCertMode) {
+        if (isInCreateMode()) {
+            this.inner().withClientCertMode(clientCertMode);
+        } else {
+            this.updateParameter.withClientCertMode(clientCertMode);
         }
         return this;
     }

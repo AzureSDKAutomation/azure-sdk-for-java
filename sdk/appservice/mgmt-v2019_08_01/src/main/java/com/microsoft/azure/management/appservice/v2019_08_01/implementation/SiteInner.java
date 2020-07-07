@@ -15,6 +15,7 @@ import com.microsoft.azure.management.appservice.v2019_08_01.HostNameSslState;
 import org.joda.time.DateTime;
 import com.microsoft.azure.management.appservice.v2019_08_01.SiteConfig;
 import com.microsoft.azure.management.appservice.v2019_08_01.HostingEnvironmentProfile;
+import com.microsoft.azure.management.appservice.v2019_08_01.ClientCertMode;
 import com.microsoft.azure.management.appservice.v2019_08_01.CloningInfo;
 import com.microsoft.azure.management.appservice.v2019_08_01.SlotSwapStatus;
 import com.microsoft.azure.management.appservice.v2019_08_01.RedundancyMode;
@@ -165,6 +166,18 @@ public class SiteInner extends Resource {
      */
     @JsonProperty(value = "properties.clientCertEnabled")
     private Boolean clientCertEnabled;
+
+    /**
+     * This composes with ClientCertEnabled setting.
+     * - ClientCertEnabled: false means ClientCert is ignored.
+     * - ClientCertEnabled: true and ClientCertMode: Required means ClientCert
+     * is required.
+     * - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert
+     * is optional or accepted. Possible values include: 'Required',
+     * 'Optional'.
+     */
+    @JsonProperty(value = "properties.clientCertMode")
+    private ClientCertMode clientCertMode;
 
     /**
      * client certificate authentication comma-separated exclusion paths.
@@ -586,6 +599,32 @@ public class SiteInner extends Resource {
      */
     public SiteInner withClientCertEnabled(Boolean clientCertEnabled) {
         this.clientCertEnabled = clientCertEnabled;
+        return this;
+    }
+
+    /**
+     * Get this composes with ClientCertEnabled setting.
+     - ClientCertEnabled: false means ClientCert is ignored.
+     - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+     - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted. Possible values include: 'Required', 'Optional'.
+     *
+     * @return the clientCertMode value
+     */
+    public ClientCertMode clientCertMode() {
+        return this.clientCertMode;
+    }
+
+    /**
+     * Set this composes with ClientCertEnabled setting.
+     - ClientCertEnabled: false means ClientCert is ignored.
+     - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+     - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted. Possible values include: 'Required', 'Optional'.
+     *
+     * @param clientCertMode the clientCertMode value to set
+     * @return the SiteInner object itself.
+     */
+    public SiteInner withClientCertMode(ClientCertMode clientCertMode) {
+        this.clientCertMode = clientCertMode;
         return this;
     }
 

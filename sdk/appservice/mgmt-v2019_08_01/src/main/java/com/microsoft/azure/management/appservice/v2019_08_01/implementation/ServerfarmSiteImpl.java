@@ -12,6 +12,7 @@ import com.microsoft.azure.management.appservice.v2019_08_01.ServerfarmSite;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import rx.Observable;
 import com.microsoft.azure.management.appservice.v2019_08_01.SiteAvailabilityState;
+import com.microsoft.azure.management.appservice.v2019_08_01.ClientCertMode;
 import com.microsoft.azure.management.appservice.v2019_08_01.CloningInfo;
 import java.util.List;
 import com.microsoft.azure.management.appservice.v2019_08_01.HostingEnvironmentProfile;
@@ -58,6 +59,11 @@ class ServerfarmSiteImpl extends WrapperImpl<SiteInner> implements ServerfarmSit
     @Override
     public String clientCertExclusionPaths() {
         return this.inner().clientCertExclusionPaths();
+    }
+
+    @Override
+    public ClientCertMode clientCertMode() {
+        return this.inner().clientCertMode();
     }
 
     @Override

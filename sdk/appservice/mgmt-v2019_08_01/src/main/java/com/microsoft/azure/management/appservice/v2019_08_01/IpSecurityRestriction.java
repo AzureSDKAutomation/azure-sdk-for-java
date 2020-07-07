@@ -8,6 +8,8 @@
 
 package com.microsoft.azure.management.appservice.v2019_08_01;
 
+import java.util.Map;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -55,7 +57,8 @@ public class IpSecurityRestriction {
 
     /**
      * Defines what this IP filter will be used for. This is to support IP
-     * filtering on proxies. Possible values include: 'Default', 'XffProxy'.
+     * filtering on proxies. Possible values include: 'Default', 'XffProxy',
+     * 'ServiceTag'.
      */
     @JsonProperty(value = "tag")
     private IpFilterTag tag;
@@ -77,6 +80,34 @@ public class IpSecurityRestriction {
      */
     @JsonProperty(value = "description")
     private String description;
+
+    /**
+     * IP restriction rule headers.
+     * X-Forwarded-Host
+     * (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples).
+     * The matching logic is ..
+     * - If the property is null or empty (default), all hosts(or lack of) are
+     * allowed.
+     * - A value is compared using ordinal-ignore-case (excluding port number).
+     * - Subdomain wildcards are permitted but don't match the root domain. For
+     * example, *.contoso.com matches the subdomain foo.contoso.com
+     * but not the root domain contoso.com or multi-level foo.bar.contoso.com
+     * - Unicode host names are allowed but are converted to Punycode for
+     * matching.
+     *
+     * X-Forwarded-For
+     * (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples).
+     * The matching logic is ..
+     * - If the property is null or empty (default), any forwarded-for chains
+     * (or lack of) are allowed.
+     * - If any address (excluding port number) in the chain (comma separated)
+     * matches the CIDR defined by the property.
+     *
+     * X-Azure-FDID and X-FD-HealthProbe.
+     * The matching logic is exact match.
+     */
+    @JsonProperty(value = "headers")
+    private Map<String, List<String>> headers;
 
     /**
      * Get iP address the security restriction is valid for.
@@ -205,7 +236,7 @@ public class IpSecurityRestriction {
     }
 
     /**
-     * Get defines what this IP filter will be used for. This is to support IP filtering on proxies. Possible values include: 'Default', 'XffProxy'.
+     * Get defines what this IP filter will be used for. This is to support IP filtering on proxies. Possible values include: 'Default', 'XffProxy', 'ServiceTag'.
      *
      * @return the tag value
      */
@@ -214,7 +245,7 @@ public class IpSecurityRestriction {
     }
 
     /**
-     * Set defines what this IP filter will be used for. This is to support IP filtering on proxies. Possible values include: 'Default', 'XffProxy'.
+     * Set defines what this IP filter will be used for. This is to support IP filtering on proxies. Possible values include: 'Default', 'XffProxy', 'ServiceTag'.
      *
      * @param tag the tag value to set
      * @return the IpSecurityRestriction object itself.
@@ -281,6 +312,52 @@ public class IpSecurityRestriction {
      */
     public IpSecurityRestriction withDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    /**
+     * Get iP restriction rule headers.
+     X-Forwarded-Host (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples).
+     The matching logic is ..
+     - If the property is null or empty (default), all hosts(or lack of) are allowed.
+     - A value is compared using ordinal-ignore-case (excluding port number).
+     - Subdomain wildcards are permitted but don't match the root domain. For example, *.contoso.com matches the subdomain foo.contoso.com
+      but not the root domain contoso.com or multi-level foo.bar.contoso.com
+     - Unicode host names are allowed but are converted to Punycode for matching.
+     X-Forwarded-For (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples).
+     The matching logic is ..
+     - If the property is null or empty (default), any forwarded-for chains (or lack of) are allowed.
+     - If any address (excluding port number) in the chain (comma separated) matches the CIDR defined by the property.
+     X-Azure-FDID and X-FD-HealthProbe.
+     The matching logic is exact match.
+     *
+     * @return the headers value
+     */
+    public Map<String, List<String>> headers() {
+        return this.headers;
+    }
+
+    /**
+     * Set iP restriction rule headers.
+     X-Forwarded-Host (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples).
+     The matching logic is ..
+     - If the property is null or empty (default), all hosts(or lack of) are allowed.
+     - A value is compared using ordinal-ignore-case (excluding port number).
+     - Subdomain wildcards are permitted but don't match the root domain. For example, *.contoso.com matches the subdomain foo.contoso.com
+      but not the root domain contoso.com or multi-level foo.bar.contoso.com
+     - Unicode host names are allowed but are converted to Punycode for matching.
+     X-Forwarded-For (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples).
+     The matching logic is ..
+     - If the property is null or empty (default), any forwarded-for chains (or lack of) are allowed.
+     - If any address (excluding port number) in the chain (comma separated) matches the CIDR defined by the property.
+     X-Azure-FDID and X-FD-HealthProbe.
+     The matching logic is exact match.
+     *
+     * @param headers the headers value to set
+     * @return the IpSecurityRestriction object itself.
+     */
+    public IpSecurityRestriction withHeaders(Map<String, List<String>> headers) {
+        this.headers = headers;
         return this;
     }
 

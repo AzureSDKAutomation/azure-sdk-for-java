@@ -42,6 +42,11 @@ public interface HostingEnvironmentSite extends HasInner<SiteInner>, HasManager<
     String clientCertExclusionPaths();
 
     /**
+     * @return the clientCertMode value.
+     */
+    ClientCertMode clientCertMode();
+
+    /**
      * @return the cloningInfo value.
      */
     CloningInfo cloningInfo();

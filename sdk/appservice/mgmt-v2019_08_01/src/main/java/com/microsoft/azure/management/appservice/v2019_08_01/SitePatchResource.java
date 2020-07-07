@@ -157,6 +157,18 @@ public class SitePatchResource extends ProxyOnlyResource {
     private Boolean clientCertEnabled;
 
     /**
+     * This composes with ClientCertEnabled setting.
+     * - ClientCertEnabled: false means ClientCert is ignored.
+     * - ClientCertEnabled: true and ClientCertMode: Required means ClientCert
+     * is required.
+     * - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert
+     * is optional or accepted. Possible values include: 'Required',
+     * 'Optional'.
+     */
+    @JsonProperty(value = "properties.clientCertMode")
+    private ClientCertMode clientCertMode;
+
+    /**
      * client certificate authentication comma-separated exclusion paths.
      */
     @JsonProperty(value = "properties.clientCertExclusionPaths")
@@ -570,6 +582,32 @@ public class SitePatchResource extends ProxyOnlyResource {
      */
     public SitePatchResource withClientCertEnabled(Boolean clientCertEnabled) {
         this.clientCertEnabled = clientCertEnabled;
+        return this;
+    }
+
+    /**
+     * Get this composes with ClientCertEnabled setting.
+     - ClientCertEnabled: false means ClientCert is ignored.
+     - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+     - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted. Possible values include: 'Required', 'Optional'.
+     *
+     * @return the clientCertMode value
+     */
+    public ClientCertMode clientCertMode() {
+        return this.clientCertMode;
+    }
+
+    /**
+     * Set this composes with ClientCertEnabled setting.
+     - ClientCertEnabled: false means ClientCert is ignored.
+     - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+     - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted. Possible values include: 'Required', 'Optional'.
+     *
+     * @param clientCertMode the clientCertMode value to set
+     * @return the SitePatchResource object itself.
+     */
+    public SitePatchResource withClientCertMode(ClientCertMode clientCertMode) {
+        this.clientCertMode = clientCertMode;
         return this;
     }
 

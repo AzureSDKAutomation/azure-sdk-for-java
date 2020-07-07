@@ -42,6 +42,11 @@ public interface ServerfarmSite extends HasInner<SiteInner>, HasManager<Certific
     String clientCertExclusionPaths();
 
     /**
+     * @return the clientCertMode value.
+     */
+    ClientCertMode clientCertMode();
+
+    /**
      * @return the cloningInfo value.
      */
     CloningInfo cloningInfo();

@@ -12,35 +12,32 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Defines values for IpFilterTag.
+ * Defines values for ClientCertMode.
  */
-public enum IpFilterTag {
-    /** Enum value Default. */
-    DEFAULT("Default"),
+public enum ClientCertMode {
+    /** Enum value Required. */
+    REQUIRED("Required"),
 
-    /** Enum value XffProxy. */
-    XFF_PROXY("XffProxy"),
+    /** Enum value Optional. */
+    OPTIONAL("Optional");
 
-    /** Enum value ServiceTag. */
-    SERVICE_TAG("ServiceTag");
-
-    /** The actual serialized value for a IpFilterTag instance. */
+    /** The actual serialized value for a ClientCertMode instance. */
     private String value;
 
-    IpFilterTag(String value) {
+    ClientCertMode(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a IpFilterTag instance.
+     * Parses a serialized value to a ClientCertMode instance.
      *
      * @param value the serialized value to parse.
-     * @return the parsed IpFilterTag object, or null if unable to parse.
+     * @return the parsed ClientCertMode object, or null if unable to parse.
      */
     @JsonCreator
-    public static IpFilterTag fromString(String value) {
-        IpFilterTag[] items = IpFilterTag.values();
-        for (IpFilterTag item : items) {
+    public static ClientCertMode fromString(String value) {
+        ClientCertMode[] items = ClientCertMode.values();
+        for (ClientCertMode item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
