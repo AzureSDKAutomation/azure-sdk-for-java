@@ -23,7 +23,7 @@ public interface TaskRuns extends SupportsCreating<TaskRun.DefinitionStages.Blan
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
@@ -34,7 +34,7 @@ public interface TaskRuns extends SupportsCreating<TaskRun.DefinitionStages.Blan
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
@@ -55,7 +55,7 @@ public interface TaskRuns extends SupportsCreating<TaskRun.DefinitionStages.Blan
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */

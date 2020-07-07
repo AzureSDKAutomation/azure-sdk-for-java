@@ -37,6 +37,12 @@ public class TaskRunUpdateParameters {
     private String forceUpdateTag;
 
     /**
+     * The location of the resource.
+     */
+    @JsonProperty(value = "location")
+    private String location;
+
+    /**
      * The ARM resource tags.
      */
     @JsonProperty(value = "tags")
@@ -99,6 +105,26 @@ public class TaskRunUpdateParameters {
      */
     public TaskRunUpdateParameters withForceUpdateTag(String forceUpdateTag) {
         this.forceUpdateTag = forceUpdateTag;
+        return this;
+    }
+
+    /**
+     * Get the location of the resource.
+     *
+     * @return the location value
+     */
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Set the location of the resource.
+     *
+     * @param location the location value to set
+     * @return the TaskRunUpdateParameters object itself.
+     */
+    public TaskRunUpdateParameters withLocation(String location) {
+        this.location = location;
         return this;
     }
 

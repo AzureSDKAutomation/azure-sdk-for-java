@@ -111,7 +111,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -126,7 +126,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -140,7 +140,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TaskRunInner object
      */
@@ -158,7 +158,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TaskRunInner object
      */
@@ -202,7 +202,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The name of task run.
+     * @param taskRunName The name of the task run.
      * @param taskRun The parameters of a run that needs to scheduled.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -218,7 +218,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The name of task run.
+     * @param taskRunName The name of the task run.
      * @param taskRun The parameters of a run that needs to scheduled.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -233,7 +233,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The name of task run.
+     * @param taskRunName The name of the task run.
      * @param taskRun The parameters of a run that needs to scheduled.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -252,7 +252,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The name of task run.
+     * @param taskRunName The name of the task run.
      * @param taskRun The parameters of a run that needs to scheduled.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -284,7 +284,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The name of task run.
+     * @param taskRunName The name of the task run.
      * @param taskRun The parameters of a run that needs to scheduled.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -300,7 +300,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The name of task run.
+     * @param taskRunName The name of the task run.
      * @param taskRun The parameters of a run that needs to scheduled.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -315,7 +315,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The name of task run.
+     * @param taskRunName The name of the task run.
      * @param taskRun The parameters of a run that needs to scheduled.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TaskRunInner object
@@ -334,7 +334,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The name of task run.
+     * @param taskRunName The name of the task run.
      * @param taskRun The parameters of a run that needs to scheduled.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TaskRunInner object
@@ -384,7 +384,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -398,7 +398,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -412,7 +412,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
@@ -430,7 +430,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
@@ -457,7 +457,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -471,7 +471,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -485,7 +485,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
@@ -503,7 +503,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
@@ -549,7 +549,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param updateParameters The parameters for updating a task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -565,7 +565,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param updateParameters The parameters for updating a task run.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -580,7 +580,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param updateParameters The parameters for updating a task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -599,7 +599,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param updateParameters The parameters for updating a task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
@@ -631,7 +631,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param updateParameters The parameters for updating a task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -647,7 +647,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param updateParameters The parameters for updating a task run.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -662,7 +662,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param updateParameters The parameters for updating a task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TaskRunInner object
@@ -681,7 +681,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The task run name.
+     * @param taskRunName The name of the task run.
      * @param updateParameters The parameters for updating a task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TaskRunInner object
@@ -731,7 +731,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -746,7 +746,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -760,7 +760,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TaskRunInner object
      */
@@ -778,7 +778,7 @@ public class TaskRunsInner {
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param registryName The name of the container registry.
-     * @param taskRunName The run request name.
+     * @param taskRunName The name of the task run.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the TaskRunInner object
      */
