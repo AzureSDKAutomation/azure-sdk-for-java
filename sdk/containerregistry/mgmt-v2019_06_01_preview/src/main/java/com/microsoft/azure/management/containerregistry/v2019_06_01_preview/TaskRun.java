@@ -64,11 +64,6 @@ public interface TaskRun extends HasInner<TaskRunInner>, Indexable, Refreshable<
     Run runResult();
 
     /**
-     * @return the tags value.
-     */
-    Map<String, String> tags();
-
-    /**
      * @return the type value.
      */
     String type();
@@ -76,7 +71,7 @@ public interface TaskRun extends HasInner<TaskRunInner>, Indexable, Refreshable<
     /**
      * The entirety of the TaskRun definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithRegistry, DefinitionStages.WithLocation, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithRegistry, DefinitionStages.WithCreate {
     }
 
     /**
@@ -99,19 +94,7 @@ public interface TaskRun extends HasInner<TaskRunInner>, Indexable, Refreshable<
             * @param registryName The name of the container registry
             * @return the next definition stage
             */
-            WithLocation withExistingRegistry(String resourceGroupName, String registryName);
-        }
-
-        /**
-         * The stage of the taskrun definition allowing to specify Location.
-         */
-        interface WithLocation {
-           /**
-            * Specifies location.
-            * @param location The location of the resource. This cannot be changed after the resource is created
-            * @return the next definition stage
-            */
-            WithCreate withLocation(String location);
+            WithCreate withExistingRegistry(String resourceGroupName, String registryName);
         }
 
         /**
@@ -139,6 +122,18 @@ public interface TaskRun extends HasInner<TaskRunInner>, Indexable, Refreshable<
         }
 
         /**
+         * The stage of the taskrun definition allowing to specify Location.
+         */
+        interface WithLocation {
+            /**
+             * Specifies location.
+             * @param location The location of the resource
+             * @return the next definition stage
+             */
+            WithCreate withLocation(String location);
+        }
+
+        /**
          * The stage of the taskrun definition allowing to specify RunRequest.
          */
         interface WithRunRequest {
@@ -151,29 +146,17 @@ public interface TaskRun extends HasInner<TaskRunInner>, Indexable, Refreshable<
         }
 
         /**
-         * The stage of the taskrun definition allowing to specify Tags.
-         */
-        interface WithTags {
-            /**
-             * Specifies tags.
-             * @param tags The tags of the resource
-             * @return the next definition stage
-             */
-            WithCreate withTags(Map<String, String> tags);
-        }
-
-        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<TaskRun>, DefinitionStages.WithForceUpdateTag, DefinitionStages.WithIdentity, DefinitionStages.WithRunRequest, DefinitionStages.WithTags {
+        interface WithCreate extends Creatable<TaskRun>, DefinitionStages.WithForceUpdateTag, DefinitionStages.WithIdentity, DefinitionStages.WithLocation, DefinitionStages.WithRunRequest {
         }
     }
     /**
      * The template for a TaskRun update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<TaskRun>, UpdateStages.WithForceUpdateTag, UpdateStages.WithIdentity, UpdateStages.WithRunRequest, UpdateStages.WithTags {
+    interface Update extends Appliable<TaskRun>, UpdateStages.WithForceUpdateTag, UpdateStages.WithIdentity, UpdateStages.WithLocation, UpdateStages.WithRunRequest, UpdateStages.WithTags {
     }
 
     /**
@@ -202,6 +185,18 @@ public interface TaskRun extends HasInner<TaskRunInner>, Indexable, Refreshable<
              * @return the next update stage
              */
             Update withIdentity(IdentityProperties identity);
+        }
+
+        /**
+         * The stage of the taskrun update allowing to specify Location.
+         */
+        interface WithLocation {
+            /**
+             * Specifies location.
+             * @param location The location of the resource
+             * @return the next update stage
+             */
+            Update withLocation(String location);
         }
 
         /**

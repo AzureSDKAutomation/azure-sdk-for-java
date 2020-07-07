@@ -142,11 +142,6 @@ class TaskRunImpl extends CreatableUpdatableImpl<TaskRun, TaskRunInner, TaskRunI
     }
 
     @Override
-    public Map<String, String> tags() {
-        return this.inner().getTags();
-    }
-
-    @Override
     public String type() {
         return this.inner().type();
     }
@@ -159,8 +154,8 @@ class TaskRunImpl extends CreatableUpdatableImpl<TaskRun, TaskRunInner, TaskRunI
     }
 
     @Override
-    public TaskRunImpl withLocation(String location) {
-        this.inner().withLocation(location);
+    public TaskRunImpl withTags(Map<String, String> tags) {
+        this.updateParameter.withTags(tags);
         return this;
     }
 
@@ -185,21 +180,21 @@ class TaskRunImpl extends CreatableUpdatableImpl<TaskRun, TaskRunInner, TaskRunI
     }
 
     @Override
-    public TaskRunImpl withRunRequest(RunRequest runRequest) {
+    public TaskRunImpl withLocation(String location) {
         if (isInCreateMode()) {
-            this.inner().withRunRequest(runRequest);
+            this.inner().withLocation(location);
         } else {
-            this.updateParameter.withRunRequest(runRequest);
+            this.updateParameter.withLocation(location);
         }
         return this;
     }
 
     @Override
-    public TaskRunImpl withTags(Map<String, String> tags) {
+    public TaskRunImpl withRunRequest(RunRequest runRequest) {
         if (isInCreateMode()) {
-            this.inner().withTags(tags);
+            this.inner().withRunRequest(runRequest);
         } else {
-            this.updateParameter.withTags(tags);
+            this.updateParameter.withRunRequest(runRequest);
         }
         return this;
     }

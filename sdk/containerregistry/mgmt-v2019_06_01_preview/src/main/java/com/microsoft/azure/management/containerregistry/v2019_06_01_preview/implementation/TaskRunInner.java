@@ -13,14 +13,14 @@ import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.Prov
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.RunRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
-import com.microsoft.azure.Resource;
+import com.microsoft.azure.ProxyResource;
 
 /**
  * The task run that has the ARM resource and properties.
  * The task run will have the information of request and result of a run.
  */
 @JsonFlatten
-public class TaskRunInner extends Resource {
+public class TaskRunInner extends ProxyResource {
     /**
      * Identity for the resource.
      */
@@ -52,6 +52,12 @@ public class TaskRunInner extends Resource {
      */
     @JsonProperty(value = "properties.forceUpdateTag")
     private String forceUpdateTag;
+
+    /**
+     * The location of the resource.
+     */
+    @JsonProperty(value = "location")
+    private String location;
 
     /**
      * Get identity for the resource.
@@ -128,6 +134,26 @@ public class TaskRunInner extends Resource {
      */
     public TaskRunInner withForceUpdateTag(String forceUpdateTag) {
         this.forceUpdateTag = forceUpdateTag;
+        return this;
+    }
+
+    /**
+     * Get the location of the resource.
+     *
+     * @return the location value
+     */
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Set the location of the resource.
+     *
+     * @param location the location value to set
+     * @return the TaskRunInner object itself.
+     */
+    public TaskRunInner withLocation(String location) {
+        this.location = location;
         return this;
     }
 
