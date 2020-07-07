@@ -10,7 +10,6 @@
 
 package com.microsoft.azure.management.recoveryservices.backup.v2020_02_02;
 
-import java.util.List;
 import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -42,21 +41,6 @@ public class AzureFileshareProtectedItem extends ProtectedItemInner {
      */
     @JsonProperty(value = "protectionState")
     private ProtectionState protectionState;
-
-    /**
-     * Health status of protected item. Possible values include: 'Passed',
-     * 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded',
-     * 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy',
-     * 'Invalid'.
-     */
-    @JsonProperty(value = "healthStatus")
-    private HealthStatus healthStatus;
-
-    /**
-     * Health details on this backup item.
-     */
-    @JsonProperty(value = "healthDetails")
-    private List<HealthDetails> healthDetails;
 
     /**
      * Last backup operation status. Possible values: Healthy, Unhealthy.
@@ -133,46 +117,6 @@ public class AzureFileshareProtectedItem extends ProtectedItemInner {
      */
     public AzureFileshareProtectedItem withProtectionState(ProtectionState protectionState) {
         this.protectionState = protectionState;
-        return this;
-    }
-
-    /**
-     * Get health status of protected item. Possible values include: 'Passed', 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded', 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy', 'Invalid'.
-     *
-     * @return the healthStatus value
-     */
-    public HealthStatus healthStatus() {
-        return this.healthStatus;
-    }
-
-    /**
-     * Set health status of protected item. Possible values include: 'Passed', 'ActionRequired', 'ActionSuggested', 'Healthy', 'TransientDegraded', 'PersistentDegraded', 'TransientUnhealthy', 'PersistentUnhealthy', 'Invalid'.
-     *
-     * @param healthStatus the healthStatus value to set
-     * @return the AzureFileshareProtectedItem object itself.
-     */
-    public AzureFileshareProtectedItem withHealthStatus(HealthStatus healthStatus) {
-        this.healthStatus = healthStatus;
-        return this;
-    }
-
-    /**
-     * Get health details on this backup item.
-     *
-     * @return the healthDetails value
-     */
-    public List<HealthDetails> healthDetails() {
-        return this.healthDetails;
-    }
-
-    /**
-     * Set health details on this backup item.
-     *
-     * @param healthDetails the healthDetails value to set
-     * @return the AzureFileshareProtectedItem object itself.
-     */
-    public AzureFileshareProtectedItem withHealthDetails(List<HealthDetails> healthDetails) {
-        this.healthDetails = healthDetails;
         return this;
     }
 

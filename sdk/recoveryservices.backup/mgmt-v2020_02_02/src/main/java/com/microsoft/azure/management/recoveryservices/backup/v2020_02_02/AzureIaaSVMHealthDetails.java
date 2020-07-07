@@ -14,5 +14,5 @@ package com.microsoft.azure.management.recoveryservices.backup.v2020_02_02;
 /**
  * Azure IaaS VM workload-specific Health Details.
  */
-public class AzureIaaSVMHealthDetails extends HealthDetails {
+public class AzureIaaSVMHealthDetails extends ResourceHealthDetails {
 }

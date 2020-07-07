@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Health Details for backup items.
  */
-public class HealthDetails {
+public class ResourceHealthDetails {
     /**
      * Health Code.
      */
