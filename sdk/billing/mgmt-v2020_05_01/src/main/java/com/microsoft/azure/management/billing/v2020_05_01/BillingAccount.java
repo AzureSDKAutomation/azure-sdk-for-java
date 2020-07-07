@@ -17,6 +17,7 @@ import com.microsoft.azure.arm.model.Refreshable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.billing.v2020_05_01.implementation.BillingManager;
 import java.util.List;
+import com.microsoft.azure.management.billing.v2020_05_01.implementation.EnrollmentAccountInner;
 
 /**
  * Type representing BillingAccount.
@@ -55,7 +56,7 @@ public interface BillingAccount extends HasInner<BillingAccountInner>, Indexable
     /**
      * @return the enrollmentAccounts value.
      */
-    List<EnrollmentAccount> enrollmentAccounts();
+    List<EnrollmentAccountInner> enrollmentAccounts();
 
     /**
      * @return the enrollmentDetails value.
@@ -142,7 +143,7 @@ public interface BillingAccount extends HasInner<BillingAccountInner>, Indexable
              * @param enrollmentAccounts The accounts associated to the enrollment
              * @return the next update stage
              */
-            Update withEnrollmentAccounts(List<EnrollmentAccount> enrollmentAccounts);
+            Update withEnrollmentAccounts(List<EnrollmentAccountInner> enrollmentAccounts);
         }
 
         /**

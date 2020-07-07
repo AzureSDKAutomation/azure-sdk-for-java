@@ -16,7 +16,6 @@ import com.microsoft.azure.management.billing.v2020_05_01.BillingProfilesOnExpan
 import com.microsoft.azure.management.billing.v2020_05_01.Enrollment;
 import java.util.List;
 import com.microsoft.azure.management.billing.v2020_05_01.Department;
-import com.microsoft.azure.management.billing.v2020_05_01.EnrollmentAccount;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -86,7 +85,7 @@ public class BillingAccountInner extends ProxyResource {
      * The accounts associated to the enrollment.
      */
     @JsonProperty(value = "properties.enrollmentAccounts")
-    private List<EnrollmentAccount> enrollmentAccounts;
+    private List<EnrollmentAccountInner> enrollmentAccounts;
 
     /**
      * Indicates whether user has read access to the billing account.
@@ -215,7 +214,7 @@ public class BillingAccountInner extends ProxyResource {
      *
      * @return the enrollmentAccounts value
      */
-    public List<EnrollmentAccount> enrollmentAccounts() {
+    public List<EnrollmentAccountInner> enrollmentAccounts() {
         return this.enrollmentAccounts;
     }
 
@@ -225,7 +224,7 @@ public class BillingAccountInner extends ProxyResource {
      * @param enrollmentAccounts the enrollmentAccounts value to set
      * @return the BillingAccountInner object itself.
      */
-    public BillingAccountInner withEnrollmentAccounts(List<EnrollmentAccount> enrollmentAccounts) {
+    public BillingAccountInner withEnrollmentAccounts(List<EnrollmentAccountInner> enrollmentAccounts) {
         this.enrollmentAccounts = enrollmentAccounts;
         return this;
     }

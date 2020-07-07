@@ -34,6 +34,8 @@ import com.microsoft.azure.management.billing.v2020_05_01.Operations;
 import com.microsoft.azure.management.billing.v2020_05_01.BillingRoleDefinitions;
 import com.microsoft.azure.management.billing.v2020_05_01.BillingRoleAssignments;
 import com.microsoft.azure.management.billing.v2020_05_01.Agreements;
+import com.microsoft.azure.management.billing.v2020_05_01.EnrollmentAccounts;
+import com.microsoft.azure.management.billing.v2020_05_01.BillingPeriods;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -59,6 +61,8 @@ public final class BillingManager extends ManagerCore<BillingManager, BillingMan
     private BillingRoleDefinitions billingRoleDefinitions;
     private BillingRoleAssignments billingRoleAssignments;
     private Agreements agreements;
+    private EnrollmentAccounts enrollmentAccounts;
+    private BillingPeriods billingPeriods;
     /**
     * Get a Configurable instance that can be used to create BillingManager with optional configuration.
     *
@@ -284,6 +288,26 @@ public final class BillingManager extends ManagerCore<BillingManager, BillingMan
             this.agreements = new AgreementsImpl(this);
         }
         return this.agreements;
+    }
+
+    /**
+     * @return Entry point to manage EnrollmentAccounts.
+     */
+    public EnrollmentAccounts enrollmentAccounts() {
+        if (this.enrollmentAccounts == null) {
+            this.enrollmentAccounts = new EnrollmentAccountsImpl(this);
+        }
+        return this.enrollmentAccounts;
+    }
+
+    /**
+     * @return Entry point to manage BillingPeriods.
+     */
+    public BillingPeriods billingPeriods() {
+        if (this.billingPeriods == null) {
+            this.billingPeriods = new BillingPeriodsImpl(this);
+        }
+        return this.billingPeriods;
     }
 
     /**

@@ -167,10 +167,8 @@ public class BillingRoleAssignmentsInner {
         if (billingRoleAssignmentName == null) {
             throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getByBillingAccount(billingAccountName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.getByBillingAccount(billingAccountName, billingRoleAssignmentName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
@@ -250,10 +248,8 @@ public class BillingRoleAssignmentsInner {
         if (billingRoleAssignmentName == null) {
             throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.deleteByBillingAccount(billingAccountName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.deleteByBillingAccount(billingAccountName, billingRoleAssignmentName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
@@ -347,10 +343,8 @@ public class BillingRoleAssignmentsInner {
         if (billingRoleAssignmentName == null) {
             throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getByInvoiceSection(billingAccountName, billingProfileName, invoiceSectionName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.getByInvoiceSection(billingAccountName, billingProfileName, invoiceSectionName, billingRoleAssignmentName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
@@ -444,10 +438,8 @@ public class BillingRoleAssignmentsInner {
         if (billingRoleAssignmentName == null) {
             throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.deleteByInvoiceSection(billingAccountName, billingProfileName, invoiceSectionName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.deleteByInvoiceSection(billingAccountName, billingProfileName, invoiceSectionName, billingRoleAssignmentName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
@@ -534,10 +526,8 @@ public class BillingRoleAssignmentsInner {
         if (billingRoleAssignmentName == null) {
             throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getByBillingProfile(billingAccountName, billingProfileName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.getByBillingProfile(billingAccountName, billingProfileName, billingRoleAssignmentName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
@@ -624,10 +614,8 @@ public class BillingRoleAssignmentsInner {
         if (billingRoleAssignmentName == null) {
             throw new IllegalArgumentException("Parameter billingRoleAssignmentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.deleteByBillingProfile(billingAccountName, billingProfileName, billingRoleAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.deleteByBillingProfile(billingAccountName, billingProfileName, billingRoleAssignmentName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingRoleAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingRoleAssignmentInner>> call(Response<ResponseBody> response) {
@@ -736,10 +724,8 @@ public class BillingRoleAssignmentsInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByBillingAccount(billingAccountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByBillingAccount(billingAccountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {
@@ -864,10 +850,8 @@ public class BillingRoleAssignmentsInner {
         if (invoiceSectionName == null) {
             throw new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByInvoiceSection(billingAccountName, billingProfileName, invoiceSectionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByInvoiceSection(billingAccountName, billingProfileName, invoiceSectionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {
@@ -984,10 +968,8 @@ public class BillingRoleAssignmentsInner {
         if (billingProfileName == null) {
             throw new IllegalArgumentException("Parameter billingProfileName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByBillingProfile(billingAccountName, billingProfileName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByBillingProfile(billingAccountName, billingProfileName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingRoleAssignmentInner>>> call(Response<ResponseBody> response) {

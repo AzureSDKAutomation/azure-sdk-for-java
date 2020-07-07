@@ -19,7 +19,7 @@ import com.microsoft.azure.management.billing.v2020_05_01.AccountType;
 import com.microsoft.azure.management.billing.v2020_05_01.AgreementType;
 import com.microsoft.azure.management.billing.v2020_05_01.BillingProfilesOnExpand;
 import com.microsoft.azure.management.billing.v2020_05_01.Department;
-import com.microsoft.azure.management.billing.v2020_05_01.EnrollmentAccount;
+import java.util.ArrayList;
 import com.microsoft.azure.management.billing.v2020_05_01.Enrollment;
 import com.microsoft.azure.management.billing.v2020_05_01.AddressDetails;
 import rx.functions.Func1;
@@ -120,7 +120,7 @@ class BillingAccountImpl extends CreatableUpdatableImpl<BillingAccount, BillingA
     }
 
     @Override
-    public List<EnrollmentAccount> enrollmentAccounts() {
+    public List<EnrollmentAccountInner> enrollmentAccounts() {
         return this.inner().enrollmentAccounts();
     }
 
@@ -173,7 +173,7 @@ class BillingAccountImpl extends CreatableUpdatableImpl<BillingAccount, BillingA
     }
 
     @Override
-    public BillingAccountImpl withEnrollmentAccounts(List<EnrollmentAccount> enrollmentAccounts) {
+    public BillingAccountImpl withEnrollmentAccounts(List<EnrollmentAccountInner> enrollmentAccounts) {
         this.updateParameter.withEnrollmentAccounts(enrollmentAccounts);
         return this;
     }

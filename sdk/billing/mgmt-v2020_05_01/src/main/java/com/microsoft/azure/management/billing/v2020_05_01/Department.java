@@ -9,6 +9,7 @@
 package com.microsoft.azure.management.billing.v2020_05_01;
 
 import java.util.List;
+import com.microsoft.azure.management.billing.v2020_05_01.implementation.EnrollmentAccountInner;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -41,7 +42,7 @@ public class Department extends ProxyResource {
      * it's specified in $expand.
      */
     @JsonProperty(value = "properties.enrollmentAccounts")
-    private List<EnrollmentAccount> enrollmentAccounts;
+    private List<EnrollmentAccountInner> enrollmentAccounts;
 
     /**
      * Get the name of the department.
@@ -108,7 +109,7 @@ public class Department extends ProxyResource {
      *
      * @return the enrollmentAccounts value
      */
-    public List<EnrollmentAccount> enrollmentAccounts() {
+    public List<EnrollmentAccountInner> enrollmentAccounts() {
         return this.enrollmentAccounts;
     }
 
@@ -118,7 +119,7 @@ public class Department extends ProxyResource {
      * @param enrollmentAccounts the enrollmentAccounts value to set
      * @return the Department object itself.
      */
-    public Department withEnrollmentAccounts(List<EnrollmentAccount> enrollmentAccounts) {
+    public Department withEnrollmentAccounts(List<EnrollmentAccountInner> enrollmentAccounts) {
         this.enrollmentAccounts = enrollmentAccounts;
         return this;
     }

@@ -30,18 +30,6 @@ public class BillingManagementClientImpl extends AzureServiceClient {
         return this.azureClient;
     }
 
-    /** The version of the API to be used with the client request. The current version is 2020-05-01. */
-    private String apiVersion;
-
-    /**
-     * Gets The version of the API to be used with the client request. The current version is 2020-05-01.
-     *
-     * @return the apiVersion value.
-     */
-    public String apiVersion() {
-        return this.apiVersion;
-    }
-
     /** The ID that uniquely identifies an Azure subscription. */
     private String subscriptionId;
 
@@ -62,6 +50,29 @@ public class BillingManagementClientImpl extends AzureServiceClient {
      */
     public BillingManagementClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
+        return this;
+    }
+
+    /** Azure Subscription ID. */
+    private String subscriptionId1;
+
+    /**
+     * Gets Azure Subscription ID.
+     *
+     * @return the subscriptionId1 value.
+     */
+    public String subscriptionId1() {
+        return this.subscriptionId1;
+    }
+
+    /**
+     * Sets Azure Subscription ID.
+     *
+     * @param subscriptionId1 the subscriptionId1 value.
+     * @return the service client itself
+     */
+    public BillingManagementClientImpl withSubscriptionId1(String subscriptionId1) {
+        this.subscriptionId1 = subscriptionId1;
         return this;
     }
 
@@ -369,6 +380,32 @@ public class BillingManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The EnrollmentAccountsInner object to access its operations.
+     */
+    private EnrollmentAccountsInner enrollmentAccounts;
+
+    /**
+     * Gets the EnrollmentAccountsInner object to access its operations.
+     * @return the EnrollmentAccountsInner object.
+     */
+    public EnrollmentAccountsInner enrollmentAccounts() {
+        return this.enrollmentAccounts;
+    }
+
+    /**
+     * The BillingPeriodsInner object to access its operations.
+     */
+    private BillingPeriodsInner billingPeriods;
+
+    /**
+     * Gets the BillingPeriodsInner object to access its operations.
+     * @return the BillingPeriodsInner object.
+     */
+    public BillingPeriodsInner billingPeriods() {
+        return this.billingPeriods;
+    }
+
+    /**
      * Initializes an instance of BillingManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -399,7 +436,6 @@ public class BillingManagementClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2020-05-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
@@ -421,6 +457,8 @@ public class BillingManagementClientImpl extends AzureServiceClient {
         this.billingRoleDefinitions = new BillingRoleDefinitionsInner(restClient().retrofit(), this);
         this.billingRoleAssignments = new BillingRoleAssignmentsInner(restClient().retrofit(), this);
         this.agreements = new AgreementsInner(restClient().retrofit(), this);
+        this.enrollmentAccounts = new EnrollmentAccountsInner(restClient().retrofit(), this);
+        this.billingPeriods = new BillingPeriodsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

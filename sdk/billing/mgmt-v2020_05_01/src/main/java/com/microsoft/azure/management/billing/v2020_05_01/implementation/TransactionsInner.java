@@ -162,10 +162,8 @@ public class TransactionsInner {
         if (invoiceName == null) {
             throw new IllegalArgumentException("Parameter invoiceName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByInvoice(billingAccountName, invoiceName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByInvoice(billingAccountName, invoiceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<TransactionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<TransactionInner>>> call(Response<ResponseBody> response) {

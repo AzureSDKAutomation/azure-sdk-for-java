@@ -172,11 +172,9 @@ public class BillingAccountsInner {
      * @return the PagedList&lt;BillingAccountInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<BillingAccountInner>>> listSinglePageAsync() {
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2020-05-01";
         final String expand = null;
-        return service.list(this.client.apiVersion(), expand, this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingAccountInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingAccountInner>>> call(Response<ResponseBody> response) {
@@ -275,10 +273,8 @@ public class BillingAccountsInner {
      * @return the PagedList&lt;BillingAccountInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<BillingAccountInner>>> listSinglePageAsync(final String expand) {
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.apiVersion(), expand, this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.list(apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingAccountInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingAccountInner>>> call(Response<ResponseBody> response) {
@@ -292,7 +288,7 @@ public class BillingAccountsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<BillingAccountInner>> listDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+    private ServiceResponse<PageImpl<BillingAccountInner>> listDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<BillingAccountInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<BillingAccountInner>>() { }.getType())
                 .registerError(ErrorResponseException.class)
@@ -351,11 +347,9 @@ public class BillingAccountsInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2020-05-01";
         final String expand = null;
-        return service.get(billingAccountName, this.client.apiVersion(), expand, this.client.acceptLanguage(), this.client.userAgent())
+        return service.get(billingAccountName, apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingAccountInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingAccountInner>> call(Response<ResponseBody> response) {
@@ -425,10 +419,8 @@ public class BillingAccountsInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(billingAccountName, this.client.apiVersion(), expand, this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.get(billingAccountName, apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingAccountInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingAccountInner>> call(Response<ResponseBody> response) {
@@ -505,14 +497,12 @@ public class BillingAccountsInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
         Validator.validate(parameters);
-        Observable<Response<ResponseBody>> observable = service.update(billingAccountName, this.client.apiVersion(), parameters, this.client.acceptLanguage(), this.client.userAgent());
+        final String apiVersion = "2020-05-01";
+        Observable<Response<ResponseBody>> observable = service.update(billingAccountName, apiVersion, parameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<BillingAccountInner>() { }.getType());
     }
 
@@ -572,14 +562,12 @@ public class BillingAccountsInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
         Validator.validate(parameters);
-        return service.beginUpdate(billingAccountName, this.client.apiVersion(), parameters, this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.beginUpdate(billingAccountName, apiVersion, parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingAccountInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingAccountInner>> call(Response<ResponseBody> response) {
@@ -689,10 +677,8 @@ public class BillingAccountsInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listInvoiceSectionsByCreateSubscriptionPermission(billingAccountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listInvoiceSectionsByCreateSubscriptionPermission(billingAccountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<InvoiceSectionWithCreateSubPermissionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<InvoiceSectionWithCreateSubPermissionInner>>> call(Response<ResponseBody> response) {

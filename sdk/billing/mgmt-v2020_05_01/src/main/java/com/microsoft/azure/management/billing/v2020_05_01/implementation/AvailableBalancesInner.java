@@ -116,10 +116,8 @@ public class AvailableBalancesInner {
         if (billingProfileName == null) {
             throw new IllegalArgumentException("Parameter billingProfileName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(billingAccountName, billingProfileName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.get(billingAccountName, billingProfileName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<AvailableBalanceInner>>>() {
                 @Override
                 public Observable<ServiceResponse<AvailableBalanceInner>> call(Response<ResponseBody> response) {

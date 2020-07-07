@@ -111,10 +111,8 @@ public class BillingPropertysInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.get(this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingPropertyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingPropertyInner>> call(Response<ResponseBody> response) {
@@ -183,13 +181,11 @@ public class BillingPropertysInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2020-05-01";
         final String costCenter = null;
         BillingPropertyInner parameters = new BillingPropertyInner();
         parameters.withCostCenter(null);
-        return service.update(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.update(this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingPropertyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingPropertyInner>> call(Response<ResponseBody> response) {
@@ -255,12 +251,10 @@ public class BillingPropertysInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2020-05-01";
         BillingPropertyInner parameters = new BillingPropertyInner();
         parameters.withCostCenter(costCenter);
-        return service.update(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.update(this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingPropertyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingPropertyInner>> call(Response<ResponseBody> response) {

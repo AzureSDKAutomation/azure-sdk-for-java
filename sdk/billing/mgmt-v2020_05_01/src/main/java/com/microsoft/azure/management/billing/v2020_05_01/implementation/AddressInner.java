@@ -108,14 +108,12 @@ public class AddressInner {
      * @return the observable to the ValidateAddressResponseInner object
      */
     public Observable<ServiceResponse<ValidateAddressResponseInner>> validateWithServiceResponseAsync(AddressDetails address) {
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (address == null) {
             throw new IllegalArgumentException("Parameter address is required and cannot be null.");
         }
         Validator.validate(address);
-        return service.validate(this.client.apiVersion(), address, this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.validate(apiVersion, address, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ValidateAddressResponseInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ValidateAddressResponseInner>> call(Response<ResponseBody> response) {

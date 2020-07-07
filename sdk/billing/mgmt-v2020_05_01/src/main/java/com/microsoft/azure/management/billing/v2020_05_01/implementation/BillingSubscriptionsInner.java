@@ -214,10 +214,8 @@ public class BillingSubscriptionsInner {
         if (customerName == null) {
             throw new IllegalArgumentException("Parameter customerName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByCustomer(billingAccountName, customerName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByCustomer(billingAccountName, customerName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingSubscriptionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingSubscriptionInner>>> call(Response<ResponseBody> response) {
@@ -326,10 +324,8 @@ public class BillingSubscriptionsInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByBillingAccount(billingAccountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByBillingAccount(billingAccountName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingSubscriptionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingSubscriptionInner>>> call(Response<ResponseBody> response) {
@@ -446,10 +442,8 @@ public class BillingSubscriptionsInner {
         if (billingProfileName == null) {
             throw new IllegalArgumentException("Parameter billingProfileName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByBillingProfile(billingAccountName, billingProfileName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByBillingProfile(billingAccountName, billingProfileName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingSubscriptionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingSubscriptionInner>>> call(Response<ResponseBody> response) {
@@ -574,10 +568,8 @@ public class BillingSubscriptionsInner {
         if (invoiceSectionName == null) {
             throw new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByInvoiceSection(billingAccountName, billingProfileName, invoiceSectionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByInvoiceSection(billingAccountName, billingProfileName, invoiceSectionName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<BillingSubscriptionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<BillingSubscriptionInner>>> call(Response<ResponseBody> response) {
@@ -653,10 +645,8 @@ public class BillingSubscriptionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(billingAccountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.get(billingAccountName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingSubscriptionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingSubscriptionInner>> call(Response<ResponseBody> response) {
@@ -736,14 +726,12 @@ public class BillingSubscriptionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
         Validator.validate(parameters);
-        return service.update(billingAccountName, this.client.subscriptionId(), this.client.apiVersion(), parameters, this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.update(billingAccountName, this.client.subscriptionId(), apiVersion, parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BillingSubscriptionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BillingSubscriptionInner>> call(Response<ResponseBody> response) {
@@ -823,15 +811,13 @@ public class BillingSubscriptionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (destinationInvoiceSectionId == null) {
             throw new IllegalArgumentException("Parameter destinationInvoiceSectionId is required and cannot be null.");
         }
+        final String apiVersion = "2020-05-01";
         TransferBillingSubscriptionRequestProperties parameters = new TransferBillingSubscriptionRequestProperties();
         parameters.withDestinationInvoiceSectionId(destinationInvoiceSectionId);
-        Observable<Response<ResponseBody>> observable = service.move(billingAccountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.move(billingAccountName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<BillingSubscriptionInner>() { }.getType(), BillingSubscriptionsMoveHeaders.class);
     }
 
@@ -894,15 +880,13 @@ public class BillingSubscriptionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (destinationInvoiceSectionId == null) {
             throw new IllegalArgumentException("Parameter destinationInvoiceSectionId is required and cannot be null.");
         }
+        final String apiVersion = "2020-05-01";
         TransferBillingSubscriptionRequestProperties parameters = new TransferBillingSubscriptionRequestProperties();
         parameters.withDestinationInvoiceSectionId(destinationInvoiceSectionId);
-        return service.beginMove(billingAccountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.beginMove(billingAccountName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<BillingSubscriptionInner, BillingSubscriptionsMoveHeaders>>>() {
                 @Override
                 public Observable<ServiceResponseWithHeaders<BillingSubscriptionInner, BillingSubscriptionsMoveHeaders>> call(Response<ResponseBody> response) {
@@ -983,15 +967,13 @@ public class BillingSubscriptionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (destinationInvoiceSectionId == null) {
             throw new IllegalArgumentException("Parameter destinationInvoiceSectionId is required and cannot be null.");
         }
+        final String apiVersion = "2020-05-01";
         TransferBillingSubscriptionRequestProperties parameters = new TransferBillingSubscriptionRequestProperties();
         parameters.withDestinationInvoiceSectionId(destinationInvoiceSectionId);
-        return service.validateMove(billingAccountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.validateMove(billingAccountName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ValidateSubscriptionTransferEligibilityResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ValidateSubscriptionTransferEligibilityResultInner>> call(Response<ResponseBody> response) {

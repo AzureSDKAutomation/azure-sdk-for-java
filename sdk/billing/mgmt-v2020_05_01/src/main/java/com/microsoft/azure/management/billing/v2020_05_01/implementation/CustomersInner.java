@@ -175,12 +175,10 @@ public class CustomersInner {
         if (billingProfileName == null) {
             throw new IllegalArgumentException("Parameter billingProfileName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2020-05-01";
         final String search = null;
         final String filter = null;
-        return service.listByBillingProfile(billingAccountName, billingProfileName, this.client.apiVersion(), search, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByBillingProfile(billingAccountName, billingProfileName, apiVersion, search, filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<CustomerInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<CustomerInner>>> call(Response<ResponseBody> response) {
@@ -300,10 +298,8 @@ public class CustomersInner {
         if (billingProfileName == null) {
             throw new IllegalArgumentException("Parameter billingProfileName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByBillingProfile(billingAccountName, billingProfileName, this.client.apiVersion(), search, filter, this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByBillingProfile(billingAccountName, billingProfileName, apiVersion, search, filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<CustomerInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<CustomerInner>>> call(Response<ResponseBody> response) {
@@ -412,12 +408,10 @@ public class CustomersInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2020-05-01";
         final String search = null;
         final String filter = null;
-        return service.listByBillingAccount(billingAccountName, this.client.apiVersion(), search, filter, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByBillingAccount(billingAccountName, apiVersion, search, filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<CustomerInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<CustomerInner>>> call(Response<ResponseBody> response) {
@@ -529,10 +523,8 @@ public class CustomersInner {
         if (billingAccountName == null) {
             throw new IllegalArgumentException("Parameter billingAccountName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByBillingAccount(billingAccountName, this.client.apiVersion(), search, filter, this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.listByBillingAccount(billingAccountName, apiVersion, search, filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<CustomerInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<CustomerInner>>> call(Response<ResponseBody> response) {
@@ -612,11 +604,9 @@ public class CustomersInner {
         if (customerName == null) {
             throw new IllegalArgumentException("Parameter customerName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2020-05-01";
         final String expand = null;
-        return service.get(billingAccountName, customerName, this.client.apiVersion(), expand, this.client.acceptLanguage(), this.client.userAgent())
+        return service.get(billingAccountName, customerName, apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CustomerInner>>>() {
                 @Override
                 public Observable<ServiceResponse<CustomerInner>> call(Response<ResponseBody> response) {
@@ -693,10 +683,8 @@ public class CustomersInner {
         if (customerName == null) {
             throw new IllegalArgumentException("Parameter customerName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(billingAccountName, customerName, this.client.apiVersion(), expand, this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2020-05-01";
+        return service.get(billingAccountName, customerName, apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CustomerInner>>>() {
                 @Override
                 public Observable<ServiceResponse<CustomerInner>> call(Response<ResponseBody> response) {
