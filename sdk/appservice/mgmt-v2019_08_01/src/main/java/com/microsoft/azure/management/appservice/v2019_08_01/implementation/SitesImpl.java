@@ -20,6 +20,7 @@ import com.microsoft.azure.management.appservice.v2019_08_01.SiteAvailabilitySta
 import com.microsoft.azure.management.appservice.v2019_08_01.HostNameSslState;
 import com.microsoft.azure.management.appservice.v2019_08_01.SiteConfig;
 import com.microsoft.azure.management.appservice.v2019_08_01.HostingEnvironmentProfile;
+import com.microsoft.azure.management.appservice.v2019_08_01.ClientCertMode;
 import com.microsoft.azure.management.appservice.v2019_08_01.CloningInfo;
 import com.microsoft.azure.management.appservice.v2019_08_01.SlotSwapStatus;
 import com.microsoft.azure.management.appservice.v2019_08_01.RedundancyMode;
@@ -94,6 +95,11 @@ class SitesImpl extends GroupableResourceCoreImpl<Sites, SiteInner, SitesImpl, C
     @Override
     public String clientCertExclusionPaths() {
         return this.inner().clientCertExclusionPaths();
+    }
+
+    @Override
+    public ClientCertMode clientCertMode() {
+        return this.inner().clientCertMode();
     }
 
     @Override
@@ -292,6 +298,16 @@ class SitesImpl extends GroupableResourceCoreImpl<Sites, SiteInner, SitesImpl, C
             this.inner().withClientCertExclusionPaths(clientCertExclusionPaths);
         } else {
             this.updateParameter.withClientCertExclusionPaths(clientCertExclusionPaths);
+        }
+        return this;
+    }
+
+    @Override
+    public SitesImpl withClientCertMode(ClientCertMode clientCertMode) {
+        if (isInCreateMode()) {
+            this.inner().withClientCertMode(clientCertMode);
+        } else {
+            this.updateParameter.withClientCertMode(clientCertMode);
         }
         return this;
     }
