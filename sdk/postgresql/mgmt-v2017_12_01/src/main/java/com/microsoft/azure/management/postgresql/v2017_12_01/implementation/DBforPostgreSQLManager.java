@@ -26,8 +26,8 @@ import com.microsoft.azure.management.postgresql.v2017_12_01.LogFiles;
 import com.microsoft.azure.management.postgresql.v2017_12_01.ServerAdministrators;
 import com.microsoft.azure.management.postgresql.v2017_12_01.LocationBasedPerformanceTiers;
 import com.microsoft.azure.management.postgresql.v2017_12_01.CheckNameAvailabilitys;
-import com.microsoft.azure.management.postgresql.v2017_12_01.ServerSecurityAlertPolicies;
 import com.microsoft.azure.management.postgresql.v2017_12_01.Operations;
+import com.microsoft.azure.management.postgresql.v2017_12_01.ServerSecurityAlertPolicies;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -45,8 +45,8 @@ public final class DBforPostgreSQLManager extends ManagerCore<DBforPostgreSQLMan
     private ServerAdministrators serverAdministrators;
     private LocationBasedPerformanceTiers locationBasedPerformanceTiers;
     private CheckNameAvailabilitys checkNameAvailabilitys;
-    private ServerSecurityAlertPolicies serverSecurityAlertPolicies;
     private Operations operations;
+    private ServerSecurityAlertPolicies serverSecurityAlertPolicies;
     /**
     * Get a Configurable instance that can be used to create DBforPostgreSQLManager with optional configuration.
     *
@@ -195,16 +195,6 @@ public final class DBforPostgreSQLManager extends ManagerCore<DBforPostgreSQLMan
     }
 
     /**
-     * @return Entry point to manage ServerSecurityAlertPolicies.
-     */
-    public ServerSecurityAlertPolicies serverSecurityAlertPolicies() {
-        if (this.serverSecurityAlertPolicies == null) {
-            this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesImpl(this);
-        }
-        return this.serverSecurityAlertPolicies;
-    }
-
-    /**
      * @return Entry point to manage Operations.
      */
     public Operations operations() {
@@ -212,6 +202,16 @@ public final class DBforPostgreSQLManager extends ManagerCore<DBforPostgreSQLMan
             this.operations = new OperationsImpl(this);
         }
         return this.operations;
+    }
+
+    /**
+     * @return Entry point to manage ServerSecurityAlertPolicies.
+     */
+    public ServerSecurityAlertPolicies serverSecurityAlertPolicies() {
+        if (this.serverSecurityAlertPolicies == null) {
+            this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesImpl(this);
+        }
+        return this.serverSecurityAlertPolicies;
     }
 
     /**
