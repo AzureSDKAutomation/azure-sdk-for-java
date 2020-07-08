@@ -24,16 +24,6 @@ class NameAvailabilityStatusImpl extends WrapperImpl<NameAvailabilityStatusInner
     }
 
     @Override
-    public String message() {
-        return this.inner().message();
-    }
-
-    @Override
-    public Boolean nameAvailable() {
-        return this.inner().nameAvailable();
-    }
-
-    @Override
     public String reason() {
         return this.inner().reason();
     }

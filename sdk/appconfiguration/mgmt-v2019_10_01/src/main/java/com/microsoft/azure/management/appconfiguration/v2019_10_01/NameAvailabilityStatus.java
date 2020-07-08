@@ -18,16 +18,6 @@ import com.microsoft.azure.management.appconfiguration.v2019_10_01.implementatio
  */
 public interface NameAvailabilityStatus extends HasInner<NameAvailabilityStatusInner>, HasManager<AppConfigurationManager> {
     /**
-     * @return the message value.
-     */
-    String message();
-
-    /**
-     * @return the nameAvailable value.
-     */
-    Boolean nameAvailable();
-
-    /**
      * @return the reason value.
      */
     String reason();
