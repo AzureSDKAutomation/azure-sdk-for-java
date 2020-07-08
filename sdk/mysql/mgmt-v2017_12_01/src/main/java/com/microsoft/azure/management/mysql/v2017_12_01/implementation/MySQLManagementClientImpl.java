@@ -263,19 +263,6 @@ public class MySQLManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The ServerSecurityAlertPoliciesInner object to access its operations.
-     */
-    private ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies;
-
-    /**
-     * Gets the ServerSecurityAlertPoliciesInner object to access its operations.
-     * @return the ServerSecurityAlertPoliciesInner object.
-     */
-    public ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies() {
-        return this.serverSecurityAlertPolicies;
-    }
-
-    /**
      * The OperationsInner object to access its operations.
      */
     private OperationsInner operations;
@@ -286,6 +273,19 @@ public class MySQLManagementClientImpl extends AzureServiceClient {
      */
     public OperationsInner operations() {
         return this.operations;
+    }
+
+    /**
+     * The ServerSecurityAlertPoliciesInner object to access its operations.
+     */
+    private ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies;
+
+    /**
+     * Gets the ServerSecurityAlertPoliciesInner object to access its operations.
+     * @return the ServerSecurityAlertPoliciesInner object.
+     */
+    public ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies() {
+        return this.serverSecurityAlertPolicies;
     }
 
     /**
@@ -333,8 +333,8 @@ public class MySQLManagementClientImpl extends AzureServiceClient {
         this.serverAdministrators = new ServerAdministratorsInner(restClient().retrofit(), this);
         this.locationBasedPerformanceTiers = new LocationBasedPerformanceTiersInner(restClient().retrofit(), this);
         this.checkNameAvailabilitys = new CheckNameAvailabilitysInner(restClient().retrofit(), this);
-        this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesInner(restClient().retrofit(), this);
         this.operations = new OperationsInner(restClient().retrofit(), this);
+        this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
