@@ -11,6 +11,7 @@
 package com.microsoft.azure.management.recoveryservices.backup.v2020_02_02;
 
 import java.util.List;
+import java.util.Map;
 import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -66,6 +67,12 @@ public class AzureIaaSVMProtectedItem extends ProtectedItemInner {
      */
     @JsonProperty(value = "healthDetails")
     private List<AzureIaaSVMHealthDetails> healthDetails;
+
+    /**
+     * Health details of different KPIs.
+     */
+    @JsonProperty(value = "kpisHealths")
+    private Map<String, KPIResourceHealthDetails> kpisHealths;
 
     /**
      * Last backup operation status.
@@ -214,6 +221,26 @@ public class AzureIaaSVMProtectedItem extends ProtectedItemInner {
      */
     public AzureIaaSVMProtectedItem withHealthDetails(List<AzureIaaSVMHealthDetails> healthDetails) {
         this.healthDetails = healthDetails;
+        return this;
+    }
+
+    /**
+     * Get health details of different KPIs.
+     *
+     * @return the kpisHealths value
+     */
+    public Map<String, KPIResourceHealthDetails> kpisHealths() {
+        return this.kpisHealths;
+    }
+
+    /**
+     * Set health details of different KPIs.
+     *
+     * @param kpisHealths the kpisHealths value to set
+     * @return the AzureIaaSVMProtectedItem object itself.
+     */
+    public AzureIaaSVMProtectedItem withKpisHealths(Map<String, KPIResourceHealthDetails> kpisHealths) {
+        this.kpisHealths = kpisHealths;
         return this;
     }
 

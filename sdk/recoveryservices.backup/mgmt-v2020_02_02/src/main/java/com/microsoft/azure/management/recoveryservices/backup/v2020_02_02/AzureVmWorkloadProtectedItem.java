@@ -11,6 +11,7 @@
 package com.microsoft.azure.management.recoveryservices.backup.v2020_02_02;
 
 import org.joda.time.DateTime;
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -105,6 +106,12 @@ public class AzureVmWorkloadProtectedItem extends ProtectedItemInner {
      */
     @JsonProperty(value = "extendedInfo")
     private AzureVmWorkloadProtectedItemExtendedInfo extendedInfo;
+
+    /**
+     * Health details of different KPIs.
+     */
+    @JsonProperty(value = "kpisHealths")
+    private Map<String, KPIResourceHealthDetails> kpisHealths;
 
     /**
      * Get friendly name of the DB represented by this backup item.
@@ -343,6 +350,26 @@ public class AzureVmWorkloadProtectedItem extends ProtectedItemInner {
      */
     public AzureVmWorkloadProtectedItem withExtendedInfo(AzureVmWorkloadProtectedItemExtendedInfo extendedInfo) {
         this.extendedInfo = extendedInfo;
+        return this;
+    }
+
+    /**
+     * Get health details of different KPIs.
+     *
+     * @return the kpisHealths value
+     */
+    public Map<String, KPIResourceHealthDetails> kpisHealths() {
+        return this.kpisHealths;
+    }
+
+    /**
+     * Set health details of different KPIs.
+     *
+     * @param kpisHealths the kpisHealths value to set
+     * @return the AzureVmWorkloadProtectedItem object itself.
+     */
+    public AzureVmWorkloadProtectedItem withKpisHealths(Map<String, KPIResourceHealthDetails> kpisHealths) {
+        this.kpisHealths = kpisHealths;
         return this;
     }
 

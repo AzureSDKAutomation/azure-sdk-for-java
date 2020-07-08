@@ -11,6 +11,7 @@
 package com.microsoft.azure.management.recoveryservices.backup.v2020_02_02;
 
 import org.joda.time.DateTime;
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -53,6 +54,12 @@ public class AzureFileshareProtectedItem extends ProtectedItemInner {
      */
     @JsonProperty(value = "lastBackupTime")
     private DateTime lastBackupTime;
+
+    /**
+     * Health details of different KPIs.
+     */
+    @JsonProperty(value = "kpisHealths")
+    private Map<String, KPIResourceHealthDetails> kpisHealths;
 
     /**
      * Additional information with this backup item.
@@ -157,6 +164,26 @@ public class AzureFileshareProtectedItem extends ProtectedItemInner {
      */
     public AzureFileshareProtectedItem withLastBackupTime(DateTime lastBackupTime) {
         this.lastBackupTime = lastBackupTime;
+        return this;
+    }
+
+    /**
+     * Get health details of different KPIs.
+     *
+     * @return the kpisHealths value
+     */
+    public Map<String, KPIResourceHealthDetails> kpisHealths() {
+        return this.kpisHealths;
+    }
+
+    /**
+     * Set health details of different KPIs.
+     *
+     * @param kpisHealths the kpisHealths value to set
+     * @return the AzureFileshareProtectedItem object itself.
+     */
+    public AzureFileshareProtectedItem withKpisHealths(Map<String, KPIResourceHealthDetails> kpisHealths) {
+        this.kpisHealths = kpisHealths;
         return this;
     }
 
