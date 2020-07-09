@@ -33,7 +33,7 @@ public class UrlSigningActionParameters {
      * Algorithm to use for URL signing. Possible values include: 'SHA256'.
      */
     @JsonProperty(value = "algorithm")
-    private String algorithm;
+    private Algorithm algorithm;
 
     /**
      * Defines which query string parameters in the url to be considered for
@@ -94,7 +94,7 @@ public class UrlSigningActionParameters {
      *
      * @return the algorithm value
      */
-    public String algorithm() {
+    public Algorithm algorithm() {
         return this.algorithm;
     }
 
@@ -104,7 +104,7 @@ public class UrlSigningActionParameters {
      * @param algorithm the algorithm value to set
      * @return the UrlSigningActionParameters object itself.
      */
-    public UrlSigningActionParameters withAlgorithm(String algorithm) {
+    public UrlSigningActionParameters withAlgorithm(Algorithm algorithm) {
         this.algorithm = algorithm;
         return this;
     }
