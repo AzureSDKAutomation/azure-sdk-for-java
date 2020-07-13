@@ -25,7 +25,6 @@ import com.microsoft.azure.management.mariadb.v2018_06_01.Configurations;
 import com.microsoft.azure.management.mariadb.v2018_06_01.LogFiles;
 import com.microsoft.azure.management.mariadb.v2018_06_01.LocationBasedPerformanceTiers;
 import com.microsoft.azure.management.mariadb.v2018_06_01.CheckNameAvailabilitys;
-import com.microsoft.azure.management.mariadb.v2018_06_01.ServerSecurityAlertPolicies;
 import com.microsoft.azure.management.mariadb.v2018_06_01.Operations;
 import com.microsoft.azure.management.mariadb.v2018_06_01.QueryTexts;
 import com.microsoft.azure.management.mariadb.v2018_06_01.TopQueryStatistics;
@@ -36,6 +35,7 @@ import com.microsoft.azure.management.mariadb.v2018_06_01.LocationBasedRecommend
 import com.microsoft.azure.management.mariadb.v2018_06_01.LocationBasedRecommendedActionSessionsResults;
 import com.microsoft.azure.management.mariadb.v2018_06_01.PrivateEndpointConnections;
 import com.microsoft.azure.management.mariadb.v2018_06_01.PrivateLinkResources;
+import com.microsoft.azure.management.mariadb.v2018_06_01.ServerSecurityAlertPolicies;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -52,7 +52,6 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
     private LogFiles logFiles;
     private LocationBasedPerformanceTiers locationBasedPerformanceTiers;
     private CheckNameAvailabilitys checkNameAvailabilitys;
-    private ServerSecurityAlertPolicies serverSecurityAlertPolicies;
     private Operations operations;
     private QueryTexts queryTexts;
     private TopQueryStatistics topQueryStatistics;
@@ -63,6 +62,7 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
     private LocationBasedRecommendedActionSessionsResults locationBasedRecommendedActionSessionsResults;
     private PrivateEndpointConnections privateEndpointConnections;
     private PrivateLinkResources privateLinkResources;
+    private ServerSecurityAlertPolicies serverSecurityAlertPolicies;
     /**
     * Get a Configurable instance that can be used to create MariaDBManager with optional configuration.
     *
@@ -201,16 +201,6 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
     }
 
     /**
-     * @return Entry point to manage ServerSecurityAlertPolicies.
-     */
-    public ServerSecurityAlertPolicies serverSecurityAlertPolicies() {
-        if (this.serverSecurityAlertPolicies == null) {
-            this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesImpl(this);
-        }
-        return this.serverSecurityAlertPolicies;
-    }
-
-    /**
      * @return Entry point to manage Operations.
      */
     public Operations operations() {
@@ -308,6 +298,16 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
             this.privateLinkResources = new PrivateLinkResourcesImpl(this);
         }
         return this.privateLinkResources;
+    }
+
+    /**
+     * @return Entry point to manage ServerSecurityAlertPolicies.
+     */
+    public ServerSecurityAlertPolicies serverSecurityAlertPolicies() {
+        if (this.serverSecurityAlertPolicies == null) {
+            this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesImpl(this);
+        }
+        return this.serverSecurityAlertPolicies;
     }
 
     /**
