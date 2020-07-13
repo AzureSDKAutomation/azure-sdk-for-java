@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.StorageManager;
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.FileShareItemInner;
 import org.joda.time.DateTime;
+import com.microsoft.rest.DateTimeRfc1123;
 import java.util.Map;
 
 /**

@@ -18,6 +18,7 @@ import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.StorageManager;
 import org.joda.time.DateTime;
 import java.util.Map;
+import com.microsoft.rest.DateTimeRfc1123;
 
 /**
  * Type representing FileShare.
