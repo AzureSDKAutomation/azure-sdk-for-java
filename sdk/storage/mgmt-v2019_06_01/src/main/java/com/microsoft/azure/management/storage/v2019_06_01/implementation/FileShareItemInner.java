@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import java.util.Map;
 import com.microsoft.azure.management.storage.v2019_06_01.EnabledProtocols;
 import com.microsoft.azure.management.storage.v2019_06_01.RootSquashType;
+import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.azure.management.storage.v2019_06_01.ShareAccessTier;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
@@ -72,7 +73,7 @@ public class FileShareItemInner extends AzureEntityResource {
      * The deleted time if the share was deleted.
      */
     @JsonProperty(value = "properties.deletedTime", access = JsonProperty.Access.WRITE_ONLY)
-    private DateTime deletedTime;
+    private DateTimeRfc1123 deletedTime;
 
     /**
      * Remaining retention days for share that was soft deleted.
@@ -221,7 +222,10 @@ public class FileShareItemInner extends AzureEntityResource {
      * @return the deletedTime value
      */
     public DateTime deletedTime() {
-        return this.deletedTime;
+        if (this.deletedTime == null) {
+            return null;
+        }
+        return this.deletedTime.dateTime();
     }
 
     /**
