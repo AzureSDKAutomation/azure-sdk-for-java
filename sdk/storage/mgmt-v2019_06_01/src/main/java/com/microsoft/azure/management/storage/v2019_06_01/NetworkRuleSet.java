@@ -26,6 +26,12 @@ public class NetworkRuleSet {
     private Bypass bypass;
 
     /**
+     * The resourceAccessRules property.
+     */
+    @JsonProperty(value = "resourceAccessRules")
+    private List<ResourceAccessRule> resourceAccessRules;
+
+    /**
      * Sets the virtual network rules.
      */
     @JsonProperty(value = "virtualNetworkRules")
@@ -61,6 +67,26 @@ public class NetworkRuleSet {
      */
     public NetworkRuleSet withBypass(Bypass bypass) {
         this.bypass = bypass;
+        return this;
+    }
+
+    /**
+     * Get the resourceAccessRules value.
+     *
+     * @return the resourceAccessRules value
+     */
+    public List<ResourceAccessRule> resourceAccessRules() {
+        return this.resourceAccessRules;
+    }
+
+    /**
+     * Set the resourceAccessRules value.
+     *
+     * @param resourceAccessRules the resourceAccessRules value to set
+     * @return the NetworkRuleSet object itself.
+     */
+    public NetworkRuleSet withResourceAccessRules(List<ResourceAccessRule> resourceAccessRules) {
+        this.resourceAccessRules = resourceAccessRules;
         return this;
     }
 
