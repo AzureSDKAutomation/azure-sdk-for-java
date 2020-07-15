@@ -59,4 +59,14 @@ public interface PublicIPAddresses extends SupportsCreating<PublicIPAddress.Defi
      */
     Observable<PublicIPAddress> getVirtualMachineScaleSetPublicIPAddressAsync(String resourceGroupName, String virtualMachineScaleSetName, String virtualmachineIndex, String networkInterfaceName, String ipConfigurationName, String publicIpAddressName);
 
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<PublicIPAddress> listCloudServicePublicIPAddressesAsync(final String resourceGroupName, final String cloudServiceName);
+
 }

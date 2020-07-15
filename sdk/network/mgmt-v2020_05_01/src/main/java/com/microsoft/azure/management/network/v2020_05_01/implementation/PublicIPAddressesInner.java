@@ -111,6 +111,10 @@ public class PublicIPAddressesInner implements InnerSupportsGet<PublicIPAddressI
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}")
         Observable<Response<ResponseBody>> getVirtualMachineScaleSetPublicIPAddress(@Path("resourceGroupName") String resourceGroupName, @Path("virtualMachineScaleSetName") String virtualMachineScaleSetName, @Path("virtualmachineIndex") String virtualmachineIndex, @Path("networkInterfaceName") String networkInterfaceName, @Path("ipConfigurationName") String ipConfigurationName, @Path("publicIpAddressName") String publicIpAddressName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Query("$expand") String expand, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.PublicIPAddresses listCloudServicePublicIPAddresses" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/publicipaddresses")
+        Observable<Response<ResponseBody>> listCloudServicePublicIPAddresses(@Path("resourceGroupName") String resourceGroupName, @Path("cloudServiceName") String cloudServiceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.PublicIPAddresses listNext" })
         @GET
         Observable<Response<ResponseBody>> listNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -126,6 +130,10 @@ public class PublicIPAddressesInner implements InnerSupportsGet<PublicIPAddressI
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.PublicIPAddresses listVirtualMachineScaleSetVMPublicIPAddressesNext" })
         @GET
         Observable<Response<ResponseBody>> listVirtualMachineScaleSetVMPublicIPAddressesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.PublicIPAddresses listCloudServicePublicIPAddressesNext" })
+        @GET
+        Observable<Response<ResponseBody>> listCloudServicePublicIPAddressesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -1492,6 +1500,127 @@ public class PublicIPAddressesInner implements InnerSupportsGet<PublicIPAddressI
     }
 
     /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;PublicIPAddressInner&gt; object if successful.
+     */
+    public PagedList<PublicIPAddressInner> listCloudServicePublicIPAddresses(final String resourceGroupName, final String cloudServiceName) {
+        ServiceResponse<Page<PublicIPAddressInner>> response = listCloudServicePublicIPAddressesSinglePageAsync(resourceGroupName, cloudServiceName).toBlocking().single();
+        return new PagedList<PublicIPAddressInner>(response.body()) {
+            @Override
+            public Page<PublicIPAddressInner> nextPage(String nextPageLink) {
+                return listCloudServicePublicIPAddressesNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<PublicIPAddressInner>> listCloudServicePublicIPAddressesAsync(final String resourceGroupName, final String cloudServiceName, final ListOperationCallback<PublicIPAddressInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listCloudServicePublicIPAddressesSinglePageAsync(resourceGroupName, cloudServiceName),
+            new Func1<String, Observable<ServiceResponse<Page<PublicIPAddressInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<PublicIPAddressInner>>> call(String nextPageLink) {
+                    return listCloudServicePublicIPAddressesNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;PublicIPAddressInner&gt; object
+     */
+    public Observable<Page<PublicIPAddressInner>> listCloudServicePublicIPAddressesAsync(final String resourceGroupName, final String cloudServiceName) {
+        return listCloudServicePublicIPAddressesWithServiceResponseAsync(resourceGroupName, cloudServiceName)
+            .map(new Func1<ServiceResponse<Page<PublicIPAddressInner>>, Page<PublicIPAddressInner>>() {
+                @Override
+                public Page<PublicIPAddressInner> call(ServiceResponse<Page<PublicIPAddressInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;PublicIPAddressInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<PublicIPAddressInner>>> listCloudServicePublicIPAddressesWithServiceResponseAsync(final String resourceGroupName, final String cloudServiceName) {
+        return listCloudServicePublicIPAddressesSinglePageAsync(resourceGroupName, cloudServiceName)
+            .concatMap(new Func1<ServiceResponse<Page<PublicIPAddressInner>>, Observable<ServiceResponse<Page<PublicIPAddressInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<PublicIPAddressInner>>> call(ServiceResponse<Page<PublicIPAddressInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listCloudServicePublicIPAddressesNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+    ServiceResponse<PageImpl<PublicIPAddressInner>> * @param resourceGroupName The name of the resource group.
+    ServiceResponse<PageImpl<PublicIPAddressInner>> * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;PublicIPAddressInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<PublicIPAddressInner>>> listCloudServicePublicIPAddressesSinglePageAsync(final String resourceGroupName, final String cloudServiceName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (cloudServiceName == null) {
+            throw new IllegalArgumentException("Parameter cloudServiceName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        final String apiVersion = "2020-05-01";
+        return service.listCloudServicePublicIPAddresses(resourceGroupName, cloudServiceName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PublicIPAddressInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<PublicIPAddressInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<PublicIPAddressInner>> result = listCloudServicePublicIPAddressesDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<PublicIPAddressInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<PublicIPAddressInner>> listCloudServicePublicIPAddressesDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<PublicIPAddressInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<PublicIPAddressInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
      * Gets all the public IP addresses in a subscription.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
@@ -1929,6 +2058,117 @@ public class PublicIPAddressesInner implements InnerSupportsGet<PublicIPAddressI
     }
 
     private ServiceResponse<PageImpl<PublicIPAddressInner>> listVirtualMachineScaleSetVMPublicIPAddressesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<PublicIPAddressInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<PublicIPAddressInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;PublicIPAddressInner&gt; object if successful.
+     */
+    public PagedList<PublicIPAddressInner> listCloudServicePublicIPAddressesNext(final String nextPageLink) {
+        ServiceResponse<Page<PublicIPAddressInner>> response = listCloudServicePublicIPAddressesNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<PublicIPAddressInner>(response.body()) {
+            @Override
+            public Page<PublicIPAddressInner> nextPage(String nextPageLink) {
+                return listCloudServicePublicIPAddressesNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<PublicIPAddressInner>> listCloudServicePublicIPAddressesNextAsync(final String nextPageLink, final ServiceFuture<List<PublicIPAddressInner>> serviceFuture, final ListOperationCallback<PublicIPAddressInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listCloudServicePublicIPAddressesNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<PublicIPAddressInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<PublicIPAddressInner>>> call(String nextPageLink) {
+                    return listCloudServicePublicIPAddressesNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;PublicIPAddressInner&gt; object
+     */
+    public Observable<Page<PublicIPAddressInner>> listCloudServicePublicIPAddressesNextAsync(final String nextPageLink) {
+        return listCloudServicePublicIPAddressesNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<PublicIPAddressInner>>, Page<PublicIPAddressInner>>() {
+                @Override
+                public Page<PublicIPAddressInner> call(ServiceResponse<Page<PublicIPAddressInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;PublicIPAddressInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<PublicIPAddressInner>>> listCloudServicePublicIPAddressesNextWithServiceResponseAsync(final String nextPageLink) {
+        return listCloudServicePublicIPAddressesNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<PublicIPAddressInner>>, Observable<ServiceResponse<Page<PublicIPAddressInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<PublicIPAddressInner>>> call(ServiceResponse<Page<PublicIPAddressInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listCloudServicePublicIPAddressesNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Gets information about all public IP addresses on a cloud service level.
+     *
+    ServiceResponse<PageImpl<PublicIPAddressInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;PublicIPAddressInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<PublicIPAddressInner>>> listCloudServicePublicIPAddressesNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listCloudServicePublicIPAddressesNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PublicIPAddressInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<PublicIPAddressInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<PublicIPAddressInner>> result = listCloudServicePublicIPAddressesNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<PublicIPAddressInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<PublicIPAddressInner>> listCloudServicePublicIPAddressesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<PublicIPAddressInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<PublicIPAddressInner>>() { }.getType())
                 .registerError(CloudException.class)

@@ -115,6 +115,28 @@ public interface NetworkInterfaces {
     Observable<LoadBalancerNetworkInterface> getVirtualMachineScaleSetNetworkInterfaceAsync(String resourceGroupName, String virtualMachineScaleSetName, String virtualmachineIndex, String networkInterfaceName);
 
     /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<LoadBalancerNetworkInterface> listCloudServiceNetworkInterfacesAsync(final String resourceGroupName, final String cloudServiceName);
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<LoadBalancerNetworkInterface> getCloudServiceNetworkInterfaceAsync(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName);
+
+    /**
      * Get the specified network interface ip configuration in a virtual machine scale set.
      *
      * @param resourceGroupName The name of the resource group.
