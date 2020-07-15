@@ -13,9 +13,9 @@ import com.microsoft.azure.management.resources.v2019_08_01.TagDetails;
 import rx.Completable;
 
 /**
- * Type representing Tags.
+ * Type representing TagOperations.
  */
-public interface Tags {
+public interface TagOperations {
     /**
      * Gets the names and values of all resource tags that are defined in a subscription.
      *
