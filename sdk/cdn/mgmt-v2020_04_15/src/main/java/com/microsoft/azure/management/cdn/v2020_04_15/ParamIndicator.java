@@ -16,14 +16,14 @@ import com.microsoft.rest.ExpandableStringEnum;
  * Defines values for ParamIndicator.
  */
 public final class ParamIndicator extends ExpandableStringEnum<ParamIndicator> {
-    /** Static value expires for ParamIndicator. */
-    public static final ParamIndicator EXPIRES = fromString("expires");
+    /** Static value Expires for ParamIndicator. */
+    public static final ParamIndicator EXPIRES = fromString("Expires");
 
-    /** Static value keyId for ParamIndicator. */
-    public static final ParamIndicator KEY_ID = fromString("keyId");
+    /** Static value KeyId for ParamIndicator. */
+    public static final ParamIndicator KEY_ID = fromString("KeyId");
 
-    /** Static value signature for ParamIndicator. */
-    public static final ParamIndicator SIGNATURE = fromString("signature");
+    /** Static value Signature for ParamIndicator. */
+    public static final ParamIndicator SIGNATURE = fromString("Signature");
 
     /**
      * Creates or finds a ParamIndicator from its string representation.
