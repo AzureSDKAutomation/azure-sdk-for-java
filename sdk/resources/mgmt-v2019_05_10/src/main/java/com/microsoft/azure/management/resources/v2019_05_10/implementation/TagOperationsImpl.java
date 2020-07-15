@@ -10,7 +10,7 @@
 package com.microsoft.azure.management.resources.v2019_05_10.implementation;
 
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
-import com.microsoft.azure.management.resources.v2019_05_10.Tags;
+import com.microsoft.azure.management.resources.v2019_05_10.TagOperations;
 import rx.Observable;
 import rx.functions.Func1;
 import com.microsoft.azure.Page;
@@ -18,11 +18,11 @@ import com.microsoft.azure.management.resources.v2019_05_10.TagDetails;
 import rx.Completable;
 import com.microsoft.azure.management.resources.v2019_05_10.TagValue;
 
-class TagsImpl extends WrapperImpl<TagsInner> implements Tags {
+class TagOperationsImpl extends WrapperImpl<TagOperationsInner> implements TagOperations {
     private final ResourcesManager manager;
 
-    TagsImpl(ResourcesManager manager) {
-        super(manager.inner().tags());
+    TagOperationsImpl(ResourcesManager manager) {
+        super(manager.inner().tagOperations());
         this.manager = manager;
     }
 
@@ -36,7 +36,7 @@ class TagsImpl extends WrapperImpl<TagsInner> implements Tags {
 
     @Override
     public Observable<TagDetails> listAsync() {
-        TagsInner client = this.inner();
+        TagOperationsInner client = this.inner();
         return client.listAsync()
         .flatMapIterable(new Func1<Page<TagDetailsInner>, Iterable<TagDetailsInner>>() {
             @Override
@@ -54,13 +54,13 @@ class TagsImpl extends WrapperImpl<TagsInner> implements Tags {
 
     @Override
     public Completable deleteAsync(String tagName) {
-        TagsInner client = this.inner();
+        TagOperationsInner client = this.inner();
         return client.deleteAsync(tagName).toCompletable();
     }
 
     @Override
     public Observable<TagDetails> createOrUpdateAsync(String tagName) {
-        TagsInner client = this.inner();
+        TagOperationsInner client = this.inner();
         return client.createOrUpdateAsync(tagName)
         .map(new Func1<TagDetailsInner, TagDetails>() {
             @Override
@@ -72,13 +72,13 @@ class TagsImpl extends WrapperImpl<TagsInner> implements Tags {
 
     @Override
     public Completable deleteValueAsync(String tagName, String tagValue) {
-        TagsInner client = this.inner();
+        TagOperationsInner client = this.inner();
         return client.deleteValueAsync(tagName, tagValue).toCompletable();
     }
 
     @Override
     public Observable<TagValue> createOrUpdateValueAsync(String tagName, String tagValue) {
-        TagsInner client = this.inner();
+        TagOperationsInner client = this.inner();
         return client.createOrUpdateValueAsync(tagName, tagValue)
         .map(new Func1<TagValueInner, TagValue>() {
             @Override
