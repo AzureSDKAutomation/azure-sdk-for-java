@@ -138,6 +138,14 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}")
         Observable<Response<ResponseBody>> getVirtualMachineScaleSetIpConfiguration(@Path("resourceGroupName") String resourceGroupName, @Path("virtualMachineScaleSetName") String virtualMachineScaleSetName, @Path("virtualmachineIndex") String virtualmachineIndex, @Path("networkInterfaceName") String networkInterfaceName, @Path("ipConfigurationName") String ipConfigurationName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Query("$expand") String expand, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.NetworkInterfaces listCloudServiceNetworkInterfaces" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/cloudServices/{cloudServiceName}/networkInterfaces")
+        Observable<Response<ResponseBody>> listCloudServiceNetworkInterfaces(@Path("resourceGroupName") String resourceGroupName, @Path("cloudServiceName") String cloudServiceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.NetworkInterfaces getCloudServiceNetworkInterface" })
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces/{networkInterfaceName}")
+        Observable<Response<ResponseBody>> getCloudServiceNetworkInterface(@Path("resourceGroupName") String resourceGroupName, @Path("cloudServiceName") String cloudServiceName, @Path("roleInstanceName") String roleInstanceName, @Path("networkInterfaceName") String networkInterfaceName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Query("$expand") String expand, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.NetworkInterfaces listNext" })
         @GET
         Observable<Response<ResponseBody>> listNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -157,6 +165,10 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.NetworkInterfaces listVirtualMachineScaleSetIpConfigurationsNext" })
         @GET
         Observable<Response<ResponseBody>> listVirtualMachineScaleSetIpConfigurationsNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.network.v2020_05_01.NetworkInterfaces listCloudServiceNetworkInterfacesNext" })
+        @GET
+        Observable<Response<ResponseBody>> listCloudServiceNetworkInterfacesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -2264,6 +2276,321 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
     }
 
     /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;NetworkInterfaceInner&gt; object if successful.
+     */
+    public PagedList<NetworkInterfaceInner> listCloudServiceNetworkInterfaces(final String resourceGroupName, final String cloudServiceName) {
+        ServiceResponse<Page<NetworkInterfaceInner>> response = listCloudServiceNetworkInterfacesSinglePageAsync(resourceGroupName, cloudServiceName).toBlocking().single();
+        return new PagedList<NetworkInterfaceInner>(response.body()) {
+            @Override
+            public Page<NetworkInterfaceInner> nextPage(String nextPageLink) {
+                return listCloudServiceNetworkInterfacesNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<NetworkInterfaceInner>> listCloudServiceNetworkInterfacesAsync(final String resourceGroupName, final String cloudServiceName, final ListOperationCallback<NetworkInterfaceInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listCloudServiceNetworkInterfacesSinglePageAsync(resourceGroupName, cloudServiceName),
+            new Func1<String, Observable<ServiceResponse<Page<NetworkInterfaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> call(String nextPageLink) {
+                    return listCloudServiceNetworkInterfacesNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;NetworkInterfaceInner&gt; object
+     */
+    public Observable<Page<NetworkInterfaceInner>> listCloudServiceNetworkInterfacesAsync(final String resourceGroupName, final String cloudServiceName) {
+        return listCloudServiceNetworkInterfacesWithServiceResponseAsync(resourceGroupName, cloudServiceName)
+            .map(new Func1<ServiceResponse<Page<NetworkInterfaceInner>>, Page<NetworkInterfaceInner>>() {
+                @Override
+                public Page<NetworkInterfaceInner> call(ServiceResponse<Page<NetworkInterfaceInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;NetworkInterfaceInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> listCloudServiceNetworkInterfacesWithServiceResponseAsync(final String resourceGroupName, final String cloudServiceName) {
+        return listCloudServiceNetworkInterfacesSinglePageAsync(resourceGroupName, cloudServiceName)
+            .concatMap(new Func1<ServiceResponse<Page<NetworkInterfaceInner>>, Observable<ServiceResponse<Page<NetworkInterfaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> call(ServiceResponse<Page<NetworkInterfaceInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listCloudServiceNetworkInterfacesNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+    ServiceResponse<PageImpl<NetworkInterfaceInner>> * @param resourceGroupName The name of the resource group.
+    ServiceResponse<PageImpl<NetworkInterfaceInner>> * @param cloudServiceName The name of the cloud service.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;NetworkInterfaceInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> listCloudServiceNetworkInterfacesSinglePageAsync(final String resourceGroupName, final String cloudServiceName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (cloudServiceName == null) {
+            throw new IllegalArgumentException("Parameter cloudServiceName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        final String apiVersion = "2020-05-01";
+        return service.listCloudServiceNetworkInterfaces(resourceGroupName, cloudServiceName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<NetworkInterfaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<NetworkInterfaceInner>> result = listCloudServiceNetworkInterfacesDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<NetworkInterfaceInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<NetworkInterfaceInner>> listCloudServiceNetworkInterfacesDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<NetworkInterfaceInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<NetworkInterfaceInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the NetworkInterfaceInner object if successful.
+     */
+    public NetworkInterfaceInner getCloudServiceNetworkInterface(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName) {
+        return getCloudServiceNetworkInterfaceWithServiceResponseAsync(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName).toBlocking().single().body();
+    }
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<NetworkInterfaceInner> getCloudServiceNetworkInterfaceAsync(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName, final ServiceCallback<NetworkInterfaceInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getCloudServiceNetworkInterfaceWithServiceResponseAsync(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName), serviceCallback);
+    }
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the NetworkInterfaceInner object
+     */
+    public Observable<NetworkInterfaceInner> getCloudServiceNetworkInterfaceAsync(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName) {
+        return getCloudServiceNetworkInterfaceWithServiceResponseAsync(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName).map(new Func1<ServiceResponse<NetworkInterfaceInner>, NetworkInterfaceInner>() {
+            @Override
+            public NetworkInterfaceInner call(ServiceResponse<NetworkInterfaceInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the NetworkInterfaceInner object
+     */
+    public Observable<ServiceResponse<NetworkInterfaceInner>> getCloudServiceNetworkInterfaceWithServiceResponseAsync(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (cloudServiceName == null) {
+            throw new IllegalArgumentException("Parameter cloudServiceName is required and cannot be null.");
+        }
+        if (roleInstanceName == null) {
+            throw new IllegalArgumentException("Parameter roleInstanceName is required and cannot be null.");
+        }
+        if (networkInterfaceName == null) {
+            throw new IllegalArgumentException("Parameter networkInterfaceName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        final String apiVersion = "2020-05-01";
+        final String expand = null;
+        return service.getCloudServiceNetworkInterface(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName, this.client.subscriptionId(), apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<NetworkInterfaceInner>>>() {
+                @Override
+                public Observable<ServiceResponse<NetworkInterfaceInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<NetworkInterfaceInner> clientResponse = getCloudServiceNetworkInterfaceDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @param expand Expands referenced resources.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the NetworkInterfaceInner object if successful.
+     */
+    public NetworkInterfaceInner getCloudServiceNetworkInterface(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName, String expand) {
+        return getCloudServiceNetworkInterfaceWithServiceResponseAsync(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName, expand).toBlocking().single().body();
+    }
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @param expand Expands referenced resources.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<NetworkInterfaceInner> getCloudServiceNetworkInterfaceAsync(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName, String expand, final ServiceCallback<NetworkInterfaceInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getCloudServiceNetworkInterfaceWithServiceResponseAsync(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName, expand), serviceCallback);
+    }
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @param expand Expands referenced resources.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the NetworkInterfaceInner object
+     */
+    public Observable<NetworkInterfaceInner> getCloudServiceNetworkInterfaceAsync(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName, String expand) {
+        return getCloudServiceNetworkInterfaceWithServiceResponseAsync(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName, expand).map(new Func1<ServiceResponse<NetworkInterfaceInner>, NetworkInterfaceInner>() {
+            @Override
+            public NetworkInterfaceInner call(ServiceResponse<NetworkInterfaceInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Get the specified network interface in a cloud service.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param cloudServiceName The name of the cloud service.
+     * @param roleInstanceName The name of role instance
+     * @param networkInterfaceName The name of the network interface.
+     * @param expand Expands referenced resources.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the NetworkInterfaceInner object
+     */
+    public Observable<ServiceResponse<NetworkInterfaceInner>> getCloudServiceNetworkInterfaceWithServiceResponseAsync(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName, String expand) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (cloudServiceName == null) {
+            throw new IllegalArgumentException("Parameter cloudServiceName is required and cannot be null.");
+        }
+        if (roleInstanceName == null) {
+            throw new IllegalArgumentException("Parameter roleInstanceName is required and cannot be null.");
+        }
+        if (networkInterfaceName == null) {
+            throw new IllegalArgumentException("Parameter networkInterfaceName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        final String apiVersion = "2020-05-01";
+        return service.getCloudServiceNetworkInterface(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName, this.client.subscriptionId(), apiVersion, expand, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<NetworkInterfaceInner>>>() {
+                @Override
+                public Observable<ServiceResponse<NetworkInterfaceInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<NetworkInterfaceInner> clientResponse = getCloudServiceNetworkInterfaceDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<NetworkInterfaceInner> getCloudServiceNetworkInterfaceDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<NetworkInterfaceInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<NetworkInterfaceInner>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
      * Gets all network interfaces in a subscription.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
@@ -2814,6 +3141,117 @@ public class NetworkInterfacesInner implements InnerSupportsGet<NetworkInterface
     private ServiceResponse<PageImpl<NetworkInterfaceIPConfigurationInner>> listVirtualMachineScaleSetIpConfigurationsNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<NetworkInterfaceIPConfigurationInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<NetworkInterfaceIPConfigurationInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;NetworkInterfaceInner&gt; object if successful.
+     */
+    public PagedList<NetworkInterfaceInner> listCloudServiceNetworkInterfacesNext(final String nextPageLink) {
+        ServiceResponse<Page<NetworkInterfaceInner>> response = listCloudServiceNetworkInterfacesNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<NetworkInterfaceInner>(response.body()) {
+            @Override
+            public Page<NetworkInterfaceInner> nextPage(String nextPageLink) {
+                return listCloudServiceNetworkInterfacesNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<NetworkInterfaceInner>> listCloudServiceNetworkInterfacesNextAsync(final String nextPageLink, final ServiceFuture<List<NetworkInterfaceInner>> serviceFuture, final ListOperationCallback<NetworkInterfaceInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listCloudServiceNetworkInterfacesNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<NetworkInterfaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> call(String nextPageLink) {
+                    return listCloudServiceNetworkInterfacesNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;NetworkInterfaceInner&gt; object
+     */
+    public Observable<Page<NetworkInterfaceInner>> listCloudServiceNetworkInterfacesNextAsync(final String nextPageLink) {
+        return listCloudServiceNetworkInterfacesNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<NetworkInterfaceInner>>, Page<NetworkInterfaceInner>>() {
+                @Override
+                public Page<NetworkInterfaceInner> call(ServiceResponse<Page<NetworkInterfaceInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;NetworkInterfaceInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> listCloudServiceNetworkInterfacesNextWithServiceResponseAsync(final String nextPageLink) {
+        return listCloudServiceNetworkInterfacesNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<NetworkInterfaceInner>>, Observable<ServiceResponse<Page<NetworkInterfaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> call(ServiceResponse<Page<NetworkInterfaceInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listCloudServiceNetworkInterfacesNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Gets all network interfaces in a cloud service.
+     *
+    ServiceResponse<PageImpl<NetworkInterfaceInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;NetworkInterfaceInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> listCloudServiceNetworkInterfacesNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listCloudServiceNetworkInterfacesNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<NetworkInterfaceInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<NetworkInterfaceInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<NetworkInterfaceInner>> result = listCloudServiceNetworkInterfacesNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<NetworkInterfaceInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<NetworkInterfaceInner>> listCloudServiceNetworkInterfacesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<NetworkInterfaceInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<NetworkInterfaceInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

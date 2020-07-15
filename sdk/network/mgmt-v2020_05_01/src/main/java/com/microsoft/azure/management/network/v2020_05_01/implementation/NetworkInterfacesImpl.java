@@ -193,6 +193,36 @@ class NetworkInterfacesImpl extends WrapperImpl<NetworkInterfacesInner> implemen
     }
 
     @Override
+    public Observable<LoadBalancerNetworkInterface> listCloudServiceNetworkInterfacesAsync(final String resourceGroupName, final String cloudServiceName) {
+        NetworkInterfacesInner client = this.inner();
+        return client.listCloudServiceNetworkInterfacesAsync(resourceGroupName, cloudServiceName)
+        .flatMapIterable(new Func1<Page<NetworkInterfaceInner>, Iterable<NetworkInterfaceInner>>() {
+            @Override
+            public Iterable<NetworkInterfaceInner> call(Page<NetworkInterfaceInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<NetworkInterfaceInner, LoadBalancerNetworkInterface>() {
+            @Override
+            public LoadBalancerNetworkInterface call(NetworkInterfaceInner inner) {
+                return new LoadBalancerNetworkInterfaceImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<LoadBalancerNetworkInterface> getCloudServiceNetworkInterfaceAsync(String resourceGroupName, String cloudServiceName, String roleInstanceName, String networkInterfaceName) {
+        NetworkInterfacesInner client = this.inner();
+        return client.getCloudServiceNetworkInterfaceAsync(resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName)
+        .map(new Func1<NetworkInterfaceInner, LoadBalancerNetworkInterface>() {
+            @Override
+            public LoadBalancerNetworkInterface call(NetworkInterfaceInner inner) {
+                return new LoadBalancerNetworkInterfaceImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
     public Observable<VirtualMachineScaleSetNetworkInterfaceIPConfiguration> getVirtualMachineScaleSetIpConfigurationAsync(String resourceGroupName, String virtualMachineScaleSetName, String virtualmachineIndex, String networkInterfaceName, String ipConfigurationName) {
         NetworkInterfacesInner client = this.inner();
         return client.getVirtualMachineScaleSetIpConfigurationAsync(resourceGroupName, virtualMachineScaleSetName, virtualmachineIndex, networkInterfaceName, ipConfigurationName)

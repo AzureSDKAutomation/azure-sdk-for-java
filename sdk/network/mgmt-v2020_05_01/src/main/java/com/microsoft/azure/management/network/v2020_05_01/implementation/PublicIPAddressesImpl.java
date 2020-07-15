@@ -174,6 +174,24 @@ class PublicIPAddressesImpl extends GroupableResourcesCoreImpl<PublicIPAddress, 
     }
 
     @Override
+    public Observable<PublicIPAddress> listCloudServicePublicIPAddressesAsync(final String resourceGroupName, final String cloudServiceName) {
+        PublicIPAddressesInner client = this.inner();
+        return client.listCloudServicePublicIPAddressesAsync(resourceGroupName, cloudServiceName)
+        .flatMapIterable(new Func1<Page<PublicIPAddressInner>, Iterable<PublicIPAddressInner>>() {
+            @Override
+            public Iterable<PublicIPAddressInner> call(Page<PublicIPAddressInner> page) {
+                return page.items();
+            }
+        })
+        .map(new Func1<PublicIPAddressInner, PublicIPAddress>() {
+            @Override
+            public PublicIPAddress call(PublicIPAddressInner inner) {
+                return new PublicIPAddressImpl(inner.name(), inner, manager());
+            }
+        });
+    }
+
+    @Override
     protected PublicIPAddressImpl wrapModel(PublicIPAddressInner inner) {
         return  new PublicIPAddressImpl(inner.name(), inner, manager());
     }
