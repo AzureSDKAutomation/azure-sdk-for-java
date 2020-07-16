@@ -34,6 +34,11 @@ public interface ExportPipeline extends HasInner<ExportPipelineInner>, Indexable
     IdentityProperties identity();
 
     /**
+     * @return the location value.
+     */
+    String location();
+
+    /**
      * @return the name value.
      */
     String name();
@@ -112,6 +117,18 @@ public interface ExportPipeline extends HasInner<ExportPipelineInner>, Indexable
         }
 
         /**
+         * The stage of the exportpipeline definition allowing to specify Location.
+         */
+        interface WithLocation {
+            /**
+             * Specifies location.
+             * @param location The location of the export pipeline
+             * @return the next definition stage
+             */
+            WithCreate withLocation(String location);
+        }
+
+        /**
          * The stage of the exportpipeline definition allowing to specify Options.
          */
         interface WithOptions {
@@ -128,13 +145,13 @@ public interface ExportPipeline extends HasInner<ExportPipelineInner>, Indexable
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ExportPipeline>, DefinitionStages.WithIdentity, DefinitionStages.WithOptions {
+        interface WithCreate extends Creatable<ExportPipeline>, DefinitionStages.WithIdentity, DefinitionStages.WithLocation, DefinitionStages.WithOptions {
         }
     }
     /**
      * The template for a ExportPipeline update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ExportPipeline>, UpdateStages.WithIdentity, UpdateStages.WithOptions {
+    interface Update extends Appliable<ExportPipeline>, UpdateStages.WithIdentity, UpdateStages.WithLocation, UpdateStages.WithOptions {
     }
 
     /**
@@ -151,6 +168,18 @@ public interface ExportPipeline extends HasInner<ExportPipelineInner>, Indexable
              * @return the next update stage
              */
             Update withIdentity(IdentityProperties identity);
+        }
+
+        /**
+         * The stage of the exportpipeline update allowing to specify Location.
+         */
+        interface WithLocation {
+            /**
+             * Specifies location.
+             * @param location The location of the export pipeline
+             * @return the next update stage
+             */
+            Update withLocation(String location);
         }
 
         /**

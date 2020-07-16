@@ -85,6 +85,11 @@ class ExportPipelineImpl extends CreatableUpdatableImpl<ExportPipeline, ExportPi
     }
 
     @Override
+    public String location() {
+        return this.inner().location();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
     }
@@ -125,6 +130,12 @@ class ExportPipelineImpl extends CreatableUpdatableImpl<ExportPipeline, ExportPi
     @Override
     public ExportPipelineImpl withIdentity(IdentityProperties identity) {
         this.inner().withIdentity(identity);
+        return this;
+    }
+
+    @Override
+    public ExportPipelineImpl withLocation(String location) {
+        this.inner().withLocation(location);
         return this;
     }
 

@@ -24,6 +24,12 @@ import com.microsoft.azure.ProxyResource;
 @JsonFlatten
 public class ImportPipelineInner extends ProxyResource {
     /**
+     * The location of the import pipeline.
+     */
+    @JsonProperty(value = "location")
+    private String location;
+
+    /**
      * The identity of the import pipeline.
      */
     @JsonProperty(value = "identity")
@@ -54,6 +60,26 @@ public class ImportPipelineInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private ProvisioningState provisioningState;
+
+    /**
+     * Get the location of the import pipeline.
+     *
+     * @return the location value
+     */
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Set the location of the import pipeline.
+     *
+     * @param location the location value to set
+     * @return the ImportPipelineInner object itself.
+     */
+    public ImportPipelineInner withLocation(String location) {
+        this.location = location;
+        return this;
+    }
 
     /**
      * Get the identity of the import pipeline.

@@ -34,6 +34,11 @@ public interface ImportPipeline extends HasInner<ImportPipelineInner>, Indexable
     IdentityProperties identity();
 
     /**
+     * @return the location value.
+     */
+    String location();
+
+    /**
      * @return the name value.
      */
     String name();
@@ -117,6 +122,18 @@ public interface ImportPipeline extends HasInner<ImportPipelineInner>, Indexable
         }
 
         /**
+         * The stage of the importpipeline definition allowing to specify Location.
+         */
+        interface WithLocation {
+            /**
+             * Specifies location.
+             * @param location The location of the import pipeline
+             * @return the next definition stage
+             */
+            WithCreate withLocation(String location);
+        }
+
+        /**
          * The stage of the importpipeline definition allowing to specify Options.
          */
         interface WithOptions {
@@ -145,13 +162,13 @@ public interface ImportPipeline extends HasInner<ImportPipelineInner>, Indexable
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ImportPipeline>, DefinitionStages.WithIdentity, DefinitionStages.WithOptions, DefinitionStages.WithTrigger {
+        interface WithCreate extends Creatable<ImportPipeline>, DefinitionStages.WithIdentity, DefinitionStages.WithLocation, DefinitionStages.WithOptions, DefinitionStages.WithTrigger {
         }
     }
     /**
      * The template for a ImportPipeline update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ImportPipeline>, UpdateStages.WithIdentity, UpdateStages.WithOptions, UpdateStages.WithTrigger {
+    interface Update extends Appliable<ImportPipeline>, UpdateStages.WithIdentity, UpdateStages.WithLocation, UpdateStages.WithOptions, UpdateStages.WithTrigger {
     }
 
     /**
@@ -168,6 +185,18 @@ public interface ImportPipeline extends HasInner<ImportPipelineInner>, Indexable
              * @return the next update stage
              */
             Update withIdentity(IdentityProperties identity);
+        }
+
+        /**
+         * The stage of the importpipeline update allowing to specify Location.
+         */
+        interface WithLocation {
+            /**
+             * Specifies location.
+             * @param location The location of the import pipeline
+             * @return the next update stage
+             */
+            Update withLocation(String location);
         }
 
         /**

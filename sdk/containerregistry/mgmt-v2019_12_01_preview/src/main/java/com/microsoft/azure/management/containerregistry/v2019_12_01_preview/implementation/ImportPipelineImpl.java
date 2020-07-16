@@ -86,6 +86,11 @@ class ImportPipelineImpl extends CreatableUpdatableImpl<ImportPipeline, ImportPi
     }
 
     @Override
+    public String location() {
+        return this.inner().location();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
     }
@@ -131,6 +136,12 @@ class ImportPipelineImpl extends CreatableUpdatableImpl<ImportPipeline, ImportPi
     @Override
     public ImportPipelineImpl withIdentity(IdentityProperties identity) {
         this.inner().withIdentity(identity);
+        return this;
+    }
+
+    @Override
+    public ImportPipelineImpl withLocation(String location) {
+        this.inner().withLocation(location);
         return this;
     }
 
