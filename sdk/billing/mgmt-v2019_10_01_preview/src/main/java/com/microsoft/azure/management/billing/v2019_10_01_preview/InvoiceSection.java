@@ -38,6 +38,16 @@ public interface InvoiceSection extends HasInner<InvoiceSectionInner>, Indexable
     String name();
 
     /**
+     * @return the state value.
+     */
+    InvoiceSectionState state();
+
+    /**
+     * @return the targetCloud value.
+     */
+    TargetCloud targetCloud();
+
+    /**
      * @return the type value.
      */
     String type();

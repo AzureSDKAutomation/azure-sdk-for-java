@@ -9,10 +9,13 @@
 package com.microsoft.azure.management.billing.v2019_10_01_preview.implementation;
 
 import com.microsoft.azure.management.billing.v2019_10_01_preview.AddressDetails;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRelationshipType;
 import java.util.List;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.AzurePlan;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.IndirectRelationshipInfo;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.StatusReasonCode;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.SpendingLimit;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.TargetCloud;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -42,6 +45,14 @@ public class BillingProfileInner extends ProxyResource {
     private AddressDetails address;
 
     /**
+     * Identifies which services and purchases are paid by a billing profile.
+     * Possible values include: 'Direct', 'IndirectCustomer',
+     * 'IndirectPartner', 'CSPPartner'.
+     */
+    @JsonProperty(value = "properties.billingRelationshipType", access = JsonProperty.Access.WRITE_ONLY)
+    private BillingRelationshipType billingRelationshipType;
+
+    /**
      * Flag controlling whether the invoices for the billing profile are sent
      * through email.
      */
@@ -68,6 +79,13 @@ public class BillingProfileInner extends ProxyResource {
     private List<AzurePlan> enabledAzurePlans;
 
     /**
+     * Identifies the billing profile that is linked to another billing profile
+     * in indirect purchase motion.
+     */
+    @JsonProperty(value = "properties.indirectRelationshipInfo", access = JsonProperty.Access.WRITE_ONLY)
+    private IndirectRelationshipInfo indirectRelationshipInfo;
+
+    /**
      * The invoice sections associated to the billing profile.
      */
     @JsonProperty(value = "properties.invoiceSections")
@@ -92,6 +110,14 @@ public class BillingProfileInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.spendingLimit", access = JsonProperty.Access.WRITE_ONLY)
     private SpendingLimit spendingLimit;
+
+    /**
+     * Identifies the cloud environments that are associated with a billing
+     * profile. This is a system managed optional field and gets updated as the
+     * billing profile gets associated with accounts in various clouds.
+     */
+    @JsonProperty(value = "properties.targetClouds", access = JsonProperty.Access.WRITE_ONLY)
+    private List<TargetCloud> targetClouds;
 
     /**
      * Get the name of the billing profile.
@@ -154,6 +180,15 @@ public class BillingProfileInner extends ProxyResource {
     }
 
     /**
+     * Get identifies which services and purchases are paid by a billing profile. Possible values include: 'Direct', 'IndirectCustomer', 'IndirectPartner', 'CSPPartner'.
+     *
+     * @return the billingRelationshipType value
+     */
+    public BillingRelationshipType billingRelationshipType() {
+        return this.billingRelationshipType;
+    }
+
+    /**
      * Get flag controlling whether the invoices for the billing profile are sent through email.
      *
      * @return the invoiceEmailOptIn value
@@ -212,6 +247,15 @@ public class BillingProfileInner extends ProxyResource {
     }
 
     /**
+     * Get identifies the billing profile that is linked to another billing profile in indirect purchase motion.
+     *
+     * @return the indirectRelationshipInfo value
+     */
+    public IndirectRelationshipInfo indirectRelationshipInfo() {
+        return this.indirectRelationshipInfo;
+    }
+
+    /**
      * Get the invoice sections associated to the billing profile.
      *
      * @return the invoiceSections value
@@ -256,6 +300,15 @@ public class BillingProfileInner extends ProxyResource {
      */
     public SpendingLimit spendingLimit() {
         return this.spendingLimit;
+    }
+
+    /**
+     * Get identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.
+     *
+     * @return the targetClouds value
+     */
+    public List<TargetCloud> targetClouds() {
+        return this.targetClouds;
     }
 
 }

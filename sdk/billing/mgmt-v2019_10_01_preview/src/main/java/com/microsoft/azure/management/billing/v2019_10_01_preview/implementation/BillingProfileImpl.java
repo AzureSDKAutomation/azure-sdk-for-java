@@ -12,10 +12,13 @@ import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingProfile
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.AddressDetails;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRelationshipType;
 import java.util.List;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.AzurePlan;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.IndirectRelationshipInfo;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.StatusReasonCode;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.SpendingLimit;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.TargetCloud;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingProfileCreationRequest;
 import java.util.ArrayList;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.InvoiceSection;
@@ -102,6 +105,11 @@ class BillingProfileImpl extends CreatableUpdatableImpl<BillingProfile, BillingP
     }
 
     @Override
+    public BillingRelationshipType billingRelationshipType() {
+        return this.inner().billingRelationshipType();
+    }
+
+    @Override
     public String currency() {
         return this.inner().currency();
     }
@@ -119,6 +127,11 @@ class BillingProfileImpl extends CreatableUpdatableImpl<BillingProfile, BillingP
     @Override
     public String id() {
         return this.inner().id();
+    }
+
+    @Override
+    public IndirectRelationshipInfo indirectRelationshipInfo() {
+        return this.inner().indirectRelationshipInfo();
     }
 
     @Override
@@ -165,6 +178,11 @@ class BillingProfileImpl extends CreatableUpdatableImpl<BillingProfile, BillingP
     @Override
     public StatusReasonCode statusReasonCode() {
         return this.inner().statusReasonCode();
+    }
+
+    @Override
+    public List<TargetCloud> targetClouds() {
+        return this.inner().targetClouds();
     }
 
     @Override

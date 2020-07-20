@@ -8,6 +8,8 @@
 
 package com.microsoft.azure.management.billing.v2019_10_01_preview.implementation;
 
+import com.microsoft.azure.management.billing.v2019_10_01_preview.InvoiceSectionState;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.TargetCloud;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -22,6 +24,22 @@ public class InvoiceSectionInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.displayName")
     private String displayName;
+
+    /**
+     * Identifies the state of an invoice section. Possible values include:
+     * 'Active', 'Restricted'.
+     */
+    @JsonProperty(value = "properties.state", access = JsonProperty.Access.WRITE_ONLY)
+    private InvoiceSectionState state;
+
+    /**
+     * Identifies the cloud environments that are associated with an invoice
+     * section. This is a system managed optional field and gets updated as the
+     * invoice section gets associated with accounts in various clouds.
+     * Possible values include: 'USGov', 'USNat', 'USSec'.
+     */
+    @JsonProperty(value = "properties.targetCloud", access = JsonProperty.Access.WRITE_ONLY)
+    private TargetCloud targetCloud;
 
     /**
      * Get the name of the invoice section.
@@ -41,6 +59,24 @@ public class InvoiceSectionInner extends ProxyResource {
     public InvoiceSectionInner withDisplayName(String displayName) {
         this.displayName = displayName;
         return this;
+    }
+
+    /**
+     * Get identifies the state of an invoice section. Possible values include: 'Active', 'Restricted'.
+     *
+     * @return the state value
+     */
+    public InvoiceSectionState state() {
+        return this.state;
+    }
+
+    /**
+     * Get identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds. Possible values include: 'USGov', 'USNat', 'USSec'.
+     *
+     * @return the targetCloud value
+     */
+    public TargetCloud targetCloud() {
+        return this.targetCloud;
     }
 
 }

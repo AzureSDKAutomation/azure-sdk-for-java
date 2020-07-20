@@ -30,6 +30,11 @@ public interface BillingProfile extends HasInner<BillingProfileInner>, Indexable
     AddressDetails address();
 
     /**
+     * @return the billingRelationshipType value.
+     */
+    BillingRelationshipType billingRelationshipType();
+
+    /**
      * @return the currency value.
      */
     String currency();
@@ -48,6 +53,11 @@ public interface BillingProfile extends HasInner<BillingProfileInner>, Indexable
      * @return the id value.
      */
     String id();
+
+    /**
+     * @return the indirectRelationshipInfo value.
+     */
+    IndirectRelationshipInfo indirectRelationshipInfo();
 
     /**
      * @return the invoiceDay value.
@@ -88,6 +98,11 @@ public interface BillingProfile extends HasInner<BillingProfileInner>, Indexable
      * @return the statusReasonCode value.
      */
     StatusReasonCode statusReasonCode();
+
+    /**
+     * @return the targetClouds value.
+     */
+    List<TargetCloud> targetClouds();
 
     /**
      * @return the type value.
