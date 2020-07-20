@@ -44,9 +44,19 @@ public interface InvoiceSection extends HasInner<InvoiceSectionInner>, Indexable
     String name();
 
     /**
+     * @return the state value.
+     */
+    InvoiceSectionState state();
+
+    /**
      * @return the systemId value.
      */
     String systemId();
+
+    /**
+     * @return the targetCloud value.
+     */
+    TargetCloud targetCloud();
 
     /**
      * @return the type value.

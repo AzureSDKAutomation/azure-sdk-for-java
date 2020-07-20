@@ -9,6 +9,8 @@
 package com.microsoft.azure.management.billing.v2020_05_01.implementation;
 
 import java.util.Map;
+import com.microsoft.azure.management.billing.v2020_05_01.InvoiceSectionState;
+import com.microsoft.azure.management.billing.v2020_05_01.TargetCloud;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -31,10 +33,26 @@ public class InvoiceSectionInner extends ProxyResource {
     private Map<String, String> labels;
 
     /**
+     * Identifies the state of an invoice section. Possible values include:
+     * 'Active', 'Restricted'.
+     */
+    @JsonProperty(value = "properties.state", access = JsonProperty.Access.WRITE_ONLY)
+    private InvoiceSectionState state;
+
+    /**
      * The system generated unique identifier for an invoice section.
      */
     @JsonProperty(value = "properties.systemId", access = JsonProperty.Access.WRITE_ONLY)
     private String systemId;
+
+    /**
+     * Identifies the cloud environments that are associated with an invoice
+     * section. This is a system managed optional field and gets updated as the
+     * invoice section gets associated with accounts in various clouds.
+     * Possible values include: 'USGov', 'USNat', 'USSec'.
+     */
+    @JsonProperty(value = "properties.targetCloud", access = JsonProperty.Access.WRITE_ONLY)
+    private TargetCloud targetCloud;
 
     /**
      * Get the name of the invoice section.
@@ -77,12 +95,30 @@ public class InvoiceSectionInner extends ProxyResource {
     }
 
     /**
+     * Get identifies the state of an invoice section. Possible values include: 'Active', 'Restricted'.
+     *
+     * @return the state value
+     */
+    public InvoiceSectionState state() {
+        return this.state;
+    }
+
+    /**
      * Get the system generated unique identifier for an invoice section.
      *
      * @return the systemId value
      */
     public String systemId() {
         return this.systemId;
+    }
+
+    /**
+     * Get identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds. Possible values include: 'USGov', 'USNat', 'USSec'.
+     *
+     * @return the targetCloud value
+     */
+    public TargetCloud targetCloud() {
+        return this.targetCloud;
     }
 
 }

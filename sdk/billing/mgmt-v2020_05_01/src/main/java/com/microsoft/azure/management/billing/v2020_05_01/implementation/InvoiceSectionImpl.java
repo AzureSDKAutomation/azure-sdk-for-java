@@ -12,6 +12,8 @@ import com.microsoft.azure.management.billing.v2020_05_01.InvoiceSection;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import java.util.Map;
+import com.microsoft.azure.management.billing.v2020_05_01.InvoiceSectionState;
+import com.microsoft.azure.management.billing.v2020_05_01.TargetCloud;
 
 class InvoiceSectionImpl extends CreatableUpdatableImpl<InvoiceSection, InvoiceSectionInner, InvoiceSectionImpl> implements InvoiceSection, InvoiceSection.Definition, InvoiceSection.Update {
     private final BillingManager manager;
@@ -91,8 +93,18 @@ class InvoiceSectionImpl extends CreatableUpdatableImpl<InvoiceSection, InvoiceS
     }
 
     @Override
+    public InvoiceSectionState state() {
+        return this.inner().state();
+    }
+
+    @Override
     public String systemId() {
         return this.inner().systemId();
+    }
+
+    @Override
+    public TargetCloud targetCloud() {
+        return this.inner().targetCloud();
     }
 
     @Override

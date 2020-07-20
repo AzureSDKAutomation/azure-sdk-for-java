@@ -11,13 +11,16 @@ package com.microsoft.azure.management.billing.v2020_05_01.implementation;
 import com.microsoft.azure.management.billing.v2020_05_01.BillingProfile;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
+import com.microsoft.azure.management.billing.v2020_05_01.BillingRelationshipType;
 import com.microsoft.azure.management.billing.v2020_05_01.AddressDetails;
+import com.microsoft.azure.management.billing.v2020_05_01.IndirectRelationshipInfo;
 import java.util.List;
 import com.microsoft.azure.management.billing.v2020_05_01.AzurePlan;
 import com.microsoft.azure.management.billing.v2020_05_01.InvoiceSectionsOnExpand;
 import com.microsoft.azure.management.billing.v2020_05_01.BillingProfileStatus;
 import com.microsoft.azure.management.billing.v2020_05_01.StatusReasonCode;
 import com.microsoft.azure.management.billing.v2020_05_01.SpendingLimit;
+import com.microsoft.azure.management.billing.v2020_05_01.TargetCloud;
 
 class BillingProfileImpl extends CreatableUpdatableImpl<BillingProfile, BillingProfileInner, BillingProfileImpl> implements BillingProfile, BillingProfile.Definition, BillingProfile.Update {
     private final BillingManager manager;
@@ -75,6 +78,11 @@ class BillingProfileImpl extends CreatableUpdatableImpl<BillingProfile, BillingP
 
 
     @Override
+    public BillingRelationshipType billingRelationshipType() {
+        return this.inner().billingRelationshipType();
+    }
+
+    @Override
     public AddressDetails billTo() {
         return this.inner().billTo();
     }
@@ -102,6 +110,11 @@ class BillingProfileImpl extends CreatableUpdatableImpl<BillingProfile, BillingP
     @Override
     public String id() {
         return this.inner().id();
+    }
+
+    @Override
+    public IndirectRelationshipInfo indirectRelationshipInfo() {
+        return this.inner().indirectRelationshipInfo();
     }
 
     @Override
@@ -147,6 +160,11 @@ class BillingProfileImpl extends CreatableUpdatableImpl<BillingProfile, BillingP
     @Override
     public String systemId() {
         return this.inner().systemId();
+    }
+
+    @Override
+    public List<TargetCloud> targetClouds() {
+        return this.inner().targetClouds();
     }
 
     @Override

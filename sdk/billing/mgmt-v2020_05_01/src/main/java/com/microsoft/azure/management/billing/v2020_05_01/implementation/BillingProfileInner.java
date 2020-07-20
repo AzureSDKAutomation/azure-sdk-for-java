@@ -8,13 +8,16 @@
 
 package com.microsoft.azure.management.billing.v2020_05_01.implementation;
 
+import com.microsoft.azure.management.billing.v2020_05_01.BillingRelationshipType;
 import com.microsoft.azure.management.billing.v2020_05_01.AddressDetails;
+import com.microsoft.azure.management.billing.v2020_05_01.IndirectRelationshipInfo;
 import java.util.List;
 import com.microsoft.azure.management.billing.v2020_05_01.AzurePlan;
 import com.microsoft.azure.management.billing.v2020_05_01.InvoiceSectionsOnExpand;
 import com.microsoft.azure.management.billing.v2020_05_01.BillingProfileStatus;
 import com.microsoft.azure.management.billing.v2020_05_01.StatusReasonCode;
 import com.microsoft.azure.management.billing.v2020_05_01.SpendingLimit;
+import com.microsoft.azure.management.billing.v2020_05_01.TargetCloud;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -38,10 +41,25 @@ public class BillingProfileInner extends ProxyResource {
     private String poNumber;
 
     /**
+     * Identifies which services and purchases are paid by a billing profile.
+     * Possible values include: 'Direct', 'IndirectCustomer',
+     * 'IndirectPartner', 'CSPPartner'.
+     */
+    @JsonProperty(value = "properties.billingRelationshipType", access = JsonProperty.Access.WRITE_ONLY)
+    private BillingRelationshipType billingRelationshipType;
+
+    /**
      * Billing address.
      */
     @JsonProperty(value = "properties.billTo")
     private AddressDetails billTo;
+
+    /**
+     * Identifies the billing profile that is linked to another billing profile
+     * in indirect purchase motion.
+     */
+    @JsonProperty(value = "properties.indirectRelationshipInfo", access = JsonProperty.Access.WRITE_ONLY)
+    private IndirectRelationshipInfo indirectRelationshipInfo;
 
     /**
      * Flag controlling whether the invoices for the billing profile are sent
@@ -110,6 +128,14 @@ public class BillingProfileInner extends ProxyResource {
     private SpendingLimit spendingLimit;
 
     /**
+     * Identifies the cloud environments that are associated with a billing
+     * profile. This is a system managed optional field and gets updated as the
+     * billing profile gets associated with accounts in various clouds.
+     */
+    @JsonProperty(value = "properties.targetClouds", access = JsonProperty.Access.WRITE_ONLY)
+    private List<TargetCloud> targetClouds;
+
+    /**
      * Get the name of the billing profile.
      *
      * @return the displayName value
@@ -150,6 +176,15 @@ public class BillingProfileInner extends ProxyResource {
     }
 
     /**
+     * Get identifies which services and purchases are paid by a billing profile. Possible values include: 'Direct', 'IndirectCustomer', 'IndirectPartner', 'CSPPartner'.
+     *
+     * @return the billingRelationshipType value
+     */
+    public BillingRelationshipType billingRelationshipType() {
+        return this.billingRelationshipType;
+    }
+
+    /**
      * Get billing address.
      *
      * @return the billTo value
@@ -167,6 +202,15 @@ public class BillingProfileInner extends ProxyResource {
     public BillingProfileInner withBillTo(AddressDetails billTo) {
         this.billTo = billTo;
         return this;
+    }
+
+    /**
+     * Get identifies the billing profile that is linked to another billing profile in indirect purchase motion.
+     *
+     * @return the indirectRelationshipInfo value
+     */
+    public IndirectRelationshipInfo indirectRelationshipInfo() {
+        return this.indirectRelationshipInfo;
     }
 
     /**
@@ -290,6 +334,15 @@ public class BillingProfileInner extends ProxyResource {
      */
     public SpendingLimit spendingLimit() {
         return this.spendingLimit;
+    }
+
+    /**
+     * Get identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.
+     *
+     * @return the targetClouds value
+     */
+    public List<TargetCloud> targetClouds() {
+        return this.targetClouds;
     }
 
 }

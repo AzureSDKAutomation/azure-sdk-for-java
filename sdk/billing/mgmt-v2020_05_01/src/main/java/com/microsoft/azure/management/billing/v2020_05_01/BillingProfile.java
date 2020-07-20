@@ -24,6 +24,11 @@ import java.util.List;
  */
 public interface BillingProfile extends HasInner<BillingProfileInner>, Indexable, Refreshable<BillingProfile>, Updatable<BillingProfile.Update>, HasManager<BillingManager> {
     /**
+     * @return the billingRelationshipType value.
+     */
+    BillingRelationshipType billingRelationshipType();
+
+    /**
      * @return the billTo value.
      */
     AddressDetails billTo();
@@ -52,6 +57,11 @@ public interface BillingProfile extends HasInner<BillingProfileInner>, Indexable
      * @return the id value.
      */
     String id();
+
+    /**
+     * @return the indirectRelationshipInfo value.
+     */
+    IndirectRelationshipInfo indirectRelationshipInfo();
 
     /**
      * @return the invoiceDay value.
@@ -97,6 +107,11 @@ public interface BillingProfile extends HasInner<BillingProfileInner>, Indexable
      * @return the systemId value.
      */
     String systemId();
+
+    /**
+     * @return the targetClouds value.
+     */
+    List<TargetCloud> targetClouds();
 
     /**
      * @return the type value.
