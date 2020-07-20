@@ -109,7 +109,9 @@ public class ManagedClusterInner extends Resource {
     private Boolean enableRBAC;
 
     /**
-     * (PREVIEW) Whether to enable Kubernetes Pod security policy.
+     * (DEPRECATING) Whether to enable Kubernetes pod security policy
+     * (preview). This feature is set for removal on October 15th, 2020. Learn
+     * more at aka.ms/aks/azpodpolicy.
      */
     @JsonProperty(value = "properties.enablePodSecurityPolicy")
     private Boolean enablePodSecurityPolicy;
@@ -355,7 +357,7 @@ public class ManagedClusterInner extends Resource {
     }
 
     /**
-     * Get (PREVIEW) Whether to enable Kubernetes Pod security policy.
+     * Get (DEPRECATING) Whether to enable Kubernetes pod security policy (preview). This feature is set for removal on October 15th, 2020. Learn more at aka.ms/aks/azpodpolicy.
      *
      * @return the enablePodSecurityPolicy value
      */
@@ -364,7 +366,7 @@ public class ManagedClusterInner extends Resource {
     }
 
     /**
-     * Set (PREVIEW) Whether to enable Kubernetes Pod security policy.
+     * Set (DEPRECATING) Whether to enable Kubernetes pod security policy (preview). This feature is set for removal on October 15th, 2020. Learn more at aka.ms/aks/azpodpolicy.
      *
      * @param enablePodSecurityPolicy the enablePodSecurityPolicy value to set
      * @return the ManagedClusterInner object itself.
