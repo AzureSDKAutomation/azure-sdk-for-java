@@ -124,6 +124,18 @@ public class SiteConfigResourceInner extends ProxyOnlyResource {
     private Boolean httpLoggingEnabled;
 
     /**
+     * Flag to use Managed Identity Creds for ACR pull.
+     */
+    @JsonProperty(value = "properties.acrUseManagedIdentityCreds")
+    private Boolean acrUseManagedIdentityCreds;
+
+    /**
+     * If using user managed identity, the user managed identity ClientId.
+     */
+    @JsonProperty(value = "properties.acrUserManagedIdentityID")
+    private String acrUserManagedIdentityID;
+
+    /**
      * HTTP logs directory size limit.
      */
     @JsonProperty(value = "properties.logsDirectorySizeLimit")
@@ -660,6 +672,46 @@ public class SiteConfigResourceInner extends ProxyOnlyResource {
      */
     public SiteConfigResourceInner withHttpLoggingEnabled(Boolean httpLoggingEnabled) {
         this.httpLoggingEnabled = httpLoggingEnabled;
+        return this;
+    }
+
+    /**
+     * Get flag to use Managed Identity Creds for ACR pull.
+     *
+     * @return the acrUseManagedIdentityCreds value
+     */
+    public Boolean acrUseManagedIdentityCreds() {
+        return this.acrUseManagedIdentityCreds;
+    }
+
+    /**
+     * Set flag to use Managed Identity Creds for ACR pull.
+     *
+     * @param acrUseManagedIdentityCreds the acrUseManagedIdentityCreds value to set
+     * @return the SiteConfigResourceInner object itself.
+     */
+    public SiteConfigResourceInner withAcrUseManagedIdentityCreds(Boolean acrUseManagedIdentityCreds) {
+        this.acrUseManagedIdentityCreds = acrUseManagedIdentityCreds;
+        return this;
+    }
+
+    /**
+     * Get if using user managed identity, the user managed identity ClientId.
+     *
+     * @return the acrUserManagedIdentityID value
+     */
+    public String acrUserManagedIdentityID() {
+        return this.acrUserManagedIdentityID;
+    }
+
+    /**
+     * Set if using user managed identity, the user managed identity ClientId.
+     *
+     * @param acrUserManagedIdentityID the acrUserManagedIdentityID value to set
+     * @return the SiteConfigResourceInner object itself.
+     */
+    public SiteConfigResourceInner withAcrUserManagedIdentityID(String acrUserManagedIdentityID) {
+        this.acrUserManagedIdentityID = acrUserManagedIdentityID;
         return this;
     }
 

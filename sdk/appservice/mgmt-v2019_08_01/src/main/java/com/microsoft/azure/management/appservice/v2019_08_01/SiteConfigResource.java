@@ -21,6 +21,16 @@ import org.joda.time.DateTime;
  */
 public interface SiteConfigResource extends HasInner<SiteConfigResourceInner>, HasManager<CertificateRegistrationManager> {
     /**
+     * @return the acrUseManagedIdentityCreds value.
+     */
+    Boolean acrUseManagedIdentityCreds();
+
+    /**
+     * @return the acrUserManagedIdentityID value.
+     */
+    String acrUserManagedIdentityID();
+
+    /**
      * @return the alwaysOn value.
      */
     Boolean alwaysOn();

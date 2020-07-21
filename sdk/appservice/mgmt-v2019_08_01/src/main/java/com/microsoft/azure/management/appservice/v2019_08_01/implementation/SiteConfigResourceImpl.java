@@ -43,6 +43,16 @@ class SiteConfigResourceImpl extends WrapperImpl<SiteConfigResourceInner> implem
     }
 
     @Override
+    public Boolean acrUseManagedIdentityCreds() {
+        return this.inner().acrUseManagedIdentityCreds();
+    }
+
+    @Override
+    public String acrUserManagedIdentityID() {
+        return this.inner().acrUserManagedIdentityID();
+    }
+
+    @Override
     public Boolean alwaysOn() {
         return this.inner().alwaysOn();
     }
