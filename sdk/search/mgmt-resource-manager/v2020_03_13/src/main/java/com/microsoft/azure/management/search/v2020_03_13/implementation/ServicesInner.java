@@ -18,6 +18,7 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.search.v2020_03_13.CheckNameAvailabilityInput;
 import com.microsoft.azure.management.search.v2020_03_13.SearchManagementRequestOptions;
+import com.microsoft.azure.management.search.v2020_03_13.SearchServiceUpdate;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
@@ -79,7 +80,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.search.v2020_03_13.Services update" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}")
-        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("searchServiceName") String searchServiceName, @Path("subscriptionId") String subscriptionId, @Body SearchServiceInner service, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("x-ms-client-request-id") UUID clientRequestId, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("searchServiceName") String searchServiceName, @Path("subscriptionId") String subscriptionId, @Body SearchServiceUpdate service, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("x-ms-client-request-id") UUID clientRequestId, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.search.v2020_03_13.Services getByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}")
@@ -479,7 +480,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SearchServiceInner object if successful.
      */
-    public SearchServiceInner update(String resourceGroupName, String searchServiceName, SearchServiceInner service) {
+    public SearchServiceInner update(String resourceGroupName, String searchServiceName, SearchServiceUpdate service) {
         return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, service).toBlocking().single().body();
     }
 
@@ -493,7 +494,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SearchServiceInner> updateAsync(String resourceGroupName, String searchServiceName, SearchServiceInner service, final ServiceCallback<SearchServiceInner> serviceCallback) {
+    public ServiceFuture<SearchServiceInner> updateAsync(String resourceGroupName, String searchServiceName, SearchServiceUpdate service, final ServiceCallback<SearchServiceInner> serviceCallback) {
         return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, searchServiceName, service), serviceCallback);
     }
 
@@ -506,7 +507,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SearchServiceInner object
      */
-    public Observable<SearchServiceInner> updateAsync(String resourceGroupName, String searchServiceName, SearchServiceInner service) {
+    public Observable<SearchServiceInner> updateAsync(String resourceGroupName, String searchServiceName, SearchServiceUpdate service) {
         return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, service).map(new Func1<ServiceResponse<SearchServiceInner>, SearchServiceInner>() {
             @Override
             public SearchServiceInner call(ServiceResponse<SearchServiceInner> response) {
@@ -524,7 +525,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SearchServiceInner object
      */
-    public Observable<ServiceResponse<SearchServiceInner>> updateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, SearchServiceInner service) {
+    public Observable<ServiceResponse<SearchServiceInner>> updateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, SearchServiceUpdate service) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -569,7 +570,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SearchServiceInner object if successful.
      */
-    public SearchServiceInner update(String resourceGroupName, String searchServiceName, SearchServiceInner service, SearchManagementRequestOptions searchManagementRequestOptions) {
+    public SearchServiceInner update(String resourceGroupName, String searchServiceName, SearchServiceUpdate service, SearchManagementRequestOptions searchManagementRequestOptions) {
         return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, service, searchManagementRequestOptions).toBlocking().single().body();
     }
 
@@ -584,7 +585,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SearchServiceInner> updateAsync(String resourceGroupName, String searchServiceName, SearchServiceInner service, SearchManagementRequestOptions searchManagementRequestOptions, final ServiceCallback<SearchServiceInner> serviceCallback) {
+    public ServiceFuture<SearchServiceInner> updateAsync(String resourceGroupName, String searchServiceName, SearchServiceUpdate service, SearchManagementRequestOptions searchManagementRequestOptions, final ServiceCallback<SearchServiceInner> serviceCallback) {
         return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, searchServiceName, service, searchManagementRequestOptions), serviceCallback);
     }
 
@@ -598,7 +599,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SearchServiceInner object
      */
-    public Observable<SearchServiceInner> updateAsync(String resourceGroupName, String searchServiceName, SearchServiceInner service, SearchManagementRequestOptions searchManagementRequestOptions) {
+    public Observable<SearchServiceInner> updateAsync(String resourceGroupName, String searchServiceName, SearchServiceUpdate service, SearchManagementRequestOptions searchManagementRequestOptions) {
         return updateWithServiceResponseAsync(resourceGroupName, searchServiceName, service, searchManagementRequestOptions).map(new Func1<ServiceResponse<SearchServiceInner>, SearchServiceInner>() {
             @Override
             public SearchServiceInner call(ServiceResponse<SearchServiceInner> response) {
@@ -617,7 +618,7 @@ public class ServicesInner implements InnerSupportsGet<SearchServiceInner>, Inne
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SearchServiceInner object
      */
-    public Observable<ServiceResponse<SearchServiceInner>> updateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, SearchServiceInner service, SearchManagementRequestOptions searchManagementRequestOptions) {
+    public Observable<ServiceResponse<SearchServiceInner>> updateWithServiceResponseAsync(String resourceGroupName, String searchServiceName, SearchServiceUpdate service, SearchManagementRequestOptions searchManagementRequestOptions) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }

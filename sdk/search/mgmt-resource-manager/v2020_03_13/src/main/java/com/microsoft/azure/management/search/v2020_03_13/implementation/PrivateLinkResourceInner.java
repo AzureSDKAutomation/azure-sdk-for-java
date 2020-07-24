@@ -10,63 +10,19 @@ package com.microsoft.azure.management.search.v2020_03_13.implementation;
 
 import com.microsoft.azure.management.search.v2020_03_13.PrivateLinkResourceProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.azure.ProxyResource;
 
 /**
  * Describes a supported private link resource for the Azure Cognitive Search
  * service.
  */
-public class PrivateLinkResourceInner {
-    /**
-     * The ID of the private link resource.
-     */
-    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
-    private String id;
-
-    /**
-     * The name of the private link resource.
-     */
-    @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
-    private String name;
-
-    /**
-     * The resource type.
-     */
-    @JsonProperty(value = "type", access = JsonProperty.Access.WRITE_ONLY)
-    private String type;
-
+public class PrivateLinkResourceInner extends ProxyResource {
     /**
      * Describes the properties of a supported private link resource for the
      * Azure Cognitive Search service.
      */
     @JsonProperty(value = "properties", access = JsonProperty.Access.WRITE_ONLY)
     private PrivateLinkResourceProperties properties;
-
-    /**
-     * Get the ID of the private link resource.
-     *
-     * @return the id value
-     */
-    public String id() {
-        return this.id;
-    }
-
-    /**
-     * Get the name of the private link resource.
-     *
-     * @return the name value
-     */
-    public String name() {
-        return this.name;
-    }
-
-    /**
-     * Get the resource type.
-     *
-     * @return the type value
-     */
-    public String type() {
-        return this.type;
-    }
 
     /**
      * Get describes the properties of a supported private link resource for the Azure Cognitive Search service.
