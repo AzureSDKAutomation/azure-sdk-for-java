@@ -13,14 +13,15 @@ import com.microsoft.azure.management.search.v2020_03_13.SearchService;
 import rx.Observable;
 import com.microsoft.azure.management.search.v2020_03_13.SearchManagementRequestOptions;
 import java.util.UUID;
-import com.microsoft.azure.management.search.v2020_03_13.Identity;
+import com.microsoft.azure.management.search.v2020_03_13.SearchServiceUpdate;
+import java.util.List;
 import com.microsoft.azure.management.search.v2020_03_13.HostingMode;
 import com.microsoft.azure.management.search.v2020_03_13.PublicNetworkAccess;
 import com.microsoft.azure.management.search.v2020_03_13.SearchServiceStatus;
 import com.microsoft.azure.management.search.v2020_03_13.ProvisioningState;
 import com.microsoft.azure.management.search.v2020_03_13.NetworkRuleSet;
-import java.util.List;
 import com.microsoft.azure.management.search.v2020_03_13.Sku;
+import com.microsoft.azure.management.search.v2020_03_13.Identity;
 import java.util.ArrayList;
 import com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnection;
 import com.microsoft.azure.management.search.v2020_03_13.SharedPrivateLinkResource;
@@ -29,10 +30,12 @@ import rx.functions.Func1;
 class SearchServiceImpl extends GroupableResourceCoreImpl<SearchService, SearchServiceInner, SearchServiceImpl, SearchManager> implements SearchService, SearchService.Definition, SearchService.Update {
     private SearchManagementRequestOptions csearchManagementRequestOptions;
     private SearchManagementRequestOptions usearchManagementRequestOptions;
+    private SearchServiceUpdate updateParameter;
     SearchServiceImpl(String name, SearchServiceInner inner, SearchManager manager) {
         super(name, inner, manager);
         this.csearchManagementRequestOptions = new SearchManagementRequestOptions();
         this.usearchManagementRequestOptions = new SearchManagementRequestOptions();
+        this.updateParameter = new SearchServiceUpdate();
     }
 
     @Override
@@ -52,7 +55,7 @@ class SearchServiceImpl extends GroupableResourceCoreImpl<SearchService, SearchS
     @Override
     public Observable<SearchService> updateResourceAsync() {
         ServicesInner client = this.manager().inner().services();
-        return client.updateAsync(this.resourceGroupName(), this.name(), this.inner(), this.usearchManagementRequestOptions)
+        return client.updateAsync(this.resourceGroupName(), this.name(), this.updateParameter, this.usearchManagementRequestOptions)
             .map(new Func1<SearchServiceInner, SearchServiceInner>() {
                @Override
                public SearchServiceInner call(SearchServiceInner resource) {
@@ -77,6 +80,7 @@ class SearchServiceImpl extends GroupableResourceCoreImpl<SearchService, SearchS
     private void resetCreateUpdateParameters() {
         this.csearchManagementRequestOptions = new SearchManagementRequestOptions();
         this.usearchManagementRequestOptions = new SearchManagementRequestOptions();
+        this.updateParameter = new SearchServiceUpdate();
     }
 
     @Override
@@ -163,43 +167,71 @@ class SearchServiceImpl extends GroupableResourceCoreImpl<SearchService, SearchS
 
     @Override
     public SearchServiceImpl withHostingMode(HostingMode hostingMode) {
-        this.inner().withHostingMode(hostingMode);
+        if (isInCreateMode()) {
+            this.inner().withHostingMode(hostingMode);
+        } else {
+            this.updateParameter.withHostingMode(hostingMode);
+        }
         return this;
     }
 
     @Override
     public SearchServiceImpl withIdentity(Identity identity) {
-        this.inner().withIdentity(identity);
+        if (isInCreateMode()) {
+            this.inner().withIdentity(identity);
+        } else {
+            this.updateParameter.withIdentity(identity);
+        }
         return this;
     }
 
     @Override
     public SearchServiceImpl withNetworkRuleSet(NetworkRuleSet networkRuleSet) {
-        this.inner().withNetworkRuleSet(networkRuleSet);
+        if (isInCreateMode()) {
+            this.inner().withNetworkRuleSet(networkRuleSet);
+        } else {
+            this.updateParameter.withNetworkRuleSet(networkRuleSet);
+        }
         return this;
     }
 
     @Override
     public SearchServiceImpl withPartitionCount(Integer partitionCount) {
-        this.inner().withPartitionCount(partitionCount);
+        if (isInCreateMode()) {
+            this.inner().withPartitionCount(partitionCount);
+        } else {
+            this.updateParameter.withPartitionCount(partitionCount);
+        }
         return this;
     }
 
     @Override
     public SearchServiceImpl withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess) {
-        this.inner().withPublicNetworkAccess(publicNetworkAccess);
+        if (isInCreateMode()) {
+            this.inner().withPublicNetworkAccess(publicNetworkAccess);
+        } else {
+            this.updateParameter.withPublicNetworkAccess(publicNetworkAccess);
+        }
         return this;
     }
 
     @Override
     public SearchServiceImpl withReplicaCount(Integer replicaCount) {
-        this.inner().withReplicaCount(replicaCount);
+        if (isInCreateMode()) {
+            this.inner().withReplicaCount(replicaCount);
+        } else {
+            this.updateParameter.withReplicaCount(replicaCount);
+        }
         return this;
     }
 
     @Override
     public SearchServiceImpl withSku(Sku sku) {
-        this.inner().withSku(sku);
+        if (isInCreateMode()) {
+            this.inner().withSku(sku);
+        } else {
+            this.updateParameter.withSku(sku);
+        }
         return this;
     }
 

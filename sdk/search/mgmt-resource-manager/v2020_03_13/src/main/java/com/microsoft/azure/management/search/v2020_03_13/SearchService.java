@@ -20,6 +20,8 @@ import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.search.v2020_03_13.implementation.SearchManager;
 import java.util.UUID;
 import java.util.List;
+import com.microsoft.azure.management.search.v2020_03_13.implementation.PrivateEndpointConnectionInner;
+import com.microsoft.azure.management.search.v2020_03_13.implementation.SharedPrivateLinkResourceInner;
 import com.microsoft.azure.management.search.v2020_03_13.implementation.SearchServiceInner;
 
 /**
