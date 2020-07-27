@@ -15,37 +15,38 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkStatement {
     /**
-     * The id property.
+     * The livy id of the spark statement job.
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /**
-     * The code property.
+     * The execution code.
      */
     @JsonProperty(value = "code")
     private String code;
 
     /**
-     * The state property.
+     * The current state of the spark statement. Possible values include:
+     * 'waiting', 'running', 'available', 'error', 'cancelling', 'cancelled'.
      */
     @JsonProperty(value = "state")
-    private String state;
+    private StatementState state;
 
     /**
-     * The output property.
+     * The execution output.
      */
     @JsonProperty(value = "output")
     private SparkStatementOutput output;
 
     /**
-     * The progress property.
+     * The execution progress.
      */
     @JsonProperty(value = "progress")
     private Double progress;
 
     /**
-     * Get the id value.
+     * Get the livy id of the spark statement job.
      *
      * @return the id value
      */
@@ -54,7 +55,7 @@ public class SparkStatement {
     }
 
     /**
-     * Set the id value.
+     * Set the livy id of the spark statement job.
      *
      * @param id the id value to set
      * @return the SparkStatement object itself.
@@ -65,7 +66,7 @@ public class SparkStatement {
     }
 
     /**
-     * Get the code value.
+     * Get the execution code.
      *
      * @return the code value
      */
@@ -74,7 +75,7 @@ public class SparkStatement {
     }
 
     /**
-     * Set the code value.
+     * Set the execution code.
      *
      * @param code the code value to set
      * @return the SparkStatement object itself.
@@ -85,27 +86,27 @@ public class SparkStatement {
     }
 
     /**
-     * Get the state value.
+     * Get the current state of the spark statement. Possible values include: 'waiting', 'running', 'available', 'error', 'cancelling', 'cancelled'.
      *
      * @return the state value
      */
-    public String state() {
+    public StatementState state() {
         return this.state;
     }
 
     /**
-     * Set the state value.
+     * Set the current state of the spark statement. Possible values include: 'waiting', 'running', 'available', 'error', 'cancelling', 'cancelled'.
      *
      * @param state the state value to set
      * @return the SparkStatement object itself.
      */
-    public SparkStatement withState(String state) {
+    public SparkStatement withState(StatementState state) {
         this.state = state;
         return this;
     }
 
     /**
-     * Get the output value.
+     * Get the execution output.
      *
      * @return the output value
      */
@@ -114,7 +115,7 @@ public class SparkStatement {
     }
 
     /**
-     * Set the output value.
+     * Set the execution output.
      *
      * @param output the output value to set
      * @return the SparkStatement object itself.
@@ -125,7 +126,7 @@ public class SparkStatement {
     }
 
     /**
-     * Get the progress value.
+     * Get the execution progress.
      *
      * @return the progress value
      */
@@ -134,7 +135,7 @@ public class SparkStatement {
     }
 
     /**
-     * Set the progress value.
+     * Set the execution progress.
      *
      * @param progress the progress value to set
      * @return the SparkStatement object itself.

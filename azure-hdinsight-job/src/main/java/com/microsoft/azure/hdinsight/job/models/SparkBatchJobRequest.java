@@ -17,103 +17,103 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkBatchJobRequest {
     /**
-     * The file property.
+     * File containing the application to execute.
      */
     @JsonProperty(value = "file")
     private String file;
 
     /**
-     * The proxyUser property.
+     * User to impersonate when running the job.
      */
     @JsonProperty(value = "proxyUser")
     private String proxyUser;
 
     /**
-     * The className property.
+     * Application Java/Spark main class.
      */
     @JsonProperty(value = "className")
     private String className;
 
     /**
-     * The arguments property.
+     * Command line arguments for the application.
      */
     @JsonProperty(value = "args")
     private List<String> arguments;
 
     /**
-     * The jars property.
+     * Jars to be used in this batch job.
      */
     @JsonProperty(value = "jars")
     private List<String> jars;
 
     /**
-     * The pythonFiles property.
+     * Python files to be used in this batch job.
      */
     @JsonProperty(value = "pyFiles")
     private List<String> pythonFiles;
 
     /**
-     * The files property.
+     * Files to be used in this batch job.
      */
     @JsonProperty(value = "files")
     private List<String> files;
 
     /**
-     * The driverMemory property.
+     * Amount of memory to use for the driver process.
      */
     @JsonProperty(value = "driverMemory")
     private String driverMemory;
 
     /**
-     * The driverCores property.
+     * Number of cores to use for the driver process.
      */
     @JsonProperty(value = "driverCores")
     private Integer driverCores;
 
     /**
-     * The executorMemory property.
+     * Amount of memory to use per executor process.
      */
     @JsonProperty(value = "executorMemory")
     private String executorMemory;
 
     /**
-     * The executorCores property.
+     * Number of cores to use for each executor.
      */
     @JsonProperty(value = "executorCores")
     private Integer executorCores;
 
     /**
-     * The executorCount property.
+     * Number of executors to launch for this batch job.
      */
     @JsonProperty(value = "numExecutors")
     private Integer executorCount;
 
     /**
-     * The archives property.
+     * Archives to be used in this batch job.
      */
     @JsonProperty(value = "archives")
     private List<String> archives;
 
     /**
-     * The queue property.
+     * The name of the YARN queue to which submitted.
      */
     @JsonProperty(value = "queue")
     private String queue;
 
     /**
-     * The name property.
+     * The name of this batch job.
      */
     @JsonProperty(value = "name")
     private String name;
 
     /**
-     * The configuration property.
+     * Spark configuration properties.
      */
     @JsonProperty(value = "conf")
     private Map<String, String> configuration;
 
     /**
-     * Get the file value.
+     * Get file containing the application to execute.
      *
      * @return the file value
      */
@@ -122,7 +122,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the file value.
+     * Set file containing the application to execute.
      *
      * @param file the file value to set
      * @return the SparkBatchJobRequest object itself.
@@ -133,7 +133,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the proxyUser value.
+     * Get user to impersonate when running the job.
      *
      * @return the proxyUser value
      */
@@ -142,7 +142,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the proxyUser value.
+     * Set user to impersonate when running the job.
      *
      * @param proxyUser the proxyUser value to set
      * @return the SparkBatchJobRequest object itself.
@@ -153,7 +153,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the className value.
+     * Get application Java/Spark main class.
      *
      * @return the className value
      */
@@ -162,7 +162,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the className value.
+     * Set application Java/Spark main class.
      *
      * @param className the className value to set
      * @return the SparkBatchJobRequest object itself.
@@ -173,7 +173,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the arguments value.
+     * Get command line arguments for the application.
      *
      * @return the arguments value
      */
@@ -182,7 +182,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the arguments value.
+     * Set command line arguments for the application.
      *
      * @param arguments the arguments value to set
      * @return the SparkBatchJobRequest object itself.
@@ -193,7 +193,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the jars value.
+     * Get jars to be used in this batch job.
      *
      * @return the jars value
      */
@@ -202,7 +202,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the jars value.
+     * Set jars to be used in this batch job.
      *
      * @param jars the jars value to set
      * @return the SparkBatchJobRequest object itself.
@@ -213,7 +213,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the pythonFiles value.
+     * Get python files to be used in this batch job.
      *
      * @return the pythonFiles value
      */
@@ -222,7 +222,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the pythonFiles value.
+     * Set python files to be used in this batch job.
      *
      * @param pythonFiles the pythonFiles value to set
      * @return the SparkBatchJobRequest object itself.
@@ -233,7 +233,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the files value.
+     * Get files to be used in this batch job.
      *
      * @return the files value
      */
@@ -242,7 +242,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the files value.
+     * Set files to be used in this batch job.
      *
      * @param files the files value to set
      * @return the SparkBatchJobRequest object itself.
@@ -253,7 +253,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the driverMemory value.
+     * Get amount of memory to use for the driver process.
      *
      * @return the driverMemory value
      */
@@ -262,7 +262,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the driverMemory value.
+     * Set amount of memory to use for the driver process.
      *
      * @param driverMemory the driverMemory value to set
      * @return the SparkBatchJobRequest object itself.
@@ -273,7 +273,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the driverCores value.
+     * Get number of cores to use for the driver process.
      *
      * @return the driverCores value
      */
@@ -282,7 +282,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the driverCores value.
+     * Set number of cores to use for the driver process.
      *
      * @param driverCores the driverCores value to set
      * @return the SparkBatchJobRequest object itself.
@@ -293,7 +293,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the executorMemory value.
+     * Get amount of memory to use per executor process.
      *
      * @return the executorMemory value
      */
@@ -302,7 +302,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the executorMemory value.
+     * Set amount of memory to use per executor process.
      *
      * @param executorMemory the executorMemory value to set
      * @return the SparkBatchJobRequest object itself.
@@ -313,7 +313,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the executorCores value.
+     * Get number of cores to use for each executor.
      *
      * @return the executorCores value
      */
@@ -322,7 +322,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the executorCores value.
+     * Set number of cores to use for each executor.
      *
      * @param executorCores the executorCores value to set
      * @return the SparkBatchJobRequest object itself.
@@ -333,7 +333,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the executorCount value.
+     * Get number of executors to launch for this batch job.
      *
      * @return the executorCount value
      */
@@ -342,7 +342,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the executorCount value.
+     * Set number of executors to launch for this batch job.
      *
      * @param executorCount the executorCount value to set
      * @return the SparkBatchJobRequest object itself.
@@ -353,7 +353,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the archives value.
+     * Get archives to be used in this batch job.
      *
      * @return the archives value
      */
@@ -362,7 +362,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the archives value.
+     * Set archives to be used in this batch job.
      *
      * @param archives the archives value to set
      * @return the SparkBatchJobRequest object itself.
@@ -373,7 +373,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the queue value.
+     * Get the name of the YARN queue to which submitted.
      *
      * @return the queue value
      */
@@ -382,7 +382,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the queue value.
+     * Set the name of the YARN queue to which submitted.
      *
      * @param queue the queue value to set
      * @return the SparkBatchJobRequest object itself.
@@ -393,7 +393,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the name value.
+     * Get the name of this batch job.
      *
      * @return the name value
      */
@@ -402,7 +402,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the name value.
+     * Set the name of this batch job.
      *
      * @param name the name value to set
      * @return the SparkBatchJobRequest object itself.
@@ -413,7 +413,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Get the configuration value.
+     * Get spark configuration properties.
      *
      * @return the configuration value
      */
@@ -422,7 +422,7 @@ public class SparkBatchJobRequest {
     }
 
     /**
-     * Set the configuration value.
+     * Set spark configuration properties.
      *
      * @param configuration the configuration value to set
      * @return the SparkBatchJobRequest object itself.
