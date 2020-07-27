@@ -15,45 +15,45 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkStatementOutput {
     /**
-     * The status property.
+     * Execution status. Possible values include: 'ok', 'error', 'abort'.
      */
     @JsonProperty(value = "status")
-    private String status;
+    private StatementExecutionStatus status;
 
     /**
-     * The executionCount property.
+     * A monotonically increasing number.
      */
     @JsonProperty(value = "execution_count")
     private Integer executionCount;
 
     /**
-     * The data property.
+     * Statement output.
      */
     @JsonProperty(value = "data")
     private Object data;
 
     /**
-     * Get the status value.
+     * Get execution status. Possible values include: 'ok', 'error', 'abort'.
      *
      * @return the status value
      */
-    public String status() {
+    public StatementExecutionStatus status() {
         return this.status;
     }
 
     /**
-     * Set the status value.
+     * Set execution status. Possible values include: 'ok', 'error', 'abort'.
      *
      * @param status the status value to set
      * @return the SparkStatementOutput object itself.
      */
-    public SparkStatementOutput withStatus(String status) {
+    public SparkStatementOutput withStatus(StatementExecutionStatus status) {
         this.status = status;
         return this;
     }
 
     /**
-     * Get the executionCount value.
+     * Get a monotonically increasing number.
      *
      * @return the executionCount value
      */
@@ -62,7 +62,7 @@ public class SparkStatementOutput {
     }
 
     /**
-     * Set the executionCount value.
+     * Set a monotonically increasing number.
      *
      * @param executionCount the executionCount value to set
      * @return the SparkStatementOutput object itself.
@@ -73,7 +73,7 @@ public class SparkStatementOutput {
     }
 
     /**
-     * Get the data value.
+     * Get statement output.
      *
      * @return the data value
      */
@@ -82,7 +82,7 @@ public class SparkStatementOutput {
     }
 
     /**
-     * Set the data value.
+     * Set statement output.
      *
      * @param data the data value to set
      * @return the SparkStatementOutput object itself.

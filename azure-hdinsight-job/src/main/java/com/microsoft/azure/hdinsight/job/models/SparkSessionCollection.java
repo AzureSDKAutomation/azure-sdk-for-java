@@ -16,25 +16,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkSessionCollection {
     /**
-     * The from property.
+     * The start index to fetch spark sessions.
      */
     @JsonProperty(value = "from")
     private Integer from;
 
     /**
-     * The total property.
+     * Number of spark sessions to fetch.
      */
     @JsonProperty(value = "total")
     private Integer total;
 
     /**
-     * The sessions property.
+     * List of spark sessions.
      */
     @JsonProperty(value = "sessions")
     private List<SparkSessionJob> sessions;
 
     /**
-     * Get the from value.
+     * Get the start index to fetch spark sessions.
      *
      * @return the from value
      */
@@ -43,7 +43,7 @@ public class SparkSessionCollection {
     }
 
     /**
-     * Set the from value.
+     * Set the start index to fetch spark sessions.
      *
      * @param from the from value to set
      * @return the SparkSessionCollection object itself.
@@ -54,7 +54,7 @@ public class SparkSessionCollection {
     }
 
     /**
-     * Get the total value.
+     * Get number of spark sessions to fetch.
      *
      * @return the total value
      */
@@ -63,7 +63,7 @@ public class SparkSessionCollection {
     }
 
     /**
-     * Set the total value.
+     * Set number of spark sessions to fetch.
      *
      * @param total the total value to set
      * @return the SparkSessionCollection object itself.
@@ -74,7 +74,7 @@ public class SparkSessionCollection {
     }
 
     /**
-     * Get the sessions value.
+     * Get list of spark sessions.
      *
      * @return the sessions value
      */
@@ -83,7 +83,7 @@ public class SparkSessionCollection {
     }
 
     /**
-     * Set the sessions value.
+     * Set list of spark sessions.
      *
      * @param sessions the sessions value to set
      * @return the SparkSessionCollection object itself.

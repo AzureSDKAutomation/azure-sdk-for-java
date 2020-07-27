@@ -16,13 +16,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkStatementCollection {
     /**
-     * The statements property.
+     * List of spark statements.
      */
     @JsonProperty(value = "statements")
     private List<SparkStatement> statements;
 
     /**
-     * Get the statements value.
+     * Get list of spark statements.
      *
      * @return the statements value
      */
@@ -31,7 +31,7 @@ public class SparkStatementCollection {
     }
 
     /**
-     * Set the statements value.
+     * Set list of spark statements.
      *
      * @param statements the statements value to set
      * @return the SparkStatementCollection object itself.

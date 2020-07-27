@@ -16,37 +16,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkJobLog {
     /**
-     * The id property.
+     * The livy id of the spark job.
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /**
-     * The from property.
+     * Offset from start of log.
      */
     @JsonProperty(value = "from")
     private Integer from;
 
     /**
-     * The size property.
+     * Max number of log lines.
      */
     @JsonProperty(value = "size")
     private Integer size;
 
     /**
-     * The total property.
+     * Total number of log lines.
      */
     @JsonProperty(value = "total")
     private Long total;
 
     /**
-     * The logLines property.
+     * The log lines.
      */
     @JsonProperty(value = "log")
     private List<String> logLines;
 
     /**
-     * Get the id value.
+     * Get the livy id of the spark job.
      *
      * @return the id value
      */
@@ -55,7 +55,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Set the id value.
+     * Set the livy id of the spark job.
      *
      * @param id the id value to set
      * @return the SparkJobLog object itself.
@@ -66,7 +66,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Get the from value.
+     * Get offset from start of log.
      *
      * @return the from value
      */
@@ -75,7 +75,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Set the from value.
+     * Set offset from start of log.
      *
      * @param from the from value to set
      * @return the SparkJobLog object itself.
@@ -86,7 +86,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Get the size value.
+     * Get max number of log lines.
      *
      * @return the size value
      */
@@ -95,7 +95,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Set the size value.
+     * Set max number of log lines.
      *
      * @param size the size value to set
      * @return the SparkJobLog object itself.
@@ -106,7 +106,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Get the total value.
+     * Get total number of log lines.
      *
      * @return the total value
      */
@@ -115,7 +115,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Set the total value.
+     * Set total number of log lines.
      *
      * @param total the total value to set
      * @return the SparkJobLog object itself.
@@ -126,7 +126,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Get the logLines value.
+     * Get the log lines.
      *
      * @return the logLines value
      */
@@ -135,7 +135,7 @@ public class SparkJobLog {
     }
 
     /**
-     * Set the logLines value.
+     * Set the log lines.
      *
      * @param logLines the logLines value to set
      * @return the SparkJobLog object itself.

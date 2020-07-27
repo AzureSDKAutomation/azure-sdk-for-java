@@ -16,25 +16,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkBatchJobCollection {
     /**
-     * The from property.
+     * The start index to fetch Spark Batch jobs.
      */
     @JsonProperty(value = "from")
     private Integer from;
 
     /**
-     * The total property.
+     * Number of Spark Batch jobs to fetch.
      */
     @JsonProperty(value = "total")
     private Integer total;
 
     /**
-     * The sessions property.
+     * List of spark batch jobs.
      */
     @JsonProperty(value = "sessions")
     private List<SparkBatchJob> sessions;
 
     /**
-     * Get the from value.
+     * Get the start index to fetch Spark Batch jobs.
      *
      * @return the from value
      */
@@ -43,7 +43,7 @@ public class SparkBatchJobCollection {
     }
 
     /**
-     * Set the from value.
+     * Set the start index to fetch Spark Batch jobs.
      *
      * @param from the from value to set
      * @return the SparkBatchJobCollection object itself.
@@ -54,7 +54,7 @@ public class SparkBatchJobCollection {
     }
 
     /**
-     * Get the total value.
+     * Get number of Spark Batch jobs to fetch.
      *
      * @return the total value
      */
@@ -63,7 +63,7 @@ public class SparkBatchJobCollection {
     }
 
     /**
-     * Set the total value.
+     * Set number of Spark Batch jobs to fetch.
      *
      * @param total the total value to set
      * @return the SparkBatchJobCollection object itself.
@@ -74,7 +74,7 @@ public class SparkBatchJobCollection {
     }
 
     /**
-     * Get the sessions value.
+     * Get list of spark batch jobs.
      *
      * @return the sessions value
      */
@@ -83,7 +83,7 @@ public class SparkBatchJobCollection {
     }
 
     /**
-     * Set the sessions value.
+     * Set list of spark batch jobs.
      *
      * @param sessions the sessions value to set
      * @return the SparkBatchJobCollection object itself.

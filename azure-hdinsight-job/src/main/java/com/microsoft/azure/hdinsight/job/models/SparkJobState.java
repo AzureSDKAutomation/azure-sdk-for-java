@@ -15,19 +15,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkJobState {
     /**
-     * The id property.
+     * The livy id of the spark job.
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /**
-     * The state property.
+     * The current state of the spark job. Possible values include:
+     * 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down',
+     * 'error', 'dead', 'killed', 'success', 'recovering'.
      */
     @JsonProperty(value = "state")
-    private String state;
+    private JobState state;
 
     /**
-     * Get the id value.
+     * Get the livy id of the spark job.
      *
      * @return the id value
      */
@@ -36,7 +38,7 @@ public class SparkJobState {
     }
 
     /**
-     * Set the id value.
+     * Set the livy id of the spark job.
      *
      * @param id the id value to set
      * @return the SparkJobState object itself.
@@ -47,21 +49,21 @@ public class SparkJobState {
     }
 
     /**
-     * Get the state value.
+     * Get the current state of the spark job. Possible values include: 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down', 'error', 'dead', 'killed', 'success', 'recovering'.
      *
      * @return the state value
      */
-    public String state() {
+    public JobState state() {
         return this.state;
     }
 
     /**
-     * Set the state value.
+     * Set the current state of the spark job. Possible values include: 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down', 'error', 'dead', 'killed', 'success', 'recovering'.
      *
      * @param state the state value to set
      * @return the SparkJobState object itself.
      */
-    public SparkJobState withState(String state) {
+    public SparkJobState withState(JobState state) {
         this.state = state;
         return this;
     }

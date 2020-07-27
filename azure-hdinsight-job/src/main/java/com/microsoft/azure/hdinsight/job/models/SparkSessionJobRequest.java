@@ -17,97 +17,98 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkSessionJobRequest {
     /**
-     * Possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
+     * Spark session job kind. Possible values include: 'spark', 'pyspark',
+     * 'sparkr', 'sql'.
      */
     @JsonProperty(value = "kind")
     private SessionJobKind kind;
 
     /**
-     * The proxyUser property.
+     * User to impersonate when starting the session.
      */
     @JsonProperty(value = "proxyUser")
     private String proxyUser;
 
     /**
-     * The jars property.
+     * Jars to be used in this session.
      */
     @JsonProperty(value = "jars")
     private List<String> jars;
 
     /**
-     * The pythonFiles property.
+     * Python files to be used in this session.
      */
     @JsonProperty(value = "pyFiles")
     private List<String> pythonFiles;
 
     /**
-     * The files property.
+     * Files to be used in this session.
      */
     @JsonProperty(value = "files")
     private List<String> files;
 
     /**
-     * The driverMemory property.
+     * Amount of memory to use for the driver process.
      */
     @JsonProperty(value = "driverMemory")
     private String driverMemory;
 
     /**
-     * The driverCores property.
+     * Number of cores to use for the driver process.
      */
     @JsonProperty(value = "driverCores")
     private Integer driverCores;
 
     /**
-     * The executorMemory property.
+     * Amount of memory to use per executor process.
      */
     @JsonProperty(value = "executorMemory")
     private String executorMemory;
 
     /**
-     * The executorCores property.
+     * Number of cores to use for each executor.
      */
     @JsonProperty(value = "executorCores")
     private Integer executorCores;
 
     /**
-     * The executorCount property.
+     * Number of executors to launch for this session.
      */
     @JsonProperty(value = "numExecutors")
     private Integer executorCount;
 
     /**
-     * The archives property.
+     * Archives to be used in this session.
      */
     @JsonProperty(value = "archives")
     private List<String> archives;
 
     /**
-     * The queue property.
+     * The name of the YARN queue to which submitted.
      */
     @JsonProperty(value = "queue")
     private String queue;
 
     /**
-     * The name property.
+     * The name of this session.
      */
     @JsonProperty(value = "name")
     private String name;
 
     /**
-     * The configuration property.
+     * Spark configuration properties.
      */
     @JsonProperty(value = "conf")
     private Map<String, String> configuration;
 
     /**
-     * The heartbeatTimeoutInSecond property.
+     * Timeout in second to which session be orphaned.
      */
     @JsonProperty(value = "heartbeatTimeoutInSecond")
     private Integer heartbeatTimeoutInSecond;
 
     /**
-     * Get possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
+     * Get spark session job kind. Possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
      *
      * @return the kind value
      */
@@ -116,7 +117,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
+     * Set spark session job kind. Possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
      *
      * @param kind the kind value to set
      * @return the SparkSessionJobRequest object itself.
@@ -127,7 +128,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the proxyUser value.
+     * Get user to impersonate when starting the session.
      *
      * @return the proxyUser value
      */
@@ -136,7 +137,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the proxyUser value.
+     * Set user to impersonate when starting the session.
      *
      * @param proxyUser the proxyUser value to set
      * @return the SparkSessionJobRequest object itself.
@@ -147,7 +148,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the jars value.
+     * Get jars to be used in this session.
      *
      * @return the jars value
      */
@@ -156,7 +157,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the jars value.
+     * Set jars to be used in this session.
      *
      * @param jars the jars value to set
      * @return the SparkSessionJobRequest object itself.
@@ -167,7 +168,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the pythonFiles value.
+     * Get python files to be used in this session.
      *
      * @return the pythonFiles value
      */
@@ -176,7 +177,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the pythonFiles value.
+     * Set python files to be used in this session.
      *
      * @param pythonFiles the pythonFiles value to set
      * @return the SparkSessionJobRequest object itself.
@@ -187,7 +188,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the files value.
+     * Get files to be used in this session.
      *
      * @return the files value
      */
@@ -196,7 +197,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the files value.
+     * Set files to be used in this session.
      *
      * @param files the files value to set
      * @return the SparkSessionJobRequest object itself.
@@ -207,7 +208,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the driverMemory value.
+     * Get amount of memory to use for the driver process.
      *
      * @return the driverMemory value
      */
@@ -216,7 +217,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the driverMemory value.
+     * Set amount of memory to use for the driver process.
      *
      * @param driverMemory the driverMemory value to set
      * @return the SparkSessionJobRequest object itself.
@@ -227,7 +228,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the driverCores value.
+     * Get number of cores to use for the driver process.
      *
      * @return the driverCores value
      */
@@ -236,7 +237,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the driverCores value.
+     * Set number of cores to use for the driver process.
      *
      * @param driverCores the driverCores value to set
      * @return the SparkSessionJobRequest object itself.
@@ -247,7 +248,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the executorMemory value.
+     * Get amount of memory to use per executor process.
      *
      * @return the executorMemory value
      */
@@ -256,7 +257,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the executorMemory value.
+     * Set amount of memory to use per executor process.
      *
      * @param executorMemory the executorMemory value to set
      * @return the SparkSessionJobRequest object itself.
@@ -267,7 +268,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the executorCores value.
+     * Get number of cores to use for each executor.
      *
      * @return the executorCores value
      */
@@ -276,7 +277,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the executorCores value.
+     * Set number of cores to use for each executor.
      *
      * @param executorCores the executorCores value to set
      * @return the SparkSessionJobRequest object itself.
@@ -287,7 +288,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the executorCount value.
+     * Get number of executors to launch for this session.
      *
      * @return the executorCount value
      */
@@ -296,7 +297,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the executorCount value.
+     * Set number of executors to launch for this session.
      *
      * @param executorCount the executorCount value to set
      * @return the SparkSessionJobRequest object itself.
@@ -307,7 +308,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the archives value.
+     * Get archives to be used in this session.
      *
      * @return the archives value
      */
@@ -316,7 +317,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the archives value.
+     * Set archives to be used in this session.
      *
      * @param archives the archives value to set
      * @return the SparkSessionJobRequest object itself.
@@ -327,7 +328,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the queue value.
+     * Get the name of the YARN queue to which submitted.
      *
      * @return the queue value
      */
@@ -336,7 +337,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the queue value.
+     * Set the name of the YARN queue to which submitted.
      *
      * @param queue the queue value to set
      * @return the SparkSessionJobRequest object itself.
@@ -347,7 +348,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the name value.
+     * Get the name of this session.
      *
      * @return the name value
      */
@@ -356,7 +357,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the name value.
+     * Set the name of this session.
      *
      * @param name the name value to set
      * @return the SparkSessionJobRequest object itself.
@@ -367,7 +368,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the configuration value.
+     * Get spark configuration properties.
      *
      * @return the configuration value
      */
@@ -376,7 +377,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the configuration value.
+     * Set spark configuration properties.
      *
      * @param configuration the configuration value to set
      * @return the SparkSessionJobRequest object itself.
@@ -387,7 +388,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Get the heartbeatTimeoutInSecond value.
+     * Get timeout in second to which session be orphaned.
      *
      * @return the heartbeatTimeoutInSecond value
      */
@@ -396,7 +397,7 @@ public class SparkSessionJobRequest {
     }
 
     /**
-     * Set the heartbeatTimeoutInSecond value.
+     * Set timeout in second to which session be orphaned.
      *
      * @param heartbeatTimeoutInSecond the heartbeatTimeoutInSecond value to set
      * @return the SparkSessionJobRequest object itself.

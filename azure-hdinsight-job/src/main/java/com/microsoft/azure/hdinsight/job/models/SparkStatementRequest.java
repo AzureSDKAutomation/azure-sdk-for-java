@@ -21,10 +21,10 @@ public class SparkStatementRequest {
     private String code;
 
     /**
-     * The kind property.
+     * Possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
      */
     @JsonProperty(value = "kind")
-    private String kind;
+    private SessionJobKind kind;
 
     /**
      * Get the code value.
@@ -47,21 +47,21 @@ public class SparkStatementRequest {
     }
 
     /**
-     * Get the kind value.
+     * Get possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
      *
      * @return the kind value
      */
-    public String kind() {
+    public SessionJobKind kind() {
         return this.kind;
     }
 
     /**
-     * Set the kind value.
+     * Set possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
      *
      * @param kind the kind value to set
      * @return the SparkStatementRequest object itself.
      */
-    public SparkStatementRequest withKind(String kind) {
+    public SparkStatementRequest withKind(SessionJobKind kind) {
         this.kind = kind;
         return this;
     }

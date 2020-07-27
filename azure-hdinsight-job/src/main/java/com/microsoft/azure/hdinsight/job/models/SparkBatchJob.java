@@ -17,37 +17,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkBatchJob {
     /**
-     * The id property.
+     * The livy id of the spark batch job.
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /**
-     * The appId property.
+     * The application id of this job.
      */
     @JsonProperty(value = "appId")
     private String appId;
 
     /**
-     * The appInfo property.
+     * The detailed application info.
      */
     @JsonProperty(value = "appInfo")
     private Map<String, String> appInfo;
 
     /**
-     * The state property.
+     * The current state of the spark batch job. Possible values include:
+     * 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down',
+     * 'error', 'dead', 'killed', 'success', 'recovering'.
      */
     @JsonProperty(value = "state")
-    private String state;
+    private JobState state;
 
     /**
-     * The logLines property.
+     * The log lines.
      */
     @JsonProperty(value = "log")
     private List<String> logLines;
 
     /**
-     * Get the id value.
+     * Get the livy id of the spark batch job.
      *
      * @return the id value
      */
@@ -56,7 +58,7 @@ public class SparkBatchJob {
     }
 
     /**
-     * Set the id value.
+     * Set the livy id of the spark batch job.
      *
      * @param id the id value to set
      * @return the SparkBatchJob object itself.
@@ -67,7 +69,7 @@ public class SparkBatchJob {
     }
 
     /**
-     * Get the appId value.
+     * Get the application id of this job.
      *
      * @return the appId value
      */
@@ -76,7 +78,7 @@ public class SparkBatchJob {
     }
 
     /**
-     * Set the appId value.
+     * Set the application id of this job.
      *
      * @param appId the appId value to set
      * @return the SparkBatchJob object itself.
@@ -87,7 +89,7 @@ public class SparkBatchJob {
     }
 
     /**
-     * Get the appInfo value.
+     * Get the detailed application info.
      *
      * @return the appInfo value
      */
@@ -96,7 +98,7 @@ public class SparkBatchJob {
     }
 
     /**
-     * Set the appInfo value.
+     * Set the detailed application info.
      *
      * @param appInfo the appInfo value to set
      * @return the SparkBatchJob object itself.
@@ -107,27 +109,27 @@ public class SparkBatchJob {
     }
 
     /**
-     * Get the state value.
+     * Get the current state of the spark batch job. Possible values include: 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down', 'error', 'dead', 'killed', 'success', 'recovering'.
      *
      * @return the state value
      */
-    public String state() {
+    public JobState state() {
         return this.state;
     }
 
     /**
-     * Set the state value.
+     * Set the current state of the spark batch job. Possible values include: 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down', 'error', 'dead', 'killed', 'success', 'recovering'.
      *
      * @param state the state value to set
      * @return the SparkBatchJob object itself.
      */
-    public SparkBatchJob withState(String state) {
+    public SparkBatchJob withState(JobState state) {
         this.state = state;
         return this;
     }
 
     /**
-     * Get the logLines value.
+     * Get the log lines.
      *
      * @return the logLines value
      */
@@ -136,7 +138,7 @@ public class SparkBatchJob {
     }
 
     /**
-     * Set the logLines value.
+     * Set the log lines.
      *
      * @param logLines the logLines value to set
      * @return the SparkBatchJob object itself.

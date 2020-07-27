@@ -17,55 +17,58 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SparkSessionJob {
     /**
-     * The id property.
+     * The livy id of the spark session job.
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /**
-     * The appId property.
+     * The application id of this job.
      */
     @JsonProperty(value = "appId")
     private String appId;
 
     /**
-     * The owner property.
+     * Remote user who submitted this job.
      */
     @JsonProperty(value = "owner")
     private String owner;
 
     /**
-     * The proxyUser property.
+     * User to impersonate when running.
      */
     @JsonProperty(value = "proxyUser")
     private String proxyUser;
 
     /**
-     * The kind property.
+     * Spark session job kind. Possible values include: 'spark', 'pyspark',
+     * 'sparkr', 'sql'.
      */
     @JsonProperty(value = "kind")
-    private String kind;
+    private SessionJobKind kind;
 
     /**
-     * The logLines property.
+     * The log lines.
      */
     @JsonProperty(value = "log")
     private List<String> logLines;
 
     /**
-     * The state property.
+     * The current state of the spark session job. Possible values include:
+     * 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down',
+     * 'error', 'dead', 'killed', 'success', 'recovering'.
      */
     @JsonProperty(value = "state")
-    private String state;
+    private JobState state;
 
     /**
-     * The appInfo property.
+     * The detailed application info.
      */
     @JsonProperty(value = "appInfo")
     private Map<String, String> appInfo;
 
     /**
-     * Get the id value.
+     * Get the livy id of the spark session job.
      *
      * @return the id value
      */
@@ -74,7 +77,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Set the id value.
+     * Set the livy id of the spark session job.
      *
      * @param id the id value to set
      * @return the SparkSessionJob object itself.
@@ -85,7 +88,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Get the appId value.
+     * Get the application id of this job.
      *
      * @return the appId value
      */
@@ -94,7 +97,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Set the appId value.
+     * Set the application id of this job.
      *
      * @param appId the appId value to set
      * @return the SparkSessionJob object itself.
@@ -105,7 +108,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Get the owner value.
+     * Get remote user who submitted this job.
      *
      * @return the owner value
      */
@@ -114,7 +117,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Set the owner value.
+     * Set remote user who submitted this job.
      *
      * @param owner the owner value to set
      * @return the SparkSessionJob object itself.
@@ -125,7 +128,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Get the proxyUser value.
+     * Get user to impersonate when running.
      *
      * @return the proxyUser value
      */
@@ -134,7 +137,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Set the proxyUser value.
+     * Set user to impersonate when running.
      *
      * @param proxyUser the proxyUser value to set
      * @return the SparkSessionJob object itself.
@@ -145,27 +148,27 @@ public class SparkSessionJob {
     }
 
     /**
-     * Get the kind value.
+     * Get spark session job kind. Possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
      *
      * @return the kind value
      */
-    public String kind() {
+    public SessionJobKind kind() {
         return this.kind;
     }
 
     /**
-     * Set the kind value.
+     * Set spark session job kind. Possible values include: 'spark', 'pyspark', 'sparkr', 'sql'.
      *
      * @param kind the kind value to set
      * @return the SparkSessionJob object itself.
      */
-    public SparkSessionJob withKind(String kind) {
+    public SparkSessionJob withKind(SessionJobKind kind) {
         this.kind = kind;
         return this;
     }
 
     /**
-     * Get the logLines value.
+     * Get the log lines.
      *
      * @return the logLines value
      */
@@ -174,7 +177,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Set the logLines value.
+     * Set the log lines.
      *
      * @param logLines the logLines value to set
      * @return the SparkSessionJob object itself.
@@ -185,27 +188,27 @@ public class SparkSessionJob {
     }
 
     /**
-     * Get the state value.
+     * Get the current state of the spark session job. Possible values include: 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down', 'error', 'dead', 'killed', 'success', 'recovering'.
      *
      * @return the state value
      */
-    public String state() {
+    public JobState state() {
         return this.state;
     }
 
     /**
-     * Set the state value.
+     * Set the current state of the spark session job. Possible values include: 'not_started', 'starting', 'idle', 'running', 'busy', 'shutting_down', 'error', 'dead', 'killed', 'success', 'recovering'.
      *
      * @param state the state value to set
      * @return the SparkSessionJob object itself.
      */
-    public SparkSessionJob withState(String state) {
+    public SparkSessionJob withState(JobState state) {
         this.state = state;
         return this;
     }
 
     /**
-     * Get the appInfo value.
+     * Get the detailed application info.
      *
      * @return the appInfo value
      */
@@ -214,7 +217,7 @@ public class SparkSessionJob {
     }
 
     /**
-     * Set the appInfo value.
+     * Set the detailed application info.
      *
      * @param appInfo the appInfo value to set
      * @return the SparkSessionJob object itself.
