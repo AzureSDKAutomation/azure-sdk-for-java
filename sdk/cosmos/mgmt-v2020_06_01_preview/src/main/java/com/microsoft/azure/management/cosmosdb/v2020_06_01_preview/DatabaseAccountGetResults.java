@@ -51,6 +51,11 @@ public interface DatabaseAccountGetResults extends HasInner<DatabaseAccountGetRe
     ConsistencyPolicy consistencyPolicy();
 
     /**
+     * @return the cors value.
+     */
+    List<CorsPolicy> cors();
+
+    /**
      * @return the createMode value.
      */
     CreateMode createMode();
@@ -244,7 +249,7 @@ public interface DatabaseAccountGetResults extends HasInner<DatabaseAccountGetRe
     /**
      * The template for a DatabaseAccountGetResults update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<DatabaseAccountGetResults>, Resource.UpdateWithTags<Update>, UpdateStages.WithApiProperties, UpdateStages.WithBackupPolicy, UpdateStages.WithCapabilities, UpdateStages.WithConnectorOffer, UpdateStages.WithConsistencyPolicy, UpdateStages.WithDisableKeyBasedMetadataWriteAccess, UpdateStages.WithEnableAnalyticalStorage, UpdateStages.WithEnableAutomaticFailover, UpdateStages.WithEnableCassandraConnector, UpdateStages.WithEnableFreeTier, UpdateStages.WithEnableMultipleWriteLocations, UpdateStages.WithIpRules, UpdateStages.WithIsVirtualNetworkFilterEnabled, UpdateStages.WithKeyVaultKeyUri, UpdateStages.WithLocations, UpdateStages.WithPublicNetworkAccess, UpdateStages.WithVirtualNetworkRules {
+    interface Update extends Appliable<DatabaseAccountGetResults>, Resource.UpdateWithTags<Update>, UpdateStages.WithApiProperties, UpdateStages.WithBackupPolicy, UpdateStages.WithCapabilities, UpdateStages.WithConnectorOffer, UpdateStages.WithConsistencyPolicy, UpdateStages.WithCors, UpdateStages.WithDisableKeyBasedMetadataWriteAccess, UpdateStages.WithEnableAnalyticalStorage, UpdateStages.WithEnableAutomaticFailover, UpdateStages.WithEnableCassandraConnector, UpdateStages.WithEnableFreeTier, UpdateStages.WithEnableMultipleWriteLocations, UpdateStages.WithIpRules, UpdateStages.WithIsVirtualNetworkFilterEnabled, UpdateStages.WithKeyVaultKeyUri, UpdateStages.WithLocations, UpdateStages.WithPublicNetworkAccess, UpdateStages.WithVirtualNetworkRules {
     }
 
     /**
@@ -309,6 +314,18 @@ public interface DatabaseAccountGetResults extends HasInner<DatabaseAccountGetRe
              * @return the next update stage
              */
             Update withConsistencyPolicy(ConsistencyPolicy consistencyPolicy);
+        }
+
+        /**
+         * The stage of the databaseaccountgetresults update allowing to specify Cors.
+         */
+        interface WithCors {
+            /**
+             * Specifies cors.
+             * @param cors The CORS policy for the Cosmos DB database account
+             * @return the next update stage
+             */
+            Update withCors(List<CorsPolicy> cors);
         }
 
         /**

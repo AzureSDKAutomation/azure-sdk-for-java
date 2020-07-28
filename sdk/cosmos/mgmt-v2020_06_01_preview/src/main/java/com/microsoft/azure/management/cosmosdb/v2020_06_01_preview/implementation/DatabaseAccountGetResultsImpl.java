@@ -19,6 +19,7 @@ import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.BackupPolicy;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.Capability;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.ConnectorOffer;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.ConsistencyPolicy;
+import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.CorsPolicy;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.CreateMode;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.DatabaseAccountOfferType;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.FailoverPolicy;
@@ -113,6 +114,11 @@ class DatabaseAccountGetResultsImpl extends GroupableResourceCoreImpl<DatabaseAc
     @Override
     public ConsistencyPolicy consistencyPolicy() {
         return this.inner().consistencyPolicy();
+    }
+
+    @Override
+    public List<CorsPolicy> cors() {
+        return this.inner().cors();
     }
 
     @Override
@@ -291,6 +297,12 @@ class DatabaseAccountGetResultsImpl extends GroupableResourceCoreImpl<DatabaseAc
     @Override
     public DatabaseAccountGetResultsImpl withConsistencyPolicy(ConsistencyPolicy consistencyPolicy) {
         this.updateParameter.withConsistencyPolicy(consistencyPolicy);
+        return this;
+    }
+
+    @Override
+    public DatabaseAccountGetResultsImpl withCors(List<CorsPolicy> cors) {
+        this.updateParameter.withCors(cors);
         return this;
     }
 
