@@ -53,29 +53,6 @@ public class BillingManagementClientImpl extends AzureServiceClient {
         return this;
     }
 
-    /** Azure Subscription ID. */
-    private String subscriptionId1;
-
-    /**
-     * Gets Azure Subscription ID.
-     *
-     * @return the subscriptionId1 value.
-     */
-    public String subscriptionId1() {
-        return this.subscriptionId1;
-    }
-
-    /**
-     * Sets Azure Subscription ID.
-     *
-     * @param subscriptionId1 the subscriptionId1 value.
-     * @return the service client itself
-     */
-    public BillingManagementClientImpl withSubscriptionId1(String subscriptionId1) {
-        this.subscriptionId1 = subscriptionId1;
-        return this;
-    }
-
     /** The preferred language for the response. */
     private String acceptLanguage;
 
