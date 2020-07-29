@@ -212,6 +212,30 @@ class SqlResourcesImpl extends WrapperImpl<SqlResourcesInner> implements SqlReso
     }
 
     @Override
+    public Observable<ThroughputSettingsGetResults> migrateToAutoscaleSqlDatabaseAsync(String resourceGroupName, String accountName, String databaseName) {
+        SqlResourcesInner client = this.inner();
+        return client.migrateToAutoscaleSqlDatabaseAsync(resourceGroupName, accountName, databaseName)
+        .map(new Func1<ThroughputSettingsGetResultsInner, ThroughputSettingsGetResults>() {
+            @Override
+            public ThroughputSettingsGetResults call(ThroughputSettingsGetResultsInner inner) {
+                return new ThroughputSettingsGetResultsImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<ThroughputSettingsGetResults> migrateToManualThroughputSqlDatabaseAsync(String resourceGroupName, String accountName, String databaseName) {
+        SqlResourcesInner client = this.inner();
+        return client.migrateToManualThroughputSqlDatabaseAsync(resourceGroupName, accountName, databaseName)
+        .map(new Func1<ThroughputSettingsGetResultsInner, ThroughputSettingsGetResults>() {
+            @Override
+            public ThroughputSettingsGetResults call(ThroughputSettingsGetResultsInner inner) {
+                return new ThroughputSettingsGetResultsImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
     public Observable<ThroughputSettingsGetResults> getSqlContainerThroughputAsync(String resourceGroupName, String accountName, String databaseName, String containerName) {
         SqlResourcesInner client = this.inner();
         return client.getSqlContainerThroughputAsync(resourceGroupName, accountName, databaseName, containerName)
