@@ -16,6 +16,8 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.management.containerservice.v2020_01_01.Format;
+import com.microsoft.azure.management.containerservice.v2020_01_01.Login;
 import com.microsoft.azure.management.containerservice.v2020_01_01.ManagedClusterAADProfile;
 import com.microsoft.azure.management.containerservice.v2020_01_01.ManagedClusterServicePrincipalProfile;
 import com.microsoft.azure.management.containerservice.v2020_01_01.TagsObject;
@@ -92,7 +94,7 @@ public class ManagedClustersInner implements InnerSupportsGet<ManagedClusterInne
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.containerservice.v2020_01_01.ManagedClusters listClusterUserCredentials" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterUserCredential")
-        Observable<Response<ResponseBody>> listClusterUserCredentials(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("resourceName") String resourceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listClusterUserCredentials(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("resourceName") String resourceName, @Query("api-version") String apiVersion, @Query("format") Format format, @Query("login") Login login, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.containerservice.v2020_01_01.ManagedClusters listClusterMonitoringUserCredentials" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterMonitoringUserCredential")
@@ -726,7 +728,98 @@ public class ManagedClustersInner implements InnerSupportsGet<ManagedClusterInne
             throw new IllegalArgumentException("Parameter resourceName is required and cannot be null.");
         }
         final String apiVersion = "2020-01-01";
-        return service.listClusterUserCredentials(this.client.subscriptionId(), resourceGroupName, resourceName, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        final Format format = null;
+        final Login login = null;
+        return service.listClusterUserCredentials(this.client.subscriptionId(), resourceGroupName, resourceName, apiVersion, format, login, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CredentialResultsInner>>>() {
+                @Override
+                public Observable<ServiceResponse<CredentialResultsInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<CredentialResultsInner> clientResponse = listClusterUserCredentialsDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Gets cluster user credential of a managed cluster.
+     * Gets cluster user credential of the managed cluster with a specified resource group and name.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param resourceName The name of the managed cluster resource.
+     * @param format Credential Format. Possible values: azure, exec. Possible values include: 'azure', 'exec'
+     * @param login Credential Format. Possible values: devicecode, spn, msi. Possible values include: 'devicecode', 'spn', 'msi'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the CredentialResultsInner object if successful.
+     */
+    public CredentialResultsInner listClusterUserCredentials(String resourceGroupName, String resourceName, Format format, Login login) {
+        return listClusterUserCredentialsWithServiceResponseAsync(resourceGroupName, resourceName, format, login).toBlocking().single().body();
+    }
+
+    /**
+     * Gets cluster user credential of a managed cluster.
+     * Gets cluster user credential of the managed cluster with a specified resource group and name.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param resourceName The name of the managed cluster resource.
+     * @param format Credential Format. Possible values: azure, exec. Possible values include: 'azure', 'exec'
+     * @param login Credential Format. Possible values: devicecode, spn, msi. Possible values include: 'devicecode', 'spn', 'msi'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<CredentialResultsInner> listClusterUserCredentialsAsync(String resourceGroupName, String resourceName, Format format, Login login, final ServiceCallback<CredentialResultsInner> serviceCallback) {
+        return ServiceFuture.fromResponse(listClusterUserCredentialsWithServiceResponseAsync(resourceGroupName, resourceName, format, login), serviceCallback);
+    }
+
+    /**
+     * Gets cluster user credential of a managed cluster.
+     * Gets cluster user credential of the managed cluster with a specified resource group and name.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param resourceName The name of the managed cluster resource.
+     * @param format Credential Format. Possible values: azure, exec. Possible values include: 'azure', 'exec'
+     * @param login Credential Format. Possible values: devicecode, spn, msi. Possible values include: 'devicecode', 'spn', 'msi'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CredentialResultsInner object
+     */
+    public Observable<CredentialResultsInner> listClusterUserCredentialsAsync(String resourceGroupName, String resourceName, Format format, Login login) {
+        return listClusterUserCredentialsWithServiceResponseAsync(resourceGroupName, resourceName, format, login).map(new Func1<ServiceResponse<CredentialResultsInner>, CredentialResultsInner>() {
+            @Override
+            public CredentialResultsInner call(ServiceResponse<CredentialResultsInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Gets cluster user credential of a managed cluster.
+     * Gets cluster user credential of the managed cluster with a specified resource group and name.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param resourceName The name of the managed cluster resource.
+     * @param format Credential Format. Possible values: azure, exec. Possible values include: 'azure', 'exec'
+     * @param login Credential Format. Possible values: devicecode, spn, msi. Possible values include: 'devicecode', 'spn', 'msi'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the CredentialResultsInner object
+     */
+    public Observable<ServiceResponse<CredentialResultsInner>> listClusterUserCredentialsWithServiceResponseAsync(String resourceGroupName, String resourceName, Format format, Login login) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (resourceName == null) {
+            throw new IllegalArgumentException("Parameter resourceName is required and cannot be null.");
+        }
+        final String apiVersion = "2020-01-01";
+        return service.listClusterUserCredentials(this.client.subscriptionId(), resourceGroupName, resourceName, apiVersion, format, login, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CredentialResultsInner>>>() {
                 @Override
                 public Observable<ServiceResponse<CredentialResultsInner>> call(Response<ResponseBody> response) {
