@@ -64,10 +64,14 @@ class ComputePoliciesImpl extends WrapperImpl<ComputePoliciesInner> implements C
     public Observable<ComputePolicy> getAsync(String resourceGroupName, String accountName, String computePolicyName) {
         ComputePoliciesInner client = this.inner();
         return client.getAsync(resourceGroupName, accountName, computePolicyName)
-        .map(new Func1<ComputePolicyInner, ComputePolicy>() {
+        .flatMap(new Func1<ComputePolicyInner, Observable<ComputePolicy>>() {
             @Override
-            public ComputePolicy call(ComputePolicyInner inner) {
-                return wrapModel(inner);
+            public Observable<ComputePolicy> call(ComputePolicyInner inner) {
+                if (inner == null) {
+                    return Observable.empty();
+                } else {
+                    return Observable.just((ComputePolicy)wrapModel(inner));
+                }
             }
        });
     }

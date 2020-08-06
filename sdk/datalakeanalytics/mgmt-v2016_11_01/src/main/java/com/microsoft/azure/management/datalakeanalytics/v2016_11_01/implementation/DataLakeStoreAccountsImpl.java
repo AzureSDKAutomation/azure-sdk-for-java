@@ -55,10 +55,14 @@ class DataLakeStoreAccountsImpl extends WrapperImpl<DataLakeStoreAccountsInner> 
     public Observable<DataLakeStoreAccountInformation> getAsync(String resourceGroupName, String accountName, String dataLakeStoreAccountName) {
         DataLakeStoreAccountsInner client = this.inner();
         return client.getAsync(resourceGroupName, accountName, dataLakeStoreAccountName)
-        .map(new Func1<DataLakeStoreAccountInformationInner, DataLakeStoreAccountInformation>() {
+        .flatMap(new Func1<DataLakeStoreAccountInformationInner, Observable<DataLakeStoreAccountInformation>>() {
             @Override
-            public DataLakeStoreAccountInformation call(DataLakeStoreAccountInformationInner inner) {
-                return wrapModel(inner);
+            public Observable<DataLakeStoreAccountInformation> call(DataLakeStoreAccountInformationInner inner) {
+                if (inner == null) {
+                    return Observable.empty();
+                } else {
+                    return Observable.just((DataLakeStoreAccountInformation)wrapModel(inner));
+                }
             }
        });
     }
