@@ -194,10 +194,14 @@ class AccountsImpl extends GroupableResourcesCoreImpl<DataLakeAnalyticsAccount, 
     public Observable<StorageAccountInfo> getStorageAccountAsync(String resourceGroupName, String accountName, String storageAccountName) {
         AccountsInner client = this.inner();
         return client.getStorageAccountAsync(resourceGroupName, accountName, storageAccountName)
-        .map(new Func1<StorageAccountInfoInner, StorageAccountInfo>() {
+        .flatMap(new Func1<StorageAccountInfoInner, Observable<StorageAccountInfo>>() {
             @Override
-            public StorageAccountInfo call(StorageAccountInfoInner inner) {
-                return wrapStorageAccountInfoModel(inner);
+            public Observable<StorageAccountInfo> call(StorageAccountInfoInner inner) {
+                if (inner == null) {
+                    return Observable.empty();
+                } else {
+                    return Observable.just((StorageAccountInfo)wrapStorageAccountInfoModel(inner));
+                }
             }
        });
     }
@@ -236,10 +240,14 @@ class AccountsImpl extends GroupableResourcesCoreImpl<DataLakeAnalyticsAccount, 
     public Observable<BlobContainer> getStorageContainerAsync(String resourceGroupName, String accountName, String storageAccountName, String containerName) {
         AccountsInner client = this.inner();
         return client.getStorageContainerAsync(resourceGroupName, accountName, storageAccountName, containerName)
-        .map(new Func1<BlobContainerInner, BlobContainer>() {
+        .flatMap(new Func1<BlobContainerInner, Observable<BlobContainer>>() {
             @Override
-            public BlobContainer call(BlobContainerInner inner) {
-                return wrapBlobContainerModel(inner);
+            public Observable<BlobContainer> call(BlobContainerInner inner) {
+                if (inner == null) {
+                    return Observable.empty();
+                } else {
+                    return Observable.just((BlobContainer)wrapBlobContainerModel(inner));
+                }
             }
        });
     }
@@ -284,10 +292,14 @@ class AccountsImpl extends GroupableResourcesCoreImpl<DataLakeAnalyticsAccount, 
     public Observable<DataLakeStoreAccountInfo> getDataLakeStoreAccountAsync(String resourceGroupName, String accountName, String dataLakeStoreAccountName) {
         AccountsInner client = this.inner();
         return client.getDataLakeStoreAccountAsync(resourceGroupName, accountName, dataLakeStoreAccountName)
-        .map(new Func1<DataLakeStoreAccountInfoInner, DataLakeStoreAccountInfo>() {
+        .flatMap(new Func1<DataLakeStoreAccountInfoInner, Observable<DataLakeStoreAccountInfo>>() {
             @Override
-            public DataLakeStoreAccountInfo call(DataLakeStoreAccountInfoInner inner) {
-                return wrapDataLakeStoreAccountInfoModel(inner);
+            public Observable<DataLakeStoreAccountInfo> call(DataLakeStoreAccountInfoInner inner) {
+                if (inner == null) {
+                    return Observable.empty();
+                } else {
+                    return Observable.just((DataLakeStoreAccountInfo)wrapDataLakeStoreAccountInfoModel(inner));
+                }
             }
        });
     }
