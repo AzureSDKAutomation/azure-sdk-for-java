@@ -1476,7 +1476,7 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps deleteSourceControlSlot" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/sourcecontrols/web", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteSourceControlSlot(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("slot") String slot, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteSourceControlSlot(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("slot") String slot, @Path("subscriptionId") String subscriptionId, @Query("additionalFlags") String additionalFlags, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps updateSourceControlSlot" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/sourcecontrols/web")
@@ -1612,7 +1612,7 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps deleteSourceControl" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sourcecontrols/web", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteSourceControl(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteSourceControl(@Path("resourceGroupName") String resourceGroupName, @Path("name") String name, @Path("subscriptionId") String subscriptionId, @Query("additionalFlags") String additionalFlags, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appservice.v2019_08_01.WebApps updateSourceControl" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sourcecontrols/web")
@@ -39331,7 +39331,101 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.deleteSourceControlSlot(resourceGroupName, name, slot, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String additionalFlags = null;
+        return service.deleteSourceControlSlot(resourceGroupName, name, slot, this.client.subscriptionId(), additionalFlags, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = deleteSourceControlSlotDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Deletes the source control configuration of an app.
+     * Description for Deletes the source control configuration of an app.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param slot Name of the deployment slot. If a slot is not specified, the API will delete the source control configuration for the production slot.
+     * @param additionalFlags Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    public void deleteSourceControlSlot(String resourceGroupName, String name, String slot, String additionalFlags) {
+        deleteSourceControlSlotWithServiceResponseAsync(resourceGroupName, name, slot, additionalFlags).toBlocking().single().body();
+    }
+
+    /**
+     * Deletes the source control configuration of an app.
+     * Description for Deletes the source control configuration of an app.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param slot Name of the deployment slot. If a slot is not specified, the API will delete the source control configuration for the production slot.
+     * @param additionalFlags Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Void> deleteSourceControlSlotAsync(String resourceGroupName, String name, String slot, String additionalFlags, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteSourceControlSlotWithServiceResponseAsync(resourceGroupName, name, slot, additionalFlags), serviceCallback);
+    }
+
+    /**
+     * Deletes the source control configuration of an app.
+     * Description for Deletes the source control configuration of an app.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param slot Name of the deployment slot. If a slot is not specified, the API will delete the source control configuration for the production slot.
+     * @param additionalFlags Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> deleteSourceControlSlotAsync(String resourceGroupName, String name, String slot, String additionalFlags) {
+        return deleteSourceControlSlotWithServiceResponseAsync(resourceGroupName, name, slot, additionalFlags).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Deletes the source control configuration of an app.
+     * Description for Deletes the source control configuration of an app.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param slot Name of the deployment slot. If a slot is not specified, the API will delete the source control configuration for the production slot.
+     * @param additionalFlags Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> deleteSourceControlSlotWithServiceResponseAsync(String resourceGroupName, String name, String slot, String additionalFlags) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (slot == null) {
+            throw new IllegalArgumentException("Parameter slot is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.deleteSourceControlSlot(resourceGroupName, name, slot, this.client.subscriptionId(), additionalFlags, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -43327,7 +43421,94 @@ public class WebAppsInner implements InnerSupportsGet<SiteInner>, InnerSupportsD
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.deleteSourceControl(resourceGroupName, name, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String additionalFlags = null;
+        return service.deleteSourceControl(resourceGroupName, name, this.client.subscriptionId(), additionalFlags, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = deleteSourceControlDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Deletes the source control configuration of an app.
+     * Description for Deletes the source control configuration of an app.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param additionalFlags Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws DefaultErrorResponseException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    public void deleteSourceControl(String resourceGroupName, String name, String additionalFlags) {
+        deleteSourceControlWithServiceResponseAsync(resourceGroupName, name, additionalFlags).toBlocking().single().body();
+    }
+
+    /**
+     * Deletes the source control configuration of an app.
+     * Description for Deletes the source control configuration of an app.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param additionalFlags Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Void> deleteSourceControlAsync(String resourceGroupName, String name, String additionalFlags, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteSourceControlWithServiceResponseAsync(resourceGroupName, name, additionalFlags), serviceCallback);
+    }
+
+    /**
+     * Deletes the source control configuration of an app.
+     * Description for Deletes the source control configuration of an app.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param additionalFlags Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> deleteSourceControlAsync(String resourceGroupName, String name, String additionalFlags) {
+        return deleteSourceControlWithServiceResponseAsync(resourceGroupName, name, additionalFlags).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Deletes the source control configuration of an app.
+     * Description for Deletes the source control configuration of an app.
+     *
+     * @param resourceGroupName Name of the resource group to which the resource belongs.
+     * @param name Name of the app.
+     * @param additionalFlags Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> deleteSourceControlWithServiceResponseAsync(String resourceGroupName, String name, String additionalFlags) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.deleteSourceControl(resourceGroupName, name, this.client.subscriptionId(), additionalFlags, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
