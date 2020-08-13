@@ -38,6 +38,11 @@ public interface Workspace extends HasInner<WorkspaceInner>, Resource, Groupable
     DataLakeStorageAccountDetails defaultDataLakeStorage();
 
     /**
+     * @return the extraProperties value.
+     */
+    Map<String, Object> extraProperties();
+
+    /**
      * @return the identity value.
      */
     ManagedIdentity identity();

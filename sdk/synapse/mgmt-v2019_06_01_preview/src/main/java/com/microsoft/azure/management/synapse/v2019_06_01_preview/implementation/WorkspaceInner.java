@@ -82,6 +82,12 @@ public class WorkspaceInner extends Resource {
     private List<PrivateEndpointConnectionInner> privateEndpointConnections;
 
     /**
+     * Workspace level configs and feature flags.
+     */
+    @JsonProperty(value = "properties.extraProperties", access = JsonProperty.Access.WRITE_ONLY)
+    private Map<String, Object> extraProperties;
+
+    /**
      * Identity of the workspace.
      */
     @JsonProperty(value = "identity")
@@ -254,6 +260,15 @@ public class WorkspaceInner extends Resource {
     public WorkspaceInner withPrivateEndpointConnections(List<PrivateEndpointConnectionInner> privateEndpointConnections) {
         this.privateEndpointConnections = privateEndpointConnections;
         return this;
+    }
+
+    /**
+     * Get workspace level configs and feature flags.
+     *
+     * @return the extraProperties value
+     */
+    public Map<String, Object> extraProperties() {
+        return this.extraProperties;
     }
 
     /**

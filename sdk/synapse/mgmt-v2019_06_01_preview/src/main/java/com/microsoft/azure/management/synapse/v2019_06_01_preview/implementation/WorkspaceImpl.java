@@ -82,6 +82,11 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     }
 
     @Override
+    public Map<String, Object> extraProperties() {
+        return this.inner().extraProperties();
+    }
+
+    @Override
     public ManagedIdentity identity() {
         return this.inner().identity();
     }
