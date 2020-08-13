@@ -115,6 +115,7 @@ import com.microsoft.azure.management.network.v2020_05_01.ExpressRouteConnection
 import com.microsoft.azure.management.network.v2020_05_01.VirtualHubBgpConnections;
 import com.microsoft.azure.management.network.v2020_05_01.VirtualHubIpConfigurations;
 import com.microsoft.azure.management.network.v2020_05_01.HubRouteTables;
+import com.microsoft.azure.management.network.v2020_05_01.WebApplicationFirewallPolicies;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -221,6 +222,7 @@ public final class NetworkManager extends ManagerCore<NetworkManager, NetworkMan
     private VirtualHubBgpConnections virtualHubBgpConnections;
     private VirtualHubIpConfigurations virtualHubIpConfigurations;
     private HubRouteTables hubRouteTables;
+    private WebApplicationFirewallPolicies webApplicationFirewallPolicies;
     /**
     * Get a Configurable instance that can be used to create NetworkManager with optional configuration.
     *
@@ -1256,6 +1258,16 @@ public final class NetworkManager extends ManagerCore<NetworkManager, NetworkMan
             this.hubRouteTables = new HubRouteTablesImpl(this);
         }
         return this.hubRouteTables;
+    }
+
+    /**
+     * @return Entry point to manage WebApplicationFirewallPolicies.
+     */
+    public WebApplicationFirewallPolicies webApplicationFirewallPolicies() {
+        if (this.webApplicationFirewallPolicies == null) {
+            this.webApplicationFirewallPolicies = new WebApplicationFirewallPoliciesImpl(this);
+        }
+        return this.webApplicationFirewallPolicies;
     }
 
     /**
