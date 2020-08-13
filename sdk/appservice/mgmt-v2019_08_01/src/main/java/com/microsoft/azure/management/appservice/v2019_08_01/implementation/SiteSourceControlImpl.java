@@ -10,6 +10,7 @@ package com.microsoft.azure.management.appservice.v2019_08_01.implementation;
 
 import com.microsoft.azure.management.appservice.v2019_08_01.SiteSourceControl;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
+import com.microsoft.azure.management.appservice.v2019_08_01.GitHubActionConfiguration;
 
 class SiteSourceControlImpl extends WrapperImpl<SiteSourceControlInner> implements SiteSourceControl {
     private final CertificateRegistrationManager manager;
@@ -34,8 +35,18 @@ class SiteSourceControlImpl extends WrapperImpl<SiteSourceControlInner> implemen
     }
 
     @Override
+    public GitHubActionConfiguration gitHubActionConfiguration() {
+        return this.inner().gitHubActionConfiguration();
+    }
+
+    @Override
     public String id() {
         return this.inner().id();
+    }
+
+    @Override
+    public Boolean isGitHubAction() {
+        return this.inner().isGitHubAction();
     }
 
     @Override

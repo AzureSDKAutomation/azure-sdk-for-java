@@ -28,9 +28,19 @@ public interface SiteSourceControl extends HasInner<SiteSourceControlInner>, Has
     Boolean deploymentRollbackEnabled();
 
     /**
+     * @return the gitHubActionConfiguration value.
+     */
+    GitHubActionConfiguration gitHubActionConfiguration();
+
+    /**
      * @return the id value.
      */
     String id();
+
+    /**
+     * @return the isGitHubAction value.
+     */
+    Boolean isGitHubAction();
 
     /**
      * @return the isManualIntegration value.
