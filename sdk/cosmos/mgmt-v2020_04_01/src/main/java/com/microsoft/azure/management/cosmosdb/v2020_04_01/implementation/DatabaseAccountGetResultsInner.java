@@ -20,6 +20,7 @@ import com.microsoft.azure.management.cosmosdb.v2020_04_01.VirtualNetworkRule;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.ConnectorOffer;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.PublicNetworkAccess;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.ApiProperties;
+import com.microsoft.azure.management.cosmosdb.v2020_04_01.BackupPolicy;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.CorsPolicy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
@@ -185,6 +186,12 @@ public class DatabaseAccountGetResultsInner extends ARMResourceProperties {
      */
     @JsonProperty(value = "properties.enableAnalyticalStorage")
     private Boolean enableAnalyticalStorage;
+
+    /**
+     * The object representing the policy for taking backups on an account.
+     */
+    @JsonProperty(value = "properties.backupPolicy")
+    private BackupPolicy backupPolicy;
 
     /**
      * The CORS policy for the Cosmos DB database account.
@@ -592,6 +599,26 @@ public class DatabaseAccountGetResultsInner extends ARMResourceProperties {
      */
     public DatabaseAccountGetResultsInner withEnableAnalyticalStorage(Boolean enableAnalyticalStorage) {
         this.enableAnalyticalStorage = enableAnalyticalStorage;
+        return this;
+    }
+
+    /**
+     * Get the object representing the policy for taking backups on an account.
+     *
+     * @return the backupPolicy value
+     */
+    public BackupPolicy backupPolicy() {
+        return this.backupPolicy;
+    }
+
+    /**
+     * Set the object representing the policy for taking backups on an account.
+     *
+     * @param backupPolicy the backupPolicy value to set
+     * @return the DatabaseAccountGetResultsInner object itself.
+     */
+    public DatabaseAccountGetResultsInner withBackupPolicy(BackupPolicy backupPolicy) {
+        this.backupPolicy = backupPolicy;
         return this;
     }
 

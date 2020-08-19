@@ -135,6 +135,12 @@ public class DatabaseAccountCreateUpdateParameters extends ARMResourceProperties
     private Boolean enableAnalyticalStorage;
 
     /**
+     * The object representing the policy for taking backups on an account.
+     */
+    @JsonProperty(value = "properties.backupPolicy")
+    private BackupPolicy backupPolicy;
+
+    /**
      * The CORS policy for the Cosmos DB database account.
      */
     @JsonProperty(value = "properties.cors")
@@ -505,6 +511,26 @@ public class DatabaseAccountCreateUpdateParameters extends ARMResourceProperties
      */
     public DatabaseAccountCreateUpdateParameters withEnableAnalyticalStorage(Boolean enableAnalyticalStorage) {
         this.enableAnalyticalStorage = enableAnalyticalStorage;
+        return this;
+    }
+
+    /**
+     * Get the object representing the policy for taking backups on an account.
+     *
+     * @return the backupPolicy value
+     */
+    public BackupPolicy backupPolicy() {
+        return this.backupPolicy;
+    }
+
+    /**
+     * Set the object representing the policy for taking backups on an account.
+     *
+     * @param backupPolicy the backupPolicy value to set
+     * @return the DatabaseAccountCreateUpdateParameters object itself.
+     */
+    public DatabaseAccountCreateUpdateParameters withBackupPolicy(BackupPolicy backupPolicy) {
+        this.backupPolicy = backupPolicy;
         return this;
     }
 
