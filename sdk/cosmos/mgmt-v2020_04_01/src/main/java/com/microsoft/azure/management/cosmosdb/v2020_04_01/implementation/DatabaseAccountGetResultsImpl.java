@@ -15,6 +15,7 @@ import com.microsoft.azure.management.cosmosdb.v2020_04_01.DatabaseAccountUpdate
 import java.util.List;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.DatabaseAccountCreateUpdateParameters;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.ApiProperties;
+import com.microsoft.azure.management.cosmosdb.v2020_04_01.BackupPolicy;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.Capability;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.ConnectorOffer;
 import com.microsoft.azure.management.cosmosdb.v2020_04_01.ConsistencyPolicy;
@@ -88,6 +89,11 @@ class DatabaseAccountGetResultsImpl extends GroupableResourceCoreImpl<DatabaseAc
     @Override
     public ApiProperties apiProperties() {
         return this.inner().apiProperties();
+    }
+
+    @Override
+    public BackupPolicy backupPolicy() {
+        return this.inner().backupPolicy();
     }
 
     @Override
@@ -244,6 +250,16 @@ class DatabaseAccountGetResultsImpl extends GroupableResourceCoreImpl<DatabaseAc
             this.createParameter.withApiProperties(apiProperties);
         } else {
             this.updateParameter.withApiProperties(apiProperties);
+        }
+        return this;
+    }
+
+    @Override
+    public DatabaseAccountGetResultsImpl withBackupPolicy(BackupPolicy backupPolicy) {
+        if (isInCreateMode()) {
+            this.createParameter.withBackupPolicy(backupPolicy);
+        } else {
+            this.updateParameter.withBackupPolicy(backupPolicy);
         }
         return this;
     }
