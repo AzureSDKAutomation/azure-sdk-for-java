@@ -249,7 +249,7 @@ public interface DatabaseAccountGetResults extends HasInner<DatabaseAccountGetRe
     /**
      * The template for a DatabaseAccountGetResults update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<DatabaseAccountGetResults>, Resource.UpdateWithTags<Update>, UpdateStages.WithApiProperties, UpdateStages.WithBackupPolicy, UpdateStages.WithCapabilities, UpdateStages.WithConnectorOffer, UpdateStages.WithConsistencyPolicy, UpdateStages.WithCors, UpdateStages.WithDisableKeyBasedMetadataWriteAccess, UpdateStages.WithEnableAnalyticalStorage, UpdateStages.WithEnableAutomaticFailover, UpdateStages.WithEnableCassandraConnector, UpdateStages.WithEnableFreeTier, UpdateStages.WithEnableMultipleWriteLocations, UpdateStages.WithIpRules, UpdateStages.WithIsVirtualNetworkFilterEnabled, UpdateStages.WithKeyVaultKeyUri, UpdateStages.WithLocations, UpdateStages.WithPublicNetworkAccess, UpdateStages.WithVirtualNetworkRules {
+    interface Update extends Appliable<DatabaseAccountGetResults>, Resource.UpdateWithTags<Update>, UpdateStages.WithApiProperties, UpdateStages.WithBackupPolicy, UpdateStages.WithCapabilities, UpdateStages.WithConnectorOffer, UpdateStages.WithConsistencyPolicy, UpdateStages.WithCors, UpdateStages.WithDisableKeyBasedMetadataWriteAccess, UpdateStages.WithEnableAnalyticalStorage, UpdateStages.WithEnableAutomaticFailover, UpdateStages.WithEnableCassandraConnector, UpdateStages.WithEnableFreeTier, UpdateStages.WithEnableMultipleWriteLocations, UpdateStages.WithIdentity, UpdateStages.WithIpRules, UpdateStages.WithIsVirtualNetworkFilterEnabled, UpdateStages.WithKeyVaultKeyUri, UpdateStages.WithLocations, UpdateStages.WithPublicNetworkAccess, UpdateStages.WithVirtualNetworkRules {
     }
 
     /**
@@ -398,6 +398,18 @@ public interface DatabaseAccountGetResults extends HasInner<DatabaseAccountGetRe
              * @return the next update stage
              */
             Update withEnableMultipleWriteLocations(Boolean enableMultipleWriteLocations);
+        }
+
+        /**
+         * The stage of the databaseaccountgetresults update allowing to specify Identity.
+         */
+        interface WithIdentity {
+            /**
+             * Specifies identity.
+             * @param identity the identity parameter value
+             * @return the next update stage
+             */
+            Update withIdentity(ManagedServiceIdentity identity);
         }
 
         /**

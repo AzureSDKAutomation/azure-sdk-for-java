@@ -32,8 +32,8 @@ import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.PublicNetwork
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.RestoreParameters;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.SystemData;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.VirtualNetworkRule;
-import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.DatabaseAccountCreateUpdateProperties;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.ManagedServiceIdentity;
+import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.DatabaseAccountCreateUpdateProperties;
 import rx.functions.Func1;
 
 class DatabaseAccountGetResultsImpl extends GroupableResourceCoreImpl<DatabaseAccountGetResults, DatabaseAccountGetResultsInner, DatabaseAccountGetResultsImpl, CosmosDBManager> implements DatabaseAccountGetResults, DatabaseAccountGetResults.Definition, DatabaseAccountGetResults.Update {
@@ -259,12 +259,6 @@ class DatabaseAccountGetResultsImpl extends GroupableResourceCoreImpl<DatabaseAc
     }
 
     @Override
-    public DatabaseAccountGetResultsImpl withIdentity(ManagedServiceIdentity identity) {
-        this.createParameter.withIdentity(identity);
-        return this;
-    }
-
-    @Override
     public DatabaseAccountGetResultsImpl withKind(DatabaseAccountKind kind) {
         this.createParameter.withKind(kind);
         return this;
@@ -375,6 +369,16 @@ class DatabaseAccountGetResultsImpl extends GroupableResourceCoreImpl<DatabaseAc
     @Override
     public DatabaseAccountGetResultsImpl withVirtualNetworkRules(List<VirtualNetworkRule> virtualNetworkRules) {
         this.updateParameter.withVirtualNetworkRules(virtualNetworkRules);
+        return this;
+    }
+
+    @Override
+    public DatabaseAccountGetResultsImpl withIdentity(ManagedServiceIdentity identity) {
+        if (isInCreateMode()) {
+            this.createParameter.withIdentity(identity);
+        } else {
+            this.updateParameter.withIdentity(identity);
+        }
         return this;
     }
 
