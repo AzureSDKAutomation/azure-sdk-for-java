@@ -72,6 +72,12 @@ public class ApplicationDefinitionInner extends GenericResource {
     private String packageFileUri;
 
     /**
+     * The storage account id for bring your own storage scenario.
+     */
+    @JsonProperty(value = "properties.storageAccountId")
+    private String storageAccountId;
+
+    /**
      * The inline main template json which has resources to be provisioned. It
      * can be a JObject or well-formed JSON string.
      */
@@ -254,6 +260,26 @@ public class ApplicationDefinitionInner extends GenericResource {
      */
     public ApplicationDefinitionInner withPackageFileUri(String packageFileUri) {
         this.packageFileUri = packageFileUri;
+        return this;
+    }
+
+    /**
+     * Get the storage account id for bring your own storage scenario.
+     *
+     * @return the storageAccountId value
+     */
+    public String storageAccountId() {
+        return this.storageAccountId;
+    }
+
+    /**
+     * Set the storage account id for bring your own storage scenario.
+     *
+     * @param storageAccountId the storageAccountId value to set
+     * @return the ApplicationDefinitionInner object itself.
+     */
+    public ApplicationDefinitionInner withStorageAccountId(String storageAccountId) {
+        this.storageAccountId = storageAccountId;
         return this;
     }
 

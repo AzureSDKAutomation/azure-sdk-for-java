@@ -106,6 +106,11 @@ public interface ApplicationDefinition extends HasInner<ApplicationDefinitionInn
     Sku sku();
 
     /**
+     * @return the storageAccountId value.
+     */
+    String storageAccountId();
+
+    /**
      * The entirety of the ApplicationDefinition definition.
      */
     interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithLockLevel, DefinitionStages.WithCreate {
@@ -320,17 +325,29 @@ public interface ApplicationDefinition extends HasInner<ApplicationDefinitionInn
         }
 
         /**
+         * The stage of the applicationdefinition definition allowing to specify StorageAccountId.
+         */
+        interface WithStorageAccountId {
+            /**
+             * Specifies storageAccountId.
+             * @param storageAccountId The storage account id for bring your own storage scenario
+             * @return the next definition stage
+             */
+            WithCreate withStorageAccountId(String storageAccountId);
+        }
+
+        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ApplicationDefinition>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithArtifacts, DefinitionStages.WithAuthorizations, DefinitionStages.WithCreateUiDefinition, DefinitionStages.WithDeploymentPolicy, DefinitionStages.WithDescription, DefinitionStages.WithDisplayName, DefinitionStages.WithIsEnabled, DefinitionStages.WithLockingPolicy, DefinitionStages.WithMainTemplate, DefinitionStages.WithManagedBy, DefinitionStages.WithManagementPolicy, DefinitionStages.WithNotificationPolicy, DefinitionStages.WithPackageFileUri, DefinitionStages.WithPolicies, DefinitionStages.WithSku {
+        interface WithCreate extends Creatable<ApplicationDefinition>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithArtifacts, DefinitionStages.WithAuthorizations, DefinitionStages.WithCreateUiDefinition, DefinitionStages.WithDeploymentPolicy, DefinitionStages.WithDescription, DefinitionStages.WithDisplayName, DefinitionStages.WithIsEnabled, DefinitionStages.WithLockingPolicy, DefinitionStages.WithMainTemplate, DefinitionStages.WithManagedBy, DefinitionStages.WithManagementPolicy, DefinitionStages.WithNotificationPolicy, DefinitionStages.WithPackageFileUri, DefinitionStages.WithPolicies, DefinitionStages.WithSku, DefinitionStages.WithStorageAccountId {
         }
     }
     /**
      * The template for a ApplicationDefinition update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ApplicationDefinition>, Resource.UpdateWithTags<Update>, UpdateStages.WithArtifacts, UpdateStages.WithAuthorizations, UpdateStages.WithCreateUiDefinition, UpdateStages.WithDeploymentPolicy, UpdateStages.WithDescription, UpdateStages.WithDisplayName, UpdateStages.WithIsEnabled, UpdateStages.WithLockingPolicy, UpdateStages.WithMainTemplate, UpdateStages.WithManagedBy, UpdateStages.WithManagementPolicy, UpdateStages.WithNotificationPolicy, UpdateStages.WithPackageFileUri, UpdateStages.WithPolicies, UpdateStages.WithSku {
+    interface Update extends Appliable<ApplicationDefinition>, Resource.UpdateWithTags<Update>, UpdateStages.WithArtifacts, UpdateStages.WithAuthorizations, UpdateStages.WithCreateUiDefinition, UpdateStages.WithDeploymentPolicy, UpdateStages.WithDescription, UpdateStages.WithDisplayName, UpdateStages.WithIsEnabled, UpdateStages.WithLockingPolicy, UpdateStages.WithMainTemplate, UpdateStages.WithManagedBy, UpdateStages.WithManagementPolicy, UpdateStages.WithNotificationPolicy, UpdateStages.WithPackageFileUri, UpdateStages.WithPolicies, UpdateStages.WithSku, UpdateStages.WithStorageAccountId {
     }
 
     /**
@@ -515,6 +532,18 @@ public interface ApplicationDefinition extends HasInner<ApplicationDefinitionInn
              * @return the next update stage
              */
             Update withSku(Sku sku);
+        }
+
+        /**
+         * The stage of the applicationdefinition update allowing to specify StorageAccountId.
+         */
+        interface WithStorageAccountId {
+            /**
+             * Specifies storageAccountId.
+             * @param storageAccountId The storage account id for bring your own storage scenario
+             * @return the next update stage
+             */
+            Update withStorageAccountId(String storageAccountId);
         }
 
     }

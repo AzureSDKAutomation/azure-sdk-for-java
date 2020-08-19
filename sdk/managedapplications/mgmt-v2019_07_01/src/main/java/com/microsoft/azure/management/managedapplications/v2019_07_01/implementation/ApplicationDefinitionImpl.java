@@ -134,6 +134,11 @@ class ApplicationDefinitionImpl extends GroupableResourceCoreImpl<ApplicationDef
     }
 
     @Override
+    public String storageAccountId() {
+        return this.inner().storageAccountId();
+    }
+
+    @Override
     public ApplicationDefinitionImpl withLockLevel(ApplicationLockLevel lockLevel) {
         this.inner().withLockLevel(lockLevel);
         return this;
@@ -226,6 +231,12 @@ class ApplicationDefinitionImpl extends GroupableResourceCoreImpl<ApplicationDef
     @Override
     public ApplicationDefinitionImpl withSku(Sku sku) {
         this.inner().withSku(sku);
+        return this;
+    }
+
+    @Override
+    public ApplicationDefinitionImpl withStorageAccountId(String storageAccountId) {
+        this.inner().withStorageAccountId(storageAccountId);
         return this;
     }
 
