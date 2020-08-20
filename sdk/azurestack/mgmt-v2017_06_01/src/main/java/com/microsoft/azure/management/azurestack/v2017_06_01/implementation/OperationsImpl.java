@@ -29,9 +29,9 @@ class OperationsImpl extends WrapperImpl<OperationsInner> implements Operations 
     }
 
     @Override
-    public Observable<Operation> listAsync() {
+    public Observable<Operation> xXXAsync() {
         OperationsInner client = this.inner();
-        return client.listAsync()
+        return client.xXXAsync()
         .flatMapIterable(new Func1<Page<OperationInner>, Iterable<OperationInner>>() {
             @Override
             public Iterable<OperationInner> call(Page<OperationInner> page) {
