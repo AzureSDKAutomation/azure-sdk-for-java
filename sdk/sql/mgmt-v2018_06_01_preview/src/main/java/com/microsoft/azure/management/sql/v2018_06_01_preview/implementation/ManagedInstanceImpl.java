@@ -19,6 +19,7 @@ import com.microsoft.azure.management.sql.v2018_06_01_preview.Sku;
 import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagedServerCreateMode;
 import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagedInstanceLicenseType;
 import com.microsoft.azure.management.sql.v2018_06_01_preview.ManagedInstanceProxyOverride;
+import com.microsoft.azure.management.sql.v2018_06_01_preview.StorageAccountType;
 import rx.functions.Func1;
 
 class ManagedInstanceImpl extends CreatableUpdatableImpl<ManagedInstance, ManagedInstanceInner, ManagedInstanceImpl> implements ManagedInstance, ManagedInstance.Definition, ManagedInstance.Update {
@@ -199,6 +200,11 @@ class ManagedInstanceImpl extends CreatableUpdatableImpl<ManagedInstance, Manage
     @Override
     public String state() {
         return this.inner().state();
+    }
+
+    @Override
+    public StorageAccountType storageAccountType() {
+        return this.inner().storageAccountType();
     }
 
     @Override
@@ -385,6 +391,16 @@ class ManagedInstanceImpl extends CreatableUpdatableImpl<ManagedInstance, Manage
             this.inner().withSourceManagedInstanceId(sourceManagedInstanceId);
         } else {
             this.updateParameter.withSourceManagedInstanceId(sourceManagedInstanceId);
+        }
+        return this;
+    }
+
+    @Override
+    public ManagedInstanceImpl withStorageAccountType(StorageAccountType storageAccountType) {
+        if (isInCreateMode()) {
+            this.inner().withStorageAccountType(storageAccountType);
+        } else {
+            this.updateParameter.withStorageAccountType(storageAccountType);
         }
         return this;
     }
