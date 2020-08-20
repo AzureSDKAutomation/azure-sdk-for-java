@@ -173,6 +173,15 @@ public class ManagedInstanceUpdate {
     private String minimalTlsVersion;
 
     /**
+     * The storage account type used to store backups for this instance. The
+     * options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage)
+     * and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS',
+     * 'ZRS'.
+     */
+    @JsonProperty(value = "properties.storageAccountType")
+    private StorageAccountType storageAccountType;
+
+    /**
      * Resource tags.
      */
     @JsonProperty(value = "tags")
@@ -576,6 +585,26 @@ public class ManagedInstanceUpdate {
      */
     public ManagedInstanceUpdate withMinimalTlsVersion(String minimalTlsVersion) {
         this.minimalTlsVersion = minimalTlsVersion;
+        return this;
+    }
+
+    /**
+     * Get the storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS', 'ZRS'.
+     *
+     * @return the storageAccountType value
+     */
+    public StorageAccountType storageAccountType() {
+        return this.storageAccountType;
+    }
+
+    /**
+     * Set the storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS', 'ZRS'.
+     *
+     * @param storageAccountType the storageAccountType value to set
+     * @return the ManagedInstanceUpdate object itself.
+     */
+    public ManagedInstanceUpdate withStorageAccountType(StorageAccountType storageAccountType) {
+        this.storageAccountType = storageAccountType;
         return this;
     }
 
