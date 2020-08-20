@@ -116,6 +116,11 @@ public interface ManagedInstance extends HasInner<ManagedInstanceInner>, Resourc
     String state();
 
     /**
+     * @return the storageAccountType value.
+     */
+    StorageAccountType storageAccountType();
+
+    /**
      * @return the storageSizeInGB value.
      */
     Integer storageSizeInGB();
@@ -340,6 +345,18 @@ public interface ManagedInstance extends HasInner<ManagedInstanceInner>, Resourc
         }
 
         /**
+         * The stage of the managedinstance definition allowing to specify StorageAccountType.
+         */
+        interface WithStorageAccountType {
+            /**
+             * Specifies storageAccountType.
+             * @param storageAccountType The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS', 'ZRS'
+             * @return the next definition stage
+             */
+            WithCreate withStorageAccountType(StorageAccountType storageAccountType);
+        }
+
+        /**
          * The stage of the managedinstance definition allowing to specify StorageSizeInGB.
          */
         interface WithStorageSizeInGB {
@@ -397,13 +414,13 @@ public interface ManagedInstance extends HasInner<ManagedInstanceInner>, Resourc
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ManagedInstance>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithAdministratorLogin, DefinitionStages.WithAdministratorLoginPassword, DefinitionStages.WithCollation, DefinitionStages.WithDnsZonePartner, DefinitionStages.WithIdentity, DefinitionStages.WithInstancePoolId, DefinitionStages.WithLicenseType, DefinitionStages.WithMaintenanceConfigurationId, DefinitionStages.WithManagedInstanceCreateMode, DefinitionStages.WithMinimalTlsVersion, DefinitionStages.WithProxyOverride, DefinitionStages.WithPublicDataEndpointEnabled, DefinitionStages.WithRestorePointInTime, DefinitionStages.WithSku, DefinitionStages.WithSourceManagedInstanceId, DefinitionStages.WithStorageSizeInGB, DefinitionStages.WithSubnetId, DefinitionStages.WithTimezoneId, DefinitionStages.WithVCores {
+        interface WithCreate extends Creatable<ManagedInstance>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithAdministratorLogin, DefinitionStages.WithAdministratorLoginPassword, DefinitionStages.WithCollation, DefinitionStages.WithDnsZonePartner, DefinitionStages.WithIdentity, DefinitionStages.WithInstancePoolId, DefinitionStages.WithLicenseType, DefinitionStages.WithMaintenanceConfigurationId, DefinitionStages.WithManagedInstanceCreateMode, DefinitionStages.WithMinimalTlsVersion, DefinitionStages.WithProxyOverride, DefinitionStages.WithPublicDataEndpointEnabled, DefinitionStages.WithRestorePointInTime, DefinitionStages.WithSku, DefinitionStages.WithSourceManagedInstanceId, DefinitionStages.WithStorageAccountType, DefinitionStages.WithStorageSizeInGB, DefinitionStages.WithSubnetId, DefinitionStages.WithTimezoneId, DefinitionStages.WithVCores {
         }
     }
     /**
      * The template for a ManagedInstance update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ManagedInstance>, Resource.UpdateWithTags<Update>, UpdateStages.WithAdministratorLogin, UpdateStages.WithAdministratorLoginPassword, UpdateStages.WithCollation, UpdateStages.WithDnsZonePartner, UpdateStages.WithInstancePoolId, UpdateStages.WithLicenseType, UpdateStages.WithMaintenanceConfigurationId, UpdateStages.WithManagedInstanceCreateMode, UpdateStages.WithMinimalTlsVersion, UpdateStages.WithProxyOverride, UpdateStages.WithPublicDataEndpointEnabled, UpdateStages.WithRestorePointInTime, UpdateStages.WithSku, UpdateStages.WithSourceManagedInstanceId, UpdateStages.WithStorageSizeInGB, UpdateStages.WithSubnetId, UpdateStages.WithTimezoneId, UpdateStages.WithVCores {
+    interface Update extends Appliable<ManagedInstance>, Resource.UpdateWithTags<Update>, UpdateStages.WithAdministratorLogin, UpdateStages.WithAdministratorLoginPassword, UpdateStages.WithCollation, UpdateStages.WithDnsZonePartner, UpdateStages.WithInstancePoolId, UpdateStages.WithLicenseType, UpdateStages.WithMaintenanceConfigurationId, UpdateStages.WithManagedInstanceCreateMode, UpdateStages.WithMinimalTlsVersion, UpdateStages.WithProxyOverride, UpdateStages.WithPublicDataEndpointEnabled, UpdateStages.WithRestorePointInTime, UpdateStages.WithSku, UpdateStages.WithSourceManagedInstanceId, UpdateStages.WithStorageAccountType, UpdateStages.WithStorageSizeInGB, UpdateStages.WithSubnetId, UpdateStages.WithTimezoneId, UpdateStages.WithVCores {
     }
 
     /**
@@ -578,6 +595,18 @@ public interface ManagedInstance extends HasInner<ManagedInstanceInner>, Resourc
              * @return the next update stage
              */
             Update withSourceManagedInstanceId(String sourceManagedInstanceId);
+        }
+
+        /**
+         * The stage of the managedinstance update allowing to specify StorageAccountType.
+         */
+        interface WithStorageAccountType {
+            /**
+             * Specifies storageAccountType.
+             * @param storageAccountType The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS', 'ZRS'
+             * @return the next update stage
+             */
+            Update withStorageAccountType(StorageAccountType storageAccountType);
         }
 
         /**
