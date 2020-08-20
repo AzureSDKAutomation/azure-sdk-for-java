@@ -22,6 +22,6 @@ public interface Operations extends HasInner<OperationsInner> {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<Operation> listAsync();
+    Observable<Operation> xXXAsync();
 
 }

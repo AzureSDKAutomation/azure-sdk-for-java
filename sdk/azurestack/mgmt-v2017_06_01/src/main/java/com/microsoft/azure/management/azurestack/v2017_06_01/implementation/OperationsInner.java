@@ -55,13 +55,13 @@ public class OperationsInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface OperationsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.azurestack.v2017_06_01.Operations list" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.azurestack.v2017_06_01.Operations xXX" })
         @GET("providers/Microsoft.AzureStack/operations")
-        Observable<Response<ResponseBody>> list(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> xXX(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.azurestack.v2017_06_01.Operations listNext" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.azurestack.v2017_06_01.Operations xXXNext" })
         @GET
-        Observable<Response<ResponseBody>> listNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> xXXNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -73,12 +73,12 @@ public class OperationsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;OperationInner&gt; object if successful.
      */
-    public PagedList<OperationInner> list() {
-        ServiceResponse<Page<OperationInner>> response = listSinglePageAsync().toBlocking().single();
+    public PagedList<OperationInner> xXX() {
+        ServiceResponse<Page<OperationInner>> response = xXXSinglePageAsync().toBlocking().single();
         return new PagedList<OperationInner>(response.body()) {
             @Override
             public Page<OperationInner> nextPage(String nextPageLink) {
-                return listNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+                return xXXNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -90,13 +90,13 @@ public class OperationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<OperationInner>> listAsync(final ListOperationCallback<OperationInner> serviceCallback) {
+    public ServiceFuture<List<OperationInner>> xXXAsync(final ListOperationCallback<OperationInner> serviceCallback) {
         return AzureServiceFuture.fromPageResponse(
-            listSinglePageAsync(),
+            xXXSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<OperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<OperationInner>>> call(String nextPageLink) {
-                    return listNextSinglePageAsync(nextPageLink);
+                    return xXXNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -108,8 +108,8 @@ public class OperationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;OperationInner&gt; object
      */
-    public Observable<Page<OperationInner>> listAsync() {
-        return listWithServiceResponseAsync()
+    public Observable<Page<OperationInner>> xXXAsync() {
+        return xXXWithServiceResponseAsync()
             .map(new Func1<ServiceResponse<Page<OperationInner>>, Page<OperationInner>>() {
                 @Override
                 public Page<OperationInner> call(ServiceResponse<Page<OperationInner>> response) {
@@ -124,8 +124,8 @@ public class OperationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;OperationInner&gt; object
      */
-    public Observable<ServiceResponse<Page<OperationInner>>> listWithServiceResponseAsync() {
-        return listSinglePageAsync()
+    public Observable<ServiceResponse<Page<OperationInner>>> xXXWithServiceResponseAsync() {
+        return xXXSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<OperationInner>>, Observable<ServiceResponse<Page<OperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<OperationInner>>> call(ServiceResponse<Page<OperationInner>> page) {
@@ -133,7 +133,7 @@ public class OperationsInner {
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
-                    return Observable.just(page).concatWith(listNextWithServiceResponseAsync(nextPageLink));
+                    return Observable.just(page).concatWith(xXXNextWithServiceResponseAsync(nextPageLink));
                 }
             });
     }
@@ -144,16 +144,16 @@ public class OperationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;OperationInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public Observable<ServiceResponse<Page<OperationInner>>> listSinglePageAsync() {
+    public Observable<ServiceResponse<Page<OperationInner>>> xXXSinglePageAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.list(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.xXX(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<OperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<OperationInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<OperationInner>> result = listDelegate(response);
+                        ServiceResponse<PageImpl<OperationInner>> result = xXXDelegate(response);
                         return Observable.just(new ServiceResponse<Page<OperationInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -162,7 +162,7 @@ public class OperationsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<OperationInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+    private ServiceResponse<PageImpl<OperationInner>> xXXDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<OperationInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<OperationInner>>() { }.getType())
                 .registerError(CloudException.class)
@@ -178,12 +178,12 @@ public class OperationsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;OperationInner&gt; object if successful.
      */
-    public PagedList<OperationInner> listNext(final String nextPageLink) {
-        ServiceResponse<Page<OperationInner>> response = listNextSinglePageAsync(nextPageLink).toBlocking().single();
+    public PagedList<OperationInner> xXXNext(final String nextPageLink) {
+        ServiceResponse<Page<OperationInner>> response = xXXNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<OperationInner>(response.body()) {
             @Override
             public Page<OperationInner> nextPage(String nextPageLink) {
-                return listNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+                return xXXNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -197,13 +197,13 @@ public class OperationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<OperationInner>> listNextAsync(final String nextPageLink, final ServiceFuture<List<OperationInner>> serviceFuture, final ListOperationCallback<OperationInner> serviceCallback) {
+    public ServiceFuture<List<OperationInner>> xXXNextAsync(final String nextPageLink, final ServiceFuture<List<OperationInner>> serviceFuture, final ListOperationCallback<OperationInner> serviceCallback) {
         return AzureServiceFuture.fromPageResponse(
-            listNextSinglePageAsync(nextPageLink),
+            xXXNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<OperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<OperationInner>>> call(String nextPageLink) {
-                    return listNextSinglePageAsync(nextPageLink);
+                    return xXXNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -216,8 +216,8 @@ public class OperationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;OperationInner&gt; object
      */
-    public Observable<Page<OperationInner>> listNextAsync(final String nextPageLink) {
-        return listNextWithServiceResponseAsync(nextPageLink)
+    public Observable<Page<OperationInner>> xXXNextAsync(final String nextPageLink) {
+        return xXXNextWithServiceResponseAsync(nextPageLink)
             .map(new Func1<ServiceResponse<Page<OperationInner>>, Page<OperationInner>>() {
                 @Override
                 public Page<OperationInner> call(ServiceResponse<Page<OperationInner>> response) {
@@ -233,8 +233,8 @@ public class OperationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;OperationInner&gt; object
      */
-    public Observable<ServiceResponse<Page<OperationInner>>> listNextWithServiceResponseAsync(final String nextPageLink) {
-        return listNextSinglePageAsync(nextPageLink)
+    public Observable<ServiceResponse<Page<OperationInner>>> xXXNextWithServiceResponseAsync(final String nextPageLink) {
+        return xXXNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<OperationInner>>, Observable<ServiceResponse<Page<OperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<OperationInner>>> call(ServiceResponse<Page<OperationInner>> page) {
@@ -242,7 +242,7 @@ public class OperationsInner {
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
-                    return Observable.just(page).concatWith(listNextWithServiceResponseAsync(nextPageLink));
+                    return Observable.just(page).concatWith(xXXNextWithServiceResponseAsync(nextPageLink));
                 }
             });
     }
@@ -254,17 +254,17 @@ public class OperationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;OperationInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public Observable<ServiceResponse<Page<OperationInner>>> listNextSinglePageAsync(final String nextPageLink) {
+    public Observable<ServiceResponse<Page<OperationInner>>> xXXNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.listNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+        return service.xXXNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<OperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<OperationInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<OperationInner>> result = listNextDelegate(response);
+                        ServiceResponse<PageImpl<OperationInner>> result = xXXNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<OperationInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -273,7 +273,7 @@ public class OperationsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<OperationInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+    private ServiceResponse<PageImpl<OperationInner>> xXXNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<OperationInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<OperationInner>>() { }.getType())
                 .registerError(CloudException.class)
