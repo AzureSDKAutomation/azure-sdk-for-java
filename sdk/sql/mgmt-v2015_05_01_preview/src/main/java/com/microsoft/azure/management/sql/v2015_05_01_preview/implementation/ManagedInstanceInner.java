@@ -14,6 +14,7 @@ import com.microsoft.azure.management.sql.v2015_05_01_preview.ManagedServerCreat
 import com.microsoft.azure.management.sql.v2015_05_01_preview.ManagedInstanceLicenseType;
 import org.joda.time.DateTime;
 import com.microsoft.azure.management.sql.v2015_05_01_preview.ManagedInstanceProxyOverride;
+import com.microsoft.azure.management.sql.v2015_05_01_preview.StorageAccountType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -183,6 +184,15 @@ public class ManagedInstanceInner extends Resource {
      */
     @JsonProperty(value = "properties.minimalTlsVersion")
     private String minimalTlsVersion;
+
+    /**
+     * The storage account type used to store backups for this instance. The
+     * options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage)
+     * and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS',
+     * 'ZRS'.
+     */
+    @JsonProperty(value = "properties.storageAccountType")
+    private StorageAccountType storageAccountType;
 
     /**
      * Get the Azure Active Directory identity of the managed instance.
@@ -602,6 +612,26 @@ public class ManagedInstanceInner extends Resource {
      */
     public ManagedInstanceInner withMinimalTlsVersion(String minimalTlsVersion) {
         this.minimalTlsVersion = minimalTlsVersion;
+        return this;
+    }
+
+    /**
+     * Get the storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS', 'ZRS'.
+     *
+     * @return the storageAccountType value
+     */
+    public StorageAccountType storageAccountType() {
+        return this.storageAccountType;
+    }
+
+    /**
+     * Set the storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS', 'ZRS'.
+     *
+     * @param storageAccountType the storageAccountType value to set
+     * @return the ManagedInstanceInner object itself.
+     */
+    public ManagedInstanceInner withStorageAccountType(StorageAccountType storageAccountType) {
+        this.storageAccountType = storageAccountType;
         return this;
     }
 
