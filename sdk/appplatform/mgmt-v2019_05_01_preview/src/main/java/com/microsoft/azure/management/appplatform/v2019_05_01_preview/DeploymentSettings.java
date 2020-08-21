@@ -36,6 +36,12 @@ public class DeploymentSettings {
     private String jvmOptions;
 
     /**
+     * The path to the .NET executable relative to zip root.
+     */
+    @JsonProperty(value = "netCoreMainEntryPath")
+    private String netCoreMainEntryPath;
+
+    /**
      * Instance count, basic tier should be in range (1, 25), standard tier
      * should be in range (1, 500).
      */
@@ -49,7 +55,8 @@ public class DeploymentSettings {
     private Map<String, String> environmentVariables;
 
     /**
-     * Runtime version. Possible values include: 'Java_8', 'Java_11'.
+     * Runtime version. Possible values include: 'Java_8', 'Java_11',
+     * 'NetCore_31'.
      */
     @JsonProperty(value = "runtimeVersion")
     private RuntimeVersion runtimeVersion;
@@ -115,6 +122,26 @@ public class DeploymentSettings {
     }
 
     /**
+     * Get the path to the .NET executable relative to zip root.
+     *
+     * @return the netCoreMainEntryPath value
+     */
+    public String netCoreMainEntryPath() {
+        return this.netCoreMainEntryPath;
+    }
+
+    /**
+     * Set the path to the .NET executable relative to zip root.
+     *
+     * @param netCoreMainEntryPath the netCoreMainEntryPath value to set
+     * @return the DeploymentSettings object itself.
+     */
+    public DeploymentSettings withNetCoreMainEntryPath(String netCoreMainEntryPath) {
+        this.netCoreMainEntryPath = netCoreMainEntryPath;
+        return this;
+    }
+
+    /**
      * Get instance count, basic tier should be in range (1, 25), standard tier should be in range (1, 500).
      *
      * @return the instanceCount value
@@ -155,7 +182,7 @@ public class DeploymentSettings {
     }
 
     /**
-     * Get runtime version. Possible values include: 'Java_8', 'Java_11'.
+     * Get runtime version. Possible values include: 'Java_8', 'Java_11', 'NetCore_31'.
      *
      * @return the runtimeVersion value
      */
@@ -164,7 +191,7 @@ public class DeploymentSettings {
     }
 
     /**
-     * Set runtime version. Possible values include: 'Java_8', 'Java_11'.
+     * Set runtime version. Possible values include: 'Java_8', 'Java_11', 'NetCore_31'.
      *
      * @param runtimeVersion the runtimeVersion value to set
      * @return the DeploymentSettings object itself.
