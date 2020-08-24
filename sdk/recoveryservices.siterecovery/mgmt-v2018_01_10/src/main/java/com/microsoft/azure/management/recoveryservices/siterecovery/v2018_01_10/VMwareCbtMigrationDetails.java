@@ -33,6 +33,18 @@ public class VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings
     private String osType;
 
     /**
+     * The firmware type.
+     */
+    @JsonProperty(value = "firmwareType", access = JsonProperty.Access.WRITE_ONLY)
+    private String firmwareType;
+
+    /**
+     * The target generation.
+     */
+    @JsonProperty(value = "targetGeneration", access = JsonProperty.Access.WRITE_ONLY)
+    private String targetGeneration;
+
+    /**
      * License Type of the VM to be used.
      */
     @JsonProperty(value = "licenseType")
@@ -79,6 +91,12 @@ public class VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings
      */
     @JsonProperty(value = "targetAvailabilitySetId")
     private String targetAvailabilitySetId;
+
+    /**
+     * The target availability zone.
+     */
+    @JsonProperty(value = "targetAvailabilityZone")
+    private String targetAvailabilityZone;
 
     /**
      * The target boot diagnostics storage account ARM Id.
@@ -175,6 +193,24 @@ public class VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings
      */
     public String osType() {
         return this.osType;
+    }
+
+    /**
+     * Get the firmware type.
+     *
+     * @return the firmwareType value
+     */
+    public String firmwareType() {
+        return this.firmwareType;
+    }
+
+    /**
+     * Get the target generation.
+     *
+     * @return the targetGeneration value
+     */
+    public String targetGeneration() {
+        return this.targetGeneration;
     }
 
     /**
@@ -301,6 +337,26 @@ public class VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings
      */
     public VMwareCbtMigrationDetails withTargetAvailabilitySetId(String targetAvailabilitySetId) {
         this.targetAvailabilitySetId = targetAvailabilitySetId;
+        return this;
+    }
+
+    /**
+     * Get the target availability zone.
+     *
+     * @return the targetAvailabilityZone value
+     */
+    public String targetAvailabilityZone() {
+        return this.targetAvailabilityZone;
+    }
+
+    /**
+     * Set the target availability zone.
+     *
+     * @param targetAvailabilityZone the targetAvailabilityZone value to set
+     * @return the VMwareCbtMigrationDetails object itself.
+     */
+    public VMwareCbtMigrationDetails withTargetAvailabilityZone(String targetAvailabilityZone) {
+        this.targetAvailabilityZone = targetAvailabilityZone;
         return this;
     }
 

@@ -87,6 +87,12 @@ public class VMwareCbtEnableMigrationInput extends EnableMigrationProviderSpecif
     private String targetAvailabilitySetId;
 
     /**
+     * The target availability zone.
+     */
+    @JsonProperty(value = "targetAvailabilityZone")
+    private String targetAvailabilityZone;
+
+    /**
      * The target boot diagnostics storage account ARM Id.
      */
     @JsonProperty(value = "targetBootDiagnosticsStorageAccountId")
@@ -315,6 +321,26 @@ public class VMwareCbtEnableMigrationInput extends EnableMigrationProviderSpecif
      */
     public VMwareCbtEnableMigrationInput withTargetAvailabilitySetId(String targetAvailabilitySetId) {
         this.targetAvailabilitySetId = targetAvailabilitySetId;
+        return this;
+    }
+
+    /**
+     * Get the target availability zone.
+     *
+     * @return the targetAvailabilityZone value
+     */
+    public String targetAvailabilityZone() {
+        return this.targetAvailabilityZone;
+    }
+
+    /**
+     * Set the target availability zone.
+     *
+     * @param targetAvailabilityZone the targetAvailabilityZone value to set
+     * @return the VMwareCbtEnableMigrationInput object itself.
+     */
+    public VMwareCbtEnableMigrationInput withTargetAvailabilityZone(String targetAvailabilityZone) {
+        this.targetAvailabilityZone = targetAvailabilityZone;
         return this;
     }
 
