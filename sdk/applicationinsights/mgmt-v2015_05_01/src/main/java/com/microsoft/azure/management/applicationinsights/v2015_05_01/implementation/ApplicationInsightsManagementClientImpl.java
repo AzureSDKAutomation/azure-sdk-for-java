@@ -341,6 +341,19 @@ public class ApplicationInsightsManagementClientImpl extends AzureServiceClient 
     }
 
     /**
+     * The MyWorkbooksInner object to access its operations.
+     */
+    private MyWorkbooksInner myWorkbooks;
+
+    /**
+     * Gets the MyWorkbooksInner object to access its operations.
+     * @return the MyWorkbooksInner object.
+     */
+    public MyWorkbooksInner myWorkbooks() {
+        return this.myWorkbooks;
+    }
+
+    /**
      * Initializes an instance of ApplicationInsightsManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -391,6 +404,7 @@ public class ApplicationInsightsManagementClientImpl extends AzureServiceClient 
         this.webTests = new WebTestsInner(restClient().retrofit(), this);
         this.analyticsItems = new AnalyticsItemsInner(restClient().retrofit(), this);
         this.workbooks = new WorkbooksInner(restClient().retrofit(), this);
+        this.myWorkbooks = new MyWorkbooksInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
