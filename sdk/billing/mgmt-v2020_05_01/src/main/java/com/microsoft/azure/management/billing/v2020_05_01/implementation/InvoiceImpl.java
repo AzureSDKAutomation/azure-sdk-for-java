@@ -14,9 +14,12 @@ import rx.Observable;
 import com.microsoft.azure.management.billing.v2020_05_01.Amount;
 import java.util.List;
 import com.microsoft.azure.management.billing.v2020_05_01.Document;
+import com.microsoft.azure.management.billing.v2020_05_01.InvoiceDocumentType;
 import org.joda.time.DateTime;
 import com.microsoft.azure.management.billing.v2020_05_01.InvoiceType;
 import com.microsoft.azure.management.billing.v2020_05_01.PaymentProperties;
+import java.util.Map;
+import com.microsoft.azure.management.billing.v2020_05_01.RebillDetails;
 import com.microsoft.azure.management.billing.v2020_05_01.InvoiceStatus;
 
 class InvoiceImpl extends IndexableRefreshableWrapperImpl<Invoice, InvoiceInner> implements Invoice {
@@ -61,6 +64,11 @@ class InvoiceImpl extends IndexableRefreshableWrapperImpl<Invoice, InvoiceInner>
     }
 
     @Override
+    public String billedDocumentId() {
+        return this.inner().billedDocumentId();
+    }
+
+    @Override
     public String billingProfileDisplayName() {
         return this.inner().billingProfileDisplayName();
     }
@@ -76,8 +84,18 @@ class InvoiceImpl extends IndexableRefreshableWrapperImpl<Invoice, InvoiceInner>
     }
 
     @Override
+    public String creditForDocumentId() {
+        return this.inner().creditForDocumentId();
+    }
+
+    @Override
     public List<Document> documents() {
         return this.inner().documents();
+    }
+
+    @Override
+    public InvoiceDocumentType documentType() {
+        return this.inner().documentType();
     }
 
     @Override
@@ -133,6 +151,11 @@ class InvoiceImpl extends IndexableRefreshableWrapperImpl<Invoice, InvoiceInner>
     @Override
     public String purchaseOrderNumber() {
         return this.inner().purchaseOrderNumber();
+    }
+
+    @Override
+    public Map<String, RebillDetails> rebillDetails() {
+        return this.inner().rebillDetails();
     }
 
     @Override

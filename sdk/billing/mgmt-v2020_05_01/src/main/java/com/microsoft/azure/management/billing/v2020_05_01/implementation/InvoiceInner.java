@@ -15,6 +15,9 @@ import com.microsoft.azure.management.billing.v2020_05_01.InvoiceType;
 import java.util.List;
 import com.microsoft.azure.management.billing.v2020_05_01.Document;
 import com.microsoft.azure.management.billing.v2020_05_01.PaymentProperties;
+import java.util.Map;
+import com.microsoft.azure.management.billing.v2020_05_01.RebillDetails;
+import com.microsoft.azure.management.billing.v2020_05_01.InvoiceDocumentType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -38,7 +41,7 @@ public class InvoiceInner extends ProxyResource {
 
     /**
      * The current status of the invoice. Possible values include: 'Due',
-     * 'OverDue', 'Paid'.
+     * 'OverDue', 'Paid', 'Void'.
      */
     @JsonProperty(value = "properties.status", access = JsonProperty.Access.WRITE_ONLY)
     private InvoiceStatus status;
@@ -159,6 +162,33 @@ public class InvoiceInner extends ProxyResource {
     private List<PaymentProperties> payments;
 
     /**
+     * Rebill details for an invoice.
+     */
+    @JsonProperty(value = "properties.rebillDetails", access = JsonProperty.Access.WRITE_ONLY)
+    private Map<String, RebillDetails> rebillDetails;
+
+    /**
+     * The type of the document. Possible values include: 'Invoice',
+     * 'CreditNote'.
+     */
+    @JsonProperty(value = "properties.documentType", access = JsonProperty.Access.WRITE_ONLY)
+    private InvoiceDocumentType documentType;
+
+    /**
+     * The Id of the active invoice which is originally billed after this
+     * invoice was voided. This field is applicable to the void invoices only.
+     */
+    @JsonProperty(value = "properties.billedDocumentId", access = JsonProperty.Access.WRITE_ONLY)
+    private String billedDocumentId;
+
+    /**
+     * The Id of the invoice which got voided and this credit note was issued
+     * as a result. This field is applicable to the credit notes only.
+     */
+    @JsonProperty(value = "properties.creditForDocumentId", access = JsonProperty.Access.WRITE_ONLY)
+    private String creditForDocumentId;
+
+    /**
      * The ID of the subscription for which the invoice is generated.
      */
     @JsonProperty(value = "properties.subscriptionId", access = JsonProperty.Access.WRITE_ONLY)
@@ -183,7 +213,7 @@ public class InvoiceInner extends ProxyResource {
     }
 
     /**
-     * Get the current status of the invoice. Possible values include: 'Due', 'OverDue', 'Paid'.
+     * Get the current status of the invoice. Possible values include: 'Due', 'OverDue', 'Paid', 'Void'.
      *
      * @return the status value
      */
@@ -342,6 +372,42 @@ public class InvoiceInner extends ProxyResource {
      */
     public List<PaymentProperties> payments() {
         return this.payments;
+    }
+
+    /**
+     * Get rebill details for an invoice.
+     *
+     * @return the rebillDetails value
+     */
+    public Map<String, RebillDetails> rebillDetails() {
+        return this.rebillDetails;
+    }
+
+    /**
+     * Get the type of the document. Possible values include: 'Invoice', 'CreditNote'.
+     *
+     * @return the documentType value
+     */
+    public InvoiceDocumentType documentType() {
+        return this.documentType;
+    }
+
+    /**
+     * Get the Id of the active invoice which is originally billed after this invoice was voided. This field is applicable to the void invoices only.
+     *
+     * @return the billedDocumentId value
+     */
+    public String billedDocumentId() {
+        return this.billedDocumentId;
+    }
+
+    /**
+     * Get the Id of the invoice which got voided and this credit note was issued as a result. This field is applicable to the credit notes only.
+     *
+     * @return the creditForDocumentId value
+     */
+    public String creditForDocumentId() {
+        return this.creditForDocumentId;
     }
 
     /**
