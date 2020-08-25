@@ -9,12 +9,12 @@
 package com.microsoft.azure.cognitiveservices.anomalydetector;
 
 import com.microsoft.azure.AzureClient;
-import com.microsoft.azure.cognitiveservices.anomalydetector.models.APIErrorException;
+import com.microsoft.azure.cognitiveservices.anomalydetector.models.AnomalyDetectorErrorException;
 import com.microsoft.azure.cognitiveservices.anomalydetector.models.ChangePointDetectRequest;
 import com.microsoft.azure.cognitiveservices.anomalydetector.models.ChangePointDetectResponse;
+import com.microsoft.azure.cognitiveservices.anomalydetector.models.DetectRequest;
 import com.microsoft.azure.cognitiveservices.anomalydetector.models.EntireDetectResponse;
 import com.microsoft.azure.cognitiveservices.anomalydetector.models.LastDetectResponse;
-import com.microsoft.azure.cognitiveservices.anomalydetector.models.Request;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
@@ -112,11 +112,11 @@ public interface AnomalyDetectorClient {
      *
      * @param body Time series points and period if needed. Advanced model parameters can also be set in the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws APIErrorException thrown if the request is rejected by server
+     * @throws AnomalyDetectorErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the EntireDetectResponse object if successful.
      */
-    EntireDetectResponse entireDetect(Request body);
+    EntireDetectResponse detectEntireSeries(DetectRequest body);
 
     /**
      * Detect anomalies for the entire series in batch.
@@ -127,7 +127,7 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<EntireDetectResponse> entireDetectAsync(Request body, final ServiceCallback<EntireDetectResponse> serviceCallback);
+    ServiceFuture<EntireDetectResponse> detectEntireSeriesAsync(DetectRequest body, final ServiceCallback<EntireDetectResponse> serviceCallback);
 
     /**
      * Detect anomalies for the entire series in batch.
@@ -137,7 +137,7 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EntireDetectResponse object
      */
-    Observable<EntireDetectResponse> entireDetectAsync(Request body);
+    Observable<EntireDetectResponse> detectEntireSeriesAsync(DetectRequest body);
 
     /**
      * Detect anomalies for the entire series in batch.
@@ -147,7 +147,7 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EntireDetectResponse object
      */
-    Observable<ServiceResponse<EntireDetectResponse>> entireDetectWithServiceResponseAsync(Request body);
+    Observable<ServiceResponse<EntireDetectResponse>> detectEntireSeriesWithServiceResponseAsync(DetectRequest body);
 
     /**
      * Detect anomaly status of the latest point in time series.
@@ -155,11 +155,11 @@ public interface AnomalyDetectorClient {
      *
      * @param body Time series points and period if needed. Advanced model parameters can also be set in the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws APIErrorException thrown if the request is rejected by server
+     * @throws AnomalyDetectorErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the LastDetectResponse object if successful.
      */
-    LastDetectResponse lastDetect(Request body);
+    LastDetectResponse detectLastPoint(DetectRequest body);
 
     /**
      * Detect anomaly status of the latest point in time series.
@@ -170,7 +170,7 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<LastDetectResponse> lastDetectAsync(Request body, final ServiceCallback<LastDetectResponse> serviceCallback);
+    ServiceFuture<LastDetectResponse> detectLastPointAsync(DetectRequest body, final ServiceCallback<LastDetectResponse> serviceCallback);
 
     /**
      * Detect anomaly status of the latest point in time series.
@@ -180,7 +180,7 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LastDetectResponse object
      */
-    Observable<LastDetectResponse> lastDetectAsync(Request body);
+    Observable<LastDetectResponse> detectLastPointAsync(DetectRequest body);
 
     /**
      * Detect anomaly status of the latest point in time series.
@@ -190,7 +190,7 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LastDetectResponse object
      */
-    Observable<ServiceResponse<LastDetectResponse>> lastDetectWithServiceResponseAsync(Request body);
+    Observable<ServiceResponse<LastDetectResponse>> detectLastPointWithServiceResponseAsync(DetectRequest body);
 
     /**
      * Detect change point for the entire series.
@@ -198,11 +198,11 @@ public interface AnomalyDetectorClient {
      *
      * @param body Time series points and granularity is needed. Advanced model parameters can also be set in the request if needed.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws APIErrorException thrown if the request is rejected by server
+     * @throws AnomalyDetectorErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ChangePointDetectResponse object if successful.
      */
-    ChangePointDetectResponse changePointDetect(ChangePointDetectRequest body);
+    ChangePointDetectResponse detectChangePoint(ChangePointDetectRequest body);
 
     /**
      * Detect change point for the entire series.
@@ -213,7 +213,7 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<ChangePointDetectResponse> changePointDetectAsync(ChangePointDetectRequest body, final ServiceCallback<ChangePointDetectResponse> serviceCallback);
+    ServiceFuture<ChangePointDetectResponse> detectChangePointAsync(ChangePointDetectRequest body, final ServiceCallback<ChangePointDetectResponse> serviceCallback);
 
     /**
      * Detect change point for the entire series.
@@ -223,7 +223,7 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ChangePointDetectResponse object
      */
-    Observable<ChangePointDetectResponse> changePointDetectAsync(ChangePointDetectRequest body);
+    Observable<ChangePointDetectResponse> detectChangePointAsync(ChangePointDetectRequest body);
 
     /**
      * Detect change point for the entire series.
@@ -233,6 +233,6 @@ public interface AnomalyDetectorClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ChangePointDetectResponse object
      */
-    Observable<ServiceResponse<ChangePointDetectResponse>> changePointDetectWithServiceResponseAsync(ChangePointDetectRequest body);
+    Observable<ServiceResponse<ChangePointDetectResponse>> detectChangePointWithServiceResponseAsync(ChangePointDetectRequest body);
 
 }

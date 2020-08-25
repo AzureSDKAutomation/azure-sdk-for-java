@@ -13,12 +13,12 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.cognitiveservices.anomalydetector.AnomalyDetectorClient;
-import com.microsoft.azure.cognitiveservices.anomalydetector.models.APIErrorException;
+import com.microsoft.azure.cognitiveservices.anomalydetector.models.AnomalyDetectorErrorException;
 import com.microsoft.azure.cognitiveservices.anomalydetector.models.ChangePointDetectRequest;
 import com.microsoft.azure.cognitiveservices.anomalydetector.models.ChangePointDetectResponse;
+import com.microsoft.azure.cognitiveservices.anomalydetector.models.DetectRequest;
 import com.microsoft.azure.cognitiveservices.anomalydetector.models.EntireDetectResponse;
 import com.microsoft.azure.cognitiveservices.anomalydetector.models.LastDetectResponse;
-import com.microsoft.azure.cognitiveservices.anomalydetector.models.Request;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
@@ -201,17 +201,17 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * used by Retrofit to perform actually REST calls.
      */
     interface AnomalyDetectorClientService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.cognitiveservices.anomalydetector.AnomalyDetectorClient entireDetect" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.cognitiveservices.anomalydetector.AnomalyDetectorClient detectEntireSeries" })
         @POST("timeseries/entire/detect")
-        Observable<Response<ResponseBody>> entireDetect(@Body Request body, @Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> detectEntireSeries(@Body DetectRequest body, @Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.cognitiveservices.anomalydetector.AnomalyDetectorClient lastDetect" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.cognitiveservices.anomalydetector.AnomalyDetectorClient detectLastPoint" })
         @POST("timeseries/last/detect")
-        Observable<Response<ResponseBody>> lastDetect(@Body Request body, @Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> detectLastPoint(@Body DetectRequest body, @Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.cognitiveservices.anomalydetector.AnomalyDetectorClient changePointDetect" })
-        @POST("timeseries/changePoint/detect")
-        Observable<Response<ResponseBody>> changePointDetect(@Body ChangePointDetectRequest body, @Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.cognitiveservices.anomalydetector.AnomalyDetectorClient detectChangePoint" })
+        @POST("timeseries/changepoint/detect")
+        Observable<Response<ResponseBody>> detectChangePoint(@Body ChangePointDetectRequest body, @Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
 
     }
 
@@ -221,12 +221,12 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      *
      * @param body Time series points and period if needed. Advanced model parameters can also be set in the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws APIErrorException thrown if the request is rejected by server
+     * @throws AnomalyDetectorErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the EntireDetectResponse object if successful.
      */
-    public EntireDetectResponse entireDetect(Request body) {
-        return entireDetectWithServiceResponseAsync(body).toBlocking().single().body();
+    public EntireDetectResponse detectEntireSeries(DetectRequest body) {
+        return detectEntireSeriesWithServiceResponseAsync(body).toBlocking().single().body();
     }
 
     /**
@@ -238,8 +238,8 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<EntireDetectResponse> entireDetectAsync(Request body, final ServiceCallback<EntireDetectResponse> serviceCallback) {
-        return ServiceFuture.fromResponse(entireDetectWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<EntireDetectResponse> detectEntireSeriesAsync(DetectRequest body, final ServiceCallback<EntireDetectResponse> serviceCallback) {
+        return ServiceFuture.fromResponse(detectEntireSeriesWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -250,8 +250,8 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EntireDetectResponse object
      */
-    public Observable<EntireDetectResponse> entireDetectAsync(Request body) {
-        return entireDetectWithServiceResponseAsync(body).map(new Func1<ServiceResponse<EntireDetectResponse>, EntireDetectResponse>() {
+    public Observable<EntireDetectResponse> detectEntireSeriesAsync(DetectRequest body) {
+        return detectEntireSeriesWithServiceResponseAsync(body).map(new Func1<ServiceResponse<EntireDetectResponse>, EntireDetectResponse>() {
             @Override
             public EntireDetectResponse call(ServiceResponse<EntireDetectResponse> response) {
                 return response.body();
@@ -267,7 +267,7 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the EntireDetectResponse object
      */
-    public Observable<ServiceResponse<EntireDetectResponse>> entireDetectWithServiceResponseAsync(Request body) {
+    public Observable<ServiceResponse<EntireDetectResponse>> detectEntireSeriesWithServiceResponseAsync(DetectRequest body) {
         if (this.endpoint() == null) {
             throw new IllegalArgumentException("Parameter this.endpoint() is required and cannot be null.");
         }
@@ -276,12 +276,12 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
         }
         Validator.validate(body);
         String parameterizedHost = Joiner.on(", ").join("{Endpoint}", this.endpoint());
-        return service.entireDetect(body, this.acceptLanguage(), parameterizedHost, this.userAgent())
+        return service.detectEntireSeries(body, this.acceptLanguage(), parameterizedHost, this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<EntireDetectResponse>>>() {
                 @Override
                 public Observable<ServiceResponse<EntireDetectResponse>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<EntireDetectResponse> clientResponse = entireDetectDelegate(response);
+                        ServiceResponse<EntireDetectResponse> clientResponse = detectEntireSeriesDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -290,10 +290,10 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
             });
     }
 
-    private ServiceResponse<EntireDetectResponse> entireDetectDelegate(Response<ResponseBody> response) throws APIErrorException, IOException, IllegalArgumentException {
-        return this.restClient().responseBuilderFactory().<EntireDetectResponse, APIErrorException>newInstance(this.serializerAdapter())
+    private ServiceResponse<EntireDetectResponse> detectEntireSeriesDelegate(Response<ResponseBody> response) throws AnomalyDetectorErrorException, IOException, IllegalArgumentException {
+        return this.restClient().responseBuilderFactory().<EntireDetectResponse, AnomalyDetectorErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<EntireDetectResponse>() { }.getType())
-                .registerError(APIErrorException.class)
+                .registerError(AnomalyDetectorErrorException.class)
                 .build(response);
     }
 
@@ -303,12 +303,12 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      *
      * @param body Time series points and period if needed. Advanced model parameters can also be set in the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws APIErrorException thrown if the request is rejected by server
+     * @throws AnomalyDetectorErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the LastDetectResponse object if successful.
      */
-    public LastDetectResponse lastDetect(Request body) {
-        return lastDetectWithServiceResponseAsync(body).toBlocking().single().body();
+    public LastDetectResponse detectLastPoint(DetectRequest body) {
+        return detectLastPointWithServiceResponseAsync(body).toBlocking().single().body();
     }
 
     /**
@@ -320,8 +320,8 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<LastDetectResponse> lastDetectAsync(Request body, final ServiceCallback<LastDetectResponse> serviceCallback) {
-        return ServiceFuture.fromResponse(lastDetectWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<LastDetectResponse> detectLastPointAsync(DetectRequest body, final ServiceCallback<LastDetectResponse> serviceCallback) {
+        return ServiceFuture.fromResponse(detectLastPointWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -332,8 +332,8 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LastDetectResponse object
      */
-    public Observable<LastDetectResponse> lastDetectAsync(Request body) {
-        return lastDetectWithServiceResponseAsync(body).map(new Func1<ServiceResponse<LastDetectResponse>, LastDetectResponse>() {
+    public Observable<LastDetectResponse> detectLastPointAsync(DetectRequest body) {
+        return detectLastPointWithServiceResponseAsync(body).map(new Func1<ServiceResponse<LastDetectResponse>, LastDetectResponse>() {
             @Override
             public LastDetectResponse call(ServiceResponse<LastDetectResponse> response) {
                 return response.body();
@@ -349,7 +349,7 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LastDetectResponse object
      */
-    public Observable<ServiceResponse<LastDetectResponse>> lastDetectWithServiceResponseAsync(Request body) {
+    public Observable<ServiceResponse<LastDetectResponse>> detectLastPointWithServiceResponseAsync(DetectRequest body) {
         if (this.endpoint() == null) {
             throw new IllegalArgumentException("Parameter this.endpoint() is required and cannot be null.");
         }
@@ -358,12 +358,12 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
         }
         Validator.validate(body);
         String parameterizedHost = Joiner.on(", ").join("{Endpoint}", this.endpoint());
-        return service.lastDetect(body, this.acceptLanguage(), parameterizedHost, this.userAgent())
+        return service.detectLastPoint(body, this.acceptLanguage(), parameterizedHost, this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LastDetectResponse>>>() {
                 @Override
                 public Observable<ServiceResponse<LastDetectResponse>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<LastDetectResponse> clientResponse = lastDetectDelegate(response);
+                        ServiceResponse<LastDetectResponse> clientResponse = detectLastPointDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -372,10 +372,10 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
             });
     }
 
-    private ServiceResponse<LastDetectResponse> lastDetectDelegate(Response<ResponseBody> response) throws APIErrorException, IOException, IllegalArgumentException {
-        return this.restClient().responseBuilderFactory().<LastDetectResponse, APIErrorException>newInstance(this.serializerAdapter())
+    private ServiceResponse<LastDetectResponse> detectLastPointDelegate(Response<ResponseBody> response) throws AnomalyDetectorErrorException, IOException, IllegalArgumentException {
+        return this.restClient().responseBuilderFactory().<LastDetectResponse, AnomalyDetectorErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<LastDetectResponse>() { }.getType())
-                .registerError(APIErrorException.class)
+                .registerError(AnomalyDetectorErrorException.class)
                 .build(response);
     }
 
@@ -385,12 +385,12 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      *
      * @param body Time series points and granularity is needed. Advanced model parameters can also be set in the request if needed.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws APIErrorException thrown if the request is rejected by server
+     * @throws AnomalyDetectorErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ChangePointDetectResponse object if successful.
      */
-    public ChangePointDetectResponse changePointDetect(ChangePointDetectRequest body) {
-        return changePointDetectWithServiceResponseAsync(body).toBlocking().single().body();
+    public ChangePointDetectResponse detectChangePoint(ChangePointDetectRequest body) {
+        return detectChangePointWithServiceResponseAsync(body).toBlocking().single().body();
     }
 
     /**
@@ -402,8 +402,8 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ChangePointDetectResponse> changePointDetectAsync(ChangePointDetectRequest body, final ServiceCallback<ChangePointDetectResponse> serviceCallback) {
-        return ServiceFuture.fromResponse(changePointDetectWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<ChangePointDetectResponse> detectChangePointAsync(ChangePointDetectRequest body, final ServiceCallback<ChangePointDetectResponse> serviceCallback) {
+        return ServiceFuture.fromResponse(detectChangePointWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -414,8 +414,8 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ChangePointDetectResponse object
      */
-    public Observable<ChangePointDetectResponse> changePointDetectAsync(ChangePointDetectRequest body) {
-        return changePointDetectWithServiceResponseAsync(body).map(new Func1<ServiceResponse<ChangePointDetectResponse>, ChangePointDetectResponse>() {
+    public Observable<ChangePointDetectResponse> detectChangePointAsync(ChangePointDetectRequest body) {
+        return detectChangePointWithServiceResponseAsync(body).map(new Func1<ServiceResponse<ChangePointDetectResponse>, ChangePointDetectResponse>() {
             @Override
             public ChangePointDetectResponse call(ServiceResponse<ChangePointDetectResponse> response) {
                 return response.body();
@@ -431,7 +431,7 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ChangePointDetectResponse object
      */
-    public Observable<ServiceResponse<ChangePointDetectResponse>> changePointDetectWithServiceResponseAsync(ChangePointDetectRequest body) {
+    public Observable<ServiceResponse<ChangePointDetectResponse>> detectChangePointWithServiceResponseAsync(ChangePointDetectRequest body) {
         if (this.endpoint() == null) {
             throw new IllegalArgumentException("Parameter this.endpoint() is required and cannot be null.");
         }
@@ -440,12 +440,12 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
         }
         Validator.validate(body);
         String parameterizedHost = Joiner.on(", ").join("{Endpoint}", this.endpoint());
-        return service.changePointDetect(body, this.acceptLanguage(), parameterizedHost, this.userAgent())
+        return service.detectChangePoint(body, this.acceptLanguage(), parameterizedHost, this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ChangePointDetectResponse>>>() {
                 @Override
                 public Observable<ServiceResponse<ChangePointDetectResponse>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ChangePointDetectResponse> clientResponse = changePointDetectDelegate(response);
+                        ServiceResponse<ChangePointDetectResponse> clientResponse = detectChangePointDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -454,10 +454,10 @@ public class AnomalyDetectorClientImpl extends AzureServiceClient implements Ano
             });
     }
 
-    private ServiceResponse<ChangePointDetectResponse> changePointDetectDelegate(Response<ResponseBody> response) throws APIErrorException, IOException, IllegalArgumentException {
-        return this.restClient().responseBuilderFactory().<ChangePointDetectResponse, APIErrorException>newInstance(this.serializerAdapter())
+    private ServiceResponse<ChangePointDetectResponse> detectChangePointDelegate(Response<ResponseBody> response) throws AnomalyDetectorErrorException, IOException, IllegalArgumentException {
+        return this.restClient().responseBuilderFactory().<ChangePointDetectResponse, AnomalyDetectorErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<ChangePointDetectResponse>() { }.getType())
-                .registerError(APIErrorException.class)
+                .registerError(AnomalyDetectorErrorException.class)
                 .build(response);
     }
 

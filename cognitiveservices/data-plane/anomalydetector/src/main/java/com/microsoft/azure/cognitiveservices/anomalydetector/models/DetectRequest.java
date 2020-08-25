@@ -12,9 +12,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The Request model.
+ * The DetectRequest model.
  */
-public class Request {
+public class DetectRequest {
     /**
      * Time series data points. Points should be sorted by timestamp in
      * ascending order to match the anomaly detection result. If the data is
@@ -22,14 +22,14 @@ public class Request {
      * work. In such case, an error message will be returned.
      */
     @JsonProperty(value = "series", required = true)
-    private List<Point> series;
+    private List<TimeSeriesPoint> series;
 
     /**
      * Possible values include: 'yearly', 'monthly', 'weekly', 'daily',
-     * 'hourly', 'minutely', 'secondly'.
+     * 'hourly', 'perMinute', 'perSecond'.
      */
     @JsonProperty(value = "granularity", required = true)
-    private Granularity granularity;
+    private TimeGranularity granularity;
 
     /**
      * Custom Interval is used to set non-standard time interval, for example,
@@ -66,7 +66,7 @@ public class Request {
      *
      * @return the series value
      */
-    public List<Point> series() {
+    public List<TimeSeriesPoint> series() {
         return this.series;
     }
 
@@ -74,29 +74,29 @@ public class Request {
      * Set time series data points. Points should be sorted by timestamp in ascending order to match the anomaly detection result. If the data is not sorted correctly or there is duplicated timestamp, the API will not work. In such case, an error message will be returned.
      *
      * @param series the series value to set
-     * @return the Request object itself.
+     * @return the DetectRequest object itself.
      */
-    public Request withSeries(List<Point> series) {
+    public DetectRequest withSeries(List<TimeSeriesPoint> series) {
         this.series = series;
         return this;
     }
 
     /**
-     * Get possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely', 'secondly'.
+     * Get possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'perMinute', 'perSecond'.
      *
      * @return the granularity value
      */
-    public Granularity granularity() {
+    public TimeGranularity granularity() {
         return this.granularity;
     }
 
     /**
-     * Set possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'minutely', 'secondly'.
+     * Set possible values include: 'yearly', 'monthly', 'weekly', 'daily', 'hourly', 'perMinute', 'perSecond'.
      *
      * @param granularity the granularity value to set
-     * @return the Request object itself.
+     * @return the DetectRequest object itself.
      */
-    public Request withGranularity(Granularity granularity) {
+    public DetectRequest withGranularity(TimeGranularity granularity) {
         this.granularity = granularity;
         return this;
     }
@@ -114,9 +114,9 @@ public class Request {
      * Set custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {"granularity":"minutely", "customInterval":5}.
      *
      * @param customInterval the customInterval value to set
-     * @return the Request object itself.
+     * @return the DetectRequest object itself.
      */
-    public Request withCustomInterval(Integer customInterval) {
+    public DetectRequest withCustomInterval(Integer customInterval) {
         this.customInterval = customInterval;
         return this;
     }
@@ -134,9 +134,9 @@ public class Request {
      * Set optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically.
      *
      * @param periodProperty the periodProperty value to set
-     * @return the Request object itself.
+     * @return the DetectRequest object itself.
      */
-    public Request withPeriodProperty(Integer periodProperty) {
+    public DetectRequest withPeriodProperty(Integer periodProperty) {
         this.periodProperty = periodProperty;
         return this;
     }
@@ -154,9 +154,9 @@ public class Request {
      * Set optional argument, advanced model parameter, max anomaly ratio in a time series.
      *
      * @param maxAnomalyRatio the maxAnomalyRatio value to set
-     * @return the Request object itself.
+     * @return the DetectRequest object itself.
      */
-    public Request withMaxAnomalyRatio(Double maxAnomalyRatio) {
+    public DetectRequest withMaxAnomalyRatio(Double maxAnomalyRatio) {
         this.maxAnomalyRatio = maxAnomalyRatio;
         return this;
     }
@@ -174,9 +174,9 @@ public class Request {
      * Set optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted.
      *
      * @param sensitivity the sensitivity value to set
-     * @return the Request object itself.
+     * @return the DetectRequest object itself.
      */
-    public Request withSensitivity(Integer sensitivity) {
+    public DetectRequest withSensitivity(Integer sensitivity) {
         this.sensitivity = sensitivity;
         return this;
     }

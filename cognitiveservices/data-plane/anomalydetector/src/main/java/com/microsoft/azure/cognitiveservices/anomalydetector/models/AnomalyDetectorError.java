@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Error information returned by the API.
  */
-public class APIError {
+public class AnomalyDetectorError {
     /**
      * The error code.
      */
@@ -39,9 +39,9 @@ public class APIError {
      * Set the error code.
      *
      * @param code the code value to set
-     * @return the APIError object itself.
+     * @return the AnomalyDetectorError object itself.
      */
-    public APIError withCode(Object code) {
+    public AnomalyDetectorError withCode(Object code) {
         this.code = code;
         return this;
     }
@@ -59,9 +59,9 @@ public class APIError {
      * Set a message explaining the error reported by the service.
      *
      * @param message the message value to set
-     * @return the APIError object itself.
+     * @return the AnomalyDetectorError object itself.
      */
-    public APIError withMessage(String message) {
+    public AnomalyDetectorError withMessage(String message) {
         this.message = message;
         return this;
     }

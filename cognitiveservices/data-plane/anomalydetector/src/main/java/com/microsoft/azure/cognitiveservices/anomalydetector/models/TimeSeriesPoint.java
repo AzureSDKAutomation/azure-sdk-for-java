@@ -12,9 +12,9 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The Point model.
+ * The TimeSeriesPoint model.
  */
-public class Point {
+public class TimeSeriesPoint {
     /**
      * Timestamp of a data point (ISO8601 format).
      */
@@ -40,9 +40,9 @@ public class Point {
      * Set timestamp of a data point (ISO8601 format).
      *
      * @param timestamp the timestamp value to set
-     * @return the Point object itself.
+     * @return the TimeSeriesPoint object itself.
      */
-    public Point withTimestamp(DateTime timestamp) {
+    public TimeSeriesPoint withTimestamp(DateTime timestamp) {
         this.timestamp = timestamp;
         return this;
     }
@@ -60,9 +60,9 @@ public class Point {
      * Set the measurement of that point, should be float.
      *
      * @param value the value value to set
-     * @return the Point object itself.
+     * @return the TimeSeriesPoint object itself.
      */
-    public Point withValue(double value) {
+    public TimeSeriesPoint withValue(double value) {
         this.value = value;
         return this;
     }
