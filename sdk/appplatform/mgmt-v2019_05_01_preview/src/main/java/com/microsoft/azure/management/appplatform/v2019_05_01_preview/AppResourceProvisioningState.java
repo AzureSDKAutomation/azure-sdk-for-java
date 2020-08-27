@@ -28,6 +28,9 @@ public final class AppResourceProvisioningState extends ExpandableStringEnum<App
     /** Static value Updating for AppResourceProvisioningState. */
     public static final AppResourceProvisioningState UPDATING = fromString("Updating");
 
+    /** Static value Deleting for AppResourceProvisioningState. */
+    public static final AppResourceProvisioningState DELETING = fromString("Deleting");
+
     /**
      * Creates or finds a AppResourceProvisioningState from its string representation.
      * @param name a name to look for

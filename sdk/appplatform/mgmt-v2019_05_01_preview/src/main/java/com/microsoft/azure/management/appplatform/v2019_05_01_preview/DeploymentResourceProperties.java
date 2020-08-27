@@ -36,7 +36,7 @@ public class DeploymentResourceProperties {
 
     /**
      * Provisioning state of the Deployment. Possible values include:
-     * 'Creating', 'Updating', 'Succeeded', 'Failed'.
+     * 'Creating', 'Updating', 'Succeeded', 'Failed', 'Deleting'.
      */
     @JsonProperty(value = "provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private DeploymentResourceProvisioningState provisioningState;
@@ -116,7 +116,7 @@ public class DeploymentResourceProperties {
     }
 
     /**
-     * Get provisioning state of the Deployment. Possible values include: 'Creating', 'Updating', 'Succeeded', 'Failed'.
+     * Get provisioning state of the Deployment. Possible values include: 'Creating', 'Updating', 'Succeeded', 'Failed', 'Deleting'.
      *
      * @return the provisioningState value
      */

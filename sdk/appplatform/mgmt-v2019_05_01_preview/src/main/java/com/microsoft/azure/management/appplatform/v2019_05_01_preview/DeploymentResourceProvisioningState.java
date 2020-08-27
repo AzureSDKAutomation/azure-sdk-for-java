@@ -28,6 +28,9 @@ public final class DeploymentResourceProvisioningState extends ExpandableStringE
     /** Static value Failed for DeploymentResourceProvisioningState. */
     public static final DeploymentResourceProvisioningState FAILED = fromString("Failed");
 
+    /** Static value Deleting for DeploymentResourceProvisioningState. */
+    public static final DeploymentResourceProvisioningState DELETING = fromString("Deleting");
+
     /**
      * Creates or finds a DeploymentResourceProvisioningState from its string representation.
      * @param name a name to look for
