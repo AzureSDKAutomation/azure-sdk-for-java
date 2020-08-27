@@ -380,6 +380,45 @@ public class BillingManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The TransfersInner object to access its operations.
+     */
+    private TransfersInner transfers;
+
+    /**
+     * Gets the TransfersInner object to access its operations.
+     * @return the TransfersInner object.
+     */
+    public TransfersInner transfers() {
+        return this.transfers;
+    }
+
+    /**
+     * The PartnerTransfersInner object to access its operations.
+     */
+    private PartnerTransfersInner partnerTransfers;
+
+    /**
+     * Gets the PartnerTransfersInner object to access its operations.
+     * @return the PartnerTransfersInner object.
+     */
+    public PartnerTransfersInner partnerTransfers() {
+        return this.partnerTransfers;
+    }
+
+    /**
+     * The RecipientTransfersInner object to access its operations.
+     */
+    private RecipientTransfersInner recipientTransfers;
+
+    /**
+     * Gets the RecipientTransfersInner object to access its operations.
+     * @return the RecipientTransfersInner object.
+     */
+    public RecipientTransfersInner recipientTransfers() {
+        return this.recipientTransfers;
+    }
+
+    /**
      * The EnrollmentAccountsInner object to access its operations.
      */
     private EnrollmentAccountsInner enrollmentAccounts;
@@ -457,6 +496,9 @@ public class BillingManagementClientImpl extends AzureServiceClient {
         this.billingRoleDefinitions = new BillingRoleDefinitionsInner(restClient().retrofit(), this);
         this.billingRoleAssignments = new BillingRoleAssignmentsInner(restClient().retrofit(), this);
         this.agreements = new AgreementsInner(restClient().retrofit(), this);
+        this.transfers = new TransfersInner(restClient().retrofit(), this);
+        this.partnerTransfers = new PartnerTransfersInner(restClient().retrofit(), this);
+        this.recipientTransfers = new RecipientTransfersInner(restClient().retrofit(), this);
         this.enrollmentAccounts = new EnrollmentAccountsInner(restClient().retrofit(), this);
         this.billingPeriods = new BillingPeriodsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
