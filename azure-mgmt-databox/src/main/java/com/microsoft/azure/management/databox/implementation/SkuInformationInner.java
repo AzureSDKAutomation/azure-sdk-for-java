@@ -10,7 +10,7 @@ package com.microsoft.azure.management.databox.implementation;
 
 import com.microsoft.azure.management.databox.Sku;
 import java.util.List;
-import com.microsoft.azure.management.databox.DestinationToServiceLocationMap;
+import com.microsoft.azure.management.databox.DataLocationToServiceLocationMap;
 import com.microsoft.azure.management.databox.SkuCapacity;
 import com.microsoft.azure.management.databox.SkuCost;
 import com.microsoft.azure.management.databox.SkuDisabledReason;
@@ -35,10 +35,10 @@ public class SkuInformationInner {
     private Boolean enabled;
 
     /**
-     * The map of destination location to service location.
+     * The map of data location to service location.
      */
-    @JsonProperty(value = "properties.destinationToServiceLocationMap", access = JsonProperty.Access.WRITE_ONLY)
-    private List<DestinationToServiceLocationMap> destinationToServiceLocationMap;
+    @JsonProperty(value = "properties.dataLocationToServiceLocationMap", access = JsonProperty.Access.WRITE_ONLY)
+    private List<DataLocationToServiceLocationMap> dataLocationToServiceLocationMap;
 
     /**
      * Capacity of the Sku.
@@ -96,12 +96,12 @@ public class SkuInformationInner {
     }
 
     /**
-     * Get the map of destination location to service location.
+     * Get the map of data location to service location.
      *
-     * @return the destinationToServiceLocationMap value
+     * @return the dataLocationToServiceLocationMap value
      */
-    public List<DestinationToServiceLocationMap> destinationToServiceLocationMap() {
-        return this.destinationToServiceLocationMap;
+    public List<DataLocationToServiceLocationMap> dataLocationToServiceLocationMap() {
+        return this.dataLocationToServiceLocationMap;
     }
 
     /**

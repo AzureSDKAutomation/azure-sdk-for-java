@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 @JsonTypeName("ValidationInputRequest")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "ValidateCreateOrderLimit", value = CreateOrderLimitForSubscriptionValidationRequest.class),
-    @JsonSubTypes.Type(name = "ValidateDataDestinationDetails", value = DataDestinationDetailsValidationRequest.class),
+    @JsonSubTypes.Type(name = "ValidateDataTransferDetails", value = DataTransferDetailsValidationRequest.class),
     @JsonSubTypes.Type(name = "ValidatePreferences", value = PreferencesValidationRequest.class),
     @JsonSubTypes.Type(name = "ValidateSkuAvailability", value = SkuAvailabilityValidationRequest.class),
     @JsonSubTypes.Type(name = "ValidateSubscriptionIsAllowedToCreateJob", value = SubscriptionIsAllowedToCreateJobValidationRequest.class),

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 /**
- * Input request for all pre job creation validation.
+ * Minimum request requirement of any validation category.
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "validationCategory", defaultImpl = ValidationRequest.class)
 @JsonTypeName("ValidationRequest")

@@ -27,13 +27,13 @@ public enum StageName {
     /** Device has been delivered to the user of the order. */
     DELIVERED("Delivered"),
 
-    /** Device has been picked up from user and in transit to azure datacenter. */
+    /** Device has been picked up from user and in transit to Azure datacenter. */
     PICKED_UP("PickedUp"),
 
-    /** Device has been received at azure datacenter from the user. */
+    /** Device has been received at Azure datacenter from the user. */
     AT_AZURE_DC("AtAzureDC"),
 
-    /** Data copy from the device at azure datacenter. */
+    /** Data copy from the device at Azure datacenter. */
     DATA_COPY("DataCopy"),
 
     /** Order has completed. */
@@ -48,7 +48,7 @@ public enum StageName {
     /** Order has failed due to issue reported by user. */
     FAILED_ISSUE_REPORTED_AT_CUSTOMER("Failed_IssueReportedAtCustomer"),
 
-    /** Order has failed due to issue detected at azure datacenter. */
+    /** Order has failed due to issue detected at Azure datacenter. */
     FAILED_ISSUE_DETECTED_AT_AZURE_DC("Failed_IssueDetectedAtAzureDC"),
 
     /** Order has been aborted. */

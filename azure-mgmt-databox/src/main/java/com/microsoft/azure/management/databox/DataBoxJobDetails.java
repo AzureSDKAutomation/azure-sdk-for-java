@@ -26,7 +26,14 @@ public class DataBoxJobDetails extends JobDetails {
     private List<CopyProgress> copyProgress;
 
     /**
-     * Set Device password for unlocking Databox.
+     * Set Device password for unlocking Databox. Should not be passed for
+     * TransferType:ExportFromAzure jobs. If this is not passed, the service
+     * will generate password itself. This will not be returned in Get Call.
+     * Password Requirements :  Password must be minimum of 12 and maximum of
+     * 64 characters. Password must have at least one uppercase alphabet, one
+     * number and one special character. Password cannot have the following
+     * characters : IilLoO0 Password can have only alphabets, numbers and these
+     * characters : @#\-$%^!+=;:_()]+.
      */
     @JsonProperty(value = "devicePassword")
     private String devicePassword;
@@ -41,7 +48,7 @@ public class DataBoxJobDetails extends JobDetails {
     }
 
     /**
-     * Get set Device password for unlocking Databox.
+     * Get set Device password for unlocking Databox. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\-$%^!+=;:_()]+.
      *
      * @return the devicePassword value
      */
@@ -50,7 +57,7 @@ public class DataBoxJobDetails extends JobDetails {
     }
 
     /**
-     * Set set Device password for unlocking Databox.
+     * Set set Device password for unlocking Databox. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\-$%^!+=;:_()]+.
      *
      * @param devicePassword the devicePassword value to set
      * @return the DataBoxJobDetails object itself.

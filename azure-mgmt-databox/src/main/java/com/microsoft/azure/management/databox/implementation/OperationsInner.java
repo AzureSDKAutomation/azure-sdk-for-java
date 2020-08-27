@@ -11,8 +11,8 @@ package com.microsoft.azure.management.databox.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.management.databox.ApiErrorException;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceFuture;
@@ -69,7 +69,7 @@ public class OperationsInner {
      * This method gets all the operations.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;OperationInner&gt; object if successful.
      */
@@ -162,10 +162,10 @@ public class OperationsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<OperationInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<OperationInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<OperationInner>> listDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<OperationInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<OperationInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -174,7 +174,7 @@ public class OperationsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;OperationInner&gt; object if successful.
      */
@@ -273,10 +273,10 @@ public class OperationsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<OperationInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<OperationInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<OperationInner>> listNextDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<OperationInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<OperationInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 

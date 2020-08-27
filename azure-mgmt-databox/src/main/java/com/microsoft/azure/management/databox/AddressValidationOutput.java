@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.databox.implementation.DataBoxManager;
 import com.microsoft.azure.management.databox.implementation.AddressValidationOutputInner;
 import java.util.List;
+import com.microsoft.rest.CloudError;
 
 /**
  * Type representing AddressValidationOutput.
@@ -26,7 +27,7 @@ public interface AddressValidationOutput extends HasInner<AddressValidationOutpu
     /**
      * @return the error value.
      */
-    Error error();
+    CloudError error();
 
     /**
      * @return the validationStatus value.

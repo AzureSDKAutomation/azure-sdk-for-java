@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.databox;
 
+import com.microsoft.rest.CloudError;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -21,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 @JsonTypeName("ValidationInputResponse")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "ValidateCreateOrderLimit", value = CreateOrderLimitForSubscriptionValidationResponseProperties.class),
-    @JsonSubTypes.Type(name = "ValidateDataDestinationDetails", value = DataDestinationDetailsValidationResponseProperties.class),
+    @JsonSubTypes.Type(name = "ValidateDataTransferDetails", value = DataTransferDetailsValidationResponseProperties.class),
     @JsonSubTypes.Type(name = "ValidatePreferences", value = PreferencesValidationResponseProperties.class),
     @JsonSubTypes.Type(name = "ValidateSkuAvailability", value = SkuAvailabilityValidationResponseProperties.class),
     @JsonSubTypes.Type(name = "ValidateSubscriptionIsAllowedToCreateJob", value = SubscriptionIsAllowedToCreateJobValidationResponseProperties.class)
@@ -31,14 +32,14 @@ public class ValidationInputResponse {
      * Error code and message of validation response.
      */
     @JsonProperty(value = "error", access = JsonProperty.Access.WRITE_ONLY)
-    private Error error;
+    private CloudError error;
 
     /**
      * Get error code and message of validation response.
      *
      * @return the error value
      */
-    public Error error() {
+    public CloudError error() {
         return this.error;
     }
 

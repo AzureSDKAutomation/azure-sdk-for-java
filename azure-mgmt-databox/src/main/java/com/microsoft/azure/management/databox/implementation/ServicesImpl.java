@@ -36,24 +36,6 @@ class ServicesImpl extends WrapperImpl<ServicesInner> implements Services {
     }
 
     @Override
-    public Observable<SkuInformation> listAvailableSkusAsync(final String location, final AvailableSkuRequest availableSkuRequest) {
-        ServicesInner client = this.inner();
-        return client.listAvailableSkusAsync(location, availableSkuRequest)
-        .flatMapIterable(new Func1<Page<SkuInformationInner>, Iterable<SkuInformationInner>>() {
-            @Override
-            public Iterable<SkuInformationInner> call(Page<SkuInformationInner> page) {
-                return page.items();
-            }
-        })
-        .map(new Func1<SkuInformationInner, SkuInformation>() {
-            @Override
-            public SkuInformation call(SkuInformationInner inner) {
-                return new SkuInformationImpl(inner, manager());
-            }
-        });
-    }
-
-    @Override
     public Observable<SkuInformation> listAvailableSkusByResourceGroupAsync(final String resourceGroupName, final String location, final AvailableSkuRequest availableSkuRequest) {
         ServicesInner client = this.inner();
         return client.listAvailableSkusByResourceGroupAsync(resourceGroupName, location, availableSkuRequest)
@@ -111,6 +93,18 @@ class ServicesImpl extends WrapperImpl<ServicesInner> implements Services {
     public Observable<RegionConfigurationResponse> regionConfigurationAsync(String location, RegionConfigurationRequest regionConfigurationRequest) {
         ServicesInner client = this.inner();
         return client.regionConfigurationAsync(location, regionConfigurationRequest)
+        .map(new Func1<RegionConfigurationResponseInner, RegionConfigurationResponse>() {
+            @Override
+            public RegionConfigurationResponse call(RegionConfigurationResponseInner inner) {
+                return new RegionConfigurationResponseImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<RegionConfigurationResponse> regionConfigurationByResourceGroupAsync(String resourceGroupName, String location, RegionConfigurationRequest regionConfigurationRequest) {
+        ServicesInner client = this.inner();
+        return client.regionConfigurationByResourceGroupAsync(resourceGroupName, location, regionConfigurationRequest)
         .map(new Func1<RegionConfigurationResponseInner, RegionConfigurationResponse>() {
             @Override
             public RegionConfigurationResponse call(RegionConfigurationResponseInner inner) {

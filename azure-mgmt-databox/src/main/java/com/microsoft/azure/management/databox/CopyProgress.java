@@ -15,17 +15,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CopyProgress {
     /**
-     * Name of the storage account where the data needs to be uploaded.
+     * Name of the storage account. This will be empty for data account types
+     * other than storage account.
      */
     @JsonProperty(value = "storageAccountName", access = JsonProperty.Access.WRITE_ONLY)
     private String storageAccountName;
 
     /**
-     * Data Destination Type. Possible values include: 'StorageAccount',
+     * Transfer type of data. Possible values include: 'ImportToAzure',
+     * 'ExportFromAzure'.
+     */
+    @JsonProperty(value = "transferType", access = JsonProperty.Access.WRITE_ONLY)
+    private TransferType transferType;
+
+    /**
+     * Data Account Type. Possible values include: 'StorageAccount',
      * 'ManagedDisk'.
      */
-    @JsonProperty(value = "dataDestinationType", access = JsonProperty.Access.WRITE_ONLY)
-    private DataDestinationType dataDestinationType;
+    @JsonProperty(value = "dataAccountType", access = JsonProperty.Access.WRITE_ONLY)
+    private DataAccountType dataAccountType;
 
     /**
      * Id of the account where the data needs to be uploaded.
@@ -34,10 +42,10 @@ public class CopyProgress {
     private String accountId;
 
     /**
-     * Amount of data uploaded by the job as of now.
+     * To indicate bytes transferred.
      */
-    @JsonProperty(value = "bytesSentToCloud", access = JsonProperty.Access.WRITE_ONLY)
-    private Long bytesSentToCloud;
+    @JsonProperty(value = "bytesProcessed", access = JsonProperty.Access.WRITE_ONLY)
+    private Long bytesProcessed;
 
     /**
      * Total amount of data to be processed by the job.
@@ -46,13 +54,13 @@ public class CopyProgress {
     private Long totalBytesToProcess;
 
     /**
-     * Number of files processed by the job as of now.
+     * Number of files processed.
      */
     @JsonProperty(value = "filesProcessed", access = JsonProperty.Access.WRITE_ONLY)
     private Long filesProcessed;
 
     /**
-     * Total number of files to be processed by the job.
+     * Total files to process.
      */
     @JsonProperty(value = "totalFilesToProcess", access = JsonProperty.Access.WRITE_ONLY)
     private Long totalFilesToProcess;
@@ -85,7 +93,26 @@ public class CopyProgress {
     private Long filesErroredOut;
 
     /**
-     * Get name of the storage account where the data needs to be uploaded.
+     * To indicate directories errored out in the job.
+     */
+    @JsonProperty(value = "directoriesErroredOut", access = JsonProperty.Access.WRITE_ONLY)
+    private Long directoriesErroredOut;
+
+    /**
+     * To indicate directories renamed.
+     */
+    @JsonProperty(value = "invalidDirectoriesProcessed", access = JsonProperty.Access.WRITE_ONLY)
+    private Long invalidDirectoriesProcessed;
+
+    /**
+     * To indicate if enumeration of data is in progress.
+     * Until this is true, the TotalBytesToProcess may not be valid.
+     */
+    @JsonProperty(value = "isEnumerationInProgress", access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean isEnumerationInProgress;
+
+    /**
+     * Get name of the storage account. This will be empty for data account types other than storage account.
      *
      * @return the storageAccountName value
      */
@@ -94,12 +121,21 @@ public class CopyProgress {
     }
 
     /**
-     * Get data Destination Type. Possible values include: 'StorageAccount', 'ManagedDisk'.
+     * Get transfer type of data. Possible values include: 'ImportToAzure', 'ExportFromAzure'.
      *
-     * @return the dataDestinationType value
+     * @return the transferType value
      */
-    public DataDestinationType dataDestinationType() {
-        return this.dataDestinationType;
+    public TransferType transferType() {
+        return this.transferType;
+    }
+
+    /**
+     * Get data Account Type. Possible values include: 'StorageAccount', 'ManagedDisk'.
+     *
+     * @return the dataAccountType value
+     */
+    public DataAccountType dataAccountType() {
+        return this.dataAccountType;
     }
 
     /**
@@ -112,12 +148,12 @@ public class CopyProgress {
     }
 
     /**
-     * Get amount of data uploaded by the job as of now.
+     * Get to indicate bytes transferred.
      *
-     * @return the bytesSentToCloud value
+     * @return the bytesProcessed value
      */
-    public Long bytesSentToCloud() {
-        return this.bytesSentToCloud;
+    public Long bytesProcessed() {
+        return this.bytesProcessed;
     }
 
     /**
@@ -130,7 +166,7 @@ public class CopyProgress {
     }
 
     /**
-     * Get number of files processed by the job as of now.
+     * Get number of files processed.
      *
      * @return the filesProcessed value
      */
@@ -139,7 +175,7 @@ public class CopyProgress {
     }
 
     /**
-     * Get total number of files to be processed by the job.
+     * Get total files to process.
      *
      * @return the totalFilesToProcess value
      */
@@ -181,6 +217,34 @@ public class CopyProgress {
      */
     public Long filesErroredOut() {
         return this.filesErroredOut;
+    }
+
+    /**
+     * Get to indicate directories errored out in the job.
+     *
+     * @return the directoriesErroredOut value
+     */
+    public Long directoriesErroredOut() {
+        return this.directoriesErroredOut;
+    }
+
+    /**
+     * Get to indicate directories renamed.
+     *
+     * @return the invalidDirectoriesProcessed value
+     */
+    public Long invalidDirectoriesProcessed() {
+        return this.invalidDirectoriesProcessed;
+    }
+
+    /**
+     * Get to indicate if enumeration of data is in progress.
+     Until this is true, the TotalBytesToProcess may not be valid.
+     *
+     * @return the isEnumerationInProgress value
+     */
+    public Boolean isEnumerationInProgress() {
+        return this.isEnumerationInProgress;
     }
 
 }

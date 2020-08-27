@@ -22,11 +22,11 @@ public class AccountCredentialDetails {
     private String accountName;
 
     /**
-     * Data Destination Type. Possible values include: 'StorageAccount',
+     * Type of the account. Possible values include: 'StorageAccount',
      * 'ManagedDisk'.
      */
-    @JsonProperty(value = "dataDestinationType", access = JsonProperty.Access.WRITE_ONLY)
-    private DataDestinationType dataDestinationType;
+    @JsonProperty(value = "dataAccountType", access = JsonProperty.Access.WRITE_ONLY)
+    private DataAccountType dataAccountType;
 
     /**
      * Connection string of the account endpoint to use the account as a
@@ -51,12 +51,12 @@ public class AccountCredentialDetails {
     }
 
     /**
-     * Get data Destination Type. Possible values include: 'StorageAccount', 'ManagedDisk'.
+     * Get type of the account. Possible values include: 'StorageAccount', 'ManagedDisk'.
      *
-     * @return the dataDestinationType value
+     * @return the dataAccountType value
      */
-    public DataDestinationType dataDestinationType() {
-        return this.dataDestinationType;
+    public DataAccountType dataAccountType() {
+        return this.dataAccountType;
     }
 
     /**

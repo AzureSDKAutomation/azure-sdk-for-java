@@ -26,13 +26,6 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 })
 public class JobDetails {
     /**
-     * The expected size of the data, which needs to be transferred in this
-     * job, in terabytes.
-     */
-    @JsonProperty(value = "expectedDataSizeInTerabytes")
-    private Integer expectedDataSizeInTerabytes;
-
-    /**
      * List of stages that run in the job.
      */
     @JsonProperty(value = "jobStages", access = JsonProperty.Access.WRITE_ONLY)
@@ -47,7 +40,7 @@ public class JobDetails {
     /**
      * Shipping address of the customer.
      */
-    @JsonProperty(value = "shippingAddress", required = true)
+    @JsonProperty(value = "shippingAddress")
     private ShippingAddress shippingAddress;
 
     /**
@@ -63,16 +56,16 @@ public class JobDetails {
     private PackageShippingDetails returnPackage;
 
     /**
-     * Destination account details.
+     * Details of the data to be imported into azure.
      */
-    @JsonProperty(value = "destinationAccountDetails", required = true)
-    private List<DestinationAccountDetails> destinationAccountDetails;
+    @JsonProperty(value = "dataImportDetails")
+    private List<DataImportDetails> dataImportDetails;
 
     /**
-     * Error details for failure. This is optional.
+     * Details of the data to be exported from azure.
      */
-    @JsonProperty(value = "errorDetails", access = JsonProperty.Access.WRITE_ONLY)
-    private List<JobErrorDetails> errorDetails;
+    @JsonProperty(value = "dataExportDetails")
+    private List<DataExportDetails> dataExportDetails;
 
     /**
      * Preferences for the order.
@@ -99,24 +92,17 @@ public class JobDetails {
     private String chainOfCustodySasKey;
 
     /**
-     * Get the expected size of the data, which needs to be transferred in this job, in terabytes.
-     *
-     * @return the expectedDataSizeInTerabytes value
+     * Details about which key encryption type is being used.
      */
-    public Integer expectedDataSizeInTerabytes() {
-        return this.expectedDataSizeInTerabytes;
-    }
+    @JsonProperty(value = "keyEncryptionKey", access = JsonProperty.Access.WRITE_ONLY)
+    private KeyEncryptionKey keyEncryptionKey;
 
     /**
-     * Set the expected size of the data, which needs to be transferred in this job, in terabytes.
-     *
-     * @param expectedDataSizeInTerabytes the expectedDataSizeInTerabytes value to set
-     * @return the JobDetails object itself.
+     * The expected size of the data, which needs to be transferred in this
+     * job, in terabytes.
      */
-    public JobDetails withExpectedDataSizeInTerabytes(Integer expectedDataSizeInTerabytes) {
-        this.expectedDataSizeInTerabytes = expectedDataSizeInTerabytes;
-        return this;
-    }
+    @JsonProperty(value = "expectedDataSizeInTerabytes")
+    private Integer expectedDataSizeInTerabytes;
 
     /**
      * Get list of stages that run in the job.
@@ -186,32 +172,43 @@ public class JobDetails {
     }
 
     /**
-     * Get destination account details.
+     * Get details of the data to be imported into azure.
      *
-     * @return the destinationAccountDetails value
+     * @return the dataImportDetails value
      */
-    public List<DestinationAccountDetails> destinationAccountDetails() {
-        return this.destinationAccountDetails;
+    public List<DataImportDetails> dataImportDetails() {
+        return this.dataImportDetails;
     }
 
     /**
-     * Set destination account details.
+     * Set details of the data to be imported into azure.
      *
-     * @param destinationAccountDetails the destinationAccountDetails value to set
+     * @param dataImportDetails the dataImportDetails value to set
      * @return the JobDetails object itself.
      */
-    public JobDetails withDestinationAccountDetails(List<DestinationAccountDetails> destinationAccountDetails) {
-        this.destinationAccountDetails = destinationAccountDetails;
+    public JobDetails withDataImportDetails(List<DataImportDetails> dataImportDetails) {
+        this.dataImportDetails = dataImportDetails;
         return this;
     }
 
     /**
-     * Get error details for failure. This is optional.
+     * Get details of the data to be exported from azure.
      *
-     * @return the errorDetails value
+     * @return the dataExportDetails value
      */
-    public List<JobErrorDetails> errorDetails() {
-        return this.errorDetails;
+    public List<DataExportDetails> dataExportDetails() {
+        return this.dataExportDetails;
+    }
+
+    /**
+     * Set details of the data to be exported from azure.
+     *
+     * @param dataExportDetails the dataExportDetails value to set
+     * @return the JobDetails object itself.
+     */
+    public JobDetails withDataExportDetails(List<DataExportDetails> dataExportDetails) {
+        this.dataExportDetails = dataExportDetails;
+        return this;
     }
 
     /**
@@ -259,6 +256,35 @@ public class JobDetails {
      */
     public String chainOfCustodySasKey() {
         return this.chainOfCustodySasKey;
+    }
+
+    /**
+     * Get details about which key encryption type is being used.
+     *
+     * @return the keyEncryptionKey value
+     */
+    public KeyEncryptionKey keyEncryptionKey() {
+        return this.keyEncryptionKey;
+    }
+
+    /**
+     * Get the expected size of the data, which needs to be transferred in this job, in terabytes.
+     *
+     * @return the expectedDataSizeInTerabytes value
+     */
+    public Integer expectedDataSizeInTerabytes() {
+        return this.expectedDataSizeInTerabytes;
+    }
+
+    /**
+     * Set the expected size of the data, which needs to be transferred in this job, in terabytes.
+     *
+     * @param expectedDataSizeInTerabytes the expectedDataSizeInTerabytes value to set
+     * @return the JobDetails object itself.
+     */
+    public JobDetails withExpectedDataSizeInTerabytes(Integer expectedDataSizeInTerabytes) {
+        this.expectedDataSizeInTerabytes = expectedDataSizeInTerabytes;
+        return this;
     }
 
 }

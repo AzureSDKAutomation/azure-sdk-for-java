@@ -14,8 +14,8 @@ import com.microsoft.azure.arm.collection.InnerSupportsListing;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.management.databox.ApiErrorException;
 import com.microsoft.azure.management.databox.CancellationReason;
 import com.microsoft.azure.management.databox.JobResourceUpdateParameter;
 import com.microsoft.azure.management.databox.ShipmentPickUpRequest;
@@ -131,7 +131,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * Lists all the jobs available under the subscription.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;JobResourceInner&gt; object if successful.
      */
@@ -233,7 +233,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      *
      * @param skipToken $skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;JobResourceInner&gt; object if successful.
      */
@@ -333,10 +333,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<PageImpl<JobResourceInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<JobResourceInner>> listDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<JobResourceInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -345,7 +345,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      *
      * @param resourceGroupName The Resource Group Name
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;JobResourceInner&gt; object if successful.
      */
@@ -455,7 +455,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param resourceGroupName The Resource Group Name
      * @param skipToken $skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;JobResourceInner&gt; object if successful.
      */
@@ -562,10 +562,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<PageImpl<JobResourceInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<JobResourceInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<JobResourceInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -575,7 +575,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param resourceGroupName The Resource Group Name
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the JobResourceInner object if successful.
      */
@@ -656,7 +656,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @param expand $expand is supported on details parameter for job, which provides details on the job stages.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the JobResourceInner object if successful.
      */
@@ -732,10 +732,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<JobResourceInner> getByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<JobResourceInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<JobResourceInner> getByResourceGroupDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<JobResourceInner, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<JobResourceInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -746,7 +746,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @param jobResource Job details from request body.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the JobResourceInner object if successful.
      */
@@ -823,7 +823,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @param jobResource Job details from request body.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the JobResourceInner object if successful.
      */
@@ -903,11 +903,11 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<JobResourceInner> beginCreateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<JobResourceInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<JobResourceInner> beginCreateDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<JobResourceInner, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<JobResourceInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -917,7 +917,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param resourceGroupName The Resource Group Name
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete(String resourceGroupName, String jobName) {
@@ -985,7 +985,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param resourceGroupName The Resource Group Name
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete(String resourceGroupName, String jobName) {
@@ -1057,11 +1057,12 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ApiErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -1072,7 +1073,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @param jobResourceUpdateParameter Job update parameters from request body.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the JobResourceInner object if successful.
      */
@@ -1150,7 +1151,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobResourceUpdateParameter Job update parameters from request body.
      * @param ifMatch Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the JobResourceInner object if successful.
      */
@@ -1230,7 +1231,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @param jobResourceUpdateParameter Job update parameters from request body.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the JobResourceInner object if successful.
      */
@@ -1319,7 +1320,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobResourceUpdateParameter Job update parameters from request body.
      * @param ifMatch Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the JobResourceInner object if successful.
      */
@@ -1402,11 +1403,11 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<JobResourceInner> beginUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<JobResourceInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<JobResourceInner> beginUpdateDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<JobResourceInner, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<JobResourceInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -1417,7 +1418,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @param shipmentPickUpRequest Details of shipment pick up request.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ShipmentPickUpResponseInner object if successful.
      */
@@ -1497,10 +1498,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<ShipmentPickUpResponseInner> bookShipmentPickUpDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ShipmentPickUpResponseInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<ShipmentPickUpResponseInner> bookShipmentPickUpDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ShipmentPickUpResponseInner, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ShipmentPickUpResponseInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -1511,7 +1512,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @param reason Reason for cancellation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void cancel(String resourceGroupName, String jobName, String reason) {
@@ -1591,10 +1592,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<Void> cancelDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> cancelDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -1604,7 +1605,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      * @param resourceGroupName The Resource Group Name
      * @param jobName The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;UnencryptedCredentialsInner&gt; object if successful.
      */
@@ -1682,10 +1683,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<PageImpl1<UnencryptedCredentialsInner>> listCredentialsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<UnencryptedCredentialsInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl1<UnencryptedCredentialsInner>> listCredentialsDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<UnencryptedCredentialsInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl1<UnencryptedCredentialsInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -1694,7 +1695,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;JobResourceInner&gt; object if successful.
      */
@@ -1793,10 +1794,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<PageImpl<JobResourceInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<JobResourceInner>> listNextDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<JobResourceInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -1805,7 +1806,7 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;JobResourceInner&gt; object if successful.
      */
@@ -1904,10 +1905,10 @@ public class JobsInner implements InnerSupportsGet<JobResourceInner>, InnerSuppo
             });
     }
 
-    private ServiceResponse<PageImpl<JobResourceInner>> listByResourceGroupNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<JobResourceInner>> listByResourceGroupNextDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<JobResourceInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<JobResourceInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 

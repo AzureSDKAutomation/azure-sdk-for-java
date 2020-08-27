@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Preferences {
     /**
-     * Preferred Data Center Region.
+     * Preferred data center region.
      */
     @JsonProperty(value = "preferredDataCenterRegion")
     private List<String> preferredDataCenterRegion;
@@ -28,7 +28,7 @@ public class Preferences {
     private TransportPreferences transportPreferences;
 
     /**
-     * Get preferred Data Center Region.
+     * Get preferred data center region.
      *
      * @return the preferredDataCenterRegion value
      */
@@ -37,7 +37,7 @@ public class Preferences {
     }
 
     /**
-     * Set preferred Data Center Region.
+     * Set preferred data center region.
      *
      * @param preferredDataCenterRegion the preferredDataCenterRegion value to set
      * @return the Preferences object itself.

@@ -8,7 +8,6 @@
 
 package com.microsoft.azure.management.databox;
 
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
@@ -25,17 +24,17 @@ public class JobResourceUpdateParameter {
     private UpdateJobDetails details;
 
     /**
-     * Destination account details.
-     */
-    @JsonProperty(value = "properties.destinationAccountDetails")
-    private List<DestinationAccountDetails> destinationAccountDetails;
-
-    /**
      * The list of key value pairs that describe the resource. These tags can
      * be used in viewing and grouping this resource (across resource groups).
      */
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
+
+    /**
+     * Msi identity of the resource.
+     */
+    @JsonProperty(value = "identity")
+    private ResourceIdentity identity;
 
     /**
      * Get details of a job to be updated.
@@ -58,26 +57,6 @@ public class JobResourceUpdateParameter {
     }
 
     /**
-     * Get destination account details.
-     *
-     * @return the destinationAccountDetails value
-     */
-    public List<DestinationAccountDetails> destinationAccountDetails() {
-        return this.destinationAccountDetails;
-    }
-
-    /**
-     * Set destination account details.
-     *
-     * @param destinationAccountDetails the destinationAccountDetails value to set
-     * @return the JobResourceUpdateParameter object itself.
-     */
-    public JobResourceUpdateParameter withDestinationAccountDetails(List<DestinationAccountDetails> destinationAccountDetails) {
-        this.destinationAccountDetails = destinationAccountDetails;
-        return this;
-    }
-
-    /**
      * Get the list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).
      *
      * @return the tags value
@@ -94,6 +73,26 @@ public class JobResourceUpdateParameter {
      */
     public JobResourceUpdateParameter withTags(Map<String, String> tags) {
         this.tags = tags;
+        return this;
+    }
+
+    /**
+     * Get msi identity of the resource.
+     *
+     * @return the identity value
+     */
+    public ResourceIdentity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set msi identity of the resource.
+     *
+     * @param identity the identity value to set
+     * @return the JobResourceUpdateParameter object itself.
+     */
+    public JobResourceUpdateParameter withIdentity(ResourceIdentity identity) {
+        this.identity = identity;
         return this;
     }
 

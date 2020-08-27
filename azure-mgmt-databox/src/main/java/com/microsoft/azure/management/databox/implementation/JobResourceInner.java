@@ -8,13 +8,15 @@
 
 package com.microsoft.azure.management.databox.implementation;
 
+import com.microsoft.azure.management.databox.TransferType;
 import com.microsoft.azure.management.databox.StageName;
 import org.joda.time.DateTime;
-import com.microsoft.azure.management.databox.Error;
+import com.microsoft.rest.CloudError;
 import com.microsoft.azure.management.databox.JobDetails;
 import com.microsoft.azure.management.databox.JobDeliveryType;
 import com.microsoft.azure.management.databox.JobDeliveryInfo;
 import com.microsoft.azure.management.databox.Sku;
+import com.microsoft.azure.management.databox.ResourceIdentity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -24,6 +26,13 @@ import com.microsoft.azure.Resource;
  */
 @JsonFlatten
 public class JobResourceInner extends Resource {
+    /**
+     * Type of the data transfer. Possible values include: 'ImportToAzure',
+     * 'ExportFromAzure'.
+     */
+    @JsonProperty(value = "properties.transferType", required = true)
+    private TransferType transferType;
+
     /**
      * Describes whether the job is cancellable or not.
      */
@@ -41,6 +50,12 @@ public class JobResourceInner extends Resource {
      */
     @JsonProperty(value = "properties.isShippingAddressEditable", access = JsonProperty.Access.WRITE_ONLY)
     private Boolean isShippingAddressEditable;
+
+    /**
+     * Is Prepare To Ship Enabled on this job.
+     */
+    @JsonProperty(value = "properties.isPrepareToShipEnabled", access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean isPrepareToShipEnabled;
 
     /**
      * Name of the stage which is in progress. Possible values include:
@@ -63,7 +78,7 @@ public class JobResourceInner extends Resource {
      * Top level error for the job.
      */
     @JsonProperty(value = "properties.error", access = JsonProperty.Access.WRITE_ONLY)
-    private Error error;
+    private CloudError error;
 
     /**
      * Details of a job run. This field will only be sent for expand details
@@ -122,6 +137,32 @@ public class JobResourceInner extends Resource {
     private Sku sku;
 
     /**
+     * Msi identity of the resource.
+     */
+    @JsonProperty(value = "identity")
+    private ResourceIdentity identity;
+
+    /**
+     * Get type of the data transfer. Possible values include: 'ImportToAzure', 'ExportFromAzure'.
+     *
+     * @return the transferType value
+     */
+    public TransferType transferType() {
+        return this.transferType;
+    }
+
+    /**
+     * Set type of the data transfer. Possible values include: 'ImportToAzure', 'ExportFromAzure'.
+     *
+     * @param transferType the transferType value to set
+     * @return the JobResourceInner object itself.
+     */
+    public JobResourceInner withTransferType(TransferType transferType) {
+        this.transferType = transferType;
+        return this;
+    }
+
+    /**
      * Get describes whether the job is cancellable or not.
      *
      * @return the isCancellable value
@@ -149,6 +190,15 @@ public class JobResourceInner extends Resource {
     }
 
     /**
+     * Get is Prepare To Ship Enabled on this job.
+     *
+     * @return the isPrepareToShipEnabled value
+     */
+    public Boolean isPrepareToShipEnabled() {
+        return this.isPrepareToShipEnabled;
+    }
+
+    /**
      * Get name of the stage which is in progress. Possible values include: 'DeviceOrdered', 'DevicePrepared', 'Dispatched', 'Delivered', 'PickedUp', 'AtAzureDC', 'DataCopy', 'Completed', 'CompletedWithErrors', 'Cancelled', 'Failed_IssueReportedAtCustomer', 'Failed_IssueDetectedAtAzureDC', 'Aborted', 'CompletedWithWarnings', 'ReadyToDispatchFromAzureDC', 'ReadyToReceiveAtAzureDC'.
      *
      * @return the status value
@@ -171,7 +221,7 @@ public class JobResourceInner extends Resource {
      *
      * @return the error value
      */
-    public Error error() {
+    public CloudError error() {
         return this.error;
     }
 
@@ -297,6 +347,26 @@ public class JobResourceInner extends Resource {
      */
     public JobResourceInner withSku(Sku sku) {
         this.sku = sku;
+        return this;
+    }
+
+    /**
+     * Get msi identity of the resource.
+     *
+     * @return the identity value
+     */
+    public ResourceIdentity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set msi identity of the resource.
+     *
+     * @param identity the identity value to set
+     * @return the JobResourceInner object itself.
+     */
+    public JobResourceInner withIdentity(ResourceIdentity identity) {
+        this.identity = identity;
         return this;
     }
 

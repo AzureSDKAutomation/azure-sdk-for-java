@@ -18,8 +18,8 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.databox.implementation.DataBoxManager;
-import java.util.List;
 import org.joda.time.DateTime;
+import com.microsoft.rest.CloudError;
 import com.microsoft.azure.management.databox.implementation.JobResourceInner;
 
 /**
@@ -49,7 +49,12 @@ public interface JobResource extends HasInner<JobResourceInner>, Resource, Group
     /**
      * @return the error value.
      */
-    Error error();
+    CloudError error();
+
+    /**
+     * @return the identity value.
+     */
+    ResourceIdentity identity();
 
     /**
      * @return the isCancellable value.
@@ -65,6 +70,11 @@ public interface JobResource extends HasInner<JobResourceInner>, Resource, Group
      * @return the isDeletable value.
      */
     Boolean isDeletable();
+
+    /**
+     * @return the isPrepareToShipEnabled value.
+     */
+    Boolean isPrepareToShipEnabled();
 
     /**
      * @return the isShippingAddressEditable value.
@@ -87,9 +97,14 @@ public interface JobResource extends HasInner<JobResourceInner>, Resource, Group
     StageName status();
 
     /**
+     * @return the transferType value.
+     */
+    TransferType transferType();
+
+    /**
      * The entirety of the JobResource definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithSku, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithSku, DefinitionStages.WithTransferType, DefinitionStages.WithCreate {
     }
 
     /**
@@ -117,7 +132,19 @@ public interface JobResource extends HasInner<JobResourceInner>, Resource, Group
             * @param sku The sku type
             * @return the next definition stage
 */
-            WithCreate withSku(Sku sku);
+            WithTransferType withSku(Sku sku);
+        }
+
+        /**
+         * The stage of the jobresource definition allowing to specify TransferType.
+         */
+        interface WithTransferType {
+           /**
+            * Specifies transferType.
+            * @param transferType Type of the data transfer. Possible values include: 'ImportToAzure', 'ExportFromAzure'
+            * @return the next definition stage
+*/
+            WithCreate withTransferType(TransferType transferType);
         }
 
         /**
@@ -157,17 +184,29 @@ public interface JobResource extends HasInner<JobResourceInner>, Resource, Group
         }
 
         /**
+         * The stage of the jobresource definition allowing to specify Identity.
+         */
+        interface WithIdentity {
+            /**
+             * Specifies identity.
+             * @param identity Msi identity of the resource
+             * @return the next definition stage
+             */
+            WithCreate withIdentity(ResourceIdentity identity);
+        }
+
+        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<JobResource>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithDeliveryInfo, DefinitionStages.WithDeliveryType, DefinitionStages.WithDetails {
+        interface WithCreate extends Creatable<JobResource>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithDeliveryInfo, DefinitionStages.WithDeliveryType, DefinitionStages.WithDetails, DefinitionStages.WithIdentity {
         }
     }
     /**
      * The template for a JobResource update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<JobResource>, Resource.UpdateWithTags<Update>, UpdateStages.WithIfMatch, UpdateStages.WithDestinationAccountDetails, UpdateStages.WithDetails {
+    interface Update extends Appliable<JobResource>, Resource.UpdateWithTags<Update>, UpdateStages.WithIfMatch, UpdateStages.WithDetails, UpdateStages.WithIdentity {
     }
 
     /**
@@ -187,18 +226,6 @@ public interface JobResource extends HasInner<JobResourceInner>, Resource, Group
         }
 
         /**
-         * The stage of the jobresource update allowing to specify DestinationAccountDetails.
-         */
-        interface WithDestinationAccountDetails {
-            /**
-             * Specifies destinationAccountDetails.
-             * @param destinationAccountDetails Destination account details
-             * @return the next update stage
-             */
-            Update withDestinationAccountDetails(List<DestinationAccountDetails> destinationAccountDetails);
-        }
-
-        /**
          * The stage of the jobresource update allowing to specify Details.
          */
         interface WithDetails {
@@ -208,6 +235,18 @@ public interface JobResource extends HasInner<JobResourceInner>, Resource, Group
              * @return the next update stage
              */
             Update withDetails(UpdateJobDetails details);
+        }
+
+        /**
+         * The stage of the jobresource update allowing to specify Identity.
+         */
+        interface WithIdentity {
+            /**
+             * Specifies identity.
+             * @param identity Msi identity of the resource
+             * @return the next update stage
+             */
+            Update withIdentity(ResourceIdentity identity);
         }
 
     }

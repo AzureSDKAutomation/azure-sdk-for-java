@@ -41,6 +41,12 @@ public class OperationInner {
     private String origin;
 
     /**
+     * Indicates whether the operation is a data action.
+     */
+    @JsonProperty(value = "isDataAction")
+    private Boolean isDataAction;
+
+    /**
      * Get name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}.
      *
      * @return the name value
@@ -74,6 +80,26 @@ public class OperationInner {
      */
     public String origin() {
         return this.origin;
+    }
+
+    /**
+     * Get indicates whether the operation is a data action.
+     *
+     * @return the isDataAction value
+     */
+    public Boolean isDataAction() {
+        return this.isDataAction;
+    }
+
+    /**
+     * Set indicates whether the operation is a data action.
+     *
+     * @param isDataAction the isDataAction value to set
+     * @return the OperationInner object itself.
+     */
+    public OperationInner withIsDataAction(Boolean isDataAction) {
+        this.isDataAction = isDataAction;
+        return this;
     }
 
 }

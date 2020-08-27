@@ -12,7 +12,7 @@ import com.microsoft.azure.management.databox.AddressValidationOutput;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import java.util.List;
 import com.microsoft.azure.management.databox.ShippingAddress;
-import com.microsoft.azure.management.databox.Error;
+import com.microsoft.rest.CloudError;
 import com.microsoft.azure.management.databox.AddressValidationStatus;
 
 class AddressValidationOutputImpl extends WrapperImpl<AddressValidationOutputInner> implements AddressValidationOutput {
@@ -33,7 +33,7 @@ class AddressValidationOutputImpl extends WrapperImpl<AddressValidationOutputInn
     }
 
     @Override
-    public Error error() {
+    public CloudError error() {
         return this.inner().error();
     }
 

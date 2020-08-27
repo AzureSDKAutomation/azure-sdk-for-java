@@ -12,15 +12,15 @@ import com.microsoft.azure.arm.resources.models.implementation.GroupableResource
 import com.microsoft.azure.management.databox.JobResource;
 import rx.Observable;
 import com.microsoft.azure.management.databox.JobResourceUpdateParameter;
-import java.util.List;
 import com.microsoft.azure.management.databox.Sku;
+import com.microsoft.azure.management.databox.ResourceIdentity;
+import com.microsoft.azure.management.databox.TransferType;
 import com.microsoft.azure.management.databox.StageName;
 import org.joda.time.DateTime;
-import com.microsoft.azure.management.databox.Error;
+import com.microsoft.rest.CloudError;
 import com.microsoft.azure.management.databox.JobDetails;
 import com.microsoft.azure.management.databox.JobDeliveryType;
 import com.microsoft.azure.management.databox.JobDeliveryInfo;
-import com.microsoft.azure.management.databox.DestinationAccountDetails;
 import com.microsoft.azure.management.databox.UpdateJobDetails;
 import rx.functions.Func1;
 
@@ -96,8 +96,13 @@ class JobResourceImpl extends GroupableResourceCoreImpl<JobResource, JobResource
     }
 
     @Override
-    public Error error() {
+    public CloudError error() {
         return this.inner().error();
+    }
+
+    @Override
+    public ResourceIdentity identity() {
+        return this.inner().identity();
     }
 
     @Override
@@ -113,6 +118,11 @@ class JobResourceImpl extends GroupableResourceCoreImpl<JobResource, JobResource
     @Override
     public Boolean isDeletable() {
         return this.inner().isDeletable();
+    }
+
+    @Override
+    public Boolean isPrepareToShipEnabled() {
+        return this.inner().isPrepareToShipEnabled();
     }
 
     @Override
@@ -136,8 +146,19 @@ class JobResourceImpl extends GroupableResourceCoreImpl<JobResource, JobResource
     }
 
     @Override
+    public TransferType transferType() {
+        return this.inner().transferType();
+    }
+
+    @Override
     public JobResourceImpl withSku(Sku sku) {
         this.inner().withSku(sku);
+        return this;
+    }
+
+    @Override
+    public JobResourceImpl withTransferType(TransferType transferType) {
+        this.inner().withTransferType(transferType);
         return this;
     }
 
@@ -166,14 +187,18 @@ class JobResourceImpl extends GroupableResourceCoreImpl<JobResource, JobResource
     }
 
     @Override
-    public JobResourceImpl withDestinationAccountDetails(List<DestinationAccountDetails> destinationAccountDetails) {
-        this.updateParameter.withDestinationAccountDetails(destinationAccountDetails);
+    public JobResourceImpl withDetails(UpdateJobDetails details) {
+        this.updateParameter.withDetails(details);
         return this;
     }
 
     @Override
-    public JobResourceImpl withDetails(UpdateJobDetails details) {
-        this.updateParameter.withDetails(details);
+    public JobResourceImpl withIdentity(ResourceIdentity identity) {
+        if (isInCreateMode()) {
+            this.inner().withIdentity(identity);
+        } else {
+            this.updateParameter.withIdentity(identity);
+        }
         return this;
     }
 

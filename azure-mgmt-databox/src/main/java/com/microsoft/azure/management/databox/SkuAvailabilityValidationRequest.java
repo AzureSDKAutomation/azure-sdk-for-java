@@ -26,10 +26,11 @@ public class SkuAvailabilityValidationRequest extends ValidationInputRequest {
     private SkuName deviceType;
 
     /**
-     * Type of the transfer.
+     * Type of the transfer. Possible values include: 'ImportToAzure',
+     * 'ExportFromAzure'.
      */
     @JsonProperty(value = "transferType", required = true)
-    private String transferType;
+    private TransferType transferType;
 
     /**
      * ISO country code. Country for hardware shipment. For codes check:
@@ -44,16 +45,6 @@ public class SkuAvailabilityValidationRequest extends ValidationInputRequest {
      */
     @JsonProperty(value = "location", required = true)
     private String location;
-
-    /**
-     * Creates an instance of SkuAvailabilityValidationRequest class.
-     * @param deviceType device type to be used for the job. Possible values include: 'DataBox', 'DataBoxDisk', 'DataBoxHeavy'.
-     * @param country iSO country code. Country for hardware shipment. For codes check: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements.
-     * @param location location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01.
-     */
-    public SkuAvailabilityValidationRequest() {
-        transferType = "ImportToAzure";
-    }
 
     /**
      * Get device type to be used for the job. Possible values include: 'DataBox', 'DataBoxDisk', 'DataBoxHeavy'.
@@ -76,21 +67,21 @@ public class SkuAvailabilityValidationRequest extends ValidationInputRequest {
     }
 
     /**
-     * Get type of the transfer.
+     * Get type of the transfer. Possible values include: 'ImportToAzure', 'ExportFromAzure'.
      *
      * @return the transferType value
      */
-    public String transferType() {
+    public TransferType transferType() {
         return this.transferType;
     }
 
     /**
-     * Set type of the transfer.
+     * Set type of the transfer. Possible values include: 'ImportToAzure', 'ExportFromAzure'.
      *
      * @param transferType the transferType value to set
      * @return the SkuAvailabilityValidationRequest object itself.
      */
-    public SkuAvailabilityValidationRequest withTransferType(String transferType) {
+    public SkuAvailabilityValidationRequest withTransferType(TransferType transferType) {
         this.transferType = transferType;
         return this;
     }

@@ -11,43 +11,23 @@ package com.microsoft.azure.management.databox;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Dc Access Security code for device.
+ * Dc access security code.
  */
 public class DcAccessSecurityCode {
     /**
-     * Dc Access Code for dispatching from DC.
-     */
-    @JsonProperty(value = "forwardDcAccessCode")
-    private String forwardDcAccessCode;
-
-    /**
-     * Dc Access code for dropping off at DC.
+     * Reverse Dc access security code.
      */
     @JsonProperty(value = "reverseDcAccessCode")
     private String reverseDcAccessCode;
 
     /**
-     * Get dc Access Code for dispatching from DC.
-     *
-     * @return the forwardDcAccessCode value
+     * Forward Dc access security code.
      */
-    public String forwardDcAccessCode() {
-        return this.forwardDcAccessCode;
-    }
+    @JsonProperty(value = "forwardDcAccessCode")
+    private String forwardDcAccessCode;
 
     /**
-     * Set dc Access Code for dispatching from DC.
-     *
-     * @param forwardDcAccessCode the forwardDcAccessCode value to set
-     * @return the DcAccessSecurityCode object itself.
-     */
-    public DcAccessSecurityCode withForwardDcAccessCode(String forwardDcAccessCode) {
-        this.forwardDcAccessCode = forwardDcAccessCode;
-        return this;
-    }
-
-    /**
-     * Get dc Access code for dropping off at DC.
+     * Get reverse Dc access security code.
      *
      * @return the reverseDcAccessCode value
      */
@@ -56,13 +36,33 @@ public class DcAccessSecurityCode {
     }
 
     /**
-     * Set dc Access code for dropping off at DC.
+     * Set reverse Dc access security code.
      *
      * @param reverseDcAccessCode the reverseDcAccessCode value to set
      * @return the DcAccessSecurityCode object itself.
      */
     public DcAccessSecurityCode withReverseDcAccessCode(String reverseDcAccessCode) {
         this.reverseDcAccessCode = reverseDcAccessCode;
+        return this;
+    }
+
+    /**
+     * Get forward Dc access security code.
+     *
+     * @return the forwardDcAccessCode value
+     */
+    public String forwardDcAccessCode() {
+        return this.forwardDcAccessCode;
+    }
+
+    /**
+     * Set forward Dc access security code.
+     *
+     * @param forwardDcAccessCode the forwardDcAccessCode value to set
+     * @return the DcAccessSecurityCode object itself.
+     */
+    public DcAccessSecurityCode withForwardDcAccessCode(String forwardDcAccessCode) {
+        this.forwardDcAccessCode = forwardDcAccessCode;
         return this;
     }
 

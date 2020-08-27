@@ -13,7 +13,7 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Schedule availability response for given sku in a region.
+ * Schedule availability for given sku in a region.
  */
 public class ScheduleAvailabilityResponse {
     /**

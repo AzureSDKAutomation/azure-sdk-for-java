@@ -11,8 +11,8 @@ package com.microsoft.azure.management.databox.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.management.databox.ApiErrorException;
 import com.microsoft.azure.management.databox.AvailableSkuRequest;
 import com.microsoft.azure.management.databox.RegionConfigurationRequest;
 import com.microsoft.azure.management.databox.ValidateAddress;
@@ -64,10 +64,6 @@ public class ServicesInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface ServicesService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Services listAvailableSkus" })
-        @POST("subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/availableSkus")
-        Observable<Response<ResponseBody>> listAvailableSkus(@Path("subscriptionId") String subscriptionId, @Path("location") String location, @Query("api-version") String apiVersion, @Body AvailableSkuRequest availableSkuRequest, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Services listAvailableSkusByResourceGroup" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/availableSkus")
         Observable<Response<ResponseBody>> listAvailableSkusByResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("location") String location, @Query("api-version") String apiVersion, @Body AvailableSkuRequest availableSkuRequest, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -88,138 +84,14 @@ public class ServicesInner {
         @POST("subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration")
         Observable<Response<ResponseBody>> regionConfiguration(@Path("subscriptionId") String subscriptionId, @Path("location") String location, @Query("api-version") String apiVersion, @Body RegionConfigurationRequest regionConfigurationRequest, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Services listAvailableSkusNext" })
-        @GET
-        Observable<Response<ResponseBody>> listAvailableSkusNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Services regionConfigurationByResourceGroup" })
+        @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration")
+        Observable<Response<ResponseBody>> regionConfigurationByResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("location") String location, @Query("api-version") String apiVersion, @Body RegionConfigurationRequest regionConfigurationRequest, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.databox.Services listAvailableSkusByResourceGroupNext" })
         @GET
         Observable<Response<ResponseBody>> listAvailableSkusByResourceGroupNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-    }
-
-    /**
-     * This method provides the list of available skus for the given subscription and location.
-     *
-     * @param location The location of the resource
-     * @param availableSkuRequest Filters for showing the available skus.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PagedList&lt;SkuInformationInner&gt; object if successful.
-     */
-    public PagedList<SkuInformationInner> listAvailableSkus(final String location, final AvailableSkuRequest availableSkuRequest) {
-        ServiceResponse<Page<SkuInformationInner>> response = listAvailableSkusSinglePageAsync(location, availableSkuRequest).toBlocking().single();
-        return new PagedList<SkuInformationInner>(response.body()) {
-            @Override
-            public Page<SkuInformationInner> nextPage(String nextPageLink) {
-                return listAvailableSkusNextSinglePageAsync(nextPageLink).toBlocking().single().body();
-            }
-        };
-    }
-
-    /**
-     * This method provides the list of available skus for the given subscription and location.
-     *
-     * @param location The location of the resource
-     * @param availableSkuRequest Filters for showing the available skus.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<List<SkuInformationInner>> listAvailableSkusAsync(final String location, final AvailableSkuRequest availableSkuRequest, final ListOperationCallback<SkuInformationInner> serviceCallback) {
-        return AzureServiceFuture.fromPageResponse(
-            listAvailableSkusSinglePageAsync(location, availableSkuRequest),
-            new Func1<String, Observable<ServiceResponse<Page<SkuInformationInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<SkuInformationInner>>> call(String nextPageLink) {
-                    return listAvailableSkusNextSinglePageAsync(nextPageLink);
-                }
-            },
-            serviceCallback);
-    }
-
-    /**
-     * This method provides the list of available skus for the given subscription and location.
-     *
-     * @param location The location of the resource
-     * @param availableSkuRequest Filters for showing the available skus.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;SkuInformationInner&gt; object
-     */
-    public Observable<Page<SkuInformationInner>> listAvailableSkusAsync(final String location, final AvailableSkuRequest availableSkuRequest) {
-        return listAvailableSkusWithServiceResponseAsync(location, availableSkuRequest)
-            .map(new Func1<ServiceResponse<Page<SkuInformationInner>>, Page<SkuInformationInner>>() {
-                @Override
-                public Page<SkuInformationInner> call(ServiceResponse<Page<SkuInformationInner>> response) {
-                    return response.body();
-                }
-            });
-    }
-
-    /**
-     * This method provides the list of available skus for the given subscription and location.
-     *
-     * @param location The location of the resource
-     * @param availableSkuRequest Filters for showing the available skus.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;SkuInformationInner&gt; object
-     */
-    public Observable<ServiceResponse<Page<SkuInformationInner>>> listAvailableSkusWithServiceResponseAsync(final String location, final AvailableSkuRequest availableSkuRequest) {
-        return listAvailableSkusSinglePageAsync(location, availableSkuRequest)
-            .concatMap(new Func1<ServiceResponse<Page<SkuInformationInner>>, Observable<ServiceResponse<Page<SkuInformationInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<SkuInformationInner>>> call(ServiceResponse<Page<SkuInformationInner>> page) {
-                    String nextPageLink = page.body().nextPageLink();
-                    if (nextPageLink == null) {
-                        return Observable.just(page);
-                    }
-                    return Observable.just(page).concatWith(listAvailableSkusNextWithServiceResponseAsync(nextPageLink));
-                }
-            });
-    }
-
-    /**
-     * This method provides the list of available skus for the given subscription and location.
-     *
-    ServiceResponse<PageImpl<SkuInformationInner>> * @param location The location of the resource
-    ServiceResponse<PageImpl<SkuInformationInner>> * @param availableSkuRequest Filters for showing the available skus.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;SkuInformationInner&gt; object wrapped in {@link ServiceResponse} if successful.
-     */
-    public Observable<ServiceResponse<Page<SkuInformationInner>>> listAvailableSkusSinglePageAsync(final String location, final AvailableSkuRequest availableSkuRequest) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (location == null) {
-            throw new IllegalArgumentException("Parameter location is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        if (availableSkuRequest == null) {
-            throw new IllegalArgumentException("Parameter availableSkuRequest is required and cannot be null.");
-        }
-        Validator.validate(availableSkuRequest);
-        return service.listAvailableSkus(this.client.subscriptionId(), location, this.client.apiVersion(), availableSkuRequest, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<SkuInformationInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<SkuInformationInner>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<PageImpl<SkuInformationInner>> result = listAvailableSkusDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<SkuInformationInner>>(result.body(), result.response()));
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<PageImpl<SkuInformationInner>> listAvailableSkusDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<SkuInformationInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<SkuInformationInner>>() { }.getType())
-                .registerError(CloudException.class)
-                .build(response);
     }
 
     /**
@@ -229,7 +101,7 @@ public class ServicesInner {
      * @param location The location of the resource
      * @param availableSkuRequest Filters for showing the available skus.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;SkuInformationInner&gt; object if successful.
      */
@@ -347,20 +219,20 @@ public class ServicesInner {
             });
     }
 
-    private ServiceResponse<PageImpl<SkuInformationInner>> listAvailableSkusByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<SkuInformationInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<SkuInformationInner>> listAvailableSkusByResourceGroupDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<SkuInformationInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<SkuInformationInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
     /**
-     * [DEPRECATED NOTICE: This operation will soon be removed] This method validates the customer shipping address and provide alternate addresses if any.
+     * [DEPRECATED NOTICE: This operation will soon be removed]. This method validates the customer shipping address and provide alternate addresses if any.
      *
      * @param location The location of the resource
      * @param validateAddress Shipping address of the customer.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the AddressValidationOutputInner object if successful.
      */
@@ -369,7 +241,7 @@ public class ServicesInner {
     }
 
     /**
-     * [DEPRECATED NOTICE: This operation will soon be removed] This method validates the customer shipping address and provide alternate addresses if any.
+     * [DEPRECATED NOTICE: This operation will soon be removed]. This method validates the customer shipping address and provide alternate addresses if any.
      *
      * @param location The location of the resource
      * @param validateAddress Shipping address of the customer.
@@ -382,7 +254,7 @@ public class ServicesInner {
     }
 
     /**
-     * [DEPRECATED NOTICE: This operation will soon be removed] This method validates the customer shipping address and provide alternate addresses if any.
+     * [DEPRECATED NOTICE: This operation will soon be removed]. This method validates the customer shipping address and provide alternate addresses if any.
      *
      * @param location The location of the resource
      * @param validateAddress Shipping address of the customer.
@@ -399,7 +271,7 @@ public class ServicesInner {
     }
 
     /**
-     * [DEPRECATED NOTICE: This operation will soon be removed] This method validates the customer shipping address and provide alternate addresses if any.
+     * [DEPRECATED NOTICE: This operation will soon be removed]. This method validates the customer shipping address and provide alternate addresses if any.
      *
      * @param location The location of the resource
      * @param validateAddress Shipping address of the customer.
@@ -434,10 +306,10 @@ public class ServicesInner {
             });
     }
 
-    private ServiceResponse<AddressValidationOutputInner> validateAddressMethodDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<AddressValidationOutputInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<AddressValidationOutputInner> validateAddressMethodDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<AddressValidationOutputInner, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<AddressValidationOutputInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -448,7 +320,7 @@ public class ServicesInner {
      * @param location The location of the resource
      * @param validationRequest Inputs of the customer.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ValidationResponseInner object if successful.
      */
@@ -528,10 +400,10 @@ public class ServicesInner {
             });
     }
 
-    private ServiceResponse<ValidationResponseInner> validateInputsByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ValidationResponseInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<ValidationResponseInner> validateInputsByResourceGroupDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ValidationResponseInner, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ValidationResponseInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -541,7 +413,7 @@ public class ServicesInner {
      * @param location The location of the resource
      * @param validationRequest Inputs of the customer.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ValidationResponseInner object if successful.
      */
@@ -615,20 +487,20 @@ public class ServicesInner {
             });
     }
 
-    private ServiceResponse<ValidationResponseInner> validateInputsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<ValidationResponseInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<ValidationResponseInner> validateInputsDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ValidationResponseInner, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ValidationResponseInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
     /**
-     * This API provides configuration details specific to given region/location.
+     * This API provides configuration details specific to given region/location at Subscription level.
      *
      * @param location The location of the resource
      * @param regionConfigurationRequest Request body to get the configuration for the region.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the RegionConfigurationResponseInner object if successful.
      */
@@ -637,7 +509,7 @@ public class ServicesInner {
     }
 
     /**
-     * This API provides configuration details specific to given region/location.
+     * This API provides configuration details specific to given region/location at Subscription level.
      *
      * @param location The location of the resource
      * @param regionConfigurationRequest Request body to get the configuration for the region.
@@ -650,7 +522,7 @@ public class ServicesInner {
     }
 
     /**
-     * This API provides configuration details specific to given region/location.
+     * This API provides configuration details specific to given region/location at Subscription level.
      *
      * @param location The location of the resource
      * @param regionConfigurationRequest Request body to get the configuration for the region.
@@ -667,7 +539,7 @@ public class ServicesInner {
     }
 
     /**
-     * This API provides configuration details specific to given region/location.
+     * This API provides configuration details specific to given region/location at Subscription level.
      *
      * @param location The location of the resource
      * @param regionConfigurationRequest Request body to get the configuration for the region.
@@ -702,110 +574,93 @@ public class ServicesInner {
             });
     }
 
-    private ServiceResponse<RegionConfigurationResponseInner> regionConfigurationDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<RegionConfigurationResponseInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<RegionConfigurationResponseInner> regionConfigurationDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<RegionConfigurationResponseInner, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<RegionConfigurationResponseInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
     /**
-     * This method provides the list of available skus for the given subscription and location.
+     * This API provides configuration details specific to given region/location at Resource group level.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName The Resource Group Name
+     * @param location The location of the resource
+     * @param regionConfigurationRequest Request body to get the configuration for the region at resource group level.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PagedList&lt;SkuInformationInner&gt; object if successful.
+     * @return the RegionConfigurationResponseInner object if successful.
      */
-    public PagedList<SkuInformationInner> listAvailableSkusNext(final String nextPageLink) {
-        ServiceResponse<Page<SkuInformationInner>> response = listAvailableSkusNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<SkuInformationInner>(response.body()) {
-            @Override
-            public Page<SkuInformationInner> nextPage(String nextPageLink) {
-                return listAvailableSkusNextSinglePageAsync(nextPageLink).toBlocking().single().body();
-            }
-        };
+    public RegionConfigurationResponseInner regionConfigurationByResourceGroup(String resourceGroupName, String location, RegionConfigurationRequest regionConfigurationRequest) {
+        return regionConfigurationByResourceGroupWithServiceResponseAsync(resourceGroupName, location, regionConfigurationRequest).toBlocking().single().body();
     }
 
     /**
-     * This method provides the list of available skus for the given subscription and location.
+     * This API provides configuration details specific to given region/location at Resource group level.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param resourceGroupName The Resource Group Name
+     * @param location The location of the resource
+     * @param regionConfigurationRequest Request body to get the configuration for the region at resource group level.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<SkuInformationInner>> listAvailableSkusNextAsync(final String nextPageLink, final ServiceFuture<List<SkuInformationInner>> serviceFuture, final ListOperationCallback<SkuInformationInner> serviceCallback) {
-        return AzureServiceFuture.fromPageResponse(
-            listAvailableSkusNextSinglePageAsync(nextPageLink),
-            new Func1<String, Observable<ServiceResponse<Page<SkuInformationInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<SkuInformationInner>>> call(String nextPageLink) {
-                    return listAvailableSkusNextSinglePageAsync(nextPageLink);
-                }
-            },
-            serviceCallback);
+    public ServiceFuture<RegionConfigurationResponseInner> regionConfigurationByResourceGroupAsync(String resourceGroupName, String location, RegionConfigurationRequest regionConfigurationRequest, final ServiceCallback<RegionConfigurationResponseInner> serviceCallback) {
+        return ServiceFuture.fromResponse(regionConfigurationByResourceGroupWithServiceResponseAsync(resourceGroupName, location, regionConfigurationRequest), serviceCallback);
     }
 
     /**
-     * This method provides the list of available skus for the given subscription and location.
+     * This API provides configuration details specific to given region/location at Resource group level.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName The Resource Group Name
+     * @param location The location of the resource
+     * @param regionConfigurationRequest Request body to get the configuration for the region at resource group level.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;SkuInformationInner&gt; object
+     * @return the observable to the RegionConfigurationResponseInner object
      */
-    public Observable<Page<SkuInformationInner>> listAvailableSkusNextAsync(final String nextPageLink) {
-        return listAvailableSkusNextWithServiceResponseAsync(nextPageLink)
-            .map(new Func1<ServiceResponse<Page<SkuInformationInner>>, Page<SkuInformationInner>>() {
-                @Override
-                public Page<SkuInformationInner> call(ServiceResponse<Page<SkuInformationInner>> response) {
-                    return response.body();
-                }
-            });
+    public Observable<RegionConfigurationResponseInner> regionConfigurationByResourceGroupAsync(String resourceGroupName, String location, RegionConfigurationRequest regionConfigurationRequest) {
+        return regionConfigurationByResourceGroupWithServiceResponseAsync(resourceGroupName, location, regionConfigurationRequest).map(new Func1<ServiceResponse<RegionConfigurationResponseInner>, RegionConfigurationResponseInner>() {
+            @Override
+            public RegionConfigurationResponseInner call(ServiceResponse<RegionConfigurationResponseInner> response) {
+                return response.body();
+            }
+        });
     }
 
     /**
-     * This method provides the list of available skus for the given subscription and location.
+     * This API provides configuration details specific to given region/location at Resource group level.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param resourceGroupName The Resource Group Name
+     * @param location The location of the resource
+     * @param regionConfigurationRequest Request body to get the configuration for the region at resource group level.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;SkuInformationInner&gt; object
+     * @return the observable to the RegionConfigurationResponseInner object
      */
-    public Observable<ServiceResponse<Page<SkuInformationInner>>> listAvailableSkusNextWithServiceResponseAsync(final String nextPageLink) {
-        return listAvailableSkusNextSinglePageAsync(nextPageLink)
-            .concatMap(new Func1<ServiceResponse<Page<SkuInformationInner>>, Observable<ServiceResponse<Page<SkuInformationInner>>>>() {
-                @Override
-                public Observable<ServiceResponse<Page<SkuInformationInner>>> call(ServiceResponse<Page<SkuInformationInner>> page) {
-                    String nextPageLink = page.body().nextPageLink();
-                    if (nextPageLink == null) {
-                        return Observable.just(page);
-                    }
-                    return Observable.just(page).concatWith(listAvailableSkusNextWithServiceResponseAsync(nextPageLink));
-                }
-            });
-    }
-
-    /**
-     * This method provides the list of available skus for the given subscription and location.
-     *
-    ServiceResponse<PageImpl<SkuInformationInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;SkuInformationInner&gt; object wrapped in {@link ServiceResponse} if successful.
-     */
-    public Observable<ServiceResponse<Page<SkuInformationInner>>> listAvailableSkusNextSinglePageAsync(final String nextPageLink) {
-        if (nextPageLink == null) {
-            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+    public Observable<ServiceResponse<RegionConfigurationResponseInner>> regionConfigurationByResourceGroupWithServiceResponseAsync(String resourceGroupName, String location, RegionConfigurationRequest regionConfigurationRequest) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        String nextUrl = String.format("%s", nextPageLink);
-        return service.listAvailableSkusNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<SkuInformationInner>>>>() {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (location == null) {
+            throw new IllegalArgumentException("Parameter location is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        if (regionConfigurationRequest == null) {
+            throw new IllegalArgumentException("Parameter regionConfigurationRequest is required and cannot be null.");
+        }
+        Validator.validate(regionConfigurationRequest);
+        return service.regionConfigurationByResourceGroup(this.client.subscriptionId(), resourceGroupName, location, this.client.apiVersion(), regionConfigurationRequest, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<RegionConfigurationResponseInner>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<SkuInformationInner>>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<RegionConfigurationResponseInner>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<SkuInformationInner>> result = listAvailableSkusNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<SkuInformationInner>>(result.body(), result.response()));
+                        ServiceResponse<RegionConfigurationResponseInner> clientResponse = regionConfigurationByResourceGroupDelegate(response);
+                        return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -813,10 +668,10 @@ public class ServicesInner {
             });
     }
 
-    private ServiceResponse<PageImpl<SkuInformationInner>> listAvailableSkusNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<SkuInformationInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<SkuInformationInner>>() { }.getType())
-                .registerError(CloudException.class)
+    private ServiceResponse<RegionConfigurationResponseInner> regionConfigurationByResourceGroupDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<RegionConfigurationResponseInner, ApiErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<RegionConfigurationResponseInner>() { }.getType())
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
@@ -825,7 +680,7 @@ public class ServicesInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;SkuInformationInner&gt; object if successful.
      */
@@ -924,10 +779,10 @@ public class ServicesInner {
             });
     }
 
-    private ServiceResponse<PageImpl<SkuInformationInner>> listAvailableSkusByResourceGroupNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<SkuInformationInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<SkuInformationInner>> listAvailableSkusByResourceGroupNextDelegate(Response<ResponseBody> response) throws ApiErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<SkuInformationInner>, ApiErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<SkuInformationInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ApiErrorException.class)
                 .build(response);
     }
 
