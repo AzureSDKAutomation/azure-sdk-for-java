@@ -122,13 +122,6 @@ public class SearchServiceInner extends Resource {
     private List<PrivateEndpointConnectionInner> privateEndpointConnections;
 
     /**
-     * The list of shared private link resources managed by the Azure Cognitive
-     * Search service.
-     */
-    @JsonProperty(value = "properties.sharedPrivateLinkResources", access = JsonProperty.Access.WRITE_ONLY)
-    private List<SharedPrivateLinkResourceInner> sharedPrivateLinkResources;
-
-    /**
      * The SKU of the Search Service, which determines price tier and capacity
      * limits. This property is required when creating a new Search Service.
      */
@@ -275,15 +268,6 @@ public class SearchServiceInner extends Resource {
      */
     public List<PrivateEndpointConnectionInner> privateEndpointConnections() {
         return this.privateEndpointConnections;
-    }
-
-    /**
-     * Get the list of shared private link resources managed by the Azure Cognitive Search service.
-     *
-     * @return the sharedPrivateLinkResources value
-     */
-    public List<SharedPrivateLinkResourceInner> sharedPrivateLinkResources() {
-        return this.sharedPrivateLinkResources;
     }
 
     /**

@@ -22,7 +22,6 @@ import com.microsoft.azure.management.search.v2020_03_13.QueryKeys;
 import com.microsoft.azure.management.search.v2020_03_13.Services;
 import com.microsoft.azure.management.search.v2020_03_13.PrivateLinkResources;
 import com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnections;
-import com.microsoft.azure.management.search.v2020_03_13.SharedPrivateLinkResources;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -36,7 +35,6 @@ public final class SearchManager extends ManagerCore<SearchManager, SearchManage
     private Services services;
     private PrivateLinkResources privateLinkResources;
     private PrivateEndpointConnections privateEndpointConnections;
-    private SharedPrivateLinkResources sharedPrivateLinkResources;
     /**
     * Get a Configurable instance that can be used to create SearchManager with optional configuration.
     *
@@ -142,16 +140,6 @@ public final class SearchManager extends ManagerCore<SearchManager, SearchManage
             this.privateEndpointConnections = new PrivateEndpointConnectionsImpl(this);
         }
         return this.privateEndpointConnections;
-    }
-
-    /**
-     * @return Entry point to manage SharedPrivateLinkResources.
-     */
-    public SharedPrivateLinkResources sharedPrivateLinkResources() {
-        if (this.sharedPrivateLinkResources == null) {
-            this.sharedPrivateLinkResources = new SharedPrivateLinkResourcesImpl(this);
-        }
-        return this.sharedPrivateLinkResources;
     }
 
     /**

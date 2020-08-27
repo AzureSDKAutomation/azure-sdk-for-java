@@ -13,8 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Describes the properties of a supported private link resource for the Azure
- * Cognitive Search service. For a given API version, this represents the
- * 'supported' groupIds when creating a shared private link resource.
+ * Cognitive Search service.
  */
 public class PrivateLinkResourceProperties {
     /**
@@ -34,13 +33,6 @@ public class PrivateLinkResourceProperties {
      */
     @JsonProperty(value = "requiredZoneNames", access = JsonProperty.Access.WRITE_ONLY)
     private List<String> requiredZoneNames;
-
-    /**
-     * The list of resources that are onboarded to private link service, that
-     * are supported by Azure Cognitive Search.
-     */
-    @JsonProperty(value = "shareablePrivateLinkResourceTypes", access = JsonProperty.Access.WRITE_ONLY)
-    private List<ShareablePrivateLinkResourceType> shareablePrivateLinkResourceTypes;
 
     /**
      * Get the group ID of the private link resource.
@@ -67,15 +59,6 @@ public class PrivateLinkResourceProperties {
      */
     public List<String> requiredZoneNames() {
         return this.requiredZoneNames;
-    }
-
-    /**
-     * Get the list of resources that are onboarded to private link service, that are supported by Azure Cognitive Search.
-     *
-     * @return the shareablePrivateLinkResourceTypes value
-     */
-    public List<ShareablePrivateLinkResourceType> shareablePrivateLinkResourceTypes() {
-        return this.shareablePrivateLinkResourceTypes;
     }
 
 }

@@ -67,11 +67,6 @@ public interface SearchService extends HasInner<SearchServiceInner>, Resource, G
     Integer replicaCount();
 
     /**
-     * @return the sharedPrivateLinkResources value.
-     */
-    List<SharedPrivateLinkResource> sharedPrivateLinkResources();
-
-    /**
      * @return the sku value.
      */
     Sku sku();

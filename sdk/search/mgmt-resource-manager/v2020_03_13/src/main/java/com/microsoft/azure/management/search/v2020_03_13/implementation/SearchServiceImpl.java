@@ -23,7 +23,6 @@ import java.util.List;
 import com.microsoft.azure.management.search.v2020_03_13.Sku;
 import java.util.ArrayList;
 import com.microsoft.azure.management.search.v2020_03_13.PrivateEndpointConnection;
-import com.microsoft.azure.management.search.v2020_03_13.SharedPrivateLinkResource;
 import rx.functions.Func1;
 
 class SearchServiceImpl extends GroupableResourceCoreImpl<SearchService, SearchServiceInner, SearchServiceImpl, SearchManager> implements SearchService, SearchService.Definition, SearchService.Update {
@@ -123,17 +122,6 @@ class SearchServiceImpl extends GroupableResourceCoreImpl<SearchService, SearchS
     @Override
     public Integer replicaCount() {
         return this.inner().replicaCount();
-    }
-
-    @Override
-    public List<SharedPrivateLinkResource> sharedPrivateLinkResources() {
-        List<SharedPrivateLinkResource> lst = new ArrayList<SharedPrivateLinkResource>();
-        if (this.inner().sharedPrivateLinkResources() != null) {
-            for (SharedPrivateLinkResourceInner inner : this.inner().sharedPrivateLinkResources()) {
-                lst.add( new SharedPrivateLinkResourceImpl(inner, manager()));
-            }
-        }
-        return lst;
     }
 
     @Override

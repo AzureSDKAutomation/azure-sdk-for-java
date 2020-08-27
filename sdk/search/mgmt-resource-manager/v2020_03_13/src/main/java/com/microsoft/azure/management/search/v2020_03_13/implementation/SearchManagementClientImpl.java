@@ -211,19 +211,6 @@ public class SearchManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The SharedPrivateLinkResourcesInner object to access its operations.
-     */
-    private SharedPrivateLinkResourcesInner sharedPrivateLinkResources;
-
-    /**
-     * Gets the SharedPrivateLinkResourcesInner object to access its operations.
-     * @return the SharedPrivateLinkResourcesInner object.
-     */
-    public SharedPrivateLinkResourcesInner sharedPrivateLinkResources() {
-        return this.sharedPrivateLinkResources;
-    }
-
-    /**
      * Initializes an instance of SearchManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -264,7 +251,6 @@ public class SearchManagementClientImpl extends AzureServiceClient {
         this.services = new ServicesInner(restClient().retrofit(), this);
         this.privateLinkResources = new PrivateLinkResourcesInner(restClient().retrofit(), this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsInner(restClient().retrofit(), this);
-        this.sharedPrivateLinkResources = new SharedPrivateLinkResourcesInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
