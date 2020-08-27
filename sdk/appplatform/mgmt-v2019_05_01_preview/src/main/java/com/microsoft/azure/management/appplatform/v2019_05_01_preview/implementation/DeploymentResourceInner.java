@@ -23,6 +23,12 @@ public class DeploymentResourceInner extends ProxyResource {
     private DeploymentResourceProperties properties;
 
     /**
+     * Sku of the Deployment resource.
+     */
+    @JsonProperty(value = "sku")
+    private SkuInner sku;
+
+    /**
      * Get properties of the Deployment resource.
      *
      * @return the properties value
@@ -39,6 +45,26 @@ public class DeploymentResourceInner extends ProxyResource {
      */
     public DeploymentResourceInner withProperties(DeploymentResourceProperties properties) {
         this.properties = properties;
+        return this;
+    }
+
+    /**
+     * Get sku of the Deployment resource.
+     *
+     * @return the sku value
+     */
+    public SkuInner sku() {
+        return this.sku;
+    }
+
+    /**
+     * Set sku of the Deployment resource.
+     *
+     * @param sku the sku value to set
+     * @return the DeploymentResourceInner object itself.
+     */
+    public DeploymentResourceInner withSku(SkuInner sku) {
+        this.sku = sku;
         return this;
     }
 

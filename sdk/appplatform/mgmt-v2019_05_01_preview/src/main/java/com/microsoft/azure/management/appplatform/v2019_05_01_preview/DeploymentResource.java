@@ -17,8 +17,7 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.implementation.AppPlatformManager;
-import org.joda.time.DateTime;
-import java.util.List;
+import com.microsoft.azure.management.appplatform.v2019_05_01_preview.implementation.SkuInner;
 
 /**
  * Type representing DeploymentResource.
@@ -40,6 +39,11 @@ public interface DeploymentResource extends HasInner<DeploymentResourceInner>, I
     DeploymentResourceProperties properties();
 
     /**
+     * @return the sku value.
+     */
+    SkuInner sku();
+
+    /**
      * @return the type value.
      */
     String type();
@@ -47,7 +51,7 @@ public interface DeploymentResource extends HasInner<DeploymentResourceInner>, I
     /**
      * The entirety of the DeploymentResource definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithApp, DefinitionStages.WithProperties, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithApp, DefinitionStages.WithCreate {
     }
 
     /**
@@ -71,19 +75,31 @@ public interface DeploymentResource extends HasInner<DeploymentResourceInner>, I
             * @param appName The name of the App resource
             * @return the next definition stage
             */
-            WithProperties withExistingApp(String resourceGroupName, String serviceName, String appName);
+            WithCreate withExistingApp(String resourceGroupName, String serviceName, String appName);
         }
 
         /**
          * The stage of the deploymentresource definition allowing to specify Properties.
          */
         interface WithProperties {
-           /**
-            * Specifies properties.
-            * @param properties Properties of the Deployment resource
-            * @return the next definition stage
-            */
+            /**
+             * Specifies properties.
+             * @param properties Properties of the Deployment resource
+             * @return the next definition stage
+             */
             WithCreate withProperties(DeploymentResourceProperties properties);
+        }
+
+        /**
+         * The stage of the deploymentresource definition allowing to specify Sku.
+         */
+        interface WithSku {
+            /**
+             * Specifies sku.
+             * @param sku Sku of the Deployment resource
+             * @return the next definition stage
+             */
+            WithCreate withSku(SkuInner sku);
         }
 
         /**
@@ -91,13 +107,13 @@ public interface DeploymentResource extends HasInner<DeploymentResourceInner>, I
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<DeploymentResource> {
+        interface WithCreate extends Creatable<DeploymentResource>, DefinitionStages.WithProperties, DefinitionStages.WithSku {
         }
     }
     /**
      * The template for a DeploymentResource update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<DeploymentResource>, UpdateStages.WithProperties {
+    interface Update extends Appliable<DeploymentResource>, UpdateStages.WithProperties, UpdateStages.WithSku {
     }
 
     /**
@@ -114,6 +130,18 @@ public interface DeploymentResource extends HasInner<DeploymentResourceInner>, I
              * @return the next update stage
              */
             Update withProperties(DeploymentResourceProperties properties);
+        }
+
+        /**
+         * The stage of the deploymentresource update allowing to specify Sku.
+         */
+        interface WithSku {
+            /**
+             * Specifies sku.
+             * @param sku Sku of the Deployment resource
+             * @return the next update stage
+             */
+            Update withSku(SkuInner sku);
         }
 
     }
