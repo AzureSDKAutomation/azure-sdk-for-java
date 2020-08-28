@@ -15,6 +15,8 @@ import com.microsoft.azure.management.avs.v20190809preview.Clusters;
 import com.microsoft.azure.management.avs.v20190809preview.Locations;
 import com.microsoft.azure.management.avs.v20190809preview.Operations;
 import com.microsoft.azure.management.avs.v20190809preview.PrivateClouds;
+import com.microsoft.azure.management.avs.v20190809preview.VMWareDatastoreBackings;
+import com.microsoft.azure.management.avs.v20190809preview.VMWareDatastores;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 
@@ -190,6 +192,32 @@ public class AvsClientImpl extends AzureServiceClient implements AvsClient {
     }
 
     /**
+     * The VMWareDatastoreBackings object to access its operations.
+     */
+    private VMWareDatastoreBackings vMWareDatastoreBackings;
+
+    /**
+     * Gets the VMWareDatastoreBackings object to access its operations.
+     * @return the VMWareDatastoreBackings object.
+     */
+    public VMWareDatastoreBackings vMWareDatastoreBackings() {
+        return this.vMWareDatastoreBackings;
+    }
+
+    /**
+     * The VMWareDatastores object to access its operations.
+     */
+    private VMWareDatastores vMWareDatastores;
+
+    /**
+     * Gets the VMWareDatastores object to access its operations.
+     * @return the VMWareDatastores object.
+     */
+    public VMWareDatastores vMWareDatastores() {
+        return this.vMWareDatastores;
+    }
+
+    /**
      * Initializes an instance of AvsClient client.
      *
      * @param credentials the management credentials for Azure
@@ -228,6 +256,8 @@ public class AvsClientImpl extends AzureServiceClient implements AvsClient {
         this.locations = new LocationsImpl(restClient().retrofit(), this);
         this.privateClouds = new PrivateCloudsImpl(restClient().retrofit(), this);
         this.clusters = new ClustersImpl(restClient().retrofit(), this);
+        this.vMWareDatastoreBackings = new VMWareDatastoreBackingsImpl(restClient().retrofit(), this);
+        this.vMWareDatastores = new VMWareDatastoresImpl(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
