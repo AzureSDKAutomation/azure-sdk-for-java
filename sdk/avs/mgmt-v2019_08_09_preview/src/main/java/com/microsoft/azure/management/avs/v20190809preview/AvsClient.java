@@ -126,4 +126,16 @@ public interface AvsClient {
      */
     Clusters clusters();
 
+    /**
+     * Gets the VMWareDatastoreBackings object to access its operations.
+     * @return the VMWareDatastoreBackings object.
+     */
+    VMWareDatastoreBackings vMWareDatastoreBackings();
+
+    /**
+     * Gets the VMWareDatastores object to access its operations.
+     * @return the VMWareDatastores object.
+     */
+    VMWareDatastores vMWareDatastores();
+
 }
