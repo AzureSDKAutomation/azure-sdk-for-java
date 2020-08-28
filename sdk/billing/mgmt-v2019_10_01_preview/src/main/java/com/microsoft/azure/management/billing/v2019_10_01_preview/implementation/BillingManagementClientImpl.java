@@ -447,6 +447,32 @@ public class BillingManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The RoleAssignmentsInner object to access its operations.
+     */
+    private RoleAssignmentsInner roleAssignments;
+
+    /**
+     * Gets the RoleAssignmentsInner object to access its operations.
+     * @return the RoleAssignmentsInner object.
+     */
+    public RoleAssignmentsInner roleAssignments() {
+        return this.roleAssignments;
+    }
+
+    /**
+     * The EnrollmentDepartmentRoleAssignmentsInner object to access its operations.
+     */
+    private EnrollmentDepartmentRoleAssignmentsInner enrollmentDepartmentRoleAssignments;
+
+    /**
+     * Gets the EnrollmentDepartmentRoleAssignmentsInner object to access its operations.
+     * @return the EnrollmentDepartmentRoleAssignmentsInner object.
+     */
+    public EnrollmentDepartmentRoleAssignmentsInner enrollmentDepartmentRoleAssignments() {
+        return this.enrollmentDepartmentRoleAssignments;
+    }
+
+    /**
      * The EnrollmentAccountRoleAssignmentsInner object to access its operations.
      */
     private EnrollmentAccountRoleAssignmentsInner enrollmentAccountRoleAssignments;
@@ -531,6 +557,8 @@ public class BillingManagementClientImpl extends AzureServiceClient {
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.billingRoleDefinitions = new BillingRoleDefinitionsInner(restClient().retrofit(), this);
         this.billingRoleAssignments = new BillingRoleAssignmentsInner(restClient().retrofit(), this);
+        this.roleAssignments = new RoleAssignmentsInner(restClient().retrofit(), this);
+        this.enrollmentDepartmentRoleAssignments = new EnrollmentDepartmentRoleAssignmentsInner(restClient().retrofit(), this);
         this.enrollmentAccountRoleAssignments = new EnrollmentAccountRoleAssignmentsInner(restClient().retrofit(), this);
         this.agreements = new AgreementsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);

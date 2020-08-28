@@ -40,6 +40,8 @@ import com.microsoft.azure.management.billing.v2019_10_01_preview.RecipientTrans
 import com.microsoft.azure.management.billing.v2019_10_01_preview.Operations;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleDefinitions;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.BillingRoleAssignments;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.RoleAssignments;
+import com.microsoft.azure.management.billing.v2019_10_01_preview.EnrollmentDepartmentRoleAssignments;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.EnrollmentAccountRoleAssignments;
 import com.microsoft.azure.management.billing.v2019_10_01_preview.Agreements;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
@@ -73,6 +75,8 @@ public final class BillingManager extends ManagerCore<BillingManager, BillingMan
     private Operations operations;
     private BillingRoleDefinitions billingRoleDefinitions;
     private BillingRoleAssignments billingRoleAssignments;
+    private RoleAssignments roleAssignments;
+    private EnrollmentDepartmentRoleAssignments enrollmentDepartmentRoleAssignments;
     private EnrollmentAccountRoleAssignments enrollmentAccountRoleAssignments;
     private Agreements agreements;
     /**
@@ -360,6 +364,26 @@ public final class BillingManager extends ManagerCore<BillingManager, BillingMan
             this.billingRoleAssignments = new BillingRoleAssignmentsImpl(this);
         }
         return this.billingRoleAssignments;
+    }
+
+    /**
+     * @return Entry point to manage RoleAssignments.
+     */
+    public RoleAssignments roleAssignments() {
+        if (this.roleAssignments == null) {
+            this.roleAssignments = new RoleAssignmentsImpl(this);
+        }
+        return this.roleAssignments;
+    }
+
+    /**
+     * @return Entry point to manage EnrollmentDepartmentRoleAssignments.
+     */
+    public EnrollmentDepartmentRoleAssignments enrollmentDepartmentRoleAssignments() {
+        if (this.enrollmentDepartmentRoleAssignments == null) {
+            this.enrollmentDepartmentRoleAssignments = new EnrollmentDepartmentRoleAssignmentsImpl(this);
+        }
+        return this.enrollmentDepartmentRoleAssignments;
     }
 
     /**
