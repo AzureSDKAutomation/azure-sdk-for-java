@@ -16,6 +16,7 @@ import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.billing.v2020_05_01.implementation.BillingManager;
 import java.util.List;
 import org.joda.time.DateTime;
+import java.util.Map;
 
 /**
  * Type representing Invoice.
@@ -37,6 +38,11 @@ public interface Invoice extends HasInner<InvoiceInner>, Indexable, Refreshable<
     Amount billedAmount();
 
     /**
+     * @return the billedDocumentId value.
+     */
+    String billedDocumentId();
+
+    /**
      * @return the billingProfileDisplayName value.
      */
     String billingProfileDisplayName();
@@ -52,9 +58,19 @@ public interface Invoice extends HasInner<InvoiceInner>, Indexable, Refreshable<
     Amount creditAmount();
 
     /**
+     * @return the creditForDocumentId value.
+     */
+    String creditForDocumentId();
+
+    /**
      * @return the documents value.
      */
     List<Document> documents();
+
+    /**
+     * @return the documentType value.
+     */
+    InvoiceDocumentType documentType();
 
     /**
      * @return the dueDate value.
@@ -110,6 +126,11 @@ public interface Invoice extends HasInner<InvoiceInner>, Indexable, Refreshable<
      * @return the purchaseOrderNumber value.
      */
     String purchaseOrderNumber();
+
+    /**
+     * @return the rebillDetails value.
+     */
+    Map<String, RebillDetails> rebillDetails();
 
     /**
      * @return the status value.

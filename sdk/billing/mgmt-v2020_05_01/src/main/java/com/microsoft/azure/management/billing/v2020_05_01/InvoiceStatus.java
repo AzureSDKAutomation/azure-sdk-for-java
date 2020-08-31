@@ -25,6 +25,9 @@ public final class InvoiceStatus extends ExpandableStringEnum<InvoiceStatus> {
     /** Static value Paid for InvoiceStatus. */
     public static final InvoiceStatus PAID = fromString("Paid");
 
+    /** Static value Void for InvoiceStatus. */
+    public static final InvoiceStatus VOID = fromString("Void");
+
     /**
      * Creates or finds a InvoiceStatus from its string representation.
      * @param name a name to look for
