@@ -15,27 +15,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Sku {
     /**
-     * Name of this SKU. Possible values include: 'Basic', 'Standard'.
+     * Name of this SKU. Possible values include: 'Basic', 'Standard',
+     * 'Premium'.
      */
     @JsonProperty(value = "name", required = true)
     private SkuName name;
 
     /**
      * The billing tier of this particular SKU. Possible values include:
-     * 'Basic', 'Standard'.
+     * 'Basic', 'Standard', 'Premium'.
      */
     @JsonProperty(value = "tier")
     private SkuTier tier;
 
     /**
-     * The Event Hubs throughput units, value should be 0 to 20 throughput
-     * units.
+     * The Event Hubs throughput units for Basic or Standard tiers, where value
+     * should be 0 to 20 throughput units. The Event Hubs premium units for
+     * Premium tier, where value should be 0 to 10 premium units.
      */
     @JsonProperty(value = "capacity")
     private Integer capacity;
 
     /**
-     * Get name of this SKU. Possible values include: 'Basic', 'Standard'.
+     * Get name of this SKU. Possible values include: 'Basic', 'Standard', 'Premium'.
      *
      * @return the name value
      */
@@ -44,7 +46,7 @@ public class Sku {
     }
 
     /**
-     * Set name of this SKU. Possible values include: 'Basic', 'Standard'.
+     * Set name of this SKU. Possible values include: 'Basic', 'Standard', 'Premium'.
      *
      * @param name the name value to set
      * @return the Sku object itself.
@@ -55,7 +57,7 @@ public class Sku {
     }
 
     /**
-     * Get the billing tier of this particular SKU. Possible values include: 'Basic', 'Standard'.
+     * Get the billing tier of this particular SKU. Possible values include: 'Basic', 'Standard', 'Premium'.
      *
      * @return the tier value
      */
@@ -64,7 +66,7 @@ public class Sku {
     }
 
     /**
-     * Set the billing tier of this particular SKU. Possible values include: 'Basic', 'Standard'.
+     * Set the billing tier of this particular SKU. Possible values include: 'Basic', 'Standard', 'Premium'.
      *
      * @param tier the tier value to set
      * @return the Sku object itself.
@@ -75,7 +77,7 @@ public class Sku {
     }
 
     /**
-     * Get the Event Hubs throughput units, value should be 0 to 20 throughput units.
+     * Get the Event Hubs throughput units for Basic or Standard tiers, where value should be 0 to 20 throughput units. The Event Hubs premium units for Premium tier, where value should be 0 to 10 premium units.
      *
      * @return the capacity value
      */
@@ -84,7 +86,7 @@ public class Sku {
     }
 
     /**
-     * Set the Event Hubs throughput units, value should be 0 to 20 throughput units.
+     * Set the Event Hubs throughput units for Basic or Standard tiers, where value should be 0 to 20 throughput units. The Event Hubs premium units for Premium tier, where value should be 0 to 10 premium units.
      *
      * @param capacity the capacity value to set
      * @return the Sku object itself.
