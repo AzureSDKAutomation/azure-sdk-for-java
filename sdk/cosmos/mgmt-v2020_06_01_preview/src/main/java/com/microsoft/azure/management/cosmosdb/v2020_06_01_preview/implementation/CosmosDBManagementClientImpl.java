@@ -381,6 +381,32 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The CassandraClustersInner object to access its operations.
+     */
+    private CassandraClustersInner cassandraClusters;
+
+    /**
+     * Gets the CassandraClustersInner object to access its operations.
+     * @return the CassandraClustersInner object.
+     */
+    public CassandraClustersInner cassandraClusters() {
+        return this.cassandraClusters;
+    }
+
+    /**
+     * The CassandraDataCentersInner object to access its operations.
+     */
+    private CassandraDataCentersInner cassandraDataCenters;
+
+    /**
+     * Gets the CassandraDataCentersInner object to access its operations.
+     * @return the CassandraDataCentersInner object.
+     */
+    public CassandraDataCentersInner cassandraDataCenters() {
+        return this.cassandraDataCenters;
+    }
+
+    /**
      * The PrivateLinkResourcesInner object to access its operations.
      */
     private PrivateLinkResourcesInner privateLinkResources;
@@ -460,6 +486,8 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
         this.gremlinResources = new GremlinResourcesInner(restClient().retrofit(), this);
         this.restorableDatabaseAccounts = new RestorableDatabaseAccountsInner(restClient().retrofit(), this);
         this.notebookWorkspaces = new NotebookWorkspacesInner(restClient().retrofit(), this);
+        this.cassandraClusters = new CassandraClustersInner(restClient().retrofit(), this);
+        this.cassandraDataCenters = new CassandraDataCentersInner(restClient().retrofit(), this);
         this.privateLinkResources = new PrivateLinkResourcesInner(restClient().retrofit(), this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
