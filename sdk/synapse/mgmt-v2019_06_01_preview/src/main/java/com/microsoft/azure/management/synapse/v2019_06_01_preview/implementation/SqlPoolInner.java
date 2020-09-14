@@ -10,6 +10,7 @@ package com.microsoft.azure.management.synapse.v2019_06_01_preview.implementatio
 
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.Sku;
 import org.joda.time.DateTime;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.StorageAccountType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -79,6 +80,14 @@ public class SqlPoolInner extends Resource {
      */
     @JsonProperty(value = "properties.creationDate")
     private DateTime creationDate;
+
+    /**
+     * The storage account type used to store data and backups for this sql
+     * pool. The supported options are GRS (Geo-Redundant Storage) and LRS
+     * (Locally Redundant Storage). Possible values include: 'GRS', 'LRS'.
+     */
+    @JsonProperty(value = "properties.storageAccountType")
+    private StorageAccountType storageAccountType;
 
     /**
      * Get sQL pool SKU.
@@ -277,6 +286,26 @@ public class SqlPoolInner extends Resource {
      */
     public SqlPoolInner withCreationDate(DateTime creationDate) {
         this.creationDate = creationDate;
+        return this;
+    }
+
+    /**
+     * Get the storage account type used to store data and backups for this sql pool. The supported options are GRS (Geo-Redundant Storage) and LRS (Locally Redundant Storage). Possible values include: 'GRS', 'LRS'.
+     *
+     * @return the storageAccountType value
+     */
+    public StorageAccountType storageAccountType() {
+        return this.storageAccountType;
+    }
+
+    /**
+     * Set the storage account type used to store data and backups for this sql pool. The supported options are GRS (Geo-Redundant Storage) and LRS (Locally Redundant Storage). Possible values include: 'GRS', 'LRS'.
+     *
+     * @param storageAccountType the storageAccountType value to set
+     * @return the SqlPoolInner object itself.
+     */
+    public SqlPoolInner withStorageAccountType(StorageAccountType storageAccountType) {
+        this.storageAccountType = storageAccountType;
         return this;
     }
 
