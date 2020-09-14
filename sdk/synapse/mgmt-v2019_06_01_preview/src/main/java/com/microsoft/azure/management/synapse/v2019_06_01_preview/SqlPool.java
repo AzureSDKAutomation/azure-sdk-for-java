@@ -90,6 +90,11 @@ public interface SqlPool extends HasInner<SqlPoolInner>, Indexable, Refreshable<
     String status();
 
     /**
+     * @return the storageAccountType value.
+     */
+    StorageAccountType storageAccountType();
+
+    /**
      * @return the tags value.
      */
     Map<String, String> tags();
@@ -261,6 +266,18 @@ public interface SqlPool extends HasInner<SqlPoolInner>, Indexable, Refreshable<
         }
 
         /**
+         * The stage of the sqlpool definition allowing to specify StorageAccountType.
+         */
+        interface WithStorageAccountType {
+            /**
+             * Specifies storageAccountType.
+             * @param storageAccountType The storage account type used to store data and backups for this sql pool. The supported options are GRS (Geo-Redundant Storage) and LRS (Locally Redundant Storage). Possible values include: 'GRS', 'LRS'
+             * @return the next definition stage
+             */
+            WithCreate withStorageAccountType(StorageAccountType storageAccountType);
+        }
+
+        /**
          * The stage of the sqlpool definition allowing to specify Tags.
          */
         interface WithTags {
@@ -277,13 +294,13 @@ public interface SqlPool extends HasInner<SqlPoolInner>, Indexable, Refreshable<
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<SqlPool>, DefinitionStages.WithCollation, DefinitionStages.WithCreateMode, DefinitionStages.WithCreationDate, DefinitionStages.WithMaxSizeBytes, DefinitionStages.WithProvisioningState, DefinitionStages.WithRecoverableDatabaseId, DefinitionStages.WithRestorePointInTime, DefinitionStages.WithSku, DefinitionStages.WithSourceDatabaseId, DefinitionStages.WithStatus, DefinitionStages.WithTags {
+        interface WithCreate extends Creatable<SqlPool>, DefinitionStages.WithCollation, DefinitionStages.WithCreateMode, DefinitionStages.WithCreationDate, DefinitionStages.WithMaxSizeBytes, DefinitionStages.WithProvisioningState, DefinitionStages.WithRecoverableDatabaseId, DefinitionStages.WithRestorePointInTime, DefinitionStages.WithSku, DefinitionStages.WithSourceDatabaseId, DefinitionStages.WithStatus, DefinitionStages.WithStorageAccountType, DefinitionStages.WithTags {
         }
     }
     /**
      * The template for a SqlPool update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<SqlPool>, UpdateStages.WithCollation, UpdateStages.WithCreateMode, UpdateStages.WithCreationDate, UpdateStages.WithLocation, UpdateStages.WithMaxSizeBytes, UpdateStages.WithProvisioningState, UpdateStages.WithRecoverableDatabaseId, UpdateStages.WithRestorePointInTime, UpdateStages.WithSku, UpdateStages.WithSourceDatabaseId, UpdateStages.WithStatus, UpdateStages.WithTags {
+    interface Update extends Appliable<SqlPool>, UpdateStages.WithCollation, UpdateStages.WithCreateMode, UpdateStages.WithCreationDate, UpdateStages.WithLocation, UpdateStages.WithMaxSizeBytes, UpdateStages.WithProvisioningState, UpdateStages.WithRecoverableDatabaseId, UpdateStages.WithRestorePointInTime, UpdateStages.WithSku, UpdateStages.WithSourceDatabaseId, UpdateStages.WithStatus, UpdateStages.WithStorageAccountType, UpdateStages.WithTags {
     }
 
     /**
@@ -420,6 +437,18 @@ public interface SqlPool extends HasInner<SqlPoolInner>, Indexable, Refreshable<
              * @return the next update stage
              */
             Update withStatus(String status);
+        }
+
+        /**
+         * The stage of the sqlpool update allowing to specify StorageAccountType.
+         */
+        interface WithStorageAccountType {
+            /**
+             * Specifies storageAccountType.
+             * @param storageAccountType The storage account type used to store data and backups for this sql pool. The supported options are GRS (Geo-Redundant Storage) and LRS (Locally Redundant Storage). Possible values include: 'GRS', 'LRS'
+             * @return the next update stage
+             */
+            Update withStorageAccountType(StorageAccountType storageAccountType);
         }
 
         /**

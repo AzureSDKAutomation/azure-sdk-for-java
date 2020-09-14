@@ -15,6 +15,7 @@ import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolPatchIn
 import java.util.Map;
 import org.joda.time.DateTime;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.Sku;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.StorageAccountType;
 import rx.functions.Func1;
 
 class SqlPoolImpl extends CreatableUpdatableImpl<SqlPool, SqlPoolInner, SqlPoolImpl> implements SqlPool, SqlPool.Definition, SqlPool.Update {
@@ -160,6 +161,11 @@ class SqlPoolImpl extends CreatableUpdatableImpl<SqlPool, SqlPoolInner, SqlPoolI
     }
 
     @Override
+    public StorageAccountType storageAccountType() {
+        return this.inner().storageAccountType();
+    }
+
+    @Override
     public Map<String, String> tags() {
         return this.inner().getTags();
     }
@@ -282,6 +288,16 @@ class SqlPoolImpl extends CreatableUpdatableImpl<SqlPool, SqlPoolInner, SqlPoolI
             this.inner().withStatus(status);
         } else {
             this.updateParameter.withStatus(status);
+        }
+        return this;
+    }
+
+    @Override
+    public SqlPoolImpl withStorageAccountType(StorageAccountType storageAccountType) {
+        if (isInCreateMode()) {
+            this.inner().withStorageAccountType(storageAccountType);
+        } else {
+            this.updateParameter.withStorageAccountType(storageAccountType);
         }
         return this;
     }

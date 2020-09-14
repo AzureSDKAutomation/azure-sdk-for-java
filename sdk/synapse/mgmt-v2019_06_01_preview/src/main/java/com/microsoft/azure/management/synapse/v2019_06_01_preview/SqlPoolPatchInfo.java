@@ -92,6 +92,14 @@ public class SqlPoolPatchInfo {
     private DateTime creationDate;
 
     /**
+     * The storage account type used to store data and backups for this sql
+     * pool. The supported options are GRS (Geo-Redundant Storage) and LRS
+     * (Locally Redundant Storage). Possible values include: 'GRS', 'LRS'.
+     */
+    @JsonProperty(value = "properties.storageAccountType")
+    private StorageAccountType storageAccountType;
+
+    /**
      * Get resource tags.
      *
      * @return the tags value
@@ -328,6 +336,26 @@ public class SqlPoolPatchInfo {
      */
     public SqlPoolPatchInfo withCreationDate(DateTime creationDate) {
         this.creationDate = creationDate;
+        return this;
+    }
+
+    /**
+     * Get the storage account type used to store data and backups for this sql pool. The supported options are GRS (Geo-Redundant Storage) and LRS (Locally Redundant Storage). Possible values include: 'GRS', 'LRS'.
+     *
+     * @return the storageAccountType value
+     */
+    public StorageAccountType storageAccountType() {
+        return this.storageAccountType;
+    }
+
+    /**
+     * Set the storage account type used to store data and backups for this sql pool. The supported options are GRS (Geo-Redundant Storage) and LRS (Locally Redundant Storage). Possible values include: 'GRS', 'LRS'.
+     *
+     * @param storageAccountType the storageAccountType value to set
+     * @return the SqlPoolPatchInfo object itself.
+     */
+    public SqlPoolPatchInfo withStorageAccountType(StorageAccountType storageAccountType) {
+        this.storageAccountType = storageAccountType;
         return this;
     }
 
