@@ -10,6 +10,8 @@ package com.microsoft.azure.management.policyinsights.v2019_10_01.implementation
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 
@@ -26,6 +28,29 @@ public class PolicyInsightsClientImpl extends AzureServiceClient {
      */
     public AzureClient getAzureClient() {
         return this.azureClient;
+    }
+
+    /** The ID of the target subscription. */
+    private String subscriptionId2;
+
+    /**
+     * Gets The ID of the target subscription.
+     *
+     * @return the subscriptionId2 value.
+     */
+    public String subscriptionId2() {
+        return this.subscriptionId2;
+    }
+
+    /**
+     * Sets The ID of the target subscription.
+     *
+     * @param subscriptionId2 the subscriptionId2 value.
+     * @return the service client itself
+     */
+    public PolicyInsightsClientImpl withSubscriptionId2(String subscriptionId2) {
+        this.subscriptionId2 = subscriptionId2;
+        return this;
     }
 
     /** The preferred language for the response. */
@@ -176,6 +201,19 @@ public class PolicyInsightsClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The PolicyRestrictionsInner object to access its operations.
+     */
+    private PolicyRestrictionsInner policyRestrictions;
+
+    /**
+     * Gets the PolicyRestrictionsInner object to access its operations.
+     * @return the PolicyRestrictionsInner object.
+     */
+    public PolicyRestrictionsInner policyRestrictions() {
+        return this.policyRestrictions;
+    }
+
+    /**
      * Initializes an instance of PolicyInsightsClient client.
      *
      * @param credentials the management credentials for Azure
@@ -215,6 +253,7 @@ public class PolicyInsightsClientImpl extends AzureServiceClient {
         this.policyStates = new PolicyStatesInner(restClient().retrofit(), this);
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.policyMetadatas = new PolicyMetadatasInner(restClient().retrofit(), this);
+        this.policyRestrictions = new PolicyRestrictionsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
