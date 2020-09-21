@@ -15,18 +15,14 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 /**
- * Format write settings.
+ * A copy activity translator.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", defaultImpl = FormatWriteSettings.class)
-@JsonTypeName("FormatWriteSettings")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", defaultImpl = CopyTranslator.class)
+@JsonTypeName("CopyTranslator")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "JsonWriteSettings", value = JsonWriteSettings.class),
-    @JsonSubTypes.Type(name = "DelimitedTextWriteSettings", value = DelimitedTextWriteSettings.class),
-    @JsonSubTypes.Type(name = "OrcWriteSettings", value = OrcWriteSettings.class),
-    @JsonSubTypes.Type(name = "AvroWriteSettings", value = AvroWriteSettings.class),
-    @JsonSubTypes.Type(name = "ParquetWriteSettings", value = ParquetWriteSettings.class)
+    @JsonSubTypes.Type(name = "TabularTranslator", value = TabularTranslator.class)
 })
-public class FormatWriteSettings {
+public class CopyTranslator {
     /**
      * Unmatched properties from the message are deserialized this collection.
      */
@@ -46,9 +42,9 @@ public class FormatWriteSettings {
      * Set unmatched properties from the message are deserialized this collection.
      *
      * @param additionalProperties the additionalProperties value to set
-     * @return the FormatWriteSettings object itself.
+     * @return the CopyTranslator object itself.
      */
-    public FormatWriteSettings withAdditionalProperties(Map<String, Object> additionalProperties) {
+    public CopyTranslator withAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
