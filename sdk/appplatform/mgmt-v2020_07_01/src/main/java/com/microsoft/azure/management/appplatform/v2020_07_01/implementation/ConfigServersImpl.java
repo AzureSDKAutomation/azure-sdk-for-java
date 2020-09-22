@@ -14,6 +14,7 @@ import com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServers;
 import rx.functions.Func1;
 import rx.Observable;
 import com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServerResource;
+import com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServerSettingsValidateResult;
 
 class ConfigServersImpl extends WrapperImpl<ConfigServersInner> implements ConfigServers {
     private final AppPlatformManager manager;
@@ -59,6 +60,18 @@ class ConfigServersImpl extends WrapperImpl<ConfigServersInner> implements Confi
             @Override
             public ConfigServerResource call(ConfigServerResourceInner inner) {
                 return new ConfigServerResourceImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<ConfigServerSettingsValidateResult> validateAsync(String resourceGroupName, String serviceName) {
+        ConfigServersInner client = this.inner();
+        return client.validateAsync(resourceGroupName, serviceName)
+        .map(new Func1<ConfigServerSettingsValidateResultInner, ConfigServerSettingsValidateResult>() {
+            @Override
+            public ConfigServerSettingsValidateResult call(ConfigServerSettingsValidateResultInner inner) {
+                return new ConfigServerSettingsValidateResultImpl(inner, manager());
             }
         });
     }
