@@ -46,4 +46,14 @@ public interface ConfigServers extends HasInner<ConfigServersInner> {
      */
     Observable<ConfigServerResource> updatePatchAsync(String resourceGroupName, String serviceName);
 
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<ConfigServerSettingsValidateResult> validateAsync(String resourceGroupName, String serviceName);
+
 }
