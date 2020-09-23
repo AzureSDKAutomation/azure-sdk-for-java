@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 public class SpringAppDeploymentsImpl
     extends ExternalChildResourcesNonCachedImpl<
         SpringAppDeploymentImpl, SpringAppDeployment, DeploymentResourceInner, SpringAppImpl, SpringApp>
-    implements SpringAppDeployments {
+    implements SpringAppDeployments<SpringAppDeploymentImpl> {
 
     SpringAppDeploymentsImpl(SpringAppImpl parent) {
         super(parent, parent.taskGroup(), "SpringAppDeployment");
@@ -100,8 +100,7 @@ public class SpringAppDeploymentsImpl
         return inner == null ? null : new SpringAppDeploymentImpl(inner.name(), parent(), inner);
     }
 
-    @Override
     public DeploymentsClient inner() {
-        return manager().inner().getDeployments();
+        return manager().serviceClient().getDeployments();
     }
 }
