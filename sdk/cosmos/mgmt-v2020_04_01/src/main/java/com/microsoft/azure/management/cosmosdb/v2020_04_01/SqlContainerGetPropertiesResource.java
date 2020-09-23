@@ -71,7 +71,7 @@ public class SqlContainerGetPropertiesResource {
      * the resource.
      */
     @JsonProperty(value = "_ts", access = JsonProperty.Access.WRITE_ONLY)
-    private Object _ts;
+    private Double _ts;
 
     /**
      * A system generated property representing the resource etag required for
@@ -79,6 +79,13 @@ public class SqlContainerGetPropertiesResource {
      */
     @JsonProperty(value = "_etag", access = JsonProperty.Access.WRITE_ONLY)
     private String _etag;
+
+    /**
+     * A system generated property. It is the unique addressable URI for the
+     * resource.
+     */
+    @JsonProperty(value = "_self", access = JsonProperty.Access.WRITE_ONLY)
+    private String _self;
 
     /**
      * Get name of the Cosmos DB SQL container.
@@ -234,7 +241,7 @@ public class SqlContainerGetPropertiesResource {
      *
      * @return the _ts value
      */
-    public Object _ts() {
+    public Double _ts() {
         return this._ts;
     }
 
@@ -245,6 +252,15 @@ public class SqlContainerGetPropertiesResource {
      */
     public String _etag() {
         return this._etag;
+    }
+
+    /**
+     * Get a system generated property. It is the unique addressable URI for the resource.
+     *
+     * @return the _self value
+     */
+    public String _self() {
+        return this._self;
     }
 
 }
