@@ -434,6 +434,45 @@ public class SynapseManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The SqlPoolWorkloadGroupsInner object to access its operations.
+     */
+    private SqlPoolWorkloadGroupsInner sqlPoolWorkloadGroups;
+
+    /**
+     * Gets the SqlPoolWorkloadGroupsInner object to access its operations.
+     * @return the SqlPoolWorkloadGroupsInner object.
+     */
+    public SqlPoolWorkloadGroupsInner sqlPoolWorkloadGroups() {
+        return this.sqlPoolWorkloadGroups;
+    }
+
+    /**
+     * The WorkloadGroupsInner object to access its operations.
+     */
+    private WorkloadGroupsInner workloadGroups;
+
+    /**
+     * Gets the WorkloadGroupsInner object to access its operations.
+     * @return the WorkloadGroupsInner object.
+     */
+    public WorkloadGroupsInner workloadGroups() {
+        return this.workloadGroups;
+    }
+
+    /**
+     * The SqlPoolWorkloadClassifiersInner object to access its operations.
+     */
+    private SqlPoolWorkloadClassifiersInner sqlPoolWorkloadClassifiers;
+
+    /**
+     * Gets the SqlPoolWorkloadClassifiersInner object to access its operations.
+     * @return the SqlPoolWorkloadClassifiersInner object.
+     */
+    public SqlPoolWorkloadClassifiersInner sqlPoolWorkloadClassifiers() {
+        return this.sqlPoolWorkloadClassifiers;
+    }
+
+    /**
      * The WorkspacesInner object to access its operations.
      */
     private WorkspacesInner workspaces;
@@ -686,6 +725,9 @@ public class SynapseManagementClientImpl extends AzureServiceClient {
         this.sqlPoolVulnerabilityAssessmentScans = new SqlPoolVulnerabilityAssessmentScansInner(restClient().retrofit(), this);
         this.sqlPoolSecurityAlertPolicies = new SqlPoolSecurityAlertPoliciesInner(restClient().retrofit(), this);
         this.sqlPoolVulnerabilityAssessmentRuleBaselines = new SqlPoolVulnerabilityAssessmentRuleBaselinesInner(restClient().retrofit(), this);
+        this.sqlPoolWorkloadGroups = new SqlPoolWorkloadGroupsInner(restClient().retrofit(), this);
+        this.workloadGroups = new WorkloadGroupsInner(restClient().retrofit(), this);
+        this.sqlPoolWorkloadClassifiers = new SqlPoolWorkloadClassifiersInner(restClient().retrofit(), this);
         this.workspaces = new WorkspacesInner(restClient().retrofit(), this);
         this.workspaceAadAdmins = new WorkspaceAadAdminsInner(restClient().retrofit(), this);
         this.workspaceManagedIdentitySqlControlSettings = new WorkspaceManagedIdentitySqlControlSettingsInner(restClient().retrofit(), this);
