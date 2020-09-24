@@ -39,6 +39,9 @@ import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolVulnera
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolVulnerabilityAssessmentScans;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolSecurityAlertPolicies;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolVulnerabilityAssessmentRuleBaselines;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolWorkloadGroups;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkloadGroups;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolWorkloadClassifiers;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.Workspaces;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceAadAdmins;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManagedIdentitySqlControlSettings;
@@ -84,6 +87,9 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
     private SqlPoolVulnerabilityAssessmentScans sqlPoolVulnerabilityAssessmentScans;
     private SqlPoolSecurityAlertPolicies sqlPoolSecurityAlertPolicies;
     private SqlPoolVulnerabilityAssessmentRuleBaselines sqlPoolVulnerabilityAssessmentRuleBaselines;
+    private SqlPoolWorkloadGroups sqlPoolWorkloadGroups;
+    private WorkloadGroups workloadGroups;
+    private SqlPoolWorkloadClassifiers sqlPoolWorkloadClassifiers;
     private Workspaces workspaces;
     private WorkspaceAadAdmins workspaceAadAdmins;
     private WorkspaceManagedIdentitySqlControlSettings workspaceManagedIdentitySqlControlSettings;
@@ -374,6 +380,36 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
             this.sqlPoolVulnerabilityAssessmentRuleBaselines = new SqlPoolVulnerabilityAssessmentRuleBaselinesImpl(this);
         }
         return this.sqlPoolVulnerabilityAssessmentRuleBaselines;
+    }
+
+    /**
+     * @return Entry point to manage SqlPoolWorkloadGroups.
+     */
+    public SqlPoolWorkloadGroups sqlPoolWorkloadGroups() {
+        if (this.sqlPoolWorkloadGroups == null) {
+            this.sqlPoolWorkloadGroups = new SqlPoolWorkloadGroupsImpl(this);
+        }
+        return this.sqlPoolWorkloadGroups;
+    }
+
+    /**
+     * @return Entry point to manage WorkloadGroups.
+     */
+    public WorkloadGroups workloadGroups() {
+        if (this.workloadGroups == null) {
+            this.workloadGroups = new WorkloadGroupsImpl(this);
+        }
+        return this.workloadGroups;
+    }
+
+    /**
+     * @return Entry point to manage SqlPoolWorkloadClassifiers.
+     */
+    public SqlPoolWorkloadClassifiers sqlPoolWorkloadClassifiers() {
+        if (this.sqlPoolWorkloadClassifiers == null) {
+            this.sqlPoolWorkloadClassifiers = new SqlPoolWorkloadClassifiersImpl(this);
+        }
+        return this.sqlPoolWorkloadClassifiers;
     }
 
     /**
