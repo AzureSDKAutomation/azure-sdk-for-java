@@ -73,6 +73,12 @@ public class AzureMLServiceLinkedService extends LinkedServiceInner {
     private Object encryptedCredential;
 
     /**
+     * The credential reference containing authentication information.
+     */
+    @JsonProperty(value = "typeProperties.credential")
+    private CredentialReference credential;
+
+    /**
      * Get azure ML Service workspace subscription ID. Type: string (or Expression with resultType string).
      *
      * @return the subscriptionId value
@@ -209,6 +215,26 @@ public class AzureMLServiceLinkedService extends LinkedServiceInner {
      */
     public AzureMLServiceLinkedService withEncryptedCredential(Object encryptedCredential) {
         this.encryptedCredential = encryptedCredential;
+        return this;
+    }
+
+    /**
+     * Get the credential reference containing authentication information.
+     *
+     * @return the credential value
+     */
+    public CredentialReference credential() {
+        return this.credential;
+    }
+
+    /**
+     * Set the credential reference containing authentication information.
+     *
+     * @param credential the credential value to set
+     * @return the AzureMLServiceLinkedService object itself.
+     */
+    public AzureMLServiceLinkedService withCredential(CredentialReference credential) {
+        this.credential = credential;
         return this;
     }
 

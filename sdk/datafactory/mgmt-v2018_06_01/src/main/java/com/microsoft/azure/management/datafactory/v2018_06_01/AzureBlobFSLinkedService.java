@@ -75,6 +75,12 @@ public class AzureBlobFSLinkedService extends LinkedServiceInner {
     private Object encryptedCredential;
 
     /**
+     * The credential reference containing authentication information.
+     */
+    @JsonProperty(value = "typeProperties.credential")
+    private CredentialReference credential;
+
+    /**
      * Get endpoint for the Azure Data Lake Storage Gen2 service. Type: string (or Expression with resultType string).
      *
      * @return the url value
@@ -211,6 +217,26 @@ public class AzureBlobFSLinkedService extends LinkedServiceInner {
      */
     public AzureBlobFSLinkedService withEncryptedCredential(Object encryptedCredential) {
         this.encryptedCredential = encryptedCredential;
+        return this;
+    }
+
+    /**
+     * Get the credential reference containing authentication information.
+     *
+     * @return the credential value
+     */
+    public CredentialReference credential() {
+        return this.credential;
+    }
+
+    /**
+     * Set the credential reference containing authentication information.
+     *
+     * @param credential the credential value to set
+     * @return the AzureBlobFSLinkedService object itself.
+     */
+    public AzureBlobFSLinkedService withCredential(CredentialReference credential) {
+        this.credential = credential;
         return this;
     }
 

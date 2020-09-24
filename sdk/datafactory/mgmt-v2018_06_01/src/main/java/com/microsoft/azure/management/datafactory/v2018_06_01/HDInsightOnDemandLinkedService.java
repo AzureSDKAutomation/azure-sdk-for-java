@@ -254,6 +254,12 @@ public class HDInsightOnDemandLinkedService extends LinkedServiceInner {
     private Object subnetName;
 
     /**
+     * The credential reference containing authentication information.
+     */
+    @JsonProperty(value = "typeProperties.credential")
+    private CredentialReference credential;
+
+    /**
      * Get number of worker/data nodes in the cluster. Suggestion value: 4. Type: string (or Expression with resultType string).
      *
      * @return the clusterSize value
@@ -910,6 +916,26 @@ public class HDInsightOnDemandLinkedService extends LinkedServiceInner {
      */
     public HDInsightOnDemandLinkedService withSubnetName(Object subnetName) {
         this.subnetName = subnetName;
+        return this;
+    }
+
+    /**
+     * Get the credential reference containing authentication information.
+     *
+     * @return the credential value
+     */
+    public CredentialReference credential() {
+        return this.credential;
+    }
+
+    /**
+     * Set the credential reference containing authentication information.
+     *
+     * @param credential the credential value to set
+     * @return the HDInsightOnDemandLinkedService object itself.
+     */
+    public HDInsightOnDemandLinkedService withCredential(CredentialReference credential) {
+        this.credential = credential;
         return this;
     }
 
