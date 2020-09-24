@@ -80,6 +80,12 @@ public class AzureDataLakeAnalyticsLinkedService extends LinkedServiceInner {
     private Object encryptedCredential;
 
     /**
+     * The credential reference containing authentication information.
+     */
+    @JsonProperty(value = "typeProperties.credential")
+    private CredentialReference credential;
+
+    /**
      * Get the Azure Data Lake Analytics account name. Type: string (or Expression with resultType string).
      *
      * @return the accountName value
@@ -236,6 +242,26 @@ public class AzureDataLakeAnalyticsLinkedService extends LinkedServiceInner {
      */
     public AzureDataLakeAnalyticsLinkedService withEncryptedCredential(Object encryptedCredential) {
         this.encryptedCredential = encryptedCredential;
+        return this;
+    }
+
+    /**
+     * Get the credential reference containing authentication information.
+     *
+     * @return the credential value
+     */
+    public CredentialReference credential() {
+        return this.credential;
+    }
+
+    /**
+     * Set the credential reference containing authentication information.
+     *
+     * @param credential the credential value to set
+     * @return the AzureDataLakeAnalyticsLinkedService object itself.
+     */
+    public AzureDataLakeAnalyticsLinkedService withCredential(CredentialReference credential) {
+        this.credential = credential;
         return this;
     }
 

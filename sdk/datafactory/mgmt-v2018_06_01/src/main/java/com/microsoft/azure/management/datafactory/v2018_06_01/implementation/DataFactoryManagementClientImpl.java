@@ -354,6 +354,19 @@ public class DataFactoryManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The CredentialOperationsInner object to access its operations.
+     */
+    private CredentialOperationsInner credentialOperations;
+
+    /**
+     * Gets the CredentialOperationsInner object to access its operations.
+     * @return the CredentialOperationsInner object.
+     */
+    public CredentialOperationsInner credentialOperations() {
+        return this.credentialOperations;
+    }
+
+    /**
      * Initializes an instance of DataFactoryManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -405,6 +418,7 @@ public class DataFactoryManagementClientImpl extends AzureServiceClient {
         this.dataFlowDebugSessions = new DataFlowDebugSessionsInner(restClient().retrofit(), this);
         this.managedVirtualNetworks = new ManagedVirtualNetworksInner(restClient().retrofit(), this);
         this.managedPrivateEndpoints = new ManagedPrivateEndpointsInner(restClient().retrofit(), this);
+        this.credentialOperations = new CredentialOperationsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

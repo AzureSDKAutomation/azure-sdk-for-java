@@ -33,6 +33,7 @@ import com.microsoft.azure.management.datafactory.v2018_06_01.DataFlows;
 import com.microsoft.azure.management.datafactory.v2018_06_01.DataFlowDebugSessions;
 import com.microsoft.azure.management.datafactory.v2018_06_01.ManagedVirtualNetworks;
 import com.microsoft.azure.management.datafactory.v2018_06_01.ManagedPrivateEndpoints;
+import com.microsoft.azure.management.datafactory.v2018_06_01.CredentialOperations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -57,6 +58,7 @@ public final class DataFactoryManager extends ManagerCore<DataFactoryManager, Da
     private DataFlowDebugSessions dataFlowDebugSessions;
     private ManagedVirtualNetworks managedVirtualNetworks;
     private ManagedPrivateEndpoints managedPrivateEndpoints;
+    private CredentialOperations credentialOperations;
     /**
     * Get a Configurable instance that can be used to create DataFactoryManager with optional configuration.
     *
@@ -272,6 +274,16 @@ public final class DataFactoryManager extends ManagerCore<DataFactoryManager, Da
             this.managedPrivateEndpoints = new ManagedPrivateEndpointsImpl(this);
         }
         return this.managedPrivateEndpoints;
+    }
+
+    /**
+     * @return Entry point to manage CredentialOperations.
+     */
+    public CredentialOperations credentialOperations() {
+        if (this.credentialOperations == null) {
+            this.credentialOperations = new CredentialOperationsImpl(this);
+        }
+        return this.credentialOperations;
     }
 
     /**
