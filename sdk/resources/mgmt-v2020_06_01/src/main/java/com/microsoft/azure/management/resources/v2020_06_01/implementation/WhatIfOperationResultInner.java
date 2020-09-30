@@ -27,6 +27,12 @@ public class WhatIfOperationResultInner {
     private String status;
 
     /**
+     * The correlation ID of the What-If operation.
+     */
+    @JsonProperty(value = "properties.correlationId")
+    private String correlationId;
+
+    /**
      * List of resource changes predicted by What-If operation.
      */
     @JsonProperty(value = "properties.changes")
@@ -55,6 +61,26 @@ public class WhatIfOperationResultInner {
      */
     public WhatIfOperationResultInner withStatus(String status) {
         this.status = status;
+        return this;
+    }
+
+    /**
+     * Get the correlation ID of the What-If operation.
+     *
+     * @return the correlationId value
+     */
+    public String correlationId() {
+        return this.correlationId;
+    }
+
+    /**
+     * Set the correlation ID of the What-If operation.
+     *
+     * @param correlationId the correlationId value to set
+     * @return the WhatIfOperationResultInner object itself.
+     */
+    public WhatIfOperationResultInner withCorrelationId(String correlationId) {
+        this.correlationId = correlationId;
         return this;
     }
 
