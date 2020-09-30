@@ -24,6 +24,11 @@ public interface WhatIfOperationResult extends HasInner<WhatIfOperationResultInn
     List<WhatIfChange> changes();
 
     /**
+     * @return the correlationId value.
+     */
+    String correlationId();
+
+    /**
      * @return the error value.
      */
     ErrorResponse error();
