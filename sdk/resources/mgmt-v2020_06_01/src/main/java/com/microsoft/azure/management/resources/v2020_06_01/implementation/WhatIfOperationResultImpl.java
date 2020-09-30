@@ -32,6 +32,11 @@ class WhatIfOperationResultImpl extends WrapperImpl<WhatIfOperationResultInner> 
     }
 
     @Override
+    public String correlationId() {
+        return this.inner().correlationId();
+    }
+
+    @Override
     public ErrorResponse error() {
         return this.inner().error();
     }
