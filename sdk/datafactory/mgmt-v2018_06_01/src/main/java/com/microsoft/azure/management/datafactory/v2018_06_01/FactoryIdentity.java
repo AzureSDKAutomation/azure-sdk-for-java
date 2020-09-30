@@ -9,6 +9,7 @@
 package com.microsoft.azure.management.datafactory.v2018_06_01;
 
 import java.util.UUID;
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -16,11 +17,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class FactoryIdentity {
     /**
-     * The identity type. Currently the only supported type is
-     * 'SystemAssigned'.
+     * The identity type. Possible values include: 'SystemAssigned',
+     * 'UserAssigned', 'SystemAssigned,UserAssigned'.
      */
-    @JsonProperty(value = "type", required = true)
-    private String type;
+    @JsonProperty(value = "type")
+    private FactoryIdentityType type;
 
     /**
      * The principal id of the identity.
@@ -35,28 +36,27 @@ public class FactoryIdentity {
     private UUID tenantId;
 
     /**
-     * Creates an instance of FactoryIdentity class.
+     * List of user assigned identities for the factory.
      */
-    public FactoryIdentity() {
-        type = "SystemAssigned";
-    }
+    @JsonProperty(value = "userAssignedIdentities")
+    private Map<String, Object> userAssignedIdentities;
 
     /**
-     * Get the identity type. Currently the only supported type is 'SystemAssigned'.
+     * Get the identity type. Possible values include: 'SystemAssigned', 'UserAssigned', 'SystemAssigned,UserAssigned'.
      *
      * @return the type value
      */
-    public String type() {
+    public FactoryIdentityType type() {
         return this.type;
     }
 
     /**
-     * Set the identity type. Currently the only supported type is 'SystemAssigned'.
+     * Set the identity type. Possible values include: 'SystemAssigned', 'UserAssigned', 'SystemAssigned,UserAssigned'.
      *
      * @param type the type value to set
      * @return the FactoryIdentity object itself.
      */
-    public FactoryIdentity withType(String type) {
+    public FactoryIdentity withType(FactoryIdentityType type) {
         this.type = type;
         return this;
     }
@@ -77,6 +77,26 @@ public class FactoryIdentity {
      */
     public UUID tenantId() {
         return this.tenantId;
+    }
+
+    /**
+     * Get list of user assigned identities for the factory.
+     *
+     * @return the userAssignedIdentities value
+     */
+    public Map<String, Object> userAssignedIdentities() {
+        return this.userAssignedIdentities;
+    }
+
+    /**
+     * Set list of user assigned identities for the factory.
+     *
+     * @param userAssignedIdentities the userAssignedIdentities value to set
+     * @return the FactoryIdentity object itself.
+     */
+    public FactoryIdentity withUserAssignedIdentities(Map<String, Object> userAssignedIdentities) {
+        this.userAssignedIdentities = userAssignedIdentities;
+        return this;
     }
 
 }
