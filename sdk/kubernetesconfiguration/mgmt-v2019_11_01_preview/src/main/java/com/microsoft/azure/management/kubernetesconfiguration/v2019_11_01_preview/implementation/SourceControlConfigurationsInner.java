@@ -13,6 +13,7 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.ErrorResponseException;
+import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.SourceControlConfigurationForCreate;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
@@ -67,7 +68,7 @@ public class SourceControlConfigurationsInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.SourceControlConfigurations createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/sourceControlConfigurations/{sourceControlConfigurationName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("clusterRp") String clusterRp, @Path("clusterResourceName") String clusterResourceName, @Path("clusterName") String clusterName, @Path("sourceControlConfigurationName") String sourceControlConfigurationName, @Query("api-version") String apiVersion, @Body SourceControlConfigurationInner sourceControlConfiguration, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("clusterRp") String clusterRp, @Path("clusterResourceName") String clusterResourceName, @Path("clusterName") String clusterName, @Path("sourceControlConfigurationName") String sourceControlConfigurationName, @Query("api-version") String apiVersion, @Body SourceControlConfigurationForCreate sourceControlConfiguration, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.SourceControlConfigurations delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/sourceControlConfigurations/{sourceControlConfigurationName}", method = "DELETE", hasBody = true)
@@ -208,7 +209,7 @@ public class SourceControlConfigurationsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SourceControlConfigurationInner object if successful.
      */
-    public SourceControlConfigurationInner createOrUpdate(String resourceGroupName, String clusterRp, String clusterResourceName, String clusterName, String sourceControlConfigurationName, SourceControlConfigurationInner sourceControlConfiguration) {
+    public SourceControlConfigurationInner createOrUpdate(String resourceGroupName, String clusterRp, String clusterResourceName, String clusterName, String sourceControlConfigurationName, SourceControlConfigurationForCreate sourceControlConfiguration) {
         return createOrUpdateWithServiceResponseAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName, sourceControlConfiguration).toBlocking().single().body();
     }
 
@@ -225,7 +226,7 @@ public class SourceControlConfigurationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SourceControlConfigurationInner> createOrUpdateAsync(String resourceGroupName, String clusterRp, String clusterResourceName, String clusterName, String sourceControlConfigurationName, SourceControlConfigurationInner sourceControlConfiguration, final ServiceCallback<SourceControlConfigurationInner> serviceCallback) {
+    public ServiceFuture<SourceControlConfigurationInner> createOrUpdateAsync(String resourceGroupName, String clusterRp, String clusterResourceName, String clusterName, String sourceControlConfigurationName, SourceControlConfigurationForCreate sourceControlConfiguration, final ServiceCallback<SourceControlConfigurationInner> serviceCallback) {
         return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName, sourceControlConfiguration), serviceCallback);
     }
 
@@ -241,7 +242,7 @@ public class SourceControlConfigurationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SourceControlConfigurationInner object
      */
-    public Observable<SourceControlConfigurationInner> createOrUpdateAsync(String resourceGroupName, String clusterRp, String clusterResourceName, String clusterName, String sourceControlConfigurationName, SourceControlConfigurationInner sourceControlConfiguration) {
+    public Observable<SourceControlConfigurationInner> createOrUpdateAsync(String resourceGroupName, String clusterRp, String clusterResourceName, String clusterName, String sourceControlConfigurationName, SourceControlConfigurationForCreate sourceControlConfiguration) {
         return createOrUpdateWithServiceResponseAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName, sourceControlConfiguration).map(new Func1<ServiceResponse<SourceControlConfigurationInner>, SourceControlConfigurationInner>() {
             @Override
             public SourceControlConfigurationInner call(ServiceResponse<SourceControlConfigurationInner> response) {
@@ -262,7 +263,7 @@ public class SourceControlConfigurationsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SourceControlConfigurationInner object
      */
-    public Observable<ServiceResponse<SourceControlConfigurationInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String clusterRp, String clusterResourceName, String clusterName, String sourceControlConfigurationName, SourceControlConfigurationInner sourceControlConfiguration) {
+    public Observable<ServiceResponse<SourceControlConfigurationInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String clusterRp, String clusterResourceName, String clusterName, String sourceControlConfigurationName, SourceControlConfigurationForCreate sourceControlConfiguration) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }

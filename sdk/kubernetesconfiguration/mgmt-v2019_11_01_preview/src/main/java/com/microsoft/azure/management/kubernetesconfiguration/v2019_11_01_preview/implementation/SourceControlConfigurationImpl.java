@@ -11,12 +11,15 @@ package com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_previ
 import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.SourceControlConfiguration;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
-import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.OperatorType;
-import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.OperatorScope;
+import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.SourceControlConfigurationForCreate;
+import java.util.Map;
+import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.ComplianceStatus;
 import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.EnableHelmOperator;
 import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.HelmOperatorProperties;
+import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.OperatorScope;
+import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.OperatorType;
 import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.ProvisioningState;
-import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.ComplianceStatus;
+import rx.functions.Func1;
 
 class SourceControlConfigurationImpl extends CreatableUpdatableImpl<SourceControlConfiguration, SourceControlConfigurationInner, SourceControlConfigurationImpl> implements SourceControlConfiguration, SourceControlConfiguration.Definition, SourceControlConfiguration.Update {
     private final KubernetesConfigurationManager manager;
@@ -25,6 +28,7 @@ class SourceControlConfigurationImpl extends CreatableUpdatableImpl<SourceContro
     private String clusterResourceName;
     private String clusterName;
     private String sourceControlConfigurationName;
+    private SourceControlConfigurationForCreate createOrUpdateParameter;
 
     SourceControlConfigurationImpl(String name, KubernetesConfigurationManager manager) {
         super(name, new SourceControlConfigurationInner());
@@ -32,6 +36,7 @@ class SourceControlConfigurationImpl extends CreatableUpdatableImpl<SourceContro
         // Set resource name
         this.sourceControlConfigurationName = name;
         //
+        this.createOrUpdateParameter = new SourceControlConfigurationForCreate();
     }
 
     SourceControlConfigurationImpl(SourceControlConfigurationInner inner, KubernetesConfigurationManager manager) {
@@ -41,11 +46,12 @@ class SourceControlConfigurationImpl extends CreatableUpdatableImpl<SourceContro
         this.sourceControlConfigurationName = inner.name();
         // set resource ancestor and positional variables
         this.resourceGroupName = IdParsingUtils.getValueFromIdByName(inner.id(), "resourceGroups");
-        this.clusterRp = IdParsingUtils.getValueFromIdByName(inner.id(), "providers");
+        this.clusterRp = String.fromString(IdParsingUtils.getValueFromIdByName(inner.id(), "providers"));
         this.sourceControlConfigurationName = IdParsingUtils.getValueFromIdByName(inner.id(), "sourceControlConfigurations");
-        this.clusterResourceName = IdParsingUtils.getValueFromIdByPosition(inner.id(), 6);
+        this.clusterResourceName = String.fromString(IdParsingUtils.getValueFromIdByPosition(inner.id(), 6));
         this.clusterName = IdParsingUtils.getValueFromIdByPosition(inner.id(), 7);
         //
+        this.createOrUpdateParameter = new SourceControlConfigurationForCreate();
     }
 
     @Override
@@ -56,14 +62,28 @@ class SourceControlConfigurationImpl extends CreatableUpdatableImpl<SourceContro
     @Override
     public Observable<SourceControlConfiguration> createResourceAsync() {
         SourceControlConfigurationsInner client = this.manager().inner().sourceControlConfigurations();
-        return client.createOrUpdateAsync(this.resourceGroupName, this.clusterRp, this.clusterResourceName, this.clusterName, this.sourceControlConfigurationName, this.inner())
+        return client.createOrUpdateAsync(this.resourceGroupName, this.clusterRp, this.clusterResourceName, this.clusterName, this.sourceControlConfigurationName, this.createOrUpdateParameter)
+            .map(new Func1<SourceControlConfigurationInner, SourceControlConfigurationInner>() {
+               @Override
+               public SourceControlConfigurationInner call(SourceControlConfigurationInner resource) {
+                   resetCreateUpdateParameters();
+                   return resource;
+               }
+            })
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<SourceControlConfiguration> updateResourceAsync() {
         SourceControlConfigurationsInner client = this.manager().inner().sourceControlConfigurations();
-        return client.createOrUpdateAsync(this.resourceGroupName, this.clusterRp, this.clusterResourceName, this.clusterName, this.sourceControlConfigurationName, this.inner())
+        return client.createOrUpdateAsync(this.resourceGroupName, this.clusterRp, this.clusterResourceName, this.clusterName, this.sourceControlConfigurationName, this.createOrUpdateParameter)
+            .map(new Func1<SourceControlConfigurationInner, SourceControlConfigurationInner>() {
+               @Override
+               public SourceControlConfigurationInner call(SourceControlConfigurationInner resource) {
+                   resetCreateUpdateParameters();
+                   return resource;
+               }
+            })
             .map(innerToFluentMap(this));
     }
 
@@ -78,6 +98,9 @@ class SourceControlConfigurationImpl extends CreatableUpdatableImpl<SourceContro
         return this.inner().id() == null;
     }
 
+    private void resetCreateUpdateParameters() {
+        this.createOrUpdateParameter = new SourceControlConfigurationForCreate();
+    }
 
     @Override
     public ComplianceStatus complianceStatus() {
@@ -145,6 +168,11 @@ class SourceControlConfigurationImpl extends CreatableUpdatableImpl<SourceContro
     }
 
     @Override
+    public String sshKnownHostsContents() {
+        return this.inner().sshKnownHostsContents();
+    }
+
+    @Override
     public String type() {
         return this.inner().type();
     }
@@ -169,50 +197,62 @@ class SourceControlConfigurationImpl extends CreatableUpdatableImpl<SourceContro
     }
 
     @Override
+    public SourceControlConfigurationImpl withConfigurationProtectedSettings(Map<String, String> configurationProtectedSettings) {
+        this.createOrUpdateParameter.withConfigurationProtectedSettings(configurationProtectedSettings);
+        return this;
+    }
+
+    @Override
     public SourceControlConfigurationImpl withEnableHelmOperator(EnableHelmOperator enableHelmOperator) {
-        this.inner().withEnableHelmOperator(enableHelmOperator);
+        this.createOrUpdateParameter.withEnableHelmOperator(enableHelmOperator);
         return this;
     }
 
     @Override
     public SourceControlConfigurationImpl withHelmOperatorProperties(HelmOperatorProperties helmOperatorProperties) {
-        this.inner().withHelmOperatorProperties(helmOperatorProperties);
+        this.createOrUpdateParameter.withHelmOperatorProperties(helmOperatorProperties);
         return this;
     }
 
     @Override
     public SourceControlConfigurationImpl withOperatorInstanceName(String operatorInstanceName) {
-        this.inner().withOperatorInstanceName(operatorInstanceName);
+        this.createOrUpdateParameter.withOperatorInstanceName(operatorInstanceName);
         return this;
     }
 
     @Override
     public SourceControlConfigurationImpl withOperatorNamespace(String operatorNamespace) {
-        this.inner().withOperatorNamespace(operatorNamespace);
+        this.createOrUpdateParameter.withOperatorNamespace(operatorNamespace);
         return this;
     }
 
     @Override
     public SourceControlConfigurationImpl withOperatorParams(String operatorParams) {
-        this.inner().withOperatorParams(operatorParams);
+        this.createOrUpdateParameter.withOperatorParams(operatorParams);
         return this;
     }
 
     @Override
     public SourceControlConfigurationImpl withOperatorScope(OperatorScope operatorScope) {
-        this.inner().withOperatorScope(operatorScope);
+        this.createOrUpdateParameter.withOperatorScope(operatorScope);
         return this;
     }
 
     @Override
     public SourceControlConfigurationImpl withOperatorType(OperatorType operatorType) {
-        this.inner().withOperatorType(operatorType);
+        this.createOrUpdateParameter.withOperatorType(operatorType);
         return this;
     }
 
     @Override
     public SourceControlConfigurationImpl withRepositoryUrl(String repositoryUrl) {
-        this.inner().withRepositoryUrl(repositoryUrl);
+        this.createOrUpdateParameter.withRepositoryUrl(repositoryUrl);
+        return this;
+    }
+
+    @Override
+    public SourceControlConfigurationImpl withSshKnownHostsContents(String sshKnownHostsContents) {
+        this.createOrUpdateParameter.withSshKnownHostsContents(sshKnownHostsContents);
         return this;
     }
 
