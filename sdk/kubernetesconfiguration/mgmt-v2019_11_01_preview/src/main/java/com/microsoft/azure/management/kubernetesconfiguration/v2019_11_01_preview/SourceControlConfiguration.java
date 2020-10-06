@@ -16,6 +16,7 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview.implementation.KubernetesConfigurationManager;
+import java.util.Map;
 
 /**
  * Type representing SourceControlConfiguration.
@@ -87,6 +88,11 @@ public interface SourceControlConfiguration extends HasInner<SourceControlConfig
     String repositoryUrl();
 
     /**
+     * @return the sshKnownHostsContents value.
+     */
+    String sshKnownHostsContents();
+
+    /**
      * @return the type value.
      */
     String type();
@@ -142,6 +148,18 @@ public interface SourceControlConfiguration extends HasInner<SourceControlConfig
             * @return the next definition stage
             */
             WithCreate withClusterName(String clusterName);
+        }
+
+        /**
+         * The stage of the sourcecontrolconfiguration definition allowing to specify ConfigurationProtectedSettings.
+         */
+        interface WithConfigurationProtectedSettings {
+            /**
+             * Specifies configurationProtectedSettings.
+             * @param configurationProtectedSettings Name-value pairs of protected configuration settings for the configuration
+             * @return the next definition stage
+             */
+            WithCreate withConfigurationProtectedSettings(Map<String, String> configurationProtectedSettings);
         }
 
         /**
@@ -241,23 +259,47 @@ public interface SourceControlConfiguration extends HasInner<SourceControlConfig
         }
 
         /**
+         * The stage of the sourcecontrolconfiguration definition allowing to specify SshKnownHostsContents.
+         */
+        interface WithSshKnownHostsContents {
+            /**
+             * Specifies sshKnownHostsContents.
+             * @param sshKnownHostsContents Base64-encoded known_hosts contents containing public SSH keys required to access private Git instances
+             * @return the next definition stage
+             */
+            WithCreate withSshKnownHostsContents(String sshKnownHostsContents);
+        }
+
+        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<SourceControlConfiguration>, DefinitionStages.WithEnableHelmOperator, DefinitionStages.WithHelmOperatorProperties, DefinitionStages.WithOperatorInstanceName, DefinitionStages.WithOperatorNamespace, DefinitionStages.WithOperatorParams, DefinitionStages.WithOperatorScope, DefinitionStages.WithOperatorType, DefinitionStages.WithRepositoryUrl {
+        interface WithCreate extends Creatable<SourceControlConfiguration>, DefinitionStages.WithConfigurationProtectedSettings, DefinitionStages.WithEnableHelmOperator, DefinitionStages.WithHelmOperatorProperties, DefinitionStages.WithOperatorInstanceName, DefinitionStages.WithOperatorNamespace, DefinitionStages.WithOperatorParams, DefinitionStages.WithOperatorScope, DefinitionStages.WithOperatorType, DefinitionStages.WithRepositoryUrl, DefinitionStages.WithSshKnownHostsContents {
         }
     }
     /**
      * The template for a SourceControlConfiguration update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<SourceControlConfiguration>, UpdateStages.WithEnableHelmOperator, UpdateStages.WithHelmOperatorProperties, UpdateStages.WithOperatorInstanceName, UpdateStages.WithOperatorNamespace, UpdateStages.WithOperatorParams, UpdateStages.WithOperatorScope, UpdateStages.WithOperatorType, UpdateStages.WithRepositoryUrl {
+    interface Update extends Appliable<SourceControlConfiguration>, UpdateStages.WithConfigurationProtectedSettings, UpdateStages.WithEnableHelmOperator, UpdateStages.WithHelmOperatorProperties, UpdateStages.WithOperatorInstanceName, UpdateStages.WithOperatorNamespace, UpdateStages.WithOperatorParams, UpdateStages.WithOperatorScope, UpdateStages.WithOperatorType, UpdateStages.WithRepositoryUrl, UpdateStages.WithSshKnownHostsContents {
     }
 
     /**
      * Grouping of SourceControlConfiguration update stages.
      */
     interface UpdateStages {
+        /**
+         * The stage of the sourcecontrolconfiguration update allowing to specify ConfigurationProtectedSettings.
+         */
+        interface WithConfigurationProtectedSettings {
+            /**
+             * Specifies configurationProtectedSettings.
+             * @param configurationProtectedSettings Name-value pairs of protected configuration settings for the configuration
+             * @return the next update stage
+             */
+            Update withConfigurationProtectedSettings(Map<String, String> configurationProtectedSettings);
+        }
+
         /**
          * The stage of the sourcecontrolconfiguration update allowing to specify EnableHelmOperator.
          */
@@ -352,6 +394,18 @@ public interface SourceControlConfiguration extends HasInner<SourceControlConfig
              * @return the next update stage
              */
             Update withRepositoryUrl(String repositoryUrl);
+        }
+
+        /**
+         * The stage of the sourcecontrolconfiguration update allowing to specify SshKnownHostsContents.
+         */
+        interface WithSshKnownHostsContents {
+            /**
+             * Specifies sshKnownHostsContents.
+             * @param sshKnownHostsContents Base64-encoded known_hosts contents containing public SSH keys required to access private Git instances
+             * @return the next update stage
+             */
+            Update withSshKnownHostsContents(String sshKnownHostsContents);
         }
 
     }
