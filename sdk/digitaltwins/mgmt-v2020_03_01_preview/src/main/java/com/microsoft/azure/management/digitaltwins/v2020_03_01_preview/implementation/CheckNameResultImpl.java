@@ -30,11 +30,6 @@ class CheckNameResultImpl extends WrapperImpl<CheckNameResultInner> implements C
     }
 
     @Override
-    public String name() {
-        return this.inner().name();
-    }
-
-    @Override
     public Boolean nameAvailable() {
         return this.inner().nameAvailable();
     }

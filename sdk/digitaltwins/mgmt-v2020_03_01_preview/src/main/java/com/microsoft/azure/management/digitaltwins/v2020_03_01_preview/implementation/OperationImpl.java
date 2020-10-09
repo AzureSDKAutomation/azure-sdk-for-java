@@ -30,8 +30,18 @@ class OperationImpl extends WrapperImpl<OperationInner> implements Operation {
     }
 
     @Override
+    public Boolean isDataAction() {
+        return this.inner().isDataAction();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
+    }
+
+    @Override
+    public String origin() {
+        return this.inner().origin();
     }
 
 }

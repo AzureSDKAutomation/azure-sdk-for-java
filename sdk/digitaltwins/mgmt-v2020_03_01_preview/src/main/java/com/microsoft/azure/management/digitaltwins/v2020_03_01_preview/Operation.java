@@ -23,8 +23,18 @@ public interface Operation extends HasInner<OperationInner>, HasManager<DigitalT
     OperationDisplay display();
 
     /**
+     * @return the isDataAction value.
+     */
+    Boolean isDataAction();
+
+    /**
      * @return the name value.
      */
     String name();
+
+    /**
+     * @return the origin value.
+     */
+    String origin();
 
 }

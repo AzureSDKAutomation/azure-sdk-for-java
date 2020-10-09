@@ -21,7 +21,7 @@ public class EventGrid extends DigitalTwinsEndpointResourceProperties {
     /**
      * EventGrid Topic Endpoint.
      */
-    @JsonProperty(value = "TopicEndpoint")
+    @JsonProperty(value = "TopicEndpoint", required = true)
     private String topicEndpoint;
 
     /**
@@ -33,7 +33,7 @@ public class EventGrid extends DigitalTwinsEndpointResourceProperties {
     /**
      * EventGrid secondary accesskey. Will be obfuscated during read.
      */
-    @JsonProperty(value = "accessKey2", required = true)
+    @JsonProperty(value = "accessKey2")
     private String accessKey2;
 
     /**

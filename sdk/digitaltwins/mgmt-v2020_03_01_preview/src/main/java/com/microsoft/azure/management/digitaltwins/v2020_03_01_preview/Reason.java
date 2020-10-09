@@ -16,11 +16,14 @@ import com.microsoft.rest.ExpandableStringEnum;
  * Defines values for Reason.
  */
 public final class Reason extends ExpandableStringEnum<Reason> {
-    /** Static value Invalid for Reason. */
-    public static final Reason INVALID = fromString("Invalid");
+    /** Static value NameIsAvailable for Reason. */
+    public static final Reason NAME_IS_AVAILABLE = fromString("NameIsAvailable");
 
-    /** Static value AlreadyExists for Reason. */
-    public static final Reason ALREADY_EXISTS = fromString("AlreadyExists");
+    /** Static value NameConflict for Reason. */
+    public static final Reason NAME_CONFLICT = fromString("NameConflict");
+
+    /** Static value InvalidName for Reason. */
+    public static final Reason INVALID_NAME = fromString("InvalidName");
 
     /**
      * Creates or finds a Reason from its string representation.

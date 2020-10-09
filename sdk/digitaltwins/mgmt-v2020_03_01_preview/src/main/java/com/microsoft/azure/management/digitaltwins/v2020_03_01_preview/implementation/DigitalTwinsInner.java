@@ -85,10 +85,6 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}")
         Observable<Response<ResponseBody>> update(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("resourceName") String resourceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body DigitalTwinsPatchDescription digitalTwinsPatchDescription, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.digitaltwins.v2020_03_01_preview.DigitalTwins beginUpdate" })
-        @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}")
-        Observable<Response<ResponseBody>> beginUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("resourceName") String resourceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body DigitalTwinsPatchDescription digitalTwinsPatchDescription, @Header("User-Agent") String userAgent);
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.digitaltwins.v2020_03_01_preview.DigitalTwins delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("resourceName") String resourceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -379,7 +375,7 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
      * @return the DigitalTwinsDescriptionInner object if successful.
      */
     public DigitalTwinsDescriptionInner update(String resourceGroupName, String resourceName) {
-        return updateWithServiceResponseAsync(resourceGroupName, resourceName).toBlocking().last().body();
+        return updateWithServiceResponseAsync(resourceGroupName, resourceName).toBlocking().single().body();
     }
 
     /**
@@ -401,7 +397,7 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
      * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
      * @param resourceName The name of the DigitalTwinsInstance.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @return the observable to the DigitalTwinsDescriptionInner object
      */
     public Observable<DigitalTwinsDescriptionInner> updateAsync(String resourceGroupName, String resourceName) {
         return updateWithServiceResponseAsync(resourceGroupName, resourceName).map(new Func1<ServiceResponse<DigitalTwinsDescriptionInner>, DigitalTwinsDescriptionInner>() {
@@ -418,7 +414,7 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
      * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
      * @param resourceName The name of the DigitalTwinsInstance.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @return the observable to the DigitalTwinsDescriptionInner object
      */
     public Observable<ServiceResponse<DigitalTwinsDescriptionInner>> updateWithServiceResponseAsync(String resourceGroupName, String resourceName) {
         if (this.client.subscriptionId() == null) {
@@ -433,9 +429,20 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
         final Map<String, String> tags = null;
         DigitalTwinsPatchDescription digitalTwinsPatchDescription = new DigitalTwinsPatchDescription();
         digitalTwinsPatchDescription.withTags(null);
-        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), this.client.acceptLanguage(), digitalTwinsPatchDescription, this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DigitalTwinsDescriptionInner>() { }.getType());
+        return service.update(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), this.client.acceptLanguage(), digitalTwinsPatchDescription, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DigitalTwinsDescriptionInner>>>() {
+                @Override
+                public Observable<ServiceResponse<DigitalTwinsDescriptionInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<DigitalTwinsDescriptionInner> clientResponse = updateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
+
     /**
      * Update metadata of DigitalTwinsInstance.
      *
@@ -448,7 +455,7 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
      * @return the DigitalTwinsDescriptionInner object if successful.
      */
     public DigitalTwinsDescriptionInner update(String resourceGroupName, String resourceName, Map<String, String> tags) {
-        return updateWithServiceResponseAsync(resourceGroupName, resourceName, tags).toBlocking().last().body();
+        return updateWithServiceResponseAsync(resourceGroupName, resourceName, tags).toBlocking().single().body();
     }
 
     /**
@@ -472,7 +479,7 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
      * @param resourceName The name of the DigitalTwinsInstance.
      * @param tags Instance tags
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @return the observable to the DigitalTwinsDescriptionInner object
      */
     public Observable<DigitalTwinsDescriptionInner> updateAsync(String resourceGroupName, String resourceName, Map<String, String> tags) {
         return updateWithServiceResponseAsync(resourceGroupName, resourceName, tags).map(new Func1<ServiceResponse<DigitalTwinsDescriptionInner>, DigitalTwinsDescriptionInner>() {
@@ -490,7 +497,7 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
      * @param resourceName The name of the DigitalTwinsInstance.
      * @param tags Instance tags
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @return the observable to the DigitalTwinsDescriptionInner object
      */
     public Observable<ServiceResponse<DigitalTwinsDescriptionInner>> updateWithServiceResponseAsync(String resourceGroupName, String resourceName, Map<String, String> tags) {
         if (this.client.subscriptionId() == null) {
@@ -505,81 +512,12 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
         Validator.validate(tags);
         DigitalTwinsPatchDescription digitalTwinsPatchDescription = new DigitalTwinsPatchDescription();
         digitalTwinsPatchDescription.withTags(tags);
-        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), this.client.acceptLanguage(), digitalTwinsPatchDescription, this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DigitalTwinsDescriptionInner>() { }.getType());
-    }
-
-    /**
-     * Update metadata of DigitalTwinsInstance.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DigitalTwinsDescriptionInner object if successful.
-     */
-    public DigitalTwinsDescriptionInner beginUpdate(String resourceGroupName, String resourceName) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName).toBlocking().single().body();
-    }
-
-    /**
-     * Update metadata of DigitalTwinsInstance.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DigitalTwinsDescriptionInner> beginUpdateAsync(String resourceGroupName, String resourceName, final ServiceCallback<DigitalTwinsDescriptionInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName), serviceCallback);
-    }
-
-    /**
-     * Update metadata of DigitalTwinsInstance.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DigitalTwinsDescriptionInner object
-     */
-    public Observable<DigitalTwinsDescriptionInner> beginUpdateAsync(String resourceGroupName, String resourceName) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName).map(new Func1<ServiceResponse<DigitalTwinsDescriptionInner>, DigitalTwinsDescriptionInner>() {
-            @Override
-            public DigitalTwinsDescriptionInner call(ServiceResponse<DigitalTwinsDescriptionInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Update metadata of DigitalTwinsInstance.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DigitalTwinsDescriptionInner object
-     */
-    public Observable<ServiceResponse<DigitalTwinsDescriptionInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (resourceName == null) {
-            throw new IllegalArgumentException("Parameter resourceName is required and cannot be null.");
-        }
-        final Map<String, String> tags = null;
-        DigitalTwinsPatchDescription digitalTwinsPatchDescription = new DigitalTwinsPatchDescription();
-        digitalTwinsPatchDescription.withTags(null);
-        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), this.client.acceptLanguage(), digitalTwinsPatchDescription, this.client.userAgent())
+        return service.update(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), this.client.acceptLanguage(), digitalTwinsPatchDescription, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DigitalTwinsDescriptionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DigitalTwinsDescriptionInner>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<DigitalTwinsDescriptionInner> clientResponse = beginUpdateDelegate(response);
+                        ServiceResponse<DigitalTwinsDescriptionInner> clientResponse = updateDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -588,93 +526,9 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
             });
     }
 
-    /**
-     * Update metadata of DigitalTwinsInstance.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param tags Instance tags
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DigitalTwinsDescriptionInner object if successful.
-     */
-    public DigitalTwinsDescriptionInner beginUpdate(String resourceGroupName, String resourceName, Map<String, String> tags) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName, tags).toBlocking().single().body();
-    }
-
-    /**
-     * Update metadata of DigitalTwinsInstance.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param tags Instance tags
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DigitalTwinsDescriptionInner> beginUpdateAsync(String resourceGroupName, String resourceName, Map<String, String> tags, final ServiceCallback<DigitalTwinsDescriptionInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName, tags), serviceCallback);
-    }
-
-    /**
-     * Update metadata of DigitalTwinsInstance.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param tags Instance tags
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DigitalTwinsDescriptionInner object
-     */
-    public Observable<DigitalTwinsDescriptionInner> beginUpdateAsync(String resourceGroupName, String resourceName, Map<String, String> tags) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, resourceName, tags).map(new Func1<ServiceResponse<DigitalTwinsDescriptionInner>, DigitalTwinsDescriptionInner>() {
-            @Override
-            public DigitalTwinsDescriptionInner call(ServiceResponse<DigitalTwinsDescriptionInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Update metadata of DigitalTwinsInstance.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param tags Instance tags
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DigitalTwinsDescriptionInner object
-     */
-    public Observable<ServiceResponse<DigitalTwinsDescriptionInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, Map<String, String> tags) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (resourceName == null) {
-            throw new IllegalArgumentException("Parameter resourceName is required and cannot be null.");
-        }
-        Validator.validate(tags);
-        DigitalTwinsPatchDescription digitalTwinsPatchDescription = new DigitalTwinsPatchDescription();
-        digitalTwinsPatchDescription.withTags(tags);
-        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, resourceName, this.client.apiVersion(), this.client.acceptLanguage(), digitalTwinsPatchDescription, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DigitalTwinsDescriptionInner>>>() {
-                @Override
-                public Observable<ServiceResponse<DigitalTwinsDescriptionInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<DigitalTwinsDescriptionInner> clientResponse = beginUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<DigitalTwinsDescriptionInner> beginUpdateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+    private ServiceResponse<DigitalTwinsDescriptionInner> updateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<DigitalTwinsDescriptionInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DigitalTwinsDescriptionInner>() { }.getType())
-                .register(201, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorResponseException.class)
                 .build(response);
     }
@@ -823,7 +677,7 @@ public class DigitalTwinsInner implements InnerSupportsGet<DigitalTwinsDescripti
 
     private ServiceResponse<DigitalTwinsDescriptionInner> beginDeleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<DigitalTwinsDescriptionInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
+                .register(200, new TypeToken<DigitalTwinsDescriptionInner>() { }.getType())
                 .register(202, new TypeToken<DigitalTwinsDescriptionInner>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorResponseException.class)
