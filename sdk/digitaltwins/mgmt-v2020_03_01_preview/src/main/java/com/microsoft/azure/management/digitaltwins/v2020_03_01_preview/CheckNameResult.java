@@ -23,11 +23,6 @@ public interface CheckNameResult extends HasInner<CheckNameResultInner>, HasMana
     String message();
 
     /**
-     * @return the name value.
-     */
-    String name();
-
-    /**
      * @return the nameAvailable value.
      */
     Boolean nameAvailable();

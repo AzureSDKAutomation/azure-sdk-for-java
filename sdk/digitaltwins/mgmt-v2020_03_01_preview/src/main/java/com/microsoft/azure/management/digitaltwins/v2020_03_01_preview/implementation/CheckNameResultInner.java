@@ -22,12 +22,6 @@ public class CheckNameResultInner {
     private Boolean nameAvailable;
 
     /**
-     * The name that was checked.
-     */
-    @JsonProperty(value = "name")
-    private String name;
-
-    /**
      * Message indicating an unavailable name due to a conflict, or a
      * description of the naming rules that are violated.
      */
@@ -36,7 +30,7 @@ public class CheckNameResultInner {
 
     /**
      * Message providing the reason why the given name is invalid. Possible
-     * values include: 'Invalid', 'AlreadyExists'.
+     * values include: 'NameIsAvailable', 'NameConflict', 'InvalidName'.
      */
     @JsonProperty(value = "reason")
     private Reason reason;
@@ -62,26 +56,6 @@ public class CheckNameResultInner {
     }
 
     /**
-     * Get the name that was checked.
-     *
-     * @return the name value
-     */
-    public String name() {
-        return this.name;
-    }
-
-    /**
-     * Set the name that was checked.
-     *
-     * @param name the name value to set
-     * @return the CheckNameResultInner object itself.
-     */
-    public CheckNameResultInner withName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    /**
      * Get message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated.
      *
      * @return the message value
@@ -102,7 +76,7 @@ public class CheckNameResultInner {
     }
 
     /**
-     * Get message providing the reason why the given name is invalid. Possible values include: 'Invalid', 'AlreadyExists'.
+     * Get message providing the reason why the given name is invalid. Possible values include: 'NameIsAvailable', 'NameConflict', 'InvalidName'.
      *
      * @return the reason value
      */
@@ -111,7 +85,7 @@ public class CheckNameResultInner {
     }
 
     /**
-     * Set message providing the reason why the given name is invalid. Possible values include: 'Invalid', 'AlreadyExists'.
+     * Set message providing the reason why the given name is invalid. Possible values include: 'NameIsAvailable', 'NameConflict', 'InvalidName'.
      *
      * @param reason the reason value to set
      * @return the CheckNameResultInner object itself.

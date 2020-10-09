@@ -28,7 +28,7 @@ public class EventHub extends DigitalTwinsEndpointResourceProperties {
      * SecondaryConnectionString of the endpoint. Will be obfuscated during
      * read.
      */
-    @JsonProperty(value = "connectionString-SecondaryKey", required = true)
+    @JsonProperty(value = "connectionString-SecondaryKey")
     private String connectionStringSecondaryKey;
 
     /**

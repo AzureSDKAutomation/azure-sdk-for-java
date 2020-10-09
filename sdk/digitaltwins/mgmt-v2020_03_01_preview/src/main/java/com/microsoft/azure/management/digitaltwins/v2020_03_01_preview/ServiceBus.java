@@ -28,7 +28,7 @@ public class ServiceBus extends DigitalTwinsEndpointResourceProperties {
      * SecondaryConnectionString of the endpoint. Will be obfuscated during
      * read.
      */
-    @JsonProperty(value = "secondaryConnectionString", required = true)
+    @JsonProperty(value = "secondaryConnectionString")
     private String secondaryConnectionString;
 
     /**

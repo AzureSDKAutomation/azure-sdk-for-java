@@ -308,81 +308,6 @@ public class DigitalTwinsEndpointsInner {
      * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
      * @param resourceName The name of the DigitalTwinsInstance.
      * @param endpointName Name of Endpoint Resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DigitalTwinsEndpointResourceInner object if successful.
-     */
-    public DigitalTwinsEndpointResourceInner createOrUpdate(String resourceGroupName, String resourceName, String endpointName) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, endpointName).toBlocking().last().body();
-    }
-
-    /**
-     * Create or update DigitalTwinsInstance endpoint.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param endpointName Name of Endpoint Resource.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DigitalTwinsEndpointResourceInner> createOrUpdateAsync(String resourceGroupName, String resourceName, String endpointName, final ServiceCallback<DigitalTwinsEndpointResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, endpointName), serviceCallback);
-    }
-
-    /**
-     * Create or update DigitalTwinsInstance endpoint.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param endpointName Name of Endpoint Resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<DigitalTwinsEndpointResourceInner> createOrUpdateAsync(String resourceGroupName, String resourceName, String endpointName) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, endpointName).map(new Func1<ServiceResponse<DigitalTwinsEndpointResourceInner>, DigitalTwinsEndpointResourceInner>() {
-            @Override
-            public DigitalTwinsEndpointResourceInner call(ServiceResponse<DigitalTwinsEndpointResourceInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Create or update DigitalTwinsInstance endpoint.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param endpointName Name of Endpoint Resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<ServiceResponse<DigitalTwinsEndpointResourceInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, String endpointName) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (resourceName == null) {
-            throw new IllegalArgumentException("Parameter resourceName is required and cannot be null.");
-        }
-        if (endpointName == null) {
-            throw new IllegalArgumentException("Parameter endpointName is required and cannot be null.");
-        }
-        final DigitalTwinsEndpointResourceProperties properties = null;
-        DigitalTwinsEndpointResourceInner endpointDescription = new DigitalTwinsEndpointResourceInner();
-        endpointDescription.withProperties(null);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, resourceName, endpointName, this.client.apiVersion(), this.client.acceptLanguage(), endpointDescription, this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DigitalTwinsEndpointResourceInner>() { }.getType());
-    }
-    /**
-     * Create or update DigitalTwinsInstance endpoint.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param endpointName Name of Endpoint Resource.
      * @param properties DigitalTwinsInstance endpoint resource properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorResponseException thrown if the request is rejected by server
@@ -450,97 +375,14 @@ public class DigitalTwinsEndpointsInner {
         if (endpointName == null) {
             throw new IllegalArgumentException("Parameter endpointName is required and cannot be null.");
         }
+        if (properties == null) {
+            throw new IllegalArgumentException("Parameter properties is required and cannot be null.");
+        }
         Validator.validate(properties);
         DigitalTwinsEndpointResourceInner endpointDescription = new DigitalTwinsEndpointResourceInner();
         endpointDescription.withProperties(properties);
         Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, resourceName, endpointName, this.client.apiVersion(), this.client.acceptLanguage(), endpointDescription, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DigitalTwinsEndpointResourceInner>() { }.getType());
-    }
-
-    /**
-     * Create or update DigitalTwinsInstance endpoint.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param endpointName Name of Endpoint Resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorResponseException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DigitalTwinsEndpointResourceInner object if successful.
-     */
-    public DigitalTwinsEndpointResourceInner beginCreateOrUpdate(String resourceGroupName, String resourceName, String endpointName) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, endpointName).toBlocking().single().body();
-    }
-
-    /**
-     * Create or update DigitalTwinsInstance endpoint.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param endpointName Name of Endpoint Resource.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DigitalTwinsEndpointResourceInner> beginCreateOrUpdateAsync(String resourceGroupName, String resourceName, String endpointName, final ServiceCallback<DigitalTwinsEndpointResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, endpointName), serviceCallback);
-    }
-
-    /**
-     * Create or update DigitalTwinsInstance endpoint.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param endpointName Name of Endpoint Resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DigitalTwinsEndpointResourceInner object
-     */
-    public Observable<DigitalTwinsEndpointResourceInner> beginCreateOrUpdateAsync(String resourceGroupName, String resourceName, String endpointName) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, resourceName, endpointName).map(new Func1<ServiceResponse<DigitalTwinsEndpointResourceInner>, DigitalTwinsEndpointResourceInner>() {
-            @Override
-            public DigitalTwinsEndpointResourceInner call(ServiceResponse<DigitalTwinsEndpointResourceInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Create or update DigitalTwinsInstance endpoint.
-     *
-     * @param resourceGroupName The name of the resource group that contains the DigitalTwinsInstance.
-     * @param resourceName The name of the DigitalTwinsInstance.
-     * @param endpointName Name of Endpoint Resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DigitalTwinsEndpointResourceInner object
-     */
-    public Observable<ServiceResponse<DigitalTwinsEndpointResourceInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String resourceName, String endpointName) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (resourceName == null) {
-            throw new IllegalArgumentException("Parameter resourceName is required and cannot be null.");
-        }
-        if (endpointName == null) {
-            throw new IllegalArgumentException("Parameter endpointName is required and cannot be null.");
-        }
-        final DigitalTwinsEndpointResourceProperties properties = null;
-        DigitalTwinsEndpointResourceInner endpointDescription = new DigitalTwinsEndpointResourceInner();
-        endpointDescription.withProperties(null);
-        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, resourceName, endpointName, this.client.apiVersion(), this.client.acceptLanguage(), endpointDescription, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DigitalTwinsEndpointResourceInner>>>() {
-                @Override
-                public Observable<ServiceResponse<DigitalTwinsEndpointResourceInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<DigitalTwinsEndpointResourceInner> clientResponse = beginCreateOrUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
     }
 
     /**
@@ -615,6 +457,9 @@ public class DigitalTwinsEndpointsInner {
         }
         if (endpointName == null) {
             throw new IllegalArgumentException("Parameter endpointName is required and cannot be null.");
+        }
+        if (properties == null) {
+            throw new IllegalArgumentException("Parameter properties is required and cannot be null.");
         }
         Validator.validate(properties);
         DigitalTwinsEndpointResourceInner endpointDescription = new DigitalTwinsEndpointResourceInner();
@@ -799,7 +644,7 @@ public class DigitalTwinsEndpointsInner {
 
     private ServiceResponse<DigitalTwinsEndpointResourceInner> beginDeleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<DigitalTwinsEndpointResourceInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
+                .register(200, new TypeToken<DigitalTwinsEndpointResourceInner>() { }.getType())
                 .register(202, new TypeToken<DigitalTwinsEndpointResourceInner>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorResponseException.class)
