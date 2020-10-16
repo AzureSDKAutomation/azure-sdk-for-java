@@ -27,6 +27,7 @@ import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachinePriority
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineEvictionPolicyTypes;
 import com.microsoft.azure.management.compute.v2020_06_01.BillingProfile;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineIdentity;
+import com.microsoft.azure.management.compute.v2020_06_01.ExtendedLocation;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineInstanceView;
 import java.util.ArrayList;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineVirtualMachineExtension;
@@ -130,6 +131,11 @@ class VirtualMachineImpl extends CreatableUpdatableImpl<VirtualMachine, VirtualM
     @Override
     public VirtualMachineEvictionPolicyTypes evictionPolicy() {
         return this.inner().evictionPolicy();
+    }
+
+    @Override
+    public ExtendedLocation extendedLocation() {
+        return this.inner().extendedLocation();
     }
 
     @Override
@@ -264,7 +270,7 @@ class VirtualMachineImpl extends CreatableUpdatableImpl<VirtualMachine, VirtualM
     }
 
     @Override
-    public VirtualMachineImpl withExistingResourceGroup(String resourceGroupName) {
+    public VirtualMachineImpl withExistingLocation(String resourceGroupName) {
         this.resourceGroupName = resourceGroupName;
         return this;
     }
@@ -272,6 +278,12 @@ class VirtualMachineImpl extends CreatableUpdatableImpl<VirtualMachine, VirtualM
     @Override
     public VirtualMachineImpl withLocation(String location) {
         this.inner().withLocation(location);
+        return this;
+    }
+
+    @Override
+    public VirtualMachineImpl withExtendedLocation(ExtendedLocation extendedLocation) {
+        this.inner().withExtendedLocation(extendedLocation);
         return this;
     }
 

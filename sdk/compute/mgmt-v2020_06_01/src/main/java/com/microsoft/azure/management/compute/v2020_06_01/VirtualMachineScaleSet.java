@@ -42,6 +42,11 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
     Boolean doNotRunExtensionsOnOverprovisionedVMs();
 
     /**
+     * @return the extendedLocation value.
+     */
+    ExtendedLocation extendedLocation();
+
+    /**
      * @return the hostGroup value.
      */
     SubResource hostGroup();
@@ -172,6 +177,18 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
              * @return the next definition stage
              */
             WithCreate withDoNotRunExtensionsOnOverprovisionedVMs(Boolean doNotRunExtensionsOnOverprovisionedVMs);
+        }
+
+        /**
+         * The stage of the virtualmachinescaleset definition allowing to specify ExtendedLocation.
+         */
+        interface WithExtendedLocation {
+            /**
+             * Specifies extendedLocation.
+             * @param extendedLocation The extended location of the Virtual Machine Scale Set
+             * @return the next definition stage
+             */
+            WithCreate withExtendedLocation(ExtendedLocation extendedLocation);
         }
 
         /**
@@ -335,7 +352,7 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<VirtualMachineScaleSet>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithAdditionalCapabilities, DefinitionStages.WithAutomaticRepairsPolicy, DefinitionStages.WithDoNotRunExtensionsOnOverprovisionedVMs, DefinitionStages.WithHostGroup, DefinitionStages.WithIdentity, DefinitionStages.WithOverprovision, DefinitionStages.WithPlan, DefinitionStages.WithPlatformFaultDomainCount, DefinitionStages.WithProximityPlacementGroup, DefinitionStages.WithScaleInPolicy, DefinitionStages.WithSinglePlacementGroup, DefinitionStages.WithSku, DefinitionStages.WithUpgradePolicy, DefinitionStages.WithVirtualMachineProfile, DefinitionStages.WithZoneBalance, DefinitionStages.WithZones {
+        interface WithCreate extends Creatable<VirtualMachineScaleSet>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithAdditionalCapabilities, DefinitionStages.WithAutomaticRepairsPolicy, DefinitionStages.WithDoNotRunExtensionsOnOverprovisionedVMs, DefinitionStages.WithExtendedLocation, DefinitionStages.WithHostGroup, DefinitionStages.WithIdentity, DefinitionStages.WithOverprovision, DefinitionStages.WithPlan, DefinitionStages.WithPlatformFaultDomainCount, DefinitionStages.WithProximityPlacementGroup, DefinitionStages.WithScaleInPolicy, DefinitionStages.WithSinglePlacementGroup, DefinitionStages.WithSku, DefinitionStages.WithUpgradePolicy, DefinitionStages.WithVirtualMachineProfile, DefinitionStages.WithZoneBalance, DefinitionStages.WithZones {
         }
     }
     /**

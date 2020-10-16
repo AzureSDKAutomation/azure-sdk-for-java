@@ -22,6 +22,7 @@ import com.microsoft.azure.management.compute.v2020_06_01.AdditionalCapabilities
 import com.microsoft.azure.management.compute.v2020_06_01.ScaleInPolicy;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSetIdentity;
 import java.util.List;
+import com.microsoft.azure.management.compute.v2020_06_01.ExtendedLocation;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSetUpdateVMProfile;
 import rx.functions.Func1;
 
@@ -88,6 +89,11 @@ class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachin
     @Override
     public Boolean doNotRunExtensionsOnOverprovisionedVMs() {
         return this.inner().doNotRunExtensionsOnOverprovisionedVMs();
+    }
+
+    @Override
+    public ExtendedLocation extendedLocation() {
+        return this.inner().extendedLocation();
     }
 
     @Override
@@ -163,6 +169,12 @@ class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachin
     @Override
     public List<String> zones() {
         return this.inner().zones();
+    }
+
+    @Override
+    public VirtualMachineScaleSetImpl withExtendedLocation(ExtendedLocation extendedLocation) {
+        this.inner().withExtendedLocation(extendedLocation);
+        return this;
     }
 
     @Override

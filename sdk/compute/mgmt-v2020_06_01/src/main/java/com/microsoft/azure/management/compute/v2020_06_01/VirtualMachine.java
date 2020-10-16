@@ -51,6 +51,11 @@ public interface VirtualMachine extends HasInner<VirtualMachineInner>, Indexable
     VirtualMachineEvictionPolicyTypes evictionPolicy();
 
     /**
+     * @return the extendedLocation value.
+     */
+    ExtendedLocation extendedLocation();
+
+    /**
      * @return the extensionsTimeBudget value.
      */
     String extensionsTimeBudget();
@@ -173,7 +178,7 @@ public interface VirtualMachine extends HasInner<VirtualMachineInner>, Indexable
     /**
      * The entirety of the VirtualMachine definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithResourceGroup, DefinitionStages.WithLocation, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithLocation, DefinitionStages.WithLocation, DefinitionStages.WithCreate {
     }
 
     /**
@@ -183,19 +188,19 @@ public interface VirtualMachine extends HasInner<VirtualMachineInner>, Indexable
         /**
          * The first stage of a VirtualMachine definition.
          */
-        interface Blank extends WithResourceGroup {
+        interface Blank extends WithLocation {
         }
 
         /**
          * The stage of the virtualmachine definition allowing to specify Location.
          */
-        interface WithResourceGroup {
+        interface WithLocation {
            /**
             * Specifies resourceGroupName.
             * @param resourceGroupName The name of the resource group
             * @return the next definition stage
             */
-            WithLocation withExistingResourceGroup(String resourceGroupName);
+            WithLocation withExistingLocation(String resourceGroupName);
         }
 
         /**
@@ -268,6 +273,18 @@ public interface VirtualMachine extends HasInner<VirtualMachineInner>, Indexable
              * @return the next definition stage
              */
             WithCreate withEvictionPolicy(VirtualMachineEvictionPolicyTypes evictionPolicy);
+        }
+
+        /**
+         * The stage of the virtualmachine definition allowing to specify ExtendedLocation.
+         */
+        interface WithExtendedLocation {
+            /**
+             * Specifies extendedLocation.
+             * @param extendedLocation The extended location of the Virtual Machine
+             * @return the next definition stage
+             */
+            WithCreate withExtendedLocation(ExtendedLocation extendedLocation);
         }
 
         /**
@@ -467,7 +484,7 @@ public interface VirtualMachine extends HasInner<VirtualMachineInner>, Indexable
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<VirtualMachine>, DefinitionStages.WithAdditionalCapabilities, DefinitionStages.WithAvailabilitySet, DefinitionStages.WithBillingProfile, DefinitionStages.WithDiagnosticsProfile, DefinitionStages.WithEvictionPolicy, DefinitionStages.WithExtensionsTimeBudget, DefinitionStages.WithHardwareProfile, DefinitionStages.WithHost, DefinitionStages.WithHostGroup, DefinitionStages.WithIdentity, DefinitionStages.WithLicenseType, DefinitionStages.WithNetworkProfile, DefinitionStages.WithOsProfile, DefinitionStages.WithPlan, DefinitionStages.WithPriority, DefinitionStages.WithProximityPlacementGroup, DefinitionStages.WithSecurityProfile, DefinitionStages.WithStorageProfile, DefinitionStages.WithTags, DefinitionStages.WithVirtualMachineScaleSet, DefinitionStages.WithZones {
+        interface WithCreate extends Creatable<VirtualMachine>, DefinitionStages.WithAdditionalCapabilities, DefinitionStages.WithAvailabilitySet, DefinitionStages.WithBillingProfile, DefinitionStages.WithDiagnosticsProfile, DefinitionStages.WithEvictionPolicy, DefinitionStages.WithExtendedLocation, DefinitionStages.WithExtensionsTimeBudget, DefinitionStages.WithHardwareProfile, DefinitionStages.WithHost, DefinitionStages.WithHostGroup, DefinitionStages.WithIdentity, DefinitionStages.WithLicenseType, DefinitionStages.WithNetworkProfile, DefinitionStages.WithOsProfile, DefinitionStages.WithPlan, DefinitionStages.WithPriority, DefinitionStages.WithProximityPlacementGroup, DefinitionStages.WithSecurityProfile, DefinitionStages.WithStorageProfile, DefinitionStages.WithTags, DefinitionStages.WithVirtualMachineScaleSet, DefinitionStages.WithZones {
         }
     }
     /**

@@ -22,6 +22,7 @@ import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineEviction
 import com.microsoft.azure.management.compute.v2020_06_01.BillingProfile;
 import java.util.List;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineIdentity;
+import com.microsoft.azure.management.compute.v2020_06_01.ExtendedLocation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -233,6 +234,12 @@ public class VirtualMachineInner extends Resource {
      */
     @JsonProperty(value = "zones")
     private List<String> zones;
+
+    /**
+     * The extended location of the Virtual Machine.
+     */
+    @JsonProperty(value = "extendedLocation")
+    private ExtendedLocation extendedLocation;
 
     /**
      * Get specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
@@ -667,6 +674,26 @@ public class VirtualMachineInner extends Resource {
      */
     public VirtualMachineInner withZones(List<String> zones) {
         this.zones = zones;
+        return this;
+    }
+
+    /**
+     * Get the extended location of the Virtual Machine.
+     *
+     * @return the extendedLocation value
+     */
+    public ExtendedLocation extendedLocation() {
+        return this.extendedLocation;
+    }
+
+    /**
+     * Set the extended location of the Virtual Machine.
+     *
+     * @param extendedLocation the extendedLocation value to set
+     * @return the VirtualMachineInner object itself.
+     */
+    public VirtualMachineInner withExtendedLocation(ExtendedLocation extendedLocation) {
+        this.extendedLocation = extendedLocation;
         return this;
     }
 
