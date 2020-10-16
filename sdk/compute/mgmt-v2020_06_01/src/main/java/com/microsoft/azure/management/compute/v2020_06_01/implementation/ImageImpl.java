@@ -15,6 +15,7 @@ import com.microsoft.azure.management.compute.v2020_06_01.ImageUpdate;
 import com.microsoft.azure.SubResource;
 import com.microsoft.azure.management.compute.v2020_06_01.ImageStorageProfile;
 import com.microsoft.azure.management.compute.v2020_06_01.HyperVGenerationTypes;
+import com.microsoft.azure.management.compute.v2020_06_01.ExtendedLocation;
 import rx.functions.Func1;
 
 class ImageImpl extends GroupableResourceCoreImpl<Image, ImageInner, ImageImpl, ComputeManager> implements Image, Image.Definition, Image.Update {
@@ -68,6 +69,11 @@ class ImageImpl extends GroupableResourceCoreImpl<Image, ImageInner, ImageImpl, 
     }
 
     @Override
+    public ExtendedLocation extendedLocation() {
+        return this.inner().extendedLocation();
+    }
+
+    @Override
     public HyperVGenerationTypes hyperVGeneration() {
         return this.inner().hyperVGeneration();
     }
@@ -85,6 +91,12 @@ class ImageImpl extends GroupableResourceCoreImpl<Image, ImageInner, ImageImpl, 
     @Override
     public ImageStorageProfile storageProfile() {
         return this.inner().storageProfile();
+    }
+
+    @Override
+    public ImageImpl withExtendedLocation(ExtendedLocation extendedLocation) {
+        this.inner().withExtendedLocation(extendedLocation);
+        return this;
     }
 
     @Override

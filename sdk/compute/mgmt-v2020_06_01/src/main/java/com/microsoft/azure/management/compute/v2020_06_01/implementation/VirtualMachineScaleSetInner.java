@@ -18,6 +18,7 @@ import com.microsoft.azure.management.compute.v2020_06_01.AdditionalCapabilities
 import com.microsoft.azure.management.compute.v2020_06_01.ScaleInPolicy;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSetIdentity;
 import java.util.List;
+import com.microsoft.azure.management.compute.v2020_06_01.ExtendedLocation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -156,6 +157,12 @@ public class VirtualMachineScaleSetInner extends Resource {
      */
     @JsonProperty(value = "zones")
     private List<String> zones;
+
+    /**
+     * The extended location of the Virtual Machine Scale Set.
+     */
+    @JsonProperty(value = "extendedLocation")
+    private ExtendedLocation extendedLocation;
 
     /**
      * Get the virtual machine scale set sku.
@@ -492,6 +499,26 @@ public class VirtualMachineScaleSetInner extends Resource {
      */
     public VirtualMachineScaleSetInner withZones(List<String> zones) {
         this.zones = zones;
+        return this;
+    }
+
+    /**
+     * Get the extended location of the Virtual Machine Scale Set.
+     *
+     * @return the extendedLocation value
+     */
+    public ExtendedLocation extendedLocation() {
+        return this.extendedLocation;
+    }
+
+    /**
+     * Set the extended location of the Virtual Machine Scale Set.
+     *
+     * @param extendedLocation the extendedLocation value to set
+     * @return the VirtualMachineScaleSetInner object itself.
+     */
+    public VirtualMachineScaleSetInner withExtendedLocation(ExtendedLocation extendedLocation) {
+        this.extendedLocation = extendedLocation;
         return this;
     }
 

@@ -26,6 +26,11 @@ import com.microsoft.azure.management.compute.v2020_06_01.implementation.ImageIn
  */
 public interface Image extends HasInner<ImageInner>, Resource, GroupableResourceCore<ComputeManager, ImageInner>, HasResourceGroup, Refreshable<Image>, Updatable<Image.Update>, HasManager<ComputeManager> {
     /**
+     * @return the extendedLocation value.
+     */
+    ExtendedLocation extendedLocation();
+
+    /**
      * @return the hyperVGeneration value.
      */
     HyperVGenerationTypes hyperVGeneration();
@@ -65,6 +70,18 @@ public interface Image extends HasInner<ImageInner>, Resource, GroupableResource
          * The stage of the Image definition allowing to specify the resource group.
          */
         interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithCreate> {
+        }
+
+        /**
+         * The stage of the image definition allowing to specify ExtendedLocation.
+         */
+        interface WithExtendedLocation {
+            /**
+             * Specifies extendedLocation.
+             * @param extendedLocation The extended location of the Image
+             * @return the next definition stage
+             */
+            WithCreate withExtendedLocation(ExtendedLocation extendedLocation);
         }
 
         /**
@@ -108,7 +125,7 @@ public interface Image extends HasInner<ImageInner>, Resource, GroupableResource
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<Image>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithHyperVGeneration, DefinitionStages.WithSourceVirtualMachine, DefinitionStages.WithStorageProfile {
+        interface WithCreate extends Creatable<Image>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithExtendedLocation, DefinitionStages.WithHyperVGeneration, DefinitionStages.WithSourceVirtualMachine, DefinitionStages.WithStorageProfile {
         }
     }
     /**
