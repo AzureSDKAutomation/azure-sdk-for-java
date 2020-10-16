@@ -22,6 +22,12 @@ public class OperationInner {
     private String name;
 
     /**
+     * Indicates whether the operation applies to data-plane.
+     */
+    @JsonProperty(value = "isDataAction")
+    private Boolean isDataAction;
+
+    /**
      * The object that describes the operation.
      */
     @JsonProperty(value = "display")
@@ -34,6 +40,26 @@ public class OperationInner {
      */
     public String name() {
         return this.name;
+    }
+
+    /**
+     * Get indicates whether the operation applies to data-plane.
+     *
+     * @return the isDataAction value
+     */
+    public Boolean isDataAction() {
+        return this.isDataAction;
+    }
+
+    /**
+     * Set indicates whether the operation applies to data-plane.
+     *
+     * @param isDataAction the isDataAction value to set
+     * @return the OperationInner object itself.
+     */
+    public OperationInner withIsDataAction(Boolean isDataAction) {
+        this.isDataAction = isDataAction;
+        return this;
     }
 
     /**
