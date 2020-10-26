@@ -16,9 +16,12 @@ import com.microsoft.azure.management.synapse.v2019_06_01_preview.DataLakeStorag
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.VirtualNetworkProfile;
 import java.util.Map;
 import java.util.List;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.EncryptionDetails;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.ManagedVirtualNetworkSettings;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.ManagedIdentity;
 import java.util.ArrayList;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.PrivateEndpointConnection;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspacePatchInfoManagedVirtualNetworkSettings;
 import rx.functions.Func1;
 
 class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner, WorkspaceImpl, SynapseManager> implements Workspace, Workspace.Definition, Workspace.Update {
@@ -82,6 +85,11 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     }
 
     @Override
+    public EncryptionDetails encryption() {
+        return this.inner().encryption();
+    }
+
+    @Override
     public Map<String, Object> extraProperties() {
         return this.inner().extraProperties();
     }
@@ -99,6 +107,11 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     @Override
     public String managedVirtualNetwork() {
         return this.inner().managedVirtualNetwork();
+    }
+
+    @Override
+    public ManagedVirtualNetworkSettings managedVirtualNetworkSettings() {
+        return this.inner().managedVirtualNetworkSettings();
     }
 
     @Override
@@ -133,6 +146,11 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     }
 
     @Override
+    public String workspaceUID() {
+        return this.inner().workspaceUID();
+    }
+
+    @Override
     public WorkspaceImpl withConnectivityEndpoints(Map<String, String> connectivityEndpoints) {
         this.inner().withConnectivityEndpoints(connectivityEndpoints);
         return this;
@@ -145,6 +163,12 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     }
 
     @Override
+    public WorkspaceImpl withEncryption(EncryptionDetails encryption) {
+        this.inner().withEncryption(encryption);
+        return this;
+    }
+
+    @Override
     public WorkspaceImpl withManagedResourceGroupName(String managedResourceGroupName) {
         this.inner().withManagedResourceGroupName(managedResourceGroupName);
         return this;
@@ -153,6 +177,12 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     @Override
     public WorkspaceImpl withManagedVirtualNetwork(String managedVirtualNetwork) {
         this.inner().withManagedVirtualNetwork(managedVirtualNetwork);
+        return this;
+    }
+
+    @Override
+    public WorkspaceImpl withManagedVirtualNetworkSettings(ManagedVirtualNetworkSettings managedVirtualNetworkSettings) {
+        this.inner().withManagedVirtualNetworkSettings(managedVirtualNetworkSettings);
         return this;
     }
 
@@ -171,6 +201,12 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     @Override
     public WorkspaceImpl withVirtualNetworkProfile(VirtualNetworkProfile virtualNetworkProfile) {
         this.inner().withVirtualNetworkProfile(virtualNetworkProfile);
+        return this;
+    }
+
+    @Override
+    public WorkspaceImpl withManagedVirtualNetworkSettings(WorkspacePatchInfoManagedVirtualNetworkSettings managedVirtualNetworkSettings) {
+        this.updateParameter.withManagedVirtualNetworkSettings(managedVirtualNetworkSettings);
         return this;
     }
 

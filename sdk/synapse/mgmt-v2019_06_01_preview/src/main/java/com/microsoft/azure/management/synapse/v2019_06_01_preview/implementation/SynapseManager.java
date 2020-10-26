@@ -39,6 +39,10 @@ import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolVulnera
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolVulnerabilityAssessmentScans;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolSecurityAlertPolicies;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolVulnerabilityAssessmentRuleBaselines;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.ExtendedSqlPoolBlobAuditingPolicies;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.DataMaskingPolicies;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.DataMaskingRules;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.SqlPoolColumns;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.Workspaces;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceAadAdmins;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManagedIdentitySqlControlSettings;
@@ -54,6 +58,7 @@ import com.microsoft.azure.management.synapse.v2019_06_01_preview.IntegrationRun
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.PrivateLinkResources;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.PrivateEndpointConnections;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.PrivateLinkHubs;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.Keys;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -84,6 +89,10 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
     private SqlPoolVulnerabilityAssessmentScans sqlPoolVulnerabilityAssessmentScans;
     private SqlPoolSecurityAlertPolicies sqlPoolSecurityAlertPolicies;
     private SqlPoolVulnerabilityAssessmentRuleBaselines sqlPoolVulnerabilityAssessmentRuleBaselines;
+    private ExtendedSqlPoolBlobAuditingPolicies extendedSqlPoolBlobAuditingPolicies;
+    private DataMaskingPolicies dataMaskingPolicies;
+    private DataMaskingRules dataMaskingRules;
+    private SqlPoolColumns sqlPoolColumns;
     private Workspaces workspaces;
     private WorkspaceAadAdmins workspaceAadAdmins;
     private WorkspaceManagedIdentitySqlControlSettings workspaceManagedIdentitySqlControlSettings;
@@ -99,6 +108,7 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
     private PrivateLinkResources privateLinkResources;
     private PrivateEndpointConnections privateEndpointConnections;
     private PrivateLinkHubs privateLinkHubs;
+    private Keys keys;
     /**
     * Get a Configurable instance that can be used to create SynapseManager with optional configuration.
     *
@@ -377,6 +387,46 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
     }
 
     /**
+     * @return Entry point to manage ExtendedSqlPoolBlobAuditingPolicies.
+     */
+    public ExtendedSqlPoolBlobAuditingPolicies extendedSqlPoolBlobAuditingPolicies() {
+        if (this.extendedSqlPoolBlobAuditingPolicies == null) {
+            this.extendedSqlPoolBlobAuditingPolicies = new ExtendedSqlPoolBlobAuditingPoliciesImpl(this);
+        }
+        return this.extendedSqlPoolBlobAuditingPolicies;
+    }
+
+    /**
+     * @return Entry point to manage DataMaskingPolicies.
+     */
+    public DataMaskingPolicies dataMaskingPolicies() {
+        if (this.dataMaskingPolicies == null) {
+            this.dataMaskingPolicies = new DataMaskingPoliciesImpl(this);
+        }
+        return this.dataMaskingPolicies;
+    }
+
+    /**
+     * @return Entry point to manage DataMaskingRules.
+     */
+    public DataMaskingRules dataMaskingRules() {
+        if (this.dataMaskingRules == null) {
+            this.dataMaskingRules = new DataMaskingRulesImpl(this);
+        }
+        return this.dataMaskingRules;
+    }
+
+    /**
+     * @return Entry point to manage SqlPoolColumns.
+     */
+    public SqlPoolColumns sqlPoolColumns() {
+        if (this.sqlPoolColumns == null) {
+            this.sqlPoolColumns = new SqlPoolColumnsImpl(this);
+        }
+        return this.sqlPoolColumns;
+    }
+
+    /**
      * @return Entry point to manage Workspaces.
      */
     public Workspaces workspaces() {
@@ -524,6 +574,16 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
             this.privateLinkHubs = new PrivateLinkHubsImpl(this);
         }
         return this.privateLinkHubs;
+    }
+
+    /**
+     * @return Entry point to manage Keys.
+     */
+    public Keys keys() {
+        if (this.keys == null) {
+            this.keys = new KeysImpl(this);
+        }
+        return this.keys;
     }
 
     /**
