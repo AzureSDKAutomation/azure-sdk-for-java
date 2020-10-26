@@ -381,6 +381,19 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The SqlxsInner object to access its operations.
+     */
+    private SqlxsInner sqlxs;
+
+    /**
+     * Gets the SqlxsInner object to access its operations.
+     * @return the SqlxsInner object.
+     */
+    public SqlxsInner sqlxs() {
+        return this.sqlxs;
+    }
+
+    /**
      * The PrivateLinkResourcesInner object to access its operations.
      */
     private PrivateLinkResourcesInner privateLinkResources;
@@ -460,6 +473,7 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
         this.gremlinResources = new GremlinResourcesInner(restClient().retrofit(), this);
         this.restorableDatabaseAccounts = new RestorableDatabaseAccountsInner(restClient().retrofit(), this);
         this.notebookWorkspaces = new NotebookWorkspacesInner(restClient().retrofit(), this);
+        this.sqlxs = new SqlxsInner(restClient().retrofit(), this);
         this.privateLinkResources = new PrivateLinkResourcesInner(restClient().retrofit(), this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
