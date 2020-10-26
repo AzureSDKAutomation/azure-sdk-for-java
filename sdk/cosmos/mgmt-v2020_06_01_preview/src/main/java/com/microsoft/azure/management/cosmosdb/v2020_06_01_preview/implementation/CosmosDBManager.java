@@ -36,6 +36,7 @@ import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.CassandraReso
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.GremlinResources;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.RestorableDatabaseAccounts;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.NotebookWorkspaces;
+import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.Sqlxs;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.PrivateLinkResources;
 import com.microsoft.azure.management.cosmosdb.v2020_06_01_preview.PrivateEndpointConnections;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
@@ -65,6 +66,7 @@ public final class CosmosDBManager extends ManagerCore<CosmosDBManager, CosmosDB
     private GremlinResources gremlinResources;
     private RestorableDatabaseAccounts restorableDatabaseAccounts;
     private NotebookWorkspaces notebookWorkspaces;
+    private Sqlxs sqlxs;
     private PrivateLinkResources privateLinkResources;
     private PrivateEndpointConnections privateEndpointConnections;
     /**
@@ -312,6 +314,16 @@ public final class CosmosDBManager extends ManagerCore<CosmosDBManager, CosmosDB
             this.notebookWorkspaces = new NotebookWorkspacesImpl(this);
         }
         return this.notebookWorkspaces;
+    }
+
+    /**
+     * @return Entry point to manage Sqlxs.
+     */
+    public Sqlxs sqlxs() {
+        if (this.sqlxs == null) {
+            this.sqlxs = new SqlxsImpl(this);
+        }
+        return this.sqlxs;
     }
 
     /**
