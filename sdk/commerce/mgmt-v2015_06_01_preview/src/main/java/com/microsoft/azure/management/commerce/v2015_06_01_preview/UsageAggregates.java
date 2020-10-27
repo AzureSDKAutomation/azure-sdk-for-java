@@ -18,7 +18,7 @@ import com.microsoft.azure.arm.model.HasInner;
  */
 public interface UsageAggregates extends HasInner<UsageAggregatesInner> {
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
