@@ -69,7 +69,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -89,7 +89,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -110,7 +110,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -128,7 +128,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -150,7 +150,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -188,7 +188,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -211,7 +211,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -235,7 +235,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -256,7 +256,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -281,7 +281,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
     ServiceResponse<PageImpl<UsageAggregationInner>> * @param reportedStartTime The start of the time range to retrieve data for.
     ServiceResponse<PageImpl<UsageAggregationInner>> * @param reportedEndTime The end of the time range to retrieve data for.
@@ -326,7 +326,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -345,7 +345,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
@@ -366,7 +366,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -383,7 +383,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -404,7 +404,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Query aggregated Azure subscription consumption data for a date range. Nit.
      *
     ServiceResponse<PageImpl<UsageAggregationInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
