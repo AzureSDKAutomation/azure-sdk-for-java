@@ -9,6 +9,7 @@
 package com.microsoft.azure.management.datalakeanalytics.v2016_11_01.implementation;
 
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.OperationDisplay;
+import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.OperationMetaPropertyInfo;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.OperationOrigin;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -27,6 +28,12 @@ public class OperationInner {
      */
     @JsonProperty(value = "display", access = JsonProperty.Access.WRITE_ONLY)
     private OperationDisplay display;
+
+    /**
+     * The OperationMetaPropertyInfo for the operation.
+     */
+    @JsonProperty(value = "properties", access = JsonProperty.Access.WRITE_ONLY)
+    private OperationMetaPropertyInfo properties;
 
     /**
      * The intended executor of the operation. Possible values include: 'user',
@@ -51,6 +58,15 @@ public class OperationInner {
      */
     public OperationDisplay display() {
         return this.display;
+    }
+
+    /**
+     * Get the OperationMetaPropertyInfo for the operation.
+     *
+     * @return the properties value
+     */
+    public OperationMetaPropertyInfo properties() {
+        return this.properties;
     }
 
     /**

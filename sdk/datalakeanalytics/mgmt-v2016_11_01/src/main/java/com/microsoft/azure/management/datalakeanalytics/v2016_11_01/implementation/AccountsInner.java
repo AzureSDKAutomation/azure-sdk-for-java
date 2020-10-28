@@ -14,10 +14,10 @@ import com.microsoft.azure.arm.collection.InnerSupportsListing;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.CheckNameAvailabilityParameters;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.CreateDataLakeAnalyticsAccountParameters;
+import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.ErrorResponseException;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.UpdateDataLakeAnalyticsAccountParameters;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
@@ -123,7 +123,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * Gets the first page of Data Lake Analytics accounts, if any, within the current subscription. This includes a link to the next page, if any.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;DataLakeAnalyticsAccountBasicInner&gt; object if successful.
      */
@@ -235,7 +235,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param orderby OrderBy clause. One or more comma-separated expressions with an optional "asc" (the default) or "desc" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional.
      * @param count The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;DataLakeAnalyticsAccountBasicInner&gt; object if successful.
      */
@@ -355,10 +355,10 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<PageImpl<DataLakeAnalyticsAccountBasicInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<DataLakeAnalyticsAccountBasicInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<DataLakeAnalyticsAccountBasicInner>> listDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<DataLakeAnalyticsAccountBasicInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<DataLakeAnalyticsAccountBasicInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -367,7 +367,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      *
      * @param resourceGroupName The name of the Azure resource group.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;DataLakeAnalyticsAccountBasicInner&gt; object if successful.
      */
@@ -487,7 +487,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param orderby OrderBy clause. One or more comma-separated expressions with an optional "asc" (the default) or "desc" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional.
      * @param count The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;DataLakeAnalyticsAccountBasicInner&gt; object if successful.
      */
@@ -614,10 +614,10 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<PageImpl<DataLakeAnalyticsAccountBasicInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<DataLakeAnalyticsAccountBasicInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<DataLakeAnalyticsAccountBasicInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<DataLakeAnalyticsAccountBasicInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<DataLakeAnalyticsAccountBasicInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -628,7 +628,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param accountName The name of the Data Lake Analytics account.
      * @param parameters Parameters supplied to create a new Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DataLakeAnalyticsAccountInner object if successful.
      */
@@ -705,7 +705,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param accountName The name of the Data Lake Analytics account.
      * @param parameters Parameters supplied to create a new Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DataLakeAnalyticsAccountInner object if successful.
      */
@@ -785,11 +785,11 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<DataLakeAnalyticsAccountInner> beginCreateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<DataLakeAnalyticsAccountInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<DataLakeAnalyticsAccountInner> beginCreateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<DataLakeAnalyticsAccountInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DataLakeAnalyticsAccountInner>() { }.getType())
                 .register(201, new TypeToken<DataLakeAnalyticsAccountInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -799,7 +799,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param resourceGroupName The name of the Azure resource group.
      * @param accountName The name of the Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DataLakeAnalyticsAccountInner object if successful.
      */
@@ -872,10 +872,10 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<DataLakeAnalyticsAccountInner> getByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<DataLakeAnalyticsAccountInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<DataLakeAnalyticsAccountInner> getByResourceGroupDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<DataLakeAnalyticsAccountInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DataLakeAnalyticsAccountInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -885,7 +885,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param resourceGroupName The name of the Azure resource group.
      * @param accountName The name of the Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DataLakeAnalyticsAccountInner object if successful.
      */
@@ -955,7 +955,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param accountName The name of the Data Lake Analytics account.
      * @param parameters Parameters supplied to the update Data Lake Analytics account operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DataLakeAnalyticsAccountInner object if successful.
      */
@@ -1028,7 +1028,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param resourceGroupName The name of the Azure resource group.
      * @param accountName The name of the Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DataLakeAnalyticsAccountInner object if successful.
      */
@@ -1109,7 +1109,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param accountName The name of the Data Lake Analytics account.
      * @param parameters Parameters supplied to the update Data Lake Analytics account operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DataLakeAnalyticsAccountInner object if successful.
      */
@@ -1186,12 +1186,12 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<DataLakeAnalyticsAccountInner> beginUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<DataLakeAnalyticsAccountInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<DataLakeAnalyticsAccountInner> beginUpdateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<DataLakeAnalyticsAccountInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DataLakeAnalyticsAccountInner>() { }.getType())
                 .register(201, new TypeToken<DataLakeAnalyticsAccountInner>() { }.getType())
                 .register(202, new TypeToken<DataLakeAnalyticsAccountInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -1201,7 +1201,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param resourceGroupName The name of the Azure resource group.
      * @param accountName The name of the Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete(String resourceGroupName, String accountName) {
@@ -1269,7 +1269,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param resourceGroupName The name of the Azure resource group.
      * @param accountName The name of the Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete(String resourceGroupName, String accountName) {
@@ -1341,12 +1341,12 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> beginDeleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -1356,7 +1356,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      * @param location The resource location without whitespace.
      * @param parameters Parameters supplied to check the Data Lake Analytics account name availability.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the NameAvailabilityInformationInner object if successful.
      */
@@ -1430,10 +1430,10 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<NameAvailabilityInformationInner> checkNameAvailabilityDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<NameAvailabilityInformationInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<NameAvailabilityInformationInner> checkNameAvailabilityDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<NameAvailabilityInformationInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<NameAvailabilityInformationInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -1442,7 +1442,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;DataLakeAnalyticsAccountBasicInner&gt; object if successful.
      */
@@ -1541,10 +1541,10 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<PageImpl<DataLakeAnalyticsAccountBasicInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<DataLakeAnalyticsAccountBasicInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<DataLakeAnalyticsAccountBasicInner>> listNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<DataLakeAnalyticsAccountBasicInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<DataLakeAnalyticsAccountBasicInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -1553,7 +1553,7 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;DataLakeAnalyticsAccountBasicInner&gt; object if successful.
      */
@@ -1652,10 +1652,10 @@ public class AccountsInner implements InnerSupportsGet<DataLakeAnalyticsAccountI
             });
     }
 
-    private ServiceResponse<PageImpl<DataLakeAnalyticsAccountBasicInner>> listByResourceGroupNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<DataLakeAnalyticsAccountBasicInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<DataLakeAnalyticsAccountBasicInner>> listByResourceGroupNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<DataLakeAnalyticsAccountBasicInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<DataLakeAnalyticsAccountBasicInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 

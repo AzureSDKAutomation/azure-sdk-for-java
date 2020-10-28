@@ -64,10 +64,14 @@ class StorageAccountsImpl extends WrapperImpl<StorageAccountsInner> implements S
     public Observable<StorageAccountInformation> getAsync(String resourceGroupName, String accountName, String storageAccountName) {
         StorageAccountsInner client = this.inner();
         return client.getAsync(resourceGroupName, accountName, storageAccountName)
-        .map(new Func1<StorageAccountInformationInner, StorageAccountInformation>() {
+        .flatMap(new Func1<StorageAccountInformationInner, Observable<StorageAccountInformation>>() {
             @Override
-            public StorageAccountInformation call(StorageAccountInformationInner inner) {
-                return wrapModel(inner);
+            public Observable<StorageAccountInformation> call(StorageAccountInformationInner inner) {
+                if (inner == null) {
+                    return Observable.empty();
+                } else {
+                    return Observable.just((StorageAccountInformation)wrapModel(inner));
+                }
             }
        });
     }
@@ -101,10 +105,14 @@ class StorageAccountsImpl extends WrapperImpl<StorageAccountsInner> implements S
     public Observable<StorageContainer> getStorageContainerAsync(String resourceGroupName, String accountName, String storageAccountName, String containerName) {
         StorageAccountsInner client = this.inner();
         return client.getStorageContainerAsync(resourceGroupName, accountName, storageAccountName, containerName)
-        .map(new Func1<StorageContainerInner, StorageContainer>() {
+        .flatMap(new Func1<StorageContainerInner, Observable<StorageContainer>>() {
             @Override
-            public StorageContainer call(StorageContainerInner inner) {
-                return wrapStorageContainerModel(inner);
+            public Observable<StorageContainer> call(StorageContainerInner inner) {
+                if (inner == null) {
+                    return Observable.empty();
+                } else {
+                    return Observable.just((StorageContainer)wrapStorageContainerModel(inner));
+                }
             }
        });
     }
