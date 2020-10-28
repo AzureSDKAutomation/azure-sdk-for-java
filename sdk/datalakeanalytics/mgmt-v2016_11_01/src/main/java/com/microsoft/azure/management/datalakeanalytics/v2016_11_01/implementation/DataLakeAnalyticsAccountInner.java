@@ -13,9 +13,12 @@ import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.DataLakeAnal
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.DataLakeAnalyticsAccountState;
 import org.joda.time.DateTime;
 import java.util.List;
+import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.HiveMetastore;
+import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.VirtualNetworkRule;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.FirewallState;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.FirewallAllowAzureIpsState;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.TierType;
+import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.DebugDataAccessLevel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.rest.SkipParentValidation;
@@ -93,6 +96,18 @@ public class DataLakeAnalyticsAccountInner extends Resource {
     private List<ComputePolicyInner> computePolicies;
 
     /**
+     * The list of hiveMetastores associated with this account.
+     */
+    @JsonProperty(value = "properties.hiveMetastores", access = JsonProperty.Access.WRITE_ONLY)
+    private List<HiveMetastore> hiveMetastores;
+
+    /**
+     * The list of virtualNetwork rules associated with this account.
+     */
+    @JsonProperty(value = "properties.virtualNetworkRules", access = JsonProperty.Access.WRITE_ONLY)
+    private List<VirtualNetworkRule> virtualNetworkRules;
+
+    /**
      * The list of firewall rules associated with this account.
      */
     @JsonProperty(value = "properties.firewallRules", access = JsonProperty.Access.WRITE_ONLY)
@@ -137,7 +152,7 @@ public class DataLakeAnalyticsAccountInner extends Resource {
     /**
      * The maximum supported jobs running under the account at the same time.
      */
-    @JsonProperty(value = "properties.maxJobCount", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.maxJobCount")
     private Integer maxJobCount;
 
     /**
@@ -151,7 +166,7 @@ public class DataLakeAnalyticsAccountInner extends Resource {
     /**
      * The maximum supported degree of parallelism for this account.
      */
-    @JsonProperty(value = "properties.maxDegreeOfParallelism", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.maxDegreeOfParallelism")
     private Integer maxDegreeOfParallelism;
 
     /**
@@ -177,8 +192,15 @@ public class DataLakeAnalyticsAccountInner extends Resource {
     /**
      * The number of days that job metadata is retained.
      */
-    @JsonProperty(value = "properties.queryStoreRetention", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.queryStoreRetention")
     private Integer queryStoreRetention;
+
+    /**
+     * The current state of the DebugDataAccessLevel for this account. Possible
+     * values include: 'All', 'Customer', 'None'.
+     */
+    @JsonProperty(value = "properties.debugDataAccessLevel", access = JsonProperty.Access.WRITE_ONLY)
+    private DebugDataAccessLevel debugDataAccessLevel;
 
     /**
      * Get the unique identifier associated with this Data Lake Analytics account.
@@ -271,6 +293,24 @@ public class DataLakeAnalyticsAccountInner extends Resource {
     }
 
     /**
+     * Get the list of hiveMetastores associated with this account.
+     *
+     * @return the hiveMetastores value
+     */
+    public List<HiveMetastore> hiveMetastores() {
+        return this.hiveMetastores;
+    }
+
+    /**
+     * Get the list of virtualNetwork rules associated with this account.
+     *
+     * @return the virtualNetworkRules value
+     */
+    public List<VirtualNetworkRule> virtualNetworkRules() {
+        return this.virtualNetworkRules;
+    }
+
+    /**
      * Get the list of firewall rules associated with this account.
      *
      * @return the firewallRules value
@@ -325,6 +365,17 @@ public class DataLakeAnalyticsAccountInner extends Resource {
     }
 
     /**
+     * Set the maximum supported jobs running under the account at the same time.
+     *
+     * @param maxJobCount the maxJobCount value to set
+     * @return the DataLakeAnalyticsAccountInner object itself.
+     */
+    public DataLakeAnalyticsAccountInner withMaxJobCount(Integer maxJobCount) {
+        this.maxJobCount = maxJobCount;
+        return this;
+    }
+
+    /**
      * Get the system defined maximum supported jobs running under the account at the same time, which restricts the maximum number of running jobs the user can set for the account.
      *
      * @return the systemMaxJobCount value
@@ -340,6 +391,17 @@ public class DataLakeAnalyticsAccountInner extends Resource {
      */
     public Integer maxDegreeOfParallelism() {
         return this.maxDegreeOfParallelism;
+    }
+
+    /**
+     * Set the maximum supported degree of parallelism for this account.
+     *
+     * @param maxDegreeOfParallelism the maxDegreeOfParallelism value to set
+     * @return the DataLakeAnalyticsAccountInner object itself.
+     */
+    public DataLakeAnalyticsAccountInner withMaxDegreeOfParallelism(Integer maxDegreeOfParallelism) {
+        this.maxDegreeOfParallelism = maxDegreeOfParallelism;
+        return this;
     }
 
     /**
@@ -376,6 +438,26 @@ public class DataLakeAnalyticsAccountInner extends Resource {
      */
     public Integer queryStoreRetention() {
         return this.queryStoreRetention;
+    }
+
+    /**
+     * Set the number of days that job metadata is retained.
+     *
+     * @param queryStoreRetention the queryStoreRetention value to set
+     * @return the DataLakeAnalyticsAccountInner object itself.
+     */
+    public DataLakeAnalyticsAccountInner withQueryStoreRetention(Integer queryStoreRetention) {
+        this.queryStoreRetention = queryStoreRetention;
+        return this;
+    }
+
+    /**
+     * Get the current state of the DebugDataAccessLevel for this account. Possible values include: 'All', 'Customer', 'None'.
+     *
+     * @return the debugDataAccessLevel value
+     */
+    public DebugDataAccessLevel debugDataAccessLevel() {
+        return this.debugDataAccessLevel;
     }
 
 }

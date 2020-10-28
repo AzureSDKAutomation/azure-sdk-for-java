@@ -11,9 +11,9 @@ package com.microsoft.azure.management.datalakeanalytics.v2016_11_01.implementat
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.CreateOrUpdateFirewallRuleParameters;
+import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.ErrorResponseException;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.UpdateFirewallRuleParameters;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
@@ -96,7 +96,7 @@ public class FirewallRulesInner {
      * @param resourceGroupName The name of the Azure resource group.
      * @param accountName The name of the Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;FirewallRuleInner&gt; object if successful.
      */
@@ -206,10 +206,10 @@ public class FirewallRulesInner {
             });
     }
 
-    private ServiceResponse<PageImpl<FirewallRuleInner>> listByAccountDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<FirewallRuleInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<FirewallRuleInner>> listByAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<FirewallRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<FirewallRuleInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -221,7 +221,7 @@ public class FirewallRulesInner {
      * @param firewallRuleName The name of the firewall rule to create or update.
      * @param parameters Parameters supplied to create or update the firewall rule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the FirewallRuleInner object if successful.
      */
@@ -307,10 +307,10 @@ public class FirewallRulesInner {
             });
     }
 
-    private ServiceResponse<FirewallRuleInner> createOrUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<FirewallRuleInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<FirewallRuleInner> createOrUpdateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<FirewallRuleInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<FirewallRuleInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -321,7 +321,7 @@ public class FirewallRulesInner {
      * @param accountName The name of the Data Lake Analytics account.
      * @param firewallRuleName The name of the firewall rule to retrieve.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the FirewallRuleInner object if successful.
      */
@@ -400,10 +400,10 @@ public class FirewallRulesInner {
             });
     }
 
-    private ServiceResponse<FirewallRuleInner> getDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<FirewallRuleInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<FirewallRuleInner> getDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<FirewallRuleInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<FirewallRuleInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -414,7 +414,7 @@ public class FirewallRulesInner {
      * @param accountName The name of the Data Lake Analytics account.
      * @param firewallRuleName The name of the firewall rule to update.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the FirewallRuleInner object if successful.
      */
@@ -502,7 +502,7 @@ public class FirewallRulesInner {
      * @param firewallRuleName The name of the firewall rule to update.
      * @param parameters Parameters supplied to update the firewall rule.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the FirewallRuleInner object if successful.
      */
@@ -585,10 +585,10 @@ public class FirewallRulesInner {
             });
     }
 
-    private ServiceResponse<FirewallRuleInner> updateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<FirewallRuleInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<FirewallRuleInner> updateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<FirewallRuleInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<FirewallRuleInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -599,7 +599,7 @@ public class FirewallRulesInner {
      * @param accountName The name of the Data Lake Analytics account.
      * @param firewallRuleName The name of the firewall rule to delete.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete(String resourceGroupName, String accountName, String firewallRuleName) {
@@ -677,11 +677,11 @@ public class FirewallRulesInner {
             });
     }
 
-    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -690,7 +690,7 @@ public class FirewallRulesInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;FirewallRuleInner&gt; object if successful.
      */
@@ -789,10 +789,10 @@ public class FirewallRulesInner {
             });
     }
 
-    private ServiceResponse<PageImpl<FirewallRuleInner>> listByAccountNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<FirewallRuleInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<FirewallRuleInner>> listByAccountNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<FirewallRuleInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<FirewallRuleInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 

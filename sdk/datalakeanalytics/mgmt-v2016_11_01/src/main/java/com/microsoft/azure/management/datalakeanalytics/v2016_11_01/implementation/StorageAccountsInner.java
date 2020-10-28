@@ -11,9 +11,9 @@ package com.microsoft.azure.management.datalakeanalytics.v2016_11_01.implementat
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.AddStorageAccountParameters;
+import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.ErrorResponseException;
 import com.microsoft.azure.management.datalakeanalytics.v2016_11_01.UpdateStorageAccountParameters;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
@@ -117,7 +117,7 @@ public class StorageAccountsInner {
      * @param resourceGroupName The name of the Azure resource group.
      * @param accountName The name of the Data Lake Analytics account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;StorageAccountInformationInner&gt; object if successful.
      */
@@ -245,7 +245,7 @@ public class StorageAccountsInner {
      * @param orderby OrderBy clause. One or more comma-separated expressions with an optional "asc" (the default) or "desc" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional.
      * @param count The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;StorageAccountInformationInner&gt; object if successful.
      */
@@ -379,10 +379,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<StorageAccountInformationInner>> listByAccountDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageAccountInformationInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<StorageAccountInformationInner>> listByAccountDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageAccountInformationInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<StorageAccountInformationInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -394,7 +394,7 @@ public class StorageAccountsInner {
      * @param storageAccountName The name of the Azure Storage account to add
      * @param parameters The parameters containing the access key and optional suffix for the Azure Storage Account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void add(String resourceGroupName, String accountName, String storageAccountName, AddStorageAccountParameters parameters) {
@@ -479,10 +479,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<Void> addDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> addDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -493,7 +493,7 @@ public class StorageAccountsInner {
      * @param accountName The name of the Data Lake Analytics account.
      * @param storageAccountName The name of the Azure Storage account for which to retrieve the details.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the StorageAccountInformationInner object if successful.
      */
@@ -572,10 +572,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<StorageAccountInformationInner> getDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<StorageAccountInformationInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<StorageAccountInformationInner> getDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<StorageAccountInformationInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageAccountInformationInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -586,7 +586,7 @@ public class StorageAccountsInner {
      * @param accountName The name of the Data Lake Analytics account.
      * @param storageAccountName The Azure Storage account to modify
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void update(String resourceGroupName, String accountName, String storageAccountName) {
@@ -673,7 +673,7 @@ public class StorageAccountsInner {
      * @param storageAccountName The Azure Storage account to modify
      * @param parameters The parameters containing the access key and suffix to update the storage account with, if any. Passing nothing results in no change.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void update(String resourceGroupName, String accountName, String storageAccountName, UpdateStorageAccountParameters parameters) {
@@ -755,10 +755,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -769,7 +769,7 @@ public class StorageAccountsInner {
      * @param accountName The name of the Data Lake Analytics account.
      * @param storageAccountName The name of the Azure Storage account to remove
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete(String resourceGroupName, String accountName, String storageAccountName) {
@@ -847,10 +847,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -861,7 +861,7 @@ public class StorageAccountsInner {
      * @param accountName The name of the Data Lake Analytics account.
      * @param storageAccountName The name of the Azure storage account from which to list blob containers.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;StorageContainerInner&gt; object if successful.
      */
@@ -978,10 +978,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<StorageContainerInner>> listStorageContainersDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageContainerInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<StorageContainerInner>> listStorageContainersDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageContainerInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<StorageContainerInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -993,7 +993,7 @@ public class StorageAccountsInner {
      * @param storageAccountName The name of the Azure storage account from which to retrieve the blob container.
      * @param containerName The name of the Azure storage container to retrieve
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the StorageContainerInner object if successful.
      */
@@ -1078,10 +1078,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<StorageContainerInner> getStorageContainerDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<StorageContainerInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<StorageContainerInner> getStorageContainerDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<StorageContainerInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageContainerInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -1093,7 +1093,7 @@ public class StorageAccountsInner {
      * @param storageAccountName The name of the Azure storage account for which the SAS token is being requested.
      * @param containerName The name of the Azure storage container for which the SAS token is being requested.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;SasTokenInformationInner&gt; object if successful.
      */
@@ -1217,10 +1217,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<SasTokenInformationInner>> listSasTokensDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<SasTokenInformationInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<SasTokenInformationInner>> listSasTokensDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<SasTokenInformationInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<SasTokenInformationInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -1229,7 +1229,7 @@ public class StorageAccountsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;StorageAccountInformationInner&gt; object if successful.
      */
@@ -1328,10 +1328,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<StorageAccountInformationInner>> listByAccountNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageAccountInformationInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<StorageAccountInformationInner>> listByAccountNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageAccountInformationInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<StorageAccountInformationInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -1340,7 +1340,7 @@ public class StorageAccountsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;StorageContainerInner&gt; object if successful.
      */
@@ -1439,10 +1439,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<StorageContainerInner>> listStorageContainersNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageContainerInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<StorageContainerInner>> listStorageContainersNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageContainerInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<StorageContainerInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -1451,7 +1451,7 @@ public class StorageAccountsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;SasTokenInformationInner&gt; object if successful.
      */
@@ -1550,10 +1550,10 @@ public class StorageAccountsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<SasTokenInformationInner>> listSasTokensNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<SasTokenInformationInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<SasTokenInformationInner>> listSasTokensNextDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<SasTokenInformationInner>, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<SasTokenInformationInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
