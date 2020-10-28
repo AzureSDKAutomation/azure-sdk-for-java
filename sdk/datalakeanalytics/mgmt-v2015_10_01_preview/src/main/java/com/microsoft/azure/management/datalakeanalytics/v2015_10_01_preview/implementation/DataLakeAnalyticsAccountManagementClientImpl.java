@@ -146,6 +146,84 @@ public class DataLakeAnalyticsAccountManagementClientImpl extends AzureServiceCl
     }
 
     /**
+     * The DataLakeStoreAccountsInner object to access its operations.
+     */
+    private DataLakeStoreAccountsInner dataLakeStoreAccounts;
+
+    /**
+     * Gets the DataLakeStoreAccountsInner object to access its operations.
+     * @return the DataLakeStoreAccountsInner object.
+     */
+    public DataLakeStoreAccountsInner dataLakeStoreAccounts() {
+        return this.dataLakeStoreAccounts;
+    }
+
+    /**
+     * The StorageAccountsInner object to access its operations.
+     */
+    private StorageAccountsInner storageAccounts;
+
+    /**
+     * Gets the StorageAccountsInner object to access its operations.
+     * @return the StorageAccountsInner object.
+     */
+    public StorageAccountsInner storageAccounts() {
+        return this.storageAccounts;
+    }
+
+    /**
+     * The ComputePoliciesInner object to access its operations.
+     */
+    private ComputePoliciesInner computePolicies;
+
+    /**
+     * Gets the ComputePoliciesInner object to access its operations.
+     * @return the ComputePoliciesInner object.
+     */
+    public ComputePoliciesInner computePolicies() {
+        return this.computePolicies;
+    }
+
+    /**
+     * The FirewallRulesInner object to access its operations.
+     */
+    private FirewallRulesInner firewallRules;
+
+    /**
+     * Gets the FirewallRulesInner object to access its operations.
+     * @return the FirewallRulesInner object.
+     */
+    public FirewallRulesInner firewallRules() {
+        return this.firewallRules;
+    }
+
+    /**
+     * The OperationsInner object to access its operations.
+     */
+    private OperationsInner operations;
+
+    /**
+     * Gets the OperationsInner object to access its operations.
+     * @return the OperationsInner object.
+     */
+    public OperationsInner operations() {
+        return this.operations;
+    }
+
+    /**
+     * The LocationsInner object to access its operations.
+     */
+    private LocationsInner locations;
+
+    /**
+     * Gets the LocationsInner object to access its operations.
+     * @return the LocationsInner object.
+     */
+    public LocationsInner locations() {
+        return this.locations;
+    }
+
+    /**
      * Initializes an instance of DataLakeAnalyticsAccountManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -181,6 +259,12 @@ public class DataLakeAnalyticsAccountManagementClientImpl extends AzureServiceCl
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.accounts = new AccountsInner(restClient().retrofit(), this);
+        this.dataLakeStoreAccounts = new DataLakeStoreAccountsInner(restClient().retrofit(), this);
+        this.storageAccounts = new StorageAccountsInner(restClient().retrofit(), this);
+        this.computePolicies = new ComputePoliciesInner(restClient().retrofit(), this);
+        this.firewallRules = new FirewallRulesInner(restClient().retrofit(), this);
+        this.operations = new OperationsInner(restClient().retrofit(), this);
+        this.locations = new LocationsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

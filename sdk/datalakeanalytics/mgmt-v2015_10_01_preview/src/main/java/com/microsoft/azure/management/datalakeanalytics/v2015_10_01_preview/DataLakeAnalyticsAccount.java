@@ -18,6 +18,9 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.implementation.DataLakeAnalyticsManager;
+import java.util.List;
+import java.util.UUID;
+import org.joda.time.DateTime;
 import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.implementation.DataLakeAnalyticsAccountInner;
 
 /**
@@ -25,14 +28,134 @@ import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.impl
  */
 public interface DataLakeAnalyticsAccount extends HasInner<DataLakeAnalyticsAccountInner>, Resource, GroupableResourceCore<DataLakeAnalyticsManager, DataLakeAnalyticsAccountInner>, HasResourceGroup, Refreshable<DataLakeAnalyticsAccount>, Updatable<DataLakeAnalyticsAccount.Update>, HasManager<DataLakeAnalyticsManager> {
     /**
-     * @return the properties value.
+     * @return the accountId value.
      */
-    DataLakeAnalyticsAccountProperties properties();
+    UUID accountId();
+
+    /**
+     * @return the computePolicies value.
+     */
+    List<ComputePolicy> computePolicies();
+
+    /**
+     * @return the creationTime value.
+     */
+    DateTime creationTime();
+
+    /**
+     * @return the currentTier value.
+     */
+    TierType currentTier();
+
+    /**
+     * @return the dataLakeStoreAccounts value.
+     */
+    List<DataLakeStoreAccountInformation> dataLakeStoreAccounts();
+
+    /**
+     * @return the debugDataAccessLevel value.
+     */
+    DebugDataAccessLevel debugDataAccessLevel();
+
+    /**
+     * @return the defaultDataLakeStoreAccount value.
+     */
+    String defaultDataLakeStoreAccount();
+
+    /**
+     * @return the endpoint value.
+     */
+    String endpoint();
+
+    /**
+     * @return the firewallAllowAzureIps value.
+     */
+    FirewallAllowAzureIpsState firewallAllowAzureIps();
+
+    /**
+     * @return the firewallRules value.
+     */
+    List<FirewallRule> firewallRules();
+
+    /**
+     * @return the firewallState value.
+     */
+    FirewallState firewallState();
+
+    /**
+     * @return the hiveMetastores value.
+     */
+    List<HiveMetastore> hiveMetastores();
+
+    /**
+     * @return the lastModifiedTime value.
+     */
+    DateTime lastModifiedTime();
+
+    /**
+     * @return the maxDegreeOfParallelism value.
+     */
+    Integer maxDegreeOfParallelism();
+
+    /**
+     * @return the maxDegreeOfParallelismPerJob value.
+     */
+    Integer maxDegreeOfParallelismPerJob();
+
+    /**
+     * @return the maxJobCount value.
+     */
+    Integer maxJobCount();
+
+    /**
+     * @return the minPriorityPerJob value.
+     */
+    Integer minPriorityPerJob();
+
+    /**
+     * @return the newTier value.
+     */
+    TierType newTier();
+
+    /**
+     * @return the provisioningState value.
+     */
+    DataLakeAnalyticsAccountStatus provisioningState();
+
+    /**
+     * @return the queryStoreRetention value.
+     */
+    Integer queryStoreRetention();
+
+    /**
+     * @return the state value.
+     */
+    DataLakeAnalyticsAccountState state();
+
+    /**
+     * @return the storageAccounts value.
+     */
+    List<StorageAccountInformation> storageAccounts();
+
+    /**
+     * @return the systemMaxDegreeOfParallelism value.
+     */
+    Integer systemMaxDegreeOfParallelism();
+
+    /**
+     * @return the systemMaxJobCount value.
+     */
+    Integer systemMaxJobCount();
+
+    /**
+     * @return the virtualNetworkRules value.
+     */
+    List<VirtualNetworkRule> virtualNetworkRules();
 
     /**
      * The entirety of the DataLakeAnalyticsAccount definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithDataLakeStoreAccounts, DefinitionStages.WithDefaultDataLakeStoreAccount, DefinitionStages.WithCreate {
     }
 
     /**
@@ -48,19 +171,163 @@ public interface DataLakeAnalyticsAccount extends HasInner<DataLakeAnalyticsAcco
         /**
          * The stage of the DataLakeAnalyticsAccount definition allowing to specify the resource group.
          */
-        interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithCreate> {
+        interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithDataLakeStoreAccounts> {
         }
 
         /**
-         * The stage of the datalakeanalyticsaccount definition allowing to specify Properties.
+         * The stage of the datalakeanalyticsaccount definition allowing to specify DataLakeStoreAccounts.
          */
-        interface WithProperties {
+        interface WithDataLakeStoreAccounts {
+           /**
+            * Specifies dataLakeStoreAccounts.
+            * @param dataLakeStoreAccounts The list of Data Lake Store accounts associated with this account
+            * @return the next definition stage
+*/
+            WithDefaultDataLakeStoreAccount withDataLakeStoreAccounts(List<AddDataLakeStoreWithAccountParameters> dataLakeStoreAccounts);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify DefaultDataLakeStoreAccount.
+         */
+        interface WithDefaultDataLakeStoreAccount {
+           /**
+            * Specifies defaultDataLakeStoreAccount.
+            * @param defaultDataLakeStoreAccount The default Data Lake Store account associated with this account
+            * @return the next definition stage
+*/
+            WithCreate withDefaultDataLakeStoreAccount(String defaultDataLakeStoreAccount);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify ComputePolicies.
+         */
+        interface WithComputePolicies {
             /**
-             * Specifies properties.
-             * @param properties the properties defined by Data Lake Analytics all properties are specific to each resource provider
+             * Specifies computePolicies.
+             * @param computePolicies The list of compute policies associated with this account
              * @return the next definition stage
              */
-            WithCreate withProperties(DataLakeAnalyticsAccountProperties properties);
+            WithCreate withComputePolicies(List<CreateComputePolicyWithAccountParameters> computePolicies);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify FirewallAllowAzureIps.
+         */
+        interface WithFirewallAllowAzureIps {
+            /**
+             * Specifies firewallAllowAzureIps.
+             * @param firewallAllowAzureIps The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced. Possible values include: 'Enabled', 'Disabled'
+             * @return the next definition stage
+             */
+            WithCreate withFirewallAllowAzureIps(FirewallAllowAzureIpsState firewallAllowAzureIps);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify FirewallRules.
+         */
+        interface WithFirewallRules {
+            /**
+             * Specifies firewallRules.
+             * @param firewallRules The list of firewall rules associated with this account
+             * @return the next definition stage
+             */
+            WithCreate withFirewallRules(List<CreateFirewallRuleWithAccountParameters> firewallRules);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify FirewallState.
+         */
+        interface WithFirewallState {
+            /**
+             * Specifies firewallState.
+             * @param firewallState The current state of the IP address firewall for this account. Possible values include: 'Enabled', 'Disabled'
+             * @return the next definition stage
+             */
+            WithCreate withFirewallState(FirewallState firewallState);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify MaxDegreeOfParallelism.
+         */
+        interface WithMaxDegreeOfParallelism {
+            /**
+             * Specifies maxDegreeOfParallelism.
+             * @param maxDegreeOfParallelism The maximum supported degree of parallelism for this account
+             * @return the next definition stage
+             */
+            WithCreate withMaxDegreeOfParallelism(Integer maxDegreeOfParallelism);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify MaxDegreeOfParallelismPerJob.
+         */
+        interface WithMaxDegreeOfParallelismPerJob {
+            /**
+             * Specifies maxDegreeOfParallelismPerJob.
+             * @param maxDegreeOfParallelismPerJob The maximum supported degree of parallelism per job for this account
+             * @return the next definition stage
+             */
+            WithCreate withMaxDegreeOfParallelismPerJob(Integer maxDegreeOfParallelismPerJob);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify MaxJobCount.
+         */
+        interface WithMaxJobCount {
+            /**
+             * Specifies maxJobCount.
+             * @param maxJobCount The maximum supported jobs running under the account at the same time
+             * @return the next definition stage
+             */
+            WithCreate withMaxJobCount(Integer maxJobCount);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify MinPriorityPerJob.
+         */
+        interface WithMinPriorityPerJob {
+            /**
+             * Specifies minPriorityPerJob.
+             * @param minPriorityPerJob The minimum supported priority per job for this account
+             * @return the next definition stage
+             */
+            WithCreate withMinPriorityPerJob(Integer minPriorityPerJob);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify NewTier.
+         */
+        interface WithNewTier {
+            /**
+             * Specifies newTier.
+             * @param newTier The commitment tier for the next month. Possible values include: 'Consumption', 'Commitment_100AUHours', 'Commitment_500AUHours', 'Commitment_1000AUHours', 'Commitment_5000AUHours', 'Commitment_10000AUHours', 'Commitment_50000AUHours', 'Commitment_100000AUHours', 'Commitment_500000AUHours'
+             * @return the next definition stage
+             */
+            WithCreate withNewTier(TierType newTier);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify QueryStoreRetention.
+         */
+        interface WithQueryStoreRetention {
+            /**
+             * Specifies queryStoreRetention.
+             * @param queryStoreRetention The number of days that job metadata is retained
+             * @return the next definition stage
+             */
+            WithCreate withQueryStoreRetention(Integer queryStoreRetention);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount definition allowing to specify StorageAccounts.
+         */
+        interface WithStorageAccounts {
+            /**
+             * Specifies storageAccounts.
+             * @param storageAccounts The list of Azure Blob Storage accounts associated with this account
+             * @return the next definition stage
+             */
+            WithCreate withStorageAccounts(List<AddStorageAccountWithAccountParameters> storageAccounts);
         }
 
         /**
@@ -68,13 +335,13 @@ public interface DataLakeAnalyticsAccount extends HasInner<DataLakeAnalyticsAcco
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<DataLakeAnalyticsAccount>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithProperties {
+        interface WithCreate extends Creatable<DataLakeAnalyticsAccount>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithComputePolicies, DefinitionStages.WithFirewallAllowAzureIps, DefinitionStages.WithFirewallRules, DefinitionStages.WithFirewallState, DefinitionStages.WithMaxDegreeOfParallelism, DefinitionStages.WithMaxDegreeOfParallelismPerJob, DefinitionStages.WithMaxJobCount, DefinitionStages.WithMinPriorityPerJob, DefinitionStages.WithNewTier, DefinitionStages.WithQueryStoreRetention, DefinitionStages.WithStorageAccounts {
         }
     }
     /**
      * The template for a DataLakeAnalyticsAccount update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<DataLakeAnalyticsAccount>, Resource.UpdateWithTags<Update>, UpdateStages.WithProperties {
+    interface Update extends Appliable<DataLakeAnalyticsAccount>, Resource.UpdateWithTags<Update>, UpdateStages.WithComputePolicies, UpdateStages.WithDataLakeStoreAccounts, UpdateStages.WithFirewallAllowAzureIps, UpdateStages.WithFirewallRules, UpdateStages.WithFirewallState, UpdateStages.WithMaxDegreeOfParallelism, UpdateStages.WithMaxDegreeOfParallelismPerJob, UpdateStages.WithMaxJobCount, UpdateStages.WithMinPriorityPerJob, UpdateStages.WithNewTier, UpdateStages.WithQueryStoreRetention, UpdateStages.WithStorageAccounts {
     }
 
     /**
@@ -82,15 +349,147 @@ public interface DataLakeAnalyticsAccount extends HasInner<DataLakeAnalyticsAcco
      */
     interface UpdateStages {
         /**
-         * The stage of the datalakeanalyticsaccount update allowing to specify Properties.
+         * The stage of the datalakeanalyticsaccount update allowing to specify ComputePolicies.
          */
-        interface WithProperties {
+        interface WithComputePolicies {
             /**
-             * Specifies properties.
-             * @param properties the properties defined by Data Lake Analytics all properties are specific to each resource provider
+             * Specifies computePolicies.
+             * @param computePolicies The list of compute policies associated with this account
              * @return the next update stage
              */
-            Update withProperties(DataLakeAnalyticsAccountProperties properties);
+            Update withComputePolicies(List<UpdateComputePolicyWithAccountParameters> computePolicies);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify DataLakeStoreAccounts.
+         */
+        interface WithDataLakeStoreAccounts {
+            /**
+             * Specifies dataLakeStoreAccounts.
+             * @param dataLakeStoreAccounts The list of Data Lake Store accounts associated with this account
+             * @return the next update stage
+             */
+            Update withDataLakeStoreAccounts(List<UpdateDataLakeStoreWithAccountParameters> dataLakeStoreAccounts);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify FirewallAllowAzureIps.
+         */
+        interface WithFirewallAllowAzureIps {
+            /**
+             * Specifies firewallAllowAzureIps.
+             * @param firewallAllowAzureIps The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced. Possible values include: 'Enabled', 'Disabled'
+             * @return the next update stage
+             */
+            Update withFirewallAllowAzureIps(FirewallAllowAzureIpsState firewallAllowAzureIps);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify FirewallRules.
+         */
+        interface WithFirewallRules {
+            /**
+             * Specifies firewallRules.
+             * @param firewallRules The list of firewall rules associated with this account
+             * @return the next update stage
+             */
+            Update withFirewallRules(List<UpdateFirewallRuleWithAccountParameters> firewallRules);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify FirewallState.
+         */
+        interface WithFirewallState {
+            /**
+             * Specifies firewallState.
+             * @param firewallState The current state of the IP address firewall for this account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled. Possible values include: 'Enabled', 'Disabled'
+             * @return the next update stage
+             */
+            Update withFirewallState(FirewallState firewallState);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify MaxDegreeOfParallelism.
+         */
+        interface WithMaxDegreeOfParallelism {
+            /**
+             * Specifies maxDegreeOfParallelism.
+             * @param maxDegreeOfParallelism The maximum supported degree of parallelism for this account
+             * @return the next update stage
+             */
+            Update withMaxDegreeOfParallelism(Integer maxDegreeOfParallelism);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify MaxDegreeOfParallelismPerJob.
+         */
+        interface WithMaxDegreeOfParallelismPerJob {
+            /**
+             * Specifies maxDegreeOfParallelismPerJob.
+             * @param maxDegreeOfParallelismPerJob The maximum supported degree of parallelism per job for this account
+             * @return the next update stage
+             */
+            Update withMaxDegreeOfParallelismPerJob(Integer maxDegreeOfParallelismPerJob);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify MaxJobCount.
+         */
+        interface WithMaxJobCount {
+            /**
+             * Specifies maxJobCount.
+             * @param maxJobCount The maximum supported jobs running under the account at the same time
+             * @return the next update stage
+             */
+            Update withMaxJobCount(Integer maxJobCount);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify MinPriorityPerJob.
+         */
+        interface WithMinPriorityPerJob {
+            /**
+             * Specifies minPriorityPerJob.
+             * @param minPriorityPerJob The minimum supported priority per job for this account
+             * @return the next update stage
+             */
+            Update withMinPriorityPerJob(Integer minPriorityPerJob);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify NewTier.
+         */
+        interface WithNewTier {
+            /**
+             * Specifies newTier.
+             * @param newTier The commitment tier to use for next month. Possible values include: 'Consumption', 'Commitment_100AUHours', 'Commitment_500AUHours', 'Commitment_1000AUHours', 'Commitment_5000AUHours', 'Commitment_10000AUHours', 'Commitment_50000AUHours', 'Commitment_100000AUHours', 'Commitment_500000AUHours'
+             * @return the next update stage
+             */
+            Update withNewTier(TierType newTier);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify QueryStoreRetention.
+         */
+        interface WithQueryStoreRetention {
+            /**
+             * Specifies queryStoreRetention.
+             * @param queryStoreRetention The number of days that job metadata is retained
+             * @return the next update stage
+             */
+            Update withQueryStoreRetention(Integer queryStoreRetention);
+        }
+
+        /**
+         * The stage of the datalakeanalyticsaccount update allowing to specify StorageAccounts.
+         */
+        interface WithStorageAccounts {
+            /**
+             * Specifies storageAccounts.
+             * @param storageAccounts The list of Azure Blob storage accounts associated with this account
+             * @return the next update stage
+             */
+            Update withStorageAccounts(List<UpdateStorageAccountWithAccountParameters> storageAccounts);
         }
 
     }

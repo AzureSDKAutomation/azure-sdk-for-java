@@ -17,6 +17,12 @@ import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.Accounts;
+import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.DataLakeStoreAccounts;
+import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.StorageAccounts;
+import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.ComputePolicies;
+import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.FirewallRules;
+import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.Operations;
+import com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview.Locations;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -25,6 +31,12 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
  */
 public final class DataLakeAnalyticsManager extends ManagerCore<DataLakeAnalyticsManager, DataLakeAnalyticsAccountManagementClientImpl> {
     private Accounts accounts;
+    private DataLakeStoreAccounts dataLakeStoreAccounts;
+    private StorageAccounts storageAccounts;
+    private ComputePolicies computePolicies;
+    private FirewallRules firewallRules;
+    private Operations operations;
+    private Locations locations;
     /**
     * Get a Configurable instance that can be used to create DataLakeAnalyticsManager with optional configuration.
     *
@@ -80,6 +92,66 @@ public final class DataLakeAnalyticsManager extends ManagerCore<DataLakeAnalytic
             this.accounts = new AccountsImpl(this);
         }
         return this.accounts;
+    }
+
+    /**
+     * @return Entry point to manage DataLakeStoreAccounts.
+     */
+    public DataLakeStoreAccounts dataLakeStoreAccounts() {
+        if (this.dataLakeStoreAccounts == null) {
+            this.dataLakeStoreAccounts = new DataLakeStoreAccountsImpl(this);
+        }
+        return this.dataLakeStoreAccounts;
+    }
+
+    /**
+     * @return Entry point to manage StorageAccounts.
+     */
+    public StorageAccounts storageAccounts() {
+        if (this.storageAccounts == null) {
+            this.storageAccounts = new StorageAccountsImpl(this);
+        }
+        return this.storageAccounts;
+    }
+
+    /**
+     * @return Entry point to manage ComputePolicies.
+     */
+    public ComputePolicies computePolicies() {
+        if (this.computePolicies == null) {
+            this.computePolicies = new ComputePoliciesImpl(this);
+        }
+        return this.computePolicies;
+    }
+
+    /**
+     * @return Entry point to manage FirewallRules.
+     */
+    public FirewallRules firewallRules() {
+        if (this.firewallRules == null) {
+            this.firewallRules = new FirewallRulesImpl(this);
+        }
+        return this.firewallRules;
+    }
+
+    /**
+     * @return Entry point to manage Operations.
+     */
+    public Operations operations() {
+        if (this.operations == null) {
+            this.operations = new OperationsImpl(this);
+        }
+        return this.operations;
+    }
+
+    /**
+     * @return Entry point to manage Locations.
+     */
+    public Locations locations() {
+        if (this.locations == null) {
+            this.locations = new LocationsImpl(this);
+        }
+        return this.locations;
     }
 
     /**
