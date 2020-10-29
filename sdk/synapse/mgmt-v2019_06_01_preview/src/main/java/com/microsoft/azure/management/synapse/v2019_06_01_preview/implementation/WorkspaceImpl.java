@@ -16,6 +16,8 @@ import com.microsoft.azure.management.synapse.v2019_06_01_preview.DataLakeStorag
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.VirtualNetworkProfile;
 import java.util.Map;
 import java.util.List;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.ManagedVirtualNetworkSettings;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.BabylonConfiguration;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.ManagedIdentity;
 import java.util.ArrayList;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.PrivateEndpointConnection;
@@ -72,6 +74,11 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     }
 
     @Override
+    public BabylonConfiguration babylonConfiguration() {
+        return this.inner().babylonConfiguration();
+    }
+
+    @Override
     public Map<String, String> connectivityEndpoints() {
         return this.inner().connectivityEndpoints();
     }
@@ -99,6 +106,11 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     @Override
     public String managedVirtualNetwork() {
         return this.inner().managedVirtualNetwork();
+    }
+
+    @Override
+    public ManagedVirtualNetworkSettings managedVirtualNetworkSettings() {
+        return this.inner().managedVirtualNetworkSettings();
     }
 
     @Override
@@ -175,11 +187,31 @@ class WorkspaceImpl extends GroupableResourceCoreImpl<Workspace, WorkspaceInner,
     }
 
     @Override
+    public WorkspaceImpl withBabylonConfiguration(BabylonConfiguration babylonConfiguration) {
+        if (isInCreateMode()) {
+            this.inner().withBabylonConfiguration(babylonConfiguration);
+        } else {
+            this.updateParameter.withBabylonConfiguration(babylonConfiguration);
+        }
+        return this;
+    }
+
+    @Override
     public WorkspaceImpl withIdentity(ManagedIdentity identity) {
         if (isInCreateMode()) {
             this.inner().withIdentity(identity);
         } else {
             this.updateParameter.withIdentity(identity);
+        }
+        return this;
+    }
+
+    @Override
+    public WorkspaceImpl withManagedVirtualNetworkSettings(ManagedVirtualNetworkSettings managedVirtualNetworkSettings) {
+        if (isInCreateMode()) {
+            this.inner().withManagedVirtualNetworkSettings(managedVirtualNetworkSettings);
+        } else {
+            this.updateParameter.withManagedVirtualNetworkSettings(managedVirtualNetworkSettings);
         }
         return this;
     }
