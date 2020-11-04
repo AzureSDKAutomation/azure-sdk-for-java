@@ -53,6 +53,12 @@ public class OperationValueInner {
     private String provider;
 
     /**
+     * Indicates whether the operation applies to data-plane.
+     */
+    @JsonProperty(value = "isDataAction", access = JsonProperty.Access.WRITE_ONLY)
+    private String isDataAction;
+
+    /**
      * Get the origin of the compute operation.
      *
      * @return the origin value
@@ -104,6 +110,15 @@ public class OperationValueInner {
      */
     public String provider() {
         return this.provider;
+    }
+
+    /**
+     * Get indicates whether the operation applies to data-plane.
+     *
+     * @return the isDataAction value
+     */
+    public String isDataAction() {
+        return this.isDataAction;
     }
 
 }

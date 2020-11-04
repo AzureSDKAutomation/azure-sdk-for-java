@@ -288,7 +288,7 @@ public class MachineExtensionsInner {
     }
 
     /**
-     * The operation to create or update the extension.
+     * The operation to update the extension.
      *
      * @param resourceGroupName The name of the resource group.
      * @param name The name of the machine where the extension should be created or updated.
@@ -304,7 +304,7 @@ public class MachineExtensionsInner {
     }
 
     /**
-     * The operation to create or update the extension.
+     * The operation to update the extension.
      *
      * @param resourceGroupName The name of the resource group.
      * @param name The name of the machine where the extension should be created or updated.
@@ -319,7 +319,7 @@ public class MachineExtensionsInner {
     }
 
     /**
-     * The operation to create or update the extension.
+     * The operation to update the extension.
      *
      * @param resourceGroupName The name of the resource group.
      * @param name The name of the machine where the extension should be created or updated.
@@ -338,7 +338,7 @@ public class MachineExtensionsInner {
     }
 
     /**
-     * The operation to create or update the extension.
+     * The operation to update the extension.
      *
      * @param resourceGroupName The name of the resource group.
      * @param name The name of the machine where the extension should be created or updated.
@@ -372,7 +372,7 @@ public class MachineExtensionsInner {
     }
 
     /**
-     * The operation to create or update the extension.
+     * The operation to update the extension.
      *
      * @param resourceGroupName The name of the resource group.
      * @param name The name of the machine where the extension should be created or updated.
@@ -388,7 +388,7 @@ public class MachineExtensionsInner {
     }
 
     /**
-     * The operation to create or update the extension.
+     * The operation to update the extension.
      *
      * @param resourceGroupName The name of the resource group.
      * @param name The name of the machine where the extension should be created or updated.
@@ -403,7 +403,7 @@ public class MachineExtensionsInner {
     }
 
     /**
-     * The operation to create or update the extension.
+     * The operation to update the extension.
      *
      * @param resourceGroupName The name of the resource group.
      * @param name The name of the machine where the extension should be created or updated.
@@ -422,7 +422,7 @@ public class MachineExtensionsInner {
     }
 
     /**
-     * The operation to create or update the extension.
+     * The operation to update the extension.
      *
      * @param resourceGroupName The name of the resource group.
      * @param name The name of the machine where the extension should be created or updated.
@@ -469,6 +469,7 @@ public class MachineExtensionsInner {
         return this.client.restClient().responseBuilderFactory().<MachineExtensionInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<MachineExtensionInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -638,6 +639,7 @@ public class MachineExtensionsInner {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -731,6 +733,7 @@ public class MachineExtensionsInner {
     private ServiceResponse<MachineExtensionInner> getDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<MachineExtensionInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<MachineExtensionInner>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -976,6 +979,7 @@ public class MachineExtensionsInner {
     private ServiceResponse<PageImpl<MachineExtensionInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<MachineExtensionInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<MachineExtensionInner>>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1087,6 +1091,7 @@ public class MachineExtensionsInner {
     private ServiceResponse<PageImpl<MachineExtensionInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<MachineExtensionInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<MachineExtensionInner>>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

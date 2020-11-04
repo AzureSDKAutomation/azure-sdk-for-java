@@ -15,7 +15,6 @@ import java.util.List;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.ErrorDetail;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.MachineExtensionInstanceView;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.MachineIdentity;
-import org.joda.time.DateTime;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.LocationData;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.MachinePropertiesOsProfile;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.StatusTypes;
@@ -91,7 +90,7 @@ class MachineImpl extends GroupableResourceCoreImpl<Machine, MachineInner, Machi
     }
 
     @Override
-    public DateTime lastStatusChange() {
+    public String lastStatusChange() {
         return this.inner().lastStatusChange();
     }
 

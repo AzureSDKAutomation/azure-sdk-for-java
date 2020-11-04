@@ -18,7 +18,7 @@ public class ErrorResponse {
     /**
      * The error details.
      */
-    @JsonProperty(value = "error", required = true)
+    @JsonProperty(value = "error")
     private ErrorDetail error;
 
     /**
