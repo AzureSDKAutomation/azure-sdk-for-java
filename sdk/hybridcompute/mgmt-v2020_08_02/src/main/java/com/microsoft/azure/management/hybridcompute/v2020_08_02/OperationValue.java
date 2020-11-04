@@ -23,6 +23,11 @@ public interface OperationValue extends HasInner<OperationValueInner>, HasManage
     String description();
 
     /**
+     * @return the isDataAction value.
+     */
+    String isDataAction();
+
+    /**
      * @return the name value.
      */
     String name();

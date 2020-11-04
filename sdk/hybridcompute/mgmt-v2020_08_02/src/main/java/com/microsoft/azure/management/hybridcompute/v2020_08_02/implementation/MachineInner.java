@@ -11,7 +11,6 @@ package com.microsoft.azure.management.hybridcompute.v2020_08_02.implementation;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.LocationData;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.MachinePropertiesOsProfile;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.StatusTypes;
-import org.joda.time.DateTime;
 import java.util.List;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.ErrorDetail;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.MachineExtensionInstanceView;
@@ -54,7 +53,7 @@ public class MachineInner extends Resource {
      * The time of the last status change.
      */
     @JsonProperty(value = "properties.lastStatusChange", access = JsonProperty.Access.WRITE_ONLY)
-    private DateTime lastStatusChange;
+    private String lastStatusChange;
 
     /**
      * Details about the error state.
@@ -114,7 +113,7 @@ public class MachineInner extends Resource {
     /**
      * Machine Extensions information.
      */
-    @JsonProperty(value = "properties.extensions")
+    @JsonProperty(value = "properties.extensions", access = JsonProperty.Access.WRITE_ONLY)
     private List<MachineExtensionInstanceView> extensions;
 
     /**
@@ -210,7 +209,7 @@ public class MachineInner extends Resource {
      *
      * @return the lastStatusChange value
      */
-    public DateTime lastStatusChange() {
+    public String lastStatusChange() {
         return this.lastStatusChange;
     }
 
@@ -324,17 +323,6 @@ public class MachineInner extends Resource {
      */
     public List<MachineExtensionInstanceView> extensions() {
         return this.extensions;
-    }
-
-    /**
-     * Set machine Extensions information.
-     *
-     * @param extensions the extensions value to set
-     * @return the MachineInner object itself.
-     */
-    public MachineInner withExtensions(List<MachineExtensionInstanceView> extensions) {
-        this.extensions = extensions;
-        return this;
     }
 
     /**

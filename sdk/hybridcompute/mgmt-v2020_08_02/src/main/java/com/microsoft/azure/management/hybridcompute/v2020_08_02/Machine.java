@@ -16,7 +16,6 @@ import com.microsoft.azure.arm.model.Refreshable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.implementation.HybridComputeManager;
 import java.util.List;
-import org.joda.time.DateTime;
 import com.microsoft.azure.management.hybridcompute.v2020_08_02.implementation.MachineInner;
 
 /**
@@ -71,7 +70,7 @@ public interface Machine extends HasInner<MachineInner>, Resource, GroupableReso
     /**
      * @return the lastStatusChange value.
      */
-    DateTime lastStatusChange();
+    String lastStatusChange();
 
     /**
      * @return the locationData value.

@@ -29,6 +29,11 @@ class OperationValueImpl extends WrapperImpl<OperationValueInner> implements Ope
     }
 
     @Override
+    public String isDataAction() {
+        return this.inner().isDataAction();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
     }

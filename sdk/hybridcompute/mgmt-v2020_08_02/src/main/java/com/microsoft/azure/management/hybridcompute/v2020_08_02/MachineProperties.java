@@ -8,7 +8,6 @@
 
 package com.microsoft.azure.management.hybridcompute.v2020_08_02;
 
-import org.joda.time.DateTime;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -45,7 +44,7 @@ public class MachineProperties {
      * The time of the last status change.
      */
     @JsonProperty(value = "lastStatusChange", access = JsonProperty.Access.WRITE_ONLY)
-    private DateTime lastStatusChange;
+    private String lastStatusChange;
 
     /**
      * Details about the error state.
@@ -105,7 +104,7 @@ public class MachineProperties {
     /**
      * Machine Extensions information.
      */
-    @JsonProperty(value = "extensions")
+    @JsonProperty(value = "extensions", access = JsonProperty.Access.WRITE_ONLY)
     private List<MachineExtensionInstanceView> extensions;
 
     /**
@@ -195,7 +194,7 @@ public class MachineProperties {
      *
      * @return the lastStatusChange value
      */
-    public DateTime lastStatusChange() {
+    public String lastStatusChange() {
         return this.lastStatusChange;
     }
 
@@ -309,17 +308,6 @@ public class MachineProperties {
      */
     public List<MachineExtensionInstanceView> extensions() {
         return this.extensions;
-    }
-
-    /**
-     * Set machine Extensions information.
-     *
-     * @param extensions the extensions value to set
-     * @return the MachineProperties object itself.
-     */
-    public MachineProperties withExtensions(List<MachineExtensionInstanceView> extensions) {
-        this.extensions = extensions;
-        return this;
     }
 
     /**
