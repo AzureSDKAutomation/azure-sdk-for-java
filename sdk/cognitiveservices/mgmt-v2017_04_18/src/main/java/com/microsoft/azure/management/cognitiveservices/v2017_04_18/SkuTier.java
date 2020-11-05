@@ -22,7 +22,10 @@ public enum SkuTier {
     STANDARD("Standard"),
 
     /** Enum value Premium. */
-    PREMIUM("Premium");
+    PREMIUM("Premium"),
+
+    /** Enum value Enterprise. */
+    ENTERPRISE("Enterprise");
 
     /** The actual serialized value for a SkuTier instance. */
     private String value;
