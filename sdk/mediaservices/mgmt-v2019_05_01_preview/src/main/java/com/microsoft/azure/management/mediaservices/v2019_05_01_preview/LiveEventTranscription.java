@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class LiveEventTranscription {
     /**
-     * Specifies the language (locale) used for speech-to-text transcription �
+     * Specifies the language (locale) used for speech-to-text transcription -
      * it should match the spoken language in the audio track. The value should
      * be in BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of
      * supported languages are 'en-US' and 'en-GB'.
@@ -40,7 +40,7 @@ public class LiveEventTranscription {
     private LiveEventOutputTranscriptionTrack outputTranscriptionTrack;
 
     /**
-     * Get specifies the language (locale) used for speech-to-text transcription � it should match the spoken language in the audio track. The value should be in BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported languages are 'en-US' and 'en-GB'.
+     * Get specifies the language (locale) used for speech-to-text transcription - it should match the spoken language in the audio track. The value should be in BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported languages are 'en-US' and 'en-GB'.
      *
      * @return the language value
      */
@@ -49,7 +49,7 @@ public class LiveEventTranscription {
     }
 
     /**
-     * Set specifies the language (locale) used for speech-to-text transcription � it should match the spoken language in the audio track. The value should be in BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported languages are 'en-US' and 'en-GB'.
+     * Set specifies the language (locale) used for speech-to-text transcription - it should match the spoken language in the audio track. The value should be in BCP-47 format of 'language tag-region' (e.g: 'en-US'). The list of supported languages are 'en-US' and 'en-GB'.
      *
      * @param language the language value to set
      * @return the LiveEventTranscription object itself.
