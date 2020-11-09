@@ -8,10 +8,41 @@
 
 package com.microsoft.azure.management.storagecache.v2020_03_01;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.azure.ProxyResource;
 
 /**
  * Resource used by a Cache.
  */
 public class StorageTargetResource extends ProxyResource {
+    /**
+     * Region name string.
+     */
+    @JsonProperty(value = "location", access = JsonProperty.Access.WRITE_ONLY)
+    private String location;
+
+    /**
+     * The system meta data relating to this resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
+
+    /**
+     * Get region name string.
+     *
+     * @return the location value
+     */
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Get the system meta data relating to this resource.
+     *
+     * @return the systemData value
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
+
 }
