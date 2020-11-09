@@ -21,6 +21,7 @@ import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.Prov
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.RunType;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.SourceTriggerDescriptor;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.RunStatus;
+import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.SystemData;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.TimerTriggerDescriptor;
 
 class RunImpl extends CreatableUpdatableImpl<Run, RunInner, RunImpl> implements Run, Run.Update {
@@ -86,6 +87,11 @@ class RunImpl extends CreatableUpdatableImpl<Run, RunInner, RunImpl> implements 
     }
 
     @Override
+    public String agentPoolName() {
+        return this.inner().agentPoolName();
+    }
+
+    @Override
     public DateTime createTime() {
         return this.inner().createTime();
     }
@@ -118,6 +124,11 @@ class RunImpl extends CreatableUpdatableImpl<Run, RunInner, RunImpl> implements 
     @Override
     public DateTime lastUpdatedTime() {
         return this.inner().lastUpdatedTime();
+    }
+
+    @Override
+    public ImageDescriptor logArtifact() {
+        return this.inner().logArtifact();
     }
 
     @Override
@@ -173,6 +184,11 @@ class RunImpl extends CreatableUpdatableImpl<Run, RunInner, RunImpl> implements 
     @Override
     public RunStatus status() {
         return this.inner().status();
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override
