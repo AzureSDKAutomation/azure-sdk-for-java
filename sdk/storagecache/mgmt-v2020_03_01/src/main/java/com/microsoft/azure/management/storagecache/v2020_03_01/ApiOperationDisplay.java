@@ -33,6 +33,12 @@ public class ApiOperationDisplay {
     private String resource;
 
     /**
+     * The description of the operation.
+     */
+    @JsonProperty(value = "description")
+    private String description;
+
+    /**
      * Get operation type: Read, write, delete, etc.
      *
      * @return the operation value
@@ -89,6 +95,26 @@ public class ApiOperationDisplay {
      */
     public ApiOperationDisplay withResource(String resource) {
         this.resource = resource;
+        return this;
+    }
+
+    /**
+     * Get the description of the operation.
+     *
+     * @return the description value
+     */
+    public String description() {
+        return this.description;
+    }
+
+    /**
+     * Set the description of the operation.
+     *
+     * @param description the description value to set
+     * @return the ApiOperationDisplay object itself.
+     */
+    public ApiOperationDisplay withDescription(String description) {
+        this.description = description;
         return this;
     }
 
