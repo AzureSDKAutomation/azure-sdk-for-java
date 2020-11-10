@@ -11,6 +11,7 @@ package com.microsoft.azure.management.hdinsight.v2018_06_01_preview.implementat
 import java.util.List;
 import com.microsoft.azure.management.hdinsight.v2018_06_01_preview.VmSizeCompatibilityFilterV2;
 import com.microsoft.azure.management.hdinsight.v2018_06_01_preview.BillingResources;
+import com.microsoft.azure.management.hdinsight.v2018_06_01_preview.VmSizeProperty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -36,6 +37,18 @@ public class BillingResponseListResultInner {
      */
     @JsonProperty(value = "billingResources")
     private List<BillingResources> billingResources;
+
+    /**
+     * The vm sizes when enabling encryption at host.
+     */
+    @JsonProperty(value = "vmSizesWithEncryptionAtHost", access = JsonProperty.Access.WRITE_ONLY)
+    private List<String> vmSizesWithEncryptionAtHost;
+
+    /**
+     * The vm size properties.
+     */
+    @JsonProperty(value = "vmSizeProperties", access = JsonProperty.Access.WRITE_ONLY)
+    private List<VmSizeProperty> vmSizeProperties;
 
     /**
      * Get the virtual machine sizes to include or exclude.
@@ -95,6 +108,24 @@ public class BillingResponseListResultInner {
     public BillingResponseListResultInner withBillingResources(List<BillingResources> billingResources) {
         this.billingResources = billingResources;
         return this;
+    }
+
+    /**
+     * Get the vm sizes when enabling encryption at host.
+     *
+     * @return the vmSizesWithEncryptionAtHost value
+     */
+    public List<String> vmSizesWithEncryptionAtHost() {
+        return this.vmSizesWithEncryptionAtHost;
+    }
+
+    /**
+     * Get the vm size properties.
+     *
+     * @return the vmSizeProperties value
+     */
+    public List<VmSizeProperty> vmSizeProperties() {
+        return this.vmSizeProperties;
     }
 
 }
