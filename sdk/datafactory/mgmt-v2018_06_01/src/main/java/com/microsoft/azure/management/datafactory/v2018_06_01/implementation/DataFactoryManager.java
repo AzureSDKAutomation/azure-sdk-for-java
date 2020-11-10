@@ -33,6 +33,9 @@ import com.microsoft.azure.management.datafactory.v2018_06_01.DataFlows;
 import com.microsoft.azure.management.datafactory.v2018_06_01.DataFlowDebugSessions;
 import com.microsoft.azure.management.datafactory.v2018_06_01.ManagedVirtualNetworks;
 import com.microsoft.azure.management.datafactory.v2018_06_01.ManagedPrivateEndpoints;
+import com.microsoft.azure.management.datafactory.v2018_06_01.PrivateEndPointConnections;
+import com.microsoft.azure.management.datafactory.v2018_06_01.PrivateEndpointConnections;
+import com.microsoft.azure.management.datafactory.v2018_06_01.PrivateLinkResources;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
 
@@ -57,6 +60,9 @@ public final class DataFactoryManager extends ManagerCore<DataFactoryManager, Da
     private DataFlowDebugSessions dataFlowDebugSessions;
     private ManagedVirtualNetworks managedVirtualNetworks;
     private ManagedPrivateEndpoints managedPrivateEndpoints;
+    private PrivateEndPointConnections privateEndPointConnections;
+    private PrivateEndpointConnections privateEndpointConnections;
+    private PrivateLinkResources privateLinkResources;
     /**
     * Get a Configurable instance that can be used to create DataFactoryManager with optional configuration.
     *
@@ -272,6 +278,36 @@ public final class DataFactoryManager extends ManagerCore<DataFactoryManager, Da
             this.managedPrivateEndpoints = new ManagedPrivateEndpointsImpl(this);
         }
         return this.managedPrivateEndpoints;
+    }
+
+    /**
+     * @return Entry point to manage PrivateEndPointConnections.
+     */
+    public PrivateEndPointConnections privateEndPointConnections() {
+        if (this.privateEndPointConnections == null) {
+            this.privateEndPointConnections = new PrivateEndPointConnectionsImpl(this);
+        }
+        return this.privateEndPointConnections;
+    }
+
+    /**
+     * @return Entry point to manage PrivateEndpointConnections.
+     */
+    public PrivateEndpointConnections privateEndpointConnections() {
+        if (this.privateEndpointConnections == null) {
+            this.privateEndpointConnections = new PrivateEndpointConnectionsImpl(this);
+        }
+        return this.privateEndpointConnections;
+    }
+
+    /**
+     * @return Entry point to manage PrivateLinkResources.
+     */
+    public PrivateLinkResources privateLinkResources() {
+        if (this.privateLinkResources == null) {
+            this.privateLinkResources = new PrivateLinkResourcesImpl(this);
+        }
+        return this.privateLinkResources;
     }
 
     /**
