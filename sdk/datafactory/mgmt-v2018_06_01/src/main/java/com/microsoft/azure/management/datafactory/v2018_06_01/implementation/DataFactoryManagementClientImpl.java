@@ -354,6 +354,45 @@ public class DataFactoryManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The PrivateEndPointConnectionsInner object to access its operations.
+     */
+    private PrivateEndPointConnectionsInner privateEndPointConnections;
+
+    /**
+     * Gets the PrivateEndPointConnectionsInner object to access its operations.
+     * @return the PrivateEndPointConnectionsInner object.
+     */
+    public PrivateEndPointConnectionsInner privateEndPointConnections() {
+        return this.privateEndPointConnections;
+    }
+
+    /**
+     * The PrivateEndpointConnectionsInner object to access its operations.
+     */
+    private PrivateEndpointConnectionsInner privateEndpointConnections;
+
+    /**
+     * Gets the PrivateEndpointConnectionsInner object to access its operations.
+     * @return the PrivateEndpointConnectionsInner object.
+     */
+    public PrivateEndpointConnectionsInner privateEndpointConnections() {
+        return this.privateEndpointConnections;
+    }
+
+    /**
+     * The PrivateLinkResourcesInner object to access its operations.
+     */
+    private PrivateLinkResourcesInner privateLinkResources;
+
+    /**
+     * Gets the PrivateLinkResourcesInner object to access its operations.
+     * @return the PrivateLinkResourcesInner object.
+     */
+    public PrivateLinkResourcesInner privateLinkResources() {
+        return this.privateLinkResources;
+    }
+
+    /**
      * Initializes an instance of DataFactoryManagementClient client.
      *
      * @param credentials the management credentials for Azure
@@ -405,6 +444,9 @@ public class DataFactoryManagementClientImpl extends AzureServiceClient {
         this.dataFlowDebugSessions = new DataFlowDebugSessionsInner(restClient().retrofit(), this);
         this.managedVirtualNetworks = new ManagedVirtualNetworksInner(restClient().retrofit(), this);
         this.managedPrivateEndpoints = new ManagedPrivateEndpointsInner(restClient().retrofit(), this);
+        this.privateEndPointConnections = new PrivateEndPointConnectionsInner(restClient().retrofit(), this);
+        this.privateEndpointConnections = new PrivateEndpointConnectionsInner(restClient().retrofit(), this);
+        this.privateLinkResources = new PrivateLinkResourcesInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
