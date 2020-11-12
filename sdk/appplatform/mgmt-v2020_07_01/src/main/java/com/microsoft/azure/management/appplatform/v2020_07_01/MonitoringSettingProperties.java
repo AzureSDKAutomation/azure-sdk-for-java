@@ -40,6 +40,25 @@ public class MonitoringSettingProperties {
     private String appInsightsInstrumentationKey;
 
     /**
+     * Indicates the sampling rate of application insight agent, should be in
+     * range [0.0, 100.0].
+     */
+    @JsonProperty(value = "appInsightsSamplingRate")
+    private Double appInsightsSamplingRate;
+
+    /**
+     * Type of the monitoring. Possible values include: 'AppInsights'.
+     */
+    @JsonProperty(value = "monitoringType")
+    private MonitoringType monitoringType;
+
+    /**
+     * Indicates the versions of application insight agent.
+     */
+    @JsonProperty(value = "appInsightsAgentVersions")
+    private ApplicationInsightsAgentVersions appInsightsAgentVersions;
+
+    /**
      * Get state of the Monitoring Setting. Possible values include: 'NotAvailable', 'Failed', 'Succeeded', 'Updating'.
      *
      * @return the provisioningState value
@@ -105,6 +124,66 @@ public class MonitoringSettingProperties {
      */
     public MonitoringSettingProperties withAppInsightsInstrumentationKey(String appInsightsInstrumentationKey) {
         this.appInsightsInstrumentationKey = appInsightsInstrumentationKey;
+        return this;
+    }
+
+    /**
+     * Get indicates the sampling rate of application insight agent, should be in range [0.0, 100.0].
+     *
+     * @return the appInsightsSamplingRate value
+     */
+    public Double appInsightsSamplingRate() {
+        return this.appInsightsSamplingRate;
+    }
+
+    /**
+     * Set indicates the sampling rate of application insight agent, should be in range [0.0, 100.0].
+     *
+     * @param appInsightsSamplingRate the appInsightsSamplingRate value to set
+     * @return the MonitoringSettingProperties object itself.
+     */
+    public MonitoringSettingProperties withAppInsightsSamplingRate(Double appInsightsSamplingRate) {
+        this.appInsightsSamplingRate = appInsightsSamplingRate;
+        return this;
+    }
+
+    /**
+     * Get type of the monitoring. Possible values include: 'AppInsights'.
+     *
+     * @return the monitoringType value
+     */
+    public MonitoringType monitoringType() {
+        return this.monitoringType;
+    }
+
+    /**
+     * Set type of the monitoring. Possible values include: 'AppInsights'.
+     *
+     * @param monitoringType the monitoringType value to set
+     * @return the MonitoringSettingProperties object itself.
+     */
+    public MonitoringSettingProperties withMonitoringType(MonitoringType monitoringType) {
+        this.monitoringType = monitoringType;
+        return this;
+    }
+
+    /**
+     * Get indicates the versions of application insight agent.
+     *
+     * @return the appInsightsAgentVersions value
+     */
+    public ApplicationInsightsAgentVersions appInsightsAgentVersions() {
+        return this.appInsightsAgentVersions;
+    }
+
+    /**
+     * Set indicates the versions of application insight agent.
+     *
+     * @param appInsightsAgentVersions the appInsightsAgentVersions value to set
+     * @return the MonitoringSettingProperties object itself.
+     */
+    public MonitoringSettingProperties withAppInsightsAgentVersions(ApplicationInsightsAgentVersions appInsightsAgentVersions) {
+        this.appInsightsAgentVersions = appInsightsAgentVersions;
         return this;
     }
 
