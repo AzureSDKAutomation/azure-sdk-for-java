@@ -15,6 +15,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class PatchVault extends PatchTrackedResource {
     /**
+     * The identity property.
+     */
+    @JsonProperty(value = "identity")
+    private IdentityData identity;
+
+    /**
      * The properties property.
      */
     @JsonProperty(value = "properties")
@@ -25,6 +31,26 @@ public class PatchVault extends PatchTrackedResource {
      */
     @JsonProperty(value = "sku")
     private Sku sku;
+
+    /**
+     * Get the identity value.
+     *
+     * @return the identity value
+     */
+    public IdentityData identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity value.
+     *
+     * @param identity the identity value to set
+     * @return the PatchVault object itself.
+     */
+    public PatchVault withIdentity(IdentityData identity) {
+        this.identity = identity;
+        return this;
+    }
 
     /**
      * Get the properties value.
