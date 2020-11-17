@@ -18,8 +18,6 @@ class ExpressRouteAuthorizationImpl extends CreatableUpdatableImpl<ExpressRouteA
     private String resourceGroupName;
     private String privateCloudName;
     private String authorizationName;
-    private Object cauthorization;
-    private Object uauthorization;
 
     ExpressRouteAuthorizationImpl(String name, AVSManager manager) {
         super(name, new ExpressRouteAuthorizationInner());
@@ -49,14 +47,14 @@ class ExpressRouteAuthorizationImpl extends CreatableUpdatableImpl<ExpressRouteA
     @Override
     public Observable<ExpressRouteAuthorization> createResourceAsync() {
         AuthorizationsInner client = this.manager().inner().authorizations();
-        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.authorizationName, this.cauthorization)
+        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.authorizationName)
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<ExpressRouteAuthorization> updateResourceAsync() {
         AuthorizationsInner client = this.manager().inner().authorizations();
-        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.authorizationName, this.uauthorization)
+        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.authorizationName)
             .map(innerToFluentMap(this));
     }
 
@@ -106,16 +104,6 @@ class ExpressRouteAuthorizationImpl extends CreatableUpdatableImpl<ExpressRouteA
     public ExpressRouteAuthorizationImpl withExistingPrivateCloud(String resourceGroupName, String privateCloudName) {
         this.resourceGroupName = resourceGroupName;
         this.privateCloudName = privateCloudName;
-        return this;
-    }
-
-    @Override
-    public ExpressRouteAuthorizationImpl withAuthorization(Object authorization) {
-        if (isInCreateMode()) {
-            this.cauthorization = authorization;
-        } else {
-            this.uauthorization = authorization;
-        }
         return this;
     }
 
