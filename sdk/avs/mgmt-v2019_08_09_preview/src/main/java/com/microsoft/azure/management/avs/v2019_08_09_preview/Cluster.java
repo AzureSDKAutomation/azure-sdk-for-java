@@ -17,7 +17,6 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.avs.v2019_08_09_preview.implementation.AVSManager;
-import java.util.List;
 
 /**
  * Type representing Cluster.
@@ -46,7 +45,7 @@ public interface Cluster extends HasInner<ClusterInner>, Indexable, Refreshable<
     /**
      * The entirety of the Cluster definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithPrivateCloud, DefinitionStages.WithProperties, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithPrivateCloud, DefinitionStages.WithCreate {
     }
 
     /**
@@ -69,18 +68,18 @@ public interface Cluster extends HasInner<ClusterInner>, Indexable, Refreshable<
             * @param privateCloudName The name of the private cloud
             * @return the next definition stage
             */
-            WithProperties withExistingPrivateCloud(String resourceGroupName, String privateCloudName);
+            WithCreate withExistingPrivateCloud(String resourceGroupName, String privateCloudName);
         }
 
         /**
          * The stage of the cluster definition allowing to specify Properties.
          */
         interface WithProperties {
-           /**
-            * Specifies properties.
-            * @param properties The properties of a cluster resource
-            * @return the next definition stage
-            */
+            /**
+             * Specifies properties.
+             * @param properties The properties of a cluster resource
+             * @return the next definition stage
+             */
             WithCreate withProperties(ClusterProperties properties);
         }
 
@@ -89,7 +88,7 @@ public interface Cluster extends HasInner<ClusterInner>, Indexable, Refreshable<
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<Cluster> {
+        interface WithCreate extends Creatable<Cluster>, DefinitionStages.WithProperties {
         }
     }
     /**

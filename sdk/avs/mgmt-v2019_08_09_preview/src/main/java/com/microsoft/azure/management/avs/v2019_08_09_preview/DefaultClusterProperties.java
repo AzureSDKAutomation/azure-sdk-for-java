@@ -16,6 +16,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class DefaultClusterProperties {
     /**
+     * The deprecated identity.
+     */
+    @JsonProperty(value = "clusterID", access = JsonProperty.Access.WRITE_ONLY)
+    private Integer clusterID;
+
+    /**
      * The identity.
      */
     @JsonProperty(value = "clusterId", access = JsonProperty.Access.WRITE_ONLY)
@@ -32,6 +38,15 @@ public class DefaultClusterProperties {
      */
     @JsonProperty(value = "hosts", access = JsonProperty.Access.WRITE_ONLY)
     private List<String> hosts;
+
+    /**
+     * Get the deprecated identity.
+     *
+     * @return the clusterID value
+     */
+    public Integer clusterID() {
+        return this.clusterID;
+    }
 
     /**
      * Get the identity.

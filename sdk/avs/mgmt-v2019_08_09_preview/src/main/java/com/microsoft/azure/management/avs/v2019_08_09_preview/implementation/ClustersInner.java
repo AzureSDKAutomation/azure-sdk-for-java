@@ -13,7 +13,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.avs.v2019_08_09_preview.ApiErrorException;
-import com.microsoft.azure.management.avs.v2019_08_09_preview.ClusterProperties;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
@@ -73,19 +72,19 @@ public class ClustersInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2019_08_09_preview.Clusters createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("clusterName") String clusterName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ClusterInner cluster, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("clusterName") String clusterName, @Body ClusterInner cluster, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2019_08_09_preview.Clusters beginCreateOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("clusterName") String clusterName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ClusterInner cluster, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("clusterName") String clusterName, @Body ClusterInner cluster, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2019_08_09_preview.Clusters update" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}")
-        Observable<Response<ResponseBody>> update(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("clusterName") String clusterName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ClusterInner cluster, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> update(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("clusterName") String clusterName, @Body ClusterInner cluster, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2019_08_09_preview.Clusters beginUpdate" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}")
-        Observable<Response<ResponseBody>> beginUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("clusterName") String clusterName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ClusterInner cluster, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("clusterName") String clusterName, @Body ClusterInner cluster, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2019_08_09_preview.Clusters delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}", method = "DELETE", hasBody = true)
@@ -323,13 +322,14 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName The name of the private cloud.
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in the private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ClusterInner object if successful.
      */
-    public ClusterInner createOrUpdate(String resourceGroupName, String privateCloudName, String clusterName) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName).toBlocking().last().body();
+    public ClusterInner createOrUpdate(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster).toBlocking().last().body();
     }
 
     /**
@@ -338,12 +338,13 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName The name of the private cloud.
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in the private cloud
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ClusterInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName), serviceCallback);
+    public ServiceFuture<ClusterInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster, final ServiceCallback<ClusterInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster), serviceCallback);
     }
 
     /**
@@ -352,11 +353,12 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName The name of the private cloud.
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in the private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ClusterInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
+    public Observable<ClusterInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
             @Override
             public ClusterInner call(ServiceResponse<ClusterInner> response) {
                 return response.body();
@@ -370,10 +372,11 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName The name of the private cloud.
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in the private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ClusterInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName) {
+    public Observable<ServiceResponse<ClusterInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -386,95 +389,14 @@ public class ClustersInner {
         if (clusterName == null) {
             throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        final ClusterProperties properties = null;
-        ClusterInner cluster = new ClusterInner();
-        cluster.withProperties(null);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, this.client.apiVersion(), this.client.acceptLanguage(), cluster, this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ClusterInner>() { }.getType());
-    }
-    /**
-     * Create or update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName The name of the private cloud.
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ApiErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ClusterInner object if successful.
-     */
-    public ClusterInner createOrUpdate(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties).toBlocking().last().body();
-    }
-
-    /**
-     * Create or update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName The name of the private cloud.
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<ClusterInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties), serviceCallback);
-    }
-
-    /**
-     * Create or update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName The name of the private cloud.
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<ClusterInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
-            @Override
-            public ClusterInner call(ServiceResponse<ClusterInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Create or update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName The name of the private cloud.
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<ServiceResponse<ClusterInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (privateCloudName == null) {
-            throw new IllegalArgumentException("Parameter privateCloudName is required and cannot be null.");
-        }
-        if (clusterName == null) {
-            throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
+        if (cluster == null) {
+            throw new IllegalArgumentException("Parameter cluster is required and cannot be null.");
         }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(properties);
-        ClusterInner cluster = new ClusterInner();
-        cluster.withProperties(properties);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, this.client.apiVersion(), this.client.acceptLanguage(), cluster, this.client.userAgent());
+        Validator.validate(cluster);
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, cluster, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ClusterInner>() { }.getType());
     }
 
@@ -484,13 +406,14 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName The name of the private cloud.
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in the private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ClusterInner object if successful.
      */
-    public ClusterInner beginCreateOrUpdate(String resourceGroupName, String privateCloudName, String clusterName) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName).toBlocking().single().body();
+    public ClusterInner beginCreateOrUpdate(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
+        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster).toBlocking().single().body();
     }
 
     /**
@@ -499,12 +422,13 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName The name of the private cloud.
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in the private cloud
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ClusterInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName), serviceCallback);
+    public ServiceFuture<ClusterInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster, final ServiceCallback<ClusterInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster), serviceCallback);
     }
 
     /**
@@ -513,11 +437,12 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName The name of the private cloud.
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in the private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
      */
-    public Observable<ClusterInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
+    public Observable<ClusterInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
+        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
             @Override
             public ClusterInner call(ServiceResponse<ClusterInner> response) {
                 return response.body();
@@ -531,10 +456,11 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName The name of the private cloud.
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in the private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
      */
-    public Observable<ServiceResponse<ClusterInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName) {
+    public Observable<ServiceResponse<ClusterInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -547,106 +473,14 @@ public class ClustersInner {
         if (clusterName == null) {
             throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        final ClusterProperties properties = null;
-        ClusterInner cluster = new ClusterInner();
-        cluster.withProperties(null);
-        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, this.client.apiVersion(), this.client.acceptLanguage(), cluster, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ClusterInner>>>() {
-                @Override
-                public Observable<ServiceResponse<ClusterInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<ClusterInner> clientResponse = beginCreateOrUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    /**
-     * Create or update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName The name of the private cloud.
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ApiErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ClusterInner object if successful.
-     */
-    public ClusterInner beginCreateOrUpdate(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties).toBlocking().single().body();
-    }
-
-    /**
-     * Create or update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName The name of the private cloud.
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<ClusterInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties), serviceCallback);
-    }
-
-    /**
-     * Create or update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName The name of the private cloud.
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ClusterInner object
-     */
-    public Observable<ClusterInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
-            @Override
-            public ClusterInner call(ServiceResponse<ClusterInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Create or update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName The name of the private cloud.
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ClusterInner object
-     */
-    public Observable<ServiceResponse<ClusterInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (privateCloudName == null) {
-            throw new IllegalArgumentException("Parameter privateCloudName is required and cannot be null.");
-        }
-        if (clusterName == null) {
-            throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
+        if (cluster == null) {
+            throw new IllegalArgumentException("Parameter cluster is required and cannot be null.");
         }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(properties);
-        ClusterInner cluster = new ClusterInner();
-        cluster.withProperties(properties);
-        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, this.client.apiVersion(), this.client.acceptLanguage(), cluster, this.client.userAgent())
+        Validator.validate(cluster);
+        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, cluster, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ClusterInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ClusterInner>> call(Response<ResponseBody> response) {
@@ -674,13 +508,14 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName Name of the private cloud
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in a private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ClusterInner object if successful.
      */
-    public ClusterInner update(String resourceGroupName, String privateCloudName, String clusterName) {
-        return updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName).toBlocking().last().body();
+    public ClusterInner update(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
+        return updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster).toBlocking().last().body();
     }
 
     /**
@@ -689,12 +524,13 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName Name of the private cloud
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in a private cloud
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ClusterInner> updateAsync(String resourceGroupName, String privateCloudName, String clusterName, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName), serviceCallback);
+    public ServiceFuture<ClusterInner> updateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster, final ServiceCallback<ClusterInner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster), serviceCallback);
     }
 
     /**
@@ -703,11 +539,12 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName Name of the private cloud
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in a private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ClusterInner> updateAsync(String resourceGroupName, String privateCloudName, String clusterName) {
-        return updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
+    public Observable<ClusterInner> updateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
+        return updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
             @Override
             public ClusterInner call(ServiceResponse<ClusterInner> response) {
                 return response.body();
@@ -721,10 +558,11 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName Name of the private cloud
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in a private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ClusterInner>> updateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName) {
+    public Observable<ServiceResponse<ClusterInner>> updateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -737,95 +575,14 @@ public class ClustersInner {
         if (clusterName == null) {
             throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        final ClusterProperties properties = null;
-        ClusterInner cluster = new ClusterInner();
-        cluster.withProperties(null);
-        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, this.client.apiVersion(), this.client.acceptLanguage(), cluster, this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ClusterInner>() { }.getType());
-    }
-    /**
-     * Update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName Name of the private cloud
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ApiErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ClusterInner object if successful.
-     */
-    public ClusterInner update(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        return updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties).toBlocking().last().body();
-    }
-
-    /**
-     * Update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName Name of the private cloud
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<ClusterInner> updateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties), serviceCallback);
-    }
-
-    /**
-     * Update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName Name of the private cloud
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<ClusterInner> updateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        return updateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
-            @Override
-            public ClusterInner call(ServiceResponse<ClusterInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName Name of the private cloud
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<ServiceResponse<ClusterInner>> updateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (privateCloudName == null) {
-            throw new IllegalArgumentException("Parameter privateCloudName is required and cannot be null.");
-        }
-        if (clusterName == null) {
-            throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
+        if (cluster == null) {
+            throw new IllegalArgumentException("Parameter cluster is required and cannot be null.");
         }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(properties);
-        ClusterInner cluster = new ClusterInner();
-        cluster.withProperties(properties);
-        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, this.client.apiVersion(), this.client.acceptLanguage(), cluster, this.client.userAgent());
+        Validator.validate(cluster);
+        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, cluster, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ClusterInner>() { }.getType());
     }
 
@@ -835,13 +592,14 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName Name of the private cloud
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in a private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ApiErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ClusterInner object if successful.
      */
-    public ClusterInner beginUpdate(String resourceGroupName, String privateCloudName, String clusterName) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName).toBlocking().single().body();
+    public ClusterInner beginUpdate(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster).toBlocking().single().body();
     }
 
     /**
@@ -850,12 +608,13 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName Name of the private cloud
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in a private cloud
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ClusterInner> beginUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName), serviceCallback);
+    public ServiceFuture<ClusterInner> beginUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster, final ServiceCallback<ClusterInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster), serviceCallback);
     }
 
     /**
@@ -864,11 +623,12 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName Name of the private cloud
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in a private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
      */
-    public Observable<ClusterInner> beginUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
+    public Observable<ClusterInner> beginUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, cluster).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
             @Override
             public ClusterInner call(ServiceResponse<ClusterInner> response) {
                 return response.body();
@@ -882,10 +642,11 @@ public class ClustersInner {
      * @param resourceGroupName Name of the resource group within the Azure subscription
      * @param privateCloudName Name of the private cloud
      * @param clusterName Name of the cluster in the private cloud
+     * @param cluster A cluster in a private cloud
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ClusterInner object
      */
-    public Observable<ServiceResponse<ClusterInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName) {
+    public Observable<ServiceResponse<ClusterInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterInner cluster) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -898,106 +659,14 @@ public class ClustersInner {
         if (clusterName == null) {
             throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        final ClusterProperties properties = null;
-        ClusterInner cluster = new ClusterInner();
-        cluster.withProperties(null);
-        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, this.client.apiVersion(), this.client.acceptLanguage(), cluster, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ClusterInner>>>() {
-                @Override
-                public Observable<ServiceResponse<ClusterInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<ClusterInner> clientResponse = beginUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    /**
-     * Update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName Name of the private cloud
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ApiErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ClusterInner object if successful.
-     */
-    public ClusterInner beginUpdate(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties).toBlocking().single().body();
-    }
-
-    /**
-     * Update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName Name of the private cloud
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<ClusterInner> beginUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties, final ServiceCallback<ClusterInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties), serviceCallback);
-    }
-
-    /**
-     * Update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName Name of the private cloud
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ClusterInner object
-     */
-    public Observable<ClusterInner> beginUpdateAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, clusterName, properties).map(new Func1<ServiceResponse<ClusterInner>, ClusterInner>() {
-            @Override
-            public ClusterInner call(ServiceResponse<ClusterInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Update a cluster in a private cloud.
-     *
-     * @param resourceGroupName Name of the resource group within the Azure subscription
-     * @param privateCloudName Name of the private cloud
-     * @param clusterName Name of the cluster in the private cloud
-     * @param properties The properties of a cluster resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ClusterInner object
-     */
-    public Observable<ServiceResponse<ClusterInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String clusterName, ClusterProperties properties) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (privateCloudName == null) {
-            throw new IllegalArgumentException("Parameter privateCloudName is required and cannot be null.");
-        }
-        if (clusterName == null) {
-            throw new IllegalArgumentException("Parameter clusterName is required and cannot be null.");
+        if (cluster == null) {
+            throw new IllegalArgumentException("Parameter cluster is required and cannot be null.");
         }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(properties);
-        ClusterInner cluster = new ClusterInner();
-        cluster.withProperties(properties);
-        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, this.client.apiVersion(), this.client.acceptLanguage(), cluster, this.client.userAgent())
+        Validator.validate(cluster);
+        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, clusterName, cluster, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ClusterInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ClusterInner>> call(Response<ResponseBody> response) {
