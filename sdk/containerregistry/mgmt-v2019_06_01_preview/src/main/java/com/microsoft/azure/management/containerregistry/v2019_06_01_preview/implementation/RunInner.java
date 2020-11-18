@@ -19,6 +19,7 @@ import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.Time
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.PlatformProperties;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.AgentProperties;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.ProvisioningState;
+import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.SystemData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.ProxyResource;
@@ -54,6 +55,12 @@ public class RunInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.runType")
     private RunType runType;
+
+    /**
+     * The dedicated agent pool for the run.
+     */
+    @JsonProperty(value = "properties.agentPoolName")
+    private String agentPoolName;
 
     /**
      * The time the run was scheduled.
@@ -144,6 +151,12 @@ public class RunInner extends ProxyResource {
     private String updateTriggerToken;
 
     /**
+     * The image description for the log artifact.
+     */
+    @JsonProperty(value = "properties.logArtifact", access = JsonProperty.Access.WRITE_ONLY)
+    private ImageDescriptor logArtifact;
+
+    /**
      * The provisioning state of a run. Possible values include: 'Creating',
      * 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled'.
      */
@@ -155,6 +168,12 @@ public class RunInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.isArchiveEnabled")
     private Boolean isArchiveEnabled;
+
+    /**
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get the unique identifier for the run.
@@ -233,6 +252,26 @@ public class RunInner extends ProxyResource {
      */
     public RunInner withRunType(RunType runType) {
         this.runType = runType;
+        return this;
+    }
+
+    /**
+     * Get the dedicated agent pool for the run.
+     *
+     * @return the agentPoolName value
+     */
+    public String agentPoolName() {
+        return this.agentPoolName;
+    }
+
+    /**
+     * Set the dedicated agent pool for the run.
+     *
+     * @param agentPoolName the agentPoolName value to set
+     * @return the RunInner object itself.
+     */
+    public RunInner withAgentPoolName(String agentPoolName) {
+        this.agentPoolName = agentPoolName;
         return this;
     }
 
@@ -506,6 +545,15 @@ public class RunInner extends ProxyResource {
     }
 
     /**
+     * Get the image description for the log artifact.
+     *
+     * @return the logArtifact value
+     */
+    public ImageDescriptor logArtifact() {
+        return this.logArtifact;
+    }
+
+    /**
      * Get the provisioning state of a run. Possible values include: 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled'.
      *
      * @return the provisioningState value
@@ -543,6 +591,15 @@ public class RunInner extends ProxyResource {
     public RunInner withIsArchiveEnabled(Boolean isArchiveEnabled) {
         this.isArchiveEnabled = isArchiveEnabled;
         return this;
+    }
+
+    /**
+     * Get metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
 }
