@@ -9,6 +9,7 @@
 package com.microsoft.azure.management.appconfiguration.v2020_06_01.implementation;
 
 import com.microsoft.azure.management.appconfiguration.v2020_06_01.OperationDefinitionDisplay;
+import com.microsoft.azure.management.appconfiguration.v2020_06_01.OperationProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -22,10 +23,28 @@ public class OperationDefinitionInner {
     private String name;
 
     /**
+     * Indicates whether the operation is a data action.
+     */
+    @JsonProperty(value = "isDataAction")
+    private Boolean isDataAction;
+
+    /**
      * The display information for the configuration store operation.
      */
     @JsonProperty(value = "display")
     private OperationDefinitionDisplay display;
+
+    /**
+     * Origin of the operation.
+     */
+    @JsonProperty(value = "origin")
+    private String origin;
+
+    /**
+     * Properties of the operation.
+     */
+    @JsonProperty(value = "properties")
+    private OperationProperties properties;
 
     /**
      * Get operation name: {provider}/{resource}/{operation}.
@@ -48,6 +67,26 @@ public class OperationDefinitionInner {
     }
 
     /**
+     * Get indicates whether the operation is a data action.
+     *
+     * @return the isDataAction value
+     */
+    public Boolean isDataAction() {
+        return this.isDataAction;
+    }
+
+    /**
+     * Set indicates whether the operation is a data action.
+     *
+     * @param isDataAction the isDataAction value to set
+     * @return the OperationDefinitionInner object itself.
+     */
+    public OperationDefinitionInner withIsDataAction(Boolean isDataAction) {
+        this.isDataAction = isDataAction;
+        return this;
+    }
+
+    /**
      * Get the display information for the configuration store operation.
      *
      * @return the display value
@@ -64,6 +103,46 @@ public class OperationDefinitionInner {
      */
     public OperationDefinitionInner withDisplay(OperationDefinitionDisplay display) {
         this.display = display;
+        return this;
+    }
+
+    /**
+     * Get origin of the operation.
+     *
+     * @return the origin value
+     */
+    public String origin() {
+        return this.origin;
+    }
+
+    /**
+     * Set origin of the operation.
+     *
+     * @param origin the origin value to set
+     * @return the OperationDefinitionInner object itself.
+     */
+    public OperationDefinitionInner withOrigin(String origin) {
+        this.origin = origin;
+        return this;
+    }
+
+    /**
+     * Get properties of the operation.
+     *
+     * @return the properties value
+     */
+    public OperationProperties properties() {
+        return this.properties;
+    }
+
+    /**
+     * Set properties of the operation.
+     *
+     * @param properties the properties value to set
+     * @return the OperationDefinitionInner object itself.
+     */
+    public OperationDefinitionInner withProperties(OperationProperties properties) {
+        this.properties = properties;
         return this;
     }
 

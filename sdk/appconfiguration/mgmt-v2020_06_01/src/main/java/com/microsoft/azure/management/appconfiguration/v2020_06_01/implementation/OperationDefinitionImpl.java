@@ -11,6 +11,7 @@ package com.microsoft.azure.management.appconfiguration.v2020_06_01.implementati
 import com.microsoft.azure.management.appconfiguration.v2020_06_01.OperationDefinition;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.appconfiguration.v2020_06_01.OperationDefinitionDisplay;
+import com.microsoft.azure.management.appconfiguration.v2020_06_01.OperationProperties;
 
 class OperationDefinitionImpl extends WrapperImpl<OperationDefinitionInner> implements OperationDefinition {
     private final AppConfigurationManager manager;
@@ -30,8 +31,23 @@ class OperationDefinitionImpl extends WrapperImpl<OperationDefinitionInner> impl
     }
 
     @Override
+    public Boolean isDataAction() {
+        return this.inner().isDataAction();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
+    }
+
+    @Override
+    public String origin() {
+        return this.inner().origin();
+    }
+
+    @Override
+    public OperationProperties properties() {
+        return this.inner().properties();
     }
 
 }
