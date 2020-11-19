@@ -14,26 +14,26 @@ import com.microsoft.azure.management.postgresql.v2017_12_01.LocationBasedPerfor
 import rx.Observable;
 import rx.functions.Func1;
 import java.util.List;
-import com.microsoft.azure.management.postgresql.v2017_12_01.PerformanceTierProperties;
+import com.microsoft.azure.management.postgresql.v2017_12_01.LocationPerformanceTierProperties;
 
 class LocationBasedPerformanceTiersImpl extends WrapperImpl<LocationBasedPerformanceTiersInner> implements LocationBasedPerformanceTiers {
-    private final PostgreSQLManager manager;
+    private final DBForPostgreSQLManager manager;
 
-    LocationBasedPerformanceTiersImpl(PostgreSQLManager manager) {
+    LocationBasedPerformanceTiersImpl(DBForPostgreSQLManager manager) {
         super(manager.inner().locationBasedPerformanceTiers());
         this.manager = manager;
     }
 
-    public PostgreSQLManager manager() {
+    public DBForPostgreSQLManager manager() {
         return this.manager;
     }
 
-    private PerformanceTierPropertiesImpl wrapPerformanceTierPropertiesModel(PerformanceTierPropertiesInner inner) {
-        return  new PerformanceTierPropertiesImpl(inner, manager());
+    private LocationPerformanceTierPropertiesImpl wrapLocationPerformanceTierPropertiesModel(PerformanceTierPropertiesInner inner) {
+        return  new LocationPerformanceTierPropertiesImpl(inner, manager());
     }
 
     @Override
-    public Observable<PerformanceTierProperties> listAsync(String locationName) {
+    public Observable<LocationPerformanceTierProperties> listAsync(String locationName) {
         LocationBasedPerformanceTiersInner client = this.inner();
         return client.listAsync(locationName)
         .flatMap(new Func1<List<PerformanceTierPropertiesInner>, Observable<PerformanceTierPropertiesInner>>() {
@@ -42,10 +42,10 @@ class LocationBasedPerformanceTiersImpl extends WrapperImpl<LocationBasedPerform
                 return Observable.from(innerList);
             }
         })
-        .map(new Func1<PerformanceTierPropertiesInner, PerformanceTierProperties>() {
+        .map(new Func1<PerformanceTierPropertiesInner, LocationPerformanceTierProperties>() {
             @Override
-            public PerformanceTierProperties call(PerformanceTierPropertiesInner inner) {
-                return wrapPerformanceTierPropertiesModel(inner);
+            public LocationPerformanceTierProperties call(PerformanceTierPropertiesInner inner) {
+                return wrapLocationPerformanceTierPropertiesModel(inner);
             }
         });
     }
