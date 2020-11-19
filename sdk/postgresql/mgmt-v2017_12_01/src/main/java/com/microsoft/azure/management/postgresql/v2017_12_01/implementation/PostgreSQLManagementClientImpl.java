@@ -10,6 +10,8 @@ package com.microsoft.azure.management.postgresql.v2017_12_01.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 
@@ -28,11 +30,23 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
         return this.azureClient;
     }
 
-    /** The subscription ID that identifies an Azure subscription. */
+    /** The API version to use for this operation. */
+    private String apiVersion;
+
+    /**
+     * Gets The API version to use for this operation.
+     *
+     * @return the apiVersion value.
+     */
+    public String apiVersion() {
+        return this.apiVersion;
+    }
+
+    /** The ID of the target subscription. */
     private String subscriptionId;
 
     /**
-     * Gets The subscription ID that identifies an Azure subscription.
+     * Gets The ID of the target subscription.
      *
      * @return the subscriptionId value.
      */
@@ -41,7 +55,7 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Sets The subscription ID that identifies an Azure subscription.
+     * Sets The ID of the target subscription.
      *
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
@@ -49,18 +63,6 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
     public PostgreSQLManagementClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
-    }
-
-    /** The API version to use for the request. */
-    private String apiVersion;
-
-    /**
-     * Gets The API version to use for the request.
-     *
-     * @return the apiVersion value.
-     */
-    public String apiVersion() {
-        return this.apiVersion;
     }
 
     /** The preferred language for the response. */
@@ -211,6 +213,19 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The ServerParametersInner object to access its operations.
+     */
+    private ServerParametersInner serverParameters;
+
+    /**
+     * Gets the ServerParametersInner object to access its operations.
+     * @return the ServerParametersInner object.
+     */
+    public ServerParametersInner serverParameters() {
+        return this.serverParameters;
+    }
+
+    /**
      * The LogFilesInner object to access its operations.
      */
     private LogFilesInner logFiles;
@@ -221,6 +236,45 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
      */
     public LogFilesInner logFiles() {
         return this.logFiles;
+    }
+
+    /**
+     * The ServerAdministratorsInner object to access its operations.
+     */
+    private ServerAdministratorsInner serverAdministrators;
+
+    /**
+     * Gets the ServerAdministratorsInner object to access its operations.
+     * @return the ServerAdministratorsInner object.
+     */
+    public ServerAdministratorsInner serverAdministrators() {
+        return this.serverAdministrators;
+    }
+
+    /**
+     * The RecoverableServersInner object to access its operations.
+     */
+    private RecoverableServersInner recoverableServers;
+
+    /**
+     * Gets the RecoverableServersInner object to access its operations.
+     * @return the RecoverableServersInner object.
+     */
+    public RecoverableServersInner recoverableServers() {
+        return this.recoverableServers;
+    }
+
+    /**
+     * The ServerBasedPerformanceTiersInner object to access its operations.
+     */
+    private ServerBasedPerformanceTiersInner serverBasedPerformanceTiers;
+
+    /**
+     * Gets the ServerBasedPerformanceTiersInner object to access its operations.
+     * @return the ServerBasedPerformanceTiersInner object.
+     */
+    public ServerBasedPerformanceTiersInner serverBasedPerformanceTiers() {
+        return this.serverBasedPerformanceTiers;
     }
 
     /**
@@ -250,19 +304,6 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The ServerSecurityAlertPoliciesInner object to access its operations.
-     */
-    private ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies;
-
-    /**
-     * Gets the ServerSecurityAlertPoliciesInner object to access its operations.
-     * @return the ServerSecurityAlertPoliciesInner object.
-     */
-    public ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies() {
-        return this.serverSecurityAlertPolicies;
-    }
-
-    /**
      * The OperationsInner object to access its operations.
      */
     private OperationsInner operations;
@@ -273,6 +314,19 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
      */
     public OperationsInner operations() {
         return this.operations;
+    }
+
+    /**
+     * The ServerSecurityAlertPoliciesInner object to access its operations.
+     */
+    private ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies;
+
+    /**
+     * Gets the ServerSecurityAlertPoliciesInner object to access its operations.
+     * @return the ServerSecurityAlertPoliciesInner object.
+     */
+    public ServerSecurityAlertPoliciesInner serverSecurityAlertPolicies() {
+        return this.serverSecurityAlertPolicies;
     }
 
     /**
@@ -316,11 +370,15 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
         this.virtualNetworkRules = new VirtualNetworkRulesInner(restClient().retrofit(), this);
         this.databases = new DatabasesInner(restClient().retrofit(), this);
         this.configurations = new ConfigurationsInner(restClient().retrofit(), this);
+        this.serverParameters = new ServerParametersInner(restClient().retrofit(), this);
         this.logFiles = new LogFilesInner(restClient().retrofit(), this);
+        this.serverAdministrators = new ServerAdministratorsInner(restClient().retrofit(), this);
+        this.recoverableServers = new RecoverableServersInner(restClient().retrofit(), this);
+        this.serverBasedPerformanceTiers = new ServerBasedPerformanceTiersInner(restClient().retrofit(), this);
         this.locationBasedPerformanceTiers = new LocationBasedPerformanceTiersInner(restClient().retrofit(), this);
         this.checkNameAvailabilitys = new CheckNameAvailabilitysInner(restClient().retrofit(), this);
-        this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesInner(restClient().retrofit(), this);
         this.operations = new OperationsInner(restClient().retrofit(), this);
+        this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 
