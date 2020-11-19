@@ -55,9 +55,7 @@ public class RoleAssignmentInner {
 
     /**
      * The principal type of the assigned principal ID. Possible values
-     * include: 'User', 'Group', 'ServicePrincipal', 'Unknown',
-     * 'DirectoryRoleTemplate', 'ForeignGroup', 'Application', 'MSI',
-     * 'DirectoryObjectOrGroup', 'Everyone'.
+     * include: 'User', 'Group', 'ServicePrincipal'.
      */
     @JsonProperty(value = "properties.principalType")
     private PrincipalType principalType;
@@ -156,7 +154,7 @@ public class RoleAssignmentInner {
     }
 
     /**
-     * Get the principal type of the assigned principal ID. Possible values include: 'User', 'Group', 'ServicePrincipal', 'Unknown', 'DirectoryRoleTemplate', 'ForeignGroup', 'Application', 'MSI', 'DirectoryObjectOrGroup', 'Everyone'.
+     * Get the principal type of the assigned principal ID. Possible values include: 'User', 'Group', 'ServicePrincipal'.
      *
      * @return the principalType value
      */
@@ -165,7 +163,7 @@ public class RoleAssignmentInner {
     }
 
     /**
-     * Set the principal type of the assigned principal ID. Possible values include: 'User', 'Group', 'ServicePrincipal', 'Unknown', 'DirectoryRoleTemplate', 'ForeignGroup', 'Application', 'MSI', 'DirectoryObjectOrGroup', 'Everyone'.
+     * Set the principal type of the assigned principal ID. Possible values include: 'User', 'Group', 'ServicePrincipal'.
      *
      * @param principalType the principalType value to set
      * @return the RoleAssignmentInner object itself.
