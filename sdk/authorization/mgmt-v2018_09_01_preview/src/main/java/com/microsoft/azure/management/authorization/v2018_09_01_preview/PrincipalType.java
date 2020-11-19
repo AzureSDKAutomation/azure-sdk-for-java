@@ -25,27 +25,6 @@ public final class PrincipalType extends ExpandableStringEnum<PrincipalType> {
     /** Static value ServicePrincipal for PrincipalType. */
     public static final PrincipalType SERVICE_PRINCIPAL = fromString("ServicePrincipal");
 
-    /** Static value Unknown for PrincipalType. */
-    public static final PrincipalType UNKNOWN = fromString("Unknown");
-
-    /** Static value DirectoryRoleTemplate for PrincipalType. */
-    public static final PrincipalType DIRECTORY_ROLE_TEMPLATE = fromString("DirectoryRoleTemplate");
-
-    /** Static value ForeignGroup for PrincipalType. */
-    public static final PrincipalType FOREIGN_GROUP = fromString("ForeignGroup");
-
-    /** Static value Application for PrincipalType. */
-    public static final PrincipalType APPLICATION = fromString("Application");
-
-    /** Static value MSI for PrincipalType. */
-    public static final PrincipalType MSI = fromString("MSI");
-
-    /** Static value DirectoryObjectOrGroup for PrincipalType. */
-    public static final PrincipalType DIRECTORY_OBJECT_OR_GROUP = fromString("DirectoryObjectOrGroup");
-
-    /** Static value Everyone for PrincipalType. */
-    public static final PrincipalType EVERYONE = fromString("Everyone");
-
     /**
      * Creates or finds a PrincipalType from its string representation.
      * @param name a name to look for

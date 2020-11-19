@@ -142,7 +142,7 @@ public interface RoleAssignment extends HasInner<RoleAssignmentInner>, Indexable
         interface WithPrincipalType {
             /**
              * Specifies principalType.
-             * @param principalType The principal type of the assigned principal ID. Possible values include: 'User', 'Group', 'ServicePrincipal', 'Unknown', 'DirectoryRoleTemplate', 'ForeignGroup', 'Application', 'MSI', 'DirectoryObjectOrGroup', 'Everyone'
+             * @param principalType The principal type of the assigned principal ID. Possible values include: 'User', 'Group', 'ServicePrincipal'
              * @return the next definition stage
              */
             WithCreate withPrincipalType(PrincipalType principalType);
@@ -184,7 +184,7 @@ public interface RoleAssignment extends HasInner<RoleAssignmentInner>, Indexable
         interface WithPrincipalType {
             /**
              * Specifies principalType.
-             * @param principalType The principal type of the assigned principal ID. Possible values include: 'User', 'Group', 'ServicePrincipal', 'Unknown', 'DirectoryRoleTemplate', 'ForeignGroup', 'Application', 'MSI', 'DirectoryObjectOrGroup', 'Everyone'
+             * @param principalType The principal type of the assigned principal ID. Possible values include: 'User', 'Group', 'ServicePrincipal'
              * @return the next update stage
              */
             Update withPrincipalType(PrincipalType principalType);
