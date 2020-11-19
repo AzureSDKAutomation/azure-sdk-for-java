@@ -10,6 +10,8 @@ package com.microsoft.azure.management.postgresql.v2017_12_01_preview.implementa
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 
@@ -211,6 +213,19 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The ServerParametersInner object to access its operations.
+     */
+    private ServerParametersInner serverParameters;
+
+    /**
+     * Gets the ServerParametersInner object to access its operations.
+     * @return the ServerParametersInner object.
+     */
+    public ServerParametersInner serverParameters() {
+        return this.serverParameters;
+    }
+
+    /**
      * The LogFilesInner object to access its operations.
      */
     private LogFilesInner logFiles;
@@ -221,6 +236,45 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
      */
     public LogFilesInner logFiles() {
         return this.logFiles;
+    }
+
+    /**
+     * The ServerAdministratorsInner object to access its operations.
+     */
+    private ServerAdministratorsInner serverAdministrators;
+
+    /**
+     * Gets the ServerAdministratorsInner object to access its operations.
+     * @return the ServerAdministratorsInner object.
+     */
+    public ServerAdministratorsInner serverAdministrators() {
+        return this.serverAdministrators;
+    }
+
+    /**
+     * The RecoverableServersInner object to access its operations.
+     */
+    private RecoverableServersInner recoverableServers;
+
+    /**
+     * Gets the RecoverableServersInner object to access its operations.
+     * @return the RecoverableServersInner object.
+     */
+    public RecoverableServersInner recoverableServers() {
+        return this.recoverableServers;
+    }
+
+    /**
+     * The ServerBasedPerformanceTiersInner object to access its operations.
+     */
+    private ServerBasedPerformanceTiersInner serverBasedPerformanceTiers;
+
+    /**
+     * Gets the ServerBasedPerformanceTiersInner object to access its operations.
+     * @return the ServerBasedPerformanceTiersInner object.
+     */
+    public ServerBasedPerformanceTiersInner serverBasedPerformanceTiers() {
+        return this.serverBasedPerformanceTiers;
     }
 
     /**
@@ -316,7 +370,11 @@ public class PostgreSQLManagementClientImpl extends AzureServiceClient {
         this.virtualNetworkRules = new VirtualNetworkRulesInner(restClient().retrofit(), this);
         this.databases = new DatabasesInner(restClient().retrofit(), this);
         this.configurations = new ConfigurationsInner(restClient().retrofit(), this);
+        this.serverParameters = new ServerParametersInner(restClient().retrofit(), this);
         this.logFiles = new LogFilesInner(restClient().retrofit(), this);
+        this.serverAdministrators = new ServerAdministratorsInner(restClient().retrofit(), this);
+        this.recoverableServers = new RecoverableServersInner(restClient().retrofit(), this);
+        this.serverBasedPerformanceTiers = new ServerBasedPerformanceTiersInner(restClient().retrofit(), this);
         this.locationBasedPerformanceTiers = new LocationBasedPerformanceTiersInner(restClient().retrofit(), this);
         this.checkNameAvailabilitys = new CheckNameAvailabilitysInner(restClient().retrofit(), this);
         this.serverSecurityAlertPolicies = new ServerSecurityAlertPoliciesInner(restClient().retrofit(), this);

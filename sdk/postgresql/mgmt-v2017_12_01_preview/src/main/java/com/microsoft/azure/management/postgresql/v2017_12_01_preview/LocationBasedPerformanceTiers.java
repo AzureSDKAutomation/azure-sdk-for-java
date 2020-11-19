@@ -9,7 +9,7 @@
 package com.microsoft.azure.management.postgresql.v2017_12_01_preview;
 
 import rx.Observable;
-import com.microsoft.azure.management.postgresql.v2017_12_01_preview.PerformanceTierProperties;
+import com.microsoft.azure.management.postgresql.v2017_12_01_preview.LocationPerformanceTierProperties;
 
 /**
  * Type representing LocationBasedPerformanceTiers.
@@ -22,6 +22,6 @@ public interface LocationBasedPerformanceTiers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<PerformanceTierProperties> listAsync(String locationName);
+    Observable<LocationPerformanceTierProperties> listAsync(String locationName);
 
 }
