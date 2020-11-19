@@ -9,12 +9,13 @@
 package com.microsoft.azure.management.mariadb.v2018_06_01;
 
 import rx.Observable;
-import com.microsoft.azure.management.mariadb.v2018_06_01.PerformanceTierProperties;
+import com.microsoft.azure.management.mariadb.v2018_06_01.implementation.LocationBasedPerformanceTiersInner;
+import com.microsoft.azure.arm.model.HasInner;
 
 /**
  * Type representing LocationBasedPerformanceTiers.
  */
-public interface LocationBasedPerformanceTiers {
+public interface LocationBasedPerformanceTiers extends HasInner<LocationBasedPerformanceTiersInner> {
     /**
      * List all the performance tiers at specified location in a given subscription.
      *
@@ -22,6 +23,6 @@ public interface LocationBasedPerformanceTiers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<PerformanceTierProperties> listAsync(String locationName);
+    Observable<LocationPerformanceTierProperties> listAsync(String locationName);
 
 }
