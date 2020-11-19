@@ -22,10 +22,22 @@ import com.microsoft.azure.management.mariadb.v2020_01_01.FirewallRules;
 import com.microsoft.azure.management.mariadb.v2020_01_01.VirtualNetworkRules;
 import com.microsoft.azure.management.mariadb.v2020_01_01.Databases;
 import com.microsoft.azure.management.mariadb.v2020_01_01.Configurations;
+import com.microsoft.azure.management.mariadb.v2020_01_01.ServerParameters;
 import com.microsoft.azure.management.mariadb.v2020_01_01.LogFiles;
+import com.microsoft.azure.management.mariadb.v2020_01_01.RecoverableServers;
+import com.microsoft.azure.management.mariadb.v2020_01_01.ServerBasedPerformanceTiers;
 import com.microsoft.azure.management.mariadb.v2020_01_01.LocationBasedPerformanceTiers;
 import com.microsoft.azure.management.mariadb.v2020_01_01.CheckNameAvailabilitys;
 import com.microsoft.azure.management.mariadb.v2020_01_01.Operations;
+import com.microsoft.azure.management.mariadb.v2020_01_01.QueryTexts;
+import com.microsoft.azure.management.mariadb.v2020_01_01.TopQueryStatistics;
+import com.microsoft.azure.management.mariadb.v2020_01_01.WaitStatistics;
+import com.microsoft.azure.management.mariadb.v2020_01_01.Advisors;
+import com.microsoft.azure.management.mariadb.v2020_01_01.RecommendedActions;
+import com.microsoft.azure.management.mariadb.v2020_01_01.LocationBasedRecommendedActionSessionsOperationStatus;
+import com.microsoft.azure.management.mariadb.v2020_01_01.LocationBasedRecommendedActionSessionsResults;
+import com.microsoft.azure.management.mariadb.v2020_01_01.PrivateEndpointConnections;
+import com.microsoft.azure.management.mariadb.v2020_01_01.PrivateLinkResources;
 import com.microsoft.azure.management.mariadb.v2020_01_01.ServerSecurityAlertPolicies;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
@@ -40,10 +52,22 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
     private VirtualNetworkRules virtualNetworkRules;
     private Databases databases;
     private Configurations configurations;
+    private ServerParameters serverParameters;
     private LogFiles logFiles;
+    private RecoverableServers recoverableServers;
+    private ServerBasedPerformanceTiers serverBasedPerformanceTiers;
     private LocationBasedPerformanceTiers locationBasedPerformanceTiers;
     private CheckNameAvailabilitys checkNameAvailabilitys;
     private Operations operations;
+    private QueryTexts queryTexts;
+    private TopQueryStatistics topQueryStatistics;
+    private WaitStatistics waitStatistics;
+    private Advisors advisors;
+    private RecommendedActions recommendedActions;
+    private LocationBasedRecommendedActionSessionsOperationStatus locationBasedRecommendedActionSessionsOperationStatus;
+    private LocationBasedRecommendedActionSessionsResults locationBasedRecommendedActionSessionsResults;
+    private PrivateEndpointConnections privateEndpointConnections;
+    private PrivateLinkResources privateLinkResources;
     private ServerSecurityAlertPolicies serverSecurityAlertPolicies;
     /**
     * Get a Configurable instance that can be used to create MariaDBManager with optional configuration.
@@ -153,6 +177,16 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
     }
 
     /**
+     * @return Entry point to manage ServerParameters.
+     */
+    public ServerParameters serverParameters() {
+        if (this.serverParameters == null) {
+            this.serverParameters = new ServerParametersImpl(this);
+        }
+        return this.serverParameters;
+    }
+
+    /**
      * @return Entry point to manage LogFiles.
      */
     public LogFiles logFiles() {
@@ -160,6 +194,26 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
             this.logFiles = new LogFilesImpl(this);
         }
         return this.logFiles;
+    }
+
+    /**
+     * @return Entry point to manage RecoverableServers.
+     */
+    public RecoverableServers recoverableServers() {
+        if (this.recoverableServers == null) {
+            this.recoverableServers = new RecoverableServersImpl(this);
+        }
+        return this.recoverableServers;
+    }
+
+    /**
+     * @return Entry point to manage ServerBasedPerformanceTiers.
+     */
+    public ServerBasedPerformanceTiers serverBasedPerformanceTiers() {
+        if (this.serverBasedPerformanceTiers == null) {
+            this.serverBasedPerformanceTiers = new ServerBasedPerformanceTiersImpl(this);
+        }
+        return this.serverBasedPerformanceTiers;
     }
 
     /**
@@ -190,6 +244,96 @@ public final class MariaDBManager extends ManagerCore<MariaDBManager, MariaDBMan
             this.operations = new OperationsImpl(this);
         }
         return this.operations;
+    }
+
+    /**
+     * @return Entry point to manage QueryTexts.
+     */
+    public QueryTexts queryTexts() {
+        if (this.queryTexts == null) {
+            this.queryTexts = new QueryTextsImpl(this);
+        }
+        return this.queryTexts;
+    }
+
+    /**
+     * @return Entry point to manage TopQueryStatistics.
+     */
+    public TopQueryStatistics topQueryStatistics() {
+        if (this.topQueryStatistics == null) {
+            this.topQueryStatistics = new TopQueryStatisticsImpl(this);
+        }
+        return this.topQueryStatistics;
+    }
+
+    /**
+     * @return Entry point to manage WaitStatistics.
+     */
+    public WaitStatistics waitStatistics() {
+        if (this.waitStatistics == null) {
+            this.waitStatistics = new WaitStatisticsImpl(this);
+        }
+        return this.waitStatistics;
+    }
+
+    /**
+     * @return Entry point to manage Advisors.
+     */
+    public Advisors advisors() {
+        if (this.advisors == null) {
+            this.advisors = new AdvisorsImpl(this);
+        }
+        return this.advisors;
+    }
+
+    /**
+     * @return Entry point to manage RecommendedActions.
+     */
+    public RecommendedActions recommendedActions() {
+        if (this.recommendedActions == null) {
+            this.recommendedActions = new RecommendedActionsImpl(this);
+        }
+        return this.recommendedActions;
+    }
+
+    /**
+     * @return Entry point to manage LocationBasedRecommendedActionSessionsOperationStatus.
+     */
+    public LocationBasedRecommendedActionSessionsOperationStatus locationBasedRecommendedActionSessionsOperationStatus() {
+        if (this.locationBasedRecommendedActionSessionsOperationStatus == null) {
+            this.locationBasedRecommendedActionSessionsOperationStatus = new LocationBasedRecommendedActionSessionsOperationStatusImpl(this);
+        }
+        return this.locationBasedRecommendedActionSessionsOperationStatus;
+    }
+
+    /**
+     * @return Entry point to manage LocationBasedRecommendedActionSessionsResults.
+     */
+    public LocationBasedRecommendedActionSessionsResults locationBasedRecommendedActionSessionsResults() {
+        if (this.locationBasedRecommendedActionSessionsResults == null) {
+            this.locationBasedRecommendedActionSessionsResults = new LocationBasedRecommendedActionSessionsResultsImpl(this);
+        }
+        return this.locationBasedRecommendedActionSessionsResults;
+    }
+
+    /**
+     * @return Entry point to manage PrivateEndpointConnections.
+     */
+    public PrivateEndpointConnections privateEndpointConnections() {
+        if (this.privateEndpointConnections == null) {
+            this.privateEndpointConnections = new PrivateEndpointConnectionsImpl(this);
+        }
+        return this.privateEndpointConnections;
+    }
+
+    /**
+     * @return Entry point to manage PrivateLinkResources.
+     */
+    public PrivateLinkResources privateLinkResources() {
+        if (this.privateLinkResources == null) {
+            this.privateLinkResources = new PrivateLinkResourcesImpl(this);
+        }
+        return this.privateLinkResources;
     }
 
     /**
