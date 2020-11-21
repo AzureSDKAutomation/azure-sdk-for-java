@@ -19,6 +19,7 @@ import com.microsoft.rest.RestClient;
 import com.microsoft.azure.management.storage.v2019_06_01.Operations;
 import com.microsoft.azure.management.storage.v2019_06_01.Skus;
 import com.microsoft.azure.management.storage.v2019_06_01.StorageAccounts;
+import com.microsoft.azure.management.storage.v2019_06_01.DeletedAccounts;
 import com.microsoft.azure.management.storage.v2019_06_01.Usages;
 import com.microsoft.azure.management.storage.v2019_06_01.ManagementPolicies;
 import com.microsoft.azure.management.storage.v2019_06_01.PrivateEndpointConnections;
@@ -43,6 +44,7 @@ public final class StorageManager extends ManagerCore<StorageManager, StorageMan
     private Operations operations;
     private Skus skus;
     private StorageAccounts storageAccounts;
+    private DeletedAccounts deletedAccounts;
     private Usages usages;
     private ManagementPolicies managementPolicies;
     private PrivateEndpointConnections privateEndpointConnections;
@@ -132,6 +134,16 @@ public final class StorageManager extends ManagerCore<StorageManager, StorageMan
             this.storageAccounts = new StorageAccountsImpl(this);
         }
         return this.storageAccounts;
+    }
+
+    /**
+     * @return Entry point to manage DeletedAccounts.
+     */
+    public DeletedAccounts deletedAccounts() {
+        if (this.deletedAccounts == null) {
+            this.deletedAccounts = new DeletedAccountsImpl(this);
+        }
+        return this.deletedAccounts;
     }
 
     /**
