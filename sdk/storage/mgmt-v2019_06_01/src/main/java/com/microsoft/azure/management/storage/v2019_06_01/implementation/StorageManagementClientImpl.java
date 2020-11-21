@@ -174,6 +174,19 @@ public class StorageManagementClientImpl extends AzureServiceClient {
     }
 
     /**
+     * The DeletedAccountsInner object to access its operations.
+     */
+    private DeletedAccountsInner deletedAccounts;
+
+    /**
+     * Gets the DeletedAccountsInner object to access its operations.
+     * @return the DeletedAccountsInner object.
+     */
+    public DeletedAccountsInner deletedAccounts() {
+        return this.deletedAccounts;
+    }
+
+    /**
      * The UsagesInner object to access its operations.
      */
     private UsagesInner usages;
@@ -393,6 +406,7 @@ public class StorageManagementClientImpl extends AzureServiceClient {
         this.operations = new OperationsInner(restClient().retrofit(), this);
         this.skus = new SkusInner(restClient().retrofit(), this);
         this.storageAccounts = new StorageAccountsInner(restClient().retrofit(), this);
+        this.deletedAccounts = new DeletedAccountsInner(restClient().retrofit(), this);
         this.usages = new UsagesInner(restClient().retrofit(), this);
         this.managementPolicies = new ManagementPoliciesInner(restClient().retrofit(), this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsInner(restClient().retrofit(), this);
