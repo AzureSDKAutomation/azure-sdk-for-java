@@ -23,9 +23,9 @@ import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineExtensio
 import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachines;
 import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineImages;
 import com.microsoft.azure.management.compute.v2017_12_01.Usages;
+import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineScaleSets;
 import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineSizes;
 import com.microsoft.azure.management.compute.v2017_12_01.Images;
-import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineScaleSets;
 import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineScaleSetExtensions;
 import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineScaleSetRollingUpgrades;
 import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineScaleSetVMs;
@@ -45,9 +45,9 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
     private VirtualMachines virtualMachines;
     private VirtualMachineImages virtualMachineImages;
     private Usages usages;
+    private VirtualMachineScaleSets virtualMachineScaleSets;
     private VirtualMachineSizes virtualMachineSizes;
     private Images images;
-    private VirtualMachineScaleSets virtualMachineScaleSets;
     private VirtualMachineScaleSetExtensions virtualMachineScaleSetExtensions;
     private VirtualMachineScaleSetRollingUpgrades virtualMachineScaleSetRollingUpgrades;
     private VirtualMachineScaleSetVMs virtualMachineScaleSetVMs;
@@ -171,6 +171,16 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
     }
 
     /**
+     * @return Entry point to manage VirtualMachineScaleSets.
+     */
+    public VirtualMachineScaleSets virtualMachineScaleSets() {
+        if (this.virtualMachineScaleSets == null) {
+            this.virtualMachineScaleSets = new VirtualMachineScaleSetsImpl(this);
+        }
+        return this.virtualMachineScaleSets;
+    }
+
+    /**
      * @return Entry point to manage VirtualMachineSizes.
      */
     public VirtualMachineSizes virtualMachineSizes() {
@@ -188,16 +198,6 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
             this.images = new ImagesImpl(this);
         }
         return this.images;
-    }
-
-    /**
-     * @return Entry point to manage VirtualMachineScaleSets.
-     */
-    public VirtualMachineScaleSets virtualMachineScaleSets() {
-        if (this.virtualMachineScaleSets == null) {
-            this.virtualMachineScaleSets = new VirtualMachineScaleSetsImpl(this);
-        }
-        return this.virtualMachineScaleSets;
     }
 
     /**
