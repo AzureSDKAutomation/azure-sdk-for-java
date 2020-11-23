@@ -11,9 +11,9 @@ package com.microsoft.azure.management.cognitiveservices.v2017_04_18.implementat
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.management.cognitiveservices.v2017_04_18.CheckDomainAvailabilityParameter;
 import com.microsoft.azure.management.cognitiveservices.v2017_04_18.CheckSkuAvailabilityParameter;
+import com.microsoft.azure.management.cognitiveservices.v2017_04_18.ErrorException;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
@@ -300,7 +300,7 @@ public class CognitiveServicesManagementClientImpl extends AzureServiceClient {
      * @param kind The Kind of the resource.
      * @param type The Type of the resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the CheckSkuAvailabilityResultListInner object if successful.
      */
@@ -390,10 +390,10 @@ public class CognitiveServicesManagementClientImpl extends AzureServiceClient {
             });
     }
 
-    private ServiceResponse<CheckSkuAvailabilityResultListInner> checkSkuAvailabilityDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.restClient().responseBuilderFactory().<CheckSkuAvailabilityResultListInner, CloudException>newInstance(this.serializerAdapter())
+    private ServiceResponse<CheckSkuAvailabilityResultListInner> checkSkuAvailabilityDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return this.restClient().responseBuilderFactory().<CheckSkuAvailabilityResultListInner, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<CheckSkuAvailabilityResultListInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorException.class)
                 .build(response);
     }
 
@@ -403,7 +403,7 @@ public class CognitiveServicesManagementClientImpl extends AzureServiceClient {
      * @param subdomainName The subdomain name to use.
      * @param type The Type of the resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the CheckDomainAvailabilityResultInner object if successful.
      */
@@ -479,10 +479,10 @@ public class CognitiveServicesManagementClientImpl extends AzureServiceClient {
             });
     }
 
-    private ServiceResponse<CheckDomainAvailabilityResultInner> checkDomainAvailabilityDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.restClient().responseBuilderFactory().<CheckDomainAvailabilityResultInner, CloudException>newInstance(this.serializerAdapter())
+    private ServiceResponse<CheckDomainAvailabilityResultInner> checkDomainAvailabilityDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return this.restClient().responseBuilderFactory().<CheckDomainAvailabilityResultInner, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<CheckDomainAvailabilityResultInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorException.class)
                 .build(response);
     }
 
