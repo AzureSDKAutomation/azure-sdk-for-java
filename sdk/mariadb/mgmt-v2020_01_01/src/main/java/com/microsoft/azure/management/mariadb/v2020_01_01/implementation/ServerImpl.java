@@ -14,6 +14,7 @@ import rx.Observable;
 import com.microsoft.azure.management.mariadb.v2020_01_01.ServerUpdateParameters;
 import com.microsoft.azure.management.mariadb.v2020_01_01.ServerForCreate;
 import org.joda.time.DateTime;
+import com.microsoft.azure.management.mariadb.v2020_01_01.MinimalTlsVersionEnum;
 import java.util.List;
 import com.microsoft.azure.management.mariadb.v2020_01_01.ServerPrivateEndpointConnection;
 import com.microsoft.azure.management.mariadb.v2020_01_01.PublicNetworkAccessEnum;
@@ -101,6 +102,11 @@ class ServerImpl extends GroupableResourceCoreImpl<Server, ServerInner, ServerIm
     }
 
     @Override
+    public MinimalTlsVersionEnum minimalTlsVersion() {
+        return this.inner().minimalTlsVersion();
+    }
+
+    @Override
     public List<ServerPrivateEndpointConnection> privateEndpointConnections() {
         return this.inner().privateEndpointConnections();
     }
@@ -154,6 +160,12 @@ class ServerImpl extends GroupableResourceCoreImpl<Server, ServerInner, ServerIm
     @Override
     public ServerImpl withAdministratorLoginPassword(String administratorLoginPassword) {
         this.updateParameter.withAdministratorLoginPassword(administratorLoginPassword);
+        return this;
+    }
+
+    @Override
+    public ServerImpl withMinimalTlsVersion(MinimalTlsVersionEnum minimalTlsVersion) {
+        this.updateParameter.withMinimalTlsVersion(minimalTlsVersion);
         return this;
     }
 

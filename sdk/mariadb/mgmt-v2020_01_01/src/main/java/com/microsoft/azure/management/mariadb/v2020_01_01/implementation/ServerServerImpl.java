@@ -12,6 +12,7 @@ import com.microsoft.azure.management.mariadb.v2020_01_01.ServerServer;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import rx.Observable;
 import org.joda.time.DateTime;
+import com.microsoft.azure.management.mariadb.v2020_01_01.MinimalTlsVersionEnum;
 import java.util.List;
 import com.microsoft.azure.management.mariadb.v2020_01_01.ServerPrivateEndpointConnection;
 import com.microsoft.azure.management.mariadb.v2020_01_01.PublicNetworkAccessEnum;
@@ -65,6 +66,11 @@ class ServerServerImpl extends WrapperImpl<ServerInner> implements ServerServer 
     @Override
     public String masterServerId() {
         return this.inner().masterServerId();
+    }
+
+    @Override
+    public MinimalTlsVersionEnum minimalTlsVersion() {
+        return this.inner().minimalTlsVersion();
     }
 
     @Override

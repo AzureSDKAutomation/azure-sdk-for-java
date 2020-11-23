@@ -47,6 +47,11 @@ public interface Server extends HasInner<ServerInner>, Resource, GroupableResour
     String masterServerId();
 
     /**
+     * @return the minimalTlsVersion value.
+     */
+    MinimalTlsVersionEnum minimalTlsVersion();
+
+    /**
      * @return the privateEndpointConnections value.
      */
     List<ServerPrivateEndpointConnection> privateEndpointConnections();
@@ -148,7 +153,7 @@ public interface Server extends HasInner<ServerInner>, Resource, GroupableResour
     /**
      * The template for a Server update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<Server>, Resource.UpdateWithTags<Update>, UpdateStages.WithAdministratorLoginPassword, UpdateStages.WithPublicNetworkAccess, UpdateStages.WithReplicationRole, UpdateStages.WithSku, UpdateStages.WithSslEnforcement, UpdateStages.WithStorageProfile, UpdateStages.WithVersion {
+    interface Update extends Appliable<Server>, Resource.UpdateWithTags<Update>, UpdateStages.WithAdministratorLoginPassword, UpdateStages.WithMinimalTlsVersion, UpdateStages.WithPublicNetworkAccess, UpdateStages.WithReplicationRole, UpdateStages.WithSku, UpdateStages.WithSslEnforcement, UpdateStages.WithStorageProfile, UpdateStages.WithVersion {
     }
 
     /**
@@ -165,6 +170,18 @@ public interface Server extends HasInner<ServerInner>, Resource, GroupableResour
              * @return the next update stage
              */
             Update withAdministratorLoginPassword(String administratorLoginPassword);
+        }
+
+        /**
+         * The stage of the server update allowing to specify MinimalTlsVersion.
+         */
+        interface WithMinimalTlsVersion {
+            /**
+             * Specifies minimalTlsVersion.
+             * @param minimalTlsVersion Enforce a minimal Tls version for the server. Possible values include: 'TLS1_0', 'TLS1_1', 'TLS1_2', 'TLSEnforcementDisabled'
+             * @return the next update stage
+             */
+            Update withMinimalTlsVersion(MinimalTlsVersionEnum minimalTlsVersion);
         }
 
         /**

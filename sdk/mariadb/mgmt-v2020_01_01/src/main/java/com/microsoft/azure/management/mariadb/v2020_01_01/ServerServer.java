@@ -51,6 +51,11 @@ public interface ServerServer extends HasInner<ServerInner>, HasManager<MariaDBM
     String masterServerId();
 
     /**
+     * @return the minimalTlsVersion value.
+     */
+    MinimalTlsVersionEnum minimalTlsVersion();
+
+    /**
      * @return the name value.
      */
     String name();
