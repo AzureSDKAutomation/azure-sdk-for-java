@@ -13,6 +13,7 @@ import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.TaskUpdateParameters;
 import java.util.Map;
+import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.SystemData;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.IdentityProperties;
 import com.microsoft.azure.management.containerregistry.v2019_06_01_preview.ProvisioningState;
 import org.joda.time.DateTime;
@@ -110,6 +111,11 @@ class TaskImpl extends CreatableUpdatableImpl<Task, TaskInner, TaskImpl> impleme
     }
 
     @Override
+    public String agentPoolName() {
+        return this.inner().agentPoolName();
+    }
+
+    @Override
     public DateTime creationDate() {
         return this.inner().creationDate();
     }
@@ -130,8 +136,18 @@ class TaskImpl extends CreatableUpdatableImpl<Task, TaskInner, TaskImpl> impleme
     }
 
     @Override
+    public Boolean isSystemTask() {
+        return this.inner().isSystemTask();
+    }
+
+    @Override
     public String location() {
         return this.inner().location();
+    }
+
+    @Override
+    public String logTemplate() {
+        return this.inner().logTemplate();
     }
 
     @Override
@@ -157,6 +173,11 @@ class TaskImpl extends CreatableUpdatableImpl<Task, TaskInner, TaskImpl> impleme
     @Override
     public TaskStepProperties step() {
         return this.inner().step();
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override
@@ -189,6 +210,12 @@ class TaskImpl extends CreatableUpdatableImpl<Task, TaskInner, TaskImpl> impleme
     @Override
     public TaskImpl withLocation(String location) {
         this.inner().withLocation(location);
+        return this;
+    }
+
+    @Override
+    public TaskImpl withIsSystemTask(Boolean isSystemTask) {
+        this.inner().withIsSystemTask(isSystemTask);
         return this;
     }
 
@@ -239,6 +266,16 @@ class TaskImpl extends CreatableUpdatableImpl<Task, TaskInner, TaskImpl> impleme
     }
 
     @Override
+    public TaskImpl withAgentPoolName(String agentPoolName) {
+        if (isInCreateMode()) {
+            this.inner().withAgentPoolName(agentPoolName);
+        } else {
+            this.updateParameter.withAgentPoolName(agentPoolName);
+        }
+        return this;
+    }
+
+    @Override
     public TaskImpl withCredentials(Credentials credentials) {
         if (isInCreateMode()) {
             this.inner().withCredentials(credentials);
@@ -254,6 +291,16 @@ class TaskImpl extends CreatableUpdatableImpl<Task, TaskInner, TaskImpl> impleme
             this.inner().withIdentity(identity);
         } else {
             this.updateParameter.withIdentity(identity);
+        }
+        return this;
+    }
+
+    @Override
+    public TaskImpl withLogTemplate(String logTemplate) {
+        if (isInCreateMode()) {
+            this.inner().withLogTemplate(logTemplate);
+        } else {
+            this.updateParameter.withLogTemplate(logTemplate);
         }
         return this;
     }
