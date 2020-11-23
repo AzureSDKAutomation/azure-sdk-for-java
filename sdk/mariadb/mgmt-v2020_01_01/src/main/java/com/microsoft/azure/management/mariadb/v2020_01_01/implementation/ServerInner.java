@@ -11,6 +11,7 @@ package com.microsoft.azure.management.mariadb.v2020_01_01.implementation;
 import com.microsoft.azure.management.mariadb.v2020_01_01.Sku;
 import com.microsoft.azure.management.mariadb.v2020_01_01.ServerVersion;
 import com.microsoft.azure.management.mariadb.v2020_01_01.SslEnforcementEnum;
+import com.microsoft.azure.management.mariadb.v2020_01_01.MinimalTlsVersionEnum;
 import com.microsoft.azure.management.mariadb.v2020_01_01.ServerState;
 import org.joda.time.DateTime;
 import com.microsoft.azure.management.mariadb.v2020_01_01.StorageProfile;
@@ -51,6 +52,13 @@ public class ServerInner extends Resource {
      */
     @JsonProperty(value = "properties.sslEnforcement")
     private SslEnforcementEnum sslEnforcement;
+
+    /**
+     * Enforce a minimal Tls version for the server. Possible values include:
+     * 'TLS1_0', 'TLS1_1', 'TLS1_2', 'TLSEnforcementDisabled'.
+     */
+    @JsonProperty(value = "properties.minimalTlsVersion")
+    private MinimalTlsVersionEnum minimalTlsVersion;
 
     /**
      * A state of a server that is visible to user. Possible values include:
@@ -186,6 +194,26 @@ public class ServerInner extends Resource {
      */
     public ServerInner withSslEnforcement(SslEnforcementEnum sslEnforcement) {
         this.sslEnforcement = sslEnforcement;
+        return this;
+    }
+
+    /**
+     * Get enforce a minimal Tls version for the server. Possible values include: 'TLS1_0', 'TLS1_1', 'TLS1_2', 'TLSEnforcementDisabled'.
+     *
+     * @return the minimalTlsVersion value
+     */
+    public MinimalTlsVersionEnum minimalTlsVersion() {
+        return this.minimalTlsVersion;
+    }
+
+    /**
+     * Set enforce a minimal Tls version for the server. Possible values include: 'TLS1_0', 'TLS1_1', 'TLS1_2', 'TLSEnforcementDisabled'.
+     *
+     * @param minimalTlsVersion the minimalTlsVersion value to set
+     * @return the ServerInner object itself.
+     */
+    public ServerInner withMinimalTlsVersion(MinimalTlsVersionEnum minimalTlsVersion) {
+        this.minimalTlsVersion = minimalTlsVersion;
         return this;
     }
 
