@@ -27,15 +27,16 @@ import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineExtensio
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineImages;
 import com.microsoft.azure.management.compute.v2020_06_01.Usages;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachines;
+import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSets;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineSizes;
 import com.microsoft.azure.management.compute.v2020_06_01.Images;
-import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSets;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSetExtensions;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSetRollingUpgrades;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSetVMExtensions;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSetVMs;
 import com.microsoft.azure.management.compute.v2020_06_01.LogAnalytics;
 import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineRunCommands;
+import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineScaleSetVMRunCommands;
 import com.microsoft.azure.management.compute.v2020_06_01.ResourceSkus;
 import com.microsoft.azure.management.compute.v2020_06_01.Disks;
 import com.microsoft.azure.management.compute.v2020_06_01.Snapshots;
@@ -65,15 +66,16 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
     private VirtualMachineImages virtualMachineImages;
     private Usages usages;
     private VirtualMachines virtualMachines;
+    private VirtualMachineScaleSets virtualMachineScaleSets;
     private VirtualMachineSizes virtualMachineSizes;
     private Images images;
-    private VirtualMachineScaleSets virtualMachineScaleSets;
     private VirtualMachineScaleSetExtensions virtualMachineScaleSetExtensions;
     private VirtualMachineScaleSetRollingUpgrades virtualMachineScaleSetRollingUpgrades;
     private VirtualMachineScaleSetVMExtensions virtualMachineScaleSetVMExtensions;
     private VirtualMachineScaleSetVMs virtualMachineScaleSetVMs;
     private LogAnalytics logAnalytics;
     private VirtualMachineRunCommands virtualMachineRunCommands;
+    private VirtualMachineScaleSetVMRunCommands virtualMachineScaleSetVMRunCommands;
     private ResourceSkus resourceSkus;
     private Disks disks;
     private Snapshots snapshots;
@@ -243,6 +245,16 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
     }
 
     /**
+     * @return Entry point to manage VirtualMachineScaleSets.
+     */
+    public VirtualMachineScaleSets virtualMachineScaleSets() {
+        if (this.virtualMachineScaleSets == null) {
+            this.virtualMachineScaleSets = new VirtualMachineScaleSetsImpl(this);
+        }
+        return this.virtualMachineScaleSets;
+    }
+
+    /**
      * @return Entry point to manage VirtualMachineSizes.
      */
     public VirtualMachineSizes virtualMachineSizes() {
@@ -260,16 +272,6 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
             this.images = new ImagesImpl(this);
         }
         return this.images;
-    }
-
-    /**
-     * @return Entry point to manage VirtualMachineScaleSets.
-     */
-    public VirtualMachineScaleSets virtualMachineScaleSets() {
-        if (this.virtualMachineScaleSets == null) {
-            this.virtualMachineScaleSets = new VirtualMachineScaleSetsImpl(this);
-        }
-        return this.virtualMachineScaleSets;
     }
 
     /**
@@ -330,6 +332,16 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
             this.virtualMachineRunCommands = new VirtualMachineRunCommandsImpl(this);
         }
         return this.virtualMachineRunCommands;
+    }
+
+    /**
+     * @return Entry point to manage VirtualMachineScaleSetVMRunCommands.
+     */
+    public VirtualMachineScaleSetVMRunCommands virtualMachineScaleSetVMRunCommands() {
+        if (this.virtualMachineScaleSetVMRunCommands == null) {
+            this.virtualMachineScaleSetVMRunCommands = new VirtualMachineScaleSetVMRunCommandsImpl(this);
+        }
+        return this.virtualMachineScaleSetVMRunCommands;
     }
 
     /**

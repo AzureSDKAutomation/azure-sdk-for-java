@@ -9,23 +9,21 @@
 package com.microsoft.azure.management.compute.v2020_06_01;
 
 import com.microsoft.azure.arm.model.HasInner;
-import com.microsoft.azure.arm.resources.models.Resource;
-import com.microsoft.azure.arm.resources.models.GroupableResourceCore;
-import com.microsoft.azure.arm.resources.models.HasResourceGroup;
-import com.microsoft.azure.arm.model.Refreshable;
+import com.microsoft.azure.management.compute.v2020_06_01.implementation.VirtualMachineScaleSetInner;
+import com.microsoft.azure.arm.model.Indexable;
 import com.microsoft.azure.arm.model.Updatable;
 import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.compute.v2020_06_01.implementation.ComputeManager;
+import java.util.Map;
 import com.microsoft.azure.SubResource;
 import java.util.List;
-import com.microsoft.azure.management.compute.v2020_06_01.implementation.VirtualMachineScaleSetInner;
 
 /**
  * Type representing VirtualMachineScaleSet.
  */
-public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetInner>, Resource, GroupableResourceCore<ComputeManager, VirtualMachineScaleSetInner>, HasResourceGroup, Refreshable<VirtualMachineScaleSet>, Updatable<VirtualMachineScaleSet.Update>, HasManager<ComputeManager> {
+public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetInner>, Indexable, Updatable<VirtualMachineScaleSet.Update>, HasManager<ComputeManager> {
     /**
      * @return the additionalCapabilities value.
      */
@@ -47,9 +45,24 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
     SubResource hostGroup();
 
     /**
+     * @return the id value.
+     */
+    String id();
+
+    /**
      * @return the identity value.
      */
     VirtualMachineScaleSetIdentity identity();
+
+    /**
+     * @return the location value.
+     */
+    String location();
+
+    /**
+     * @return the name value.
+     */
+    String name();
 
     /**
      * @return the overprovision value.
@@ -92,6 +105,16 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
     Sku sku();
 
     /**
+     * @return the tags value.
+     */
+    Map<String, String> tags();
+
+    /**
+     * @return the type value.
+     */
+    String type();
+
+    /**
      * @return the uniqueId value.
      */
     String uniqueId();
@@ -119,7 +142,7 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
     /**
      * The entirety of the VirtualMachineScaleSet definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithLocation, DefinitionStages.WithLocation, DefinitionStages.WithCreate {
     }
 
     /**
@@ -129,13 +152,31 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
         /**
          * The first stage of a VirtualMachineScaleSet definition.
          */
-        interface Blank extends GroupableResourceCore.DefinitionWithRegion<WithGroup> {
+        interface Blank extends WithLocation {
         }
 
         /**
-         * The stage of the VirtualMachineScaleSet definition allowing to specify the resource group.
+         * The stage of the virtualmachinescaleset definition allowing to specify Location.
          */
-        interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithCreate> {
+        interface WithLocation {
+           /**
+            * Specifies resourceGroupName.
+            * @param resourceGroupName The name of the resource group
+            * @return the next definition stage
+            */
+            WithLocation withExistingLocation(String resourceGroupName);
+        }
+
+        /**
+         * The stage of the virtualmachinescaleset definition allowing to specify Location.
+         */
+        interface WithLocation {
+           /**
+            * Specifies location.
+            * @param location Resource location
+            * @return the next definition stage
+            */
+            WithCreate withLocation(String location);
         }
 
         /**
@@ -283,6 +324,18 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
         }
 
         /**
+         * The stage of the virtualmachinescaleset definition allowing to specify Tags.
+         */
+        interface WithTags {
+            /**
+             * Specifies tags.
+             * @param tags Resource tags
+             * @return the next definition stage
+             */
+            WithCreate withTags(Map<String, String> tags);
+        }
+
+        /**
          * The stage of the virtualmachinescaleset definition allowing to specify UpgradePolicy.
          */
         interface WithUpgradePolicy {
@@ -335,13 +388,13 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<VirtualMachineScaleSet>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithAdditionalCapabilities, DefinitionStages.WithAutomaticRepairsPolicy, DefinitionStages.WithDoNotRunExtensionsOnOverprovisionedVMs, DefinitionStages.WithHostGroup, DefinitionStages.WithIdentity, DefinitionStages.WithOverprovision, DefinitionStages.WithPlan, DefinitionStages.WithPlatformFaultDomainCount, DefinitionStages.WithProximityPlacementGroup, DefinitionStages.WithScaleInPolicy, DefinitionStages.WithSinglePlacementGroup, DefinitionStages.WithSku, DefinitionStages.WithUpgradePolicy, DefinitionStages.WithVirtualMachineProfile, DefinitionStages.WithZoneBalance, DefinitionStages.WithZones {
+        interface WithCreate extends Creatable<VirtualMachineScaleSet>, DefinitionStages.WithAdditionalCapabilities, DefinitionStages.WithAutomaticRepairsPolicy, DefinitionStages.WithDoNotRunExtensionsOnOverprovisionedVMs, DefinitionStages.WithHostGroup, DefinitionStages.WithIdentity, DefinitionStages.WithOverprovision, DefinitionStages.WithPlan, DefinitionStages.WithPlatformFaultDomainCount, DefinitionStages.WithProximityPlacementGroup, DefinitionStages.WithScaleInPolicy, DefinitionStages.WithSinglePlacementGroup, DefinitionStages.WithSku, DefinitionStages.WithTags, DefinitionStages.WithUpgradePolicy, DefinitionStages.WithVirtualMachineProfile, DefinitionStages.WithZoneBalance, DefinitionStages.WithZones {
         }
     }
     /**
      * The template for a VirtualMachineScaleSet update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<VirtualMachineScaleSet>, Resource.UpdateWithTags<Update>, UpdateStages.WithAdditionalCapabilities, UpdateStages.WithAutomaticRepairsPolicy, UpdateStages.WithDoNotRunExtensionsOnOverprovisionedVMs, UpdateStages.WithIdentity, UpdateStages.WithOverprovision, UpdateStages.WithPlan, UpdateStages.WithProximityPlacementGroup, UpdateStages.WithScaleInPolicy, UpdateStages.WithSinglePlacementGroup, UpdateStages.WithSku, UpdateStages.WithUpgradePolicy, UpdateStages.WithVirtualMachineProfile {
+    interface Update extends Appliable<VirtualMachineScaleSet>, UpdateStages.WithAdditionalCapabilities, UpdateStages.WithAutomaticRepairsPolicy, UpdateStages.WithDoNotRunExtensionsOnOverprovisionedVMs, UpdateStages.WithIdentity, UpdateStages.WithOverprovision, UpdateStages.WithPlan, UpdateStages.WithProximityPlacementGroup, UpdateStages.WithScaleInPolicy, UpdateStages.WithSinglePlacementGroup, UpdateStages.WithSku, UpdateStages.WithTags, UpdateStages.WithUpgradePolicy, UpdateStages.WithVirtualMachineProfile {
     }
 
     /**
@@ -466,6 +519,18 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
              * @return the next update stage
              */
             Update withSku(Sku sku);
+        }
+
+        /**
+         * The stage of the virtualmachinescaleset update allowing to specify Tags.
+         */
+        interface WithTags {
+            /**
+             * Specifies tags.
+             * @param tags Resource tags
+             * @return the next update stage
+             */
+            Update withTags(Map<String, String> tags);
         }
 
         /**
