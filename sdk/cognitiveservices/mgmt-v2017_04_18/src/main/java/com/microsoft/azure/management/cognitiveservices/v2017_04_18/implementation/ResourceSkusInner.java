@@ -11,8 +11,8 @@ package com.microsoft.azure.management.cognitiveservices.v2017_04_18.implementat
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.management.cognitiveservices.v2017_04_18.ErrorException;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceFuture;
@@ -70,7 +70,7 @@ public class ResourceSkusInner {
      * Gets the list of Microsoft.CognitiveServices SKUs available for your Subscription.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;ResourceSkuInner&gt; object if successful.
      */
@@ -166,10 +166,10 @@ public class ResourceSkusInner {
             });
     }
 
-    private ServiceResponse<PageImpl<ResourceSkuInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<ResourceSkuInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<ResourceSkuInner>> listDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<ResourceSkuInner>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<ResourceSkuInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorException.class)
                 .build(response);
     }
 
@@ -178,7 +178,7 @@ public class ResourceSkusInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the PagedList&lt;ResourceSkuInner&gt; object if successful.
      */
@@ -277,10 +277,10 @@ public class ResourceSkusInner {
             });
     }
 
-    private ServiceResponse<PageImpl<ResourceSkuInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<ResourceSkuInner>, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<PageImpl<ResourceSkuInner>> listNextDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<ResourceSkuInner>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<ResourceSkuInner>>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorException.class)
                 .build(response);
     }
 
