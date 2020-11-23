@@ -13,6 +13,7 @@ import com.microsoft.azure.management.mariadb.v2018_06_01.implementation.ServerI
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.mariadb.v2018_06_01.implementation.MariaDBManager;
 import org.joda.time.DateTime;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,9 +51,24 @@ public interface ServerServer extends HasInner<ServerInner>, HasManager<MariaDBM
     String masterServerId();
 
     /**
+     * @return the minimalTlsVersion value.
+     */
+    MinimalTlsVersionEnum minimalTlsVersion();
+
+    /**
      * @return the name value.
      */
     String name();
+
+    /**
+     * @return the privateEndpointConnections value.
+     */
+    List<ServerPrivateEndpointConnection> privateEndpointConnections();
+
+    /**
+     * @return the publicNetworkAccess value.
+     */
+    PublicNetworkAccessEnum publicNetworkAccess();
 
     /**
      * @return the replicaCapacity value.
