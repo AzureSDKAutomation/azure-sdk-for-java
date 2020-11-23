@@ -9,12 +9,8 @@
 package com.microsoft.azure.management.compute.v2017_12_01;
 
 import com.microsoft.azure.arm.collection.SupportsCreating;
-import com.microsoft.azure.arm.resources.collection.SupportsDeletingByResourceGroup;
-import com.microsoft.azure.arm.resources.collection.SupportsBatchDeletion;
-import com.microsoft.azure.arm.resources.collection.SupportsGettingByResourceGroup;
 import rx.Observable;
-import com.microsoft.azure.arm.resources.collection.SupportsListingByResourceGroup;
-import com.microsoft.azure.arm.collection.SupportsListing;
+import rx.Completable;
 import java.util.List;
 import com.microsoft.azure.management.compute.v2017_12_01.implementation.VirtualMachineScaleSetsInner;
 import com.microsoft.azure.arm.model.HasInner;
@@ -23,7 +19,27 @@ import com.microsoft.azure.management.compute.v2017_12_01.VirtualMachineScaleSet
 /**
  * Type representing VirtualMachineScaleSets.
  */
-public interface VirtualMachineScaleSets extends SupportsCreating<VirtualMachineScaleSet.DefinitionStages.Blank>, SupportsDeletingByResourceGroup, SupportsBatchDeletion, SupportsGettingByResourceGroup<VirtualMachineScaleSet>, SupportsListingByResourceGroup<VirtualMachineScaleSet>, SupportsListing<VirtualMachineScaleSet>, HasInner<VirtualMachineScaleSetsInner> {
+public interface VirtualMachineScaleSets extends SupportsCreating<VirtualMachineScaleSet.DefinitionStages.Blank>, HasInner<VirtualMachineScaleSetsInner> {
+    /**
+     * Deletes a VM scale set.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param vmScaleSetName The name of the VM scale set.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<OperationStatusResponse> deleteAsync(String resourceGroupName, String vmScaleSetName);
+
+    /**
+     * Display information about a virtual machine scale set.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param vmScaleSetName The name of the VM scale set.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<VirtualMachineScaleSet> getByResourceGroupAsync(String resourceGroupName, String vmScaleSetName);
+
     /**
      * Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
      *
@@ -96,7 +112,7 @@ public interface VirtualMachineScaleSets extends SupportsCreating<VirtualMachine
     Observable<OperationStatusResponse> startAsync(String resourceGroupName, String vmScaleSetName);
 
     /**
-     * Redeploy one or more virtual machines in a VM scale set.
+     * Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
      *
      * @param resourceGroupName The name of the resource group.
      * @param vmScaleSetName The name of the VM scale set.
@@ -106,7 +122,7 @@ public interface VirtualMachineScaleSets extends SupportsCreating<VirtualMachine
     Observable<OperationStatusResponse> redeployAsync(String resourceGroupName, String vmScaleSetName);
 
     /**
-     * Perform maintenance on one or more virtual machines in a VM scale set.
+     * Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications.
      *
      * @param resourceGroupName The name of the resource group.
      * @param vmScaleSetName The name of the VM scale set.
@@ -156,6 +172,32 @@ public interface VirtualMachineScaleSets extends SupportsCreating<VirtualMachine
      * @return the observable for the request
      */
     Observable<RecoveryWalkResponse> forceRecoveryServiceFabricPlatformUpdateDomainWalkAsync(String resourceGroupName, String vmScaleSetName, int platformUpdateDomain);
+
+    /**
+     * Gets a list of all VM scale sets under a resource group.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<VirtualMachineScaleSet> listByResourceGroupAsync(final String resourceGroupName);
+
+    /**
+     * Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<VirtualMachineScaleSet> listAsync();
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param location The location for which VM scale sets under the subscription are queried.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<VirtualMachineScaleSet> listByLocationAsync(final String location);
 
     /**
      * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.

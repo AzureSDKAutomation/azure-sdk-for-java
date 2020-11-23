@@ -9,26 +9,39 @@
 package com.microsoft.azure.management.compute.v2017_12_01;
 
 import com.microsoft.azure.arm.model.HasInner;
-import com.microsoft.azure.arm.resources.models.Resource;
-import com.microsoft.azure.arm.resources.models.HasResourceGroup;
-import com.microsoft.azure.arm.model.Refreshable;
+import com.microsoft.azure.management.compute.v2017_12_01.implementation.VirtualMachineScaleSetInner;
+import com.microsoft.azure.arm.model.Indexable;
 import com.microsoft.azure.arm.model.Updatable;
 import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
-import com.microsoft.azure.arm.resources.models.GroupableResourceCore;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.compute.v2017_12_01.implementation.ComputeManager;
+import java.util.Map;
 import java.util.List;
-import com.microsoft.azure.management.compute.v2017_12_01.implementation.VirtualMachineScaleSetInner;
 
 /**
  * Type representing VirtualMachineScaleSet.
  */
-public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetInner>, Resource, GroupableResourceCore<ComputeManager, VirtualMachineScaleSetInner>, HasResourceGroup, Refreshable<VirtualMachineScaleSet>, Updatable<VirtualMachineScaleSet.Update>, HasManager<ComputeManager> {
+public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetInner>, Indexable, Updatable<VirtualMachineScaleSet.Update>, HasManager<ComputeManager> {
+    /**
+     * @return the id value.
+     */
+    String id();
+
     /**
      * @return the identity value.
      */
     VirtualMachineScaleSetIdentity identity();
+
+    /**
+     * @return the location value.
+     */
+    String location();
+
+    /**
+     * @return the name value.
+     */
+    String name();
 
     /**
      * @return the overprovision value.
@@ -61,6 +74,16 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
     Sku sku();
 
     /**
+     * @return the tags value.
+     */
+    Map<String, String> tags();
+
+    /**
+     * @return the type value.
+     */
+    String type();
+
+    /**
      * @return the uniqueId value.
      */
     String uniqueId();
@@ -88,7 +111,7 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
     /**
      * The entirety of the VirtualMachineScaleSet definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithLocation, DefinitionStages.WithLocation, DefinitionStages.WithCreate {
     }
 
     /**
@@ -98,111 +121,161 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
         /**
          * The first stage of a VirtualMachineScaleSet definition.
          */
-        interface Blank extends GroupableResourceCore.DefinitionWithRegion<WithGroup> {
+        interface Blank extends WithLocation {
         }
 
         /**
-         * The stage of the VirtualMachineScaleSet definition allowing to specify the resource group.
+         * The stage of the virtualmachinescaleset definition allowing to specify Location.
          */
-        interface WithGroup extends GroupableResourceCore.DefinitionStages.WithGroup<WithCreate> {
+        interface WithLocation {
+           /**
+            * Specifies resourceGroupName.
+            * @param resourceGroupName The name of the resource group
+            * @return the next definition stage
+            */
+            WithLocation withExistingLocation(String resourceGroupName);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify Identity.
+         * The stage of the virtualmachinescaleset definition allowing to specify Location.
+         */
+        interface WithLocation {
+           /**
+            * Specifies location.
+            * @param location Resource location
+            * @return the next definition stage
+            */
+            WithCreate withLocation(String location);
+        }
+
+        /**
+         * The stage of the virtualmachinescaleset definition allowing to specify Identity.
          */
         interface WithIdentity {
             /**
              * Specifies identity.
+             * @param identity The identity of the virtual machine scale set, if configured
+             * @return the next definition stage
              */
             WithCreate withIdentity(VirtualMachineScaleSetIdentity identity);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify Overprovision.
+         * The stage of the virtualmachinescaleset definition allowing to specify Overprovision.
          */
         interface WithOverprovision {
             /**
              * Specifies overprovision.
+             * @param overprovision Specifies whether the Virtual Machine Scale Set should be overprovisioned
+             * @return the next definition stage
              */
             WithCreate withOverprovision(Boolean overprovision);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify Plan.
+         * The stage of the virtualmachinescaleset definition allowing to specify Plan.
          */
         interface WithPlan {
             /**
              * Specifies plan.
+             * @param plan Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**
+             * @return the next definition stage
              */
             WithCreate withPlan(Plan plan);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify PlatformFaultDomainCount.
+         * The stage of the virtualmachinescaleset definition allowing to specify PlatformFaultDomainCount.
          */
         interface WithPlatformFaultDomainCount {
             /**
              * Specifies platformFaultDomainCount.
+             * @param platformFaultDomainCount Fault Domain count for each placement group
+             * @return the next definition stage
              */
             WithCreate withPlatformFaultDomainCount(Integer platformFaultDomainCount);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify SinglePlacementGroup.
+         * The stage of the virtualmachinescaleset definition allowing to specify SinglePlacementGroup.
          */
         interface WithSinglePlacementGroup {
             /**
              * Specifies singlePlacementGroup.
+             * @param singlePlacementGroup When true this limits the scale set to a single placement group, of max size 100 virtual machines
+             * @return the next definition stage
              */
             WithCreate withSinglePlacementGroup(Boolean singlePlacementGroup);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify Sku.
+         * The stage of the virtualmachinescaleset definition allowing to specify Sku.
          */
         interface WithSku {
             /**
              * Specifies sku.
+             * @param sku The virtual machine scale set sku
+             * @return the next definition stage
              */
             WithCreate withSku(Sku sku);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify UpgradePolicy.
+         * The stage of the virtualmachinescaleset definition allowing to specify Tags.
+         */
+        interface WithTags {
+            /**
+             * Specifies tags.
+             * @param tags Resource tags
+             * @return the next definition stage
+             */
+            WithCreate withTags(Map<String, String> tags);
+        }
+
+        /**
+         * The stage of the virtualmachinescaleset definition allowing to specify UpgradePolicy.
          */
         interface WithUpgradePolicy {
             /**
              * Specifies upgradePolicy.
+             * @param upgradePolicy The upgrade policy
+             * @return the next definition stage
              */
             WithCreate withUpgradePolicy(UpgradePolicy upgradePolicy);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify VirtualMachineProfile.
+         * The stage of the virtualmachinescaleset definition allowing to specify VirtualMachineProfile.
          */
         interface WithVirtualMachineProfile {
             /**
              * Specifies virtualMachineProfile.
+             * @param virtualMachineProfile The virtual machine profile
+             * @return the next definition stage
              */
             WithCreate withVirtualMachineProfile(VirtualMachineScaleSetVMProfile virtualMachineProfile);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify ZoneBalance.
+         * The stage of the virtualmachinescaleset definition allowing to specify ZoneBalance.
          */
         interface WithZoneBalance {
             /**
              * Specifies zoneBalance.
+             * @param zoneBalance Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage
+             * @return the next definition stage
              */
             WithCreate withZoneBalance(Boolean zoneBalance);
         }
 
         /**
-         * The stage of the virtualmachinescaleset update allowing to specify Zones.
+         * The stage of the virtualmachinescaleset definition allowing to specify Zones.
          */
         interface WithZones {
             /**
              * Specifies zones.
+             * @param zones The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set
+             * @return the next definition stage
              */
             WithCreate withZones(List<String> zones);
         }
@@ -212,13 +285,13 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<VirtualMachineScaleSet>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithIdentity, DefinitionStages.WithOverprovision, DefinitionStages.WithPlan, DefinitionStages.WithPlatformFaultDomainCount, DefinitionStages.WithSinglePlacementGroup, DefinitionStages.WithSku, DefinitionStages.WithUpgradePolicy, DefinitionStages.WithVirtualMachineProfile, DefinitionStages.WithZoneBalance, DefinitionStages.WithZones {
+        interface WithCreate extends Creatable<VirtualMachineScaleSet>, DefinitionStages.WithIdentity, DefinitionStages.WithOverprovision, DefinitionStages.WithPlan, DefinitionStages.WithPlatformFaultDomainCount, DefinitionStages.WithSinglePlacementGroup, DefinitionStages.WithSku, DefinitionStages.WithTags, DefinitionStages.WithUpgradePolicy, DefinitionStages.WithVirtualMachineProfile, DefinitionStages.WithZoneBalance, DefinitionStages.WithZones {
         }
     }
     /**
      * The template for a VirtualMachineScaleSet update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<VirtualMachineScaleSet>, Resource.UpdateWithTags<Update>, UpdateStages.WithIdentity, UpdateStages.WithOverprovision, UpdateStages.WithPlan, UpdateStages.WithSinglePlacementGroup, UpdateStages.WithSku, UpdateStages.WithUpgradePolicy, UpdateStages.WithVirtualMachineProfile {
+    interface Update extends Appliable<VirtualMachineScaleSet>, UpdateStages.WithIdentity, UpdateStages.WithOverprovision, UpdateStages.WithPlan, UpdateStages.WithSinglePlacementGroup, UpdateStages.WithSku, UpdateStages.WithTags, UpdateStages.WithUpgradePolicy, UpdateStages.WithVirtualMachineProfile {
     }
 
     /**
@@ -226,71 +299,97 @@ public interface VirtualMachineScaleSet extends HasInner<VirtualMachineScaleSetI
      */
     interface UpdateStages {
         /**
-         * The stage of the virtualmachinescaleset {0} allowing to specify Identity.
+         * The stage of the virtualmachinescaleset update allowing to specify Identity.
          */
         interface WithIdentity {
             /**
              * Specifies identity.
+             * @param identity The identity of the virtual machine scale set, if configured
+             * @return the next update stage
              */
             Update withIdentity(VirtualMachineScaleSetIdentity identity);
         }
 
         /**
-         * The stage of the virtualmachinescaleset {0} allowing to specify Overprovision.
+         * The stage of the virtualmachinescaleset update allowing to specify Overprovision.
          */
         interface WithOverprovision {
             /**
              * Specifies overprovision.
+             * @param overprovision Specifies whether the Virtual Machine Scale Set should be overprovisioned
+             * @return the next update stage
              */
             Update withOverprovision(Boolean overprovision);
         }
 
         /**
-         * The stage of the virtualmachinescaleset {0} allowing to specify Plan.
+         * The stage of the virtualmachinescaleset update allowing to specify Plan.
          */
         interface WithPlan {
             /**
              * Specifies plan.
+             * @param plan The purchase plan when deploying a virtual machine scale set from VM Marketplace images
+             * @return the next update stage
              */
             Update withPlan(Plan plan);
         }
 
         /**
-         * The stage of the virtualmachinescaleset {0} allowing to specify SinglePlacementGroup.
+         * The stage of the virtualmachinescaleset update allowing to specify SinglePlacementGroup.
          */
         interface WithSinglePlacementGroup {
             /**
              * Specifies singlePlacementGroup.
+             * @param singlePlacementGroup When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true
+             * @return the next update stage
              */
             Update withSinglePlacementGroup(Boolean singlePlacementGroup);
         }
 
         /**
-         * The stage of the virtualmachinescaleset {0} allowing to specify Sku.
+         * The stage of the virtualmachinescaleset update allowing to specify Sku.
          */
         interface WithSku {
             /**
              * Specifies sku.
+             * @param sku The virtual machine scale set sku
+             * @return the next update stage
              */
             Update withSku(Sku sku);
         }
 
         /**
-         * The stage of the virtualmachinescaleset {0} allowing to specify UpgradePolicy.
+         * The stage of the virtualmachinescaleset update allowing to specify Tags.
+         */
+        interface WithTags {
+            /**
+             * Specifies tags.
+             * @param tags Resource tags
+             * @return the next update stage
+             */
+            Update withTags(Map<String, String> tags);
+        }
+
+        /**
+         * The stage of the virtualmachinescaleset update allowing to specify UpgradePolicy.
          */
         interface WithUpgradePolicy {
             /**
              * Specifies upgradePolicy.
+             * @param upgradePolicy The upgrade policy
+             * @return the next update stage
              */
             Update withUpgradePolicy(UpgradePolicy upgradePolicy);
         }
 
         /**
-         * The stage of the virtualmachinescaleset {0} allowing to specify VirtualMachineProfile.
+         * The stage of the virtualmachinescaleset update allowing to specify VirtualMachineProfile.
          */
         interface WithVirtualMachineProfile {
             /**
              * Specifies virtualMachineProfile.
+             * @param virtualMachineProfile The virtual machine profile
+             * @return the next update stage
              */
             Update withVirtualMachineProfile(VirtualMachineScaleSetUpdateVMProfile virtualMachineProfile);
         }
