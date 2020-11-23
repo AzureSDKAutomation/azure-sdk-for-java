@@ -8,10 +8,11 @@
 
 package com.microsoft.azure.management.compute.v2017_03_30.implementation;
 
-import com.microsoft.azure.arm.resources.models.implementation.GroupableResourceCoreImpl;
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSet;
+import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSetUpdate;
+import java.util.Map;
 import com.microsoft.azure.management.compute.v2017_03_30.Sku;
 import com.microsoft.azure.management.compute.v2017_03_30.Plan;
 import com.microsoft.azure.management.compute.v2017_03_30.UpgradePolicy;
@@ -21,17 +22,42 @@ import java.util.List;
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSetUpdateVMProfile;
 import rx.functions.Func1;
 
-class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachineScaleSet, VirtualMachineScaleSetInner, VirtualMachineScaleSetImpl, ComputeManager> implements VirtualMachineScaleSet, VirtualMachineScaleSet.Definition, VirtualMachineScaleSet.Update {
+class VirtualMachineScaleSetImpl extends CreatableUpdatableImpl<VirtualMachineScaleSet, VirtualMachineScaleSetInner, VirtualMachineScaleSetImpl> implements VirtualMachineScaleSet, VirtualMachineScaleSet.Definition, VirtualMachineScaleSet.Update {
+    private final ComputeManager manager;
+    private String resourceGroupName;
+    private String vmScaleSetName;
     private VirtualMachineScaleSetUpdate updateParameter;
-    VirtualMachineScaleSetImpl(String name, VirtualMachineScaleSetInner inner, ComputeManager manager) {
-        super(name, inner, manager);
+
+    VirtualMachineScaleSetImpl(String name, ComputeManager manager) {
+        super(name, new VirtualMachineScaleSetInner());
+        this.manager = manager;
+        // Set resource name
+        this.vmScaleSetName = name;
+        //
         this.updateParameter = new VirtualMachineScaleSetUpdate();
+    }
+
+    VirtualMachineScaleSetImpl(VirtualMachineScaleSetInner inner, ComputeManager manager) {
+        super(inner.name(), inner);
+        this.manager = manager;
+        // Set resource name
+        this.vmScaleSetName = inner.name();
+        // set resource ancestor and positional variables
+        this.resourceGroupName = IdParsingUtils.getValueFromIdByName(inner.id(), "resourceGroups");
+        this.vmScaleSetName = IdParsingUtils.getValueFromIdByName(inner.id(), "virtualMachineScaleSets");
+        //
+        this.updateParameter = new VirtualMachineScaleSetUpdate();
+    }
+
+    @Override
+    public ComputeManager manager() {
+        return this.manager;
     }
 
     @Override
     public Observable<VirtualMachineScaleSet> createResourceAsync() {
         VirtualMachineScaleSetsInner client = this.manager().inner().virtualMachineScaleSets();
-        return client.createOrUpdateAsync(this.resourceGroupName(), this.name(), this.inner())
+        return client.createOrUpdateAsync(this.resourceGroupName, this.vmScaleSetName, this.inner())
             .map(new Func1<VirtualMachineScaleSetInner, VirtualMachineScaleSetInner>() {
                @Override
                public VirtualMachineScaleSetInner call(VirtualMachineScaleSetInner resource) {
@@ -45,7 +71,7 @@ class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachin
     @Override
     public Observable<VirtualMachineScaleSet> updateResourceAsync() {
         VirtualMachineScaleSetsInner client = this.manager().inner().virtualMachineScaleSets();
-        return client.updateAsync(this.resourceGroupName(), this.name(), this.updateParameter)
+        return client.updateAsync(this.resourceGroupName, this.vmScaleSetName, this.updateParameter)
             .map(new Func1<VirtualMachineScaleSetInner, VirtualMachineScaleSetInner>() {
                @Override
                public VirtualMachineScaleSetInner call(VirtualMachineScaleSetInner resource) {
@@ -59,7 +85,7 @@ class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachin
     @Override
     protected Observable<VirtualMachineScaleSetInner> getInnerAsync() {
         VirtualMachineScaleSetsInner client = this.manager().inner().virtualMachineScaleSets();
-        return client.getByResourceGroupAsync(this.resourceGroupName(), this.name());
+        return null; // NOP getInnerAsync implementation as get is not supported
     }
 
     @Override
@@ -72,8 +98,23 @@ class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachin
     }
 
     @Override
+    public String id() {
+        return this.inner().id();
+    }
+
+    @Override
     public VirtualMachineScaleSetIdentity identity() {
         return this.inner().identity();
+    }
+
+    @Override
+    public String location() {
+        return this.inner().location();
+    }
+
+    @Override
+    public String name() {
+        return this.inner().name();
     }
 
     @Override
@@ -102,6 +143,16 @@ class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachin
     }
 
     @Override
+    public Map<String, String> tags() {
+        return this.inner().getTags();
+    }
+
+    @Override
+    public String type() {
+        return this.inner().type();
+    }
+
+    @Override
     public String uniqueId() {
         return this.inner().uniqueId();
     }
@@ -119,6 +170,18 @@ class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachin
     @Override
     public List<String> zones() {
         return this.inner().zones();
+    }
+
+    @Override
+    public VirtualMachineScaleSetImpl withExistingLocation(String resourceGroupName) {
+        this.resourceGroupName = resourceGroupName;
+        return this;
+    }
+
+    @Override
+    public VirtualMachineScaleSetImpl withLocation(String location) {
+        this.inner().withLocation(location);
+        return this;
     }
 
     @Override
@@ -185,6 +248,16 @@ class VirtualMachineScaleSetImpl extends GroupableResourceCoreImpl<VirtualMachin
             this.inner().withSku(sku);
         } else {
             this.updateParameter.withSku(sku);
+        }
+        return this;
+    }
+
+    @Override
+    public VirtualMachineScaleSetImpl withTags(Map<String, String> tags) {
+        if (isInCreateMode()) {
+            this.inner().withTags(tags);
+        } else {
+            this.updateParameter.withTags(tags);
         }
         return this;
     }

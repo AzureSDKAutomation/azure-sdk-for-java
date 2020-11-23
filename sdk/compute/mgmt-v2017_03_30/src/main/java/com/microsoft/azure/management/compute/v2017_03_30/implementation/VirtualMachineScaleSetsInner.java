@@ -42,6 +42,8 @@ import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -69,6 +71,10 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
      * used by Retrofit to perform actually REST calls.
      */
     interface VirtualMachineScaleSetsService {
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSets listByLocation" })
+        @GET("subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachineScaleSets")
+        Observable<Response<ResponseBody>> listByLocation(@Path("location") String location, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSets createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}")
         Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("vmScaleSetName") String vmScaleSetName, @Path("subscriptionId") String subscriptionId, @Body VirtualMachineScaleSetInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -177,6 +183,10 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall")
         Observable<Response<ResponseBody>> beginReimageAll(@Path("resourceGroupName") String resourceGroupName, @Path("vmScaleSetName") String vmScaleSetName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSets listByLocationNext" })
+        @GET
+        Observable<Response<ResponseBody>> listByLocationNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSets listByResourceGroupNext" })
         @GET
         Observable<Response<ResponseBody>> listByResourceGroupNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -189,6 +199,121 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         @GET
         Observable<Response<ResponseBody>> listSkusNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param location The location for which VM scale sets under the subscription are queried.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;VirtualMachineScaleSetInner&gt; object if successful.
+     */
+    public PagedList<VirtualMachineScaleSetInner> listByLocation(final String location) {
+        ServiceResponse<Page<VirtualMachineScaleSetInner>> response = listByLocationSinglePageAsync(location).toBlocking().single();
+        return new PagedList<VirtualMachineScaleSetInner>(response.body()) {
+            @Override
+            public Page<VirtualMachineScaleSetInner> nextPage(String nextPageLink) {
+                return listByLocationNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param location The location for which VM scale sets under the subscription are queried.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<VirtualMachineScaleSetInner>> listByLocationAsync(final String location, final ListOperationCallback<VirtualMachineScaleSetInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByLocationSinglePageAsync(location),
+            new Func1<String, Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(String nextPageLink) {
+                    return listByLocationNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param location The location for which VM scale sets under the subscription are queried.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;VirtualMachineScaleSetInner&gt; object
+     */
+    public Observable<Page<VirtualMachineScaleSetInner>> listByLocationAsync(final String location) {
+        return listByLocationWithServiceResponseAsync(location)
+            .map(new Func1<ServiceResponse<Page<VirtualMachineScaleSetInner>>, Page<VirtualMachineScaleSetInner>>() {
+                @Override
+                public Page<VirtualMachineScaleSetInner> call(ServiceResponse<Page<VirtualMachineScaleSetInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param location The location for which VM scale sets under the subscription are queried.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;VirtualMachineScaleSetInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> listByLocationWithServiceResponseAsync(final String location) {
+        return listByLocationSinglePageAsync(location)
+            .concatMap(new Func1<ServiceResponse<Page<VirtualMachineScaleSetInner>>, Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(ServiceResponse<Page<VirtualMachineScaleSetInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByLocationNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+    ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> * @param location The location for which VM scale sets under the subscription are queried.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;VirtualMachineScaleSetInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> listByLocationSinglePageAsync(final String location) {
+        if (location == null) {
+            throw new IllegalArgumentException("Parameter location is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listByLocation(location, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> result = listByLocationDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<VirtualMachineScaleSetInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> listByLocationDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<VirtualMachineScaleSetInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
     }
 
     /**
@@ -846,7 +971,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
         vmInstanceIDs.withInstanceIds(null);
         Observable<Response<ResponseBody>> observable = service.deallocate(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
     /**
      * Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
@@ -924,7 +1049,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             vmInstanceIDs.withInstanceIds(instanceIds);
         }
         Observable<Response<ResponseBody>> observable = service.deallocate(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
 
     /**
@@ -1182,7 +1307,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs = new VirtualMachineScaleSetVMInstanceRequiredIDs();
         vmInstanceIDs.withInstanceIds(instanceIds);
         Observable<Response<ResponseBody>> observable = service.deleteInstances(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
 
     /**
@@ -1448,7 +1573,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
     /**
      * Gets a list of all VM scale sets under a resource group.
      *
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> * @param resourceGroupName The name of the resource group.
+    ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> * @param resourceGroupName The name of the resource group.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualMachineScaleSetInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -1467,7 +1592,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
                 @Override
                 public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> result = listByResourceGroupDelegate(response);
+                        ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> result = listByResourceGroupDelegate(response);
                         return Observable.just(new ServiceResponse<Page<VirtualMachineScaleSetInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1476,9 +1601,9 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             });
     }
 
-    private ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<VirtualMachineScaleSetInner>>() { }.getType())
+    private ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<VirtualMachineScaleSetInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1574,7 +1699,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
                 @Override
                 public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> result = listDelegate(response);
+                        ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> result = listDelegate(response);
                         return Observable.just(new ServiceResponse<Page<VirtualMachineScaleSetInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1583,9 +1708,9 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             });
     }
 
-    private ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<VirtualMachineScaleSetInner>>() { }.getType())
+    private ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<VirtualMachineScaleSetInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1674,8 +1799,8 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
     /**
      * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
      *
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetSkuInner>> * @param resourceGroupName The name of the resource group.
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetSkuInner>> * @param vmScaleSetName The name of the VM scale set.
+    ServiceResponse<PageImpl<VirtualMachineScaleSetSkuInner>> * @param resourceGroupName The name of the resource group.
+    ServiceResponse<PageImpl<VirtualMachineScaleSetSkuInner>> * @param vmScaleSetName The name of the VM scale set.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualMachineScaleSetSkuInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -1697,7 +1822,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
                 @Override
                 public Observable<ServiceResponse<Page<VirtualMachineScaleSetSkuInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<VirtualMachineScaleSetSkuInner>> result = listSkusDelegate(response);
+                        ServiceResponse<PageImpl<VirtualMachineScaleSetSkuInner>> result = listSkusDelegate(response);
                         return Observable.just(new ServiceResponse<Page<VirtualMachineScaleSetSkuInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -1706,9 +1831,9 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             });
     }
 
-    private ServiceResponse<PageImpl1<VirtualMachineScaleSetSkuInner>> listSkusDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<VirtualMachineScaleSetSkuInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<VirtualMachineScaleSetSkuInner>>() { }.getType())
+    private ServiceResponse<PageImpl<VirtualMachineScaleSetSkuInner>> listSkusDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualMachineScaleSetSkuInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<VirtualMachineScaleSetSkuInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -1782,7 +1907,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
         vmInstanceIDs.withInstanceIds(null);
         Observable<Response<ResponseBody>> observable = service.powerOff(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
     /**
      * Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
@@ -1860,7 +1985,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             vmInstanceIDs.withInstanceIds(instanceIds);
         }
         Observable<Response<ResponseBody>> observable = service.powerOff(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
 
     /**
@@ -2111,7 +2236,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
         vmInstanceIDs.withInstanceIds(null);
         Observable<Response<ResponseBody>> observable = service.restart(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
     /**
      * Restarts one or more virtual machines in a VM scale set.
@@ -2189,7 +2314,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             vmInstanceIDs.withInstanceIds(instanceIds);
         }
         Observable<Response<ResponseBody>> observable = service.restart(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
 
     /**
@@ -2440,7 +2565,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
         vmInstanceIDs.withInstanceIds(null);
         Observable<Response<ResponseBody>> observable = service.start(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
     /**
      * Starts one or more virtual machines in a VM scale set.
@@ -2518,7 +2643,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             vmInstanceIDs.withInstanceIds(instanceIds);
         }
         Observable<Response<ResponseBody>> observable = service.start(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
 
     /**
@@ -2776,7 +2901,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs = new VirtualMachineScaleSetVMInstanceRequiredIDs();
         vmInstanceIDs.withInstanceIds(instanceIds);
         Observable<Response<ResponseBody>> observable = service.updateInstances(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
 
     /**
@@ -2945,7 +3070,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
         vmInstanceIDs.withInstanceIds(null);
         Observable<Response<ResponseBody>> observable = service.reimage(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
     /**
      * Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.
@@ -3023,7 +3148,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             vmInstanceIDs.withInstanceIds(instanceIds);
         }
         Observable<Response<ResponseBody>> observable = service.reimage(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
 
     /**
@@ -3274,7 +3399,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
         VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
         vmInstanceIDs.withInstanceIds(null);
         Observable<Response<ResponseBody>> observable = service.reimageAll(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
     /**
      * Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
@@ -3352,7 +3477,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             vmInstanceIDs.withInstanceIds(instanceIds);
         }
         Observable<Response<ResponseBody>> observable = service.reimageAll(resourceGroupName, vmScaleSetName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), vmInstanceIDs, this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<OperationStatusResponseInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<OperationStatusResponseInner>() { }.getType());
     }
 
     /**
@@ -3535,6 +3660,117 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
     }
 
     /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;VirtualMachineScaleSetInner&gt; object if successful.
+     */
+    public PagedList<VirtualMachineScaleSetInner> listByLocationNext(final String nextPageLink) {
+        ServiceResponse<Page<VirtualMachineScaleSetInner>> response = listByLocationNextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<VirtualMachineScaleSetInner>(response.body()) {
+            @Override
+            public Page<VirtualMachineScaleSetInner> nextPage(String nextPageLink) {
+                return listByLocationNextSinglePageAsync(nextPageLink).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<VirtualMachineScaleSetInner>> listByLocationNextAsync(final String nextPageLink, final ServiceFuture<List<VirtualMachineScaleSetInner>> serviceFuture, final ListOperationCallback<VirtualMachineScaleSetInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            listByLocationNextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(String nextPageLink) {
+                    return listByLocationNextSinglePageAsync(nextPageLink);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;VirtualMachineScaleSetInner&gt; object
+     */
+    public Observable<Page<VirtualMachineScaleSetInner>> listByLocationNextAsync(final String nextPageLink) {
+        return listByLocationNextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<VirtualMachineScaleSetInner>>, Page<VirtualMachineScaleSetInner>>() {
+                @Override
+                public Page<VirtualMachineScaleSetInner> call(ServiceResponse<Page<VirtualMachineScaleSetInner>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;VirtualMachineScaleSetInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> listByLocationNextWithServiceResponseAsync(final String nextPageLink) {
+        return listByLocationNextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<VirtualMachineScaleSetInner>>, Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(ServiceResponse<Page<VirtualMachineScaleSetInner>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(listByLocationNextWithServiceResponseAsync(nextPageLink));
+                }
+            });
+    }
+
+    /**
+     * Gets all the VM scale sets under the specified subscription for the specified location.
+     *
+    ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;VirtualMachineScaleSetInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> listByLocationNextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.listByLocationNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> result = listByLocationNextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<VirtualMachineScaleSetInner>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> listByLocationNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<VirtualMachineScaleSetInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
      * Gets a list of all VM scale sets under a resource group.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
@@ -3615,7 +3851,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
     /**
      * Gets a list of all VM scale sets under a resource group.
      *
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualMachineScaleSetInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -3629,7 +3865,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
                 @Override
                 public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> result = listByResourceGroupNextDelegate(response);
+                        ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> result = listByResourceGroupNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<VirtualMachineScaleSetInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3638,9 +3874,9 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             });
     }
 
-    private ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> listByResourceGroupNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<VirtualMachineScaleSetInner>>() { }.getType())
+    private ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> listByResourceGroupNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<VirtualMachineScaleSetInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -3726,7 +3962,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
     /**
      * Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.
      *
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualMachineScaleSetInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -3740,7 +3976,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
                 @Override
                 public Observable<ServiceResponse<Page<VirtualMachineScaleSetInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> result = listNextDelegate(response);
+                        ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> result = listNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<VirtualMachineScaleSetInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3749,9 +3985,9 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             });
     }
 
-    private ServiceResponse<PageImpl1<VirtualMachineScaleSetInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<VirtualMachineScaleSetInner>>() { }.getType())
+    private ServiceResponse<PageImpl<VirtualMachineScaleSetInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualMachineScaleSetInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<VirtualMachineScaleSetInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -3837,7 +4073,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
     /**
      * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
      *
-    ServiceResponse<PageImpl1<VirtualMachineScaleSetSkuInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<VirtualMachineScaleSetSkuInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;VirtualMachineScaleSetSkuInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -3851,7 +4087,7 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
                 @Override
                 public Observable<ServiceResponse<Page<VirtualMachineScaleSetSkuInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<VirtualMachineScaleSetSkuInner>> result = listSkusNextDelegate(response);
+                        ServiceResponse<PageImpl<VirtualMachineScaleSetSkuInner>> result = listSkusNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<VirtualMachineScaleSetSkuInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3860,9 +4096,9 @@ public class VirtualMachineScaleSetsInner implements InnerSupportsGet<VirtualMac
             });
     }
 
-    private ServiceResponse<PageImpl1<VirtualMachineScaleSetSkuInner>> listSkusNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<VirtualMachineScaleSetSkuInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<VirtualMachineScaleSetSkuInner>>() { }.getType())
+    private ServiceResponse<PageImpl<VirtualMachineScaleSetSkuInner>> listSkusNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<VirtualMachineScaleSetSkuInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<VirtualMachineScaleSetSkuInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

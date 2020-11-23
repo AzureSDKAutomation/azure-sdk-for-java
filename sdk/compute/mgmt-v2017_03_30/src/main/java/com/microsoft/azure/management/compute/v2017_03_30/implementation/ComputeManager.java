@@ -22,10 +22,10 @@ import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineExtensio
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachines;
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineImages;
 import com.microsoft.azure.management.compute.v2017_03_30.Usages;
+import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSets;
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineSizes;
 import com.microsoft.azure.management.compute.v2017_03_30.Images;
 import com.microsoft.azure.management.compute.v2017_03_30.ResourceSkus;
-import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSets;
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSetExtensions;
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSetRollingUpgrades;
 import com.microsoft.azure.management.compute.v2017_03_30.VirtualMachineScaleSetVMs;
@@ -45,10 +45,10 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
     private VirtualMachines virtualMachines;
     private VirtualMachineImages virtualMachineImages;
     private Usages usages;
+    private VirtualMachineScaleSets virtualMachineScaleSets;
     private VirtualMachineSizes virtualMachineSizes;
     private Images images;
     private ResourceSkus resourceSkus;
-    private VirtualMachineScaleSets virtualMachineScaleSets;
     private VirtualMachineScaleSetExtensions virtualMachineScaleSetExtensions;
     private VirtualMachineScaleSetRollingUpgrades virtualMachineScaleSetRollingUpgrades;
     private VirtualMachineScaleSetVMs virtualMachineScaleSetVMs;
@@ -163,6 +163,16 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
     }
 
     /**
+     * @return Entry point to manage VirtualMachineScaleSets.
+     */
+    public VirtualMachineScaleSets virtualMachineScaleSets() {
+        if (this.virtualMachineScaleSets == null) {
+            this.virtualMachineScaleSets = new VirtualMachineScaleSetsImpl(this);
+        }
+        return this.virtualMachineScaleSets;
+    }
+
+    /**
      * @return Entry point to manage VirtualMachineSizes.
      */
     public VirtualMachineSizes virtualMachineSizes() {
@@ -190,16 +200,6 @@ public final class ComputeManager extends ManagerCore<ComputeManager, ComputeMan
             this.resourceSkus = new ResourceSkusImpl(this);
         }
         return this.resourceSkus;
-    }
-
-    /**
-     * @return Entry point to manage VirtualMachineScaleSets.
-     */
-    public VirtualMachineScaleSets virtualMachineScaleSets() {
-        if (this.virtualMachineScaleSets == null) {
-            this.virtualMachineScaleSets = new VirtualMachineScaleSetsImpl(this);
-        }
-        return this.virtualMachineScaleSets;
     }
 
     /**
