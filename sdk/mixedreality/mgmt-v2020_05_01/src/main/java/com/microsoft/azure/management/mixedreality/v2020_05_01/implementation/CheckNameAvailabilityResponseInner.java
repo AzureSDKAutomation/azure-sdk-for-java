@@ -8,7 +8,6 @@
 
 package com.microsoft.azure.management.mixedreality.v2020_05_01.implementation;
 
-import com.microsoft.azure.management.mixedreality.v2020_05_01.NameAvailability;
 import com.microsoft.azure.management.mixedreality.v2020_05_01.NameUnavailableReason;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,10 +16,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CheckNameAvailabilityResponseInner {
     /**
-     * if name Available. Possible values include: 'true', 'false'.
+     * if name Available.
      */
     @JsonProperty(value = "nameAvailable", required = true)
-    private NameAvailability nameAvailable;
+    private boolean nameAvailable;
 
     /**
      * Resource Name To Verify. Possible values include: 'Invalid',
@@ -36,21 +35,21 @@ public class CheckNameAvailabilityResponseInner {
     private String message;
 
     /**
-     * Get if name Available. Possible values include: 'true', 'false'.
+     * Get if name Available.
      *
      * @return the nameAvailable value
      */
-    public NameAvailability nameAvailable() {
+    public boolean nameAvailable() {
         return this.nameAvailable;
     }
 
     /**
-     * Set if name Available. Possible values include: 'true', 'false'.
+     * Set if name Available.
      *
      * @param nameAvailable the nameAvailable value to set
      * @return the CheckNameAvailabilityResponseInner object itself.
      */
-    public CheckNameAvailabilityResponseInner withNameAvailable(NameAvailability nameAvailable) {
+    public CheckNameAvailabilityResponseInner withNameAvailable(boolean nameAvailable) {
         this.nameAvailable = nameAvailable;
         return this;
     }
