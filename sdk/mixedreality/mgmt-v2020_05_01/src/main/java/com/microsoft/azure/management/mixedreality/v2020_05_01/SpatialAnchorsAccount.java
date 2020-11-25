@@ -35,6 +35,11 @@ public interface SpatialAnchorsAccount extends HasInner<SpatialAnchorsAccountInn
     String accountId();
 
     /**
+     * @return the identity value.
+     */
+    Identity identity();
+
+    /**
      * The entirety of the SpatialAnchorsAccount definition.
      */
     interface Definition extends DefinitionStages.Blank, DefinitionStages.WithGroup, DefinitionStages.WithCreate {
@@ -57,22 +62,46 @@ public interface SpatialAnchorsAccount extends HasInner<SpatialAnchorsAccountInn
         }
 
         /**
+         * The stage of the spatialanchorsaccount definition allowing to specify Identity.
+         */
+        interface WithIdentity {
+            /**
+             * Specifies identity.
+             * @param identity The identity associated with this account
+             * @return the next definition stage
+             */
+            WithCreate withIdentity(Identity identity);
+        }
+
+        /**
          * The stage of the definition which contains all the minimum required inputs for
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<SpatialAnchorsAccount>, Resource.DefinitionWithTags<WithCreate> {
+        interface WithCreate extends Creatable<SpatialAnchorsAccount>, Resource.DefinitionWithTags<WithCreate>, DefinitionStages.WithIdentity {
         }
     }
     /**
      * The template for a SpatialAnchorsAccount update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<SpatialAnchorsAccount>, Resource.UpdateWithTags<Update> {
+    interface Update extends Appliable<SpatialAnchorsAccount>, Resource.UpdateWithTags<Update>, UpdateStages.WithIdentity {
     }
 
     /**
      * Grouping of SpatialAnchorsAccount update stages.
      */
     interface UpdateStages {
+        /**
+         * The stage of the spatialanchorsaccount update allowing to specify Identity.
+         */
+        interface WithIdentity {
+            /**
+             * Specifies identity.
+             * @param identity The identity associated with this account
+             * @return the next update stage
+             */
+            Update withIdentity(Identity identity);
+        }
+
     }
 }

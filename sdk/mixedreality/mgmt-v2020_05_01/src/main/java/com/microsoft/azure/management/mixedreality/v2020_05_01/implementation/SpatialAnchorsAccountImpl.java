@@ -11,6 +11,7 @@ package com.microsoft.azure.management.mixedreality.v2020_05_01.implementation;
 import com.microsoft.azure.arm.resources.models.implementation.GroupableResourceCoreImpl;
 import com.microsoft.azure.management.mixedreality.v2020_05_01.SpatialAnchorsAccount;
 import rx.Observable;
+import com.microsoft.azure.management.mixedreality.v2020_05_01.Identity;
 
 class SpatialAnchorsAccountImpl extends GroupableResourceCoreImpl<SpatialAnchorsAccount, SpatialAnchorsAccountInner, SpatialAnchorsAccountImpl, MixedRealityManager> implements SpatialAnchorsAccount, SpatialAnchorsAccount.Definition, SpatialAnchorsAccount.Update {
     SpatialAnchorsAccountImpl(String name, SpatialAnchorsAccountInner inner, MixedRealityManager manager) {
@@ -51,6 +52,17 @@ class SpatialAnchorsAccountImpl extends GroupableResourceCoreImpl<SpatialAnchors
     @Override
     public String accountId() {
         return this.inner().accountId();
+    }
+
+    @Override
+    public Identity identity() {
+        return this.inner().identity();
+    }
+
+    @Override
+    public SpatialAnchorsAccountImpl withIdentity(Identity identity) {
+        this.inner().withIdentity(identity);
+        return this;
     }
 
 }

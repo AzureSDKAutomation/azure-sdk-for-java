@@ -8,6 +8,7 @@
 
 package com.microsoft.azure.management.mixedreality.v2020_05_01.implementation;
 
+import com.microsoft.azure.management.mixedreality.v2020_05_01.Identity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.Resource;
@@ -30,6 +31,12 @@ public class SpatialAnchorsAccountInner extends Resource {
     private String accountDomain;
 
     /**
+     * The identity associated with this account.
+     */
+    @JsonProperty(value = "identity")
+    private Identity identity;
+
+    /**
      * Get unique id of certain account.
      *
      * @return the accountId value
@@ -45,6 +52,26 @@ public class SpatialAnchorsAccountInner extends Resource {
      */
     public String accountDomain() {
         return this.accountDomain;
+    }
+
+    /**
+     * Get the identity associated with this account.
+     *
+     * @return the identity value
+     */
+    public Identity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity associated with this account.
+     *
+     * @param identity the identity value to set
+     * @return the SpatialAnchorsAccountInner object itself.
+     */
+    public SpatialAnchorsAccountInner withIdentity(Identity identity) {
+        this.identity = identity;
+        return this;
     }
 
 }

@@ -28,6 +28,12 @@ public class OperationInner {
     private OperationDisplay display;
 
     /**
+     * Whether or not this is a data plane operation.
+     */
+    @JsonProperty(value = "isDataAction")
+    private Boolean isDataAction;
+
+    /**
      * Get operation name: {provider}/{resource}/{operation}.
      *
      * @return the name value
@@ -64,6 +70,26 @@ public class OperationInner {
      */
     public OperationInner withDisplay(OperationDisplay display) {
         this.display = display;
+        return this;
+    }
+
+    /**
+     * Get whether or not this is a data plane operation.
+     *
+     * @return the isDataAction value
+     */
+    public Boolean isDataAction() {
+        return this.isDataAction;
+    }
+
+    /**
+     * Set whether or not this is a data plane operation.
+     *
+     * @param isDataAction the isDataAction value to set
+     * @return the OperationInner object itself.
+     */
+    public OperationInner withIsDataAction(Boolean isDataAction) {
+        this.isDataAction = isDataAction;
         return this;
     }
 
