@@ -50,7 +50,7 @@ public interface HcxEnterpriseSite extends HasInner<HcxEnterpriseSiteInner>, Ind
     /**
      * The entirety of the HcxEnterpriseSite definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithPrivateCloud, DefinitionStages.WithHcxEnterpriseSite, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithPrivateCloud, DefinitionStages.WithCreate {
     }
 
     /**
@@ -73,19 +73,7 @@ public interface HcxEnterpriseSite extends HasInner<HcxEnterpriseSiteInner>, Ind
             * @param privateCloudName The name of the private cloud
             * @return the next definition stage
             */
-            WithHcxEnterpriseSite withExistingPrivateCloud(String resourceGroupName, String privateCloudName);
-        }
-
-        /**
-         * The stage of the hcxenterprisesite definition allowing to specify HcxEnterpriseSite.
-         */
-        interface WithHcxEnterpriseSite {
-           /**
-            * Specifies hcxEnterpriseSite.
-            * @param hcxEnterpriseSite The HCX Enterprise Site
-            * @return the next definition stage
-            */
-            WithCreate withHcxEnterpriseSite(Object hcxEnterpriseSite);
+            WithCreate withExistingPrivateCloud(String resourceGroupName, String privateCloudName);
         }
 
         /**
@@ -99,24 +87,12 @@ public interface HcxEnterpriseSite extends HasInner<HcxEnterpriseSiteInner>, Ind
     /**
      * The template for a HcxEnterpriseSite update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<HcxEnterpriseSite>, UpdateStages.WithHcxEnterpriseSite {
+    interface Update extends Appliable<HcxEnterpriseSite> {
     }
 
     /**
      * Grouping of HcxEnterpriseSite update stages.
      */
     interface UpdateStages {
-        /**
-         * The stage of the hcxenterprisesite update allowing to specify HcxEnterpriseSite.
-         */
-        interface WithHcxEnterpriseSite {
-            /**
-             * Specifies hcxEnterpriseSite.
-             * @param hcxEnterpriseSite The HCX Enterprise Site
-             * @return the next update stage
-             */
-            Update withHcxEnterpriseSite(Object hcxEnterpriseSite);
-        }
-
     }
 }

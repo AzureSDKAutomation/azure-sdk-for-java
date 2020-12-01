@@ -55,7 +55,7 @@ public interface ExpressRouteAuthorization extends HasInner<ExpressRouteAuthoriz
     /**
      * The entirety of the ExpressRouteAuthorization definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithPrivateCloud, DefinitionStages.WithAuthorization, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithPrivateCloud, DefinitionStages.WithCreate {
     }
 
     /**
@@ -78,19 +78,7 @@ public interface ExpressRouteAuthorization extends HasInner<ExpressRouteAuthoriz
             * @param privateCloudName The name of the private cloud
             * @return the next definition stage
             */
-            WithAuthorization withExistingPrivateCloud(String resourceGroupName, String privateCloudName);
-        }
-
-        /**
-         * The stage of the expressrouteauthorization definition allowing to specify Authorization.
-         */
-        interface WithAuthorization {
-           /**
-            * Specifies authorization.
-            * @param authorization An ExpressRoute Circuit Authorization
-            * @return the next definition stage
-            */
-            WithCreate withAuthorization(Object authorization);
+            WithCreate withExistingPrivateCloud(String resourceGroupName, String privateCloudName);
         }
 
         /**
@@ -104,24 +92,12 @@ public interface ExpressRouteAuthorization extends HasInner<ExpressRouteAuthoriz
     /**
      * The template for a ExpressRouteAuthorization update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ExpressRouteAuthorization>, UpdateStages.WithAuthorization {
+    interface Update extends Appliable<ExpressRouteAuthorization> {
     }
 
     /**
      * Grouping of ExpressRouteAuthorization update stages.
      */
     interface UpdateStages {
-        /**
-         * The stage of the expressrouteauthorization update allowing to specify Authorization.
-         */
-        interface WithAuthorization {
-            /**
-             * Specifies authorization.
-             * @param authorization An ExpressRoute Circuit Authorization
-             * @return the next update stage
-             */
-            Update withAuthorization(Object authorization);
-        }
-
     }
 }
