@@ -70,11 +70,11 @@ public class AuthorizationsInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2020_03_20.Authorizations createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("authorizationName") String authorizationName, @Body Object authorization, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("authorizationName") String authorizationName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ExpressRouteAuthorizationInner authorization, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2020_03_20.Authorizations beginCreateOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("authorizationName") String authorizationName, @Body Object authorization, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("authorizationName") String authorizationName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ExpressRouteAuthorizationInner authorization, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2020_03_20.Authorizations delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}", method = "DELETE", hasBody = true)
@@ -312,14 +312,13 @@ public class AuthorizationsInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param authorizationName Name of the ExpressRoute Circuit Authorization in the private cloud
-     * @param authorization An ExpressRoute Circuit Authorization
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ExpressRouteAuthorizationInner object if successful.
      */
-    public ExpressRouteAuthorizationInner createOrUpdate(String resourceGroupName, String privateCloudName, String authorizationName, Object authorization) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName, authorization).toBlocking().last().body();
+    public ExpressRouteAuthorizationInner createOrUpdate(String resourceGroupName, String privateCloudName, String authorizationName) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName).toBlocking().last().body();
     }
 
     /**
@@ -328,13 +327,12 @@ public class AuthorizationsInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param authorizationName Name of the ExpressRoute Circuit Authorization in the private cloud
-     * @param authorization An ExpressRoute Circuit Authorization
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ExpressRouteAuthorizationInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String authorizationName, Object authorization, final ServiceCallback<ExpressRouteAuthorizationInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName, authorization), serviceCallback);
+    public ServiceFuture<ExpressRouteAuthorizationInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String authorizationName, final ServiceCallback<ExpressRouteAuthorizationInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName), serviceCallback);
     }
 
     /**
@@ -343,12 +341,11 @@ public class AuthorizationsInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param authorizationName Name of the ExpressRoute Circuit Authorization in the private cloud
-     * @param authorization An ExpressRoute Circuit Authorization
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ExpressRouteAuthorizationInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String authorizationName, Object authorization) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName, authorization).map(new Func1<ServiceResponse<ExpressRouteAuthorizationInner>, ExpressRouteAuthorizationInner>() {
+    public Observable<ExpressRouteAuthorizationInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String authorizationName) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName).map(new Func1<ServiceResponse<ExpressRouteAuthorizationInner>, ExpressRouteAuthorizationInner>() {
             @Override
             public ExpressRouteAuthorizationInner call(ServiceResponse<ExpressRouteAuthorizationInner> response) {
                 return response.body();
@@ -362,11 +359,10 @@ public class AuthorizationsInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param authorizationName Name of the ExpressRoute Circuit Authorization in the private cloud
-     * @param authorization An ExpressRoute Circuit Authorization
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ExpressRouteAuthorizationInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String authorizationName, Object authorization) {
+    public Observable<ServiceResponse<ExpressRouteAuthorizationInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String authorizationName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -379,13 +375,10 @@ public class AuthorizationsInner {
         if (authorizationName == null) {
             throw new IllegalArgumentException("Parameter authorizationName is required and cannot be null.");
         }
-        if (authorization == null) {
-            throw new IllegalArgumentException("Parameter authorization is required and cannot be null.");
-        }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, authorizationName, authorization, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, authorizationName, this.client.apiVersion(), this.client.acceptLanguage(), authorization, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ExpressRouteAuthorizationInner>() { }.getType());
     }
 
@@ -395,14 +388,13 @@ public class AuthorizationsInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param authorizationName Name of the ExpressRoute Circuit Authorization in the private cloud
-     * @param authorization An ExpressRoute Circuit Authorization
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ExpressRouteAuthorizationInner object if successful.
      */
-    public ExpressRouteAuthorizationInner beginCreateOrUpdate(String resourceGroupName, String privateCloudName, String authorizationName, Object authorization) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName, authorization).toBlocking().single().body();
+    public ExpressRouteAuthorizationInner beginCreateOrUpdate(String resourceGroupName, String privateCloudName, String authorizationName) {
+        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName).toBlocking().single().body();
     }
 
     /**
@@ -411,13 +403,12 @@ public class AuthorizationsInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param authorizationName Name of the ExpressRoute Circuit Authorization in the private cloud
-     * @param authorization An ExpressRoute Circuit Authorization
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ExpressRouteAuthorizationInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String authorizationName, Object authorization, final ServiceCallback<ExpressRouteAuthorizationInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName, authorization), serviceCallback);
+    public ServiceFuture<ExpressRouteAuthorizationInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String authorizationName, final ServiceCallback<ExpressRouteAuthorizationInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName), serviceCallback);
     }
 
     /**
@@ -426,12 +417,11 @@ public class AuthorizationsInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param authorizationName Name of the ExpressRoute Circuit Authorization in the private cloud
-     * @param authorization An ExpressRoute Circuit Authorization
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ExpressRouteAuthorizationInner object
      */
-    public Observable<ExpressRouteAuthorizationInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String authorizationName, Object authorization) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName, authorization).map(new Func1<ServiceResponse<ExpressRouteAuthorizationInner>, ExpressRouteAuthorizationInner>() {
+    public Observable<ExpressRouteAuthorizationInner> beginCreateOrUpdateAsync(String resourceGroupName, String privateCloudName, String authorizationName) {
+        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, authorizationName).map(new Func1<ServiceResponse<ExpressRouteAuthorizationInner>, ExpressRouteAuthorizationInner>() {
             @Override
             public ExpressRouteAuthorizationInner call(ServiceResponse<ExpressRouteAuthorizationInner> response) {
                 return response.body();
@@ -445,11 +435,10 @@ public class AuthorizationsInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param authorizationName Name of the ExpressRoute Circuit Authorization in the private cloud
-     * @param authorization An ExpressRoute Circuit Authorization
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ExpressRouteAuthorizationInner object
      */
-    public Observable<ServiceResponse<ExpressRouteAuthorizationInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String authorizationName, Object authorization) {
+    public Observable<ServiceResponse<ExpressRouteAuthorizationInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String authorizationName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -462,13 +451,10 @@ public class AuthorizationsInner {
         if (authorizationName == null) {
             throw new IllegalArgumentException("Parameter authorizationName is required and cannot be null.");
         }
-        if (authorization == null) {
-            throw new IllegalArgumentException("Parameter authorization is required and cannot be null.");
-        }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, authorizationName, authorization, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, authorizationName, this.client.apiVersion(), this.client.acceptLanguage(), authorization, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ExpressRouteAuthorizationInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ExpressRouteAuthorizationInner>> call(Response<ResponseBody> response) {

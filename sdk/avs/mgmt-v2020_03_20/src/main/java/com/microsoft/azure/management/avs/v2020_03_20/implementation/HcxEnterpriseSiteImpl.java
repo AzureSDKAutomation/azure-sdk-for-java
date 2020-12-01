@@ -18,8 +18,6 @@ class HcxEnterpriseSiteImpl extends CreatableUpdatableImpl<HcxEnterpriseSite, Hc
     private String resourceGroupName;
     private String privateCloudName;
     private String hcxEnterpriseSiteName;
-    private Object chcxEnterpriseSite;
-    private Object uhcxEnterpriseSite;
 
     HcxEnterpriseSiteImpl(String name, AVSManager manager) {
         super(name, new HcxEnterpriseSiteInner());
@@ -49,14 +47,14 @@ class HcxEnterpriseSiteImpl extends CreatableUpdatableImpl<HcxEnterpriseSite, Hc
     @Override
     public Observable<HcxEnterpriseSite> createResourceAsync() {
         HcxEnterpriseSitesInner client = this.manager().inner().hcxEnterpriseSites();
-        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.hcxEnterpriseSiteName, this.chcxEnterpriseSite)
+        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.hcxEnterpriseSiteName)
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<HcxEnterpriseSite> updateResourceAsync() {
         HcxEnterpriseSitesInner client = this.manager().inner().hcxEnterpriseSites();
-        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.hcxEnterpriseSiteName, this.uhcxEnterpriseSite)
+        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.hcxEnterpriseSiteName)
             .map(innerToFluentMap(this));
     }
 
@@ -101,16 +99,6 @@ class HcxEnterpriseSiteImpl extends CreatableUpdatableImpl<HcxEnterpriseSite, Hc
     public HcxEnterpriseSiteImpl withExistingPrivateCloud(String resourceGroupName, String privateCloudName) {
         this.resourceGroupName = resourceGroupName;
         this.privateCloudName = privateCloudName;
-        return this;
-    }
-
-    @Override
-    public HcxEnterpriseSiteImpl withHcxEnterpriseSite(Object hcxEnterpriseSite) {
-        if (isInCreateMode()) {
-            this.chcxEnterpriseSite = hcxEnterpriseSite;
-        } else {
-            this.uhcxEnterpriseSite = hcxEnterpriseSite;
-        }
         return this;
     }
 

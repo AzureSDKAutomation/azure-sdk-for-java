@@ -70,7 +70,7 @@ public class HcxEnterpriseSitesInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2020_03_20.HcxEnterpriseSites createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("hcxEnterpriseSiteName") String hcxEnterpriseSiteName, @Body Object hcxEnterpriseSite, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("privateCloudName") String privateCloudName, @Path("hcxEnterpriseSiteName") String hcxEnterpriseSiteName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body HcxEnterpriseSiteInner hcxEnterpriseSite, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.avs.v2020_03_20.HcxEnterpriseSites delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}", method = "DELETE", hasBody = true)
@@ -304,14 +304,13 @@ public class HcxEnterpriseSitesInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param hcxEnterpriseSiteName Name of the HCX Enterprise Site in the private cloud
-     * @param hcxEnterpriseSite The HCX Enterprise Site
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the HcxEnterpriseSiteInner object if successful.
      */
-    public HcxEnterpriseSiteInner createOrUpdate(String resourceGroupName, String privateCloudName, String hcxEnterpriseSiteName, Object hcxEnterpriseSite) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, hcxEnterpriseSiteName, hcxEnterpriseSite).toBlocking().single().body();
+    public HcxEnterpriseSiteInner createOrUpdate(String resourceGroupName, String privateCloudName, String hcxEnterpriseSiteName) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, hcxEnterpriseSiteName).toBlocking().single().body();
     }
 
     /**
@@ -320,13 +319,12 @@ public class HcxEnterpriseSitesInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param hcxEnterpriseSiteName Name of the HCX Enterprise Site in the private cloud
-     * @param hcxEnterpriseSite The HCX Enterprise Site
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<HcxEnterpriseSiteInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String hcxEnterpriseSiteName, Object hcxEnterpriseSite, final ServiceCallback<HcxEnterpriseSiteInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, hcxEnterpriseSiteName, hcxEnterpriseSite), serviceCallback);
+    public ServiceFuture<HcxEnterpriseSiteInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String hcxEnterpriseSiteName, final ServiceCallback<HcxEnterpriseSiteInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, hcxEnterpriseSiteName), serviceCallback);
     }
 
     /**
@@ -335,12 +333,11 @@ public class HcxEnterpriseSitesInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param hcxEnterpriseSiteName Name of the HCX Enterprise Site in the private cloud
-     * @param hcxEnterpriseSite The HCX Enterprise Site
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the HcxEnterpriseSiteInner object
      */
-    public Observable<HcxEnterpriseSiteInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String hcxEnterpriseSiteName, Object hcxEnterpriseSite) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, hcxEnterpriseSiteName, hcxEnterpriseSite).map(new Func1<ServiceResponse<HcxEnterpriseSiteInner>, HcxEnterpriseSiteInner>() {
+    public Observable<HcxEnterpriseSiteInner> createOrUpdateAsync(String resourceGroupName, String privateCloudName, String hcxEnterpriseSiteName) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, privateCloudName, hcxEnterpriseSiteName).map(new Func1<ServiceResponse<HcxEnterpriseSiteInner>, HcxEnterpriseSiteInner>() {
             @Override
             public HcxEnterpriseSiteInner call(ServiceResponse<HcxEnterpriseSiteInner> response) {
                 return response.body();
@@ -354,11 +351,10 @@ public class HcxEnterpriseSitesInner {
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param privateCloudName The name of the private cloud.
      * @param hcxEnterpriseSiteName Name of the HCX Enterprise Site in the private cloud
-     * @param hcxEnterpriseSite The HCX Enterprise Site
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the HcxEnterpriseSiteInner object
      */
-    public Observable<ServiceResponse<HcxEnterpriseSiteInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String hcxEnterpriseSiteName, Object hcxEnterpriseSite) {
+    public Observable<ServiceResponse<HcxEnterpriseSiteInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String privateCloudName, String hcxEnterpriseSiteName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -371,13 +367,10 @@ public class HcxEnterpriseSitesInner {
         if (hcxEnterpriseSiteName == null) {
             throw new IllegalArgumentException("Parameter hcxEnterpriseSiteName is required and cannot be null.");
         }
-        if (hcxEnterpriseSite == null) {
-            throw new IllegalArgumentException("Parameter hcxEnterpriseSite is required and cannot be null.");
-        }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, hcxEnterpriseSiteName, hcxEnterpriseSite, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, privateCloudName, hcxEnterpriseSiteName, this.client.apiVersion(), this.client.acceptLanguage(), hcxEnterpriseSite, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<HcxEnterpriseSiteInner>>>() {
                 @Override
                 public Observable<ServiceResponse<HcxEnterpriseSiteInner>> call(Response<ResponseBody> response) {
