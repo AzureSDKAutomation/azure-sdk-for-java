@@ -12,16 +12,12 @@ import com.microsoft.azure.management.avs.v2019_08_09_preview.Cluster;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.avs.v2019_08_09_preview.ClusterProperties;
-import java.util.List;
-import rx.functions.Func1;
 
 class ClusterImpl extends CreatableUpdatableImpl<Cluster, ClusterInner, ClusterImpl> implements Cluster, Cluster.Definition, Cluster.Update {
     private final AVSManager manager;
     private String resourceGroupName;
     private String privateCloudName;
     private String clusterName;
-    private ClusterProperties cproperties;
-    private ClusterProperties uproperties;
 
     ClusterImpl(String name, AVSManager manager) {
         super(name, new ClusterInner());
@@ -29,8 +25,6 @@ class ClusterImpl extends CreatableUpdatableImpl<Cluster, ClusterInner, ClusterI
         // Set resource name
         this.clusterName = name;
         //
-        this.cproperties = new ClusterProperties();
-        this.uproperties = new ClusterProperties();
     }
 
     ClusterImpl(ClusterInner inner, AVSManager manager) {
@@ -43,8 +37,6 @@ class ClusterImpl extends CreatableUpdatableImpl<Cluster, ClusterInner, ClusterI
         this.privateCloudName = IdParsingUtils.getValueFromIdByName(inner.id(), "privateClouds");
         this.clusterName = IdParsingUtils.getValueFromIdByName(inner.id(), "clusters");
         //
-        this.cproperties = new ClusterProperties();
-        this.uproperties = new ClusterProperties();
     }
 
     @Override
@@ -55,28 +47,14 @@ class ClusterImpl extends CreatableUpdatableImpl<Cluster, ClusterInner, ClusterI
     @Override
     public Observable<Cluster> createResourceAsync() {
         ClustersInner client = this.manager().inner().clusters();
-        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.clusterName, this.cproperties)
-            .map(new Func1<ClusterInner, ClusterInner>() {
-               @Override
-               public ClusterInner call(ClusterInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
+        return client.createOrUpdateAsync(this.resourceGroupName, this.privateCloudName, this.clusterName, this.inner())
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<Cluster> updateResourceAsync() {
         ClustersInner client = this.manager().inner().clusters();
-        return client.updateAsync(this.resourceGroupName, this.privateCloudName, this.clusterName, this.uproperties)
-            .map(new Func1<ClusterInner, ClusterInner>() {
-               @Override
-               public ClusterInner call(ClusterInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
+        return client.updateAsync(this.resourceGroupName, this.privateCloudName, this.clusterName, this.inner())
             .map(innerToFluentMap(this));
     }
 
@@ -91,10 +69,6 @@ class ClusterImpl extends CreatableUpdatableImpl<Cluster, ClusterInner, ClusterI
         return this.inner().id() == null;
     }
 
-    private void resetCreateUpdateParameters() {
-        this.cproperties = new ClusterProperties();
-        this.uproperties = new ClusterProperties();
-    }
 
     @Override
     public String id() {
@@ -125,11 +99,7 @@ class ClusterImpl extends CreatableUpdatableImpl<Cluster, ClusterInner, ClusterI
 
     @Override
     public ClusterImpl withProperties(ClusterProperties properties) {
-        if (isInCreateMode()) {
-            this.cproperties = properties;
-        } else {
-            this.uproperties = properties;
-        }
+        this.inner().withProperties(properties);
         return this;
     }
 
