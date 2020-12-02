@@ -35,7 +35,7 @@ class RecoverableSqlPoolImpl extends IndexableRefreshableWrapperImpl<Recoverable
 
     @Override
     protected Observable<RecoverableSqlPoolInner> getInnerAsync() {
-        WorkspaceManagedSqlServerRecoverableSqlpoolsInner client = this.manager().inner().workspaceManagedSqlServerRecoverableSqlpools();
+        WorkspaceManagedSqlServerRecoverableSqlPoolsInner client = this.manager().inner().workspaceManagedSqlServerRecoverableSqlPools();
         return client.getAsync(this.resourceGroupName, this.workspaceName, this.sqlComputeName);
     }
 
