@@ -27,6 +27,12 @@ public class ExpressionEvaluationDetails {
     private String expression;
 
     /**
+     * The kind of expression that was evaluated.
+     */
+    @JsonProperty(value = "expressionKind", access = JsonProperty.Access.WRITE_ONLY)
+    private String expressionKind;
+
+    /**
      * Property path if the expression is a field or an alias.
      */
     @JsonProperty(value = "path")
@@ -88,6 +94,15 @@ public class ExpressionEvaluationDetails {
     public ExpressionEvaluationDetails withExpression(String expression) {
         this.expression = expression;
         return this;
+    }
+
+    /**
+     * Get the kind of expression that was evaluated.
+     *
+     * @return the expressionKind value
+     */
+    public String expressionKind() {
+        return this.expressionKind;
     }
 
     /**
