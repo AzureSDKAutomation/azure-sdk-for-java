@@ -15,6 +15,7 @@ import com.microsoft.azure.management.compute.v2020_06_01.AutomaticOSUpgradeProp
 import java.util.List;
 import com.microsoft.azure.management.compute.v2020_06_01.DataDiskImage;
 import com.microsoft.azure.management.compute.v2020_06_01.DisallowedConfiguration;
+import com.microsoft.azure.management.compute.v2020_06_01.VirtualMachineImageFeature;
 import com.microsoft.azure.management.compute.v2020_06_01.HyperVGenerationTypes;
 import com.microsoft.azure.management.compute.v2020_06_01.OSDiskImage;
 import com.microsoft.azure.management.compute.v2020_06_01.PurchasePlan;
@@ -65,6 +66,11 @@ class VirtualMachineImageImpl extends IndexableRefreshableWrapperImpl<VirtualMac
     @Override
     public DisallowedConfiguration disallowed() {
         return this.inner().disallowed();
+    }
+
+    @Override
+    public List<VirtualMachineImageFeature> features() {
+        return this.inner().features();
     }
 
     @Override
