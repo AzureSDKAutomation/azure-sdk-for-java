@@ -28,7 +28,7 @@ public class StorageAccountKey {
 
     /**
      * Permissions for the key -- read-only or full permissions. Possible
-     * values include: 'Read', 'Full'.
+     * values include: 'READ', 'FULL', 'NONE', 'DELETE'.
      */
     @JsonProperty(value = "permissions", access = JsonProperty.Access.WRITE_ONLY)
     private KeyPermission permissions;
@@ -52,7 +52,7 @@ public class StorageAccountKey {
     }
 
     /**
-     * Get permissions for the key -- read-only or full permissions. Possible values include: 'Read', 'Full'.
+     * Get permissions for the key -- read-only or full permissions. Possible values include: 'READ', 'FULL', 'NONE', 'DELETE'.
      *
      * @return the permissions value
      */
