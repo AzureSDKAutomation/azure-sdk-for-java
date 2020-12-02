@@ -37,6 +37,11 @@ public interface VirtualMachineImage extends HasInner<VirtualMachineImageInner>,
     DisallowedConfiguration disallowed();
 
     /**
+     * @return the features value.
+     */
+    List<VirtualMachineImageFeature> features();
+
+    /**
      * @return the hyperVGeneration value.
      */
     HyperVGenerationTypes hyperVGeneration();
