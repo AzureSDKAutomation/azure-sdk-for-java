@@ -811,16 +811,16 @@ public class SynapseManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The WorkspaceManagedSqlServerRecoverableSqlpoolsInner object to access its operations.
+     * The WorkspaceManagedSqlServerRecoverableSqlPoolsInner object to access its operations.
      */
-    private WorkspaceManagedSqlServerRecoverableSqlpoolsInner workspaceManagedSqlServerRecoverableSqlpools;
+    private WorkspaceManagedSqlServerRecoverableSqlPoolsInner workspaceManagedSqlServerRecoverableSqlPools;
 
     /**
-     * Gets the WorkspaceManagedSqlServerRecoverableSqlpoolsInner object to access its operations.
-     * @return the WorkspaceManagedSqlServerRecoverableSqlpoolsInner object.
+     * Gets the WorkspaceManagedSqlServerRecoverableSqlPoolsInner object to access its operations.
+     * @return the WorkspaceManagedSqlServerRecoverableSqlPoolsInner object.
      */
-    public WorkspaceManagedSqlServerRecoverableSqlpoolsInner workspaceManagedSqlServerRecoverableSqlpools() {
-        return this.workspaceManagedSqlServerRecoverableSqlpools;
+    public WorkspaceManagedSqlServerRecoverableSqlPoolsInner workspaceManagedSqlServerRecoverableSqlPools() {
+        return this.workspaceManagedSqlServerRecoverableSqlPools;
     }
 
     /**
@@ -923,7 +923,7 @@ public class SynapseManagementClientImpl extends AzureServiceClient {
         this.workspaceManagedSqlServerSecurityAlertPolicys = new WorkspaceManagedSqlServerSecurityAlertPolicysInner(restClient().retrofit(), this);
         this.workspaceManagedSqlServerVulnerabilityAssessments = new WorkspaceManagedSqlServerVulnerabilityAssessmentsInner(restClient().retrofit(), this);
         this.workspaceManagedSqlServerUsages = new WorkspaceManagedSqlServerUsagesInner(restClient().retrofit(), this);
-        this.workspaceManagedSqlServerRecoverableSqlpools = new WorkspaceManagedSqlServerRecoverableSqlpoolsInner(restClient().retrofit(), this);
+        this.workspaceManagedSqlServerRecoverableSqlPools = new WorkspaceManagedSqlServerRecoverableSqlPoolsInner(restClient().retrofit(), this);
         this.keys = new KeysInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }

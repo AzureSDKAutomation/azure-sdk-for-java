@@ -68,7 +68,7 @@ import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManag
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManagedSqlServerSecurityAlertPolicys;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManagedSqlServerVulnerabilityAssessments;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManagedSqlServerUsages;
-import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManagedSqlServerRecoverableSqlpools;
+import com.microsoft.azure.management.synapse.v2019_06_01_preview.WorkspaceManagedSqlServerRecoverableSqlPools;
 import com.microsoft.azure.management.synapse.v2019_06_01_preview.Keys;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
@@ -129,7 +129,7 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
     private WorkspaceManagedSqlServerSecurityAlertPolicys workspaceManagedSqlServerSecurityAlertPolicys;
     private WorkspaceManagedSqlServerVulnerabilityAssessments workspaceManagedSqlServerVulnerabilityAssessments;
     private WorkspaceManagedSqlServerUsages workspaceManagedSqlServerUsages;
-    private WorkspaceManagedSqlServerRecoverableSqlpools workspaceManagedSqlServerRecoverableSqlpools;
+    private WorkspaceManagedSqlServerRecoverableSqlPools workspaceManagedSqlServerRecoverableSqlPools;
     private Keys keys;
     /**
     * Get a Configurable instance that can be used to create SynapseManager with optional configuration.
@@ -699,13 +699,13 @@ public final class SynapseManager extends ManagerCore<SynapseManager, SynapseMan
     }
 
     /**
-     * @return Entry point to manage WorkspaceManagedSqlServerRecoverableSqlpools.
+     * @return Entry point to manage WorkspaceManagedSqlServerRecoverableSqlPools.
      */
-    public WorkspaceManagedSqlServerRecoverableSqlpools workspaceManagedSqlServerRecoverableSqlpools() {
-        if (this.workspaceManagedSqlServerRecoverableSqlpools == null) {
-            this.workspaceManagedSqlServerRecoverableSqlpools = new WorkspaceManagedSqlServerRecoverableSqlpoolsImpl(this);
+    public WorkspaceManagedSqlServerRecoverableSqlPools workspaceManagedSqlServerRecoverableSqlPools() {
+        if (this.workspaceManagedSqlServerRecoverableSqlPools == null) {
+            this.workspaceManagedSqlServerRecoverableSqlPools = new WorkspaceManagedSqlServerRecoverableSqlPoolsImpl(this);
         }
-        return this.workspaceManagedSqlServerRecoverableSqlpools;
+        return this.workspaceManagedSqlServerRecoverableSqlPools;
     }
 
     /**
