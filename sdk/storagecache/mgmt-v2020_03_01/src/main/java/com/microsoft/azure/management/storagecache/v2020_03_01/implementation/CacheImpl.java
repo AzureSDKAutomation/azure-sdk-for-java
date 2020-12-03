@@ -12,6 +12,7 @@ import com.microsoft.azure.arm.resources.models.implementation.GroupableResource
 import com.microsoft.azure.management.storagecache.v2020_03_01.Cache;
 import rx.Observable;
 import com.microsoft.azure.management.storagecache.v2020_03_01.CacheIdentity;
+import com.microsoft.azure.management.storagecache.v2020_03_01.SystemData;
 import com.microsoft.azure.management.storagecache.v2020_03_01.CacheHealth;
 import java.util.List;
 import com.microsoft.azure.management.storagecache.v2020_03_01.ProvisioningStateType;
@@ -100,6 +101,11 @@ class CacheImpl extends GroupableResourceCoreImpl<Cache, CacheInner, CacheImpl, 
     @Override
     public String subnet() {
         return this.inner().subnet();
+    }
+
+    @Override
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override

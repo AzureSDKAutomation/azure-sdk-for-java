@@ -11,6 +11,7 @@ package com.microsoft.azure.management.storagecache.v2020_03_01.implementation;
 import com.microsoft.azure.management.storagecache.v2020_03_01.ApiOperation;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import com.microsoft.azure.management.storagecache.v2020_03_01.ApiOperationDisplay;
+import com.microsoft.azure.management.storagecache.v2020_03_01.ApiOperationPropertiesServiceSpecification;
 
 class ApiOperationImpl extends WrapperImpl<ApiOperationInner> implements ApiOperation {
     private final StorageCacheManager manager;
@@ -30,8 +31,23 @@ class ApiOperationImpl extends WrapperImpl<ApiOperationInner> implements ApiOper
     }
 
     @Override
+    public Boolean isDataAction() {
+        return this.inner().isDataAction();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
+    }
+
+    @Override
+    public String origin() {
+        return this.inner().origin();
+    }
+
+    @Override
+    public ApiOperationPropertiesServiceSpecification serviceSpecification() {
+        return this.inner().serviceSpecification();
     }
 
 }

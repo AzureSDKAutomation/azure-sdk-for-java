@@ -9,6 +9,7 @@
 package com.microsoft.azure.management.storagecache.v2020_03_01.implementation;
 
 import com.microsoft.azure.management.storagecache.v2020_03_01.CacheIdentity;
+import com.microsoft.azure.management.storagecache.v2020_03_01.SystemData;
 import com.microsoft.azure.management.storagecache.v2020_03_01.CacheHealth;
 import java.util.List;
 import com.microsoft.azure.management.storagecache.v2020_03_01.ProvisioningStateType;
@@ -32,6 +33,12 @@ public class CacheInner extends Resource {
      */
     @JsonProperty(value = "identity")
     private CacheIdentity identity;
+
+    /**
+     * The system meta data relating to this resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * The size of this Cache, in GB.
@@ -114,6 +121,15 @@ public class CacheInner extends Resource {
     public CacheInner withIdentity(CacheIdentity identity) {
         this.identity = identity;
         return this;
+    }
+
+    /**
+     * Get the system meta data relating to this resource.
+     *
+     * @return the systemData value
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
     /**

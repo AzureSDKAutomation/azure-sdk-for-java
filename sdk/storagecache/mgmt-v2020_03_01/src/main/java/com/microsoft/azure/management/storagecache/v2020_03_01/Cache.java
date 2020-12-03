@@ -76,6 +76,11 @@ public interface Cache extends HasInner<CacheInner>, Resource, GroupableResource
     String subnet();
 
     /**
+     * @return the systemData value.
+     */
+    SystemData systemData();
+
+    /**
      * @return the upgradeStatus value.
      */
     CacheUpgradeStatus upgradeStatus();
