@@ -46,7 +46,7 @@ public interface Volumes extends SupportsCreating<Volume.DefinitionStages.Blank>
 
     /**
      * Resync volume replication.
-     * Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from source to destination.
+     * Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from from destination to source.
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the NetApp account
