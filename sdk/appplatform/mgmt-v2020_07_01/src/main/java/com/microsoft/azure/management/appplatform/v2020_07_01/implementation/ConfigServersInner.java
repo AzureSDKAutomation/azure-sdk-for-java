@@ -11,7 +11,9 @@ package com.microsoft.azure.management.appplatform.v2020_07_01.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
+import com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServerGitProperty;
 import com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServerProperties;
+import com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServerSettings;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
@@ -24,11 +26,14 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.Path;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -75,6 +80,14 @@ public class ConfigServersInner {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServers beginUpdatePatch" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default")
         Observable<Response<ResponseBody>> beginUpdatePatch(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ConfigServerResourceInner configServerResource, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServers validate" })
+        @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/validate")
+        Observable<Response<ResponseBody>> validate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ConfigServerSettings configServerSettings, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2020_07_01.ConfigServers beginValidate" })
+        @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/validate")
+        Observable<Response<ResponseBody>> beginValidate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body ConfigServerSettings configServerSettings, @Header("User-Agent") String userAgent);
 
     }
 
@@ -779,6 +792,317 @@ public class ConfigServersInner {
         return this.client.restClient().responseBuilderFactory().<ConfigServerResourceInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ConfigServerResourceInner>() { }.getType())
                 .register(202, new TypeToken<ConfigServerResourceInner>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the ConfigServerSettingsValidateResultInner object if successful.
+     */
+    public ConfigServerSettingsValidateResultInner validate(String resourceGroupName, String serviceName) {
+        return validateWithServiceResponseAsync(resourceGroupName, serviceName).toBlocking().last().body();
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<ConfigServerSettingsValidateResultInner> validateAsync(String resourceGroupName, String serviceName, final ServiceCallback<ConfigServerSettingsValidateResultInner> serviceCallback) {
+        return ServiceFuture.fromResponse(validateWithServiceResponseAsync(resourceGroupName, serviceName), serviceCallback);
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<ConfigServerSettingsValidateResultInner> validateAsync(String resourceGroupName, String serviceName) {
+        return validateWithServiceResponseAsync(resourceGroupName, serviceName).map(new Func1<ServiceResponse<ConfigServerSettingsValidateResultInner>, ConfigServerSettingsValidateResultInner>() {
+            @Override
+            public ConfigServerSettingsValidateResultInner call(ServiceResponse<ConfigServerSettingsValidateResultInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<ConfigServerSettingsValidateResultInner>> validateWithServiceResponseAsync(String resourceGroupName, String serviceName) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (serviceName == null) {
+            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
+        }
+        final ConfigServerGitProperty gitProperty = null;
+        ConfigServerSettings configServerSettings = new ConfigServerSettings();
+        configServerSettings.withGitProperty(null);
+        Observable<Response<ResponseBody>> observable = service.validate(this.client.subscriptionId(), resourceGroupName, serviceName, this.client.apiVersion(), this.client.acceptLanguage(), configServerSettings, this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.LOCATION), new TypeToken<ConfigServerSettingsValidateResultInner>() { }.getType());
+    }
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param gitProperty Property of git environment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the ConfigServerSettingsValidateResultInner object if successful.
+     */
+    public ConfigServerSettingsValidateResultInner validate(String resourceGroupName, String serviceName, ConfigServerGitProperty gitProperty) {
+        return validateWithServiceResponseAsync(resourceGroupName, serviceName, gitProperty).toBlocking().last().body();
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param gitProperty Property of git environment.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<ConfigServerSettingsValidateResultInner> validateAsync(String resourceGroupName, String serviceName, ConfigServerGitProperty gitProperty, final ServiceCallback<ConfigServerSettingsValidateResultInner> serviceCallback) {
+        return ServiceFuture.fromResponse(validateWithServiceResponseAsync(resourceGroupName, serviceName, gitProperty), serviceCallback);
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param gitProperty Property of git environment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<ConfigServerSettingsValidateResultInner> validateAsync(String resourceGroupName, String serviceName, ConfigServerGitProperty gitProperty) {
+        return validateWithServiceResponseAsync(resourceGroupName, serviceName, gitProperty).map(new Func1<ServiceResponse<ConfigServerSettingsValidateResultInner>, ConfigServerSettingsValidateResultInner>() {
+            @Override
+            public ConfigServerSettingsValidateResultInner call(ServiceResponse<ConfigServerSettingsValidateResultInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param gitProperty Property of git environment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<ConfigServerSettingsValidateResultInner>> validateWithServiceResponseAsync(String resourceGroupName, String serviceName, ConfigServerGitProperty gitProperty) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (serviceName == null) {
+            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
+        }
+        Validator.validate(gitProperty);
+        ConfigServerSettings configServerSettings = new ConfigServerSettings();
+        configServerSettings.withGitProperty(gitProperty);
+        Observable<Response<ResponseBody>> observable = service.validate(this.client.subscriptionId(), resourceGroupName, serviceName, this.client.apiVersion(), this.client.acceptLanguage(), configServerSettings, this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.LOCATION), new TypeToken<ConfigServerSettingsValidateResultInner>() { }.getType());
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the ConfigServerSettingsValidateResultInner object if successful.
+     */
+    public ConfigServerSettingsValidateResultInner beginValidate(String resourceGroupName, String serviceName) {
+        return beginValidateWithServiceResponseAsync(resourceGroupName, serviceName).toBlocking().single().body();
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<ConfigServerSettingsValidateResultInner> beginValidateAsync(String resourceGroupName, String serviceName, final ServiceCallback<ConfigServerSettingsValidateResultInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginValidateWithServiceResponseAsync(resourceGroupName, serviceName), serviceCallback);
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ConfigServerSettingsValidateResultInner object
+     */
+    public Observable<ConfigServerSettingsValidateResultInner> beginValidateAsync(String resourceGroupName, String serviceName) {
+        return beginValidateWithServiceResponseAsync(resourceGroupName, serviceName).map(new Func1<ServiceResponse<ConfigServerSettingsValidateResultInner>, ConfigServerSettingsValidateResultInner>() {
+            @Override
+            public ConfigServerSettingsValidateResultInner call(ServiceResponse<ConfigServerSettingsValidateResultInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ConfigServerSettingsValidateResultInner object
+     */
+    public Observable<ServiceResponse<ConfigServerSettingsValidateResultInner>> beginValidateWithServiceResponseAsync(String resourceGroupName, String serviceName) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (serviceName == null) {
+            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
+        }
+        final ConfigServerGitProperty gitProperty = null;
+        ConfigServerSettings configServerSettings = new ConfigServerSettings();
+        configServerSettings.withGitProperty(null);
+        return service.beginValidate(this.client.subscriptionId(), resourceGroupName, serviceName, this.client.apiVersion(), this.client.acceptLanguage(), configServerSettings, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ConfigServerSettingsValidateResultInner>>>() {
+                @Override
+                public Observable<ServiceResponse<ConfigServerSettingsValidateResultInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ConfigServerSettingsValidateResultInner> clientResponse = beginValidateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param gitProperty Property of git environment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the ConfigServerSettingsValidateResultInner object if successful.
+     */
+    public ConfigServerSettingsValidateResultInner beginValidate(String resourceGroupName, String serviceName, ConfigServerGitProperty gitProperty) {
+        return beginValidateWithServiceResponseAsync(resourceGroupName, serviceName, gitProperty).toBlocking().single().body();
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param gitProperty Property of git environment.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<ConfigServerSettingsValidateResultInner> beginValidateAsync(String resourceGroupName, String serviceName, ConfigServerGitProperty gitProperty, final ServiceCallback<ConfigServerSettingsValidateResultInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginValidateWithServiceResponseAsync(resourceGroupName, serviceName, gitProperty), serviceCallback);
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param gitProperty Property of git environment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ConfigServerSettingsValidateResultInner object
+     */
+    public Observable<ConfigServerSettingsValidateResultInner> beginValidateAsync(String resourceGroupName, String serviceName, ConfigServerGitProperty gitProperty) {
+        return beginValidateWithServiceResponseAsync(resourceGroupName, serviceName, gitProperty).map(new Func1<ServiceResponse<ConfigServerSettingsValidateResultInner>, ConfigServerSettingsValidateResultInner>() {
+            @Override
+            public ConfigServerSettingsValidateResultInner call(ServiceResponse<ConfigServerSettingsValidateResultInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Check if the config server settings are valid.
+     *
+     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+     * @param serviceName The name of the Service resource.
+     * @param gitProperty Property of git environment.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ConfigServerSettingsValidateResultInner object
+     */
+    public Observable<ServiceResponse<ConfigServerSettingsValidateResultInner>> beginValidateWithServiceResponseAsync(String resourceGroupName, String serviceName, ConfigServerGitProperty gitProperty) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (serviceName == null) {
+            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
+        }
+        Validator.validate(gitProperty);
+        ConfigServerSettings configServerSettings = new ConfigServerSettings();
+        configServerSettings.withGitProperty(gitProperty);
+        return service.beginValidate(this.client.subscriptionId(), resourceGroupName, serviceName, this.client.apiVersion(), this.client.acceptLanguage(), configServerSettings, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ConfigServerSettingsValidateResultInner>>>() {
+                @Override
+                public Observable<ServiceResponse<ConfigServerSettingsValidateResultInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ConfigServerSettingsValidateResultInner> clientResponse = beginValidateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<ConfigServerSettingsValidateResultInner> beginValidateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<ConfigServerSettingsValidateResultInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<ConfigServerSettingsValidateResultInner>() { }.getType())
+                .register(202, new TypeToken<ConfigServerSettingsValidateResultInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
