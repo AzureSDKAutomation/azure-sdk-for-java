@@ -39,7 +39,8 @@ public class VaultProperties {
     private List<AccessPolicyEntry> accessPolicies;
 
     /**
-     * The URI of the vault for performing operations on keys and secrets.
+     * The URI of the vault for performing operations on keys and secrets. This
+     * property is readonly.
      */
     @JsonProperty(value = "vaultUri")
     private String vaultUri;
@@ -185,7 +186,7 @@ public class VaultProperties {
     }
 
     /**
-     * Get the URI of the vault for performing operations on keys and secrets.
+     * Get the URI of the vault for performing operations on keys and secrets. This property is readonly.
      *
      * @return the vaultUri value
      */
@@ -194,7 +195,7 @@ public class VaultProperties {
     }
 
     /**
-     * Set the URI of the vault for performing operations on keys and secrets.
+     * Set the URI of the vault for performing operations on keys and secrets. This property is readonly.
      *
      * @param vaultUri the vaultUri value to set
      * @return the VaultProperties object itself.
