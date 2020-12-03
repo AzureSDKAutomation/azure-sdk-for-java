@@ -11,6 +11,7 @@ package com.microsoft.azure.management.storagecache.v2020_03_01.implementation;
 import com.microsoft.azure.management.storagecache.v2020_03_01.StorageTarget;
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
+import com.microsoft.azure.management.storagecache.v2020_03_01.SystemData;
 import java.util.List;
 import com.microsoft.azure.management.storagecache.v2020_03_01.NamespaceJunction;
 import com.microsoft.azure.management.storagecache.v2020_03_01.ProvisioningStateType;
@@ -91,6 +92,11 @@ class StorageTargetImpl extends CreatableUpdatableImpl<StorageTarget, StorageTar
     }
 
     @Override
+    public String location() {
+        return this.inner().location();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
     }
@@ -106,8 +112,8 @@ class StorageTargetImpl extends CreatableUpdatableImpl<StorageTarget, StorageTar
     }
 
     @Override
-    public String targetType() {
-        return this.inner().targetType();
+    public SystemData systemData() {
+        return this.inner().systemData();
     }
 
     @Override
@@ -148,12 +154,6 @@ class StorageTargetImpl extends CreatableUpdatableImpl<StorageTarget, StorageTar
     @Override
     public StorageTargetImpl withProvisioningState(ProvisioningStateType provisioningState) {
         this.inner().withProvisioningState(provisioningState);
-        return this;
-    }
-
-    @Override
-    public StorageTargetImpl withTargetType(String targetType) {
-        this.inner().withTargetType(targetType);
         return this;
     }
 

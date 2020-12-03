@@ -23,8 +23,23 @@ public interface ApiOperation extends HasInner<ApiOperationInner>, HasManager<St
     ApiOperationDisplay display();
 
     /**
+     * @return the isDataAction value.
+     */
+    Boolean isDataAction();
+
+    /**
      * @return the name value.
      */
     String name();
+
+    /**
+     * @return the origin value.
+     */
+    String origin();
+
+    /**
+     * @return the serviceSpecification value.
+     */
+    ApiOperationPropertiesServiceSpecification serviceSpecification();
 
 }

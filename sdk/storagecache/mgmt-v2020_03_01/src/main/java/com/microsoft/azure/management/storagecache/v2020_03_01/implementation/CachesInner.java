@@ -918,6 +918,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         return this.client.restClient().responseBuilderFactory().<CacheInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<CacheInner>() { }.getType())
                 .register(201, new TypeToken<CacheInner>() { }.getType())
+                .register(202, new TypeToken<CacheInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

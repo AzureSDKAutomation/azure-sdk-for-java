@@ -817,6 +817,7 @@ public class StorageTargetsInner {
         return this.client.restClient().responseBuilderFactory().<StorageTargetInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageTargetInner>() { }.getType())
                 .register(201, new TypeToken<StorageTargetInner>() { }.getType())
+                .register(202, new TypeToken<StorageTargetInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
