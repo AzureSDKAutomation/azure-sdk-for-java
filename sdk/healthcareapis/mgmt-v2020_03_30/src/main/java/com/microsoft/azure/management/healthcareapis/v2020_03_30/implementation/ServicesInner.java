@@ -16,6 +16,7 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.healthcareapis.v2020_03_30.CheckNameAvailabilityParameters;
+import com.microsoft.azure.management.healthcareapis.v2020_03_30.ErrorDetailsInnerException;
 import com.microsoft.azure.management.healthcareapis.v2020_03_30.ServicesPatchDescription;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
@@ -542,6 +543,7 @@ public class ServicesInner implements InnerSupportsGet<ServicesDescriptionInner>
     private ServiceResponse<ServicesDescriptionInner> beginUpdateDelegate(Response<ResponseBody> response) throws ErrorDetailsInnerException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<ServicesDescriptionInner, ErrorDetailsInnerException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ServicesDescriptionInner>() { }.getType())
+                .register(202, new TypeToken<ServicesDescriptionInner>() { }.getType())
                 .registerError(ErrorDetailsInnerException.class)
                 .build(response);
     }
