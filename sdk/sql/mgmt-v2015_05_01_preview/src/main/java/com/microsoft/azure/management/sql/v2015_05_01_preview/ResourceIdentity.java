@@ -24,10 +24,11 @@ public class ResourceIdentity {
     /**
      * The identity type. Set this to 'SystemAssigned' in order to
      * automatically create and assign an Azure Active Directory principal for
-     * the resource. Possible values include: 'SystemAssigned'.
+     * the resource. Possible values include: 'None', 'SystemAssigned',
+     * 'UserAssigned'.
      */
     @JsonProperty(value = "type")
-    private IdentityType type;
+    private IdentityTypeWithNone type;
 
     /**
      * The Azure Active Directory tenant id.
@@ -45,21 +46,21 @@ public class ResourceIdentity {
     }
 
     /**
-     * Get the identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource. Possible values include: 'SystemAssigned'.
+     * Get the identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource. Possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
      *
      * @return the type value
      */
-    public IdentityType type() {
+    public IdentityTypeWithNone type() {
         return this.type;
     }
 
     /**
-     * Set the identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource. Possible values include: 'SystemAssigned'.
+     * Set the identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource. Possible values include: 'None', 'SystemAssigned', 'UserAssigned'.
      *
      * @param type the type value to set
      * @return the ResourceIdentity object itself.
      */
-    public ResourceIdentity withType(IdentityType type) {
+    public ResourceIdentity withType(IdentityTypeWithNone type) {
         this.type = type;
         return this;
     }
