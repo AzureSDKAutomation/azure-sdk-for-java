@@ -23,6 +23,11 @@ public interface Operation extends HasInner<OperationInner>, HasManager<KeyVault
     OperationDisplay display();
 
     /**
+     * @return the isDataAction value.
+     */
+    Boolean isDataAction();
+
+    /**
      * @return the name value.
      */
     String name();
