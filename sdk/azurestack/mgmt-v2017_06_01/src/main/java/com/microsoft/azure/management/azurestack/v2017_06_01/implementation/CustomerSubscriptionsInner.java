@@ -11,7 +11,6 @@ package com.microsoft.azure.management.azurestack.v2017_06_01.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
-import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.management.azurestack.v2017_06_01.ErrorResponseException;
 import com.microsoft.azure.Page;
@@ -307,7 +306,7 @@ public class CustomerSubscriptionsInner {
      * @param registrationName Name of the Azure Stack registration.
      * @param customerSubscriptionName Name of the product.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete(String resourceGroup, String registrationName, String customerSubscriptionName) {
@@ -385,11 +384,11 @@ public class CustomerSubscriptionsInner {
             });
     }
 
-    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
@@ -401,7 +400,7 @@ public class CustomerSubscriptionsInner {
      * @param customerSubscriptionName Name of the product.
      * @param customerCreationParameters Parameters use to create a customer subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ErrorResponseException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the CustomerSubscriptionInner object if successful.
      */
@@ -487,10 +486,10 @@ public class CustomerSubscriptionsInner {
             });
     }
 
-    private ServiceResponse<CustomerSubscriptionInner> createDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<CustomerSubscriptionInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<CustomerSubscriptionInner> createDelegate(Response<ResponseBody> response) throws ErrorResponseException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<CustomerSubscriptionInner, ErrorResponseException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<CustomerSubscriptionInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ErrorResponseException.class)
                 .build(response);
     }
 
