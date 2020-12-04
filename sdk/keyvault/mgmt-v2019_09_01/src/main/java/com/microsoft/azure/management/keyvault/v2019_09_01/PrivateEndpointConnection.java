@@ -24,6 +24,11 @@ import java.util.Map;
  */
 public interface PrivateEndpointConnection extends HasInner<PrivateEndpointConnectionInner>, Indexable, Refreshable<PrivateEndpointConnection>, Updatable<PrivateEndpointConnection.Update>, HasManager<KeyVaultManager> {
     /**
+     * @return the etag value.
+     */
+    String etag();
+
+    /**
      * @return the id value.
      */
     String id();
@@ -93,6 +98,18 @@ public interface PrivateEndpointConnection extends HasInner<PrivateEndpointConne
         }
 
         /**
+         * The stage of the privateendpointconnection definition allowing to specify Etag.
+         */
+        interface WithEtag {
+            /**
+             * Specifies etag.
+             * @param etag Modified whenever the user or NRP changes the state of PE connection
+             * @return the next definition stage
+             */
+            WithCreate withEtag(String etag);
+        }
+
+        /**
          * The stage of the privateendpointconnection definition allowing to specify PrivateEndpoint.
          */
         interface WithPrivateEndpoint {
@@ -133,19 +150,31 @@ public interface PrivateEndpointConnection extends HasInner<PrivateEndpointConne
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<PrivateEndpointConnection>, DefinitionStages.WithPrivateEndpoint, DefinitionStages.WithPrivateLinkServiceConnectionState, DefinitionStages.WithProvisioningState {
+        interface WithCreate extends Creatable<PrivateEndpointConnection>, DefinitionStages.WithEtag, DefinitionStages.WithPrivateEndpoint, DefinitionStages.WithPrivateLinkServiceConnectionState, DefinitionStages.WithProvisioningState {
         }
     }
     /**
      * The template for a PrivateEndpointConnection update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<PrivateEndpointConnection>, UpdateStages.WithPrivateEndpoint, UpdateStages.WithPrivateLinkServiceConnectionState, UpdateStages.WithProvisioningState {
+    interface Update extends Appliable<PrivateEndpointConnection>, UpdateStages.WithEtag, UpdateStages.WithPrivateEndpoint, UpdateStages.WithPrivateLinkServiceConnectionState, UpdateStages.WithProvisioningState {
     }
 
     /**
      * Grouping of PrivateEndpointConnection update stages.
      */
     interface UpdateStages {
+        /**
+         * The stage of the privateendpointconnection update allowing to specify Etag.
+         */
+        interface WithEtag {
+            /**
+             * Specifies etag.
+             * @param etag Modified whenever the user or NRP changes the state of PE connection
+             * @return the next update stage
+             */
+            Update withEtag(String etag);
+        }
+
         /**
          * The stage of the privateendpointconnection update allowing to specify PrivateEndpoint.
          */

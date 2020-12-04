@@ -43,6 +43,12 @@ public class OperationInner {
     private ServiceSpecification serviceSpecification;
 
     /**
+     * Property to specify whether the action is a data action.
+     */
+    @JsonProperty(value = "isDataAction")
+    private Boolean isDataAction;
+
+    /**
      * Get operation name: {provider}/{resource}/{operation}.
      *
      * @return the name value
@@ -119,6 +125,26 @@ public class OperationInner {
      */
     public OperationInner withServiceSpecification(ServiceSpecification serviceSpecification) {
         this.serviceSpecification = serviceSpecification;
+        return this;
+    }
+
+    /**
+     * Get property to specify whether the action is a data action.
+     *
+     * @return the isDataAction value
+     */
+    public Boolean isDataAction() {
+        return this.isDataAction;
+    }
+
+    /**
+     * Set property to specify whether the action is a data action.
+     *
+     * @param isDataAction the isDataAction value to set
+     * @return the OperationInner object itself.
+     */
+    public OperationInner withIsDataAction(Boolean isDataAction) {
+        this.isDataAction = isDataAction;
         return this;
     }
 

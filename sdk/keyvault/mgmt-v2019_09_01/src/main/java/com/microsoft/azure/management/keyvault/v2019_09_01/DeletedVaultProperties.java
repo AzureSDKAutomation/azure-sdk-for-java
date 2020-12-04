@@ -47,6 +47,12 @@ public class DeletedVaultProperties {
     private Map<String, String> tags;
 
     /**
+     * Purge protection status of the original vault.
+     */
+    @JsonProperty(value = "purgeProtectionEnabled", access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean purgeProtectionEnabled;
+
+    /**
      * Get the resource id of the original vault.
      *
      * @return the vaultId value
@@ -89,6 +95,15 @@ public class DeletedVaultProperties {
      */
     public Map<String, String> tags() {
         return this.tags;
+    }
+
+    /**
+     * Get purge protection status of the original vault.
+     *
+     * @return the purgeProtectionEnabled value
+     */
+    public Boolean purgeProtectionEnabled() {
+        return this.purgeProtectionEnabled;
     }
 
 }
