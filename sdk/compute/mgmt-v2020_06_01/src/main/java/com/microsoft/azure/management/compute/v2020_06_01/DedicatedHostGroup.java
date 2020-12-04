@@ -90,7 +90,7 @@ public interface DedicatedHostGroup extends HasInner<DedicatedHostGroupInner>, R
         interface WithSupportAutomaticPlacement {
             /**
              * Specifies supportAutomaticPlacement.
-             * @param supportAutomaticPlacement Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01
+             * @param supportAutomaticPlacement Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01
              * @return the next definition stage
              */
             WithCreate withSupportAutomaticPlacement(Boolean supportAutomaticPlacement);
@@ -132,7 +132,7 @@ public interface DedicatedHostGroup extends HasInner<DedicatedHostGroupInner>, R
         interface WithSupportAutomaticPlacement {
             /**
              * Specifies supportAutomaticPlacement.
-             * @param supportAutomaticPlacement Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01
+             * @param supportAutomaticPlacement Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01
              * @return the next update stage
              */
             Update withSupportAutomaticPlacement(Boolean supportAutomaticPlacement);
