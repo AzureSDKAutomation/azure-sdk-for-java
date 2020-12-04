@@ -16,10 +16,10 @@ import com.microsoft.azure.management.apigeneration.Beta.SinceVersion;
 import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
-import com.microsoft.azure.management.keyvault.v2019_09_01.Operations;
 import com.microsoft.azure.management.keyvault.v2019_09_01.Vaults;
 import com.microsoft.azure.management.keyvault.v2019_09_01.PrivateEndpointConnections;
 import com.microsoft.azure.management.keyvault.v2019_09_01.PrivateLinkResources;
+import com.microsoft.azure.management.keyvault.v2019_09_01.Operations;
 import com.microsoft.azure.management.keyvault.v2019_09_01.Secrets;
 import com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl;
 import com.microsoft.azure.arm.resources.implementation.ManagerCore;
@@ -28,10 +28,10 @@ import com.microsoft.azure.arm.resources.implementation.ManagerCore;
  * Entry point to Azure KeyVault resource management.
  */
 public final class KeyVaultManager extends ManagerCore<KeyVaultManager, KeyVaultManagementClientImpl> {
-    private Operations operations;
     private Vaults vaults;
     private PrivateEndpointConnections privateEndpointConnections;
     private PrivateLinkResources privateLinkResources;
+    private Operations operations;
     private Secrets secrets;
     /**
     * Get a Configurable instance that can be used to create KeyVaultManager with optional configuration.
@@ -81,16 +81,6 @@ public final class KeyVaultManager extends ManagerCore<KeyVaultManager, KeyVault
     }
 
     /**
-     * @return Entry point to manage Operations.
-     */
-    public Operations operations() {
-        if (this.operations == null) {
-            this.operations = new OperationsImpl(this);
-        }
-        return this.operations;
-    }
-
-    /**
      * @return Entry point to manage Vaults.
      */
     public Vaults vaults() {
@@ -118,6 +108,16 @@ public final class KeyVaultManager extends ManagerCore<KeyVaultManager, KeyVault
             this.privateLinkResources = new PrivateLinkResourcesImpl(this);
         }
         return this.privateLinkResources;
+    }
+
+    /**
+     * @return Entry point to manage Operations.
+     */
+    public Operations operations() {
+        if (this.operations == null) {
+            this.operations = new OperationsImpl(this);
+        }
+        return this.operations;
     }
 
     /**
