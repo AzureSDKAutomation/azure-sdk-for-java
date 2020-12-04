@@ -13,7 +13,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.azure.management.appplatform.v2019_05_01_preview.DeploymentResourceProperties;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
 import com.microsoft.rest.CollectionFormat;
@@ -38,8 +37,6 @@ import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
-import com.microsoft.azure.LongRunningFinalState;
-import com.microsoft.azure.LongRunningOperationOptions;
 import com.microsoft.azure.LongRunningFinalState;
 import com.microsoft.azure.LongRunningOperationOptions;
 
@@ -75,11 +72,11 @@ public class DeploymentsInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body DeploymentResourceInner deploymentResource, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Body DeploymentResourceInner deploymentResource, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments beginCreateOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body DeploymentResourceInner deploymentResource, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Body DeploymentResourceInner deploymentResource, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}", method = "DELETE", hasBody = true)
@@ -87,19 +84,19 @@ public class DeploymentsInner {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments update" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> update(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body DeploymentResourceInner deploymentResource, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> update(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Body DeploymentResourceInner deploymentResource, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments beginUpdate" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> beginUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Body DeploymentResourceInner deploymentResource, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Body DeploymentResourceInner deploymentResource, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments list" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments")
-        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Query("version") String version, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Path("appName") String appName, @Query("api-version") String apiVersion, @Query("version") String version, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments listClusterAllDeployments" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/deployments")
-        Observable<Response<ResponseBody>> listClusterAllDeployments(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Query("version") String version, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listClusterAllDeployments(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("serviceName") String serviceName, @Query("api-version") String apiVersion, @Query("version") String version, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployments start" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/start")
@@ -243,13 +240,14 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the create or update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DeploymentResourceInner object if successful.
      */
-    public DeploymentResourceInner createOrUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).toBlocking().last().body();
+    public DeploymentResourceInner createOrUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource).toBlocking().last().body();
     }
 
     /**
@@ -259,12 +257,13 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the create or update operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DeploymentResourceInner> createOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName), serviceCallback);
+    public ServiceFuture<DeploymentResourceInner> createOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource), serviceCallback);
     }
 
     /**
@@ -274,11 +273,12 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the create or update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<DeploymentResourceInner> createOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
+    public Observable<DeploymentResourceInner> createOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
             @Override
             public DeploymentResourceInner call(ServiceResponse<DeploymentResourceInner> response) {
                 return response.body();
@@ -293,10 +293,11 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the create or update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<DeploymentResourceInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
+    public Observable<ServiceResponse<DeploymentResourceInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -312,99 +313,11 @@ public class DeploymentsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        final DeploymentResourceProperties properties = null;
-        DeploymentResourceInner deploymentResource = new DeploymentResourceInner();
-        deploymentResource.withProperties(null);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentResourceInner>() { }.getType());
-    }
-    /**
-     * Create a new Deployment or update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DeploymentResourceInner object if successful.
-     */
-    public DeploymentResourceInner createOrUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties).toBlocking().last().body();
-    }
-
-    /**
-     * Create a new Deployment or update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DeploymentResourceInner> createOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties), serviceCallback);
-    }
-
-    /**
-     * Create a new Deployment or update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<DeploymentResourceInner> createOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
-            @Override
-            public DeploymentResourceInner call(ServiceResponse<DeploymentResourceInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Create a new Deployment or update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<ServiceResponse<DeploymentResourceInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        if (deploymentResource == null) {
+            throw new IllegalArgumentException("Parameter deploymentResource is required and cannot be null.");
         }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (serviceName == null) {
-            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
-        }
-        if (appName == null) {
-            throw new IllegalArgumentException("Parameter appName is required and cannot be null.");
-        }
-        if (deploymentName == null) {
-            throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
-        }
-        Validator.validate(properties);
-        DeploymentResourceInner deploymentResource = null;
-        if (properties != null) {
-            deploymentResource = new DeploymentResourceInner();
-            deploymentResource.withProperties(properties);
-        }
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent());
+        Validator.validate(deploymentResource);
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), deploymentResource, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentResourceInner>() { }.getType());
     }
 
@@ -415,13 +328,14 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the create or update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DeploymentResourceInner object if successful.
      */
-    public DeploymentResourceInner beginCreateOrUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).toBlocking().single().body();
+    public DeploymentResourceInner beginCreateOrUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
+        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource).toBlocking().single().body();
     }
 
     /**
@@ -431,12 +345,13 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the create or update operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DeploymentResourceInner> beginCreateOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName), serviceCallback);
+    public ServiceFuture<DeploymentResourceInner> beginCreateOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource), serviceCallback);
     }
 
     /**
@@ -446,11 +361,12 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the create or update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DeploymentResourceInner object
      */
-    public Observable<DeploymentResourceInner> beginCreateOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
+    public Observable<DeploymentResourceInner> beginCreateOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
+        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
             @Override
             public DeploymentResourceInner call(ServiceResponse<DeploymentResourceInner> response) {
                 return response.body();
@@ -465,10 +381,11 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the create or update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DeploymentResourceInner object
      */
-    public Observable<ServiceResponse<DeploymentResourceInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
+    public Observable<ServiceResponse<DeploymentResourceInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -484,110 +401,11 @@ public class DeploymentsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        final DeploymentResourceProperties properties = null;
-        DeploymentResourceInner deploymentResource = new DeploymentResourceInner();
-        deploymentResource.withProperties(null);
-        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentResourceInner>>>() {
-                @Override
-                public Observable<ServiceResponse<DeploymentResourceInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<DeploymentResourceInner> clientResponse = beginCreateOrUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    /**
-     * Create a new Deployment or update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DeploymentResourceInner object if successful.
-     */
-    public DeploymentResourceInner beginCreateOrUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties).toBlocking().single().body();
-    }
-
-    /**
-     * Create a new Deployment or update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DeploymentResourceInner> beginCreateOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties), serviceCallback);
-    }
-
-    /**
-     * Create a new Deployment or update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DeploymentResourceInner object
-     */
-    public Observable<DeploymentResourceInner> beginCreateOrUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
-            @Override
-            public DeploymentResourceInner call(ServiceResponse<DeploymentResourceInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Create a new Deployment or update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DeploymentResourceInner object
-     */
-    public Observable<ServiceResponse<DeploymentResourceInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        if (deploymentResource == null) {
+            throw new IllegalArgumentException("Parameter deploymentResource is required and cannot be null.");
         }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (serviceName == null) {
-            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
-        }
-        if (appName == null) {
-            throw new IllegalArgumentException("Parameter appName is required and cannot be null.");
-        }
-        if (deploymentName == null) {
-            throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
-        }
-        Validator.validate(properties);
-        DeploymentResourceInner deploymentResource = null;
-        if (properties != null) {
-            deploymentResource = new DeploymentResourceInner();
-            deploymentResource.withProperties(properties);
-        }
-        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent())
+        Validator.validate(deploymentResource);
+        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), deploymentResource, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentResourceInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentResourceInner>> call(Response<ResponseBody> response) {
@@ -605,6 +423,7 @@ public class DeploymentsInner {
         return this.client.restClient().responseBuilderFactory().<DeploymentResourceInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DeploymentResourceInner>() { }.getType())
                 .register(201, new TypeToken<DeploymentResourceInner>() { }.getType())
+                .register(202, new TypeToken<DeploymentResourceInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -713,13 +532,14 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DeploymentResourceInner object if successful.
      */
-    public DeploymentResourceInner update(String resourceGroupName, String serviceName, String appName, String deploymentName) {
-        return updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).toBlocking().last().body();
+    public DeploymentResourceInner update(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
+        return updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource).toBlocking().last().body();
     }
 
     /**
@@ -729,12 +549,13 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the update operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DeploymentResourceInner> updateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName), serviceCallback);
+    public ServiceFuture<DeploymentResourceInner> updateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource), serviceCallback);
     }
 
     /**
@@ -744,11 +565,12 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<DeploymentResourceInner> updateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
-        return updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
+    public Observable<DeploymentResourceInner> updateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
+        return updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
             @Override
             public DeploymentResourceInner call(ServiceResponse<DeploymentResourceInner> response) {
                 return response.body();
@@ -763,10 +585,11 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<DeploymentResourceInner>> updateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
+    public Observable<ServiceResponse<DeploymentResourceInner>> updateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -782,99 +605,11 @@ public class DeploymentsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        final DeploymentResourceProperties properties = null;
-        DeploymentResourceInner deploymentResource = new DeploymentResourceInner();
-        deploymentResource.withProperties(null);
-        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentResourceInner>() { }.getType());
-    }
-    /**
-     * Operation to update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DeploymentResourceInner object if successful.
-     */
-    public DeploymentResourceInner update(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        return updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties).toBlocking().last().body();
-    }
-
-    /**
-     * Operation to update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DeploymentResourceInner> updateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties), serviceCallback);
-    }
-
-    /**
-     * Operation to update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<DeploymentResourceInner> updateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        return updateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
-            @Override
-            public DeploymentResourceInner call(ServiceResponse<DeploymentResourceInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Operation to update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<ServiceResponse<DeploymentResourceInner>> updateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        if (deploymentResource == null) {
+            throw new IllegalArgumentException("Parameter deploymentResource is required and cannot be null.");
         }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (serviceName == null) {
-            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
-        }
-        if (appName == null) {
-            throw new IllegalArgumentException("Parameter appName is required and cannot be null.");
-        }
-        if (deploymentName == null) {
-            throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
-        }
-        Validator.validate(properties);
-        DeploymentResourceInner deploymentResource = null;
-        if (properties != null) {
-            deploymentResource = new DeploymentResourceInner();
-            deploymentResource.withProperties(properties);
-        }
-        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent());
+        Validator.validate(deploymentResource);
+        Observable<Response<ResponseBody>> observable = service.update(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), deploymentResource, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentResourceInner>() { }.getType());
     }
 
@@ -885,13 +620,14 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DeploymentResourceInner object if successful.
      */
-    public DeploymentResourceInner beginUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).toBlocking().single().body();
+    public DeploymentResourceInner beginUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource).toBlocking().single().body();
     }
 
     /**
@@ -901,12 +637,13 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the update operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DeploymentResourceInner> beginUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName), serviceCallback);
+    public ServiceFuture<DeploymentResourceInner> beginUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource), serviceCallback);
     }
 
     /**
@@ -916,11 +653,12 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DeploymentResourceInner object
      */
-    public Observable<DeploymentResourceInner> beginUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
+    public Observable<DeploymentResourceInner> beginUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
+        return beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, deploymentResource).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
             @Override
             public DeploymentResourceInner call(ServiceResponse<DeploymentResourceInner> response) {
                 return response.body();
@@ -935,10 +673,11 @@ public class DeploymentsInner {
      * @param serviceName The name of the Service resource.
      * @param appName The name of the App resource.
      * @param deploymentName The name of the Deployment resource.
+     * @param deploymentResource Parameters for the update operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DeploymentResourceInner object
      */
-    public Observable<ServiceResponse<DeploymentResourceInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName) {
+    public Observable<ServiceResponse<DeploymentResourceInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceInner deploymentResource) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -954,110 +693,11 @@ public class DeploymentsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        final DeploymentResourceProperties properties = null;
-        DeploymentResourceInner deploymentResource = new DeploymentResourceInner();
-        deploymentResource.withProperties(null);
-        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentResourceInner>>>() {
-                @Override
-                public Observable<ServiceResponse<DeploymentResourceInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<DeploymentResourceInner> clientResponse = beginUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    /**
-     * Operation to update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the DeploymentResourceInner object if successful.
-     */
-    public DeploymentResourceInner beginUpdate(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties).toBlocking().single().body();
-    }
-
-    /**
-     * Operation to update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<DeploymentResourceInner> beginUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties, final ServiceCallback<DeploymentResourceInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties), serviceCallback);
-    }
-
-    /**
-     * Operation to update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DeploymentResourceInner object
-     */
-    public Observable<DeploymentResourceInner> beginUpdateAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        return beginUpdateWithServiceResponseAsync(resourceGroupName, serviceName, appName, deploymentName, properties).map(new Func1<ServiceResponse<DeploymentResourceInner>, DeploymentResourceInner>() {
-            @Override
-            public DeploymentResourceInner call(ServiceResponse<DeploymentResourceInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Operation to update an exiting Deployment.
-     *
-     * @param resourceGroupName The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-     * @param serviceName The name of the Service resource.
-     * @param appName The name of the App resource.
-     * @param deploymentName The name of the Deployment resource.
-     * @param properties Properties of the Deployment resource
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DeploymentResourceInner object
-     */
-    public Observable<ServiceResponse<DeploymentResourceInner>> beginUpdateWithServiceResponseAsync(String resourceGroupName, String serviceName, String appName, String deploymentName, DeploymentResourceProperties properties) {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        if (deploymentResource == null) {
+            throw new IllegalArgumentException("Parameter deploymentResource is required and cannot be null.");
         }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (serviceName == null) {
-            throw new IllegalArgumentException("Parameter serviceName is required and cannot be null.");
-        }
-        if (appName == null) {
-            throw new IllegalArgumentException("Parameter appName is required and cannot be null.");
-        }
-        if (deploymentName == null) {
-            throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
-        }
-        Validator.validate(properties);
-        DeploymentResourceInner deploymentResource = null;
-        if (properties != null) {
-            deploymentResource = new DeploymentResourceInner();
-            deploymentResource.withProperties(properties);
-        }
-        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), deploymentResource, this.client.userAgent())
+        Validator.validate(deploymentResource);
+        return service.beginUpdate(this.client.subscriptionId(), resourceGroupName, serviceName, appName, deploymentName, this.client.apiVersion(), deploymentResource, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentResourceInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentResourceInner>> call(Response<ResponseBody> response) {
@@ -1188,7 +828,7 @@ public class DeploymentsInner {
         }
         final List<String> version = null;
         String versionConverted = this.client.serializerAdapter().serializeList(version, CollectionFormat.MULTI);
-        return service.list(this.client.subscriptionId(), resourceGroupName, serviceName, appName, versionConverted, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), resourceGroupName, serviceName, appName, this.client.apiVersion(), versionConverted, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentResourceInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentResourceInner>>> call(Response<ResponseBody> response) {
@@ -1316,7 +956,7 @@ public class DeploymentsInner {
         }
         Validator.validate(version);
         String versionConverted = this.client.serializerAdapter().serializeList(version, CollectionFormat.MULTI);
-        return service.list(this.client.subscriptionId(), resourceGroupName, serviceName, appName, versionConverted, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), resourceGroupName, serviceName, appName, this.client.apiVersion(), versionConverted, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentResourceInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentResourceInner>>> call(Response<ResponseBody> response) {
@@ -1438,7 +1078,7 @@ public class DeploymentsInner {
         }
         final List<String> version = null;
         String versionConverted = this.client.serializerAdapter().serializeList(version, CollectionFormat.MULTI);
-        return service.listClusterAllDeployments(this.client.subscriptionId(), resourceGroupName, serviceName, versionConverted, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listClusterAllDeployments(this.client.subscriptionId(), resourceGroupName, serviceName, this.client.apiVersion(), versionConverted, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentResourceInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentResourceInner>>> call(Response<ResponseBody> response) {
@@ -1558,7 +1198,7 @@ public class DeploymentsInner {
         }
         Validator.validate(version);
         String versionConverted = this.client.serializerAdapter().serializeList(version, CollectionFormat.MULTI);
-        return service.listClusterAllDeployments(this.client.subscriptionId(), resourceGroupName, serviceName, versionConverted, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listClusterAllDeployments(this.client.subscriptionId(), resourceGroupName, serviceName, this.client.apiVersion(), versionConverted, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentResourceInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentResourceInner>>> call(Response<ResponseBody> response) {

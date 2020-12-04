@@ -12,9 +12,6 @@ import com.microsoft.azure.management.appplatform.v2019_05_01_preview.Deployment
 import com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl;
 import rx.Observable;
 import com.microsoft.azure.management.appplatform.v2019_05_01_preview.DeploymentResourceProperties;
-import org.joda.time.DateTime;
-import java.util.List;
-import rx.functions.Func1;
 
 class DeploymentResourceImpl extends CreatableUpdatableImpl<DeploymentResource, DeploymentResourceInner, DeploymentResourceImpl> implements DeploymentResource, DeploymentResource.Definition, DeploymentResource.Update {
     private final AppPlatformManager manager;
@@ -22,8 +19,6 @@ class DeploymentResourceImpl extends CreatableUpdatableImpl<DeploymentResource, 
     private String serviceName;
     private String appName;
     private String deploymentName;
-    private DeploymentResourceProperties cproperties;
-    private DeploymentResourceProperties uproperties;
 
     DeploymentResourceImpl(String name, AppPlatformManager manager) {
         super(name, new DeploymentResourceInner());
@@ -31,8 +26,6 @@ class DeploymentResourceImpl extends CreatableUpdatableImpl<DeploymentResource, 
         // Set resource name
         this.deploymentName = name;
         //
-        this.cproperties = new DeploymentResourceProperties();
-        this.uproperties = new DeploymentResourceProperties();
     }
 
     DeploymentResourceImpl(DeploymentResourceInner inner, AppPlatformManager manager) {
@@ -46,8 +39,6 @@ class DeploymentResourceImpl extends CreatableUpdatableImpl<DeploymentResource, 
         this.appName = IdParsingUtils.getValueFromIdByName(inner.id(), "apps");
         this.deploymentName = IdParsingUtils.getValueFromIdByName(inner.id(), "deployments");
         //
-        this.cproperties = new DeploymentResourceProperties();
-        this.uproperties = new DeploymentResourceProperties();
     }
 
     @Override
@@ -58,28 +49,14 @@ class DeploymentResourceImpl extends CreatableUpdatableImpl<DeploymentResource, 
     @Override
     public Observable<DeploymentResource> createResourceAsync() {
         DeploymentsInner client = this.manager().inner().deployments();
-        return client.createOrUpdateAsync(this.resourceGroupName, this.serviceName, this.appName, this.deploymentName, this.cproperties)
-            .map(new Func1<DeploymentResourceInner, DeploymentResourceInner>() {
-               @Override
-               public DeploymentResourceInner call(DeploymentResourceInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
+        return client.createOrUpdateAsync(this.resourceGroupName, this.serviceName, this.appName, this.deploymentName, this.inner())
             .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<DeploymentResource> updateResourceAsync() {
         DeploymentsInner client = this.manager().inner().deployments();
-        return client.updateAsync(this.resourceGroupName, this.serviceName, this.appName, this.deploymentName, this.uproperties)
-            .map(new Func1<DeploymentResourceInner, DeploymentResourceInner>() {
-               @Override
-               public DeploymentResourceInner call(DeploymentResourceInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
+        return client.updateAsync(this.resourceGroupName, this.serviceName, this.appName, this.deploymentName, this.inner())
             .map(innerToFluentMap(this));
     }
 
@@ -94,10 +71,6 @@ class DeploymentResourceImpl extends CreatableUpdatableImpl<DeploymentResource, 
         return this.inner().id() == null;
     }
 
-    private void resetCreateUpdateParameters() {
-        this.cproperties = new DeploymentResourceProperties();
-        this.uproperties = new DeploymentResourceProperties();
-    }
 
     @Override
     public String id() {
@@ -115,6 +88,11 @@ class DeploymentResourceImpl extends CreatableUpdatableImpl<DeploymentResource, 
     }
 
     @Override
+    public SkuInner sku() {
+        return this.inner().sku();
+    }
+
+    @Override
     public String type() {
         return this.inner().type();
     }
@@ -129,11 +107,13 @@ class DeploymentResourceImpl extends CreatableUpdatableImpl<DeploymentResource, 
 
     @Override
     public DeploymentResourceImpl withProperties(DeploymentResourceProperties properties) {
-        if (isInCreateMode()) {
-            this.cproperties = properties;
-        } else {
-            this.uproperties = properties;
-        }
+        this.inner().withProperties(properties);
+        return this;
+    }
+
+    @Override
+    public DeploymentResourceImpl withSku(SkuInner sku) {
+        this.inner().withSku(sku);
         return this;
     }
 
