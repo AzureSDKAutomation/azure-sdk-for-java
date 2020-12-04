@@ -74,6 +74,11 @@ class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpoi
 
 
     @Override
+    public String etag() {
+        return this.inner().etag();
+    }
+
+    @Override
     public String id() {
         return this.inner().id();
     }
@@ -117,6 +122,12 @@ class PrivateEndpointConnectionImpl extends CreatableUpdatableImpl<PrivateEndpoi
     public PrivateEndpointConnectionImpl withExistingVault(String resourceGroupName, String vaultName) {
         this.resourceGroupName = resourceGroupName;
         this.vaultName = vaultName;
+        return this;
+    }
+
+    @Override
+    public PrivateEndpointConnectionImpl withEtag(String etag) {
+        this.inner().withEtag(etag);
         return this;
     }
 
