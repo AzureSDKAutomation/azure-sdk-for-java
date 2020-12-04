@@ -13,6 +13,7 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.management.keyvault.v2019_09_01.ResponseErrorException;
 import com.microsoft.azure.management.keyvault.v2019_09_01.SecretCreateOrUpdateParameters;
 import com.microsoft.azure.management.keyvault.v2019_09_01.SecretPatchParameters;
 import com.microsoft.azure.Page;
@@ -93,7 +94,7 @@ public class SecretsInner {
      * @param secretName Name of the secret
      * @param parameters Parameters to create or update the secret
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ResponseErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SecretInner object if successful.
      */
@@ -179,11 +180,11 @@ public class SecretsInner {
             });
     }
 
-    private ServiceResponse<SecretInner> createOrUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<SecretInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<SecretInner> createOrUpdateDelegate(Response<ResponseBody> response) throws ResponseErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<SecretInner, ResponseErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<SecretInner>() { }.getType())
                 .register(201, new TypeToken<SecretInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ResponseErrorException.class)
                 .build(response);
     }
 
@@ -195,7 +196,7 @@ public class SecretsInner {
      * @param secretName Name of the secret
      * @param parameters Parameters to patch the secret
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ResponseErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SecretInner object if successful.
      */
@@ -281,11 +282,11 @@ public class SecretsInner {
             });
     }
 
-    private ServiceResponse<SecretInner> updateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<SecretInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<SecretInner> updateDelegate(Response<ResponseBody> response) throws ResponseErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<SecretInner, ResponseErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<SecretInner>() { }.getType())
                 .register(201, new TypeToken<SecretInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ResponseErrorException.class)
                 .build(response);
     }
 
@@ -296,7 +297,7 @@ public class SecretsInner {
      * @param vaultName The name of the vault.
      * @param secretName The name of the secret.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
+     * @throws ResponseErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SecretInner object if successful.
      */
@@ -375,10 +376,10 @@ public class SecretsInner {
             });
     }
 
-    private ServiceResponse<SecretInner> getDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<SecretInner, CloudException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<SecretInner> getDelegate(Response<ResponseBody> response) throws ResponseErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<SecretInner, ResponseErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<SecretInner>() { }.getType())
-                .registerError(CloudException.class)
+                .registerError(ResponseErrorException.class)
                 .build(response);
     }
 

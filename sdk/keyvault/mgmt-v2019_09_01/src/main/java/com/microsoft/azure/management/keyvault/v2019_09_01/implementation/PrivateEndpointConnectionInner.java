@@ -43,6 +43,12 @@ public class PrivateEndpointConnectionInner extends Resource {
     private PrivateEndpointConnectionProvisioningState provisioningState;
 
     /**
+     * Modified whenever the user or NRP changes the state of PE connection.
+     */
+    @JsonProperty(value = "etag")
+    private String etag;
+
+    /**
      * Get properties of the private endpoint object.
      *
      * @return the privateEndpoint value
@@ -99,6 +105,26 @@ public class PrivateEndpointConnectionInner extends Resource {
      */
     public PrivateEndpointConnectionInner withProvisioningState(PrivateEndpointConnectionProvisioningState provisioningState) {
         this.provisioningState = provisioningState;
+        return this;
+    }
+
+    /**
+     * Get modified whenever the user or NRP changes the state of PE connection.
+     *
+     * @return the etag value
+     */
+    public String etag() {
+        return this.etag;
+    }
+
+    /**
+     * Set modified whenever the user or NRP changes the state of PE connection.
+     *
+     * @param etag the etag value to set
+     * @return the PrivateEndpointConnectionInner object itself.
+     */
+    public PrivateEndpointConnectionInner withEtag(String etag) {
+        this.etag = etag;
         return this;
     }
 
