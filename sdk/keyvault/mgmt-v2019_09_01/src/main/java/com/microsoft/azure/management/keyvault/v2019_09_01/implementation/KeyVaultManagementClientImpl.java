@@ -133,19 +133,6 @@ public class KeyVaultManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * The OperationsInner object to access its operations.
-     */
-    private OperationsInner operations;
-
-    /**
-     * Gets the OperationsInner object to access its operations.
-     * @return the OperationsInner object.
-     */
-    public OperationsInner operations() {
-        return this.operations;
-    }
-
-    /**
      * The VaultsInner object to access its operations.
      */
     private VaultsInner vaults;
@@ -182,6 +169,19 @@ public class KeyVaultManagementClientImpl extends AzureServiceClient {
      */
     public PrivateLinkResourcesInner privateLinkResources() {
         return this.privateLinkResources;
+    }
+
+    /**
+     * The OperationsInner object to access its operations.
+     */
+    private OperationsInner operations;
+
+    /**
+     * Gets the OperationsInner object to access its operations.
+     * @return the OperationsInner object.
+     */
+    public OperationsInner operations() {
+        return this.operations;
     }
 
     /**
@@ -232,10 +232,10 @@ public class KeyVaultManagementClientImpl extends AzureServiceClient {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.operations = new OperationsInner(restClient().retrofit(), this);
         this.vaults = new VaultsInner(restClient().retrofit(), this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsInner(restClient().retrofit(), this);
         this.privateLinkResources = new PrivateLinkResourcesInner(restClient().retrofit(), this);
+        this.operations = new OperationsInner(restClient().retrofit(), this);
         this.secrets = new SecretsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
