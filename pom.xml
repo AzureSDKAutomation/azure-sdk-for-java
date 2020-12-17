@@ -39,6 +39,7 @@
     <module>sdk/servicebus</module>
     <module>sdk/spring</module>
     <module>sdk/storage</module>
+    <module>sdk/storagesync</module>
     <module>sdk/synapse</module>
     <module>sdk/tables</module>
     <module>sdk/template</module>
