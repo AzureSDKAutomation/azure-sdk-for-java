@@ -37,6 +37,7 @@
     <module>sdk/search</module>
     <module>sdk/servicebus</module>
     <module>sdk/spring</module>
+    <module>sdk/sql</module>
     <module>sdk/storage</module>
     <module>sdk/synapse</module>
     <module>sdk/tables</module>
