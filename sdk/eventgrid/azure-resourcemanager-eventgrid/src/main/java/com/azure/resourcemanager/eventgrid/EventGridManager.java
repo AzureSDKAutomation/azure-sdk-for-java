@@ -189,7 +189,7 @@ public final class EventGridManager {
                     new UserAgentPolicy(
                         null,
                         "com.azure.resourcemanager.eventgrid",
-                        "1.0.0-beta.1",
+                        "1.0.0-beta.2",
                         Configuration.getGlobalConfiguration()));
             policies.add(new RequestIdPolicy());
             HttpPolicyProviders.addBeforeRetryPolicies(policies);
