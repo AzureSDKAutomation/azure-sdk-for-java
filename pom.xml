@@ -38,6 +38,7 @@
     <module>sdk/recoveryservices</module>
     <module>sdk/relay</module>
     <module>sdk/resourcemanager</module>
+    <module>sdk/saas</module>
     <module>sdk/schemaregistry</module>
     <module>sdk/search</module>
     <module>sdk/servicebus</module>
