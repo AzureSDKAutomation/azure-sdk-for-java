@@ -564,6 +564,7 @@
         <module>sdk/healthbot</module>
         <module>sdk/identity</module>
         <module>sdk/keyvault</module>
+        <module>sdk/kubernetesconfiguration</module>
         <module>sdk/kusto</module>
         <module>sdk/loganalytics</module>
         <module>sdk/mediaservices</module>
