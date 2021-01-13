@@ -99,7 +99,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @Delete(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters"
                 + "/{clusterName}/extensions/clustermonitoring")
-        @ExpectedResponses({200, 202})
+        @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> disableMonitoring(
             @HostParam("$host") String endpoint,
@@ -147,7 +147,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @Delete(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters"
                 + "/{clusterName}/extensions/{extensionName}")
-        @ExpectedResponses({200, 202})
+        @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> delete(
             @HostParam("$host") String endpoint,
