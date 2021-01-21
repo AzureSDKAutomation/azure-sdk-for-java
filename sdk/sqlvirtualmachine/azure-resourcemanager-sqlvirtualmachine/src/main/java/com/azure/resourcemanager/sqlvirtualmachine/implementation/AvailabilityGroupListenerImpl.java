@@ -151,22 +151,29 @@ public final class AvailabilityGroupListenerImpl
     }
 
     public AvailabilityGroupListener refresh() {
+        String localExpand = null;
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getAvailabilityGroupListeners()
                 .getWithResponse(
-                    resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, Context.NONE)
+                    resourceGroupName,
+                    sqlVirtualMachineGroupName,
+                    availabilityGroupListenerName,
+                    localExpand,
+                    Context.NONE)
                 .getValue();
         return this;
     }
 
     public AvailabilityGroupListener refresh(Context context) {
+        String localExpand = null;
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getAvailabilityGroupListeners()
-                .getWithResponse(resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, context)
+                .getWithResponse(
+                    resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, localExpand, context)
                 .getValue();
         return this;
     }

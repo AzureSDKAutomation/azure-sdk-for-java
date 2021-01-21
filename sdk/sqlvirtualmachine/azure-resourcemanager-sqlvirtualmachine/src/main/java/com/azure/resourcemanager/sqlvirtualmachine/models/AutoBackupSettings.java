@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /** Configure backups for databases in your SQL virtual machine. */
 @Fluent
@@ -68,6 +69,13 @@ public final class AutoBackupSettings {
      */
     @JsonProperty(value = "fullBackupFrequency")
     private FullBackupFrequencyType fullBackupFrequency;
+
+    /*
+     * Days of the week for the backups when FullBackupFrequency is set to
+     * Weekly.
+     */
+    @JsonProperty(value = "daysOfWeek")
+    private List<DayOfWeek> daysOfWeek;
 
     /*
      * Start time of a given day during which full backups can take place. 0-23
@@ -268,6 +276,26 @@ public final class AutoBackupSettings {
      */
     public AutoBackupSettings withFullBackupFrequency(FullBackupFrequencyType fullBackupFrequency) {
         this.fullBackupFrequency = fullBackupFrequency;
+        return this;
+    }
+
+    /**
+     * Get the daysOfWeek property: Days of the week for the backups when FullBackupFrequency is set to Weekly.
+     *
+     * @return the daysOfWeek value.
+     */
+    public List<DayOfWeek> daysOfWeek() {
+        return this.daysOfWeek;
+    }
+
+    /**
+     * Set the daysOfWeek property: Days of the week for the backups when FullBackupFrequency is set to Weekly.
+     *
+     * @param daysOfWeek the daysOfWeek value to set.
+     * @return the AutoBackupSettings object itself.
+     */
+    public AutoBackupSettings withDaysOfWeek(List<DayOfWeek> daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
         return this;
     }
 

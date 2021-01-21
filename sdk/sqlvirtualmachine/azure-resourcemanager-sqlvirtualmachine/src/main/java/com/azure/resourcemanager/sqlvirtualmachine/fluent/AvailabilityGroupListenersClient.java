@@ -38,6 +38,7 @@ public interface AvailabilityGroupListenersClient {
      *     the Azure Resource Manager API or the portal.
      * @param sqlVirtualMachineGroupName Name of the SQL virtual machine group.
      * @param availabilityGroupListenerName Name of the availability group listener.
+     * @param expand The child resources to include in the response.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -49,6 +50,7 @@ public interface AvailabilityGroupListenersClient {
         String resourceGroupName,
         String sqlVirtualMachineGroupName,
         String availabilityGroupListenerName,
+        String expand,
         Context context);
 
     /**

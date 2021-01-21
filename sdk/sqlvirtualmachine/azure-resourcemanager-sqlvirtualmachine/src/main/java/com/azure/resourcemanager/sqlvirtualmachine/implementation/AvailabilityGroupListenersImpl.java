@@ -44,11 +44,13 @@ public final class AvailabilityGroupListenersImpl implements AvailabilityGroupLi
         String resourceGroupName,
         String sqlVirtualMachineGroupName,
         String availabilityGroupListenerName,
+        String expand,
         Context context) {
         Response<AvailabilityGroupListenerInner> inner =
             this
                 .serviceClient()
-                .getWithResponse(resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, context);
+                .getWithResponse(
+                    resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, expand, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -118,12 +120,14 @@ public final class AvailabilityGroupListenersImpl implements AvailabilityGroupLi
                                 "The resource ID '%s' is not valid. Missing path segment 'availabilityGroupListeners'.",
                                 id)));
         }
+        String localExpand = null;
         return this
-            .getWithResponse(resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, Context.NONE)
+            .getWithResponse(
+                resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, localExpand, Context.NONE)
             .getValue();
     }
 
-    public Response<AvailabilityGroupListener> getByIdWithResponse(String id, Context context) {
+    public Response<AvailabilityGroupListener> getByIdWithResponse(String id, String expand, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw logger
@@ -153,7 +157,8 @@ public final class AvailabilityGroupListenersImpl implements AvailabilityGroupLi
                                 id)));
         }
         return this
-            .getWithResponse(resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, context);
+            .getWithResponse(
+                resourceGroupName, sqlVirtualMachineGroupName, availabilityGroupListenerName, expand, context);
     }
 
     public void deleteById(String id) {
