@@ -168,13 +168,18 @@ public final class DataExportImpl implements DataExport, DataExport.Definition, 
         return this;
     }
 
-    public DataExportImpl withDataExportId(String dataExportId) {
-        this.innerModel().withDataExportId(dataExportId);
+    public DataExportImpl withTableNames(List<String> tableNames) {
+        this.innerModel().withTableNames(tableNames);
         return this;
     }
 
-    public DataExportImpl withTableNames(List<String> tableNames) {
-        this.innerModel().withTableNames(tableNames);
+    public DataExportImpl withResourceId(String resourceId) {
+        this.innerModel().withResourceId(resourceId);
+        return this;
+    }
+
+    public DataExportImpl withDataExportId(String dataExportId) {
+        this.innerModel().withDataExportId(dataExportId);
         return this;
     }
 
@@ -190,11 +195,6 @@ public final class DataExportImpl implements DataExport, DataExport.Definition, 
 
     public DataExportImpl withLastModifiedDate(String lastModifiedDate) {
         this.innerModel().withLastModifiedDate(lastModifiedDate);
-        return this;
-    }
-
-    public DataExportImpl withResourceId(String resourceId) {
-        this.innerModel().withResourceId(resourceId);
         return this;
     }
 
