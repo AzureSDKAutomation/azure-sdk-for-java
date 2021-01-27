@@ -44,8 +44,8 @@ public final class CapabilitiesResultImpl implements CapabilitiesResult {
         }
     }
 
-    public Map<String, VmSizesCapability> vmSizes() {
-        Map<String, VmSizesCapability> inner = this.innerModel().vmSizes();
+    public Map<String, VmSizesCapability> vmsizes() {
+        Map<String, VmSizesCapability> inner = this.innerModel().vmsizes();
         if (inner != null) {
             return Collections.unmodifiableMap(inner);
         } else {
@@ -53,8 +53,8 @@ public final class CapabilitiesResultImpl implements CapabilitiesResult {
         }
     }
 
-    public List<VmSizeCompatibilityFilter> vmSizeFilters() {
-        List<VmSizeCompatibilityFilter> inner = this.innerModel().vmSizeFilters();
+    public List<VmSizeCompatibilityFilter> vmsizeFilters() {
+        List<VmSizeCompatibilityFilter> inner = this.innerModel().vmsizeFilters();
         if (inner != null) {
             return Collections.unmodifiableList(inner);
         } else {

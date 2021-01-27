@@ -11,8 +11,10 @@ import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.hdinsight.HDInsightManager;
 import com.azure.resourcemanager.hdinsight.fluent.ClustersClient;
+import com.azure.resourcemanager.hdinsight.fluent.models.AsyncOperationResultInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.ClusterInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.GatewaySettingsInner;
+import com.azure.resourcemanager.hdinsight.models.AsyncOperationResult;
 import com.azure.resourcemanager.hdinsight.models.AutoscaleConfigurationUpdateParameter;
 import com.azure.resourcemanager.hdinsight.models.Cluster;
 import com.azure.resourcemanager.hdinsight.models.ClusterDiskEncryptionParameters;
@@ -163,6 +165,34 @@ public final class ClustersImpl implements Clusters {
     public void updateGatewaySettings(
         String resourceGroupName, String clusterName, UpdateGatewaySettingsParameters parameters, Context context) {
         this.serviceClient().updateGatewaySettings(resourceGroupName, clusterName, parameters, context);
+    }
+
+    public AsyncOperationResult getAzureAsyncOperationStatus(
+        String resourceGroupName, String clusterName, String operationId) {
+        AsyncOperationResultInner inner =
+            this.serviceClient().getAzureAsyncOperationStatus(resourceGroupName, clusterName, operationId);
+        if (inner != null) {
+            return new AsyncOperationResultImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Response<AsyncOperationResult> getAzureAsyncOperationStatusWithResponse(
+        String resourceGroupName, String clusterName, String operationId, Context context) {
+        Response<AsyncOperationResultInner> inner =
+            this
+                .serviceClient()
+                .getAzureAsyncOperationStatusWithResponse(resourceGroupName, clusterName, operationId, context);
+        if (inner != null) {
+            return new SimpleResponse<>(
+                inner.getRequest(),
+                inner.getStatusCode(),
+                inner.getHeaders(),
+                new AsyncOperationResultImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public void executeScriptActions(

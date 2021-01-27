@@ -10,9 +10,11 @@ import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.hdinsight.HDInsightManager;
 import com.azure.resourcemanager.hdinsight.fluent.LocationsClient;
+import com.azure.resourcemanager.hdinsight.fluent.models.AsyncOperationResultInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.BillingResponseListResultInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.CapabilitiesResultInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.UsagesListResultInner;
+import com.azure.resourcemanager.hdinsight.models.AsyncOperationResult;
 import com.azure.resourcemanager.hdinsight.models.BillingResponseListResult;
 import com.azure.resourcemanager.hdinsight.models.CapabilitiesResult;
 import com.azure.resourcemanager.hdinsight.models.Locations;
@@ -93,6 +95,30 @@ public final class LocationsImpl implements Locations {
                 inner.getStatusCode(),
                 inner.getHeaders(),
                 new BillingResponseListResultImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public AsyncOperationResult getAzureAsyncOperationStatus(String location, String operationId) {
+        AsyncOperationResultInner inner = this.serviceClient().getAzureAsyncOperationStatus(location, operationId);
+        if (inner != null) {
+            return new AsyncOperationResultImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Response<AsyncOperationResult> getAzureAsyncOperationStatusWithResponse(
+        String location, String operationId, Context context) {
+        Response<AsyncOperationResultInner> inner =
+            this.serviceClient().getAzureAsyncOperationStatusWithResponse(location, operationId, context);
+        if (inner != null) {
+            return new SimpleResponse<>(
+                inner.getRequest(),
+                inner.getStatusCode(),
+                inner.getHeaders(),
+                new AsyncOperationResultImpl(inner.getValue(), this.manager()));
         } else {
             return null;
         }
