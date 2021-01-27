@@ -98,7 +98,11 @@ public interface DataExport {
 
     /** The entirety of the DataExport definition. */
     interface Definition
-        extends DefinitionStages.Blank, DefinitionStages.WithParentResource, DefinitionStages.WithCreate {
+        extends DefinitionStages.Blank,
+            DefinitionStages.WithParentResource,
+            DefinitionStages.WithTableNames,
+            DefinitionStages.WithResourceId,
+            DefinitionStages.WithCreate {
     }
     /** The DataExport definition stages. */
     interface DefinitionStages {
@@ -114,7 +118,30 @@ public interface DataExport {
              * @param workspaceName The name of the workspace.
              * @return the next definition stage.
              */
-            WithCreate withExistingWorkspace(String resourceGroupName, String workspaceName);
+            WithTableNames withExistingWorkspace(String resourceGroupName, String workspaceName);
+        }
+        /** The stage of the DataExport definition allowing to specify tableNames. */
+        interface WithTableNames {
+            /**
+             * Specifies the tableNames property: An array of tables to export, for example: [“Heartbeat,
+             * SecurityEvent”]..
+             *
+             * @param tableNames An array of tables to export, for example: [“Heartbeat, SecurityEvent”].
+             * @return the next definition stage.
+             */
+            WithResourceId withTableNames(List<String> tableNames);
+        }
+        /** The stage of the DataExport definition allowing to specify resourceId. */
+        interface WithResourceId {
+            /**
+             * Specifies the resourceId property: The destination resource ID. This can be copied from the Properties
+             * entry of the destination resource in Azure..
+             *
+             * @param resourceId The destination resource ID. This can be copied from the Properties entry of the
+             *     destination resource in Azure.
+             * @return the next definition stage.
+             */
+            WithCreate withResourceId(String resourceId);
         }
         /**
          * The stage of the DataExport definition which contains all the minimum required properties for the resource to
@@ -122,11 +149,9 @@ public interface DataExport {
          */
         interface WithCreate
             extends DefinitionStages.WithDataExportId,
-                DefinitionStages.WithTableNames,
                 DefinitionStages.WithEnable,
                 DefinitionStages.WithCreatedDate,
                 DefinitionStages.WithLastModifiedDate,
-                DefinitionStages.WithResourceId,
                 DefinitionStages.WithEventHubName {
             /**
              * Executes the create request.
@@ -152,17 +177,6 @@ public interface DataExport {
              * @return the next definition stage.
              */
             WithCreate withDataExportId(String dataExportId);
-        }
-        /** The stage of the DataExport definition allowing to specify tableNames. */
-        interface WithTableNames {
-            /**
-             * Specifies the tableNames property: An array of tables to export, for example: [“Heartbeat,
-             * SecurityEvent”]..
-             *
-             * @param tableNames An array of tables to export, for example: [“Heartbeat, SecurityEvent”].
-             * @return the next definition stage.
-             */
-            WithCreate withTableNames(List<String> tableNames);
         }
         /** The stage of the DataExport definition allowing to specify enable. */
         interface WithEnable {
@@ -193,18 +207,6 @@ public interface DataExport {
              * @return the next definition stage.
              */
             WithCreate withLastModifiedDate(String lastModifiedDate);
-        }
-        /** The stage of the DataExport definition allowing to specify resourceId. */
-        interface WithResourceId {
-            /**
-             * Specifies the resourceId property: The destination resource ID. This can be copied from the Properties
-             * entry of the destination resource in Azure..
-             *
-             * @param resourceId The destination resource ID. This can be copied from the Properties entry of the
-             *     destination resource in Azure.
-             * @return the next definition stage.
-             */
-            WithCreate withResourceId(String resourceId);
         }
         /** The stage of the DataExport definition allowing to specify eventHubName. */
         interface WithEventHubName {

@@ -28,7 +28,7 @@ public class DataExportInner extends ProxyResource {
     /*
      * An array of tables to export, for example: [“Heartbeat, SecurityEvent”].
      */
-    @JsonProperty(value = "properties.tableNames")
+    @JsonProperty(value = "properties.tableNames", required = true)
     private List<String> tableNames;
 
     /*
@@ -53,7 +53,7 @@ public class DataExportInner extends ProxyResource {
      * The destination resource ID. This can be copied from the Properties
      * entry of the destination resource in Azure.
      */
-    @JsonProperty(value = "properties.destination.resourceId")
+    @JsonProperty(value = "properties.destination.resourceId", required = true)
     private String resourceId;
 
     /*
@@ -228,5 +228,15 @@ public class DataExportInner extends ProxyResource {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (tableNames() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException("Missing required property tableNames in model DataExportInner"));
+        }
+        if (resourceId() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException("Missing required property resourceId in model DataExportInner"));
+        }
     }
 }
