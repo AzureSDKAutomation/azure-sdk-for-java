@@ -4,11 +4,14 @@
 
 package com.azure.resourcemanager.relay.implementation;
 
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.relay.RelayManager;
 import com.azure.resourcemanager.relay.fluent.models.AuthorizationRuleInner;
+import com.azure.resourcemanager.relay.models.AccessKeys;
 import com.azure.resourcemanager.relay.models.AccessRights;
 import com.azure.resourcemanager.relay.models.AuthorizationRule;
+import com.azure.resourcemanager.relay.models.RegenerateAccessKeyParameters;
 import java.util.Collections;
 import java.util.List;
 
@@ -139,6 +142,28 @@ public final class AuthorizationRuleImpl
                 .getAuthorizationRuleWithResponse(resourceGroupName, namespaceName, authorizationRuleName, context)
                 .getValue();
         return this;
+    }
+
+    public AccessKeys listKeys() {
+        return serviceManager.namespaces().listKeys(resourceGroupName, namespaceName, authorizationRuleName);
+    }
+
+    public Response<AccessKeys> listKeysWithResponse(Context context) {
+        return serviceManager
+            .namespaces()
+            .listKeysWithResponse(resourceGroupName, namespaceName, authorizationRuleName, context);
+    }
+
+    public AccessKeys regenerateKeys(RegenerateAccessKeyParameters parameters) {
+        return serviceManager
+            .namespaces()
+            .regenerateKeys(resourceGroupName, namespaceName, authorizationRuleName, parameters);
+    }
+
+    public Response<AccessKeys> regenerateKeysWithResponse(RegenerateAccessKeyParameters parameters, Context context) {
+        return serviceManager
+            .namespaces()
+            .regenerateKeysWithResponse(resourceGroupName, namespaceName, authorizationRuleName, parameters, context);
     }
 
     public AuthorizationRuleImpl withRights(List<AccessRights> rights) {
