@@ -55,6 +55,13 @@ public interface LinkedService {
     String writeAccessResourceId();
 
     /**
+     * Gets the resourceMetadata property: Custom metadata. See specific documentation for this linked service.
+     *
+     * @return the resourceMetadata value.
+     */
+    String resourceMetadata();
+
+    /**
      * Gets the provisioningState property: The provisioning state of the linked service.
      *
      * @return the provisioningState value.
@@ -96,7 +103,7 @@ public interface LinkedService {
             extends DefinitionStages.WithTags,
                 DefinitionStages.WithResourceId,
                 DefinitionStages.WithWriteAccessResourceId,
-                DefinitionStages.WithProvisioningState {
+                DefinitionStages.WithResourceMetadata {
             /**
              * Executes the create request.
              *
@@ -146,15 +153,16 @@ public interface LinkedService {
              */
             WithCreate withWriteAccessResourceId(String writeAccessResourceId);
         }
-        /** The stage of the LinkedService definition allowing to specify provisioningState. */
-        interface WithProvisioningState {
+        /** The stage of the LinkedService definition allowing to specify resourceMetadata. */
+        interface WithResourceMetadata {
             /**
-             * Specifies the provisioningState property: The provisioning state of the linked service..
+             * Specifies the resourceMetadata property: Custom metadata. See specific documentation for this linked
+             * service..
              *
-             * @param provisioningState The provisioning state of the linked service.
+             * @param resourceMetadata Custom metadata. See specific documentation for this linked service.
              * @return the next definition stage.
              */
-            WithCreate withProvisioningState(LinkedServiceEntityStatus provisioningState);
+            WithCreate withResourceMetadata(String resourceMetadata);
         }
     }
     /**
@@ -169,7 +177,7 @@ public interface LinkedService {
         extends UpdateStages.WithTags,
             UpdateStages.WithResourceId,
             UpdateStages.WithWriteAccessResourceId,
-            UpdateStages.WithProvisioningState {
+            UpdateStages.WithResourceMetadata {
         /**
          * Executes the update request.
          *
@@ -221,15 +229,16 @@ public interface LinkedService {
              */
             Update withWriteAccessResourceId(String writeAccessResourceId);
         }
-        /** The stage of the LinkedService update allowing to specify provisioningState. */
-        interface WithProvisioningState {
+        /** The stage of the LinkedService update allowing to specify resourceMetadata. */
+        interface WithResourceMetadata {
             /**
-             * Specifies the provisioningState property: The provisioning state of the linked service..
+             * Specifies the resourceMetadata property: Custom metadata. See specific documentation for this linked
+             * service..
              *
-             * @param provisioningState The provisioning state of the linked service.
+             * @param resourceMetadata Custom metadata. See specific documentation for this linked service.
              * @return the next definition stage.
              */
-            Update withProvisioningState(LinkedServiceEntityStatus provisioningState);
+            Update withResourceMetadata(String resourceMetadata);
         }
     }
     /**

@@ -11,11 +11,12 @@ import java.util.List;
 /** Resource collection API of IntelligencePacks. */
 public interface IntelligencePacks {
     /**
-     * Disables an intelligence pack for a given workspace.
+     * Legacy operation. Disables a Solution for a given workspace. This will break the reference of an existing
+     * Solution resource if it exists.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName The name of the workspace.
-     * @param intelligencePackName The name of the intelligence pack to be disabled.
+     * @param intelligencePackName The name of the Solution to be disabled.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -23,11 +24,12 @@ public interface IntelligencePacks {
     void disable(String resourceGroupName, String workspaceName, String intelligencePackName);
 
     /**
-     * Disables an intelligence pack for a given workspace.
+     * Legacy operation. Disables a Solution for a given workspace. This will break the reference of an existing
+     * Solution resource if it exists.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName The name of the workspace.
-     * @param intelligencePackName The name of the intelligence pack to be disabled.
+     * @param intelligencePackName The name of the Solution to be disabled.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -38,11 +40,12 @@ public interface IntelligencePacks {
         String resourceGroupName, String workspaceName, String intelligencePackName, Context context);
 
     /**
-     * Enables an intelligence pack for a given workspace.
+     * Legacy operation. Enables a Solution for a given workspace. This does not create a Solution resource but has the
+     * same effect.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName The name of the workspace.
-     * @param intelligencePackName The name of the intelligence pack to be enabled.
+     * @param intelligencePackName The name of the Solution to be enabled.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -50,11 +53,12 @@ public interface IntelligencePacks {
     void enable(String resourceGroupName, String workspaceName, String intelligencePackName);
 
     /**
-     * Enables an intelligence pack for a given workspace.
+     * Legacy operation. Enables a Solution for a given workspace. This does not create a Solution resource but has the
+     * same effect.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName The name of the workspace.
-     * @param intelligencePackName The name of the intelligence pack to be enabled.
+     * @param intelligencePackName The name of the Solution to be enabled.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -65,7 +69,8 @@ public interface IntelligencePacks {
         String resourceGroupName, String workspaceName, String intelligencePackName, Context context);
 
     /**
-     * Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.
+     * Legacy operation. Lists all the Solutions possible and whether they are enabled or disabled for a given
+     * workspace.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName The name of the workspace.
@@ -77,7 +82,8 @@ public interface IntelligencePacks {
     List<IntelligencePack> list(String resourceGroupName, String workspaceName);
 
     /**
-     * Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.
+     * Legacy operation. Lists all the Solutions possible and whether they are enabled or disabled for a given
+     * workspace.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName The name of the workspace.

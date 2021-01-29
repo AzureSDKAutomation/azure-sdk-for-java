@@ -22,7 +22,7 @@ public final class DataSourceInner extends ProxyResource {
      * have it's own schema.
      */
     @JsonProperty(value = "properties", required = true)
-    private Object properties;
+    private Map<String, Object> properties;
 
     /*
      * The ETag of the data source.
@@ -48,7 +48,7 @@ public final class DataSourceInner extends ProxyResource {
      *
      * @return the properties value.
      */
-    public Object properties() {
+    public Map<String, Object> properties() {
         return this.properties;
     }
 
@@ -59,7 +59,7 @@ public final class DataSourceInner extends ProxyResource {
      * @param properties the properties value to set.
      * @return the DataSourceInner object itself.
      */
-    public DataSourceInner withProperties(Object properties) {
+    public DataSourceInner withProperties(Map<String, Object> properties) {
         this.properties = properties;
         return this;
     }

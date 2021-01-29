@@ -9,25 +9,39 @@ import com.azure.resourcemanager.loganalytics.fluent.models.IntelligencePackInne
 /** An immutable client-side representation of IntelligencePack. */
 public interface IntelligencePack {
     /**
-     * Gets the name property: The name of the intelligence pack.
+     * Gets the name property: The name of the Solution.
      *
      * @return the name value.
      */
     String name();
 
     /**
-     * Gets the enabled property: The enabled boolean for the intelligence pack.
+     * Gets the enabled property: The enabled boolean for the Solution.
      *
      * @return the enabled value.
      */
     Boolean enabled();
 
     /**
-     * Gets the displayName property: The display name of the intelligence pack.
+     * Gets the displayName property: The display name of the Solution.
      *
      * @return the displayName value.
      */
     String displayName();
+
+    /**
+     * Gets the createdDate property: Creation date.
+     *
+     * @return the createdDate value.
+     */
+    String createdDate();
+
+    /**
+     * Gets the modifiedDate property: Modification date.
+     *
+     * @return the modifiedDate value.
+     */
+    String modifiedDate();
 
     /**
      * Gets the inner com.azure.resourcemanager.loganalytics.fluent.models.IntelligencePackInner object.

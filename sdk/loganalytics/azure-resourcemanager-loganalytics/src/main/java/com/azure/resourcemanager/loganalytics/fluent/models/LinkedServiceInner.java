@@ -40,9 +40,15 @@ public class LinkedServiceInner extends ProxyResource {
     private String writeAccessResourceId;
 
     /*
+     * Custom metadata. See specific documentation for this linked service.
+     */
+    @JsonProperty(value = "properties.resourceMetadata")
+    private String resourceMetadata;
+
+    /*
      * The provisioning state of the linked service.
      */
-    @JsonProperty(value = "properties.provisioningState")
+    @JsonProperty(value = "properties.provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private LinkedServiceEntityStatus provisioningState;
 
     /**
@@ -110,23 +116,32 @@ public class LinkedServiceInner extends ProxyResource {
     }
 
     /**
+     * Get the resourceMetadata property: Custom metadata. See specific documentation for this linked service.
+     *
+     * @return the resourceMetadata value.
+     */
+    public String resourceMetadata() {
+        return this.resourceMetadata;
+    }
+
+    /**
+     * Set the resourceMetadata property: Custom metadata. See specific documentation for this linked service.
+     *
+     * @param resourceMetadata the resourceMetadata value to set.
+     * @return the LinkedServiceInner object itself.
+     */
+    public LinkedServiceInner withResourceMetadata(String resourceMetadata) {
+        this.resourceMetadata = resourceMetadata;
+        return this;
+    }
+
+    /**
      * Get the provisioningState property: The provisioning state of the linked service.
      *
      * @return the provisioningState value.
      */
     public LinkedServiceEntityStatus provisioningState() {
         return this.provisioningState;
-    }
-
-    /**
-     * Set the provisioningState property: The provisioning state of the linked service.
-     *
-     * @param provisioningState the provisioningState value to set.
-     * @return the LinkedServiceInner object itself.
-     */
-    public LinkedServiceInner withProvisioningState(LinkedServiceEntityStatus provisioningState) {
-        this.provisioningState = provisioningState;
-        return this;
     }
 
     /**

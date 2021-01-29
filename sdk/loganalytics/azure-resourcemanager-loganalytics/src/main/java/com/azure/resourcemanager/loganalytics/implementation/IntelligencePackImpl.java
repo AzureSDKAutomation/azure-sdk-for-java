@@ -30,6 +30,14 @@ public final class IntelligencePackImpl implements IntelligencePack {
         return this.innerModel().displayName();
     }
 
+    public String createdDate() {
+        return this.innerModel().createdDate();
+    }
+
+    public String modifiedDate() {
+        return this.innerModel().modifiedDate();
+    }
+
     public IntelligencePackInner innerModel() {
         return this.innerObject;
     }

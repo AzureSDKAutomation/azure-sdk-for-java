@@ -23,7 +23,7 @@ public final class StorageAccount {
     /*
      * The storage account key.
      */
-    @JsonProperty(value = "key", required = true)
+    @JsonProperty(value = "key")
     private String key;
 
     /**
@@ -76,11 +76,6 @@ public final class StorageAccount {
             throw logger
                 .logExceptionAsError(
                     new IllegalArgumentException("Missing required property id in model StorageAccount"));
-        }
-        if (key() == null) {
-            throw logger
-                .logExceptionAsError(
-                    new IllegalArgumentException("Missing required property key in model StorageAccount"));
         }
     }
 }
