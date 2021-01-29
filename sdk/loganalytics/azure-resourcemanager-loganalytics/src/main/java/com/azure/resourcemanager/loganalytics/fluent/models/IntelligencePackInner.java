@@ -15,25 +15,37 @@ public final class IntelligencePackInner {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(IntelligencePackInner.class);
 
     /*
-     * The name of the intelligence pack.
+     * The name of the Solution.
      */
     @JsonProperty(value = "name")
     private String name;
 
     /*
-     * The enabled boolean for the intelligence pack.
+     * The enabled boolean for the Solution.
      */
     @JsonProperty(value = "enabled")
     private Boolean enabled;
 
     /*
-     * The display name of the intelligence pack.
+     * The display name of the Solution.
      */
     @JsonProperty(value = "displayName")
     private String displayName;
 
+    /*
+     * Creation date.
+     */
+    @JsonProperty(value = "createdDate")
+    private String createdDate;
+
+    /*
+     * Modification date.
+     */
+    @JsonProperty(value = "modifiedDate")
+    private String modifiedDate;
+
     /**
-     * Get the name property: The name of the intelligence pack.
+     * Get the name property: The name of the Solution.
      *
      * @return the name value.
      */
@@ -42,7 +54,7 @@ public final class IntelligencePackInner {
     }
 
     /**
-     * Set the name property: The name of the intelligence pack.
+     * Set the name property: The name of the Solution.
      *
      * @param name the name value to set.
      * @return the IntelligencePackInner object itself.
@@ -53,7 +65,7 @@ public final class IntelligencePackInner {
     }
 
     /**
-     * Get the enabled property: The enabled boolean for the intelligence pack.
+     * Get the enabled property: The enabled boolean for the Solution.
      *
      * @return the enabled value.
      */
@@ -62,7 +74,7 @@ public final class IntelligencePackInner {
     }
 
     /**
-     * Set the enabled property: The enabled boolean for the intelligence pack.
+     * Set the enabled property: The enabled boolean for the Solution.
      *
      * @param enabled the enabled value to set.
      * @return the IntelligencePackInner object itself.
@@ -73,7 +85,7 @@ public final class IntelligencePackInner {
     }
 
     /**
-     * Get the displayName property: The display name of the intelligence pack.
+     * Get the displayName property: The display name of the Solution.
      *
      * @return the displayName value.
      */
@@ -82,13 +94,53 @@ public final class IntelligencePackInner {
     }
 
     /**
-     * Set the displayName property: The display name of the intelligence pack.
+     * Set the displayName property: The display name of the Solution.
      *
      * @param displayName the displayName value to set.
      * @return the IntelligencePackInner object itself.
      */
     public IntelligencePackInner withDisplayName(String displayName) {
         this.displayName = displayName;
+        return this;
+    }
+
+    /**
+     * Get the createdDate property: Creation date.
+     *
+     * @return the createdDate value.
+     */
+    public String createdDate() {
+        return this.createdDate;
+    }
+
+    /**
+     * Set the createdDate property: Creation date.
+     *
+     * @param createdDate the createdDate value to set.
+     * @return the IntelligencePackInner object itself.
+     */
+    public IntelligencePackInner withCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    /**
+     * Get the modifiedDate property: Modification date.
+     *
+     * @return the modifiedDate value.
+     */
+    public String modifiedDate() {
+        return this.modifiedDate;
+    }
+
+    /**
+     * Set the modifiedDate property: Modification date.
+     *
+     * @param modifiedDate the modifiedDate value to set.
+     * @return the IntelligencePackInner object itself.
+     */
+    public IntelligencePackInner withModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
         return this;
     }
 

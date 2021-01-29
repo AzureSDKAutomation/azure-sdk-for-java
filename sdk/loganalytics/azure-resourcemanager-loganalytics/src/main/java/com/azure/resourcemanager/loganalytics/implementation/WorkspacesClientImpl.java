@@ -110,7 +110,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
             @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({"Accept: application/json;q=0.9", "Content-Type: application/json"})
+        @Headers({"Content-Type: application/json"})
         @Delete(
             "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights"
                 + "/workspaces/{workspaceName}")
@@ -123,6 +123,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
             @QueryParam("force") Boolean force,
+            @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({"Content-Type: application/json"})
@@ -733,6 +734,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
@@ -744,6 +746,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
                             this.client.getApiVersion(),
                             this.client.getSubscriptionId(),
                             force,
+                            accept,
                             context))
             .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
     }
@@ -785,6 +788,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .delete(
@@ -794,6 +798,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
                 this.client.getApiVersion(),
                 this.client.getSubscriptionId(),
                 force,
+                accept,
                 context);
     }
 

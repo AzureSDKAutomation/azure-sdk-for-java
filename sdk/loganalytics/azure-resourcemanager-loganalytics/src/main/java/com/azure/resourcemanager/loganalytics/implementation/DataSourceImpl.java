@@ -29,8 +29,13 @@ public final class DataSourceImpl implements DataSource, DataSource.Definition, 
         return this.innerModel().type();
     }
 
-    public Object properties() {
-        return this.innerModel().properties();
+    public Map<String, Object> properties() {
+        Map<String, Object> inner = this.innerModel().properties();
+        if (inner != null) {
+            return Collections.unmodifiableMap(inner);
+        } else {
+            return Collections.emptyMap();
+        }
     }
 
     public String etag() {
@@ -152,7 +157,7 @@ public final class DataSourceImpl implements DataSource, DataSource.Definition, 
         return this;
     }
 
-    public DataSourceImpl withProperties(Object properties) {
+    public DataSourceImpl withProperties(Map<String, Object> properties) {
         this.innerModel().withProperties(properties);
         return this;
     }

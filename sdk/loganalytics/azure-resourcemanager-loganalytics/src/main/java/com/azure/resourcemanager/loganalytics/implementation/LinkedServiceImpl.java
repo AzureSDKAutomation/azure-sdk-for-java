@@ -46,6 +46,10 @@ public final class LinkedServiceImpl implements LinkedService, LinkedService.Def
         return this.innerModel().writeAccessResourceId();
     }
 
+    public String resourceMetadata() {
+        return this.innerModel().resourceMetadata();
+    }
+
     public LinkedServiceEntityStatus provisioningState() {
         return this.innerModel().provisioningState();
     }
@@ -159,8 +163,8 @@ public final class LinkedServiceImpl implements LinkedService, LinkedService.Def
         return this;
     }
 
-    public LinkedServiceImpl withProvisioningState(LinkedServiceEntityStatus provisioningState) {
-        this.innerModel().withProvisioningState(provisioningState);
+    public LinkedServiceImpl withResourceMetadata(String resourceMetadata) {
+        this.innerModel().withResourceMetadata(resourceMetadata);
         return this;
     }
 }

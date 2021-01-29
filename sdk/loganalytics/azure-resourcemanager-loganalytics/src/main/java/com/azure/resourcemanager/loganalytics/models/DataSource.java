@@ -37,7 +37,7 @@ public interface DataSource {
      *
      * @return the properties value.
      */
-    Object properties();
+    Map<String, Object> properties();
 
     /**
      * Gets the etag property: The ETag of the data source.
@@ -101,7 +101,7 @@ public interface DataSource {
              *     schema.
              * @return the next definition stage.
              */
-            WithKind withProperties(Object properties);
+            WithKind withProperties(Map<String, Object> properties);
         }
         /** The stage of the DataSource definition allowing to specify kind. */
         interface WithKind {
@@ -201,7 +201,7 @@ public interface DataSource {
              *     schema.
              * @return the next definition stage.
              */
-            Update withProperties(Object properties);
+            Update withProperties(Map<String, Object> properties);
         }
         /** The stage of the DataSource update allowing to specify etag. */
         interface WithEtag {
