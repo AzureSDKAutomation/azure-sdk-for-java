@@ -121,16 +121,12 @@ public final class TopicsImpl implements Topics {
         }
     }
 
-    public Response<TopicSharedAccessKeys> regenerateKeyWithResponse(
+    public TopicSharedAccessKeys regenerateKey(
         String resourceGroupName, String topicName, TopicRegenerateKeyRequest regenerateKeyRequest, Context context) {
-        Response<TopicSharedAccessKeysInner> inner =
-            this.serviceClient().regenerateKeyWithResponse(resourceGroupName, topicName, regenerateKeyRequest, context);
+        TopicSharedAccessKeysInner inner =
+            this.serviceClient().regenerateKey(resourceGroupName, topicName, regenerateKeyRequest, context);
         if (inner != null) {
-            return new SimpleResponse<>(
-                inner.getRequest(),
-                inner.getStatusCode(),
-                inner.getHeaders(),
-                new TopicSharedAccessKeysImpl(inner.getValue(), this.manager()));
+            return new TopicSharedAccessKeysImpl(inner, this.manager());
         } else {
             return null;
         }
