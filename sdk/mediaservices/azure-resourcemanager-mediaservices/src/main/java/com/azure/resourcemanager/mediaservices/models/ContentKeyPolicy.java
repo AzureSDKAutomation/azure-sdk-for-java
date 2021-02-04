@@ -4,6 +4,7 @@
 
 package com.azure.resourcemanager.mediaservices.models;
 
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.mediaservices.fluent.models.ContentKeyPolicyInner;
 import java.time.OffsetDateTime;
@@ -197,4 +198,24 @@ public interface ContentKeyPolicy {
      * @return the refreshed resource.
      */
     ContentKeyPolicy refresh(Context context);
+
+    /**
+     * Get a Content Key Policy including secret values.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a Content Key Policy including secret values.
+     */
+    ContentKeyPolicyProperties getPolicyPropertiesWithSecrets();
+
+    /**
+     * Get a Content Key Policy including secret values.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a Content Key Policy including secret values.
+     */
+    Response<ContentKeyPolicyProperties> getPolicyPropertiesWithSecretsWithResponse(Context context);
 }

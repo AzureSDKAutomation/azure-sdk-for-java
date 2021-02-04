@@ -4,6 +4,7 @@
 
 package com.azure.resourcemanager.mediaservices.implementation;
 
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.mediaservices.MediaservicesManager;
 import com.azure.resourcemanager.mediaservices.fluent.models.JobInner;
@@ -186,6 +187,16 @@ public final class JobImpl implements Job, Job.Definition, Job.Update {
                 .getWithResponse(resourceGroupName, accountName, transformName, jobName, context)
                 .getValue();
         return this;
+    }
+
+    public void cancelJob() {
+        serviceManager.jobs().cancelJob(resourceGroupName, accountName, transformName, jobName);
+    }
+
+    public Response<Void> cancelJobWithResponse(Context context) {
+        return serviceManager
+            .jobs()
+            .cancelJobWithResponse(resourceGroupName, accountName, transformName, jobName, context);
     }
 
     public JobImpl withDescription(String description) {
