@@ -562,6 +562,7 @@
         <module>sdk/authorization</module>
         <module>sdk/batch</module>
         <module>sdk/boms</module>
+        <module>sdk/cdn</module>
         <module>sdk/cognitiveservices</module>
         <module>sdk/communication</module>
         <module>sdk/confluent</module>
