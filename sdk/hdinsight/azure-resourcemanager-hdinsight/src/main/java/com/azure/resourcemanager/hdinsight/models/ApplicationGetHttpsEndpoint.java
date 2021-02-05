@@ -40,6 +40,12 @@ public final class ApplicationGetHttpsEndpoint {
     private Integer publicPort;
 
     /*
+     * The private ip address of the endpoint.
+     */
+    @JsonProperty(value = "privateIPAddress")
+    private String privateIpAddress;
+
+    /*
      * The subdomain suffix of the application.
      */
     @JsonProperty(value = "subDomainSuffix")
@@ -128,6 +134,26 @@ public final class ApplicationGetHttpsEndpoint {
      */
     public ApplicationGetHttpsEndpoint withPublicPort(Integer publicPort) {
         this.publicPort = publicPort;
+        return this;
+    }
+
+    /**
+     * Get the privateIpAddress property: The private ip address of the endpoint.
+     *
+     * @return the privateIpAddress value.
+     */
+    public String privateIpAddress() {
+        return this.privateIpAddress;
+    }
+
+    /**
+     * Set the privateIpAddress property: The private ip address of the endpoint.
+     *
+     * @param privateIpAddress the privateIpAddress value to set.
+     * @return the ApplicationGetHttpsEndpoint object itself.
+     */
+    public ApplicationGetHttpsEndpoint withPrivateIpAddress(String privateIpAddress) {
+        this.privateIpAddress = privateIpAddress;
         return this;
     }
 

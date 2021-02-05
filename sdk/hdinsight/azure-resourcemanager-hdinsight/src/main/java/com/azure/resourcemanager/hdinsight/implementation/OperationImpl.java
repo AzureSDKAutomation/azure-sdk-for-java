@@ -8,6 +8,7 @@ import com.azure.resourcemanager.hdinsight.HDInsightManager;
 import com.azure.resourcemanager.hdinsight.fluent.models.OperationInner;
 import com.azure.resourcemanager.hdinsight.models.Operation;
 import com.azure.resourcemanager.hdinsight.models.OperationDisplay;
+import com.azure.resourcemanager.hdinsight.models.OperationProperties;
 
 public final class OperationImpl implements Operation {
     private OperationInner innerObject;
@@ -25,6 +26,10 @@ public final class OperationImpl implements Operation {
 
     public OperationDisplay display() {
         return this.innerModel().display();
+    }
+
+    public OperationProperties properties() {
+        return this.innerModel().properties();
     }
 
     public OperationInner innerModel() {

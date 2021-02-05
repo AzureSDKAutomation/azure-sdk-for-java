@@ -30,8 +30,8 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.hdinsight.fluent.ExtensionsClient;
 import com.azure.resourcemanager.hdinsight.fluent.models.ClusterMonitoringResponseInner;
-import com.azure.resourcemanager.hdinsight.fluent.models.ExtensionInner;
 import com.azure.resourcemanager.hdinsight.models.ClusterMonitoringRequest;
+import com.azure.resourcemanager.hdinsight.models.Extension;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -99,7 +99,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @Delete(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters"
                 + "/{clusterName}/extensions/clustermonitoring")
-        @ExpectedResponses({200, 202})
+        @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> disableMonitoring(
             @HostParam("$host") String endpoint,
@@ -123,7 +123,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
             @PathParam("clusterName") String clusterName,
             @PathParam("extensionName") String extensionName,
             @QueryParam("api-version") String apiVersion,
-            @BodyParam("application/json") ExtensionInner parameters,
+            @BodyParam("application/json") Extension parameters,
             @HeaderParam("Accept") String accept,
             Context context);
 
@@ -133,7 +133,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                 + "/{clusterName}/extensions/{extensionName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<ExtensionInner>> get(
+        Mono<Response<ClusterMonitoringResponseInner>> get(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
@@ -147,7 +147,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @Delete(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters"
                 + "/{clusterName}/extensions/{extensionName}")
-        @ExpectedResponses({200, 202})
+        @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> delete(
             @HostParam("$host") String endpoint,
@@ -813,7 +813,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createWithResponseAsync(
-        String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -874,11 +874,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createWithResponseAsync(
-        String resourceGroupName,
-        String clusterName,
-        String extensionName,
-        ExtensionInner parameters,
-        Context context) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -935,7 +931,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PollerFlux<PollResult<Void>, Void> beginCreateAsync(
-        String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters) {
         Mono<Response<Flux<ByteBuffer>>> mono =
             createWithResponseAsync(resourceGroupName, clusterName, extensionName, parameters);
         return this
@@ -958,11 +954,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PollerFlux<PollResult<Void>, Void> beginCreateAsync(
-        String resourceGroupName,
-        String clusterName,
-        String extensionName,
-        ExtensionInner parameters,
-        Context context) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono =
             createWithResponseAsync(resourceGroupName, clusterName, extensionName, parameters, context);
@@ -985,7 +977,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SyncPoller<PollResult<Void>, Void> beginCreate(
-        String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters) {
         return beginCreateAsync(resourceGroupName, clusterName, extensionName, parameters).getSyncPoller();
     }
 
@@ -1004,11 +996,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SyncPoller<PollResult<Void>, Void> beginCreate(
-        String resourceGroupName,
-        String clusterName,
-        String extensionName,
-        ExtensionInner parameters,
-        Context context) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context) {
         return beginCreateAsync(resourceGroupName, clusterName, extensionName, parameters, context).getSyncPoller();
     }
 
@@ -1026,7 +1014,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> createAsync(
-        String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters) {
         return beginCreateAsync(resourceGroupName, clusterName, extensionName, parameters)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -1047,11 +1035,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> createAsync(
-        String resourceGroupName,
-        String clusterName,
-        String extensionName,
-        ExtensionInner parameters,
-        Context context) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context) {
         return beginCreateAsync(resourceGroupName, clusterName, extensionName, parameters, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -1069,7 +1053,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void create(String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters) {
+    public void create(String resourceGroupName, String clusterName, String extensionName, Extension parameters) {
         createAsync(resourceGroupName, clusterName, extensionName, parameters).block();
     }
 
@@ -1087,11 +1071,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void create(
-        String resourceGroupName,
-        String clusterName,
-        String extensionName,
-        ExtensionInner parameters,
-        Context context) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context) {
         createAsync(resourceGroupName, clusterName, extensionName, parameters, context).block();
     }
 
@@ -1107,7 +1087,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      * @return the extension properties for the specified HDInsight cluster extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<ExtensionInner>> getWithResponseAsync(
+    private Mono<Response<ClusterMonitoringResponseInner>> getWithResponseAsync(
         String resourceGroupName, String clusterName, String extensionName) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -1161,7 +1141,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      * @return the extension properties for the specified HDInsight cluster extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<ExtensionInner>> getWithResponseAsync(
+    private Mono<Response<ClusterMonitoringResponseInner>> getWithResponseAsync(
         String resourceGroupName, String clusterName, String extensionName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -1211,10 +1191,11 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      * @return the extension properties for the specified HDInsight cluster extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<ExtensionInner> getAsync(String resourceGroupName, String clusterName, String extensionName) {
+    private Mono<ClusterMonitoringResponseInner> getAsync(
+        String resourceGroupName, String clusterName, String extensionName) {
         return getWithResponseAsync(resourceGroupName, clusterName, extensionName)
             .flatMap(
-                (Response<ExtensionInner> res) -> {
+                (Response<ClusterMonitoringResponseInner> res) -> {
                     if (res.getValue() != null) {
                         return Mono.just(res.getValue());
                     } else {
@@ -1235,7 +1216,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      * @return the extension properties for the specified HDInsight cluster extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ExtensionInner get(String resourceGroupName, String clusterName, String extensionName) {
+    public ClusterMonitoringResponseInner get(String resourceGroupName, String clusterName, String extensionName) {
         return getAsync(resourceGroupName, clusterName, extensionName).block();
     }
 
@@ -1252,7 +1233,7 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      * @return the extension properties for the specified HDInsight cluster extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ExtensionInner> getWithResponse(
+    public Response<ClusterMonitoringResponseInner> getWithResponse(
         String resourceGroupName, String clusterName, String extensionName, Context context) {
         return getWithResponseAsync(resourceGroupName, clusterName, extensionName, context).block();
     }
