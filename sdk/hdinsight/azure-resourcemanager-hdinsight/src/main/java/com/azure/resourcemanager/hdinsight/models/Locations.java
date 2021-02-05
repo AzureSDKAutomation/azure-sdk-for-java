@@ -77,4 +77,30 @@ public interface Locations {
      * @return the response for the operation to get regional billingSpecs for a subscription.
      */
     Response<BillingResponseListResult> listBillingSpecsWithResponse(String location, Context context);
+
+    /**
+     * Get the async operation status.
+     *
+     * @param location The Azure location (region) for which to make the request.
+     * @param operationId The long running operation id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the async operation status.
+     */
+    AsyncOperationResult getAzureAsyncOperationStatus(String location, String operationId);
+
+    /**
+     * Get the async operation status.
+     *
+     * @param location The Azure location (region) for which to make the request.
+     * @param operationId The long running operation id.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the async operation status.
+     */
+    Response<AsyncOperationResult> getAzureAsyncOperationStatusWithResponse(
+        String location, String operationId, Context context);
 }

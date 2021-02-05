@@ -11,7 +11,6 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.hdinsight.HDInsightManager;
 import com.azure.resourcemanager.hdinsight.fluent.ExtensionsClient;
 import com.azure.resourcemanager.hdinsight.fluent.models.ClusterMonitoringResponseInner;
-import com.azure.resourcemanager.hdinsight.fluent.models.ExtensionInner;
 import com.azure.resourcemanager.hdinsight.models.ClusterMonitoringRequest;
 import com.azure.resourcemanager.hdinsight.models.ClusterMonitoringResponse;
 import com.azure.resourcemanager.hdinsight.models.Extension;
@@ -71,38 +70,34 @@ public final class ExtensionsImpl implements Extensions {
         this.serviceClient().disableMonitoring(resourceGroupName, clusterName, context);
     }
 
-    public void create(String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters) {
+    public void create(String resourceGroupName, String clusterName, String extensionName, Extension parameters) {
         this.serviceClient().create(resourceGroupName, clusterName, extensionName, parameters);
     }
 
     public void create(
-        String resourceGroupName,
-        String clusterName,
-        String extensionName,
-        ExtensionInner parameters,
-        Context context) {
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context) {
         this.serviceClient().create(resourceGroupName, clusterName, extensionName, parameters, context);
     }
 
-    public Extension get(String resourceGroupName, String clusterName, String extensionName) {
-        ExtensionInner inner = this.serviceClient().get(resourceGroupName, clusterName, extensionName);
+    public ClusterMonitoringResponse get(String resourceGroupName, String clusterName, String extensionName) {
+        ClusterMonitoringResponseInner inner = this.serviceClient().get(resourceGroupName, clusterName, extensionName);
         if (inner != null) {
-            return new ExtensionImpl(inner, this.manager());
+            return new ClusterMonitoringResponseImpl(inner, this.manager());
         } else {
             return null;
         }
     }
 
-    public Response<Extension> getWithResponse(
+    public Response<ClusterMonitoringResponse> getWithResponse(
         String resourceGroupName, String clusterName, String extensionName, Context context) {
-        Response<ExtensionInner> inner =
+        Response<ClusterMonitoringResponseInner> inner =
             this.serviceClient().getWithResponse(resourceGroupName, clusterName, extensionName, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
                 inner.getStatusCode(),
                 inner.getHeaders(),
-                new ExtensionImpl(inner.getValue(), this.manager()));
+                new ClusterMonitoringResponseImpl(inner.getValue(), this.manager()));
         } else {
             return null;
         }

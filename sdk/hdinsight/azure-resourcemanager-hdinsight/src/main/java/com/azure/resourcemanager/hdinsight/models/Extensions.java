@@ -6,7 +6,6 @@ package com.azure.resourcemanager.hdinsight.models;
 
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.hdinsight.fluent.models.ExtensionInner;
 
 /** Resource collection API of Extensions. */
 public interface Extensions {
@@ -96,7 +95,7 @@ public interface Extensions {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void create(String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters);
+    void create(String resourceGroupName, String clusterName, String extensionName, Extension parameters);
 
     /**
      * Creates an HDInsight cluster extension.
@@ -111,7 +110,7 @@ public interface Extensions {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void create(
-        String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters, Context context);
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context);
 
     /**
      * Gets the extension properties for the specified HDInsight cluster extension.
@@ -124,7 +123,7 @@ public interface Extensions {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the extension properties for the specified HDInsight cluster extension.
      */
-    Extension get(String resourceGroupName, String clusterName, String extensionName);
+    ClusterMonitoringResponse get(String resourceGroupName, String clusterName, String extensionName);
 
     /**
      * Gets the extension properties for the specified HDInsight cluster extension.
@@ -138,7 +137,7 @@ public interface Extensions {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the extension properties for the specified HDInsight cluster extension.
      */
-    Response<Extension> getWithResponse(
+    Response<ClusterMonitoringResponse> getWithResponse(
         String resourceGroupName, String clusterName, String extensionName, Context context);
 
     /**

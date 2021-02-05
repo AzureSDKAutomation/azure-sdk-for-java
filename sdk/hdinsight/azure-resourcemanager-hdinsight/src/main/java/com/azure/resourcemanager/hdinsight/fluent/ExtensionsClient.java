@@ -11,8 +11,8 @@ import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.hdinsight.fluent.models.ClusterMonitoringResponseInner;
-import com.azure.resourcemanager.hdinsight.fluent.models.ExtensionInner;
 import com.azure.resourcemanager.hdinsight.models.ClusterMonitoringRequest;
+import com.azure.resourcemanager.hdinsight.models.Extension;
 
 /** An instance of this class provides access to all the operations defined in ExtensionsClient. */
 public interface ExtensionsClient {
@@ -170,7 +170,7 @@ public interface ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     SyncPoller<PollResult<Void>, Void> beginCreate(
-        String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters);
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters);
 
     /**
      * Creates an HDInsight cluster extension.
@@ -187,7 +187,7 @@ public interface ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     SyncPoller<PollResult<Void>, Void> beginCreate(
-        String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters, Context context);
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context);
 
     /**
      * Creates an HDInsight cluster extension.
@@ -201,7 +201,7 @@ public interface ExtensionsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    void create(String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters);
+    void create(String resourceGroupName, String clusterName, String extensionName, Extension parameters);
 
     /**
      * Creates an HDInsight cluster extension.
@@ -217,7 +217,7 @@ public interface ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     void create(
-        String resourceGroupName, String clusterName, String extensionName, ExtensionInner parameters, Context context);
+        String resourceGroupName, String clusterName, String extensionName, Extension parameters, Context context);
 
     /**
      * Gets the extension properties for the specified HDInsight cluster extension.
@@ -231,7 +231,7 @@ public interface ExtensionsClient {
      * @return the extension properties for the specified HDInsight cluster extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    ExtensionInner get(String resourceGroupName, String clusterName, String extensionName);
+    ClusterMonitoringResponseInner get(String resourceGroupName, String clusterName, String extensionName);
 
     /**
      * Gets the extension properties for the specified HDInsight cluster extension.
@@ -246,7 +246,7 @@ public interface ExtensionsClient {
      * @return the extension properties for the specified HDInsight cluster extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<ExtensionInner> getWithResponse(
+    Response<ClusterMonitoringResponseInner> getWithResponse(
         String resourceGroupName, String clusterName, String extensionName, Context context);
 
     /**

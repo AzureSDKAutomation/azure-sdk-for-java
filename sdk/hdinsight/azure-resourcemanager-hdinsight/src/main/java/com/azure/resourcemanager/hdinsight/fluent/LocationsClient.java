@@ -8,6 +8,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
+import com.azure.resourcemanager.hdinsight.fluent.models.AsyncOperationResultInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.BillingResponseListResultInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.CapabilitiesResultInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.UsagesListResultInner;
@@ -88,4 +89,32 @@ public interface LocationsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BillingResponseListResultInner> listBillingSpecsWithResponse(String location, Context context);
+
+    /**
+     * Get the async operation status.
+     *
+     * @param location The Azure location (region) for which to make the request.
+     * @param operationId The long running operation id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the async operation status.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    AsyncOperationResultInner getAzureAsyncOperationStatus(String location, String operationId);
+
+    /**
+     * Get the async operation status.
+     *
+     * @param location The Azure location (region) for which to make the request.
+     * @param operationId The long running operation id.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the async operation status.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<AsyncOperationResultInner> getAzureAsyncOperationStatusWithResponse(
+        String location, String operationId, Context context);
 }
