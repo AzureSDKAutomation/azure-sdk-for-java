@@ -583,6 +583,7 @@
         <module>sdk/monitor</module>
         <module>sdk/mysql</module>
         <module>sdk/postgresql</module>
+        <module>sdk/privatedns</module>
         <module>sdk/quantum</module>
         <module>sdk/recoveryservices</module>
         <module>sdk/relay</module>
