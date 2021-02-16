@@ -27,6 +27,7 @@ import com.azure.resourcemanager.recoveryservices.implementation.RecoveryService
 import com.azure.resourcemanager.recoveryservices.implementation.RecoveryServicesManagementClientBuilder;
 import com.azure.resourcemanager.recoveryservices.implementation.RegisteredIdentitiesImpl;
 import com.azure.resourcemanager.recoveryservices.implementation.ReplicationUsagesImpl;
+import com.azure.resourcemanager.recoveryservices.implementation.ResourceProvidersImpl;
 import com.azure.resourcemanager.recoveryservices.implementation.UsagesImpl;
 import com.azure.resourcemanager.recoveryservices.implementation.VaultCertificatesImpl;
 import com.azure.resourcemanager.recoveryservices.implementation.VaultExtendedInfoesImpl;
@@ -36,6 +37,7 @@ import com.azure.resourcemanager.recoveryservices.models.PrivateLinkResourcesOpe
 import com.azure.resourcemanager.recoveryservices.models.RecoveryServices;
 import com.azure.resourcemanager.recoveryservices.models.RegisteredIdentities;
 import com.azure.resourcemanager.recoveryservices.models.ReplicationUsages;
+import com.azure.resourcemanager.recoveryservices.models.ResourceProviders;
 import com.azure.resourcemanager.recoveryservices.models.Usages;
 import com.azure.resourcemanager.recoveryservices.models.VaultCertificates;
 import com.azure.resourcemanager.recoveryservices.models.VaultExtendedInfoes;
@@ -63,6 +65,8 @@ public final class RecoveryServicesManager {
     private Operations operations;
 
     private VaultExtendedInfoes vaultExtendedInfoes;
+
+    private ResourceProviders resourceProviders;
 
     private Usages usages;
 
@@ -184,17 +188,31 @@ public final class RecoveryServicesManager {
             Objects.requireNonNull(credential, "'credential' cannot be null.");
             Objects.requireNonNull(profile, "'profile' cannot be null.");
 
+            StringBuilder userAgentBuilder = new StringBuilder();
+            userAgentBuilder
+                .append("azsdk-java")
+                .append("-")
+                .append("com.azure.resourcemanager.recoveryservices")
+                .append("/")
+                .append("1.0.0-beta.1");
+            if (!Configuration.getGlobalConfiguration().get("AZURE_TELEMETRY_DISABLED", false)) {
+                userAgentBuilder
+                    .append(" (")
+                    .append(Configuration.getGlobalConfiguration().get("java.version"))
+                    .append("; ")
+                    .append(Configuration.getGlobalConfiguration().get("os.name"))
+                    .append("; ")
+                    .append(Configuration.getGlobalConfiguration().get("os.version"))
+                    .append("; auto-generated)");
+            } else {
+                userAgentBuilder.append(" (auto-generated)");
+            }
+
             if (retryPolicy == null) {
                 retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
             }
             List<HttpPipelinePolicy> policies = new ArrayList<>();
-            policies
-                .add(
-                    new UserAgentPolicy(
-                        null,
-                        "com.azure.resourcemanager.recoveryservices",
-                        "1.0.0-beta.1",
-                        Configuration.getGlobalConfiguration()));
+            policies.add(new UserAgentPolicy(userAgentBuilder.toString()));
             policies.add(new RequestIdPolicy());
             HttpPolicyProviders.addBeforeRetryPolicies(policies);
             policies.add(retryPolicy);
@@ -277,6 +295,14 @@ public final class RecoveryServicesManager {
             this.vaultExtendedInfoes = new VaultExtendedInfoesImpl(clientObject.getVaultExtendedInfoes(), this);
         }
         return vaultExtendedInfoes;
+    }
+
+    /** @return Resource collection API of ResourceProviders. */
+    public ResourceProviders resourceProviders() {
+        if (this.resourceProviders == null) {
+            this.resourceProviders = new ResourceProvidersImpl(clientObject.getResourceProviders(), this);
+        }
+        return resourceProviders;
     }
 
     /** @return Resource collection API of Usages. */
