@@ -64,14 +64,14 @@ public final class StorageInsightConfigsImpl implements StorageInsightConfigs {
     public PagedIterable<StorageInsight> listByWorkspace(String resourceGroupName, String workspaceName) {
         PagedIterable<StorageInsightInner> inner =
             this.serviceClient().listByWorkspace(resourceGroupName, workspaceName);
-        return inner.mapPage(inner1 -> new StorageInsightImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new StorageInsightImpl(inner1, this.manager()));
     }
 
     public PagedIterable<StorageInsight> listByWorkspace(
         String resourceGroupName, String workspaceName, Context context) {
         PagedIterable<StorageInsightInner> inner =
             this.serviceClient().listByWorkspace(resourceGroupName, workspaceName, context);
-        return inner.mapPage(inner1 -> new StorageInsightImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new StorageInsightImpl(inner1, this.manager()));
     }
 
     public StorageInsight getById(String id) {
