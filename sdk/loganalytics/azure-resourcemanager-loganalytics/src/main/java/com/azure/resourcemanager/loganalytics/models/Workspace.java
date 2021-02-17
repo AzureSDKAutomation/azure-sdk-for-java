@@ -104,6 +104,13 @@ public interface Workspace {
     PublicNetworkAccessType publicNetworkAccessForQuery();
 
     /**
+     * Gets the forceCmkForQuery property: Indicates whether customer managed storage is mandatory for query management.
+     *
+     * @return the forceCmkForQuery value.
+     */
+    Boolean forceCmkForQuery();
+
+    /**
      * Gets the privateLinkScopedResources property: List of linked private link scope resources.
      *
      * @return the privateLinkScopedResources value.
@@ -183,7 +190,8 @@ public interface Workspace {
                 DefinitionStages.WithRetentionInDays,
                 DefinitionStages.WithWorkspaceCapping,
                 DefinitionStages.WithPublicNetworkAccessForIngestion,
-                DefinitionStages.WithPublicNetworkAccessForQuery {
+                DefinitionStages.WithPublicNetworkAccessForQuery,
+                DefinitionStages.WithForceCmkForQuery {
             /**
              * Executes the create request.
              *
@@ -281,6 +289,17 @@ public interface Workspace {
              */
             WithCreate withPublicNetworkAccessForQuery(PublicNetworkAccessType publicNetworkAccessForQuery);
         }
+        /** The stage of the Workspace definition allowing to specify forceCmkForQuery. */
+        interface WithForceCmkForQuery {
+            /**
+             * Specifies the forceCmkForQuery property: Indicates whether customer managed storage is mandatory for
+             * query management..
+             *
+             * @param forceCmkForQuery Indicates whether customer managed storage is mandatory for query management.
+             * @return the next definition stage.
+             */
+            WithCreate withForceCmkForQuery(Boolean forceCmkForQuery);
+        }
     }
     /**
      * Begins update for the Workspace resource.
@@ -297,7 +316,8 @@ public interface Workspace {
             UpdateStages.WithRetentionInDays,
             UpdateStages.WithWorkspaceCapping,
             UpdateStages.WithPublicNetworkAccessForIngestion,
-            UpdateStages.WithPublicNetworkAccessForQuery {
+            UpdateStages.WithPublicNetworkAccessForQuery,
+            UpdateStages.WithForceCmkForQuery {
         /**
          * Executes the update request.
          *
@@ -386,6 +406,17 @@ public interface Workspace {
              * @return the next definition stage.
              */
             Update withPublicNetworkAccessForQuery(PublicNetworkAccessType publicNetworkAccessForQuery);
+        }
+        /** The stage of the Workspace update allowing to specify forceCmkForQuery. */
+        interface WithForceCmkForQuery {
+            /**
+             * Specifies the forceCmkForQuery property: Indicates whether customer managed storage is mandatory for
+             * query management..
+             *
+             * @param forceCmkForQuery Indicates whether customer managed storage is mandatory for query management.
+             * @return the next definition stage.
+             */
+            Update withForceCmkForQuery(Boolean forceCmkForQuery);
         }
     }
     /**

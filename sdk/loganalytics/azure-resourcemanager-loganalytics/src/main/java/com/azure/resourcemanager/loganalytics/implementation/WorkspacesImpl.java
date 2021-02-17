@@ -30,22 +30,22 @@ public final class WorkspacesImpl implements Workspaces {
 
     public PagedIterable<Workspace> list() {
         PagedIterable<WorkspaceInner> inner = this.serviceClient().list();
-        return inner.mapPage(inner1 -> new WorkspaceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new WorkspaceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Workspace> list(Context context) {
         PagedIterable<WorkspaceInner> inner = this.serviceClient().list(context);
-        return inner.mapPage(inner1 -> new WorkspaceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new WorkspaceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Workspace> listByResourceGroup(String resourceGroupName) {
         PagedIterable<WorkspaceInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName);
-        return inner.mapPage(inner1 -> new WorkspaceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new WorkspaceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Workspace> listByResourceGroup(String resourceGroupName, Context context) {
         PagedIterable<WorkspaceInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName, context);
-        return inner.mapPage(inner1 -> new WorkspaceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new WorkspaceImpl(inner1, this.manager()));
     }
 
     public void delete(String resourceGroupName, String workspaceName, Boolean force) {

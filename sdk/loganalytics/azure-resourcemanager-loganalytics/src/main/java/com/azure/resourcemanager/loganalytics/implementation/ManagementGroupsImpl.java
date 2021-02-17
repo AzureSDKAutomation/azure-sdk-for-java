@@ -28,13 +28,13 @@ public final class ManagementGroupsImpl implements ManagementGroups {
 
     public PagedIterable<ManagementGroup> list(String resourceGroupName, String workspaceName) {
         PagedIterable<ManagementGroupInner> inner = this.serviceClient().list(resourceGroupName, workspaceName);
-        return inner.mapPage(inner1 -> new ManagementGroupImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ManagementGroupImpl(inner1, this.manager()));
     }
 
     public PagedIterable<ManagementGroup> list(String resourceGroupName, String workspaceName, Context context) {
         PagedIterable<ManagementGroupInner> inner =
             this.serviceClient().list(resourceGroupName, workspaceName, context);
-        return inner.mapPage(inner1 -> new ManagementGroupImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ManagementGroupImpl(inner1, this.manager()));
     }
 
     private ManagementGroupsClient serviceClient() {

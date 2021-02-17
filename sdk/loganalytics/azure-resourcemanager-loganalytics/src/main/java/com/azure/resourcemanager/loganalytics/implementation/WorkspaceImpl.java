@@ -81,6 +81,10 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
         return this.innerModel().publicNetworkAccessForQuery();
     }
 
+    public Boolean forceCmkForQuery() {
+        return this.innerModel().forceCmkForQuery();
+    }
+
     public List<PrivateLinkScopedResource> privateLinkScopedResources() {
         List<PrivateLinkScopedResource> inner = this.innerModel().privateLinkScopedResources();
         if (inner != null) {
@@ -274,6 +278,16 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
             return this;
         } else {
             this.updateParameters.withPublicNetworkAccessForQuery(publicNetworkAccessForQuery);
+            return this;
+        }
+    }
+
+    public WorkspaceImpl withForceCmkForQuery(Boolean forceCmkForQuery) {
+        if (isInCreateMode()) {
+            this.innerModel().withForceCmkForQuery(forceCmkForQuery);
+            return this;
+        } else {
+            this.updateParameters.withForceCmkForQuery(forceCmkForQuery);
             return this;
         }
     }
