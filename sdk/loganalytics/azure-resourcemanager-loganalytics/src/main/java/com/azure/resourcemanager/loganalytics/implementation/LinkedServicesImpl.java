@@ -75,14 +75,14 @@ public final class LinkedServicesImpl implements LinkedServices {
     public PagedIterable<LinkedService> listByWorkspace(String resourceGroupName, String workspaceName) {
         PagedIterable<LinkedServiceInner> inner =
             this.serviceClient().listByWorkspace(resourceGroupName, workspaceName);
-        return inner.mapPage(inner1 -> new LinkedServiceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new LinkedServiceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<LinkedService> listByWorkspace(
         String resourceGroupName, String workspaceName, Context context) {
         PagedIterable<LinkedServiceInner> inner =
             this.serviceClient().listByWorkspace(resourceGroupName, workspaceName, context);
-        return inner.mapPage(inner1 -> new LinkedServiceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new LinkedServiceImpl(inner1, this.manager()));
     }
 
     public LinkedService getById(String id) {

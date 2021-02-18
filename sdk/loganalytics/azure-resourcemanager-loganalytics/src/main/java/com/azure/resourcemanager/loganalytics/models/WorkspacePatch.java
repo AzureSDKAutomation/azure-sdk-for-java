@@ -68,6 +68,13 @@ public class WorkspacePatch extends AzureEntityResource {
     private PublicNetworkAccessType publicNetworkAccessForQuery;
 
     /*
+     * Indicates whether customer managed storage is mandatory for query
+     * management.
+     */
+    @JsonProperty(value = "properties.forceCmkForQuery")
+    private Boolean forceCmkForQuery;
+
+    /*
      * List of linked private link scope resources.
      */
     @JsonProperty(value = "properties.privateLinkScopedResources", access = JsonProperty.Access.WRITE_ONLY)
@@ -219,6 +226,26 @@ public class WorkspacePatch extends AzureEntityResource {
      */
     public WorkspacePatch withPublicNetworkAccessForQuery(PublicNetworkAccessType publicNetworkAccessForQuery) {
         this.publicNetworkAccessForQuery = publicNetworkAccessForQuery;
+        return this;
+    }
+
+    /**
+     * Get the forceCmkForQuery property: Indicates whether customer managed storage is mandatory for query management.
+     *
+     * @return the forceCmkForQuery value.
+     */
+    public Boolean forceCmkForQuery() {
+        return this.forceCmkForQuery;
+    }
+
+    /**
+     * Set the forceCmkForQuery property: Indicates whether customer managed storage is mandatory for query management.
+     *
+     * @param forceCmkForQuery the forceCmkForQuery value to set.
+     * @return the WorkspacePatch object itself.
+     */
+    public WorkspacePatch withForceCmkForQuery(Boolean forceCmkForQuery) {
+        this.forceCmkForQuery = forceCmkForQuery;
         return this;
     }
 
