@@ -593,6 +593,7 @@
         <module>sdk/postgresql</module>
         <module>sdk/quantum</module>
         <module>sdk/recoveryservices</module>
+        <module>sdk/redis</module>
         <module>sdk/relay</module>
         <module>sdk/resourcemanager</module>
         <module>sdk/schemaregistry</module>
