@@ -30,22 +30,22 @@ public final class VaultsImpl implements Vaults {
 
     public PagedIterable<Vault> list() {
         PagedIterable<VaultInner> inner = this.serviceClient().list();
-        return inner.mapPage(inner1 -> new VaultImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new VaultImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Vault> list(Context context) {
         PagedIterable<VaultInner> inner = this.serviceClient().list(context);
-        return inner.mapPage(inner1 -> new VaultImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new VaultImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Vault> listByResourceGroup(String resourceGroupName) {
         PagedIterable<VaultInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName);
-        return inner.mapPage(inner1 -> new VaultImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new VaultImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Vault> listByResourceGroup(String resourceGroupName, Context context) {
         PagedIterable<VaultInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName, context);
-        return inner.mapPage(inner1 -> new VaultImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new VaultImpl(inner1, this.manager()));
     }
 
     public Vault getByResourceGroup(String resourceGroupName, String vaultName) {
