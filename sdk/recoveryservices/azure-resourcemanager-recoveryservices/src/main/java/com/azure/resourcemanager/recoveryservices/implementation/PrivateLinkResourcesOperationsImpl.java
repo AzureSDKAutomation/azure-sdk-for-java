@@ -31,13 +31,13 @@ public final class PrivateLinkResourcesOperationsImpl implements PrivateLinkReso
 
     public PagedIterable<PrivateLinkResource> list(String resourceGroupName, String vaultName) {
         PagedIterable<PrivateLinkResourceInner> inner = this.serviceClient().list(resourceGroupName, vaultName);
-        return inner.mapPage(inner1 -> new PrivateLinkResourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new PrivateLinkResourceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PrivateLinkResource> list(String resourceGroupName, String vaultName, Context context) {
         PagedIterable<PrivateLinkResourceInner> inner =
             this.serviceClient().list(resourceGroupName, vaultName, context);
-        return inner.mapPage(inner1 -> new PrivateLinkResourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new PrivateLinkResourceImpl(inner1, this.manager()));
     }
 
     public PrivateLinkResource get(String resourceGroupName, String vaultName, String privateLinkResourceName) {
