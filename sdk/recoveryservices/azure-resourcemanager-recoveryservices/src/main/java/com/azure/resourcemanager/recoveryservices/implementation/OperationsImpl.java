@@ -28,12 +28,12 @@ public final class OperationsImpl implements Operations {
 
     public PagedIterable<ClientDiscoveryValueForSingleApi> list() {
         PagedIterable<ClientDiscoveryValueForSingleApiInner> inner = this.serviceClient().list();
-        return inner.mapPage(inner1 -> new ClientDiscoveryValueForSingleApiImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ClientDiscoveryValueForSingleApiImpl(inner1, this.manager()));
     }
 
     public PagedIterable<ClientDiscoveryValueForSingleApi> list(Context context) {
         PagedIterable<ClientDiscoveryValueForSingleApiInner> inner = this.serviceClient().list(context);
-        return inner.mapPage(inner1 -> new ClientDiscoveryValueForSingleApiImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ClientDiscoveryValueForSingleApiImpl(inner1, this.manager()));
     }
 
     private OperationsClient serviceClient() {
