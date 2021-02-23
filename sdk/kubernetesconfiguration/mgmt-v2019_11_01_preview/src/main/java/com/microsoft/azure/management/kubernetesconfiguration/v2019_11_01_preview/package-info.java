@@ -6,6 +6,6 @@
 
 /**
  * This package contains the classes for SourceControlConfigurationClient.
- * Use these APIs to create Source Control Configuration resources through ARM, for Kubernetes Clusters.
+ * KubernetesConfiguration Client.
  */
 package com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview;
