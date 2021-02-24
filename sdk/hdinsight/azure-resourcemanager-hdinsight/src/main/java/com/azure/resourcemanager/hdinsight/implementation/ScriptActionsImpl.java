@@ -11,7 +11,9 @@ import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.hdinsight.HDInsightManager;
 import com.azure.resourcemanager.hdinsight.fluent.ScriptActionsClient;
+import com.azure.resourcemanager.hdinsight.fluent.models.AsyncOperationResultInner;
 import com.azure.resourcemanager.hdinsight.fluent.models.RuntimeScriptActionDetailInner;
+import com.azure.resourcemanager.hdinsight.models.AsyncOperationResult;
 import com.azure.resourcemanager.hdinsight.models.RuntimeScriptActionDetail;
 import com.azure.resourcemanager.hdinsight.models.ScriptActions;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,14 +42,14 @@ public final class ScriptActionsImpl implements ScriptActions {
     public PagedIterable<RuntimeScriptActionDetail> listByCluster(String resourceGroupName, String clusterName) {
         PagedIterable<RuntimeScriptActionDetailInner> inner =
             this.serviceClient().listByCluster(resourceGroupName, clusterName);
-        return inner.mapPage(inner1 -> new RuntimeScriptActionDetailImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new RuntimeScriptActionDetailImpl(inner1, this.manager()));
     }
 
     public PagedIterable<RuntimeScriptActionDetail> listByCluster(
         String resourceGroupName, String clusterName, Context context) {
         PagedIterable<RuntimeScriptActionDetailInner> inner =
             this.serviceClient().listByCluster(resourceGroupName, clusterName, context);
-        return inner.mapPage(inner1 -> new RuntimeScriptActionDetailImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new RuntimeScriptActionDetailImpl(inner1, this.manager()));
     }
 
     public RuntimeScriptActionDetail getExecutionDetail(
@@ -73,6 +75,34 @@ public final class ScriptActionsImpl implements ScriptActions {
                 inner.getStatusCode(),
                 inner.getHeaders(),
                 new RuntimeScriptActionDetailImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public AsyncOperationResult getExecutionAsyncOperationStatus(
+        String resourceGroupName, String clusterName, String operationId) {
+        AsyncOperationResultInner inner =
+            this.serviceClient().getExecutionAsyncOperationStatus(resourceGroupName, clusterName, operationId);
+        if (inner != null) {
+            return new AsyncOperationResultImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Response<AsyncOperationResult> getExecutionAsyncOperationStatusWithResponse(
+        String resourceGroupName, String clusterName, String operationId, Context context) {
+        Response<AsyncOperationResultInner> inner =
+            this
+                .serviceClient()
+                .getExecutionAsyncOperationStatusWithResponse(resourceGroupName, clusterName, operationId, context);
+        if (inner != null) {
+            return new SimpleResponse<>(
+                inner.getRequest(),
+                inner.getStatusCode(),
+                inner.getHeaders(),
+                new AsyncOperationResultImpl(inner.getValue(), this.manager()));
         } else {
             return null;
         }
