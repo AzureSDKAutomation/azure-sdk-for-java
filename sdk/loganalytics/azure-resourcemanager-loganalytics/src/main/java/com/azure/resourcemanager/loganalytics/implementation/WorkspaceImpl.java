@@ -73,6 +73,14 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
         return this.innerModel().workspaceCapping();
     }
 
+    public String createdDate() {
+        return this.innerModel().createdDate();
+    }
+
+    public String modifiedDate() {
+        return this.innerModel().modifiedDate();
+    }
+
     public PublicNetworkAccessType publicNetworkAccessForIngestion() {
         return this.innerModel().publicNetworkAccessForIngestion();
     }
@@ -81,12 +89,25 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
         return this.innerModel().publicNetworkAccessForQuery();
     }
 
+    public Boolean forceCmkForQuery() {
+        return this.innerModel().forceCmkForQuery();
+    }
+
     public List<PrivateLinkScopedResource> privateLinkScopedResources() {
         List<PrivateLinkScopedResource> inner = this.innerModel().privateLinkScopedResources();
         if (inner != null) {
             return Collections.unmodifiableList(inner);
         } else {
             return Collections.emptyList();
+        }
+    }
+
+    public Map<String, Object> features() {
+        Map<String, Object> inner = this.innerModel().features();
+        if (inner != null) {
+            return Collections.unmodifiableMap(inner);
+        } else {
+            return Collections.emptyMap();
         }
     }
 
@@ -274,6 +295,26 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
             return this;
         } else {
             this.updateParameters.withPublicNetworkAccessForQuery(publicNetworkAccessForQuery);
+            return this;
+        }
+    }
+
+    public WorkspaceImpl withForceCmkForQuery(Boolean forceCmkForQuery) {
+        if (isInCreateMode()) {
+            this.innerModel().withForceCmkForQuery(forceCmkForQuery);
+            return this;
+        } else {
+            this.updateParameters.withForceCmkForQuery(forceCmkForQuery);
+            return this;
+        }
+    }
+
+    public WorkspaceImpl withFeatures(Map<String, Object> features) {
+        if (isInCreateMode()) {
+            this.innerModel().withFeatures(features);
+            return this;
+        } else {
+            this.updateParameters.withFeatures(features);
             return this;
         }
     }
