@@ -62,14 +62,14 @@ public final class VirtualNetworkRulesImpl implements VirtualNetworkRules {
 
     public PagedIterable<VirtualNetworkRule> listByServer(String resourceGroupName, String serverName) {
         PagedIterable<VirtualNetworkRuleInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName);
-        return inner.mapPage(inner1 -> new VirtualNetworkRuleImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new VirtualNetworkRuleImpl(inner1, this.manager()));
     }
 
     public PagedIterable<VirtualNetworkRule> listByServer(
         String resourceGroupName, String serverName, Context context) {
         PagedIterable<VirtualNetworkRuleInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, context);
-        return inner.mapPage(inner1 -> new VirtualNetworkRuleImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new VirtualNetworkRuleImpl(inner1, this.manager()));
     }
 
     public VirtualNetworkRule getById(String id) {
