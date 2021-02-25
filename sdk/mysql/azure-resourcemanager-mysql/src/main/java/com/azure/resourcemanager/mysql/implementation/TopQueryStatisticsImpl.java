@@ -57,14 +57,14 @@ public final class TopQueryStatisticsImpl implements TopQueryStatistics {
         String resourceGroupName, String serverName, TopQueryStatisticsInput parameters) {
         PagedIterable<QueryStatisticInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, parameters);
-        return inner.mapPage(inner1 -> new QueryStatisticImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new QueryStatisticImpl(inner1, this.manager()));
     }
 
     public PagedIterable<QueryStatistic> listByServer(
         String resourceGroupName, String serverName, TopQueryStatisticsInput parameters, Context context) {
         PagedIterable<QueryStatisticInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, parameters, context);
-        return inner.mapPage(inner1 -> new QueryStatisticImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new QueryStatisticImpl(inner1, this.manager()));
     }
 
     private TopQueryStatisticsClient serviceClient() {

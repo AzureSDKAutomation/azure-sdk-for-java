@@ -57,14 +57,14 @@ public final class WaitStatisticsImpl implements WaitStatistics {
         String resourceGroupName, String serverName, WaitStatisticsInput parameters) {
         PagedIterable<WaitStatisticInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, parameters);
-        return inner.mapPage(inner1 -> new WaitStatisticImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new WaitStatisticImpl(inner1, this.manager()));
     }
 
     public PagedIterable<WaitStatistic> listByServer(
         String resourceGroupName, String serverName, WaitStatisticsInput parameters, Context context) {
         PagedIterable<WaitStatisticInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, parameters, context);
-        return inner.mapPage(inner1 -> new WaitStatisticImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new WaitStatisticImpl(inner1, this.manager()));
     }
 
     private WaitStatisticsClient serviceClient() {

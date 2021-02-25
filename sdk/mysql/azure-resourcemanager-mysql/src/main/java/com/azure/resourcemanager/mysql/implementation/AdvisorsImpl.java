@@ -54,12 +54,12 @@ public final class AdvisorsImpl implements Advisors {
 
     public PagedIterable<Advisor> listByServer(String resourceGroupName, String serverName) {
         PagedIterable<AdvisorInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName);
-        return inner.mapPage(inner1 -> new AdvisorImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new AdvisorImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Advisor> listByServer(String resourceGroupName, String serverName, Context context) {
         PagedIterable<AdvisorInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName, context);
-        return inner.mapPage(inner1 -> new AdvisorImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new AdvisorImpl(inner1, this.manager()));
     }
 
     private AdvisorsClient serviceClient() {

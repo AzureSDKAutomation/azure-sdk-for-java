@@ -74,7 +74,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
             @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({"Accept: application/json;q=0.9", "Content-Type: application/json"})
+        @Headers({"Content-Type: application/json"})
         @Post(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers"
                 + "/{serverName}/advisors/{advisorName}/createRecommendedActionSession")
@@ -88,6 +88,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
             @PathParam("serverName") String serverName,
             @PathParam("advisorName") String advisorName,
             @QueryParam("databaseName") String databaseName,
+            @HeaderParam("Accept") String accept,
             Context context);
     }
 
@@ -286,6 +287,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
             return Mono.error(new IllegalArgumentException("Parameter databaseName is required and cannot be null."));
         }
         final String apiVersion = "2018-06-01";
+        final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
@@ -298,6 +300,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
                             serverName,
                             advisorName,
                             databaseName,
+                            accept,
                             context))
             .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
     }
@@ -344,6 +347,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
             return Mono.error(new IllegalArgumentException("Parameter databaseName is required and cannot be null."));
         }
         final String apiVersion = "2018-06-01";
+        final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .createRecommendedActionSession(
@@ -354,6 +358,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
                 serverName,
                 advisorName,
                 databaseName,
+                accept,
                 context);
     }
 
