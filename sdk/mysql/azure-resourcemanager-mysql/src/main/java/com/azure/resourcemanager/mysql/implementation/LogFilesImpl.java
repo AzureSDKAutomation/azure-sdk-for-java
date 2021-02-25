@@ -28,12 +28,12 @@ public final class LogFilesImpl implements LogFiles {
 
     public PagedIterable<LogFile> listByServer(String resourceGroupName, String serverName) {
         PagedIterable<LogFileInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName);
-        return inner.mapPage(inner1 -> new LogFileImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new LogFileImpl(inner1, this.manager()));
     }
 
     public PagedIterable<LogFile> listByServer(String resourceGroupName, String serverName, Context context) {
         PagedIterable<LogFileInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName, context);
-        return inner.mapPage(inner1 -> new LogFileImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new LogFileImpl(inner1, this.manager()));
     }
 
     private LogFilesClient serviceClient() {
