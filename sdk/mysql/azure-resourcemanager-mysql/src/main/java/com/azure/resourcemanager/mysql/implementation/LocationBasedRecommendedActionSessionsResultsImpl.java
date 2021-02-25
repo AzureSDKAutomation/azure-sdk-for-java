@@ -31,12 +31,12 @@ public final class LocationBasedRecommendedActionSessionsResultsImpl
 
     public PagedIterable<RecommendationAction> list(String locationName, String operationId) {
         PagedIterable<RecommendationActionInner> inner = this.serviceClient().list(locationName, operationId);
-        return inner.mapPage(inner1 -> new RecommendationActionImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new RecommendationActionImpl(inner1, this.manager()));
     }
 
     public PagedIterable<RecommendationAction> list(String locationName, String operationId, Context context) {
         PagedIterable<RecommendationActionInner> inner = this.serviceClient().list(locationName, operationId, context);
-        return inner.mapPage(inner1 -> new RecommendationActionImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new RecommendationActionImpl(inner1, this.manager()));
     }
 
     private LocationBasedRecommendedActionSessionsResultsClient serviceClient() {

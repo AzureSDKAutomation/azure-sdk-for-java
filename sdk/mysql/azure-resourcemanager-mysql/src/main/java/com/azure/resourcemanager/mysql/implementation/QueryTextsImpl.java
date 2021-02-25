@@ -56,14 +56,14 @@ public final class QueryTextsImpl implements QueryTexts {
     public PagedIterable<QueryText> listByServer(String resourceGroupName, String serverName, List<String> queryIds) {
         PagedIterable<QueryTextInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, queryIds);
-        return inner.mapPage(inner1 -> new QueryTextImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new QueryTextImpl(inner1, this.manager()));
     }
 
     public PagedIterable<QueryText> listByServer(
         String resourceGroupName, String serverName, List<String> queryIds, Context context) {
         PagedIterable<QueryTextInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, queryIds, context);
-        return inner.mapPage(inner1 -> new QueryTextImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new QueryTextImpl(inner1, this.manager()));
     }
 
     private QueryTextsClient serviceClient() {

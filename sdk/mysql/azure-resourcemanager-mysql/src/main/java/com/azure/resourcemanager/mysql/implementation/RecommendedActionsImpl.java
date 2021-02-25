@@ -64,14 +64,14 @@ public final class RecommendedActionsImpl implements RecommendedActions {
         String resourceGroupName, String serverName, String advisorName) {
         PagedIterable<RecommendationActionInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, advisorName);
-        return inner.mapPage(inner1 -> new RecommendationActionImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new RecommendationActionImpl(inner1, this.manager()));
     }
 
     public PagedIterable<RecommendationAction> listByServer(
         String resourceGroupName, String serverName, String advisorName, String sessionId, Context context) {
         PagedIterable<RecommendationActionInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, advisorName, sessionId, context);
-        return inner.mapPage(inner1 -> new RecommendationActionImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new RecommendationActionImpl(inner1, this.manager()));
     }
 
     private RecommendedActionsClient serviceClient() {

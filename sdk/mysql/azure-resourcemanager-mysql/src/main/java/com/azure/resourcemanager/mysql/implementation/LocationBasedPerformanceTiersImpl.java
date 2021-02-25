@@ -29,12 +29,12 @@ public final class LocationBasedPerformanceTiersImpl implements LocationBasedPer
 
     public PagedIterable<PerformanceTierProperties> list(String locationName) {
         PagedIterable<PerformanceTierPropertiesInner> inner = this.serviceClient().list(locationName);
-        return inner.mapPage(inner1 -> new PerformanceTierPropertiesImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new PerformanceTierPropertiesImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PerformanceTierProperties> list(String locationName, Context context) {
         PagedIterable<PerformanceTierPropertiesInner> inner = this.serviceClient().list(locationName, context);
-        return inner.mapPage(inner1 -> new PerformanceTierPropertiesImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new PerformanceTierPropertiesImpl(inner1, this.manager()));
     }
 
     private LocationBasedPerformanceTiersClient serviceClient() {
