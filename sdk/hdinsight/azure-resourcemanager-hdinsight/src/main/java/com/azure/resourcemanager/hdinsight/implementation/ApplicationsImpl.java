@@ -12,8 +12,10 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.hdinsight.HDInsightManager;
 import com.azure.resourcemanager.hdinsight.fluent.ApplicationsClient;
 import com.azure.resourcemanager.hdinsight.fluent.models.ApplicationInner;
+import com.azure.resourcemanager.hdinsight.fluent.models.AsyncOperationResultInner;
 import com.azure.resourcemanager.hdinsight.models.Application;
 import com.azure.resourcemanager.hdinsight.models.Applications;
+import com.azure.resourcemanager.hdinsight.models.AsyncOperationResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public final class ApplicationsImpl implements Applications {
@@ -30,13 +32,13 @@ public final class ApplicationsImpl implements Applications {
 
     public PagedIterable<Application> listByCluster(String resourceGroupName, String clusterName) {
         PagedIterable<ApplicationInner> inner = this.serviceClient().listByCluster(resourceGroupName, clusterName);
-        return inner.mapPage(inner1 -> new ApplicationImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ApplicationImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Application> listByCluster(String resourceGroupName, String clusterName, Context context) {
         PagedIterable<ApplicationInner> inner =
             this.serviceClient().listByCluster(resourceGroupName, clusterName, context);
-        return inner.mapPage(inner1 -> new ApplicationImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ApplicationImpl(inner1, this.manager()));
     }
 
     public Application get(String resourceGroupName, String clusterName, String applicationName) {
@@ -69,6 +71,37 @@ public final class ApplicationsImpl implements Applications {
 
     public void delete(String resourceGroupName, String clusterName, String applicationName, Context context) {
         this.serviceClient().delete(resourceGroupName, clusterName, applicationName, context);
+    }
+
+    public AsyncOperationResult getAzureAsyncOperationStatus(
+        String resourceGroupName, String clusterName, String applicationName, String operationId) {
+        AsyncOperationResultInner inner =
+            this
+                .serviceClient()
+                .getAzureAsyncOperationStatus(resourceGroupName, clusterName, applicationName, operationId);
+        if (inner != null) {
+            return new AsyncOperationResultImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Response<AsyncOperationResult> getAzureAsyncOperationStatusWithResponse(
+        String resourceGroupName, String clusterName, String applicationName, String operationId, Context context) {
+        Response<AsyncOperationResultInner> inner =
+            this
+                .serviceClient()
+                .getAzureAsyncOperationStatusWithResponse(
+                    resourceGroupName, clusterName, applicationName, operationId, context);
+        if (inner != null) {
+            return new SimpleResponse<>(
+                inner.getRequest(),
+                inner.getStatusCode(),
+                inner.getHeaders(),
+                new AsyncOperationResultImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public Application getById(String id) {
