@@ -30,12 +30,12 @@ public final class ServerKeysImpl implements ServerKeys {
 
     public PagedIterable<ServerKey> list(String resourceGroupName, String serverName) {
         PagedIterable<ServerKeyInner> inner = this.serviceClient().list(resourceGroupName, serverName);
-        return inner.mapPage(inner1 -> new ServerKeyImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ServerKeyImpl(inner1, this.manager()));
     }
 
     public PagedIterable<ServerKey> list(String resourceGroupName, String serverName, Context context) {
         PagedIterable<ServerKeyInner> inner = this.serviceClient().list(resourceGroupName, serverName, context);
-        return inner.mapPage(inner1 -> new ServerKeyImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ServerKeyImpl(inner1, this.manager()));
     }
 
     public ServerKey get(String resourceGroupName, String serverName, String keyName) {
