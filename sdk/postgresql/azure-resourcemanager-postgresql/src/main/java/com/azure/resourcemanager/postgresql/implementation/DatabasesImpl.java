@@ -62,12 +62,12 @@ public final class DatabasesImpl implements Databases {
 
     public PagedIterable<Database> listByServer(String resourceGroupName, String serverName) {
         PagedIterable<DatabaseInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName);
-        return inner.mapPage(inner1 -> new DatabaseImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new DatabaseImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Database> listByServer(String resourceGroupName, String serverName, Context context) {
         PagedIterable<DatabaseInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName, context);
-        return inner.mapPage(inner1 -> new DatabaseImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new DatabaseImpl(inner1, this.manager()));
     }
 
     public Database getById(String id) {
