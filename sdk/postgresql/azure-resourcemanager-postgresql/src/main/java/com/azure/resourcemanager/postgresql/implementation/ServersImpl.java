@@ -62,22 +62,22 @@ public final class ServersImpl implements Servers {
 
     public PagedIterable<Server> listByResourceGroup(String resourceGroupName) {
         PagedIterable<ServerInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName);
-        return inner.mapPage(inner1 -> new ServerImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ServerImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Server> listByResourceGroup(String resourceGroupName, Context context) {
         PagedIterable<ServerInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName, context);
-        return inner.mapPage(inner1 -> new ServerImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ServerImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Server> list() {
         PagedIterable<ServerInner> inner = this.serviceClient().list();
-        return inner.mapPage(inner1 -> new ServerImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ServerImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Server> list(Context context) {
         PagedIterable<ServerInner> inner = this.serviceClient().list(context);
-        return inner.mapPage(inner1 -> new ServerImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ServerImpl(inner1, this.manager()));
     }
 
     public void restart(String resourceGroupName, String serverName) {

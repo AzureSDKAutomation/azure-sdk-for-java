@@ -85,14 +85,14 @@ public final class ServerAdministratorsImpl implements ServerAdministrators {
     public PagedIterable<ServerAdministratorResource> list(String resourceGroupName, String serverName) {
         PagedIterable<ServerAdministratorResourceInner> inner =
             this.serviceClient().list(resourceGroupName, serverName);
-        return inner.mapPage(inner1 -> new ServerAdministratorResourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ServerAdministratorResourceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<ServerAdministratorResource> list(
         String resourceGroupName, String serverName, Context context) {
         PagedIterable<ServerAdministratorResourceInner> inner =
             this.serviceClient().list(resourceGroupName, serverName, context);
-        return inner.mapPage(inner1 -> new ServerAdministratorResourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ServerAdministratorResourceImpl(inner1, this.manager()));
     }
 
     private ServerAdministratorsClient serviceClient() {
