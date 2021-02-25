@@ -603,6 +603,7 @@
         <module>sdk/mysql</module>
         <module>sdk/netapp</module>
         <module>sdk/postgresql</module>
+        <module>sdk/providerhub</module>
         <module>sdk/quantum</module>
         <module>sdk/recoveryservices</module>
         <module>sdk/redisenterprise</module>
