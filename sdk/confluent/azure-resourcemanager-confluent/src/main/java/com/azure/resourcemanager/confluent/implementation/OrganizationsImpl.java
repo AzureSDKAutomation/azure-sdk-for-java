@@ -30,23 +30,23 @@ public final class OrganizationsImpl implements Organizations {
 
     public PagedIterable<OrganizationResource> list() {
         PagedIterable<OrganizationResourceInner> inner = this.serviceClient().list();
-        return inner.mapPage(inner1 -> new OrganizationResourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new OrganizationResourceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<OrganizationResource> list(Context context) {
         PagedIterable<OrganizationResourceInner> inner = this.serviceClient().list(context);
-        return inner.mapPage(inner1 -> new OrganizationResourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new OrganizationResourceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<OrganizationResource> listByResourceGroup(String resourceGroupName) {
         PagedIterable<OrganizationResourceInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName);
-        return inner.mapPage(inner1 -> new OrganizationResourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new OrganizationResourceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<OrganizationResource> listByResourceGroup(String resourceGroupName, Context context) {
         PagedIterable<OrganizationResourceInner> inner =
             this.serviceClient().listByResourceGroup(resourceGroupName, context);
-        return inner.mapPage(inner1 -> new OrganizationResourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new OrganizationResourceImpl(inner1, this.manager()));
     }
 
     public OrganizationResource getByResourceGroup(String resourceGroupName, String organizationName) {

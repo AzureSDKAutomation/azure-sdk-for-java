@@ -24,7 +24,7 @@ public class OrganizationResourceProperties {
     /*
      * Provision states for confluent RP
      */
-    @JsonProperty(value = "provisioningState")
+    @JsonProperty(value = "provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private ProvisionState provisioningState;
 
     /*
@@ -67,17 +67,6 @@ public class OrganizationResourceProperties {
      */
     public ProvisionState provisioningState() {
         return this.provisioningState;
-    }
-
-    /**
-     * Set the provisioningState property: Provision states for confluent RP.
-     *
-     * @param provisioningState the provisioningState value to set.
-     * @return the OrganizationResourceProperties object itself.
-     */
-    public OrganizationResourceProperties withProvisioningState(ProvisionState provisioningState) {
-        this.provisioningState = provisioningState;
-        return this;
     }
 
     /**
