@@ -54,13 +54,13 @@ public final class ConfigurationsImpl implements Configurations {
 
     public PagedIterable<Configuration> listByServer(String resourceGroupName, String serverName) {
         PagedIterable<ConfigurationInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName);
-        return inner.mapPage(inner1 -> new ConfigurationImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ConfigurationImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Configuration> listByServer(String resourceGroupName, String serverName, Context context) {
         PagedIterable<ConfigurationInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, context);
-        return inner.mapPage(inner1 -> new ConfigurationImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new ConfigurationImpl(inner1, this.manager()));
     }
 
     public Configuration getById(String id) {

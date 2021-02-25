@@ -62,13 +62,13 @@ public final class FirewallRulesImpl implements FirewallRules {
 
     public PagedIterable<FirewallRule> listByServer(String resourceGroupName, String serverName) {
         PagedIterable<FirewallRuleInner> inner = this.serviceClient().listByServer(resourceGroupName, serverName);
-        return inner.mapPage(inner1 -> new FirewallRuleImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new FirewallRuleImpl(inner1, this.manager()));
     }
 
     public PagedIterable<FirewallRule> listByServer(String resourceGroupName, String serverName, Context context) {
         PagedIterable<FirewallRuleInner> inner =
             this.serviceClient().listByServer(resourceGroupName, serverName, context);
-        return inner.mapPage(inner1 -> new FirewallRuleImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new FirewallRuleImpl(inner1, this.manager()));
     }
 
     public FirewallRule getById(String id) {
