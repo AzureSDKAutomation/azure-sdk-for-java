@@ -62,22 +62,22 @@ public final class BotsImpl implements Bots {
 
     public PagedIterable<HealthBot> listByResourceGroup(String resourceGroupName) {
         PagedIterable<HealthBotInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName);
-        return inner.mapPage(inner1 -> new HealthBotImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new HealthBotImpl(inner1, this.manager()));
     }
 
     public PagedIterable<HealthBot> listByResourceGroup(String resourceGroupName, Context context) {
         PagedIterable<HealthBotInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName, context);
-        return inner.mapPage(inner1 -> new HealthBotImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new HealthBotImpl(inner1, this.manager()));
     }
 
     public PagedIterable<HealthBot> list() {
         PagedIterable<HealthBotInner> inner = this.serviceClient().list();
-        return inner.mapPage(inner1 -> new HealthBotImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new HealthBotImpl(inner1, this.manager()));
     }
 
     public PagedIterable<HealthBot> list(Context context) {
         PagedIterable<HealthBotInner> inner = this.serviceClient().list(context);
-        return inner.mapPage(inner1 -> new HealthBotImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new HealthBotImpl(inner1, this.manager()));
     }
 
     public HealthBot getById(String id) {
