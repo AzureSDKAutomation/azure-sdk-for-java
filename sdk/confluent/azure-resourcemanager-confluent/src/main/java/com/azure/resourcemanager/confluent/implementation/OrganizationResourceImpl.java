@@ -195,11 +195,6 @@ public final class OrganizationResourceImpl
         }
     }
 
-    public OrganizationResourceImpl withProvisioningState(ProvisionState provisioningState) {
-        this.innerModel().withProvisioningState(provisioningState);
-        return this;
-    }
-
     public OrganizationResourceImpl withOfferDetail(OfferDetail offerDetail) {
         this.innerModel().withOfferDetail(offerDetail);
         return this;

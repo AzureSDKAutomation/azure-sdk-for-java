@@ -155,10 +155,7 @@ public interface OrganizationResource {
          * resource to be created, but also allows for any other optional properties to be specified.
          */
         interface WithCreate
-            extends DefinitionStages.WithTags,
-                DefinitionStages.WithProvisioningState,
-                DefinitionStages.WithOfferDetail,
-                DefinitionStages.WithUserDetail {
+            extends DefinitionStages.WithTags, DefinitionStages.WithOfferDetail, DefinitionStages.WithUserDetail {
             /**
              * Executes the create request.
              *
@@ -183,16 +180,6 @@ public interface OrganizationResource {
              * @return the next definition stage.
              */
             WithCreate withTags(Map<String, String> tags);
-        }
-        /** The stage of the OrganizationResource definition allowing to specify provisioningState. */
-        interface WithProvisioningState {
-            /**
-             * Specifies the provisioningState property: Provision states for confluent RP.
-             *
-             * @param provisioningState Provision states for confluent RP.
-             * @return the next definition stage.
-             */
-            WithCreate withProvisioningState(ProvisionState provisioningState);
         }
         /** The stage of the OrganizationResource definition allowing to specify offerDetail. */
         interface WithOfferDetail {
