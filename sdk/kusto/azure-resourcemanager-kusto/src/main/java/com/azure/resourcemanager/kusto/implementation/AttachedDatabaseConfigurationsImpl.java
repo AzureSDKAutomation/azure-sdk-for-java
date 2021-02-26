@@ -32,14 +32,14 @@ public final class AttachedDatabaseConfigurationsImpl implements AttachedDatabas
     public PagedIterable<AttachedDatabaseConfiguration> listByCluster(String resourceGroupName, String clusterName) {
         PagedIterable<AttachedDatabaseConfigurationInner> inner =
             this.serviceClient().listByCluster(resourceGroupName, clusterName);
-        return inner.mapPage(inner1 -> new AttachedDatabaseConfigurationImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new AttachedDatabaseConfigurationImpl(inner1, this.manager()));
     }
 
     public PagedIterable<AttachedDatabaseConfiguration> listByCluster(
         String resourceGroupName, String clusterName, Context context) {
         PagedIterable<AttachedDatabaseConfigurationInner> inner =
             this.serviceClient().listByCluster(resourceGroupName, clusterName, context);
-        return inner.mapPage(inner1 -> new AttachedDatabaseConfigurationImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new AttachedDatabaseConfigurationImpl(inner1, this.manager()));
     }
 
     public AttachedDatabaseConfiguration get(
