@@ -11,6 +11,7 @@ import com.azure.resourcemanager.recoveryservices.fluent.models.VaultInner;
 import com.azure.resourcemanager.recoveryservices.models.IdentityData;
 import com.azure.resourcemanager.recoveryservices.models.PatchVault;
 import com.azure.resourcemanager.recoveryservices.models.Sku;
+import com.azure.resourcemanager.recoveryservices.models.SystemData;
 import com.azure.resourcemanager.recoveryservices.models.Vault;
 import com.azure.resourcemanager.recoveryservices.models.VaultProperties;
 import java.util.Collections;
@@ -58,6 +59,10 @@ public final class VaultImpl implements Vault, Vault.Definition, Vault.Update {
         return this.innerModel().sku();
     }
 
+    public SystemData systemData() {
+        return this.innerModel().systemData();
+    }
+
     public Region region() {
         return Region.fromName(this.regionName());
     }
@@ -90,8 +95,7 @@ public final class VaultImpl implements Vault, Vault.Definition, Vault.Update {
             serviceManager
                 .serviceClient()
                 .getVaults()
-                .createOrUpdateWithResponse(resourceGroupName, vaultName, this.innerModel(), Context.NONE)
-                .getValue();
+                .createOrUpdate(resourceGroupName, vaultName, this.innerModel(), Context.NONE);
         return this;
     }
 
@@ -100,8 +104,7 @@ public final class VaultImpl implements Vault, Vault.Definition, Vault.Update {
             serviceManager
                 .serviceClient()
                 .getVaults()
-                .createOrUpdateWithResponse(resourceGroupName, vaultName, this.innerModel(), context)
-                .getValue();
+                .createOrUpdate(resourceGroupName, vaultName, this.innerModel(), context);
         return this;
     }
 
@@ -118,21 +121,13 @@ public final class VaultImpl implements Vault, Vault.Definition, Vault.Update {
 
     public Vault apply() {
         this.innerObject =
-            serviceManager
-                .serviceClient()
-                .getVaults()
-                .updateWithResponse(resourceGroupName, vaultName, updateVault, Context.NONE)
-                .getValue();
+            serviceManager.serviceClient().getVaults().update(resourceGroupName, vaultName, updateVault, Context.NONE);
         return this;
     }
 
     public Vault apply(Context context) {
         this.innerObject =
-            serviceManager
-                .serviceClient()
-                .getVaults()
-                .updateWithResponse(resourceGroupName, vaultName, updateVault, context)
-                .getValue();
+            serviceManager.serviceClient().getVaults().update(resourceGroupName, vaultName, updateVault, context);
         return this;
     }
 
