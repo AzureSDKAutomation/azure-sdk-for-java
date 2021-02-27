@@ -57,11 +57,12 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
+        <module>azure-messaging-eventhubs</module>
+        <module>azure-messaging-eventhubs-checkpointstore-blob</module>
+        <module>azure-resourcemanager-eventhubs-generated</module>
         <module>microsoft-azure-eventhubs</module>
         <module>microsoft-azure-eventhubs-eph</module>
         <module>microsoft-azure-eventhubs-extensions</module>
-        <module>azure-messaging-eventhubs</module>
-        <module>azure-messaging-eventhubs-checkpointstore-blob</module>
       </modules>
     </profile>
   </profiles>
