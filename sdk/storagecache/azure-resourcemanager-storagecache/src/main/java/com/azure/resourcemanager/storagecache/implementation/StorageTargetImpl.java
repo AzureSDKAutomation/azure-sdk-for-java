@@ -8,11 +8,13 @@ import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.storagecache.StorageCacheManager;
 import com.azure.resourcemanager.storagecache.fluent.models.StorageTargetInner;
+import com.azure.resourcemanager.storagecache.models.BlobNfsTarget;
 import com.azure.resourcemanager.storagecache.models.ClfsTarget;
 import com.azure.resourcemanager.storagecache.models.NamespaceJunction;
 import com.azure.resourcemanager.storagecache.models.Nfs3Target;
 import com.azure.resourcemanager.storagecache.models.ProvisioningStateType;
 import com.azure.resourcemanager.storagecache.models.StorageTarget;
+import com.azure.resourcemanager.storagecache.models.StorageTargetType;
 import com.azure.resourcemanager.storagecache.models.SystemData;
 import com.azure.resourcemanager.storagecache.models.UnknownTarget;
 import java.util.Collections;
@@ -52,6 +54,10 @@ public final class StorageTargetImpl implements StorageTarget, StorageTarget.Def
         }
     }
 
+    public StorageTargetType targetType() {
+        return this.innerModel().targetType();
+    }
+
     public ProvisioningStateType provisioningState() {
         return this.innerModel().provisioningState();
     }
@@ -66,6 +72,10 @@ public final class StorageTargetImpl implements StorageTarget, StorageTarget.Def
 
     public UnknownTarget unknown() {
         return this.innerModel().unknown();
+    }
+
+    public BlobNfsTarget blobNfs() {
+        return this.innerModel().blobNfs();
     }
 
     public Region region() {
@@ -170,8 +180,21 @@ public final class StorageTargetImpl implements StorageTarget, StorageTarget.Def
         return this;
     }
 
+    public void dnsRefresh() {
+        serviceManager.storageTargets().dnsRefresh(resourceGroupName, cacheName, storageTargetName);
+    }
+
+    public void dnsRefresh(Context context) {
+        serviceManager.storageTargets().dnsRefresh(resourceGroupName, cacheName, storageTargetName, context);
+    }
+
     public StorageTargetImpl withJunctions(List<NamespaceJunction> junctions) {
         this.innerModel().withJunctions(junctions);
+        return this;
+    }
+
+    public StorageTargetImpl withTargetType(StorageTargetType targetType) {
+        this.innerModel().withTargetType(targetType);
         return this;
     }
 
@@ -192,6 +215,11 @@ public final class StorageTargetImpl implements StorageTarget, StorageTarget.Def
 
     public StorageTargetImpl withUnknown(UnknownTarget unknown) {
         this.innerModel().withUnknown(unknown);
+        return this;
+    }
+
+    public StorageTargetImpl withBlobNfs(BlobNfsTarget blobNfs) {
+        this.innerModel().withBlobNfs(blobNfs);
         return this;
     }
 }

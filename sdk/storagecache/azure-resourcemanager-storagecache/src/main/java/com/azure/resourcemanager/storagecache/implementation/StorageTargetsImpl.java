@@ -28,6 +28,14 @@ public final class StorageTargetsImpl implements StorageTargets {
         this.serviceManager = serviceManager;
     }
 
+    public void dnsRefresh(String resourceGroupName, String cacheName, String storageTargetName) {
+        this.serviceClient().dnsRefresh(resourceGroupName, cacheName, storageTargetName);
+    }
+
+    public void dnsRefresh(String resourceGroupName, String cacheName, String storageTargetName, Context context) {
+        this.serviceClient().dnsRefresh(resourceGroupName, cacheName, storageTargetName, context);
+    }
+
     public PagedIterable<StorageTarget> listByCache(String resourceGroupName, String cacheName) {
         PagedIterable<StorageTargetInner> inner = this.serviceClient().listByCache(resourceGroupName, cacheName);
         return Utils.mapPage(inner, inner1 -> new StorageTargetImpl(inner1, this.manager()));
