@@ -120,14 +120,14 @@ public final class DatabasePrincipalAssignmentsImpl implements DatabasePrincipal
         String resourceGroupName, String clusterName, String databaseName) {
         PagedIterable<DatabasePrincipalAssignmentInner> inner =
             this.serviceClient().list(resourceGroupName, clusterName, databaseName);
-        return inner.mapPage(inner1 -> new DatabasePrincipalAssignmentImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new DatabasePrincipalAssignmentImpl(inner1, this.manager()));
     }
 
     public PagedIterable<DatabasePrincipalAssignment> list(
         String resourceGroupName, String clusterName, String databaseName, Context context) {
         PagedIterable<DatabasePrincipalAssignmentInner> inner =
             this.serviceClient().list(resourceGroupName, clusterName, databaseName, context);
-        return inner.mapPage(inner1 -> new DatabasePrincipalAssignmentImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new DatabasePrincipalAssignmentImpl(inner1, this.manager()));
     }
 
     public DatabasePrincipalAssignment getById(String id) {
