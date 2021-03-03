@@ -13,6 +13,7 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Put;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -67,6 +68,7 @@ public final class MarketplaceAgreementsClientImpl implements MarketplaceAgreeme
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ConfluentAgreementResourceListResponse>> list(
             @HostParam("$host") String endpoint,
+            @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
             @HeaderParam("Accept") String accept,
             Context context);
@@ -77,6 +79,7 @@ public final class MarketplaceAgreementsClientImpl implements MarketplaceAgreeme
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ConfluentAgreementResourceInner>> create(
             @HostParam("$host") String endpoint,
+            @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
             @BodyParam("application/json") ConfluentAgreementResourceInner body,
             @HeaderParam("Accept") String accept,
@@ -117,7 +120,14 @@ public final class MarketplaceAgreementsClientImpl implements MarketplaceAgreeme
         final String accept = "application/json";
         return FluxUtil
             .withContext(
-                context -> service.list(this.client.getEndpoint(), this.client.getSubscriptionId(), accept, context))
+                context ->
+                    service
+                        .list(
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            this.client.getSubscriptionId(),
+                            accept,
+                            context))
             .<PagedResponse<ConfluentAgreementResourceInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -156,7 +166,12 @@ public final class MarketplaceAgreementsClientImpl implements MarketplaceAgreeme
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .list(this.client.getEndpoint(), this.client.getSubscriptionId(), accept, context)
+            .list(
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                this.client.getSubscriptionId(),
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -252,7 +267,14 @@ public final class MarketplaceAgreementsClientImpl implements MarketplaceAgreeme
         return FluxUtil
             .withContext(
                 context ->
-                    service.create(this.client.getEndpoint(), this.client.getSubscriptionId(), body, accept, context))
+                    service
+                        .create(
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            this.client.getSubscriptionId(),
+                            body,
+                            accept,
+                            context))
             .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
     }
 
@@ -286,7 +308,14 @@ public final class MarketplaceAgreementsClientImpl implements MarketplaceAgreeme
         }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.create(this.client.getEndpoint(), this.client.getSubscriptionId(), body, accept, context);
+        return service
+            .create(
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                this.client.getSubscriptionId(),
+                body,
+                accept,
+                context);
     }
 
     /**
