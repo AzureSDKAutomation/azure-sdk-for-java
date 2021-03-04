@@ -135,6 +135,13 @@ public final class ActiveDirectory {
     @JsonProperty(value = "ldapOverTLS")
     private Boolean ldapOverTls;
 
+    /*
+     * If enabled, NFS client local users can also (in addition to LDAP users)
+     * access the NFS volumes.
+     */
+    @JsonProperty(value = "allowLocalNfsFSUsersWithLdap")
+    private Boolean allowLocalNfsFSUsersWithLdap;
+
     /**
      * Get the activeDirectoryId property: Id of the Active Directory.
      *
@@ -490,6 +497,28 @@ public final class ActiveDirectory {
      */
     public ActiveDirectory withLdapOverTls(Boolean ldapOverTls) {
         this.ldapOverTls = ldapOverTls;
+        return this;
+    }
+
+    /**
+     * Get the allowLocalNfsFSUsersWithLdap property: If enabled, NFS client local users can also (in addition to LDAP
+     * users) access the NFS volumes.
+     *
+     * @return the allowLocalNfsFSUsersWithLdap value.
+     */
+    public Boolean allowLocalNfsFSUsersWithLdap() {
+        return this.allowLocalNfsFSUsersWithLdap;
+    }
+
+    /**
+     * Set the allowLocalNfsFSUsersWithLdap property: If enabled, NFS client local users can also (in addition to LDAP
+     * users) access the NFS volumes.
+     *
+     * @param allowLocalNfsFSUsersWithLdap the allowLocalNfsFSUsersWithLdap value to set.
+     * @return the ActiveDirectory object itself.
+     */
+    public ActiveDirectory withAllowLocalNfsFSUsersWithLdap(Boolean allowLocalNfsFSUsersWithLdap) {
+        this.allowLocalNfsFSUsersWithLdap = allowLocalNfsFSUsersWithLdap;
         return this;
     }
 

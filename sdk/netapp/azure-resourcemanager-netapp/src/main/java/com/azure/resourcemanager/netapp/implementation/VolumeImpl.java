@@ -153,6 +153,10 @@ public final class VolumeImpl implements Volume, Volume.Definition, Volume.Updat
         return this.innerModel().encryptionKeySource();
     }
 
+    public Boolean ldapEnabled() {
+        return this.innerModel().ldapEnabled();
+    }
+
     public Region region() {
         return Region.fromName(this.regionName());
     }
@@ -441,6 +445,11 @@ public final class VolumeImpl implements Volume, Volume.Definition, Volume.Updat
 
     public VolumeImpl withEncryptionKeySource(String encryptionKeySource) {
         this.innerModel().withEncryptionKeySource(encryptionKeySource);
+        return this;
+    }
+
+    public VolumeImpl withLdapEnabled(Boolean ldapEnabled) {
+        this.innerModel().withLdapEnabled(ldapEnabled);
         return this;
     }
 

@@ -62,6 +62,10 @@ public final class BackupImpl implements Backup, Backup.Definition, Backup.Updat
         return this.innerModel().failureReason();
     }
 
+    public String volumeName() {
+        return this.innerModel().volumeName();
+    }
+
     public Region region() {
         return Region.fromName(this.regionName());
     }
