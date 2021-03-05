@@ -54,7 +54,7 @@ public interface SystemTopic {
     IdentityInfo identity();
 
     /**
-     * Gets the systemData property: The system metadata relating to this resource.
+     * Gets the systemData property: The system metadata relating to System Topic resource.
      *
      * @return the systemData value.
      */
