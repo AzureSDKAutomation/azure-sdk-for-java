@@ -30,13 +30,13 @@ public final class DataExportsImpl implements DataExports {
 
     public PagedIterable<DataExport> listByWorkspace(String resourceGroupName, String workspaceName) {
         PagedIterable<DataExportInner> inner = this.serviceClient().listByWorkspace(resourceGroupName, workspaceName);
-        return inner.mapPage(inner1 -> new DataExportImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new DataExportImpl(inner1, this.manager()));
     }
 
     public PagedIterable<DataExport> listByWorkspace(String resourceGroupName, String workspaceName, Context context) {
         PagedIterable<DataExportInner> inner =
             this.serviceClient().listByWorkspace(resourceGroupName, workspaceName, context);
-        return inner.mapPage(inner1 -> new DataExportImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new DataExportImpl(inner1, this.manager()));
     }
 
     public DataExport get(String resourceGroupName, String workspaceName, String dataExportName) {

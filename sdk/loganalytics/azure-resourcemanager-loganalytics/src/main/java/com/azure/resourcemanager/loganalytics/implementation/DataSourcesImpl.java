@@ -64,14 +64,14 @@ public final class DataSourcesImpl implements DataSources {
     public PagedIterable<DataSource> listByWorkspace(String resourceGroupName, String workspaceName, String filter) {
         PagedIterable<DataSourceInner> inner =
             this.serviceClient().listByWorkspace(resourceGroupName, workspaceName, filter);
-        return inner.mapPage(inner1 -> new DataSourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new DataSourceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<DataSource> listByWorkspace(
         String resourceGroupName, String workspaceName, String filter, String skiptoken, Context context) {
         PagedIterable<DataSourceInner> inner =
             this.serviceClient().listByWorkspace(resourceGroupName, workspaceName, filter, skiptoken, context);
-        return inner.mapPage(inner1 -> new DataSourceImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new DataSourceImpl(inner1, this.manager()));
     }
 
     public DataSource getById(String id) {

@@ -17,52 +17,26 @@ public final class StorageAccount {
     /*
      * The Azure Resource Manager ID of the storage account resource.
      */
-    @JsonProperty(value = "id", required = true)
-    private String id;
-
-    /*
-     * The storage account key.
-     */
-    @JsonProperty(value = "key", required = true)
-    private String key;
+    @JsonProperty(value = "resourceId", required = true)
+    private String resourceId;
 
     /**
-     * Get the id property: The Azure Resource Manager ID of the storage account resource.
+     * Get the resourceId property: The Azure Resource Manager ID of the storage account resource.
      *
-     * @return the id value.
+     * @return the resourceId value.
      */
-    public String id() {
-        return this.id;
+    public String resourceId() {
+        return this.resourceId;
     }
 
     /**
-     * Set the id property: The Azure Resource Manager ID of the storage account resource.
+     * Set the resourceId property: The Azure Resource Manager ID of the storage account resource.
      *
-     * @param id the id value to set.
+     * @param resourceId the resourceId value to set.
      * @return the StorageAccount object itself.
      */
-    public StorageAccount withId(String id) {
-        this.id = id;
-        return this;
-    }
-
-    /**
-     * Get the key property: The storage account key.
-     *
-     * @return the key value.
-     */
-    public String key() {
-        return this.key;
-    }
-
-    /**
-     * Set the key property: The storage account key.
-     *
-     * @param key the key value to set.
-     * @return the StorageAccount object itself.
-     */
-    public StorageAccount withKey(String key) {
-        this.key = key;
+    public StorageAccount withResourceId(String resourceId) {
+        this.resourceId = resourceId;
         return this;
     }
 
@@ -72,15 +46,10 @@ public final class StorageAccount {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (id() == null) {
+        if (resourceId() == null) {
             throw logger
                 .logExceptionAsError(
-                    new IllegalArgumentException("Missing required property id in model StorageAccount"));
-        }
-        if (key() == null) {
-            throw logger
-                .logExceptionAsError(
-                    new IllegalArgumentException("Missing required property key in model StorageAccount"));
+                    new IllegalArgumentException("Missing required property resourceId in model StorageAccount"));
         }
     }
 }
