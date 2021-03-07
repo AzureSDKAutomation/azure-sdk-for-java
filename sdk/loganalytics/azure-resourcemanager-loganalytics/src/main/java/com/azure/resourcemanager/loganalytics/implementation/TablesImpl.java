@@ -30,13 +30,13 @@ public final class TablesImpl implements Tables {
 
     public PagedIterable<Table> listByWorkspace(String resourceGroupName, String workspaceName) {
         PagedIterable<TableInner> inner = this.serviceClient().listByWorkspace(resourceGroupName, workspaceName);
-        return inner.mapPage(inner1 -> new TableImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new TableImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Table> listByWorkspace(String resourceGroupName, String workspaceName, Context context) {
         PagedIterable<TableInner> inner =
             this.serviceClient().listByWorkspace(resourceGroupName, workspaceName, context);
-        return inner.mapPage(inner1 -> new TableImpl(inner1, this.manager()));
+        return Utils.mapPage(inner, inner1 -> new TableImpl(inner1, this.manager()));
     }
 
     public Table update(String resourceGroupName, String workspaceName, String tableName, TableInner parameters) {
