@@ -589,12 +589,13 @@
         <module>sdk/boms</module>
         <module>sdk/cognitiveservices</module>
         <module>sdk/communication</module>
+        <module>sdk/compute</module>
         <module>sdk/confluent</module>
         <module>sdk/core</module>
         <module>sdk/cosmos</module>
         <module>sdk/costmanagement</module>
-        <module>sdk/deviceupdate</module>
         <module>sdk/datadog</module>
+        <module>sdk/deviceupdate</module>
         <module>sdk/digitaltwins</module>
         <module>sdk/eventgrid</module>
         <module>sdk/eventhubs</module>
