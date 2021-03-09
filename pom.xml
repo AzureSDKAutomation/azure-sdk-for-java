@@ -593,8 +593,8 @@
         <module>sdk/core</module>
         <module>sdk/cosmos</module>
         <module>sdk/costmanagement</module>
-        <module>sdk/deviceupdate</module>
         <module>sdk/datadog</module>
+        <module>sdk/deviceupdate</module>
         <module>sdk/digitaltwins</module>
         <module>sdk/eventgrid</module>
         <module>sdk/eventhubs</module>
@@ -627,6 +627,7 @@
         <module>sdk/sqlvirtualmachine</module>
         <module>sdk/storage</module>
         <module>sdk/storagecache</module>
+        <module>sdk/storagepool</module>
         <module>sdk/synapse</module>
         <module>sdk/tables</module>
         <module>sdk/template</module>
