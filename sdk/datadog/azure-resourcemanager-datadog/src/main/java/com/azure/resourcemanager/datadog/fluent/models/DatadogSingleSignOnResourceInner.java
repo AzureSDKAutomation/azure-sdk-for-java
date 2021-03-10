@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.management.ProxyResource;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.datadog.models.DatadogSingleSignOnProperties;
+import com.azure.resourcemanager.datadog.models.SystemData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,6 +22,12 @@ public final class DatadogSingleSignOnResourceInner extends ProxyResource {
      */
     @JsonProperty(value = "properties")
     private DatadogSingleSignOnProperties properties;
+
+    /*
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get the properties property: The properties property.
@@ -43,6 +50,15 @@ public final class DatadogSingleSignOnResourceInner extends ProxyResource {
     }
 
     /**
+     * Get the systemData property: Metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -50,6 +66,9 @@ public final class DatadogSingleSignOnResourceInner extends ProxyResource {
     public void validate() {
         if (properties() != null) {
             properties().validate();
+        }
+        if (systemData() != null) {
+            systemData().validate();
         }
     }
 }

@@ -8,6 +8,7 @@ import com.azure.core.util.Context;
 import com.azure.resourcemanager.datadog.fluent.models.MonitoringTagRulesInner;
 import com.azure.resourcemanager.datadog.models.MonitoringTagRules;
 import com.azure.resourcemanager.datadog.models.MonitoringTagRulesProperties;
+import com.azure.resourcemanager.datadog.models.SystemData;
 
 public final class MonitoringTagRulesImpl
     implements MonitoringTagRules, MonitoringTagRules.Definition, MonitoringTagRules.Update {
@@ -29,6 +30,10 @@ public final class MonitoringTagRulesImpl
 
     public MonitoringTagRulesProperties properties() {
         return this.innerModel().properties();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public MonitoringTagRulesInner innerModel() {

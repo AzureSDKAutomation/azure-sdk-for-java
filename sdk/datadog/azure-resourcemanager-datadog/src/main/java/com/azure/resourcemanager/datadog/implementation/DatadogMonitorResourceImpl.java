@@ -21,6 +21,7 @@ import com.azure.resourcemanager.datadog.models.MonitorProperties;
 import com.azure.resourcemanager.datadog.models.MonitorUpdateProperties;
 import com.azure.resourcemanager.datadog.models.MonitoredResource;
 import com.azure.resourcemanager.datadog.models.ResourceSku;
+import com.azure.resourcemanager.datadog.models.SystemData;
 import java.util.Collections;
 import java.util.Map;
 
@@ -65,6 +66,10 @@ public final class DatadogMonitorResourceImpl
 
     public IdentityProperties identity() {
         return this.innerModel().identity();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public Region region() {

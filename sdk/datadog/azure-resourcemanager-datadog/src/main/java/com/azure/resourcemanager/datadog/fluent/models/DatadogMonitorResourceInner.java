@@ -10,6 +10,7 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.datadog.models.IdentityProperties;
 import com.azure.resourcemanager.datadog.models.MonitorProperties;
 import com.azure.resourcemanager.datadog.models.ResourceSku;
+import com.azure.resourcemanager.datadog.models.SystemData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -36,6 +37,12 @@ public final class DatadogMonitorResourceInner extends Resource {
      */
     @JsonProperty(value = "identity")
     private IdentityProperties identity;
+
+    /*
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get the sku property: The sku property.
@@ -97,6 +104,15 @@ public final class DatadogMonitorResourceInner extends Resource {
         return this;
     }
 
+    /**
+     * Get the systemData property: Metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
+
     /** {@inheritDoc} */
     @Override
     public DatadogMonitorResourceInner withLocation(String location) {
@@ -125,6 +141,9 @@ public final class DatadogMonitorResourceInner extends Resource {
         }
         if (identity() != null) {
             identity().validate();
+        }
+        if (systemData() != null) {
+            systemData().validate();
         }
     }
 }

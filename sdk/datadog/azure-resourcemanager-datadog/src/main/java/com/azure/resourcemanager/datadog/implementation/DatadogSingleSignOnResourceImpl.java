@@ -8,6 +8,7 @@ import com.azure.core.util.Context;
 import com.azure.resourcemanager.datadog.fluent.models.DatadogSingleSignOnResourceInner;
 import com.azure.resourcemanager.datadog.models.DatadogSingleSignOnProperties;
 import com.azure.resourcemanager.datadog.models.DatadogSingleSignOnResource;
+import com.azure.resourcemanager.datadog.models.SystemData;
 
 public final class DatadogSingleSignOnResourceImpl
     implements DatadogSingleSignOnResource, DatadogSingleSignOnResource.Definition, DatadogSingleSignOnResource.Update {
@@ -29,6 +30,10 @@ public final class DatadogSingleSignOnResourceImpl
 
     public DatadogSingleSignOnProperties properties() {
         return this.innerModel().properties();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public DatadogSingleSignOnResourceInner innerModel() {
