@@ -6,7 +6,6 @@ package com.azure.resourcemanager.netapp.implementation;
 
 import com.azure.core.management.Region;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.netapp.NetAppFilesManager;
 import com.azure.resourcemanager.netapp.fluent.models.NetAppAccountInner;
 import com.azure.resourcemanager.netapp.models.AccountEncryption;
 import com.azure.resourcemanager.netapp.models.ActiveDirectory;
@@ -20,7 +19,7 @@ import java.util.Map;
 public final class NetAppAccountImpl implements NetAppAccount, NetAppAccount.Definition, NetAppAccount.Update {
     private NetAppAccountInner innerObject;
 
-    private final NetAppFilesManager serviceManager;
+    private final com.azure.resourcemanager.netapp.NetAppFilesManager serviceManager;
 
     public String id() {
         return this.innerModel().id();
@@ -80,7 +79,7 @@ public final class NetAppAccountImpl implements NetAppAccount, NetAppAccount.Def
         return this.innerObject;
     }
 
-    private NetAppFilesManager manager() {
+    private com.azure.resourcemanager.netapp.NetAppFilesManager manager() {
         return this.serviceManager;
     }
 
@@ -113,7 +112,7 @@ public final class NetAppAccountImpl implements NetAppAccount, NetAppAccount.Def
         return this;
     }
 
-    NetAppAccountImpl(String name, NetAppFilesManager serviceManager) {
+    NetAppAccountImpl(String name, com.azure.resourcemanager.netapp.NetAppFilesManager serviceManager) {
         this.innerObject = new NetAppAccountInner();
         this.serviceManager = serviceManager;
         this.accountName = name;
@@ -139,7 +138,8 @@ public final class NetAppAccountImpl implements NetAppAccount, NetAppAccount.Def
         return this;
     }
 
-    NetAppAccountImpl(NetAppAccountInner innerObject, NetAppFilesManager serviceManager) {
+    NetAppAccountImpl(
+        NetAppAccountInner innerObject, com.azure.resourcemanager.netapp.NetAppFilesManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
