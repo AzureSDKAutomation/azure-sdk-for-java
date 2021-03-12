@@ -16,7 +16,8 @@ public final class PrivateEndpointConnectionProperties extends ConnectionPropert
 
     /** {@inheritDoc} */
     @Override
-    public PrivateEndpointConnectionProperties withPrivateEndpoint(PrivateEndpoint privateEndpoint) {
+    public PrivateEndpointConnectionProperties withPrivateEndpoint(
+        ConnectionPropertiesPrivateEndpoint privateEndpoint) {
         super.withPrivateEndpoint(privateEndpoint);
         return this;
     }
@@ -31,7 +32,7 @@ public final class PrivateEndpointConnectionProperties extends ConnectionPropert
     /** {@inheritDoc} */
     @Override
     public PrivateEndpointConnectionProperties withPrivateLinkServiceConnectionState(
-        ConnectionState privateLinkServiceConnectionState) {
+        ConnectionPropertiesPrivateLinkServiceConnectionState privateLinkServiceConnectionState) {
         super.withPrivateLinkServiceConnectionState(privateLinkServiceConnectionState);
         return this;
     }
