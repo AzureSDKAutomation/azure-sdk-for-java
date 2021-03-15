@@ -6,8 +6,8 @@ package com.azure.resourcemanager.eventgrid.models;
 
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.eventgrid.fluent.models.PrivateEndpointConnectionInner;
 import com.azure.resourcemanager.eventgrid.fluent.models.TopicInner;
 import java.util.List;
 import java.util.Map;
@@ -217,7 +217,6 @@ public interface Topic {
                 DefinitionStages.WithIdentity,
                 DefinitionStages.WithKind,
                 DefinitionStages.WithExtendedLocation,
-                DefinitionStages.WithPrivateEndpointConnections,
                 DefinitionStages.WithInputSchema,
                 DefinitionStages.WithInputSchemaMapping,
                 DefinitionStages.WithPublicNetworkAccess,
@@ -286,16 +285,6 @@ public interface Topic {
              * @return the next definition stage.
              */
             WithCreate withExtendedLocation(ExtendedLocation extendedLocation);
-        }
-        /** The stage of the Topic definition allowing to specify privateEndpointConnections. */
-        interface WithPrivateEndpointConnections {
-            /**
-             * Specifies the privateEndpointConnections property: The privateEndpointConnections property..
-             *
-             * @param privateEndpointConnections The privateEndpointConnections property.
-             * @return the next definition stage.
-             */
-            WithCreate withPrivateEndpointConnections(List<PrivateEndpointConnectionInner> privateEndpointConnections);
         }
         /** The stage of the Topic definition allowing to specify inputSchema. */
         interface WithInputSchema {

@@ -5,6 +5,7 @@
 package com.azure.resourcemanager.eventgrid.models;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.eventgrid.fluent.models.SystemTopicInner;
 import java.util.Map;
@@ -54,7 +55,7 @@ public interface SystemTopic {
     IdentityInfo identity();
 
     /**
-     * Gets the systemData property: The system metadata relating to this resource.
+     * Gets the systemData property: The system metadata relating to System Topic resource.
      *
      * @return the systemData value.
      */

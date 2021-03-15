@@ -4,6 +4,7 @@
 
 package com.azure.resourcemanager.eventgrid.models;
 
+import com.azure.core.management.SystemData;
 import com.azure.resourcemanager.eventgrid.fluent.models.PartnerTopicInner;
 import java.time.OffsetDateTime;
 import java.util.Map;

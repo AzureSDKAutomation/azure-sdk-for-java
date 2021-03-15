@@ -7,6 +7,7 @@ package com.azure.resourcemanager.eventgrid.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.eventgrid.models.ExtendedLocation;
 import com.azure.resourcemanager.eventgrid.models.IdentityInfo;
@@ -16,7 +17,6 @@ import com.azure.resourcemanager.eventgrid.models.InputSchemaMapping;
 import com.azure.resourcemanager.eventgrid.models.PublicNetworkAccess;
 import com.azure.resourcemanager.eventgrid.models.ResourceKind;
 import com.azure.resourcemanager.eventgrid.models.ResourceSku;
-import com.azure.resourcemanager.eventgrid.models.SystemData;
 import com.azure.resourcemanager.eventgrid.models.TopicProvisioningState;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,7 +62,7 @@ public class TopicInner extends Resource {
     /*
      * The privateEndpointConnections property.
      */
-    @JsonProperty(value = "properties.privateEndpointConnections")
+    @JsonProperty(value = "properties.privateEndpointConnections", access = JsonProperty.Access.WRITE_ONLY)
     private List<PrivateEndpointConnectionInner> privateEndpointConnections;
 
     /*
@@ -215,17 +215,6 @@ public class TopicInner extends Resource {
     }
 
     /**
-     * Set the privateEndpointConnections property: The privateEndpointConnections property.
-     *
-     * @param privateEndpointConnections the privateEndpointConnections value to set.
-     * @return the TopicInner object itself.
-     */
-    public TopicInner withPrivateEndpointConnections(List<PrivateEndpointConnectionInner> privateEndpointConnections) {
-        this.privateEndpointConnections = privateEndpointConnections;
-        return this;
-    }
-
-    /**
      * Get the provisioningState property: Provisioning state of the topic.
      *
      * @return the provisioningState value.
@@ -372,9 +361,6 @@ public class TopicInner extends Resource {
         }
         if (extendedLocation() != null) {
             extendedLocation().validate();
-        }
-        if (systemData() != null) {
-            systemData().validate();
         }
         if (privateEndpointConnections() != null) {
             privateEndpointConnections().forEach(e -> e.validate());

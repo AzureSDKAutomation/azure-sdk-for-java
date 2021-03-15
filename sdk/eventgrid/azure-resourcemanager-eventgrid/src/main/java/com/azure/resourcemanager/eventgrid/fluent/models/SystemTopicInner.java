@@ -7,10 +7,10 @@ package com.azure.resourcemanager.eventgrid.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.eventgrid.models.IdentityInfo;
 import com.azure.resourcemanager.eventgrid.models.ResourceProvisioningState;
-import com.azure.resourcemanager.eventgrid.models.SystemData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class SystemTopicInner extends Resource {
     private IdentityInfo identity;
 
     /*
-     * The system metadata relating to this resource.
+     * The system metadata relating to System Topic resource.
      */
     @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
     private SystemData systemData;
@@ -78,7 +78,7 @@ public class SystemTopicInner extends Resource {
     }
 
     /**
-     * Get the systemData property: The system metadata relating to this resource.
+     * Get the systemData property: The system metadata relating to System Topic resource.
      *
      * @return the systemData value.
      */
@@ -166,9 +166,6 @@ public class SystemTopicInner extends Resource {
     public void validate() {
         if (identity() != null) {
             identity().validate();
-        }
-        if (systemData() != null) {
-            systemData().validate();
         }
     }
 }
