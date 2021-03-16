@@ -595,6 +595,7 @@
         <module>sdk/cosmos</module>
         <module>sdk/costmanagement</module>
         <module>sdk/datadog</module>
+        <module>sdk/deviceprovisioningservices</module>
         <module>sdk/deviceupdate</module>
         <module>sdk/digitaltwins</module>
         <module>sdk/eventgrid</module>
