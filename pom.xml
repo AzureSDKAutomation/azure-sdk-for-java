@@ -606,6 +606,7 @@
         <module>sdk/identity</module>
         <module>sdk/iothub</module>
         <module>sdk/keyvault</module>
+        <module>sdk/kubernetesconfiguration</module>
         <module>sdk/kusto</module>
         <module>sdk/loganalytics</module>
         <module>sdk/mediaservices</module>
