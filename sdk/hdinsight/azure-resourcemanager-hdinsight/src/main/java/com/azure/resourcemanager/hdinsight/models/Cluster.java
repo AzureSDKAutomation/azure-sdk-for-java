@@ -4,9 +4,11 @@
 
 package com.azure.resourcemanager.hdinsight.models;
 
+import com.azure.core.http.rest.Response;
 import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.hdinsight.fluent.models.ClusterInner;
+import java.util.List;
 import java.util.Map;
 
 /** An immutable client-side representation of Cluster. */
@@ -52,6 +54,13 @@ public interface Cluster {
      * @return the etag value.
      */
     String etag();
+
+    /**
+     * Gets the zones property: The availability zones.
+     *
+     * @return the zones value.
+     */
+    List<String> zones();
 
     /**
      * Gets the properties property: The properties of the cluster.
@@ -114,6 +123,7 @@ public interface Cluster {
         interface WithCreate
             extends DefinitionStages.WithLocation,
                 DefinitionStages.WithTags,
+                DefinitionStages.WithZones,
                 DefinitionStages.WithProperties,
                 DefinitionStages.WithIdentity {
             /**
@@ -158,6 +168,16 @@ public interface Cluster {
              * @return the next definition stage.
              */
             WithCreate withTags(Map<String, String> tags);
+        }
+        /** The stage of the Cluster definition allowing to specify zones. */
+        interface WithZones {
+            /**
+             * Specifies the zones property: The availability zones..
+             *
+             * @param zones The availability zones.
+             * @return the next definition stage.
+             */
+            WithCreate withZones(List<String> zones);
         }
         /** The stage of the Cluster definition allowing to specify properties. */
         interface WithProperties {
@@ -231,4 +251,108 @@ public interface Cluster {
      * @return the refreshed resource.
      */
     Cluster refresh(Context context);
+
+    /**
+     * Rotate disk encryption key of the specified HDInsight cluster.
+     *
+     * @param parameters The parameters for the disk encryption operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void rotateDiskEncryptionKey(ClusterDiskEncryptionParameters parameters);
+
+    /**
+     * Rotate disk encryption key of the specified HDInsight cluster.
+     *
+     * @param parameters The parameters for the disk encryption operation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void rotateDiskEncryptionKey(ClusterDiskEncryptionParameters parameters, Context context);
+
+    /**
+     * Gets the gateway settings for the specified cluster.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the gateway settings for the specified cluster.
+     */
+    GatewaySettings getGatewaySettings();
+
+    /**
+     * Gets the gateway settings for the specified cluster.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the gateway settings for the specified cluster.
+     */
+    Response<GatewaySettings> getGatewaySettingsWithResponse(Context context);
+
+    /**
+     * Configures the gateway settings on the specified cluster.
+     *
+     * @param parameters The cluster configurations.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void updateGatewaySettings(UpdateGatewaySettingsParameters parameters);
+
+    /**
+     * Configures the gateway settings on the specified cluster.
+     *
+     * @param parameters The cluster configurations.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void updateGatewaySettings(UpdateGatewaySettingsParameters parameters, Context context);
+
+    /**
+     * Updates the cluster identity certificate.
+     *
+     * @param parameters The cluster configurations.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void updateIdentityCertificate(UpdateClusterIdentityCertificateParameters parameters);
+
+    /**
+     * Updates the cluster identity certificate.
+     *
+     * @param parameters The cluster configurations.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void updateIdentityCertificate(UpdateClusterIdentityCertificateParameters parameters, Context context);
+
+    /**
+     * Executes script actions on the specified HDInsight cluster.
+     *
+     * @param parameters The parameters for executing script actions.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void executeScriptActions(ExecuteScriptActionParameters parameters);
+
+    /**
+     * Executes script actions on the specified HDInsight cluster.
+     *
+     * @param parameters The parameters for executing script actions.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void executeScriptActions(ExecuteScriptActionParameters parameters, Context context);
 }
