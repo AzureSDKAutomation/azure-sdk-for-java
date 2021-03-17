@@ -11,6 +11,7 @@ import com.azure.resourcemanager.hdinsight.models.ClusterGetProperties;
 import com.azure.resourcemanager.hdinsight.models.ClusterIdentity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import java.util.Map;
 
 /** The HDInsight cluster. */
@@ -23,6 +24,12 @@ public final class ClusterInner extends Resource {
      */
     @JsonProperty(value = "etag")
     private String etag;
+
+    /*
+     * The availability zones.
+     */
+    @JsonProperty(value = "zones")
+    private List<String> zones;
 
     /*
      * The properties of the cluster.
@@ -53,6 +60,26 @@ public final class ClusterInner extends Resource {
      */
     public ClusterInner withEtag(String etag) {
         this.etag = etag;
+        return this;
+    }
+
+    /**
+     * Get the zones property: The availability zones.
+     *
+     * @return the zones value.
+     */
+    public List<String> zones() {
+        return this.zones;
+    }
+
+    /**
+     * Set the zones property: The availability zones.
+     *
+     * @param zones the zones value to set.
+     * @return the ClusterInner object itself.
+     */
+    public ClusterInner withZones(List<String> zones) {
+        this.zones = zones;
         return this;
     }
 
