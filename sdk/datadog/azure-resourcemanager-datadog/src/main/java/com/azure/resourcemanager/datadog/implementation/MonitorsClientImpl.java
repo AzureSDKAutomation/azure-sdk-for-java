@@ -333,7 +333,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the api keys for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -390,7 +390,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the api keys for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -445,7 +445,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the api keys for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -462,7 +462,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the api keys for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -481,7 +481,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the api keys for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -496,7 +496,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the api keys for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -513,7 +513,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -561,7 +561,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -607,7 +607,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -630,7 +630,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -645,7 +645,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -662,7 +662,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Set the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -715,7 +715,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Set the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @param context The context to associate with this operation.
@@ -766,7 +766,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Set the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -783,7 +783,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Set the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -800,7 +800,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Set the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -815,7 +815,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Set the default api key.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @param context The context to associate with this operation.
@@ -833,7 +833,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the hosts for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -890,7 +890,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the hosts for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -945,7 +945,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the hosts for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -962,7 +962,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the hosts for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -980,7 +980,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the hosts for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -995,7 +995,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the hosts for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1011,7 +1011,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all Azure resources associated to the same Datadog organization as the target resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1068,7 +1068,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all Azure resources associated to the same Datadog organization as the target resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1123,7 +1123,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all Azure resources associated to the same Datadog organization as the target resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1140,7 +1140,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all Azure resources associated to the same Datadog organization as the target resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1159,7 +1159,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all Azure resources associated to the same Datadog organization as the target resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1174,7 +1174,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all Azure resources associated to the same Datadog organization as the target resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1191,7 +1191,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the resources currently being monitored by the Datadog monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1248,7 +1248,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the resources currently being monitored by the Datadog monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1303,7 +1303,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the resources currently being monitored by the Datadog monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1321,7 +1321,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the resources currently being monitored by the Datadog monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1340,7 +1340,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the resources currently being monitored by the Datadog monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1355,7 +1355,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List the resources currently being monitored by the Datadog monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1512,7 +1512,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all monitors under the specified resource group.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1564,7 +1564,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all monitors under the specified resource group.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1614,7 +1614,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all monitors under the specified resource group.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1630,7 +1630,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all monitors under the specified resource group.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1647,7 +1647,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all monitors under the specified resource group.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1661,7 +1661,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * List all monitors under the specified resource group.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1676,7 +1676,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the properties of a specific monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1724,7 +1724,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the properties of a specific monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1770,7 +1770,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the properties of a specific monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1793,7 +1793,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the properties of a specific monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1808,7 +1808,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Get the properties of a specific monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1825,7 +1825,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1878,7 +1878,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @param context The context to associate with this operation.
@@ -1929,7 +1929,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1954,7 +1954,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @param context The context to associate with this operation.
@@ -1981,7 +1981,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1998,7 +1998,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @param context The context to associate with this operation.
@@ -2016,7 +2016,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2035,7 +2035,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2053,7 +2053,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @param context The context to associate with this operation.
@@ -2073,7 +2073,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2090,7 +2090,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2106,7 +2106,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Create a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The body parameter.
      * @param context The context to associate with this operation.
@@ -2124,7 +2124,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Update a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The parameters for a PATCH request to a monitor resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2177,7 +2177,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Update a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The parameters for a PATCH request to a monitor resource.
      * @param context The context to associate with this operation.
@@ -2228,7 +2228,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Update a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The parameters for a PATCH request to a monitor resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2253,7 +2253,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Update a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2277,7 +2277,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Update a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2293,7 +2293,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Update a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param body The parameters for a PATCH request to a monitor resource.
      * @param context The context to associate with this operation.
@@ -2311,7 +2311,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2358,7 +2358,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2404,7 +2404,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2422,7 +2422,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2443,7 +2443,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2458,7 +2458,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2475,7 +2475,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2490,7 +2490,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2508,7 +2508,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2522,7 +2522,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Delete a monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2537,7 +2537,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Refresh the set password link and return a latest one.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2585,7 +2585,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Refresh the set password link and return a latest one.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2631,7 +2631,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Refresh the set password link and return a latest one.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2655,7 +2655,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Refresh the set password link and return a latest one.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -2670,7 +2670,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
     /**
      * Refresh the set password link and return a latest one.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

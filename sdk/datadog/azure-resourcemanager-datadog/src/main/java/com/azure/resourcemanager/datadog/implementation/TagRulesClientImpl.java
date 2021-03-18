@@ -122,7 +122,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * List the tag rules for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -179,7 +179,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * List the tag rules for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -234,7 +234,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * List the tag rules for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -250,7 +250,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * List the tag rules for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -269,7 +269,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * List the tag rules for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -284,7 +284,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * List the tag rules for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -300,7 +300,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Create or update a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @param body Capture logs and metrics of Azure resources based on ARM tags.
@@ -358,7 +358,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Create or update a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @param body Capture logs and metrics of Azure resources based on ARM tags.
@@ -418,7 +418,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Create or update a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @param body Capture logs and metrics of Azure resources based on ARM tags.
@@ -444,7 +444,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Create or update a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -470,7 +470,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Create or update a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -487,7 +487,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Create or update a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @param body Capture logs and metrics of Azure resources based on ARM tags.
@@ -510,7 +510,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Get a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -563,7 +563,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Get a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @param context The context to associate with this operation.
@@ -614,7 +614,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Get a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -638,7 +638,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Get a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -654,7 +654,7 @@ public final class TagRulesClientImpl implements TagRulesClient {
     /**
      * Get a tag rule set for a given monitor resource.
      *
-     * @param resourceGroupName The name of the resource group to which the Datadog resource belongs.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param monitorName Monitor resource name.
      * @param ruleSetName Rule set name.
      * @param context The context to associate with this operation.
