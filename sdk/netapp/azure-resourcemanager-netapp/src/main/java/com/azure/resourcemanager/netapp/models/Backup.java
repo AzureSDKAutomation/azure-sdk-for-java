@@ -76,11 +76,11 @@ public interface Backup {
     String label();
 
     /**
-     * Gets the backupType property: Type of backup adhoc or scheduled.
+     * Gets the backupType property: Type of backup Manual or Scheduled.
      *
      * @return the backupType value.
      */
-    String backupType();
+    BackupType backupType();
 
     /**
      * Gets the failureReason property: Failure reason.

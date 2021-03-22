@@ -9,6 +9,7 @@ import com.azure.core.util.Context;
 import com.azure.resourcemanager.netapp.fluent.models.BackupInner;
 import com.azure.resourcemanager.netapp.models.Backup;
 import com.azure.resourcemanager.netapp.models.BackupPatch;
+import com.azure.resourcemanager.netapp.models.BackupType;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public final class BackupImpl implements Backup, Backup.Definition, Backup.Updat
         return this.innerModel().label();
     }
 
-    public String backupType() {
+    public BackupType backupType() {
         return this.innerModel().backupType();
     }
 
