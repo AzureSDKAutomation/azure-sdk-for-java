@@ -4,17 +4,19 @@
 
 package com.azure.resourcemanager.kubernetesconfiguration.implementation;
 
-import com.azure.resourcemanager.kubernetesconfiguration.fluent.models.ResourceProviderOperationInner;
-import com.azure.resourcemanager.kubernetesconfiguration.models.ResourceProviderOperation;
-import com.azure.resourcemanager.kubernetesconfiguration.models.ResourceProviderOperationDisplay;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.models.OperationInner;
+import com.azure.resourcemanager.kubernetesconfiguration.models.ActionType;
+import com.azure.resourcemanager.kubernetesconfiguration.models.Operation;
+import com.azure.resourcemanager.kubernetesconfiguration.models.OperationDisplay;
+import com.azure.resourcemanager.kubernetesconfiguration.models.Origin;
 
-public final class ResourceProviderOperationImpl implements ResourceProviderOperation {
-    private ResourceProviderOperationInner innerObject;
+public final class OperationImpl implements Operation {
+    private OperationInner innerObject;
 
     private final com.azure.resourcemanager.kubernetesconfiguration.SourceControlConfigurationManager serviceManager;
 
-    ResourceProviderOperationImpl(
-        ResourceProviderOperationInner innerObject,
+    OperationImpl(
+        OperationInner innerObject,
         com.azure.resourcemanager.kubernetesconfiguration.SourceControlConfigurationManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
@@ -24,15 +26,23 @@ public final class ResourceProviderOperationImpl implements ResourceProviderOper
         return this.innerModel().name();
     }
 
-    public ResourceProviderOperationDisplay display() {
-        return this.innerModel().display();
-    }
-
     public Boolean isDataAction() {
         return this.innerModel().isDataAction();
     }
 
-    public ResourceProviderOperationInner innerModel() {
+    public OperationDisplay display() {
+        return this.innerModel().display();
+    }
+
+    public Origin origin() {
+        return this.innerModel().origin();
+    }
+
+    public ActionType actionType() {
+        return this.innerModel().actionType();
+    }
+
+    public OperationInner innerModel() {
         return this.innerObject;
     }
 
