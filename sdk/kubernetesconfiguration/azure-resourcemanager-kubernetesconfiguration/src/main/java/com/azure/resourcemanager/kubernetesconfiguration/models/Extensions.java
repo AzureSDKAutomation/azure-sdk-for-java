@@ -7,139 +7,137 @@ package com.azure.resourcemanager.kubernetesconfiguration.models;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.kubernetesconfiguration.fluent.models.SourceControlConfigurationInner;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.models.ExtensionInner;
 
-/** Resource collection API of SourceControlConfigurations. */
-public interface SourceControlConfigurations {
+/** Resource collection API of Extensions. */
+public interface Extensions {
     /**
-     * Gets details of the Source Control Configuration.
+     * Create a new Kubernetes Cluster Extension.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details of the Source Control Configuration.
+     * @return the Extension object.
      */
-    SourceControlConfiguration get(
+    Extension create(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName);
+        String extensionName,
+        ExtensionInner extension);
 
     /**
-     * Gets details of the Source Control Configuration.
+     * Create a new Kubernetes Cluster Extension.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details of the Source Control Configuration.
+     * @return the Extension object.
      */
-    Response<SourceControlConfiguration> getWithResponse(
+    Extension create(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
+        ExtensionInner extension,
         Context context);
 
     /**
-     * Create a new Kubernetes Source Control Configuration.
+     * Gets Kubernetes Cluster Extension.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
-     * @param sourceControlConfiguration Properties necessary to Create KubernetesConfiguration.
+     * @param extensionName Name of the Extension.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the SourceControl Configuration object returned in Get &amp; Put response.
+     * @return kubernetes Cluster Extension.
      */
-    SourceControlConfiguration createOrUpdate(
+    Extension get(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
-        SourceControlConfigurationInner sourceControlConfiguration);
+        String extensionName);
 
     /**
-     * Create a new Kubernetes Source Control Configuration.
+     * Gets Kubernetes Cluster Extension.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
-     * @param sourceControlConfiguration Properties necessary to Create KubernetesConfiguration.
+     * @param extensionName Name of the Extension.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the SourceControl Configuration object returned in Get &amp; Put response.
+     * @return kubernetes Cluster Extension.
      */
-    Response<SourceControlConfiguration> createOrUpdateWithResponse(
+    Response<Extension> getWithResponse(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
-        SourceControlConfigurationInner sourceControlConfiguration,
+        String extensionName,
         Context context);
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void delete(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName);
+        String extensionName);
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -147,16 +145,16 @@ public interface SourceControlConfigurations {
      */
     void delete(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
         Context context);
 
     /**
-     * List all Source Control Configurations.
+     * List all Extensions in the cluster.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -165,18 +163,18 @@ public interface SourceControlConfigurations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
-    PagedIterable<SourceControlConfiguration> list(
+    PagedIterable<Extension> list(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName);
 
     /**
-     * List all Source Control Configurations.
+     * List all Extensions in the cluster.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -186,12 +184,12 @@ public interface SourceControlConfigurations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
-    PagedIterable<SourceControlConfiguration> list(
+    PagedIterable<Extension> list(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         Context context);
 }

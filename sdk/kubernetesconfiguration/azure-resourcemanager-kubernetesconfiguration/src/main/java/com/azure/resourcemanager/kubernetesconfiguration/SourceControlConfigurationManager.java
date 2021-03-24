@@ -21,11 +21,13 @@ import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.SourceControlConfigurationClient;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.ExtensionsImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.OperationStatusImpl;
 import com.azure.resourcemanager.kubernetesconfiguration.implementation.OperationsImpl;
 import com.azure.resourcemanager.kubernetesconfiguration.implementation.SourceControlConfigurationClientBuilder;
-import com.azure.resourcemanager.kubernetesconfiguration.implementation.SourceControlConfigurationsImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.models.Extensions;
+import com.azure.resourcemanager.kubernetesconfiguration.models.OperationStatus;
 import com.azure.resourcemanager.kubernetesconfiguration.models.Operations;
-import com.azure.resourcemanager.kubernetesconfiguration.models.SourceControlConfigurations;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -34,7 +36,9 @@ import java.util.Objects;
 
 /** Entry point to SourceControlConfigurationManager. KubernetesConfiguration Client. */
 public final class SourceControlConfigurationManager {
-    private SourceControlConfigurations sourceControlConfigurations;
+    private Extensions extensions;
+
+    private OperationStatus operationStatus;
 
     private Operations operations;
 
@@ -202,13 +206,20 @@ public final class SourceControlConfigurationManager {
         }
     }
 
-    /** @return Resource collection API of SourceControlConfigurations. */
-    public SourceControlConfigurations sourceControlConfigurations() {
-        if (this.sourceControlConfigurations == null) {
-            this.sourceControlConfigurations =
-                new SourceControlConfigurationsImpl(clientObject.getSourceControlConfigurations(), this);
+    /** @return Resource collection API of Extensions. */
+    public Extensions extensions() {
+        if (this.extensions == null) {
+            this.extensions = new ExtensionsImpl(clientObject.getExtensions(), this);
         }
-        return sourceControlConfigurations;
+        return extensions;
+    }
+
+    /** @return Resource collection API of OperationStatus. */
+    public OperationStatus operationStatus() {
+        if (this.operationStatus == null) {
+            this.operationStatus = new OperationStatusImpl(clientObject.getOperationStatus(), this);
+        }
+        return operationStatus;
     }
 
     /** @return Resource collection API of Operations. */
