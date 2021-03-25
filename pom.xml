@@ -688,6 +688,7 @@
         <module>sdk/mysql</module>
         <module>sdk/netapp</module>
         <module>sdk/postgresql</module>
+        <module>sdk/privatedns</module>
         <module>sdk/quantum</module>
         <module>sdk/recoveryservices</module>
         <module>sdk/redisenterprise</module>
