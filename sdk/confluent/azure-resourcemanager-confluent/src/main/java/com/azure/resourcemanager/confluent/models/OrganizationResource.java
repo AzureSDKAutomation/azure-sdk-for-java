@@ -80,14 +80,14 @@ public interface OrganizationResource {
      *
      * @return the offerDetail value.
      */
-    OfferDetail offerDetail();
+    OrganizationResourcePropertiesOfferDetail offerDetail();
 
     /**
      * Gets the userDetail property: Subscriber detail.
      *
      * @return the userDetail value.
      */
-    UserDetail userDetail();
+    OrganizationResourcePropertiesUserDetail userDetail();
 
     /**
      * Gets the region of the resource.
@@ -155,10 +155,7 @@ public interface OrganizationResource {
          * resource to be created, but also allows for any other optional properties to be specified.
          */
         interface WithCreate
-            extends DefinitionStages.WithTags,
-                DefinitionStages.WithProvisioningState,
-                DefinitionStages.WithOfferDetail,
-                DefinitionStages.WithUserDetail {
+            extends DefinitionStages.WithTags, DefinitionStages.WithOfferDetail, DefinitionStages.WithUserDetail {
             /**
              * Executes the create request.
              *
@@ -184,16 +181,6 @@ public interface OrganizationResource {
              */
             WithCreate withTags(Map<String, String> tags);
         }
-        /** The stage of the OrganizationResource definition allowing to specify provisioningState. */
-        interface WithProvisioningState {
-            /**
-             * Specifies the provisioningState property: Provision states for confluent RP.
-             *
-             * @param provisioningState Provision states for confluent RP.
-             * @return the next definition stage.
-             */
-            WithCreate withProvisioningState(ProvisionState provisioningState);
-        }
         /** The stage of the OrganizationResource definition allowing to specify offerDetail. */
         interface WithOfferDetail {
             /**
@@ -202,7 +189,7 @@ public interface OrganizationResource {
              * @param offerDetail Confluent offer detail.
              * @return the next definition stage.
              */
-            WithCreate withOfferDetail(OfferDetail offerDetail);
+            WithCreate withOfferDetail(OrganizationResourcePropertiesOfferDetail offerDetail);
         }
         /** The stage of the OrganizationResource definition allowing to specify userDetail. */
         interface WithUserDetail {
@@ -212,7 +199,7 @@ public interface OrganizationResource {
              * @param userDetail Subscriber detail.
              * @return the next definition stage.
              */
-            WithCreate withUserDetail(UserDetail userDetail);
+            WithCreate withUserDetail(OrganizationResourcePropertiesUserDetail userDetail);
         }
     }
     /**
