@@ -6,7 +6,6 @@ package com.azure.resourcemanager.kusto.implementation;
 
 import com.azure.core.management.Region;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.kusto.KustoManager;
 import com.azure.resourcemanager.kusto.fluent.models.AttachedDatabaseConfigurationInner;
 import com.azure.resourcemanager.kusto.models.AttachedDatabaseConfiguration;
 import com.azure.resourcemanager.kusto.models.DefaultPrincipalsModificationKind;
@@ -20,7 +19,7 @@ public final class AttachedDatabaseConfigurationImpl
         AttachedDatabaseConfiguration.Update {
     private AttachedDatabaseConfigurationInner innerObject;
 
-    private final KustoManager serviceManager;
+    private final com.azure.resourcemanager.kusto.KustoManager serviceManager;
 
     public String id() {
         return this.innerModel().id();
@@ -75,7 +74,7 @@ public final class AttachedDatabaseConfigurationImpl
         return this.innerObject;
     }
 
-    private KustoManager manager() {
+    private com.azure.resourcemanager.kusto.KustoManager manager() {
         return this.serviceManager;
     }
 
@@ -111,7 +110,7 @@ public final class AttachedDatabaseConfigurationImpl
         return this;
     }
 
-    AttachedDatabaseConfigurationImpl(String name, KustoManager serviceManager) {
+    AttachedDatabaseConfigurationImpl(String name, com.azure.resourcemanager.kusto.KustoManager serviceManager) {
         this.innerObject = new AttachedDatabaseConfigurationInner();
         this.serviceManager = serviceManager;
         this.attachedDatabaseConfigurationName = name;
@@ -141,7 +140,8 @@ public final class AttachedDatabaseConfigurationImpl
         return this;
     }
 
-    AttachedDatabaseConfigurationImpl(AttachedDatabaseConfigurationInner innerObject, KustoManager serviceManager) {
+    AttachedDatabaseConfigurationImpl(
+        AttachedDatabaseConfigurationInner innerObject, com.azure.resourcemanager.kusto.KustoManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
