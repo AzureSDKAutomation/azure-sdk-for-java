@@ -656,6 +656,7 @@
         <module>sdk/appconfiguration</module>
         <module>sdk/attestation</module>
         <module>sdk/authorization</module>
+        <module>sdk/azureactivedirectory</module>
         <module>sdk/batch</module>
         <module>sdk/boms</module>
         <module>sdk/changeanalysis</module>
