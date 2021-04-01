@@ -4,24 +4,18 @@
 
 package com.azure.resourcemanager.mediaservices.implementation;
 
-import com.azure.core.http.rest.Response;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.mediaservices.MediaservicesManager;
 import com.azure.resourcemanager.mediaservices.fluent.models.AssetInner;
 import com.azure.resourcemanager.mediaservices.models.Asset;
-import com.azure.resourcemanager.mediaservices.models.AssetContainerSas;
 import com.azure.resourcemanager.mediaservices.models.AssetStorageEncryptionFormat;
-import com.azure.resourcemanager.mediaservices.models.ListContainerSasInput;
-import com.azure.resourcemanager.mediaservices.models.ListStreamingLocatorsResponse;
-import com.azure.resourcemanager.mediaservices.models.StorageEncryptedAssetDecryptionData;
-import com.azure.resourcemanager.mediaservices.models.SystemData;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
 public final class AssetImpl implements Asset, Asset.Definition, Asset.Update {
     private AssetInner innerObject;
 
-    private final MediaservicesManager serviceManager;
+    private final com.azure.resourcemanager.mediaservices.MediaServicesManager serviceManager;
 
     public String id() {
         return this.innerModel().id();
@@ -75,7 +69,7 @@ public final class AssetImpl implements Asset, Asset.Definition, Asset.Update {
         return this.innerObject;
     }
 
-    private MediaservicesManager manager() {
+    private com.azure.resourcemanager.mediaservices.MediaServicesManager manager() {
         return this.serviceManager;
     }
 
@@ -111,7 +105,7 @@ public final class AssetImpl implements Asset, Asset.Definition, Asset.Update {
         return this;
     }
 
-    AssetImpl(String name, MediaservicesManager serviceManager) {
+    AssetImpl(String name, com.azure.resourcemanager.mediaservices.MediaServicesManager serviceManager) {
         this.innerObject = new AssetInner();
         this.serviceManager = serviceManager;
         this.assetName = name;
@@ -141,7 +135,7 @@ public final class AssetImpl implements Asset, Asset.Definition, Asset.Update {
         return this;
     }
 
-    AssetImpl(AssetInner innerObject, MediaservicesManager serviceManager) {
+    AssetImpl(AssetInner innerObject, com.azure.resourcemanager.mediaservices.MediaServicesManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
@@ -167,34 +161,6 @@ public final class AssetImpl implements Asset, Asset.Definition, Asset.Update {
                 .getWithResponse(resourceGroupName, accountName, assetName, context)
                 .getValue();
         return this;
-    }
-
-    public AssetContainerSas listContainerSas(ListContainerSasInput parameters) {
-        return serviceManager.assets().listContainerSas(resourceGroupName, accountName, assetName, parameters);
-    }
-
-    public Response<AssetContainerSas> listContainerSasWithResponse(ListContainerSasInput parameters, Context context) {
-        return serviceManager
-            .assets()
-            .listContainerSasWithResponse(resourceGroupName, accountName, assetName, parameters, context);
-    }
-
-    public StorageEncryptedAssetDecryptionData getEncryptionKey() {
-        return serviceManager.assets().getEncryptionKey(resourceGroupName, accountName, assetName);
-    }
-
-    public Response<StorageEncryptedAssetDecryptionData> getEncryptionKeyWithResponse(Context context) {
-        return serviceManager.assets().getEncryptionKeyWithResponse(resourceGroupName, accountName, assetName, context);
-    }
-
-    public ListStreamingLocatorsResponse listStreamingLocators() {
-        return serviceManager.assets().listStreamingLocators(resourceGroupName, accountName, assetName);
-    }
-
-    public Response<ListStreamingLocatorsResponse> listStreamingLocatorsWithResponse(Context context) {
-        return serviceManager
-            .assets()
-            .listStreamingLocatorsWithResponse(resourceGroupName, accountName, assetName, context);
     }
 
     public AssetImpl withAlternateId(String alternateId) {

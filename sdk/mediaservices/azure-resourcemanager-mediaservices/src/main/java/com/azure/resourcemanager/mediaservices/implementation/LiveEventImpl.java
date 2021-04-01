@@ -5,19 +5,17 @@
 package com.azure.resourcemanager.mediaservices.implementation;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.mediaservices.MediaservicesManager;
 import com.azure.resourcemanager.mediaservices.fluent.models.LiveEventInner;
 import com.azure.resourcemanager.mediaservices.models.CrossSiteAccessPolicies;
 import com.azure.resourcemanager.mediaservices.models.LiveEvent;
-import com.azure.resourcemanager.mediaservices.models.LiveEventActionInput;
 import com.azure.resourcemanager.mediaservices.models.LiveEventEncoding;
 import com.azure.resourcemanager.mediaservices.models.LiveEventInput;
 import com.azure.resourcemanager.mediaservices.models.LiveEventPreview;
 import com.azure.resourcemanager.mediaservices.models.LiveEventResourceState;
 import com.azure.resourcemanager.mediaservices.models.LiveEventTranscription;
 import com.azure.resourcemanager.mediaservices.models.StreamOptionsFlag;
-import com.azure.resourcemanager.mediaservices.models.SystemData;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +24,7 @@ import java.util.Map;
 public final class LiveEventImpl implements LiveEvent, LiveEvent.Definition, LiveEvent.Update {
     private LiveEventInner innerObject;
 
-    private final MediaservicesManager serviceManager;
+    private final com.azure.resourcemanager.mediaservices.MediaServicesManager serviceManager;
 
     public String id() {
         return this.innerModel().id();
@@ -131,7 +129,7 @@ public final class LiveEventImpl implements LiveEvent, LiveEvent.Definition, Liv
         return this.innerObject;
     }
 
-    private MediaservicesManager manager() {
+    private com.azure.resourcemanager.mediaservices.MediaServicesManager manager() {
         return this.serviceManager;
     }
 
@@ -168,7 +166,7 @@ public final class LiveEventImpl implements LiveEvent, LiveEvent.Definition, Liv
         return this;
     }
 
-    LiveEventImpl(String name, MediaservicesManager serviceManager) {
+    LiveEventImpl(String name, com.azure.resourcemanager.mediaservices.MediaServicesManager serviceManager) {
         this.innerObject = new LiveEventInner();
         this.serviceManager = serviceManager;
         this.liveEventName = name;
@@ -197,7 +195,8 @@ public final class LiveEventImpl implements LiveEvent, LiveEvent.Definition, Liv
         return this;
     }
 
-    LiveEventImpl(LiveEventInner innerObject, MediaservicesManager serviceManager) {
+    LiveEventImpl(
+        LiveEventInner innerObject, com.azure.resourcemanager.mediaservices.MediaServicesManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
@@ -223,38 +222,6 @@ public final class LiveEventImpl implements LiveEvent, LiveEvent.Definition, Liv
                 .getWithResponse(resourceGroupName, accountName, liveEventName, context)
                 .getValue();
         return this;
-    }
-
-    public void allocate() {
-        serviceManager.liveEvents().allocate(resourceGroupName, accountName, liveEventName);
-    }
-
-    public void allocate(Context context) {
-        serviceManager.liveEvents().allocate(resourceGroupName, accountName, liveEventName, context);
-    }
-
-    public void start() {
-        serviceManager.liveEvents().start(resourceGroupName, accountName, liveEventName);
-    }
-
-    public void start(Context context) {
-        serviceManager.liveEvents().start(resourceGroupName, accountName, liveEventName, context);
-    }
-
-    public void stop(LiveEventActionInput parameters) {
-        serviceManager.liveEvents().stop(resourceGroupName, accountName, liveEventName, parameters);
-    }
-
-    public void stop(LiveEventActionInput parameters, Context context) {
-        serviceManager.liveEvents().stop(resourceGroupName, accountName, liveEventName, parameters, context);
-    }
-
-    public void reset() {
-        serviceManager.liveEvents().reset(resourceGroupName, accountName, liveEventName);
-    }
-
-    public void reset(Context context) {
-        serviceManager.liveEvents().reset(resourceGroupName, accountName, liveEventName, context);
     }
 
     public LiveEventImpl withRegion(Region location) {
