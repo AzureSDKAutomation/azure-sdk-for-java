@@ -705,6 +705,7 @@
         <module>sdk/remoterendering</module>
         <module>sdk/resourcegraph</module>
         <module>sdk/resourcemanager</module>
+        <module>sdk/resources</module>
         <module>sdk/schemaregistry</module>
         <module>sdk/search</module>
         <module>sdk/servicebus</module>
