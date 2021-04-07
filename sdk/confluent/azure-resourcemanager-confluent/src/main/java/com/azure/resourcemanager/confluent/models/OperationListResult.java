@@ -26,7 +26,7 @@ public final class OperationListResult {
     /*
      * URL to get the next set of operation list results if there are any.
      */
-    @JsonProperty(value = "nextLink")
+    @JsonProperty(value = "nextLink", access = JsonProperty.Access.WRITE_ONLY)
     private String nextLink;
 
     /**
@@ -56,17 +56,6 @@ public final class OperationListResult {
      */
     public String nextLink() {
         return this.nextLink;
-    }
-
-    /**
-     * Set the nextLink property: URL to get the next set of operation list results if there are any.
-     *
-     * @param nextLink the nextLink value to set.
-     * @return the OperationListResult object itself.
-     */
-    public OperationListResult withNextLink(String nextLink) {
-        this.nextLink = nextLink;
-        return this;
     }
 
     /**
