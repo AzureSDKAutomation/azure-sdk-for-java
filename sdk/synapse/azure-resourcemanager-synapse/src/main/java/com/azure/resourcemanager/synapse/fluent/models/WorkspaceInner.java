@@ -12,9 +12,9 @@ import com.azure.resourcemanager.synapse.models.DataLakeStorageAccountDetails;
 import com.azure.resourcemanager.synapse.models.EncryptionDetails;
 import com.azure.resourcemanager.synapse.models.ManagedIdentity;
 import com.azure.resourcemanager.synapse.models.ManagedVirtualNetworkSettings;
+import com.azure.resourcemanager.synapse.models.NetworkSettings;
 import com.azure.resourcemanager.synapse.models.PurviewConfiguration;
 import com.azure.resourcemanager.synapse.models.VirtualNetworkProfile;
-import com.azure.resourcemanager.synapse.models.WorkspacePublicNetworkAccess;
 import com.azure.resourcemanager.synapse.models.WorkspaceRepositoryConfiguration;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -136,10 +136,10 @@ public class WorkspaceInner extends Resource {
     private String adlaResourceId;
 
     /*
-     * Enable or Disable pubic network access to workspace
+     * Network Settings
      */
-    @JsonProperty(value = "properties.publicNetworkAccess")
-    private WorkspacePublicNetworkAccess publicNetworkAccess;
+    @JsonProperty(value = "properties.networkSettings")
+    private NetworkSettings networkSettings;
 
     /**
      * Get the identity property: Identity of the workspace.
@@ -449,22 +449,22 @@ public class WorkspaceInner extends Resource {
     }
 
     /**
-     * Get the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Get the networkSettings property: Network Settings.
      *
-     * @return the publicNetworkAccess value.
+     * @return the networkSettings value.
      */
-    public WorkspacePublicNetworkAccess publicNetworkAccess() {
-        return this.publicNetworkAccess;
+    public NetworkSettings networkSettings() {
+        return this.networkSettings;
     }
 
     /**
-     * Set the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Set the networkSettings property: Network Settings.
      *
-     * @param publicNetworkAccess the publicNetworkAccess value to set.
+     * @param networkSettings the networkSettings value to set.
      * @return the WorkspaceInner object itself.
      */
-    public WorkspaceInner withPublicNetworkAccess(WorkspacePublicNetworkAccess publicNetworkAccess) {
-        this.publicNetworkAccess = publicNetworkAccess;
+    public WorkspaceInner withNetworkSettings(NetworkSettings networkSettings) {
+        this.networkSettings = networkSettings;
         return this;
     }
 
@@ -511,6 +511,9 @@ public class WorkspaceInner extends Resource {
         }
         if (purviewConfiguration() != null) {
             purviewConfiguration().validate();
+        }
+        if (networkSettings() != null) {
+            networkSettings().validate();
         }
     }
 }
