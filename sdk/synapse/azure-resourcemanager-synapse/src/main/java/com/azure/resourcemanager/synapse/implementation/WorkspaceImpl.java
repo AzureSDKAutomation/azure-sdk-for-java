@@ -12,12 +12,12 @@ import com.azure.resourcemanager.synapse.models.DataLakeStorageAccountDetails;
 import com.azure.resourcemanager.synapse.models.EncryptionDetails;
 import com.azure.resourcemanager.synapse.models.ManagedIdentity;
 import com.azure.resourcemanager.synapse.models.ManagedVirtualNetworkSettings;
+import com.azure.resourcemanager.synapse.models.NetworkSettings;
 import com.azure.resourcemanager.synapse.models.PrivateEndpointConnection;
 import com.azure.resourcemanager.synapse.models.PurviewConfiguration;
 import com.azure.resourcemanager.synapse.models.VirtualNetworkProfile;
 import com.azure.resourcemanager.synapse.models.Workspace;
 import com.azure.resourcemanager.synapse.models.WorkspacePatchInfo;
-import com.azure.resourcemanager.synapse.models.WorkspacePublicNetworkAccess;
 import com.azure.resourcemanager.synapse.models.WorkspaceRepositoryConfiguration;
 import java.util.Collections;
 import java.util.List;
@@ -143,8 +143,8 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
         return this.innerModel().adlaResourceId();
     }
 
-    public WorkspacePublicNetworkAccess publicNetworkAccess() {
-        return this.innerModel().publicNetworkAccess();
+    public NetworkSettings networkSettings() {
+        return this.innerModel().networkSettings();
     }
 
     public Region region() {
@@ -366,12 +366,12 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
         }
     }
 
-    public WorkspaceImpl withPublicNetworkAccess(WorkspacePublicNetworkAccess publicNetworkAccess) {
+    public WorkspaceImpl withNetworkSettings(NetworkSettings networkSettings) {
         if (isInCreateMode()) {
-            this.innerModel().withPublicNetworkAccess(publicNetworkAccess);
+            this.innerModel().withNetworkSettings(networkSettings);
             return this;
         } else {
-            this.updateWorkspacePatchInfo.withPublicNetworkAccess(publicNetworkAccess);
+            this.updateWorkspacePatchInfo.withNetworkSettings(networkSettings);
             return this;
         }
     }

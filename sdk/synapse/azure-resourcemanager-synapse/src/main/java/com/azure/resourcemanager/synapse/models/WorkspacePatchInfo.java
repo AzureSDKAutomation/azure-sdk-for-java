@@ -66,10 +66,10 @@ public class WorkspacePatchInfo {
     private EncryptionDetails encryption;
 
     /*
-     * Enable or Disable pubic network access to workspace
+     * Network Settings
      */
-    @JsonProperty(value = "properties.publicNetworkAccess")
-    private WorkspacePublicNetworkAccess publicNetworkAccess;
+    @JsonProperty(value = "properties.networkSettings")
+    private NetworkSettings networkSettings;
 
     /**
      * Get the tags property: Resource tags.
@@ -223,22 +223,22 @@ public class WorkspacePatchInfo {
     }
 
     /**
-     * Get the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Get the networkSettings property: Network Settings.
      *
-     * @return the publicNetworkAccess value.
+     * @return the networkSettings value.
      */
-    public WorkspacePublicNetworkAccess publicNetworkAccess() {
-        return this.publicNetworkAccess;
+    public NetworkSettings networkSettings() {
+        return this.networkSettings;
     }
 
     /**
-     * Set the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Set the networkSettings property: Network Settings.
      *
-     * @param publicNetworkAccess the publicNetworkAccess value to set.
+     * @param networkSettings the networkSettings value to set.
      * @return the WorkspacePatchInfo object itself.
      */
-    public WorkspacePatchInfo withPublicNetworkAccess(WorkspacePublicNetworkAccess publicNetworkAccess) {
-        this.publicNetworkAccess = publicNetworkAccess;
+    public WorkspacePatchInfo withNetworkSettings(NetworkSettings networkSettings) {
+        this.networkSettings = networkSettings;
         return this;
     }
 
@@ -262,6 +262,9 @@ public class WorkspacePatchInfo {
         }
         if (encryption() != null) {
             encryption().validate();
+        }
+        if (networkSettings() != null) {
+            networkSettings().validate();
         }
     }
 }

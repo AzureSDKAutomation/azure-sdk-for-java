@@ -173,11 +173,11 @@ public interface Workspace {
     String adlaResourceId();
 
     /**
-     * Gets the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Gets the networkSettings property: Network Settings.
      *
-     * @return the publicNetworkAccess value.
+     * @return the networkSettings value.
      */
-    WorkspacePublicNetworkAccess publicNetworkAccess();
+    NetworkSettings networkSettings();
 
     /**
      * Gets the region of the resource.
@@ -259,7 +259,7 @@ public interface Workspace {
                 DefinitionStages.WithManagedVirtualNetworkSettings,
                 DefinitionStages.WithWorkspaceRepositoryConfiguration,
                 DefinitionStages.WithPurviewConfiguration,
-                DefinitionStages.WithPublicNetworkAccess {
+                DefinitionStages.WithNetworkSettings {
             /**
              * Executes the create request.
              *
@@ -424,15 +424,15 @@ public interface Workspace {
              */
             WithCreate withPurviewConfiguration(PurviewConfiguration purviewConfiguration);
         }
-        /** The stage of the Workspace definition allowing to specify publicNetworkAccess. */
-        interface WithPublicNetworkAccess {
+        /** The stage of the Workspace definition allowing to specify networkSettings. */
+        interface WithNetworkSettings {
             /**
-             * Specifies the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+             * Specifies the networkSettings property: Network Settings.
              *
-             * @param publicNetworkAccess Enable or Disable pubic network access to workspace.
+             * @param networkSettings Network Settings.
              * @return the next definition stage.
              */
-            WithCreate withPublicNetworkAccess(WorkspacePublicNetworkAccess publicNetworkAccess);
+            WithCreate withNetworkSettings(NetworkSettings networkSettings);
         }
     }
     /**
@@ -451,7 +451,7 @@ public interface Workspace {
             UpdateStages.WithWorkspaceRepositoryConfiguration,
             UpdateStages.WithPurviewConfiguration,
             UpdateStages.WithEncryption,
-            UpdateStages.WithPublicNetworkAccess {
+            UpdateStages.WithNetworkSettings {
         /**
          * Executes the update request.
          *
@@ -540,15 +540,15 @@ public interface Workspace {
              */
             Update withEncryption(EncryptionDetails encryption);
         }
-        /** The stage of the Workspace update allowing to specify publicNetworkAccess. */
-        interface WithPublicNetworkAccess {
+        /** The stage of the Workspace update allowing to specify networkSettings. */
+        interface WithNetworkSettings {
             /**
-             * Specifies the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+             * Specifies the networkSettings property: Network Settings.
              *
-             * @param publicNetworkAccess Enable or Disable pubic network access to workspace.
+             * @param networkSettings Network Settings.
              * @return the next definition stage.
              */
-            Update withPublicNetworkAccess(WorkspacePublicNetworkAccess publicNetworkAccess);
+            Update withNetworkSettings(NetworkSettings networkSettings);
         }
     }
     /**
