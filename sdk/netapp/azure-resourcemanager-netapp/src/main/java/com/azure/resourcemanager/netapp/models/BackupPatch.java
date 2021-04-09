@@ -55,10 +55,10 @@ public class BackupPatch {
     private String label;
 
     /*
-     * Type of backup adhoc or scheduled
+     * Type of backup Manual or Scheduled
      */
     @JsonProperty(value = "properties.backupType", access = JsonProperty.Access.WRITE_ONLY)
-    private String backupType;
+    private BackupType backupType;
 
     /*
      * Failure reason
@@ -149,11 +149,11 @@ public class BackupPatch {
     }
 
     /**
-     * Get the backupType property: Type of backup adhoc or scheduled.
+     * Get the backupType property: Type of backup Manual or Scheduled.
      *
      * @return the backupType value.
      */
-    public String backupType() {
+    public BackupType backupType() {
         return this.backupType;
     }
 
