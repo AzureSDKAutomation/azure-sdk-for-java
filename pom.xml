@@ -676,6 +676,7 @@
         <module>sdk/datadog</module>
         <module>sdk/delegatednetwork</module>
         <module>sdk/deviceupdate</module>
+        <module>sdk/dfp</module>
         <module>sdk/digitaltwins</module>
         <module>sdk/eventgrid</module>
         <module>sdk/eventhubs</module>
