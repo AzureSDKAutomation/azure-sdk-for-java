@@ -36,6 +36,7 @@ import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimeStatusOperatio
 import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimesClient;
 import com.azure.resourcemanager.synapse.fluent.IpFirewallRulesClient;
 import com.azure.resourcemanager.synapse.fluent.KeysClient;
+import com.azure.resourcemanager.synapse.fluent.KustoPoolsClient;
 import com.azure.resourcemanager.synapse.fluent.LibrariesClient;
 import com.azure.resourcemanager.synapse.fluent.LibrariesOperationsClient;
 import com.azure.resourcemanager.synapse.fluent.OperationsClient;
@@ -324,6 +325,18 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
      */
     public KeysClient getKeys() {
         return this.keys;
+    }
+
+    /** The KustoPoolsClient object to access its operations. */
+    private final KustoPoolsClient kustoPools;
+
+    /**
+     * Gets the KustoPoolsClient object to access its operations.
+     *
+     * @return the KustoPoolsClient object.
+     */
+    public KustoPoolsClient getKustoPools() {
+        return this.kustoPools;
     }
 
     /** The LibrariesClient object to access its operations. */
@@ -928,7 +941,7 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-03-01";
+        this.apiVersion = "2021-04-01-preview";
         this.bigDataPools = new BigDataPoolsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
         this.ipFirewallRules = new IpFirewallRulesClientImpl(this);
@@ -942,6 +955,7 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         this.integrationRuntimeMonitoringDatas = new IntegrationRuntimeMonitoringDatasClientImpl(this);
         this.integrationRuntimeStatusOperations = new IntegrationRuntimeStatusOperationsClientImpl(this);
         this.keys = new KeysClientImpl(this);
+        this.kustoPools = new KustoPoolsClientImpl(this);
         this.libraries = new LibrariesClientImpl(this);
         this.librariesOperations = new LibrariesOperationsClientImpl(this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsClientImpl(this);
