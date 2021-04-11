@@ -36,6 +36,7 @@ import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeStatus
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimesImpl;
 import com.azure.resourcemanager.synapse.implementation.IpFirewallRulesImpl;
 import com.azure.resourcemanager.synapse.implementation.KeysImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoPoolsImpl;
 import com.azure.resourcemanager.synapse.implementation.LibrariesImpl;
 import com.azure.resourcemanager.synapse.implementation.LibrariesOperationsImpl;
 import com.azure.resourcemanager.synapse.implementation.OperationsImpl;
@@ -98,6 +99,7 @@ import com.azure.resourcemanager.synapse.models.IntegrationRuntimeStatusOperatio
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimes;
 import com.azure.resourcemanager.synapse.models.IpFirewallRules;
 import com.azure.resourcemanager.synapse.models.Keys;
+import com.azure.resourcemanager.synapse.models.KustoPools;
 import com.azure.resourcemanager.synapse.models.Libraries;
 import com.azure.resourcemanager.synapse.models.LibrariesOperations;
 import com.azure.resourcemanager.synapse.models.Operations;
@@ -177,6 +179,8 @@ public final class SynapseManager {
     private IntegrationRuntimeStatusOperations integrationRuntimeStatusOperations;
 
     private Keys keys;
+
+    private KustoPools kustoPools;
 
     private Libraries libraries;
 
@@ -549,6 +553,14 @@ public final class SynapseManager {
             this.keys = new KeysImpl(clientObject.getKeys(), this);
         }
         return keys;
+    }
+
+    /** @return Resource collection API of KustoPools. */
+    public KustoPools kustoPools() {
+        if (this.kustoPools == null) {
+            this.kustoPools = new KustoPoolsImpl(clientObject.getKustoPools(), this);
+        }
+        return kustoPools;
     }
 
     /** @return Resource collection API of Libraries. */

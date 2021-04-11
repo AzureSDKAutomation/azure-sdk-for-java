@@ -136,6 +136,13 @@ public interface SynapseManagementClient {
     KeysClient getKeys();
 
     /**
+     * Gets the KustoPoolsClient object to access its operations.
+     *
+     * @return the KustoPoolsClient object.
+     */
+    KustoPoolsClient getKustoPools();
+
+    /**
      * Gets the LibrariesClient object to access its operations.
      *
      * @return the LibrariesClient object.
