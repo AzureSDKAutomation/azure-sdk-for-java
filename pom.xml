@@ -687,6 +687,7 @@
         <module>sdk/delegatednetwork</module>
         <module>sdk/deviceupdate</module>
         <module>sdk/digitaltwins</module>
+        <module>sdk/dns</module>
         <module>sdk/eventgrid</module>
         <module>sdk/eventhubs</module>
         <module>sdk/formrecognizer</module>
