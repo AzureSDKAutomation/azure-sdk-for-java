@@ -60,12 +60,15 @@ public final class LotsOperationsClientImpl implements LotsOperationsClient {
     @ServiceInterface(name = "ConsumptionManagemen")
     private interface LotsOperationsService {
         @Headers({"Content-Type: application/json"})
-        @Get("/{scope}/providers/Microsoft.Consumption/lots")
+        @Get(
+            "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}"
+                + "/providers/Microsoft.Consumption/lots")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Lots>> list(
             @HostParam("$host") String endpoint,
-            @PathParam(value = "scope", encoded = true) String scope,
+            @PathParam("billingAccountId") String billingAccountId,
+            @PathParam("billingProfileId") String billingProfileId,
             @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
             Context context);
@@ -84,31 +87,41 @@ public final class LotsOperationsClientImpl implements LotsOperationsClient {
     /**
      * Lists the lots by billingAccountId and billingProfileId.
      *
-     * @param scope The scope associated with Lots operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return result of listing lot summary.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<LotSummaryInner>> listSinglePageAsync(String scope) {
+    private Mono<PagedResponse<LotSummaryInner>> listSinglePageAsync(String billingAccountId, String billingProfileId) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (scope == null) {
-            return Mono.error(new IllegalArgumentException("Parameter scope is required and cannot be null."));
+        if (billingAccountId == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter billingAccountId is required and cannot be null."));
+        }
+        if (billingProfileId == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter billingProfileId is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil
             .withContext(
-                context -> service.list(this.client.getEndpoint(), scope, this.client.getApiVersion(), accept, context))
+                context ->
+                    service
+                        .list(
+                            this.client.getEndpoint(),
+                            billingAccountId,
+                            billingProfileId,
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
             .<PagedResponse<LotSummaryInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -124,11 +137,8 @@ public final class LotsOperationsClientImpl implements LotsOperationsClient {
     /**
      * Lists the lots by billingAccountId and billingProfileId.
      *
-     * @param scope The scope associated with Lots operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -136,20 +146,32 @@ public final class LotsOperationsClientImpl implements LotsOperationsClient {
      * @return result of listing lot summary.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<LotSummaryInner>> listSinglePageAsync(String scope, Context context) {
+    private Mono<PagedResponse<LotSummaryInner>> listSinglePageAsync(
+        String billingAccountId, String billingProfileId, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (scope == null) {
-            return Mono.error(new IllegalArgumentException("Parameter scope is required and cannot be null."));
+        if (billingAccountId == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter billingAccountId is required and cannot be null."));
+        }
+        if (billingProfileId == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter billingProfileId is required and cannot be null."));
         }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .list(this.client.getEndpoint(), scope, this.client.getApiVersion(), accept, context)
+            .list(
+                this.client.getEndpoint(),
+                billingAccountId,
+                billingProfileId,
+                this.client.getApiVersion(),
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -164,67 +186,25 @@ public final class LotsOperationsClientImpl implements LotsOperationsClient {
     /**
      * Lists the lots by billingAccountId and billingProfileId.
      *
-     * @param scope The scope associated with Lots operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return result of listing lot summary.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<LotSummaryInner> listAsync(String scope) {
-        return new PagedFlux<>(() -> listSinglePageAsync(scope), nextLink -> listNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Lists the lots by billingAccountId and billingProfileId.
-     *
-     * @param scope The scope associated with Lots operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of listing lot summary.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<LotSummaryInner> listAsync(String scope, Context context) {
+    private PagedFlux<LotSummaryInner> listAsync(String billingAccountId, String billingProfileId) {
         return new PagedFlux<>(
-            () -> listSinglePageAsync(scope, context), nextLink -> listNextSinglePageAsync(nextLink, context));
+            () -> listSinglePageAsync(billingAccountId, billingProfileId),
+            nextLink -> listNextSinglePageAsync(nextLink));
     }
 
     /**
      * Lists the lots by billingAccountId and billingProfileId.
      *
-     * @param scope The scope associated with Lots operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of listing lot summary.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<LotSummaryInner> list(String scope) {
-        return new PagedIterable<>(listAsync(scope));
-    }
-
-    /**
-     * Lists the lots by billingAccountId and billingProfileId.
-     *
-     * @param scope The scope associated with Lots operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -232,8 +212,41 @@ public final class LotsOperationsClientImpl implements LotsOperationsClient {
      * @return result of listing lot summary.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<LotSummaryInner> list(String scope, Context context) {
-        return new PagedIterable<>(listAsync(scope, context));
+    private PagedFlux<LotSummaryInner> listAsync(String billingAccountId, String billingProfileId, Context context) {
+        return new PagedFlux<>(
+            () -> listSinglePageAsync(billingAccountId, billingProfileId, context),
+            nextLink -> listNextSinglePageAsync(nextLink, context));
+    }
+
+    /**
+     * Lists the lots by billingAccountId and billingProfileId.
+     *
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return result of listing lot summary.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<LotSummaryInner> list(String billingAccountId, String billingProfileId) {
+        return new PagedIterable<>(listAsync(billingAccountId, billingProfileId));
+    }
+
+    /**
+     * Lists the lots by billingAccountId and billingProfileId.
+     *
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return result of listing lot summary.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<LotSummaryInner> list(String billingAccountId, String billingProfileId, Context context) {
+        return new PagedIterable<>(listAsync(billingAccountId, billingProfileId, context));
     }
 
     /**

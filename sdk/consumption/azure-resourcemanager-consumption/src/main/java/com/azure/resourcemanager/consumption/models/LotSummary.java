@@ -32,20 +32,6 @@ public interface LotSummary {
     String type();
 
     /**
-     * Gets the creditCurrency property: Credit Currency.
-     *
-     * @return the creditCurrency value.
-     */
-    String creditCurrency();
-
-    /**
-     * Gets the billingCurrency property: Billing Currency.
-     *
-     * @return the billingCurrency value.
-     */
-    String billingCurrency();
-
-    /**
      * Gets the originalAmount property: Original amount.
      *
      * @return the originalAmount value.
@@ -53,25 +39,11 @@ public interface LotSummary {
     Amount originalAmount();
 
     /**
-     * Gets the originalAmountInBillingCurrency property: Current balance.
-     *
-     * @return the originalAmountInBillingCurrency value.
-     */
-    AmountWithExchangeRate originalAmountInBillingCurrency();
-
-    /**
      * Gets the closedBalance property: Closed balance.
      *
      * @return the closedBalance value.
      */
     Amount closedBalance();
-
-    /**
-     * Gets the closedBalanceInBillingCurrency property: Current balance.
-     *
-     * @return the closedBalanceInBillingCurrency value.
-     */
-    AmountWithExchangeRate closedBalanceInBillingCurrency();
 
     /**
      * Gets the source property: Lot source.
@@ -100,13 +72,6 @@ public interface LotSummary {
      * @return the poNumber value.
      */
     String poNumber();
-
-    /**
-     * Gets the reseller property: Reseller details.
-     *
-     * @return the reseller value.
-     */
-    Reseller reseller();
 
     /**
      * Gets the etag property: Resource etag.

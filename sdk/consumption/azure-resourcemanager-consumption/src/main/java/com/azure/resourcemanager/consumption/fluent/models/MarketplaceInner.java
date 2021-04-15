@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 import java.util.UUID;
 
-/** An marketplace resource. */
+/** A marketplace resource. */
 @JsonFlatten
 @Immutable
 public class MarketplaceInner extends ProxyResource {
