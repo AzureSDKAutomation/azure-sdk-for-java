@@ -7,11 +7,11 @@ package com.azure.resourcemanager.hybridkubernetes.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.hybridkubernetes.models.ConnectedClusterIdentity;
 import com.azure.resourcemanager.hybridkubernetes.models.ConnectivityStatus;
 import com.azure.resourcemanager.hybridkubernetes.models.ProvisioningState;
-import com.azure.resourcemanager.hybridkubernetes.models.SystemData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -324,9 +324,6 @@ public class ConnectedClusterInner extends Resource {
                     new IllegalArgumentException("Missing required property identity in model ConnectedClusterInner"));
         } else {
             identity().validate();
-        }
-        if (systemData() != null) {
-            systemData().validate();
         }
         if (agentPublicKeyCertificate() == null) {
             throw logger
