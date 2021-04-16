@@ -26,18 +26,6 @@ public final class CreditBalanceSummary {
     @JsonProperty(value = "currentBalance", access = JsonProperty.Access.WRITE_ONLY)
     private Amount currentBalance;
 
-    /*
-     * Current balance.
-     */
-    @JsonProperty(value = "estimatedBalanceInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate estimatedBalanceInBillingCurrency;
-
-    /*
-     * Current balance.
-     */
-    @JsonProperty(value = "currentBalanceInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate currentBalanceInBillingCurrency;
-
     /**
      * Get the estimatedBalance property: Estimated balance.
      *
@@ -57,24 +45,6 @@ public final class CreditBalanceSummary {
     }
 
     /**
-     * Get the estimatedBalanceInBillingCurrency property: Current balance.
-     *
-     * @return the estimatedBalanceInBillingCurrency value.
-     */
-    public AmountWithExchangeRate estimatedBalanceInBillingCurrency() {
-        return this.estimatedBalanceInBillingCurrency;
-    }
-
-    /**
-     * Get the currentBalanceInBillingCurrency property: Current balance.
-     *
-     * @return the currentBalanceInBillingCurrency value.
-     */
-    public AmountWithExchangeRate currentBalanceInBillingCurrency() {
-        return this.currentBalanceInBillingCurrency;
-    }
-
-    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -85,12 +55,6 @@ public final class CreditBalanceSummary {
         }
         if (currentBalance() != null) {
             currentBalance().validate();
-        }
-        if (estimatedBalanceInBillingCurrency() != null) {
-            estimatedBalanceInBillingCurrency().validate();
-        }
-        if (currentBalanceInBillingCurrency() != null) {
-            currentBalanceInBillingCurrency().validate();
         }
     }
 }

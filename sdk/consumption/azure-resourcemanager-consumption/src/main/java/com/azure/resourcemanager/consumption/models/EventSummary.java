@@ -32,20 +32,6 @@ public interface EventSummary {
     String type();
 
     /**
-     * Gets the creditCurrency property: Credit Currency.
-     *
-     * @return the creditCurrency value.
-     */
-    String creditCurrency();
-
-    /**
-     * Gets the billingCurrency property: Billing Currency.
-     *
-     * @return the billingCurrency value.
-     */
-    String billingCurrency();
-
-    /**
      * Gets the transactionDate property: Transaction date.
      *
      * @return the transactionDate value.
@@ -67,25 +53,11 @@ public interface EventSummary {
     Amount newCredit();
 
     /**
-     * Gets the newCreditInBillingCurrency property: Current balance.
-     *
-     * @return the newCreditInBillingCurrency value.
-     */
-    AmountWithExchangeRate newCreditInBillingCurrency();
-
-    /**
      * Gets the adjustments property: Adjustments amount.
      *
      * @return the adjustments value.
      */
     Amount adjustments();
-
-    /**
-     * Gets the adjustmentsInBillingCurrency property: Current balance.
-     *
-     * @return the adjustmentsInBillingCurrency value.
-     */
-    AmountWithExchangeRate adjustmentsInBillingCurrency();
 
     /**
      * Gets the creditExpired property: Credit expired.
@@ -95,13 +67,6 @@ public interface EventSummary {
     Amount creditExpired();
 
     /**
-     * Gets the creditExpiredInBillingCurrency property: Current balance.
-     *
-     * @return the creditExpiredInBillingCurrency value.
-     */
-    AmountWithExchangeRate creditExpiredInBillingCurrency();
-
-    /**
      * Gets the charges property: Charges amount.
      *
      * @return the charges value.
@@ -109,25 +74,11 @@ public interface EventSummary {
     Amount charges();
 
     /**
-     * Gets the chargesInBillingCurrency property: Current balance.
-     *
-     * @return the chargesInBillingCurrency value.
-     */
-    AmountWithExchangeRate chargesInBillingCurrency();
-
-    /**
      * Gets the closedBalance property: Closed balance.
      *
      * @return the closedBalance value.
      */
     Amount closedBalance();
-
-    /**
-     * Gets the closedBalanceInBillingCurrency property: Current balance.
-     *
-     * @return the closedBalanceInBillingCurrency value.
-     */
-    AmountWithExchangeRate closedBalanceInBillingCurrency();
 
     /**
      * Gets the eventType property: The type of event.
@@ -142,13 +93,6 @@ public interface EventSummary {
      * @return the invoiceNumber value.
      */
     String invoiceNumber();
-
-    /**
-     * Gets the reseller property: Reseller details.
-     *
-     * @return the reseller value.
-     */
-    Reseller reseller();
 
     /**
      * Gets the etag property: Resource etag.

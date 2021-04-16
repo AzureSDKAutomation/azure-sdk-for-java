@@ -9,9 +9,7 @@ import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.ProxyResource;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.consumption.models.Amount;
-import com.azure.resourcemanager.consumption.models.AmountWithExchangeRate;
 import com.azure.resourcemanager.consumption.models.EventType;
-import com.azure.resourcemanager.consumption.models.Reseller;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -22,18 +20,6 @@ import java.util.Map;
 @Fluent
 public class EventSummaryInner extends ProxyResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(EventSummaryInner.class);
-
-    /*
-     * Credit Currency
-     */
-    @JsonProperty(value = "properties.creditCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private String creditCurrency;
-
-    /*
-     * Billing Currency.
-     */
-    @JsonProperty(value = "properties.billingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private String billingCurrency;
 
     /*
      * Transaction date.
@@ -54,22 +40,10 @@ public class EventSummaryInner extends ProxyResource {
     private Amount newCredit;
 
     /*
-     * Current balance.
-     */
-    @JsonProperty(value = "properties.newCreditInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate newCreditInBillingCurrency;
-
-    /*
      * Adjustments amount.
      */
     @JsonProperty(value = "properties.adjustments", access = JsonProperty.Access.WRITE_ONLY)
     private Amount adjustments;
-
-    /*
-     * Current balance.
-     */
-    @JsonProperty(value = "properties.adjustmentsInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate adjustmentsInBillingCurrency;
 
     /*
      * Credit expired.
@@ -78,34 +52,16 @@ public class EventSummaryInner extends ProxyResource {
     private Amount creditExpired;
 
     /*
-     * Current balance.
-     */
-    @JsonProperty(value = "properties.creditExpiredInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate creditExpiredInBillingCurrency;
-
-    /*
      * Charges amount.
      */
     @JsonProperty(value = "properties.charges", access = JsonProperty.Access.WRITE_ONLY)
     private Amount charges;
 
     /*
-     * Current balance.
-     */
-    @JsonProperty(value = "properties.chargesInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate chargesInBillingCurrency;
-
-    /*
      * Closed balance.
      */
     @JsonProperty(value = "properties.closedBalance", access = JsonProperty.Access.WRITE_ONLY)
     private Amount closedBalance;
-
-    /*
-     * Current balance.
-     */
-    @JsonProperty(value = "properties.closedBalanceInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate closedBalanceInBillingCurrency;
 
     /*
      * The type of event.
@@ -120,12 +76,6 @@ public class EventSummaryInner extends ProxyResource {
     private String invoiceNumber;
 
     /*
-     * Reseller details.
-     */
-    @JsonProperty(value = "properties.reseller", access = JsonProperty.Access.WRITE_ONLY)
-    private Reseller reseller;
-
-    /*
      * Resource etag.
      */
     @JsonProperty(value = "etag", access = JsonProperty.Access.WRITE_ONLY)
@@ -136,24 +86,6 @@ public class EventSummaryInner extends ProxyResource {
      */
     @JsonProperty(value = "tags", access = JsonProperty.Access.WRITE_ONLY)
     private Map<String, String> tags;
-
-    /**
-     * Get the creditCurrency property: Credit Currency.
-     *
-     * @return the creditCurrency value.
-     */
-    public String creditCurrency() {
-        return this.creditCurrency;
-    }
-
-    /**
-     * Get the billingCurrency property: Billing Currency.
-     *
-     * @return the billingCurrency value.
-     */
-    public String billingCurrency() {
-        return this.billingCurrency;
-    }
 
     /**
      * Get the transactionDate property: Transaction date.
@@ -183,30 +115,12 @@ public class EventSummaryInner extends ProxyResource {
     }
 
     /**
-     * Get the newCreditInBillingCurrency property: Current balance.
-     *
-     * @return the newCreditInBillingCurrency value.
-     */
-    public AmountWithExchangeRate newCreditInBillingCurrency() {
-        return this.newCreditInBillingCurrency;
-    }
-
-    /**
      * Get the adjustments property: Adjustments amount.
      *
      * @return the adjustments value.
      */
     public Amount adjustments() {
         return this.adjustments;
-    }
-
-    /**
-     * Get the adjustmentsInBillingCurrency property: Current balance.
-     *
-     * @return the adjustmentsInBillingCurrency value.
-     */
-    public AmountWithExchangeRate adjustmentsInBillingCurrency() {
-        return this.adjustmentsInBillingCurrency;
     }
 
     /**
@@ -219,15 +133,6 @@ public class EventSummaryInner extends ProxyResource {
     }
 
     /**
-     * Get the creditExpiredInBillingCurrency property: Current balance.
-     *
-     * @return the creditExpiredInBillingCurrency value.
-     */
-    public AmountWithExchangeRate creditExpiredInBillingCurrency() {
-        return this.creditExpiredInBillingCurrency;
-    }
-
-    /**
      * Get the charges property: Charges amount.
      *
      * @return the charges value.
@@ -237,30 +142,12 @@ public class EventSummaryInner extends ProxyResource {
     }
 
     /**
-     * Get the chargesInBillingCurrency property: Current balance.
-     *
-     * @return the chargesInBillingCurrency value.
-     */
-    public AmountWithExchangeRate chargesInBillingCurrency() {
-        return this.chargesInBillingCurrency;
-    }
-
-    /**
      * Get the closedBalance property: Closed balance.
      *
      * @return the closedBalance value.
      */
     public Amount closedBalance() {
         return this.closedBalance;
-    }
-
-    /**
-     * Get the closedBalanceInBillingCurrency property: Current balance.
-     *
-     * @return the closedBalanceInBillingCurrency value.
-     */
-    public AmountWithExchangeRate closedBalanceInBillingCurrency() {
-        return this.closedBalanceInBillingCurrency;
     }
 
     /**
@@ -293,15 +180,6 @@ public class EventSummaryInner extends ProxyResource {
     }
 
     /**
-     * Get the reseller property: Reseller details.
-     *
-     * @return the reseller value.
-     */
-    public Reseller reseller() {
-        return this.reseller;
-    }
-
-    /**
      * Get the etag property: Resource etag.
      *
      * @return the etag value.
@@ -328,35 +206,17 @@ public class EventSummaryInner extends ProxyResource {
         if (newCredit() != null) {
             newCredit().validate();
         }
-        if (newCreditInBillingCurrency() != null) {
-            newCreditInBillingCurrency().validate();
-        }
         if (adjustments() != null) {
             adjustments().validate();
-        }
-        if (adjustmentsInBillingCurrency() != null) {
-            adjustmentsInBillingCurrency().validate();
         }
         if (creditExpired() != null) {
             creditExpired().validate();
         }
-        if (creditExpiredInBillingCurrency() != null) {
-            creditExpiredInBillingCurrency().validate();
-        }
         if (charges() != null) {
             charges().validate();
         }
-        if (chargesInBillingCurrency() != null) {
-            chargesInBillingCurrency().validate();
-        }
         if (closedBalance() != null) {
             closedBalance().validate();
-        }
-        if (closedBalanceInBillingCurrency() != null) {
-            closedBalanceInBillingCurrency().validate();
-        }
-        if (reseller() != null) {
-            reseller().validate();
         }
     }
 }
