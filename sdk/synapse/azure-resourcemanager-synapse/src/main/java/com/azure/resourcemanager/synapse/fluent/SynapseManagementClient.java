@@ -136,6 +136,34 @@ public interface SynapseManagementClient {
     KeysClient getKeys();
 
     /**
+     * Gets the KustoOperationsClient object to access its operations.
+     *
+     * @return the KustoOperationsClient object.
+     */
+    KustoOperationsClient getKustoOperations();
+
+    /**
+     * Gets the KustoPoolsClient object to access its operations.
+     *
+     * @return the KustoPoolsClient object.
+     */
+    KustoPoolsClient getKustoPools();
+
+    /**
+     * Gets the DatabasesClient object to access its operations.
+     *
+     * @return the DatabasesClient object.
+     */
+    DatabasesClient getDatabases();
+
+    /**
+     * Gets the DataConnectionsClient object to access its operations.
+     *
+     * @return the DataConnectionsClient object.
+     */
+    DataConnectionsClient getDataConnections();
+
+    /**
      * Gets the LibrariesClient object to access its operations.
      *
      * @return the LibrariesClient object.
