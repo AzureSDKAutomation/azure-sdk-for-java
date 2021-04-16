@@ -12,8 +12,8 @@ import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.models.SourceControlConfigurationInner;
-import com.azure.resourcemanager.kubernetesconfiguration.models.SourceControlConfigurationsClusterResourceName;
-import com.azure.resourcemanager.kubernetesconfiguration.models.SourceControlConfigurationsClusterRp;
+import com.azure.resourcemanager.kubernetesconfiguration.models.ExtensionsClusterResourceName;
+import com.azure.resourcemanager.kubernetesconfiguration.models.ExtensionsClusterRp;
 
 /** An instance of this class provides access to all the operations defined in SourceControlConfigurationsClient. */
 public interface SourceControlConfigurationsClient {
@@ -35,8 +35,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     SourceControlConfigurationInner get(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName);
 
@@ -59,8 +59,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<SourceControlConfigurationInner> getWithResponse(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         Context context);
@@ -84,8 +84,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     SourceControlConfigurationInner createOrUpdate(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         SourceControlConfigurationInner sourceControlConfiguration);
@@ -110,8 +110,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<SourceControlConfigurationInner> createOrUpdateWithResponse(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         SourceControlConfigurationInner sourceControlConfiguration,
@@ -136,8 +136,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     SyncPoller<PollResult<Void>, Void> beginDelete(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName);
 
@@ -161,8 +161,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     SyncPoller<PollResult<Void>, Void> beginDelete(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         Context context);
@@ -185,8 +185,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     void delete(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName);
 
@@ -209,8 +209,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     void delete(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         Context context);
@@ -232,8 +232,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<SourceControlConfigurationInner> list(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName);
 
     /**
@@ -254,8 +254,8 @@ public interface SourceControlConfigurationsClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<SourceControlConfigurationInner> list(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         Context context);
 }

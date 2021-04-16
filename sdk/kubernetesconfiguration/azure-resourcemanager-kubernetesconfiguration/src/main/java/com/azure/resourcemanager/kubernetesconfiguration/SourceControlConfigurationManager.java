@@ -21,9 +21,11 @@ import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.SourceControlConfigurationClient;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.ExtensionsImpl;
 import com.azure.resourcemanager.kubernetesconfiguration.implementation.OperationsImpl;
 import com.azure.resourcemanager.kubernetesconfiguration.implementation.SourceControlConfigurationClientBuilder;
 import com.azure.resourcemanager.kubernetesconfiguration.implementation.SourceControlConfigurationsImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.models.Extensions;
 import com.azure.resourcemanager.kubernetesconfiguration.models.Operations;
 import com.azure.resourcemanager.kubernetesconfiguration.models.SourceControlConfigurations;
 import java.time.Duration;
@@ -34,6 +36,8 @@ import java.util.Objects;
 
 /** Entry point to SourceControlConfigurationManager. KubernetesConfiguration Client. */
 public final class SourceControlConfigurationManager {
+    private Extensions extensions;
+
     private SourceControlConfigurations sourceControlConfigurations;
 
     private Operations operations;
@@ -201,6 +205,14 @@ public final class SourceControlConfigurationManager {
                     .build();
             return new SourceControlConfigurationManager(httpPipeline, profile, defaultPollInterval);
         }
+    }
+
+    /** @return Resource collection API of Extensions. */
+    public Extensions extensions() {
+        if (this.extensions == null) {
+            this.extensions = new ExtensionsImpl(clientObject.getExtensions(), this);
+        }
+        return extensions;
     }
 
     /** @return Resource collection API of SourceControlConfigurations. */

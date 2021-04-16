@@ -21,6 +21,7 @@ import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.ExtensionsClient;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.OperationsClient;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.SourceControlConfigurationClient;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.SourceControlConfigurationsClient;
@@ -111,6 +112,18 @@ public final class SourceControlConfigurationClientImpl implements SourceControl
         return this.defaultPollInterval;
     }
 
+    /** The ExtensionsClient object to access its operations. */
+    private final ExtensionsClient extensions;
+
+    /**
+     * Gets the ExtensionsClient object to access its operations.
+     *
+     * @return the ExtensionsClient object.
+     */
+    public ExtensionsClient getExtensions() {
+        return this.extensions;
+    }
+
     /** The SourceControlConfigurationsClient object to access its operations. */
     private final SourceControlConfigurationsClient sourceControlConfigurations;
 
@@ -158,7 +171,8 @@ public final class SourceControlConfigurationClientImpl implements SourceControl
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-03-01";
+        this.apiVersion = "2021-05-01-preview";
+        this.extensions = new ExtensionsClientImpl(this);
         this.sourceControlConfigurations = new SourceControlConfigurationsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
     }
