@@ -717,6 +717,7 @@
         <module>sdk/mysql</module>
         <module>sdk/netapp</module>
         <module>sdk/postgresql</module>
+        <module>sdk/postgresqlhsc</module>
         <module>sdk/quantum</module>
         <module>sdk/recoveryservices</module>
         <module>sdk/redisenterprise</module>
