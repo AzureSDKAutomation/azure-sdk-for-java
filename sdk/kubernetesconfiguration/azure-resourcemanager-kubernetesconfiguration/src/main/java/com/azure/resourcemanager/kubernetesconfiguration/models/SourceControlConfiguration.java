@@ -32,14 +32,6 @@ public interface SourceControlConfiguration {
     String type();
 
     /**
-     * Gets the systemData property: Top level metadata
-     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources.
-     *
-     * @return the systemData value.
-     */
-    SystemData systemData();
-
-    /**
      * Gets the repositoryUrl property: Url of the SourceControl Repository.
      *
      * @return the repositoryUrl value.
@@ -133,6 +125,14 @@ public interface SourceControlConfiguration {
      * @return the complianceStatus value.
      */
     ComplianceStatus complianceStatus();
+
+    /**
+     * Gets the systemData property: Top level metadata
+     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources.
+     *
+     * @return the systemData value.
+     */
+    SystemData systemData();
 
     /**
      * Gets the inner com.azure.resourcemanager.kubernetesconfiguration.fluent.models.SourceControlConfigurationInner

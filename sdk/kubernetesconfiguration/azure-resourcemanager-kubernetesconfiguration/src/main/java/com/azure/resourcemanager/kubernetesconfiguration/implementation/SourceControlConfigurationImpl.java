@@ -39,10 +39,6 @@ public final class SourceControlConfigurationImpl implements SourceControlConfig
         return this.innerModel().type();
     }
 
-    public SystemData systemData() {
-        return this.innerModel().systemData();
-    }
-
     public String repositoryUrl() {
         return this.innerModel().repositoryUrl();
     }
@@ -98,6 +94,10 @@ public final class SourceControlConfigurationImpl implements SourceControlConfig
 
     public ComplianceStatus complianceStatus() {
         return this.innerModel().complianceStatus();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public SourceControlConfigurationInner innerModel() {

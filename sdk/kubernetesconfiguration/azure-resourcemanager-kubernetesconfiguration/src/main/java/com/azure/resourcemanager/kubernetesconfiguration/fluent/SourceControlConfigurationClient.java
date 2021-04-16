@@ -45,6 +45,13 @@ public interface SourceControlConfigurationClient {
     Duration getDefaultPollInterval();
 
     /**
+     * Gets the ExtensionsClient object to access its operations.
+     *
+     * @return the ExtensionsClient object.
+     */
+    ExtensionsClient getExtensions();
+
+    /**
      * Gets the SourceControlConfigurationsClient object to access its operations.
      *
      * @return the SourceControlConfigurationsClient object.

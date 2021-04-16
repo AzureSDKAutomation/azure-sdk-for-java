@@ -25,13 +25,6 @@ public class SourceControlConfigurationInner extends ProxyResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(SourceControlConfigurationInner.class);
 
     /*
-     * Top level metadata
-     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources
-     */
-    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
-    private SystemData systemData;
-
-    /*
      * Url of the SourceControl Repository.
      */
     @JsonProperty(value = "properties.repositoryUrl")
@@ -113,15 +106,12 @@ public class SourceControlConfigurationInner extends ProxyResource {
     @JsonProperty(value = "properties.complianceStatus", access = JsonProperty.Access.WRITE_ONLY)
     private ComplianceStatus complianceStatus;
 
-    /**
-     * Get the systemData property: Top level metadata
-     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources.
-     *
-     * @return the systemData value.
+    /*
+     * Top level metadata
+     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources
      */
-    public SystemData systemData() {
-        return this.systemData;
-    }
+    @JsonProperty(value = "systemData")
+    private SystemData systemData;
 
     /**
      * Get the repositoryUrl property: Url of the SourceControl Repository.
@@ -356,6 +346,28 @@ public class SourceControlConfigurationInner extends ProxyResource {
      */
     public ComplianceStatus complianceStatus() {
         return this.complianceStatus;
+    }
+
+    /**
+     * Get the systemData property: Top level metadata
+     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
+
+    /**
+     * Set the systemData property: Top level metadata
+     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources.
+     *
+     * @param systemData the systemData value to set.
+     * @return the SourceControlConfigurationInner object itself.
+     */
+    public SourceControlConfigurationInner withSystemData(SystemData systemData) {
+        this.systemData = systemData;
+        return this;
     }
 
     /**
