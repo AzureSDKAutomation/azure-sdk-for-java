@@ -28,6 +28,13 @@ public final class ResourceProviderOperationInner {
     private ResourceProviderOperationDisplay display;
 
     /*
+     * The intended executor of the operation;governs the display of the
+     * operation in the RBAC UX and the audit logs UX
+     */
+    @JsonProperty(value = "origin")
+    private String origin;
+
+    /*
      * The flag that indicates whether the operation applies to data plane.
      */
     @JsonProperty(value = "isDataAction", access = JsonProperty.Access.WRITE_ONLY)
@@ -70,6 +77,28 @@ public final class ResourceProviderOperationInner {
      */
     public ResourceProviderOperationInner withDisplay(ResourceProviderOperationDisplay display) {
         this.display = display;
+        return this;
+    }
+
+    /**
+     * Get the origin property: The intended executor of the operation;governs the display of the operation in the RBAC
+     * UX and the audit logs UX.
+     *
+     * @return the origin value.
+     */
+    public String origin() {
+        return this.origin;
+    }
+
+    /**
+     * Set the origin property: The intended executor of the operation;governs the display of the operation in the RBAC
+     * UX and the audit logs UX.
+     *
+     * @param origin the origin value to set.
+     * @return the ResourceProviderOperationInner object itself.
+     */
+    public ResourceProviderOperationInner withOrigin(String origin) {
+        this.origin = origin;
         return this;
     }
 
