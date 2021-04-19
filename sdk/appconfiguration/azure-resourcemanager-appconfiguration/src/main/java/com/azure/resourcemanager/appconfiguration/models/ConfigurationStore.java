@@ -256,11 +256,7 @@ public interface ConfigurationStore {
 
     /** The template for ConfigurationStore update. */
     interface Update
-        extends UpdateStages.WithTags,
-            UpdateStages.WithIdentity,
-            UpdateStages.WithSku,
-            UpdateStages.WithEncryption,
-            UpdateStages.WithPublicNetworkAccess {
+        extends UpdateStages.WithTags, UpdateStages.WithIdentity, UpdateStages.WithSku, UpdateStages.WithEncryption {
         /**
          * Executes the update request.
          *
@@ -317,18 +313,6 @@ public interface ConfigurationStore {
              * @return the next definition stage.
              */
             Update withEncryption(EncryptionProperties encryption);
-        }
-        /** The stage of the ConfigurationStore update allowing to specify publicNetworkAccess. */
-        interface WithPublicNetworkAccess {
-            /**
-             * Specifies the publicNetworkAccess property: Control permission for data plane traffic coming from public
-             * networks while private endpoint is enabled..
-             *
-             * @param publicNetworkAccess Control permission for data plane traffic coming from public networks while
-             *     private endpoint is enabled.
-             * @return the next definition stage.
-             */
-            Update withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess);
         }
     }
     /**
@@ -391,27 +375,4 @@ public interface ConfigurationStore {
      * @return an API key used for authenticating with a configuration store endpoint.
      */
     Response<ApiKey> regenerateKeyWithResponse(RegenerateKeyParameters regenerateKeyParameters, Context context);
-
-    /**
-     * Lists a configuration store key-value.
-     *
-     * @param listKeyValueParameters The parameters for retrieving a key-value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the result of a request to retrieve a key-value from the specified configuration store.
-     */
-    KeyValue listKeyValue(ListKeyValueParameters listKeyValueParameters);
-
-    /**
-     * Lists a configuration store key-value.
-     *
-     * @param listKeyValueParameters The parameters for retrieving a key-value.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the result of a request to retrieve a key-value from the specified configuration store.
-     */
-    Response<KeyValue> listKeyValueWithResponse(ListKeyValueParameters listKeyValueParameters, Context context);
 }

@@ -41,13 +41,6 @@ public class ConfigurationStoreUpdateParameters {
     @JsonProperty(value = "properties.encryption")
     private EncryptionProperties encryption;
 
-    /*
-     * Control permission for data plane traffic coming from public networks
-     * while private endpoint is enabled.
-     */
-    @JsonProperty(value = "properties.publicNetworkAccess")
-    private PublicNetworkAccess publicNetworkAccess;
-
     /**
      * Get the identity property: The managed identity information for the configuration store.
      *
@@ -125,28 +118,6 @@ public class ConfigurationStoreUpdateParameters {
      */
     public ConfigurationStoreUpdateParameters withEncryption(EncryptionProperties encryption) {
         this.encryption = encryption;
-        return this;
-    }
-
-    /**
-     * Get the publicNetworkAccess property: Control permission for data plane traffic coming from public networks while
-     * private endpoint is enabled.
-     *
-     * @return the publicNetworkAccess value.
-     */
-    public PublicNetworkAccess publicNetworkAccess() {
-        return this.publicNetworkAccess;
-    }
-
-    /**
-     * Set the publicNetworkAccess property: Control permission for data plane traffic coming from public networks while
-     * private endpoint is enabled.
-     *
-     * @param publicNetworkAccess the publicNetworkAccess value to set.
-     * @return the ConfigurationStoreUpdateParameters object itself.
-     */
-    public ConfigurationStoreUpdateParameters withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess) {
-        this.publicNetworkAccess = publicNetworkAccess;
         return this;
     }
 

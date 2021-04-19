@@ -13,8 +13,6 @@ import com.azure.resourcemanager.appconfiguration.models.ApiKey;
 import com.azure.resourcemanager.appconfiguration.models.ConfigurationStore;
 import com.azure.resourcemanager.appconfiguration.models.ConfigurationStoreUpdateParameters;
 import com.azure.resourcemanager.appconfiguration.models.EncryptionProperties;
-import com.azure.resourcemanager.appconfiguration.models.KeyValue;
-import com.azure.resourcemanager.appconfiguration.models.ListKeyValueParameters;
 import com.azure.resourcemanager.appconfiguration.models.PrivateEndpointConnectionReference;
 import com.azure.resourcemanager.appconfiguration.models.ProvisioningState;
 import com.azure.resourcemanager.appconfiguration.models.PublicNetworkAccess;
@@ -219,18 +217,6 @@ public final class ConfigurationStoreImpl
             .regenerateKeyWithResponse(resourceGroupName, configStoreName, regenerateKeyParameters, context);
     }
 
-    public KeyValue listKeyValue(ListKeyValueParameters listKeyValueParameters) {
-        return serviceManager
-            .configurationStores()
-            .listKeyValue(resourceGroupName, configStoreName, listKeyValueParameters);
-    }
-
-    public Response<KeyValue> listKeyValueWithResponse(ListKeyValueParameters listKeyValueParameters, Context context) {
-        return serviceManager
-            .configurationStores()
-            .listKeyValueWithResponse(resourceGroupName, configStoreName, listKeyValueParameters, context);
-    }
-
     public ConfigurationStoreImpl withRegion(Region location) {
         this.innerModel().withLocation(location.toString());
         return this;
@@ -282,13 +268,8 @@ public final class ConfigurationStoreImpl
     }
 
     public ConfigurationStoreImpl withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess) {
-        if (isInCreateMode()) {
-            this.innerModel().withPublicNetworkAccess(publicNetworkAccess);
-            return this;
-        } else {
-            this.updateConfigStoreUpdateParameters.withPublicNetworkAccess(publicNetworkAccess);
-            return this;
-        }
+        this.innerModel().withPublicNetworkAccess(publicNetworkAccess);
+        return this;
     }
 
     private boolean isInCreateMode() {
