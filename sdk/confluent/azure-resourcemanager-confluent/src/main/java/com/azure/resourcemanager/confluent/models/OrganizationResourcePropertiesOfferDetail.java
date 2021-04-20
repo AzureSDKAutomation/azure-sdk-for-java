@@ -48,13 +48,6 @@ public final class OrganizationResourcePropertiesOfferDetail extends OfferDetail
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public OrganizationResourcePropertiesOfferDetail withStatus(SaaSOfferStatus status) {
-        super.withStatus(status);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *
