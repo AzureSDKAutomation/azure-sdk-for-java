@@ -727,6 +727,7 @@
         <module>sdk/powerbidedicated</module>
         <module>sdk/quantum</module>
         <module>sdk/recoveryservices</module>
+        <module>sdk/recoveryservicesbackup</module>
         <module>sdk/redisenterprise</module>
         <module>sdk/relay</module>
         <module>sdk/remoterendering</module>
