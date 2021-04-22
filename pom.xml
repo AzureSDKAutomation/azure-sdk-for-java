@@ -715,6 +715,7 @@
         <module>sdk/logic</module>
         <module>sdk/machinelearningservices</module>
         <module>sdk/maintenance</module>
+        <module>sdk/managedservices</module>
         <module>sdk/mariadb</module>
         <module>sdk/marketplaceordering</module>
         <module>sdk/mediaservices</module>
