@@ -10,6 +10,8 @@ import com.azure.core.management.ProxyResource;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.servicefabric.models.ApplicationMetricDescription;
 import com.azure.resourcemanager.servicefabric.models.ApplicationUpgradePolicy;
+import com.azure.resourcemanager.servicefabric.models.ApplicationUserAssignedIdentity;
+import com.azure.resourcemanager.servicefabric.models.ManagedIdentity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -20,6 +22,12 @@ import java.util.Map;
 @Fluent
 public class ApplicationResourceInner extends ProxyResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ApplicationResourceInner.class);
+
+    /*
+     * Describes the managed identities for an Azure resource.
+     */
+    @JsonProperty(value = "identity")
+    private ManagedIdentity identity;
 
     /*
      * The version of the application type as defined in the application
@@ -74,6 +82,13 @@ public class ApplicationResourceInner extends ProxyResource {
     private List<ApplicationMetricDescription> metrics;
 
     /*
+     * List of user assigned identities for the application, each mapped to a
+     * friendly name.
+     */
+    @JsonProperty(value = "properties.managedIdentities")
+    private List<ApplicationUserAssignedIdentity> managedIdentities;
+
+    /*
      * The current deployment or provisioning state, which only appears in the
      * response
      */
@@ -104,6 +119,26 @@ public class ApplicationResourceInner extends ProxyResource {
      */
     @JsonProperty(value = "etag", access = JsonProperty.Access.WRITE_ONLY)
     private String etag;
+
+    /**
+     * Get the identity property: Describes the managed identities for an Azure resource.
+     *
+     * @return the identity value.
+     */
+    public ManagedIdentity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: Describes the managed identities for an Azure resource.
+     *
+     * @param identity the identity value to set.
+     * @return the ApplicationResourceInner object itself.
+     */
+    public ApplicationResourceInner withIdentity(ManagedIdentity identity) {
+        this.identity = identity;
+        return this;
+    }
 
     /**
      * Get the typeVersion property: The version of the application type as defined in the application manifest.
@@ -258,6 +293,28 @@ public class ApplicationResourceInner extends ProxyResource {
     }
 
     /**
+     * Get the managedIdentities property: List of user assigned identities for the application, each mapped to a
+     * friendly name.
+     *
+     * @return the managedIdentities value.
+     */
+    public List<ApplicationUserAssignedIdentity> managedIdentities() {
+        return this.managedIdentities;
+    }
+
+    /**
+     * Set the managedIdentities property: List of user assigned identities for the application, each mapped to a
+     * friendly name.
+     *
+     * @param managedIdentities the managedIdentities value to set.
+     * @return the ApplicationResourceInner object itself.
+     */
+    public ApplicationResourceInner withManagedIdentities(List<ApplicationUserAssignedIdentity> managedIdentities) {
+        this.managedIdentities = managedIdentities;
+        return this;
+    }
+
+    /**
      * Get the provisioningState property: The current deployment or provisioning state, which only appears in the
      * response.
      *
@@ -342,11 +399,17 @@ public class ApplicationResourceInner extends ProxyResource {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (identity() != null) {
+            identity().validate();
+        }
         if (upgradePolicy() != null) {
             upgradePolicy().validate();
         }
         if (metrics() != null) {
             metrics().forEach(e -> e.validate());
+        }
+        if (managedIdentities() != null) {
+            managedIdentities().forEach(e -> e.validate());
         }
     }
 }

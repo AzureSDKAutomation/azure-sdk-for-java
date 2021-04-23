@@ -9,6 +9,7 @@ import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.servicefabric.models.AddOnFeatures;
+import com.azure.resourcemanager.servicefabric.models.ApplicationTypeVersionsCleanupPolicy;
 import com.azure.resourcemanager.servicefabric.models.AzureActiveDirectory;
 import com.azure.resourcemanager.servicefabric.models.CertificateDescription;
 import com.azure.resourcemanager.servicefabric.models.ClientCertificateCommonName;
@@ -224,6 +225,12 @@ public class ClusterInner extends Resource {
      */
     @JsonProperty(value = "properties.upgradeMode")
     private UpgradeMode upgradeMode;
+
+    /*
+     * The policy used to clean up unused versions.
+     */
+    @JsonProperty(value = "properties.applicationTypeVersionsCleanupPolicy")
+    private ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy;
 
     /*
      * The VM image VMSS has been configured with. Generic names such as
@@ -687,6 +694,27 @@ public class ClusterInner extends Resource {
     }
 
     /**
+     * Get the applicationTypeVersionsCleanupPolicy property: The policy used to clean up unused versions.
+     *
+     * @return the applicationTypeVersionsCleanupPolicy value.
+     */
+    public ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy() {
+        return this.applicationTypeVersionsCleanupPolicy;
+    }
+
+    /**
+     * Set the applicationTypeVersionsCleanupPolicy property: The policy used to clean up unused versions.
+     *
+     * @param applicationTypeVersionsCleanupPolicy the applicationTypeVersionsCleanupPolicy value to set.
+     * @return the ClusterInner object itself.
+     */
+    public ClusterInner withApplicationTypeVersionsCleanupPolicy(
+        ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy) {
+        this.applicationTypeVersionsCleanupPolicy = applicationTypeVersionsCleanupPolicy;
+        return this;
+    }
+
+    /**
      * Get the vmImage property: The VM image VMSS has been configured with. Generic names such as Windows or Linux can
      * be used.
      *
@@ -772,6 +800,9 @@ public class ClusterInner extends Resource {
         }
         if (upgradeDescription() != null) {
             upgradeDescription().validate();
+        }
+        if (applicationTypeVersionsCleanupPolicy() != null) {
+            applicationTypeVersionsCleanupPolicy().validate();
         }
     }
 }
