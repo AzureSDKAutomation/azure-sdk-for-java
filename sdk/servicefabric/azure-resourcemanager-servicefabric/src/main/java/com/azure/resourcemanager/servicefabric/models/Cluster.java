@@ -239,6 +239,13 @@ public interface Cluster {
     UpgradeMode upgradeMode();
 
     /**
+     * Gets the applicationTypeVersionsCleanupPolicy property: The policy used to clean up unused versions.
+     *
+     * @return the applicationTypeVersionsCleanupPolicy value.
+     */
+    ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy();
+
+    /**
      * Gets the vmImage property: The VM image VMSS has been configured with. Generic names such as Windows or Linux can
      * be used.
      *
@@ -337,6 +344,7 @@ public interface Cluster {
                 DefinitionStages.WithReverseProxyCertificateCommonNames,
                 DefinitionStages.WithUpgradeDescription,
                 DefinitionStages.WithUpgradeMode,
+                DefinitionStages.WithApplicationTypeVersionsCleanupPolicy,
                 DefinitionStages.WithVmImage {
             /**
              * Executes the create request.
@@ -579,6 +587,18 @@ public interface Cluster {
              */
             WithCreate withUpgradeMode(UpgradeMode upgradeMode);
         }
+        /** The stage of the Cluster definition allowing to specify applicationTypeVersionsCleanupPolicy. */
+        interface WithApplicationTypeVersionsCleanupPolicy {
+            /**
+             * Specifies the applicationTypeVersionsCleanupPolicy property: The policy used to clean up unused
+             * versions..
+             *
+             * @param applicationTypeVersionsCleanupPolicy The policy used to clean up unused versions.
+             * @return the next definition stage.
+             */
+            WithCreate withApplicationTypeVersionsCleanupPolicy(
+                ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy);
+        }
         /** The stage of the Cluster definition allowing to specify vmImage. */
         interface WithVmImage {
             /**
@@ -614,7 +634,8 @@ public interface Cluster {
             UpdateStages.WithReliabilityLevel,
             UpdateStages.WithReverseProxyCertificate,
             UpdateStages.WithUpgradeDescription,
-            UpdateStages.WithUpgradeMode {
+            UpdateStages.WithUpgradeMode,
+            UpdateStages.WithApplicationTypeVersionsCleanupPolicy {
         /**
          * Executes the update request.
          *
@@ -814,6 +835,18 @@ public interface Cluster {
              * @return the next definition stage.
              */
             Update withUpgradeMode(UpgradeMode upgradeMode);
+        }
+        /** The stage of the Cluster update allowing to specify applicationTypeVersionsCleanupPolicy. */
+        interface WithApplicationTypeVersionsCleanupPolicy {
+            /**
+             * Specifies the applicationTypeVersionsCleanupPolicy property: The policy used to clean up unused
+             * versions..
+             *
+             * @param applicationTypeVersionsCleanupPolicy The policy used to clean up unused versions.
+             * @return the next definition stage.
+             */
+            Update withApplicationTypeVersionsCleanupPolicy(
+                ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy);
         }
     }
     /**

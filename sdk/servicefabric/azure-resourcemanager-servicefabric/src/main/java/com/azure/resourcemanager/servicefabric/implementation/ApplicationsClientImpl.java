@@ -186,6 +186,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter applicationName is required and cannot be null."));
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -197,7 +198,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                             resourceGroupName,
                             clusterName,
                             applicationName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -243,6 +244,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter applicationName is required and cannot be null."));
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -252,7 +254,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                 resourceGroupName,
                 clusterName,
                 applicationName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context);
     }
@@ -365,6 +367,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -376,7 +379,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                             resourceGroupName,
                             clusterName,
                             applicationName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             parameters,
                             accept,
                             context))
@@ -431,6 +434,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -440,7 +444,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                 resourceGroupName,
                 clusterName,
                 applicationName,
-                this.client.getApiVersion(),
+                apiVersion,
                 parameters,
                 accept,
                 context);
@@ -677,6 +681,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -688,7 +693,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                             resourceGroupName,
                             clusterName,
                             applicationName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             parameters,
                             accept,
                             context))
@@ -743,6 +748,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -752,7 +758,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                 resourceGroupName,
                 clusterName,
                 applicationName,
-                this.client.getApiVersion(),
+                apiVersion,
                 parameters,
                 accept,
                 context);
@@ -982,6 +988,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter applicationName is required and cannot be null."));
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -993,7 +1000,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                             resourceGroupName,
                             clusterName,
                             applicationName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -1037,6 +1044,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter applicationName is required and cannot be null."));
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1046,7 +1054,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                 resourceGroupName,
                 clusterName,
                 applicationName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context);
     }
@@ -1232,6 +1240,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
         if (clusterName == null) {
             return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1242,7 +1251,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             clusterName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -1282,6 +1291,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
         if (clusterName == null) {
             return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
         }
+        final String apiVersion = "2020-03-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1290,7 +1300,7 @@ public final class ApplicationsClientImpl implements ApplicationsClient {
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 clusterName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context);
     }

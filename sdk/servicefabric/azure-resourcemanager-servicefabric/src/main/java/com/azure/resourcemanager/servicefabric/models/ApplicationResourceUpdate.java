@@ -72,6 +72,13 @@ public class ApplicationResourceUpdate extends ProxyResource {
     private List<ApplicationMetricDescription> metrics;
 
     /*
+     * List of user assigned identities for the application, each mapped to a
+     * friendly name.
+     */
+    @JsonProperty(value = "properties.managedIdentities")
+    private List<ApplicationUserAssignedIdentity> managedIdentities;
+
+    /*
      * It will be deprecated in New API, resource location depends on the
      * parent resource.
      */
@@ -243,6 +250,28 @@ public class ApplicationResourceUpdate extends ProxyResource {
     }
 
     /**
+     * Get the managedIdentities property: List of user assigned identities for the application, each mapped to a
+     * friendly name.
+     *
+     * @return the managedIdentities value.
+     */
+    public List<ApplicationUserAssignedIdentity> managedIdentities() {
+        return this.managedIdentities;
+    }
+
+    /**
+     * Set the managedIdentities property: List of user assigned identities for the application, each mapped to a
+     * friendly name.
+     *
+     * @param managedIdentities the managedIdentities value to set.
+     * @return the ApplicationResourceUpdate object itself.
+     */
+    public ApplicationResourceUpdate withManagedIdentities(List<ApplicationUserAssignedIdentity> managedIdentities) {
+        this.managedIdentities = managedIdentities;
+        return this;
+    }
+
+    /**
      * Get the location property: It will be deprecated in New API, resource location depends on the parent resource.
      *
      * @return the location value.
@@ -302,6 +331,9 @@ public class ApplicationResourceUpdate extends ProxyResource {
         }
         if (metrics() != null) {
             metrics().forEach(e -> e.validate());
+        }
+        if (managedIdentities() != null) {
+            managedIdentities().forEach(e -> e.validate());
         }
     }
 }
