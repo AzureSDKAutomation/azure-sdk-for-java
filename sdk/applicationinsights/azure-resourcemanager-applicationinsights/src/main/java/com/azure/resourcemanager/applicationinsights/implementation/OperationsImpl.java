@@ -9,7 +9,9 @@ import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.applicationinsights.fluent.OperationsClient;
 import com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner;
+import com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner;
 import com.azure.resourcemanager.applicationinsights.models.Operation;
+import com.azure.resourcemanager.applicationinsights.models.OperationLive;
 import com.azure.resourcemanager.applicationinsights.models.Operations;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,6 +37,16 @@ public final class OperationsImpl implements Operations {
     public PagedIterable<Operation> list(Context context) {
         PagedIterable<OperationInner> inner = this.serviceClient().list(context);
         return Utils.mapPage(inner, inner1 -> new OperationImpl(inner1, this.manager()));
+    }
+
+    public PagedIterable<OperationLive> list() {
+        PagedIterable<OperationLiveInner> inner = this.serviceClient().list();
+        return Utils.mapPage(inner, inner1 -> new OperationLiveImpl(inner1, this.manager()));
+    }
+
+    public PagedIterable<OperationLive> list(Context context) {
+        PagedIterable<OperationLiveInner> inner = this.serviceClient().list(context);
+        return Utils.mapPage(inner, inner1 -> new OperationLiveImpl(inner1, this.manager()));
     }
 
     private OperationsClient serviceClient() {

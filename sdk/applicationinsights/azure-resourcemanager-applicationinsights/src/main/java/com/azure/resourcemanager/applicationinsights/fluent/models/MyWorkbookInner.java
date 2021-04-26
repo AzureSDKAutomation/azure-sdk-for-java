@@ -7,9 +7,8 @@ package com.azure.resourcemanager.applicationinsights.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.applicationinsights.models.Kind;
-import com.azure.resourcemanager.applicationinsights.models.ManagedIdentity;
 import com.azure.resourcemanager.applicationinsights.models.MyWorkbookResource;
+import com.azure.resourcemanager.applicationinsights.models.SharedTypeKind;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -25,7 +24,7 @@ public class MyWorkbookInner extends MyWorkbookResource {
      * The kind of workbook. Choices are user and shared.
      */
     @JsonProperty(value = "kind")
-    private Kind kind;
+    private SharedTypeKind kind;
 
     /*
      * The user-defined name of the private workbook.
@@ -79,18 +78,12 @@ public class MyWorkbookInner extends MyWorkbookResource {
     @JsonProperty(value = "properties.sourceId")
     private String sourceId;
 
-    /*
-     * BYOS Storage Account URI
-     */
-    @JsonProperty(value = "properties.storageUri")
-    private String storageUri;
-
     /**
      * Get the kind property: The kind of workbook. Choices are user and shared.
      *
      * @return the kind value.
      */
-    public Kind kind() {
+    public SharedTypeKind kind() {
         return this.kind;
     }
 
@@ -100,7 +93,7 @@ public class MyWorkbookInner extends MyWorkbookResource {
      * @param kind the kind value to set.
      * @return the MyWorkbookInner object itself.
      */
-    public MyWorkbookInner withKind(Kind kind) {
+    public MyWorkbookInner withKind(SharedTypeKind kind) {
         this.kind = kind;
         return this;
     }
@@ -250,33 +243,6 @@ public class MyWorkbookInner extends MyWorkbookResource {
         return this;
     }
 
-    /**
-     * Get the storageUri property: BYOS Storage Account URI.
-     *
-     * @return the storageUri value.
-     */
-    public String storageUri() {
-        return this.storageUri;
-    }
-
-    /**
-     * Set the storageUri property: BYOS Storage Account URI.
-     *
-     * @param storageUri the storageUri value to set.
-     * @return the MyWorkbookInner object itself.
-     */
-    public MyWorkbookInner withStorageUri(String storageUri) {
-        this.storageUri = storageUri;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MyWorkbookInner withIdentity(ManagedIdentity identity) {
-        super.withIdentity(identity);
-        return this;
-    }
-
     /** {@inheritDoc} */
     @Override
     public MyWorkbookInner withId(String id) {
@@ -295,13 +261,6 @@ public class MyWorkbookInner extends MyWorkbookResource {
     @Override
     public MyWorkbookInner withType(String type) {
         super.withType(type);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MyWorkbookInner withEtag(Map<String, String> etag) {
-        super.withEtag(etag);
         return this;
     }
 
