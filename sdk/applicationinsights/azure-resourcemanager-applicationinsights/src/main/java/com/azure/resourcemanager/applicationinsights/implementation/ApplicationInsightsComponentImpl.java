@@ -12,6 +12,7 @@ import com.azure.resourcemanager.applicationinsights.models.ApplicationType;
 import com.azure.resourcemanager.applicationinsights.models.FlowType;
 import com.azure.resourcemanager.applicationinsights.models.IngestionMode;
 import com.azure.resourcemanager.applicationinsights.models.PrivateLinkScopedResource;
+import com.azure.resourcemanager.applicationinsights.models.PublicNetworkAccessType;
 import com.azure.resourcemanager.applicationinsights.models.RequestSource;
 import com.azure.resourcemanager.applicationinsights.models.TagsResource;
 import java.time.OffsetDateTime;
@@ -127,6 +128,14 @@ public final class ApplicationInsightsComponentImpl
         } else {
             return Collections.emptyList();
         }
+    }
+
+    public PublicNetworkAccessType publicNetworkAccessForIngestion() {
+        return this.innerModel().publicNetworkAccessForIngestion();
+    }
+
+    public PublicNetworkAccessType publicNetworkAccessForQuery() {
+        return this.innerModel().publicNetworkAccessForQuery();
     }
 
     public IngestionMode ingestionMode() {
@@ -303,6 +312,18 @@ public final class ApplicationInsightsComponentImpl
 
     public ApplicationInsightsComponentImpl withImmediatePurgeDataOn30Days(Boolean immediatePurgeDataOn30Days) {
         this.innerModel().withImmediatePurgeDataOn30Days(immediatePurgeDataOn30Days);
+        return this;
+    }
+
+    public ApplicationInsightsComponentImpl withPublicNetworkAccessForIngestion(
+        PublicNetworkAccessType publicNetworkAccessForIngestion) {
+        this.innerModel().withPublicNetworkAccessForIngestion(publicNetworkAccessForIngestion);
+        return this;
+    }
+
+    public ApplicationInsightsComponentImpl withPublicNetworkAccessForQuery(
+        PublicNetworkAccessType publicNetworkAccessForQuery) {
+        this.innerModel().withPublicNetworkAccessForQuery(publicNetworkAccessForQuery);
         return this;
     }
 

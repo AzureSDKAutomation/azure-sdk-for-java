@@ -17,12 +17,6 @@ public class MyWorkbookResource extends Resource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(MyWorkbookResource.class);
 
     /*
-     * Identity used for BYOS
-     */
-    @JsonProperty(value = "identity")
-    private ManagedIdentity identity;
-
-    /*
      * Azure resource Id
      */
     @JsonProperty(value = "id")
@@ -39,32 +33,6 @@ public class MyWorkbookResource extends Resource {
      */
     @JsonProperty(value = "type")
     private String type;
-
-    /*
-     * Resource etag
-     */
-    @JsonProperty(value = "etag")
-    private Map<String, String> etag;
-
-    /**
-     * Get the identity property: Identity used for BYOS.
-     *
-     * @return the identity value.
-     */
-    public ManagedIdentity identity() {
-        return this.identity;
-    }
-
-    /**
-     * Set the identity property: Identity used for BYOS.
-     *
-     * @param identity the identity value to set.
-     * @return the MyWorkbookResource object itself.
-     */
-    public MyWorkbookResource withIdentity(ManagedIdentity identity) {
-        this.identity = identity;
-        return this;
-    }
 
     /**
      * Get the id property: Azure resource Id.
@@ -126,26 +94,6 @@ public class MyWorkbookResource extends Resource {
         return this;
     }
 
-    /**
-     * Get the etag property: Resource etag.
-     *
-     * @return the etag value.
-     */
-    public Map<String, String> etag() {
-        return this.etag;
-    }
-
-    /**
-     * Set the etag property: Resource etag.
-     *
-     * @param etag the etag value to set.
-     * @return the MyWorkbookResource object itself.
-     */
-    public MyWorkbookResource withEtag(Map<String, String> etag) {
-        this.etag = etag;
-        return this;
-    }
-
     /** {@inheritDoc} */
     @Override
     public MyWorkbookResource withLocation(String location) {
@@ -166,8 +114,5 @@ public class MyWorkbookResource extends Resource {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (identity() != null) {
-            identity().validate();
-        }
     }
 }

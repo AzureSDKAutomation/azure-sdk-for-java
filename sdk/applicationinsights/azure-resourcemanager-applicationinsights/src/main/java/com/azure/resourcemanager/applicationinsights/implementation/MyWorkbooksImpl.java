@@ -37,16 +37,9 @@ public final class MyWorkbooksImpl implements MyWorkbooks {
     }
 
     public PagedIterable<MyWorkbook> listByResourceGroup(
-        String resourceGroupName,
-        CategoryType category,
-        List<String> tags,
-        String sourceId,
-        Boolean canFetchContent,
-        Context context) {
+        String resourceGroupName, CategoryType category, List<String> tags, Boolean canFetchContent, Context context) {
         PagedIterable<MyWorkbookInner> inner =
-            this
-                .serviceClient()
-                .listByResourceGroup(resourceGroupName, category, tags, sourceId, canFetchContent, context);
+            this.serviceClient().listByResourceGroup(resourceGroupName, category, tags, canFetchContent, context);
         return Utils.mapPage(inner, inner1 -> new MyWorkbookImpl(inner1, this.manager()));
     }
 
