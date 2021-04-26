@@ -7,9 +7,8 @@ package com.azure.resourcemanager.applicationinsights.implementation;
 import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.applicationinsights.fluent.models.MyWorkbookInner;
-import com.azure.resourcemanager.applicationinsights.models.Kind;
-import com.azure.resourcemanager.applicationinsights.models.ManagedIdentity;
 import com.azure.resourcemanager.applicationinsights.models.MyWorkbook;
+import com.azure.resourcemanager.applicationinsights.models.SharedTypeKind;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -32,10 +31,6 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
         }
     }
 
-    public ManagedIdentity identity() {
-        return this.innerModel().identity();
-    }
-
     public String id() {
         return this.innerModel().id();
     }
@@ -48,16 +43,7 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
         return this.innerModel().type();
     }
 
-    public Map<String, String> etag() {
-        Map<String, String> inner = this.innerModel().etag();
-        if (inner != null) {
-            return Collections.unmodifiableMap(inner);
-        } else {
-            return Collections.emptyMap();
-        }
-    }
-
-    public Kind kind() {
+    public SharedTypeKind kind() {
         return this.innerModel().kind();
     }
 
@@ -98,10 +84,6 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
         return this.innerModel().sourceId();
     }
 
-    public String storageUri() {
-        return this.innerModel().storageUri();
-    }
-
     public Region region() {
         return Region.fromName(this.regionName());
     }
@@ -122,10 +104,6 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
 
     private String resourceName;
 
-    private String createSourceId;
-
-    private String updateSourceId;
-
     public MyWorkbookImpl withExistingResourceGroup(String resourceGroupName) {
         this.resourceGroupName = resourceGroupName;
         return this;
@@ -136,8 +114,7 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
             serviceManager
                 .serviceClient()
                 .getMyWorkbooks()
-                .createOrUpdateWithResponse(
-                    resourceGroupName, resourceName, this.innerModel(), createSourceId, Context.NONE)
+                .createOrUpdateWithResponse(resourceGroupName, resourceName, this.innerModel(), Context.NONE)
                 .getValue();
         return this;
     }
@@ -147,7 +124,7 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
             serviceManager
                 .serviceClient()
                 .getMyWorkbooks()
-                .createOrUpdateWithResponse(resourceGroupName, resourceName, this.innerModel(), createSourceId, context)
+                .createOrUpdateWithResponse(resourceGroupName, resourceName, this.innerModel(), context)
                 .getValue();
         return this;
     }
@@ -157,11 +134,9 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
         this.innerObject = new MyWorkbookInner();
         this.serviceManager = serviceManager;
         this.resourceName = name;
-        this.createSourceId = null;
     }
 
     public MyWorkbookImpl update() {
-        this.updateSourceId = null;
         return this;
     }
 
@@ -170,7 +145,7 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
             serviceManager
                 .serviceClient()
                 .getMyWorkbooks()
-                .updateWithResponse(resourceGroupName, resourceName, this.innerModel(), updateSourceId, Context.NONE)
+                .updateWithResponse(resourceGroupName, resourceName, this.innerModel(), Context.NONE)
                 .getValue();
         return this;
     }
@@ -180,7 +155,7 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
             serviceManager
                 .serviceClient()
                 .getMyWorkbooks()
-                .updateWithResponse(resourceGroupName, resourceName, this.innerModel(), updateSourceId, context)
+                .updateWithResponse(resourceGroupName, resourceName, this.innerModel(), context)
                 .getValue();
         return this;
     }
@@ -229,11 +204,6 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
         return this;
     }
 
-    public MyWorkbookImpl withIdentity(ManagedIdentity identity) {
-        this.innerModel().withIdentity(identity);
-        return this;
-    }
-
     public MyWorkbookImpl withName(String name) {
         this.innerModel().withName(name);
         return this;
@@ -244,12 +214,7 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
         return this;
     }
 
-    public MyWorkbookImpl withEtag(Map<String, String> etag) {
-        this.innerModel().withEtag(etag);
-        return this;
-    }
-
-    public MyWorkbookImpl withKind(Kind kind) {
+    public MyWorkbookImpl withKind(SharedTypeKind kind) {
         this.innerModel().withKind(kind);
         return this;
     }
@@ -281,21 +246,6 @@ public final class MyWorkbookImpl implements MyWorkbook, MyWorkbook.Definition, 
 
     public MyWorkbookImpl withSourceId(String sourceId) {
         this.innerModel().withSourceId(sourceId);
-        return this;
-    }
-
-    public MyWorkbookImpl withStorageUri(String storageUri) {
-        this.innerModel().withStorageUri(storageUri);
-        return this;
-    }
-
-    public MyWorkbookImpl withSourceIdParameter(String sourceId) {
-        this.createSourceId = sourceId;
-        return this;
-    }
-
-    public MyWorkbookImpl sourceIdParameter(String sourceId) {
-        this.updateSourceId = sourceId;
         return this;
     }
 }

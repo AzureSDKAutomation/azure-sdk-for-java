@@ -27,13 +27,6 @@ public interface MyWorkbook {
     Map<String, String> tags();
 
     /**
-     * Gets the identity property: Identity used for BYOS.
-     *
-     * @return the identity value.
-     */
-    ManagedIdentity identity();
-
-    /**
      * Gets the id property: Azure resource Id.
      *
      * @return the id value.
@@ -55,18 +48,11 @@ public interface MyWorkbook {
     String type();
 
     /**
-     * Gets the etag property: Resource etag.
-     *
-     * @return the etag value.
-     */
-    Map<String, String> etag();
-
-    /**
      * Gets the kind property: The kind of workbook. Choices are user and shared.
      *
      * @return the kind value.
      */
-    Kind kind();
+    SharedTypeKind kind();
 
     /**
      * Gets the displayName property: The user-defined name of the private workbook.
@@ -127,13 +113,6 @@ public interface MyWorkbook {
      * @return the sourceId value.
      */
     String sourceId();
-
-    /**
-     * Gets the storageUri property: BYOS Storage Account URI.
-     *
-     * @return the storageUri value.
-     */
-    String storageUri();
 
     /**
      * Gets the region of the resource.
@@ -202,19 +181,15 @@ public interface MyWorkbook {
          */
         interface WithCreate
             extends DefinitionStages.WithTags,
-                DefinitionStages.WithIdentity,
                 DefinitionStages.WithName,
                 DefinitionStages.WithType,
-                DefinitionStages.WithEtag,
                 DefinitionStages.WithKind,
                 DefinitionStages.WithDisplayName,
                 DefinitionStages.WithSerializedData,
                 DefinitionStages.WithVersion,
                 DefinitionStages.WithCategory,
                 DefinitionStages.WithTagsPropertiesTags,
-                DefinitionStages.WithSourceId,
-                DefinitionStages.WithStorageUri,
-                DefinitionStages.WithSourceIdParameter {
+                DefinitionStages.WithSourceId {
             /**
              * Executes the create request.
              *
@@ -240,16 +215,6 @@ public interface MyWorkbook {
              */
             WithCreate withTags(Map<String, String> tags);
         }
-        /** The stage of the MyWorkbook definition allowing to specify identity. */
-        interface WithIdentity {
-            /**
-             * Specifies the identity property: Identity used for BYOS.
-             *
-             * @param identity Identity used for BYOS.
-             * @return the next definition stage.
-             */
-            WithCreate withIdentity(ManagedIdentity identity);
-        }
         /** The stage of the MyWorkbook definition allowing to specify name. */
         interface WithName {
             /**
@@ -270,16 +235,6 @@ public interface MyWorkbook {
              */
             WithCreate withType(String type);
         }
-        /** The stage of the MyWorkbook definition allowing to specify etag. */
-        interface WithEtag {
-            /**
-             * Specifies the etag property: Resource etag.
-             *
-             * @param etag Resource etag.
-             * @return the next definition stage.
-             */
-            WithCreate withEtag(Map<String, String> etag);
-        }
         /** The stage of the MyWorkbook definition allowing to specify kind. */
         interface WithKind {
             /**
@@ -288,7 +243,7 @@ public interface MyWorkbook {
              * @param kind The kind of workbook. Choices are user and shared.
              * @return the next definition stage.
              */
-            WithCreate withKind(Kind kind);
+            WithCreate withKind(SharedTypeKind kind);
         }
         /** The stage of the MyWorkbook definition allowing to specify displayName. */
         interface WithDisplayName {
@@ -356,26 +311,6 @@ public interface MyWorkbook {
              */
             WithCreate withSourceId(String sourceId);
         }
-        /** The stage of the MyWorkbook definition allowing to specify storageUri. */
-        interface WithStorageUri {
-            /**
-             * Specifies the storageUri property: BYOS Storage Account URI.
-             *
-             * @param storageUri BYOS Storage Account URI.
-             * @return the next definition stage.
-             */
-            WithCreate withStorageUri(String storageUri);
-        }
-        /** The stage of the MyWorkbook definition allowing to specify sourceId. */
-        interface WithSourceIdParameter {
-            /**
-             * Specifies the sourceId property: Azure Resource Id that will fetch all linked workbooks..
-             *
-             * @param sourceId Azure Resource Id that will fetch all linked workbooks.
-             * @return the next definition stage.
-             */
-            WithCreate withSourceIdParameter(String sourceId);
-        }
     }
     /**
      * Begins update for the MyWorkbook resource.
@@ -387,19 +322,15 @@ public interface MyWorkbook {
     /** The template for MyWorkbook update. */
     interface Update
         extends UpdateStages.WithTags,
-            UpdateStages.WithIdentity,
             UpdateStages.WithName,
             UpdateStages.WithType,
-            UpdateStages.WithEtag,
             UpdateStages.WithKind,
             UpdateStages.WithDisplayName,
             UpdateStages.WithSerializedData,
             UpdateStages.WithVersion,
             UpdateStages.WithCategory,
             UpdateStages.WithTagsPropertiesTags,
-            UpdateStages.WithSourceId,
-            UpdateStages.WithStorageUri,
-            UpdateStages.WithsourceIdParameter {
+            UpdateStages.WithSourceId {
         /**
          * Executes the update request.
          *
@@ -427,16 +358,6 @@ public interface MyWorkbook {
              */
             Update withTags(Map<String, String> tags);
         }
-        /** The stage of the MyWorkbook update allowing to specify identity. */
-        interface WithIdentity {
-            /**
-             * Specifies the identity property: Identity used for BYOS.
-             *
-             * @param identity Identity used for BYOS.
-             * @return the next definition stage.
-             */
-            Update withIdentity(ManagedIdentity identity);
-        }
         /** The stage of the MyWorkbook update allowing to specify name. */
         interface WithName {
             /**
@@ -457,16 +378,6 @@ public interface MyWorkbook {
              */
             Update withType(String type);
         }
-        /** The stage of the MyWorkbook update allowing to specify etag. */
-        interface WithEtag {
-            /**
-             * Specifies the etag property: Resource etag.
-             *
-             * @param etag Resource etag.
-             * @return the next definition stage.
-             */
-            Update withEtag(Map<String, String> etag);
-        }
         /** The stage of the MyWorkbook update allowing to specify kind. */
         interface WithKind {
             /**
@@ -475,7 +386,7 @@ public interface MyWorkbook {
              * @param kind The kind of workbook. Choices are user and shared.
              * @return the next definition stage.
              */
-            Update withKind(Kind kind);
+            Update withKind(SharedTypeKind kind);
         }
         /** The stage of the MyWorkbook update allowing to specify displayName. */
         interface WithDisplayName {
@@ -542,26 +453,6 @@ public interface MyWorkbook {
              * @return the next definition stage.
              */
             Update withSourceId(String sourceId);
-        }
-        /** The stage of the MyWorkbook update allowing to specify storageUri. */
-        interface WithStorageUri {
-            /**
-             * Specifies the storageUri property: BYOS Storage Account URI.
-             *
-             * @param storageUri BYOS Storage Account URI.
-             * @return the next definition stage.
-             */
-            Update withStorageUri(String storageUri);
-        }
-        /** The stage of the MyWorkbook update allowing to specify sourceId. */
-        interface WithsourceIdParameter {
-            /**
-             * Specifies the sourceId property: Azure Resource Id that will fetch all linked workbooks..
-             *
-             * @param sourceId Azure Resource Id that will fetch all linked workbooks.
-             * @return the next definition stage.
-             */
-            Update sourceIdParameter(String sourceId);
         }
     }
     /**

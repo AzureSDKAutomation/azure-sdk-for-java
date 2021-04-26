@@ -9,31 +9,37 @@ import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The object that represents the operation. */
+/** Information about an operation. */
 @Fluent
-public final class OperationDisplay {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(OperationDisplay.class);
+public final class OperationInfo {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(OperationInfo.class);
 
     /*
-     * Service provider: Microsoft.Cdn
+     * Name of the provider
      */
     @JsonProperty(value = "provider")
     private String provider;
 
     /*
-     * Resource on which the operation is performed: Profile, endpoint, etc.
+     * Name of the resource type
      */
     @JsonProperty(value = "resource")
     private String resource;
 
     /*
-     * Operation type: Read, write, delete, etc.
+     * Name of the operation
      */
     @JsonProperty(value = "operation")
     private String operation;
 
+    /*
+     * Description of the operation
+     */
+    @JsonProperty(value = "description")
+    private String description;
+
     /**
-     * Get the provider property: Service provider: Microsoft.Cdn.
+     * Get the provider property: Name of the provider.
      *
      * @return the provider value.
      */
@@ -42,18 +48,18 @@ public final class OperationDisplay {
     }
 
     /**
-     * Set the provider property: Service provider: Microsoft.Cdn.
+     * Set the provider property: Name of the provider.
      *
      * @param provider the provider value to set.
-     * @return the OperationDisplay object itself.
+     * @return the OperationInfo object itself.
      */
-    public OperationDisplay withProvider(String provider) {
+    public OperationInfo withProvider(String provider) {
         this.provider = provider;
         return this;
     }
 
     /**
-     * Get the resource property: Resource on which the operation is performed: Profile, endpoint, etc.
+     * Get the resource property: Name of the resource type.
      *
      * @return the resource value.
      */
@@ -62,18 +68,18 @@ public final class OperationDisplay {
     }
 
     /**
-     * Set the resource property: Resource on which the operation is performed: Profile, endpoint, etc.
+     * Set the resource property: Name of the resource type.
      *
      * @param resource the resource value to set.
-     * @return the OperationDisplay object itself.
+     * @return the OperationInfo object itself.
      */
-    public OperationDisplay withResource(String resource) {
+    public OperationInfo withResource(String resource) {
         this.resource = resource;
         return this;
     }
 
     /**
-     * Get the operation property: Operation type: Read, write, delete, etc.
+     * Get the operation property: Name of the operation.
      *
      * @return the operation value.
      */
@@ -82,13 +88,33 @@ public final class OperationDisplay {
     }
 
     /**
-     * Set the operation property: Operation type: Read, write, delete, etc.
+     * Set the operation property: Name of the operation.
      *
      * @param operation the operation value to set.
-     * @return the OperationDisplay object itself.
+     * @return the OperationInfo object itself.
      */
-    public OperationDisplay withOperation(String operation) {
+    public OperationInfo withOperation(String operation) {
         this.operation = operation;
+        return this;
+    }
+
+    /**
+     * Get the description property: Description of the operation.
+     *
+     * @return the description value.
+     */
+    public String description() {
+        return this.description;
+    }
+
+    /**
+     * Set the description property: Description of the operation.
+     *
+     * @param description the description value to set.
+     * @return the OperationInfo object itself.
+     */
+    public OperationInfo withDescription(String description) {
+        this.description = description;
         return this;
     }
 

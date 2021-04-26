@@ -38,11 +38,11 @@ public interface ApplicationInsightsManagementClient {
     Duration getDefaultPollInterval();
 
     /**
-     * Gets the AnalyticsItemsClient object to access its operations.
+     * Gets the OperationsClient object to access its operations.
      *
-     * @return the AnalyticsItemsClient object.
+     * @return the OperationsClient object.
      */
-    AnalyticsItemsClient getAnalyticsItems();
+    OperationsClient getOperations();
 
     /**
      * Gets the AnnotationsClient object to access its operations.
@@ -101,13 +101,6 @@ public interface ApplicationInsightsManagementClient {
     ProactiveDetectionConfigurationsClient getProactiveDetectionConfigurations();
 
     /**
-     * Gets the ComponentsClient object to access its operations.
-     *
-     * @return the ComponentsClient object.
-     */
-    ComponentsClient getComponents();
-
-    /**
      * Gets the WorkItemConfigurationsClient object to access its operations.
      *
      * @return the WorkItemConfigurationsClient object.
@@ -136,11 +129,11 @@ public interface ApplicationInsightsManagementClient {
     WebTestsClient getWebTests();
 
     /**
-     * Gets the MyWorkbooksClient object to access its operations.
+     * Gets the AnalyticsItemsClient object to access its operations.
      *
-     * @return the MyWorkbooksClient object.
+     * @return the AnalyticsItemsClient object.
      */
-    MyWorkbooksClient getMyWorkbooks();
+    AnalyticsItemsClient getAnalyticsItems();
 
     /**
      * Gets the WorkbooksClient object to access its operations.
@@ -150,9 +143,30 @@ public interface ApplicationInsightsManagementClient {
     WorkbooksClient getWorkbooks();
 
     /**
-     * Gets the OperationsClient object to access its operations.
+     * Gets the MyWorkbooksClient object to access its operations.
      *
-     * @return the OperationsClient object.
+     * @return the MyWorkbooksClient object.
      */
-    OperationsClient getOperations();
+    MyWorkbooksClient getMyWorkbooks();
+
+    /**
+     * Gets the ComponentsClient object to access its operations.
+     *
+     * @return the ComponentsClient object.
+     */
+    ComponentsClient getComponents();
+
+    /**
+     * Gets the ComponentLinkedStorageAccountsOperationsClient object to access its operations.
+     *
+     * @return the ComponentLinkedStorageAccountsOperationsClient object.
+     */
+    ComponentLinkedStorageAccountsOperationsClient getComponentLinkedStorageAccountsOperations();
+
+    /**
+     * Gets the LiveTokensClient object to access its operations.
+     *
+     * @return the LiveTokensClient object.
+     */
+    LiveTokensClient getLiveTokens();
 }

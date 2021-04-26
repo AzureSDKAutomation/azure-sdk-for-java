@@ -186,6 +186,21 @@ public interface ApplicationInsightsComponent {
     List<PrivateLinkScopedResource> privateLinkScopedResources();
 
     /**
+     * Gets the publicNetworkAccessForIngestion property: The network access type for accessing Application Insights
+     * ingestion.
+     *
+     * @return the publicNetworkAccessForIngestion value.
+     */
+    PublicNetworkAccessType publicNetworkAccessForIngestion();
+
+    /**
+     * Gets the publicNetworkAccessForQuery property: The network access type for accessing Application Insights query.
+     *
+     * @return the publicNetworkAccessForQuery value.
+     */
+    PublicNetworkAccessType publicNetworkAccessForQuery();
+
+    /**
      * Gets the ingestionMode property: Indicates the flow of the ingestion.
      *
      * @return the ingestionMode value.
@@ -283,6 +298,8 @@ public interface ApplicationInsightsComponent {
                 DefinitionStages.WithRetentionInDays,
                 DefinitionStages.WithDisableIpMasking,
                 DefinitionStages.WithImmediatePurgeDataOn30Days,
+                DefinitionStages.WithPublicNetworkAccessForIngestion,
+                DefinitionStages.WithPublicNetworkAccessForQuery,
                 DefinitionStages.WithIngestionMode {
             /**
              * Executes the create request.
@@ -397,6 +414,31 @@ public interface ApplicationInsightsComponent {
              * @return the next definition stage.
              */
             WithCreate withImmediatePurgeDataOn30Days(Boolean immediatePurgeDataOn30Days);
+        }
+        /**
+         * The stage of the ApplicationInsightsComponent definition allowing to specify publicNetworkAccessForIngestion.
+         */
+        interface WithPublicNetworkAccessForIngestion {
+            /**
+             * Specifies the publicNetworkAccessForIngestion property: The network access type for accessing Application
+             * Insights ingestion..
+             *
+             * @param publicNetworkAccessForIngestion The network access type for accessing Application Insights
+             *     ingestion.
+             * @return the next definition stage.
+             */
+            WithCreate withPublicNetworkAccessForIngestion(PublicNetworkAccessType publicNetworkAccessForIngestion);
+        }
+        /** The stage of the ApplicationInsightsComponent definition allowing to specify publicNetworkAccessForQuery. */
+        interface WithPublicNetworkAccessForQuery {
+            /**
+             * Specifies the publicNetworkAccessForQuery property: The network access type for accessing Application
+             * Insights query..
+             *
+             * @param publicNetworkAccessForQuery The network access type for accessing Application Insights query.
+             * @return the next definition stage.
+             */
+            WithCreate withPublicNetworkAccessForQuery(PublicNetworkAccessType publicNetworkAccessForQuery);
         }
         /** The stage of the ApplicationInsightsComponent definition allowing to specify ingestionMode. */
         interface WithIngestionMode {

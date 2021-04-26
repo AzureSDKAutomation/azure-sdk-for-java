@@ -6,24 +6,21 @@ package com.azure.resourcemanager.applicationinsights.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.applicationinsights.fluent.models.OperationInner;
+import com.azure.resourcemanager.applicationinsights.fluent.models.OperationLiveInner;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/**
- * Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of
- * results.
- */
+/** Result of the List Operations operation. */
 @Fluent
-public final class OperationListResult {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(OperationListResult.class);
+public final class OperationsListResult {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(OperationsListResult.class);
 
     /*
-     * List of CDN operations supported by the CDN resource provider.
+     * A collection of operations
      */
     @JsonProperty(value = "value")
-    private List<OperationInner> value;
+    private List<OperationLiveInner> value;
 
     /*
      * URL to get the next set of operation list results if there are any.
@@ -32,21 +29,21 @@ public final class OperationListResult {
     private String nextLink;
 
     /**
-     * Get the value property: List of CDN operations supported by the CDN resource provider.
+     * Get the value property: A collection of operations.
      *
      * @return the value value.
      */
-    public List<OperationInner> value() {
+    public List<OperationLiveInner> value() {
         return this.value;
     }
 
     /**
-     * Set the value property: List of CDN operations supported by the CDN resource provider.
+     * Set the value property: A collection of operations.
      *
      * @param value the value value to set.
-     * @return the OperationListResult object itself.
+     * @return the OperationsListResult object itself.
      */
-    public OperationListResult withValue(List<OperationInner> value) {
+    public OperationsListResult withValue(List<OperationLiveInner> value) {
         this.value = value;
         return this;
     }
@@ -64,9 +61,9 @@ public final class OperationListResult {
      * Set the nextLink property: URL to get the next set of operation list results if there are any.
      *
      * @param nextLink the nextLink value to set.
-     * @return the OperationListResult object itself.
+     * @return the OperationsListResult object itself.
      */
-    public OperationListResult withNextLink(String nextLink) {
+    public OperationsListResult withNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;
     }

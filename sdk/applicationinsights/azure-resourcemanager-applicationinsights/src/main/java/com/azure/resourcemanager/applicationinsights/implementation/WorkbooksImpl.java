@@ -31,33 +31,15 @@ public final class WorkbooksImpl implements Workbooks {
         this.serviceManager = serviceManager;
     }
 
-    public PagedIterable<Workbook> list(CategoryType category) {
-        PagedIterable<WorkbookInner> inner = this.serviceClient().list(category);
-        return Utils.mapPage(inner, inner1 -> new WorkbookImpl(inner1, this.manager()));
-    }
-
-    public PagedIterable<Workbook> list(
-        CategoryType category, List<String> tags, Boolean canFetchContent, Context context) {
-        PagedIterable<WorkbookInner> inner = this.serviceClient().list(category, tags, canFetchContent, context);
-        return Utils.mapPage(inner, inner1 -> new WorkbookImpl(inner1, this.manager()));
-    }
-
     public PagedIterable<Workbook> listByResourceGroup(String resourceGroupName, CategoryType category) {
         PagedIterable<WorkbookInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName, category);
         return Utils.mapPage(inner, inner1 -> new WorkbookImpl(inner1, this.manager()));
     }
 
     public PagedIterable<Workbook> listByResourceGroup(
-        String resourceGroupName,
-        CategoryType category,
-        List<String> tags,
-        String sourceId,
-        Boolean canFetchContent,
-        Context context) {
+        String resourceGroupName, CategoryType category, List<String> tags, Boolean canFetchContent, Context context) {
         PagedIterable<WorkbookInner> inner =
-            this
-                .serviceClient()
-                .listByResourceGroup(resourceGroupName, category, tags, sourceId, canFetchContent, context);
+            this.serviceClient().listByResourceGroup(resourceGroupName, category, tags, canFetchContent, context);
         return Utils.mapPage(inner, inner1 -> new WorkbookImpl(inner1, this.manager()));
     }
 
