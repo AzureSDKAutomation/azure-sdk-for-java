@@ -22,10 +22,12 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.mixedreality.fluent.MixedRealityClient;
 import com.azure.resourcemanager.mixedreality.implementation.MixedRealityClientBuilder;
+import com.azure.resourcemanager.mixedreality.implementation.ObjectAnchorsAccountsImpl;
 import com.azure.resourcemanager.mixedreality.implementation.OperationsImpl;
 import com.azure.resourcemanager.mixedreality.implementation.RemoteRenderingAccountsImpl;
 import com.azure.resourcemanager.mixedreality.implementation.ResourceProvidersImpl;
 import com.azure.resourcemanager.mixedreality.implementation.SpatialAnchorsAccountsImpl;
+import com.azure.resourcemanager.mixedreality.models.ObjectAnchorsAccounts;
 import com.azure.resourcemanager.mixedreality.models.Operations;
 import com.azure.resourcemanager.mixedreality.models.RemoteRenderingAccounts;
 import com.azure.resourcemanager.mixedreality.models.ResourceProviders;
@@ -45,6 +47,8 @@ public final class MixedRealityManager {
     private SpatialAnchorsAccounts spatialAnchorsAccounts;
 
     private RemoteRenderingAccounts remoteRenderingAccounts;
+
+    private ObjectAnchorsAccounts objectAnchorsAccounts;
 
     private final MixedRealityClient clientObject;
 
@@ -241,6 +245,14 @@ public final class MixedRealityManager {
                 new RemoteRenderingAccountsImpl(clientObject.getRemoteRenderingAccounts(), this);
         }
         return remoteRenderingAccounts;
+    }
+
+    /** @return Resource collection API of ObjectAnchorsAccounts. */
+    public ObjectAnchorsAccounts objectAnchorsAccounts() {
+        if (this.objectAnchorsAccounts == null) {
+            this.objectAnchorsAccounts = new ObjectAnchorsAccountsImpl(clientObject.getObjectAnchorsAccounts(), this);
+        }
+        return objectAnchorsAccounts;
     }
 
     /**
