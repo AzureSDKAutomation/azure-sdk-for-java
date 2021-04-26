@@ -12,6 +12,7 @@ import com.azure.resourcemanager.applicationinsights.models.ComponentsResource;
 import com.azure.resourcemanager.applicationinsights.models.FlowType;
 import com.azure.resourcemanager.applicationinsights.models.IngestionMode;
 import com.azure.resourcemanager.applicationinsights.models.PrivateLinkScopedResource;
+import com.azure.resourcemanager.applicationinsights.models.PublicNetworkAccessType;
 import com.azure.resourcemanager.applicationinsights.models.RequestSource;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -148,6 +149,18 @@ public class ApplicationInsightsComponentInner extends ComponentsResource {
      */
     @JsonProperty(value = "properties.PrivateLinkScopedResources", access = JsonProperty.Access.WRITE_ONLY)
     private List<PrivateLinkScopedResource> privateLinkScopedResources;
+
+    /*
+     * The network access type for accessing Application Insights ingestion.
+     */
+    @JsonProperty(value = "properties.publicNetworkAccessForIngestion")
+    private PublicNetworkAccessType publicNetworkAccessForIngestion;
+
+    /*
+     * The network access type for accessing Application Insights query.
+     */
+    @JsonProperty(value = "properties.publicNetworkAccessForQuery")
+    private PublicNetworkAccessType publicNetworkAccessForQuery;
 
     /*
      * Indicates the flow of the ingestion.
@@ -430,6 +443,50 @@ public class ApplicationInsightsComponentInner extends ComponentsResource {
      */
     public List<PrivateLinkScopedResource> privateLinkScopedResources() {
         return this.privateLinkScopedResources;
+    }
+
+    /**
+     * Get the publicNetworkAccessForIngestion property: The network access type for accessing Application Insights
+     * ingestion.
+     *
+     * @return the publicNetworkAccessForIngestion value.
+     */
+    public PublicNetworkAccessType publicNetworkAccessForIngestion() {
+        return this.publicNetworkAccessForIngestion;
+    }
+
+    /**
+     * Set the publicNetworkAccessForIngestion property: The network access type for accessing Application Insights
+     * ingestion.
+     *
+     * @param publicNetworkAccessForIngestion the publicNetworkAccessForIngestion value to set.
+     * @return the ApplicationInsightsComponentInner object itself.
+     */
+    public ApplicationInsightsComponentInner withPublicNetworkAccessForIngestion(
+        PublicNetworkAccessType publicNetworkAccessForIngestion) {
+        this.publicNetworkAccessForIngestion = publicNetworkAccessForIngestion;
+        return this;
+    }
+
+    /**
+     * Get the publicNetworkAccessForQuery property: The network access type for accessing Application Insights query.
+     *
+     * @return the publicNetworkAccessForQuery value.
+     */
+    public PublicNetworkAccessType publicNetworkAccessForQuery() {
+        return this.publicNetworkAccessForQuery;
+    }
+
+    /**
+     * Set the publicNetworkAccessForQuery property: The network access type for accessing Application Insights query.
+     *
+     * @param publicNetworkAccessForQuery the publicNetworkAccessForQuery value to set.
+     * @return the ApplicationInsightsComponentInner object itself.
+     */
+    public ApplicationInsightsComponentInner withPublicNetworkAccessForQuery(
+        PublicNetworkAccessType publicNetworkAccessForQuery) {
+        this.publicNetworkAccessForQuery = publicNetworkAccessForQuery;
+        return this;
     }
 
     /**
