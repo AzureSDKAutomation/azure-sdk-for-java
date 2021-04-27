@@ -4,7 +4,7 @@
 
 package com.azure.resourcemanager.applicationinsights.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.applicationinsights.fluent.models.MyWorkbookInner;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** Workbook list result. */
-@Fluent
+@Immutable
 public final class MyWorkbooksListResult {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(MyWorkbooksListResult.class);
 
@@ -22,12 +22,6 @@ public final class MyWorkbooksListResult {
     @JsonProperty(value = "value", access = JsonProperty.Access.WRITE_ONLY)
     private List<MyWorkbookInner> value;
 
-    /*
-     * The nextLink property.
-     */
-    @JsonProperty(value = "nextLink")
-    private String nextLink;
-
     /**
      * Get the value property: An array of private workbooks.
      *
@@ -35,26 +29,6 @@ public final class MyWorkbooksListResult {
      */
     public List<MyWorkbookInner> value() {
         return this.value;
-    }
-
-    /**
-     * Get the nextLink property: The nextLink property.
-     *
-     * @return the nextLink value.
-     */
-    public String nextLink() {
-        return this.nextLink;
-    }
-
-    /**
-     * Set the nextLink property: The nextLink property.
-     *
-     * @param nextLink the nextLink value to set.
-     * @return the MyWorkbooksListResult object itself.
-     */
-    public MyWorkbooksListResult withNextLink(String nextLink) {
-        this.nextLink = nextLink;
-        return this;
     }
 
     /**
