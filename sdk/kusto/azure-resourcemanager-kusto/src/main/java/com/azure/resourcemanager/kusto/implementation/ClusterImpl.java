@@ -462,17 +462,17 @@ public final class ClusterImpl implements Cluster, Cluster.Definition, Cluster.U
     }
 
     public ClusterImpl withIfMatch(String ifMatch) {
-        if (isInCreateMode()) {
-            this.createIfMatch = ifMatch;
-            return this;
-        } else {
-            this.updateIfMatch = ifMatch;
-            return this;
-        }
+        this.createIfMatch = ifMatch;
+        return this;
     }
 
     public ClusterImpl withIfNoneMatch(String ifNoneMatch) {
         this.createIfNoneMatch = ifNoneMatch;
+        return this;
+    }
+
+    public ClusterImpl ifMatch(String ifMatch) {
+        this.updateIfMatch = ifMatch;
         return this;
     }
 

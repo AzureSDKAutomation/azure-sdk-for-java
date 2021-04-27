@@ -457,7 +457,7 @@ public interface Cluster {
             UpdateStages.WithEnablePurge,
             UpdateStages.WithEnableDoubleEncryption,
             UpdateStages.WithEngineType,
-            UpdateStages.WithIfMatch {
+            UpdateStages.WithifMatch {
         /**
          * Executes the update request.
          *
@@ -599,7 +599,7 @@ public interface Cluster {
             Update withEngineType(EngineType engineType);
         }
         /** The stage of the Cluster update allowing to specify ifMatch. */
-        interface WithIfMatch {
+        interface WithifMatch {
             /**
              * Specifies the ifMatch property: The ETag of the cluster. Omit this value to always overwrite the current
              * cluster. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes..
@@ -608,7 +608,7 @@ public interface Cluster {
              *     the last-seen ETag value to prevent accidentally overwriting concurrent changes.
              * @return the next definition stage.
              */
-            Update withIfMatch(String ifMatch);
+            Update ifMatch(String ifMatch);
         }
     }
     /**
