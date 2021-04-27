@@ -173,7 +173,7 @@ public interface Workspace {
     String adlaResourceId();
 
     /**
-     * Gets the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Gets the publicNetworkAccess property: Enable or Disable public network access to workspace.
      *
      * @return the publicNetworkAccess value.
      */
@@ -427,9 +427,9 @@ public interface Workspace {
         /** The stage of the Workspace definition allowing to specify publicNetworkAccess. */
         interface WithPublicNetworkAccess {
             /**
-             * Specifies the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+             * Specifies the publicNetworkAccess property: Enable or Disable public network access to workspace.
              *
-             * @param publicNetworkAccess Enable or Disable pubic network access to workspace.
+             * @param publicNetworkAccess Enable or Disable public network access to workspace.
              * @return the next definition stage.
              */
             WithCreate withPublicNetworkAccess(WorkspacePublicNetworkAccess publicNetworkAccess);
@@ -543,9 +543,9 @@ public interface Workspace {
         /** The stage of the Workspace update allowing to specify publicNetworkAccess. */
         interface WithPublicNetworkAccess {
             /**
-             * Specifies the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+             * Specifies the publicNetworkAccess property: Enable or Disable public network access to workspace.
              *
-             * @param publicNetworkAccess Enable or Disable pubic network access to workspace.
+             * @param publicNetworkAccess Enable or Disable public network access to workspace.
              * @return the next definition stage.
              */
             Update withPublicNetworkAccess(WorkspacePublicNetworkAccess publicNetworkAccess);
