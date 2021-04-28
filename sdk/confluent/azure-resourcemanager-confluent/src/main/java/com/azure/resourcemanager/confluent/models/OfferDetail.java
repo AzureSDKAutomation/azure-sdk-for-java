@@ -47,7 +47,7 @@ public class OfferDetail {
     /*
      * SaaS Offer Status
      */
-    @JsonProperty(value = "status")
+    @JsonProperty(value = "status", access = JsonProperty.Access.WRITE_ONLY)
     private SaaSOfferStatus status;
 
     /**
@@ -157,17 +157,6 @@ public class OfferDetail {
      */
     public SaaSOfferStatus status() {
         return this.status;
-    }
-
-    /**
-     * Set the status property: SaaS Offer Status.
-     *
-     * @param status the status value to set.
-     * @return the OfferDetail object itself.
-     */
-    public OfferDetail withStatus(SaaSOfferStatus status) {
-        this.status = status;
-        return this;
     }
 
     /**
