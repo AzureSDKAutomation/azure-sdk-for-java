@@ -9,9 +9,7 @@ import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.ProxyResource;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.consumption.models.Amount;
-import com.azure.resourcemanager.consumption.models.AmountWithExchangeRate;
 import com.azure.resourcemanager.consumption.models.LotSource;
-import com.azure.resourcemanager.consumption.models.Reseller;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -24,40 +22,16 @@ public class LotSummaryInner extends ProxyResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(LotSummaryInner.class);
 
     /*
-     * Credit Currency
-     */
-    @JsonProperty(value = "properties.creditCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private String creditCurrency;
-
-    /*
-     * Billing Currency.
-     */
-    @JsonProperty(value = "properties.billingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private String billingCurrency;
-
-    /*
      * Original amount.
      */
     @JsonProperty(value = "properties.originalAmount", access = JsonProperty.Access.WRITE_ONLY)
     private Amount originalAmount;
 
     /*
-     * Current balance.
-     */
-    @JsonProperty(value = "properties.originalAmountInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate originalAmountInBillingCurrency;
-
-    /*
      * Closed balance.
      */
     @JsonProperty(value = "properties.closedBalance", access = JsonProperty.Access.WRITE_ONLY)
     private Amount closedBalance;
-
-    /*
-     * Current balance.
-     */
-    @JsonProperty(value = "properties.closedBalanceInBillingCurrency", access = JsonProperty.Access.WRITE_ONLY)
-    private AmountWithExchangeRate closedBalanceInBillingCurrency;
 
     /*
      * Lot source.
@@ -84,12 +58,6 @@ public class LotSummaryInner extends ProxyResource {
     private String poNumber;
 
     /*
-     * Reseller details.
-     */
-    @JsonProperty(value = "properties.reseller", access = JsonProperty.Access.WRITE_ONLY)
-    private Reseller reseller;
-
-    /*
      * Resource etag.
      */
     @JsonProperty(value = "etag", access = JsonProperty.Access.WRITE_ONLY)
@@ -102,24 +70,6 @@ public class LotSummaryInner extends ProxyResource {
     private Map<String, String> tags;
 
     /**
-     * Get the creditCurrency property: Credit Currency.
-     *
-     * @return the creditCurrency value.
-     */
-    public String creditCurrency() {
-        return this.creditCurrency;
-    }
-
-    /**
-     * Get the billingCurrency property: Billing Currency.
-     *
-     * @return the billingCurrency value.
-     */
-    public String billingCurrency() {
-        return this.billingCurrency;
-    }
-
-    /**
      * Get the originalAmount property: Original amount.
      *
      * @return the originalAmount value.
@@ -129,30 +79,12 @@ public class LotSummaryInner extends ProxyResource {
     }
 
     /**
-     * Get the originalAmountInBillingCurrency property: Current balance.
-     *
-     * @return the originalAmountInBillingCurrency value.
-     */
-    public AmountWithExchangeRate originalAmountInBillingCurrency() {
-        return this.originalAmountInBillingCurrency;
-    }
-
-    /**
      * Get the closedBalance property: Closed balance.
      *
      * @return the closedBalance value.
      */
     public Amount closedBalance() {
         return this.closedBalance;
-    }
-
-    /**
-     * Get the closedBalanceInBillingCurrency property: Current balance.
-     *
-     * @return the closedBalanceInBillingCurrency value.
-     */
-    public AmountWithExchangeRate closedBalanceInBillingCurrency() {
-        return this.closedBalanceInBillingCurrency;
     }
 
     /**
@@ -192,15 +124,6 @@ public class LotSummaryInner extends ProxyResource {
     }
 
     /**
-     * Get the reseller property: Reseller details.
-     *
-     * @return the reseller value.
-     */
-    public Reseller reseller() {
-        return this.reseller;
-    }
-
-    /**
      * Get the etag property: Resource etag.
      *
      * @return the etag value.
@@ -227,17 +150,8 @@ public class LotSummaryInner extends ProxyResource {
         if (originalAmount() != null) {
             originalAmount().validate();
         }
-        if (originalAmountInBillingCurrency() != null) {
-            originalAmountInBillingCurrency().validate();
-        }
         if (closedBalance() != null) {
             closedBalance().validate();
-        }
-        if (closedBalanceInBillingCurrency() != null) {
-            closedBalanceInBillingCurrency().validate();
-        }
-        if (reseller() != null) {
-            reseller().validate();
         }
     }
 }

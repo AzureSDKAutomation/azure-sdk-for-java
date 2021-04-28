@@ -60,15 +60,18 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
     @ServiceInterface(name = "ConsumptionManagemen")
     private interface EventsOperationsService {
         @Headers({"Content-Type: application/json"})
-        @Get("/{scope}/providers/Microsoft.Consumption/events")
+        @Get(
+            "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}"
+                + "/providers/Microsoft.Consumption/events")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Events>> list(
             @HostParam("$host") String endpoint,
+            @PathParam("billingAccountId") String billingAccountId,
+            @PathParam("billingProfileId") String billingProfileId,
             @QueryParam("api-version") String apiVersion,
             @QueryParam("startDate") String startDate,
             @QueryParam("endDate") String endDate,
-            @PathParam(value = "scope", encoded = true) String scope,
             @HeaderParam("Accept") String accept,
             Context context);
 
@@ -86,34 +89,37 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
     /**
      * Lists the events by billingAccountId and billingProfileId for given start and end date.
      *
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @param startDate Start date.
      * @param endDate End date.
-     * @param scope The scope associated with events operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return result of listing event summary.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<EventSummaryInner>> listSinglePageAsync(String startDate, String endDate, String scope) {
+    private Mono<PagedResponse<EventSummaryInner>> listSinglePageAsync(
+        String billingAccountId, String billingProfileId, String startDate, String endDate) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
+        if (billingAccountId == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter billingAccountId is required and cannot be null."));
+        }
+        if (billingProfileId == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter billingProfileId is required and cannot be null."));
+        }
         if (startDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter startDate is required and cannot be null."));
         }
         if (endDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter endDate is required and cannot be null."));
-        }
-        if (scope == null) {
-            return Mono.error(new IllegalArgumentException("Parameter scope is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil
@@ -122,10 +128,11 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
                     service
                         .list(
                             this.client.getEndpoint(),
+                            billingAccountId,
+                            billingProfileId,
                             this.client.getApiVersion(),
                             startDate,
                             endDate,
-                            scope,
                             accept,
                             context))
             .<PagedResponse<EventSummaryInner>>map(
@@ -143,13 +150,10 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
     /**
      * Lists the events by billingAccountId and billingProfileId for given start and end date.
      *
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @param startDate Start date.
      * @param endDate End date.
-     * @param scope The scope associated with events operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -158,12 +162,20 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<EventSummaryInner>> listSinglePageAsync(
-        String startDate, String endDate, String scope, Context context) {
+        String billingAccountId, String billingProfileId, String startDate, String endDate, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (billingAccountId == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter billingAccountId is required and cannot be null."));
+        }
+        if (billingProfileId == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter billingProfileId is required and cannot be null."));
         }
         if (startDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter startDate is required and cannot be null."));
@@ -171,13 +183,18 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
         if (endDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter endDate is required and cannot be null."));
         }
-        if (scope == null) {
-            return Mono.error(new IllegalArgumentException("Parameter scope is required and cannot be null."));
-        }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .list(this.client.getEndpoint(), this.client.getApiVersion(), startDate, endDate, scope, accept, context)
+            .list(
+                this.client.getEndpoint(),
+                billingAccountId,
+                billingProfileId,
+                this.client.getApiVersion(),
+                startDate,
+                endDate,
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -192,34 +209,30 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
     /**
      * Lists the events by billingAccountId and billingProfileId for given start and end date.
      *
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @param startDate Start date.
      * @param endDate End date.
-     * @param scope The scope associated with events operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return result of listing event summary.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<EventSummaryInner> listAsync(String startDate, String endDate, String scope) {
+    private PagedFlux<EventSummaryInner> listAsync(
+        String billingAccountId, String billingProfileId, String startDate, String endDate) {
         return new PagedFlux<>(
-            () -> listSinglePageAsync(startDate, endDate, scope), nextLink -> listNextSinglePageAsync(nextLink));
+            () -> listSinglePageAsync(billingAccountId, billingProfileId, startDate, endDate),
+            nextLink -> listNextSinglePageAsync(nextLink));
     }
 
     /**
      * Lists the events by billingAccountId and billingProfileId for given start and end date.
      *
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @param startDate Start date.
      * @param endDate End date.
-     * @param scope The scope associated with events operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -227,42 +240,38 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
      * @return result of listing event summary.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<EventSummaryInner> listAsync(String startDate, String endDate, String scope, Context context) {
+    private PagedFlux<EventSummaryInner> listAsync(
+        String billingAccountId, String billingProfileId, String startDate, String endDate, Context context) {
         return new PagedFlux<>(
-            () -> listSinglePageAsync(startDate, endDate, scope, context),
+            () -> listSinglePageAsync(billingAccountId, billingProfileId, startDate, endDate, context),
             nextLink -> listNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * Lists the events by billingAccountId and billingProfileId for given start and end date.
      *
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @param startDate Start date.
      * @param endDate End date.
-     * @param scope The scope associated with events operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return result of listing event summary.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<EventSummaryInner> list(String startDate, String endDate, String scope) {
-        return new PagedIterable<>(listAsync(startDate, endDate, scope));
+    public PagedIterable<EventSummaryInner> list(
+        String billingAccountId, String billingProfileId, String startDate, String endDate) {
+        return new PagedIterable<>(listAsync(billingAccountId, billingProfileId, startDate, endDate));
     }
 
     /**
      * Lists the events by billingAccountId and billingProfileId for given start and end date.
      *
+     * @param billingAccountId BillingAccount ID.
+     * @param billingProfileId Azure Billing Profile ID.
      * @param startDate Start date.
      * @param endDate End date.
-     * @param scope The scope associated with events operations. This includes
-     *     '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for
-     *     Billing Profile scope, and
-     *     'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for
-     *     partners.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -270,8 +279,9 @@ public final class EventsOperationsClientImpl implements EventsOperationsClient 
      * @return result of listing event summary.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<EventSummaryInner> list(String startDate, String endDate, String scope, Context context) {
-        return new PagedIterable<>(listAsync(startDate, endDate, scope, context));
+    public PagedIterable<EventSummaryInner> list(
+        String billingAccountId, String billingProfileId, String startDate, String endDate, Context context) {
+        return new PagedIterable<>(listAsync(billingAccountId, billingProfileId, startDate, endDate, context));
     }
 
     /**

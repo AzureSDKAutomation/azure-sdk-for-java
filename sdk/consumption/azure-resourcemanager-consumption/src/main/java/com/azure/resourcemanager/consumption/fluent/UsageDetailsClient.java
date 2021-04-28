@@ -15,7 +15,8 @@ import com.azure.resourcemanager.consumption.models.Metrictype;
 public interface UsageDetailsClient {
     /**
      * Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or
-     * later.
+     * later. For more information on using this API, including how to specify a date range, please see:
+     * https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/manage-automation.
      *
      * @param scope The scope associated with usage details operations. This includes '/subscriptions/{subscriptionId}/'
      *     for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account
@@ -44,7 +45,8 @@ public interface UsageDetailsClient {
 
     /**
      * Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or
-     * later.
+     * later. For more information on using this API, including how to specify a date range, please see:
+     * https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/manage-automation.
      *
      * @param scope The scope associated with usage details operations. This includes '/subscriptions/{subscriptionId}/'
      *     for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account

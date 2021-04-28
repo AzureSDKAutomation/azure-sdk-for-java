@@ -26,13 +26,13 @@ public final class LotsOperationsImpl implements LotsOperations {
         this.serviceManager = serviceManager;
     }
 
-    public PagedIterable<LotSummary> list(String scope) {
-        PagedIterable<LotSummaryInner> inner = this.serviceClient().list(scope);
+    public PagedIterable<LotSummary> list(String billingAccountId, String billingProfileId) {
+        PagedIterable<LotSummaryInner> inner = this.serviceClient().list(billingAccountId, billingProfileId);
         return Utils.mapPage(inner, inner1 -> new LotSummaryImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<LotSummary> list(String scope, Context context) {
-        PagedIterable<LotSummaryInner> inner = this.serviceClient().list(scope, context);
+    public PagedIterable<LotSummary> list(String billingAccountId, String billingProfileId, Context context) {
+        PagedIterable<LotSummaryInner> inner = this.serviceClient().list(billingAccountId, billingProfileId, context);
         return Utils.mapPage(inner, inner1 -> new LotSummaryImpl(inner1, this.manager()));
     }
 
