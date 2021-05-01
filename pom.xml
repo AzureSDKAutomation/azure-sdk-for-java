@@ -672,6 +672,7 @@
         <module>sdk/apimanagement</module>
         <module>sdk/appconfiguration</module>
         <module>sdk/applicationinsights</module>
+        <module>sdk/appservice</module>
         <module>sdk/attestation</module>
         <module>sdk/authorization</module>
         <module>sdk/automation</module>
