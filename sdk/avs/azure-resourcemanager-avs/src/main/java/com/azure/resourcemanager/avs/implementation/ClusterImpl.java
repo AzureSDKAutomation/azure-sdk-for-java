@@ -34,12 +34,12 @@ public final class ClusterImpl implements Cluster, Cluster.Definition, Cluster.U
         return this.innerModel().sku();
     }
 
-    public Integer clusterSize() {
-        return this.innerModel().clusterSize();
-    }
-
     public ClusterProvisioningState provisioningState() {
         return this.innerModel().provisioningState();
+    }
+
+    public Integer clusterSize() {
+        return this.innerModel().clusterSize();
     }
 
     public Integer clusterId() {
