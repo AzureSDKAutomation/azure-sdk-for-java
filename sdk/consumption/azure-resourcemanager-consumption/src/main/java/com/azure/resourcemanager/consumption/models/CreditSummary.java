@@ -31,20 +31,6 @@ public interface CreditSummary {
     String type();
 
     /**
-     * Gets the creditCurrency property: Credit Currency.
-     *
-     * @return the creditCurrency value.
-     */
-    String creditCurrency();
-
-    /**
-     * Gets the billingCurrency property: Billing Currency.
-     *
-     * @return the billingCurrency value.
-     */
-    String billingCurrency();
-
-    /**
      * Gets the balanceSummary property: Summary of balances associated with this credit summary.
      *
      * @return the balanceSummary value.
@@ -73,14 +59,7 @@ public interface CreditSummary {
     Amount pendingEligibleCharges();
 
     /**
-     * Gets the reseller property: Reseller details.
-     *
-     * @return the reseller value.
-     */
-    Reseller reseller();
-
-    /**
-     * Gets the etag property: Resource etag.
+     * Gets the etag property: The etag for the resource.
      *
      * @return the etag value.
      */

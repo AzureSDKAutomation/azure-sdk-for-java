@@ -6,10 +6,8 @@ package com.azure.resourcemanager.consumption.implementation;
 
 import com.azure.resourcemanager.consumption.fluent.models.LotSummaryInner;
 import com.azure.resourcemanager.consumption.models.Amount;
-import com.azure.resourcemanager.consumption.models.AmountWithExchangeRate;
 import com.azure.resourcemanager.consumption.models.LotSource;
 import com.azure.resourcemanager.consumption.models.LotSummary;
-import com.azure.resourcemanager.consumption.models.Reseller;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Map;
@@ -37,28 +35,12 @@ public final class LotSummaryImpl implements LotSummary {
         return this.innerModel().type();
     }
 
-    public String creditCurrency() {
-        return this.innerModel().creditCurrency();
-    }
-
-    public String billingCurrency() {
-        return this.innerModel().billingCurrency();
-    }
-
     public Amount originalAmount() {
         return this.innerModel().originalAmount();
     }
 
-    public AmountWithExchangeRate originalAmountInBillingCurrency() {
-        return this.innerModel().originalAmountInBillingCurrency();
-    }
-
     public Amount closedBalance() {
         return this.innerModel().closedBalance();
-    }
-
-    public AmountWithExchangeRate closedBalanceInBillingCurrency() {
-        return this.innerModel().closedBalanceInBillingCurrency();
     }
 
     public LotSource source() {
@@ -77,8 +59,12 @@ public final class LotSummaryImpl implements LotSummary {
         return this.innerModel().poNumber();
     }
 
-    public Reseller reseller() {
-        return this.innerModel().reseller();
+    public OffsetDateTime purchaseDate() {
+        return this.innerModel().purchaseDate();
+    }
+
+    public String status() {
+        return this.innerModel().status();
     }
 
     public String etag() {

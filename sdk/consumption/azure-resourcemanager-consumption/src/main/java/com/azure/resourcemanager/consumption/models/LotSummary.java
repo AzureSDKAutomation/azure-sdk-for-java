@@ -32,84 +32,64 @@ public interface LotSummary {
     String type();
 
     /**
-     * Gets the creditCurrency property: Credit Currency.
-     *
-     * @return the creditCurrency value.
-     */
-    String creditCurrency();
-
-    /**
-     * Gets the billingCurrency property: Billing Currency.
-     *
-     * @return the billingCurrency value.
-     */
-    String billingCurrency();
-
-    /**
-     * Gets the originalAmount property: Original amount.
+     * Gets the originalAmount property: The original amount of a lot.
      *
      * @return the originalAmount value.
      */
     Amount originalAmount();
 
     /**
-     * Gets the originalAmountInBillingCurrency property: Current balance.
-     *
-     * @return the originalAmountInBillingCurrency value.
-     */
-    AmountWithExchangeRate originalAmountInBillingCurrency();
-
-    /**
-     * Gets the closedBalance property: Closed balance.
+     * Gets the closedBalance property: The balance as of the last invoice.
      *
      * @return the closedBalance value.
      */
     Amount closedBalance();
 
     /**
-     * Gets the closedBalanceInBillingCurrency property: Current balance.
-     *
-     * @return the closedBalanceInBillingCurrency value.
-     */
-    AmountWithExchangeRate closedBalanceInBillingCurrency();
-
-    /**
-     * Gets the source property: Lot source.
+     * Gets the source property: The source of the lot.
      *
      * @return the source value.
      */
     LotSource source();
 
     /**
-     * Gets the startDate property: Start date.
+     * Gets the startDate property: The date when the lot became effective.
      *
      * @return the startDate value.
      */
     OffsetDateTime startDate();
 
     /**
-     * Gets the expirationDate property: Expiration date.
+     * Gets the expirationDate property: The expiration date of a lot.
      *
      * @return the expirationDate value.
      */
     OffsetDateTime expirationDate();
 
     /**
-     * Gets the poNumber property: PO number.
+     * Gets the poNumber property: The po number of the invoice on which the lot was added. This property is not
+     * available for ConsumptionCommitment lots.
      *
      * @return the poNumber value.
      */
     String poNumber();
 
     /**
-     * Gets the reseller property: Reseller details.
+     * Gets the purchaseDate property: The date when the lot was added.
      *
-     * @return the reseller value.
+     * @return the purchaseDate value.
      */
-    Reseller reseller();
+    OffsetDateTime purchaseDate();
 
     /**
-     * Gets the etag property: Resource etag.
+     * Gets the status property: The status of the lot.
+     *
+     * @return the status value.
+     */
+    String status();
+
+    /**
+     * Gets the etag property: The etag for the resource.
      *
      * @return the etag value.
      */
