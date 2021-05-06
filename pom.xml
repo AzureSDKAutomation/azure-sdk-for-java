@@ -729,6 +729,7 @@
         <module>sdk/machinelearningservices</module>
         <module>sdk/maintenance</module>
         <module>sdk/managedapplications</module>
+        <module>sdk/managementgroups</module>
         <module>sdk/mariadb</module>
         <module>sdk/marketplaceordering</module>
         <module>sdk/mediaservices</module>
