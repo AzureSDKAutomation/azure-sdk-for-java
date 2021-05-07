@@ -1,0 +1,33 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+      - master
+      - main
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/agfood/
+
+pr:
+  branches:
+    include:
+      - master
+      - main
+      - feature/*
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/agfood/
+
+extends:
+  template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: agfood
+    Artifacts:
+      - name: azure-resourcemanager-agfood
+        groupId: com.azure.resourcemanager
+        safeName: azureresourcemanageragfood
