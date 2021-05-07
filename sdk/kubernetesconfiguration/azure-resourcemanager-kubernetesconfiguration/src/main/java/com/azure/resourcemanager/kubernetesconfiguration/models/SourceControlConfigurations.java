@@ -14,7 +14,7 @@ public interface SourceControlConfigurations {
     /**
      * Gets details of the Source Control Configuration.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -28,15 +28,15 @@ public interface SourceControlConfigurations {
      */
     SourceControlConfiguration get(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName);
 
     /**
      * Gets details of the Source Control Configuration.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -51,8 +51,8 @@ public interface SourceControlConfigurations {
      */
     Response<SourceControlConfiguration> getWithResponse(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         Context context);
@@ -60,7 +60,7 @@ public interface SourceControlConfigurations {
     /**
      * Create a new Kubernetes Source Control Configuration.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -75,8 +75,8 @@ public interface SourceControlConfigurations {
      */
     SourceControlConfiguration createOrUpdate(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         SourceControlConfigurationInner sourceControlConfiguration);
@@ -84,7 +84,7 @@ public interface SourceControlConfigurations {
     /**
      * Create a new Kubernetes Source Control Configuration.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -100,8 +100,8 @@ public interface SourceControlConfigurations {
      */
     Response<SourceControlConfiguration> createOrUpdateWithResponse(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         SourceControlConfigurationInner sourceControlConfiguration,
@@ -111,7 +111,7 @@ public interface SourceControlConfigurations {
      * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
      * the source repo.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -124,8 +124,8 @@ public interface SourceControlConfigurations {
      */
     void delete(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName);
 
@@ -133,7 +133,7 @@ public interface SourceControlConfigurations {
      * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
      * the source repo.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -147,8 +147,8 @@ public interface SourceControlConfigurations {
      */
     void delete(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         String sourceControlConfigurationName,
         Context context);
@@ -156,7 +156,7 @@ public interface SourceControlConfigurations {
     /**
      * List all Source Control Configurations.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -169,14 +169,14 @@ public interface SourceControlConfigurations {
      */
     PagedIterable<SourceControlConfiguration> list(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName);
 
     /**
      * List all Source Control Configurations.
      *
-     * @param resourceGroupName The name of the resource group.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
      *     Microsoft.Kubernetes (for OnPrem K8S clusters).
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
@@ -190,8 +190,8 @@ public interface SourceControlConfigurations {
      */
     PagedIterable<SourceControlConfiguration> list(
         String resourceGroupName,
-        SourceControlConfigurationsClusterRp clusterRp,
-        SourceControlConfigurationsClusterResourceName clusterResourceName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
         Context context);
 }
