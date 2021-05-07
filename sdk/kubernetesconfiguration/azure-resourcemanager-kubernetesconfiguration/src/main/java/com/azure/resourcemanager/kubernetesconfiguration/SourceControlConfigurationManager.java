@@ -21,9 +21,21 @@ import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.SourceControlConfigurationClient;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.ClusterExtensionTypesImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.ClusterExtensionTypesOperationsImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.ExtensionTypeVersionsImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.ExtensionsImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.LocationExtensionTypesImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.implementation.OperationStatusImpl;
 import com.azure.resourcemanager.kubernetesconfiguration.implementation.OperationsImpl;
 import com.azure.resourcemanager.kubernetesconfiguration.implementation.SourceControlConfigurationClientBuilder;
 import com.azure.resourcemanager.kubernetesconfiguration.implementation.SourceControlConfigurationsImpl;
+import com.azure.resourcemanager.kubernetesconfiguration.models.ClusterExtensionTypes;
+import com.azure.resourcemanager.kubernetesconfiguration.models.ClusterExtensionTypesOperations;
+import com.azure.resourcemanager.kubernetesconfiguration.models.ExtensionTypeVersions;
+import com.azure.resourcemanager.kubernetesconfiguration.models.Extensions;
+import com.azure.resourcemanager.kubernetesconfiguration.models.LocationExtensionTypes;
+import com.azure.resourcemanager.kubernetesconfiguration.models.OperationStatus;
 import com.azure.resourcemanager.kubernetesconfiguration.models.Operations;
 import com.azure.resourcemanager.kubernetesconfiguration.models.SourceControlConfigurations;
 import java.time.Duration;
@@ -34,6 +46,18 @@ import java.util.Objects;
 
 /** Entry point to SourceControlConfigurationManager. KubernetesConfiguration Client. */
 public final class SourceControlConfigurationManager {
+    private Extensions extensions;
+
+    private OperationStatus operationStatus;
+
+    private ClusterExtensionTypes clusterExtensionTypes;
+
+    private ClusterExtensionTypesOperations clusterExtensionTypesOperations;
+
+    private ExtensionTypeVersions extensionTypeVersions;
+
+    private LocationExtensionTypes locationExtensionTypes;
+
     private SourceControlConfigurations sourceControlConfigurations;
 
     private Operations operations;
@@ -201,6 +225,56 @@ public final class SourceControlConfigurationManager {
                     .build();
             return new SourceControlConfigurationManager(httpPipeline, profile, defaultPollInterval);
         }
+    }
+
+    /** @return Resource collection API of Extensions. */
+    public Extensions extensions() {
+        if (this.extensions == null) {
+            this.extensions = new ExtensionsImpl(clientObject.getExtensions(), this);
+        }
+        return extensions;
+    }
+
+    /** @return Resource collection API of OperationStatus. */
+    public OperationStatus operationStatus() {
+        if (this.operationStatus == null) {
+            this.operationStatus = new OperationStatusImpl(clientObject.getOperationStatus(), this);
+        }
+        return operationStatus;
+    }
+
+    /** @return Resource collection API of ClusterExtensionTypes. */
+    public ClusterExtensionTypes clusterExtensionTypes() {
+        if (this.clusterExtensionTypes == null) {
+            this.clusterExtensionTypes = new ClusterExtensionTypesImpl(clientObject.getClusterExtensionTypes(), this);
+        }
+        return clusterExtensionTypes;
+    }
+
+    /** @return Resource collection API of ClusterExtensionTypesOperations. */
+    public ClusterExtensionTypesOperations clusterExtensionTypesOperations() {
+        if (this.clusterExtensionTypesOperations == null) {
+            this.clusterExtensionTypesOperations =
+                new ClusterExtensionTypesOperationsImpl(clientObject.getClusterExtensionTypesOperations(), this);
+        }
+        return clusterExtensionTypesOperations;
+    }
+
+    /** @return Resource collection API of ExtensionTypeVersions. */
+    public ExtensionTypeVersions extensionTypeVersions() {
+        if (this.extensionTypeVersions == null) {
+            this.extensionTypeVersions = new ExtensionTypeVersionsImpl(clientObject.getExtensionTypeVersions(), this);
+        }
+        return extensionTypeVersions;
+    }
+
+    /** @return Resource collection API of LocationExtensionTypes. */
+    public LocationExtensionTypes locationExtensionTypes() {
+        if (this.locationExtensionTypes == null) {
+            this.locationExtensionTypes =
+                new LocationExtensionTypesImpl(clientObject.getLocationExtensionTypes(), this);
+        }
+        return locationExtensionTypes;
     }
 
     /** @return Resource collection API of SourceControlConfigurations. */
