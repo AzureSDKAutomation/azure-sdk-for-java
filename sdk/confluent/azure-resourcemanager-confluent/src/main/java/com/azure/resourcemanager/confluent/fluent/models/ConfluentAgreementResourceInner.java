@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** Confluent Agreements Resource. */
+/** Agreement Terms definition. */
 @JsonFlatten
 @Fluent
 public class ConfluentAgreementResourceInner extends ProxyResource {
