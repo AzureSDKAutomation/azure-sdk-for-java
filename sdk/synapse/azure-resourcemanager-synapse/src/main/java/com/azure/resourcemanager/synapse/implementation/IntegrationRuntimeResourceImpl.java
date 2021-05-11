@@ -224,7 +224,7 @@ public final class IntegrationRuntimeResourceImpl
         return this;
     }
 
-    public IntegrationRuntimeResourceImpl withIfMatch(String ifMatch) {
+    public IntegrationRuntimeResourceImpl withWithIfMatch(String ifMatch) {
         this.createIfMatch = ifMatch;
         return this;
     }
