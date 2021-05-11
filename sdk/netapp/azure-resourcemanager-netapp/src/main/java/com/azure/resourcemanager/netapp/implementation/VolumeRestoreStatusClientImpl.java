@@ -22,45 +22,45 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.netapp.fluent.VolumeBackupStatusClient;
-import com.azure.resourcemanager.netapp.fluent.models.BackupStatusInner;
+import com.azure.resourcemanager.netapp.fluent.VolumeRestoreStatusClient;
+import com.azure.resourcemanager.netapp.fluent.models.RestoreStatusInner;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in VolumeBackupStatusClient. */
-public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusClient {
-    private final ClientLogger logger = new ClientLogger(VolumeBackupStatusClientImpl.class);
+/** An instance of this class provides access to all the operations defined in VolumeRestoreStatusClient. */
+public final class VolumeRestoreStatusClientImpl implements VolumeRestoreStatusClient {
+    private final ClientLogger logger = new ClientLogger(VolumeRestoreStatusClientImpl.class);
 
     /** The proxy service used to perform REST calls. */
-    private final VolumeBackupStatusService service;
+    private final VolumeRestoreStatusService service;
 
     /** The service client containing this operation class. */
     private final NetAppManagementClientImpl client;
 
     /**
-     * Initializes an instance of VolumeBackupStatusClientImpl.
+     * Initializes an instance of VolumeRestoreStatusClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    VolumeBackupStatusClientImpl(NetAppManagementClientImpl client) {
+    VolumeRestoreStatusClientImpl(NetAppManagementClientImpl client) {
         this.service =
-            RestProxy.create(VolumeBackupStatusService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+            RestProxy.create(VolumeRestoreStatusService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for NetAppManagementClientVolumeBackupStatus to be used by the proxy
+     * The interface defining all the services for NetAppManagementClientVolumeRestoreStatus to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "NetAppManagementClie")
-    private interface VolumeBackupStatusService {
+    private interface VolumeRestoreStatusService {
         @Headers({"Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp"
-                + "/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backupStatus")
+                + "/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/restoreStatus")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<BackupStatusInner>> get(
+        Mono<Response<RestoreStatusInner>> get(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
@@ -73,7 +73,7 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
     }
 
     /**
-     * Get the status of the backup for a volume.
+     * Get the status of the restore for a volume.
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the NetApp account.
@@ -82,10 +82,10 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the status of the backup for a volume.
+     * @return the status of the restore for a volume.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BackupStatusInner>> getWithResponseAsync(
+    private Mono<Response<RestoreStatusInner>> getWithResponseAsync(
         String resourceGroupName, String accountName, String poolName, String volumeName) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -127,11 +127,11 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
                             this.client.getApiVersion(),
                             accept,
                             context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
-     * Get the status of the backup for a volume.
+     * Get the status of the restore for a volume.
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the NetApp account.
@@ -141,10 +141,10 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the status of the backup for a volume.
+     * @return the status of the restore for a volume.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BackupStatusInner>> getWithResponseAsync(
+    private Mono<Response<RestoreStatusInner>> getWithResponseAsync(
         String resourceGroupName, String accountName, String poolName, String volumeName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -187,7 +187,7 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
     }
 
     /**
-     * Get the status of the backup for a volume.
+     * Get the status of the restore for a volume.
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the NetApp account.
@@ -196,14 +196,14 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the status of the backup for a volume.
+     * @return the status of the restore for a volume.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<BackupStatusInner> getAsync(
+    private Mono<RestoreStatusInner> getAsync(
         String resourceGroupName, String accountName, String poolName, String volumeName) {
         return getWithResponseAsync(resourceGroupName, accountName, poolName, volumeName)
             .flatMap(
-                (Response<BackupStatusInner> res) -> {
+                (Response<RestoreStatusInner> res) -> {
                     if (res.getValue() != null) {
                         return Mono.just(res.getValue());
                     } else {
@@ -213,7 +213,7 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
     }
 
     /**
-     * Get the status of the backup for a volume.
+     * Get the status of the restore for a volume.
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the NetApp account.
@@ -222,15 +222,15 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the status of the backup for a volume.
+     * @return the status of the restore for a volume.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BackupStatusInner get(String resourceGroupName, String accountName, String poolName, String volumeName) {
+    public RestoreStatusInner get(String resourceGroupName, String accountName, String poolName, String volumeName) {
         return getAsync(resourceGroupName, accountName, poolName, volumeName).block();
     }
 
     /**
-     * Get the status of the backup for a volume.
+     * Get the status of the restore for a volume.
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the NetApp account.
@@ -240,10 +240,10 @@ public final class VolumeBackupStatusClientImpl implements VolumeBackupStatusCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the status of the backup for a volume.
+     * @return the status of the restore for a volume.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BackupStatusInner> getWithResponse(
+    public Response<RestoreStatusInner> getWithResponse(
         String resourceGroupName, String accountName, String poolName, String volumeName, Context context) {
         return getWithResponseAsync(resourceGroupName, accountName, poolName, volumeName, context).block();
     }

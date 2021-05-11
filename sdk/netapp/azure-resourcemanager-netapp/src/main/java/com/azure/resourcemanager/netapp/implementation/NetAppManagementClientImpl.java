@@ -32,7 +32,7 @@ import com.azure.resourcemanager.netapp.fluent.PoolsClient;
 import com.azure.resourcemanager.netapp.fluent.SnapshotPoliciesClient;
 import com.azure.resourcemanager.netapp.fluent.SnapshotsClient;
 import com.azure.resourcemanager.netapp.fluent.VaultsClient;
-import com.azure.resourcemanager.netapp.fluent.VolumeBackupStatusClient;
+import com.azure.resourcemanager.netapp.fluent.VolumeRestoreStatusClient;
 import com.azure.resourcemanager.netapp.fluent.VolumesClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -209,16 +209,28 @@ public final class NetAppManagementClientImpl implements NetAppManagementClient 
         return this.snapshotPolicies;
     }
 
-    /** The VolumeBackupStatusClient object to access its operations. */
-    private final VolumeBackupStatusClient volumeBackupStatus;
+    /** The BackupsClient object to access its operations. */
+    private final BackupsClient backups;
 
     /**
-     * Gets the VolumeBackupStatusClient object to access its operations.
+     * Gets the BackupsClient object to access its operations.
      *
-     * @return the VolumeBackupStatusClient object.
+     * @return the BackupsClient object.
      */
-    public VolumeBackupStatusClient getVolumeBackupStatus() {
-        return this.volumeBackupStatus;
+    public BackupsClient getBackups() {
+        return this.backups;
+    }
+
+    /** The VolumeRestoreStatusClient object to access its operations. */
+    private final VolumeRestoreStatusClient volumeRestoreStatus;
+
+    /**
+     * Gets the VolumeRestoreStatusClient object to access its operations.
+     *
+     * @return the VolumeRestoreStatusClient object.
+     */
+    public VolumeRestoreStatusClient getVolumeRestoreStatus() {
+        return this.volumeRestoreStatus;
     }
 
     /** The AccountBackupsClient object to access its operations. */
@@ -231,18 +243,6 @@ public final class NetAppManagementClientImpl implements NetAppManagementClient 
      */
     public AccountBackupsClient getAccountBackups() {
         return this.accountBackups;
-    }
-
-    /** The BackupsClient object to access its operations. */
-    private final BackupsClient backups;
-
-    /**
-     * Gets the BackupsClient object to access its operations.
-     *
-     * @return the BackupsClient object.
-     */
-    public BackupsClient getBackups() {
-        return this.backups;
     }
 
     /** The BackupPoliciesClient object to access its operations. */
@@ -292,7 +292,7 @@ public final class NetAppManagementClientImpl implements NetAppManagementClient 
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2020-12-01";
+        this.apiVersion = "2021-04-01";
         this.operations = new OperationsClientImpl(this);
         this.netAppResources = new NetAppResourcesClientImpl(this);
         this.accounts = new AccountsClientImpl(this);
@@ -300,9 +300,9 @@ public final class NetAppManagementClientImpl implements NetAppManagementClient 
         this.volumes = new VolumesClientImpl(this);
         this.snapshots = new SnapshotsClientImpl(this);
         this.snapshotPolicies = new SnapshotPoliciesClientImpl(this);
-        this.volumeBackupStatus = new VolumeBackupStatusClientImpl(this);
-        this.accountBackups = new AccountBackupsClientImpl(this);
         this.backups = new BackupsClientImpl(this);
+        this.volumeRestoreStatus = new VolumeRestoreStatusClientImpl(this);
+        this.accountBackups = new AccountBackupsClientImpl(this);
         this.backupPolicies = new BackupPoliciesClientImpl(this);
         this.vaults = new VaultsClientImpl(this);
     }

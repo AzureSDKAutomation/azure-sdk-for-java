@@ -45,7 +45,7 @@ public interface NetAppResources {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return information regarding availability of a resource.
      */
-    CheckAvailabilityResponse checkFilePathAvailability(String location, ResourceNameAvailabilityRequest body);
+    CheckAvailabilityResponse checkFilePathAvailability(String location, FilePathAvailabilityRequest body);
 
     /**
      * Check if a file path is available.
@@ -59,7 +59,7 @@ public interface NetAppResources {
      * @return information regarding availability of a resource.
      */
     Response<CheckAvailabilityResponse> checkFilePathAvailabilityWithResponse(
-        String location, ResourceNameAvailabilityRequest body, Context context);
+        String location, FilePathAvailabilityRequest body, Context context);
 
     /**
      * Check if a quota is available.
@@ -86,4 +86,24 @@ public interface NetAppResources {
      */
     Response<CheckAvailabilityResponse> checkQuotaAvailabilityWithResponse(
         String location, QuotaAvailabilityRequest body, Context context);
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    QuotaLimitsResponse getQuotaLimits();
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    Response<QuotaLimitsResponse> getQuotaLimitsWithResponse(Context context);
 }

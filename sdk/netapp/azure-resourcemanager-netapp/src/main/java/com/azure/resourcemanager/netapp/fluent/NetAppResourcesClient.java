@@ -9,6 +9,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.netapp.fluent.models.CheckAvailabilityResponseInner;
+import com.azure.resourcemanager.netapp.fluent.models.QuotaLimitsResponseInner;
+import com.azure.resourcemanager.netapp.models.FilePathAvailabilityRequest;
 import com.azure.resourcemanager.netapp.models.QuotaAvailabilityRequest;
 import com.azure.resourcemanager.netapp.models.ResourceNameAvailabilityRequest;
 
@@ -53,7 +55,7 @@ public interface NetAppResourcesClient {
      * @return information regarding availability of a resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    CheckAvailabilityResponseInner checkFilePathAvailability(String location, ResourceNameAvailabilityRequest body);
+    CheckAvailabilityResponseInner checkFilePathAvailability(String location, FilePathAvailabilityRequest body);
 
     /**
      * Check if a file path is available.
@@ -68,7 +70,7 @@ public interface NetAppResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<CheckAvailabilityResponseInner> checkFilePathAvailabilityWithResponse(
-        String location, ResourceNameAvailabilityRequest body, Context context);
+        String location, FilePathAvailabilityRequest body, Context context);
 
     /**
      * Check if a quota is available.
@@ -97,4 +99,26 @@ public interface NetAppResourcesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<CheckAvailabilityResponseInner> checkQuotaAvailabilityWithResponse(
         String location, QuotaAvailabilityRequest body, Context context);
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    QuotaLimitsResponseInner getQuotaLimits();
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<QuotaLimitsResponseInner> getQuotaLimitsWithResponse(Context context);
 }

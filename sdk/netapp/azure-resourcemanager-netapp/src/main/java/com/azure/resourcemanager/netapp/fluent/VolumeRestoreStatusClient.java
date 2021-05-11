@@ -8,12 +8,12 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.netapp.fluent.models.BackupStatusInner;
+import com.azure.resourcemanager.netapp.fluent.models.RestoreStatusInner;
 
-/** An instance of this class provides access to all the operations defined in VolumeBackupStatusClient. */
-public interface VolumeBackupStatusClient {
+/** An instance of this class provides access to all the operations defined in VolumeRestoreStatusClient. */
+public interface VolumeRestoreStatusClient {
     /**
-     * Get the status of the backup for a volume.
+     * Get the status of the restore for a volume.
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the NetApp account.
@@ -22,13 +22,13 @@ public interface VolumeBackupStatusClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the status of the backup for a volume.
+     * @return the status of the restore for a volume.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    BackupStatusInner get(String resourceGroupName, String accountName, String poolName, String volumeName);
+    RestoreStatusInner get(String resourceGroupName, String accountName, String poolName, String volumeName);
 
     /**
-     * Get the status of the backup for a volume.
+     * Get the status of the restore for a volume.
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the NetApp account.
@@ -38,9 +38,9 @@ public interface VolumeBackupStatusClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the status of the backup for a volume.
+     * @return the status of the restore for a volume.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<BackupStatusInner> getWithResponse(
+    Response<RestoreStatusInner> getWithResponse(
         String resourceGroupName, String accountName, String poolName, String volumeName, Context context);
 }
