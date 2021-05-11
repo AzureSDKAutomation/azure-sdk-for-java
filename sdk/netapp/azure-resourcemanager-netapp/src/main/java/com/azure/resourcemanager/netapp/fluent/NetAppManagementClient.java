@@ -95,11 +95,18 @@ public interface NetAppManagementClient {
     SnapshotPoliciesClient getSnapshotPolicies();
 
     /**
-     * Gets the VolumeBackupStatusClient object to access its operations.
+     * Gets the BackupsClient object to access its operations.
      *
-     * @return the VolumeBackupStatusClient object.
+     * @return the BackupsClient object.
      */
-    VolumeBackupStatusClient getVolumeBackupStatus();
+    BackupsClient getBackups();
+
+    /**
+     * Gets the VolumeRestoreStatusClient object to access its operations.
+     *
+     * @return the VolumeRestoreStatusClient object.
+     */
+    VolumeRestoreStatusClient getVolumeRestoreStatus();
 
     /**
      * Gets the AccountBackupsClient object to access its operations.
@@ -107,13 +114,6 @@ public interface NetAppManagementClient {
      * @return the AccountBackupsClient object.
      */
     AccountBackupsClient getAccountBackups();
-
-    /**
-     * Gets the BackupsClient object to access its operations.
-     *
-     * @return the BackupsClient object.
-     */
-    BackupsClient getBackups();
 
     /**
      * Gets the BackupPoliciesClient object to access its operations.

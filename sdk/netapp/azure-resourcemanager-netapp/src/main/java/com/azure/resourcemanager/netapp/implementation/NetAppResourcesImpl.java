@@ -10,9 +10,12 @@ import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.netapp.fluent.NetAppResourcesClient;
 import com.azure.resourcemanager.netapp.fluent.models.CheckAvailabilityResponseInner;
+import com.azure.resourcemanager.netapp.fluent.models.QuotaLimitsResponseInner;
 import com.azure.resourcemanager.netapp.models.CheckAvailabilityResponse;
+import com.azure.resourcemanager.netapp.models.FilePathAvailabilityRequest;
 import com.azure.resourcemanager.netapp.models.NetAppResources;
 import com.azure.resourcemanager.netapp.models.QuotaAvailabilityRequest;
+import com.azure.resourcemanager.netapp.models.QuotaLimitsResponse;
 import com.azure.resourcemanager.netapp.models.ResourceNameAvailabilityRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -53,7 +56,7 @@ public final class NetAppResourcesImpl implements NetAppResources {
         }
     }
 
-    public CheckAvailabilityResponse checkFilePathAvailability(String location, ResourceNameAvailabilityRequest body) {
+    public CheckAvailabilityResponse checkFilePathAvailability(String location, FilePathAvailabilityRequest body) {
         CheckAvailabilityResponseInner inner = this.serviceClient().checkFilePathAvailability(location, body);
         if (inner != null) {
             return new CheckAvailabilityResponseImpl(inner, this.manager());
@@ -63,7 +66,7 @@ public final class NetAppResourcesImpl implements NetAppResources {
     }
 
     public Response<CheckAvailabilityResponse> checkFilePathAvailabilityWithResponse(
-        String location, ResourceNameAvailabilityRequest body, Context context) {
+        String location, FilePathAvailabilityRequest body, Context context) {
         Response<CheckAvailabilityResponseInner> inner =
             this.serviceClient().checkFilePathAvailabilityWithResponse(location, body, context);
         if (inner != null) {
@@ -96,6 +99,28 @@ public final class NetAppResourcesImpl implements NetAppResources {
                 inner.getStatusCode(),
                 inner.getHeaders(),
                 new CheckAvailabilityResponseImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public QuotaLimitsResponse getQuotaLimits() {
+        QuotaLimitsResponseInner inner = this.serviceClient().getQuotaLimits();
+        if (inner != null) {
+            return new QuotaLimitsResponseImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Response<QuotaLimitsResponse> getQuotaLimitsWithResponse(Context context) {
+        Response<QuotaLimitsResponseInner> inner = this.serviceClient().getQuotaLimitsWithResponse(context);
+        if (inner != null) {
+            return new SimpleResponse<>(
+                inner.getRequest(),
+                inner.getStatusCode(),
+                inner.getHeaders(),
+                new QuotaLimitsResponseImpl(inner.getValue(), this.manager()));
         } else {
             return null;
         }

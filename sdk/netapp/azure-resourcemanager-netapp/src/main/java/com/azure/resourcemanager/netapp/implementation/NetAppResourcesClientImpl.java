@@ -25,6 +25,8 @@ import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.netapp.fluent.NetAppResourcesClient;
 import com.azure.resourcemanager.netapp.fluent.models.CheckAvailabilityResponseInner;
+import com.azure.resourcemanager.netapp.fluent.models.QuotaLimitsResponseInner;
+import com.azure.resourcemanager.netapp.models.FilePathAvailabilityRequest;
 import com.azure.resourcemanager.netapp.models.QuotaAvailabilityRequest;
 import com.azure.resourcemanager.netapp.models.ResourceNameAvailabilityRequest;
 import reactor.core.publisher.Mono;
@@ -80,7 +82,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("location") String location,
             @QueryParam("api-version") String apiVersion,
-            @BodyParam("application/json") ResourceNameAvailabilityRequest body,
+            @BodyParam("application/json") FilePathAvailabilityRequest body,
             @HeaderParam("Accept") String accept,
             Context context);
 
@@ -94,6 +96,17 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
             @PathParam("location") String location,
             @QueryParam("api-version") String apiVersion,
             @BodyParam("application/json") QuotaAvailabilityRequest body,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Post("/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/getQuotaLimits")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<QuotaLimitsResponseInner>> getQuotaLimits(
+            @HostParam("$host") String endpoint,
+            @PathParam("subscriptionId") String subscriptionId,
+            @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
             Context context);
     }
@@ -144,7 +157,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
                             body,
                             accept,
                             context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -262,7 +275,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<CheckAvailabilityResponseInner>> checkFilePathAvailabilityWithResponseAsync(
-        String location, ResourceNameAvailabilityRequest body) {
+        String location, FilePathAvailabilityRequest body) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -296,7 +309,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
                             body,
                             accept,
                             context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -312,7 +325,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<CheckAvailabilityResponseInner>> checkFilePathAvailabilityWithResponseAsync(
-        String location, ResourceNameAvailabilityRequest body, Context context) {
+        String location, FilePathAvailabilityRequest body, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -358,7 +371,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CheckAvailabilityResponseInner> checkFilePathAvailabilityAsync(
-        String location, ResourceNameAvailabilityRequest body) {
+        String location, FilePathAvailabilityRequest body) {
         return checkFilePathAvailabilityWithResponseAsync(location, body)
             .flatMap(
                 (Response<CheckAvailabilityResponseInner> res) -> {
@@ -381,8 +394,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
      * @return information regarding availability of a resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public CheckAvailabilityResponseInner checkFilePathAvailability(
-        String location, ResourceNameAvailabilityRequest body) {
+    public CheckAvailabilityResponseInner checkFilePathAvailability(String location, FilePathAvailabilityRequest body) {
         return checkFilePathAvailabilityAsync(location, body).block();
     }
 
@@ -399,7 +411,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<CheckAvailabilityResponseInner> checkFilePathAvailabilityWithResponse(
-        String location, ResourceNameAvailabilityRequest body, Context context) {
+        String location, FilePathAvailabilityRequest body, Context context) {
         return checkFilePathAvailabilityWithResponseAsync(location, body, context).block();
     }
 
@@ -449,7 +461,7 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
                             body,
                             accept,
                             context))
-            .subscriberContext(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext())));
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
@@ -553,5 +565,120 @@ public final class NetAppResourcesClientImpl implements NetAppResourcesClient {
     public Response<CheckAvailabilityResponseInner> checkQuotaAvailabilityWithResponse(
         String location, QuotaAvailabilityRequest body, Context context) {
         return checkQuotaAvailabilityWithResponseAsync(location, body, context).block();
+    }
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<QuotaLimitsResponseInner>> getQuotaLimitsWithResponseAsync() {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .getQuotaLimits(
+                            this.client.getEndpoint(),
+                            this.client.getSubscriptionId(),
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<QuotaLimitsResponseInner>> getQuotaLimitsWithResponseAsync(Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .getQuotaLimits(
+                this.client.getEndpoint(),
+                this.client.getSubscriptionId(),
+                this.client.getApiVersion(),
+                accept,
+                context);
+    }
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<QuotaLimitsResponseInner> getQuotaLimitsAsync() {
+        return getQuotaLimitsWithResponseAsync()
+            .flatMap(
+                (Response<QuotaLimitsResponseInner> res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
+    }
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public QuotaLimitsResponseInner getQuotaLimits() {
+        return getQuotaLimitsAsync().block();
+    }
+
+    /**
+     * Get the default and current limits for quotas.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the default and current limits for quotas.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<QuotaLimitsResponseInner> getQuotaLimitsWithResponse(Context context) {
+        return getQuotaLimitsWithResponseAsync(context).block();
     }
 }

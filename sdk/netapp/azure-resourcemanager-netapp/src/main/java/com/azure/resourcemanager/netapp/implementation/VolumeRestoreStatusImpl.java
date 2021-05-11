@@ -8,50 +8,50 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.netapp.fluent.VolumeBackupStatusClient;
-import com.azure.resourcemanager.netapp.fluent.models.BackupStatusInner;
-import com.azure.resourcemanager.netapp.models.BackupStatus;
-import com.azure.resourcemanager.netapp.models.VolumeBackupStatus;
+import com.azure.resourcemanager.netapp.fluent.VolumeRestoreStatusClient;
+import com.azure.resourcemanager.netapp.fluent.models.RestoreStatusInner;
+import com.azure.resourcemanager.netapp.models.RestoreStatus;
+import com.azure.resourcemanager.netapp.models.VolumeRestoreStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public final class VolumeBackupStatusImpl implements VolumeBackupStatus {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(VolumeBackupStatusImpl.class);
+public final class VolumeRestoreStatusImpl implements VolumeRestoreStatus {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(VolumeRestoreStatusImpl.class);
 
-    private final VolumeBackupStatusClient innerClient;
+    private final VolumeRestoreStatusClient innerClient;
 
     private final com.azure.resourcemanager.netapp.NetAppFilesManager serviceManager;
 
-    public VolumeBackupStatusImpl(
-        VolumeBackupStatusClient innerClient, com.azure.resourcemanager.netapp.NetAppFilesManager serviceManager) {
+    public VolumeRestoreStatusImpl(
+        VolumeRestoreStatusClient innerClient, com.azure.resourcemanager.netapp.NetAppFilesManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
 
-    public BackupStatus get(String resourceGroupName, String accountName, String poolName, String volumeName) {
-        BackupStatusInner inner = this.serviceClient().get(resourceGroupName, accountName, poolName, volumeName);
+    public RestoreStatus get(String resourceGroupName, String accountName, String poolName, String volumeName) {
+        RestoreStatusInner inner = this.serviceClient().get(resourceGroupName, accountName, poolName, volumeName);
         if (inner != null) {
-            return new BackupStatusImpl(inner, this.manager());
+            return new RestoreStatusImpl(inner, this.manager());
         } else {
             return null;
         }
     }
 
-    public Response<BackupStatus> getWithResponse(
+    public Response<RestoreStatus> getWithResponse(
         String resourceGroupName, String accountName, String poolName, String volumeName, Context context) {
-        Response<BackupStatusInner> inner =
+        Response<RestoreStatusInner> inner =
             this.serviceClient().getWithResponse(resourceGroupName, accountName, poolName, volumeName, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
                 inner.getStatusCode(),
                 inner.getHeaders(),
-                new BackupStatusImpl(inner.getValue(), this.manager()));
+                new RestoreStatusImpl(inner.getValue(), this.manager()));
         } else {
             return null;
         }
     }
 
-    private VolumeBackupStatusClient serviceClient() {
+    private VolumeRestoreStatusClient serviceClient() {
         return this.innerClient;
     }
 
