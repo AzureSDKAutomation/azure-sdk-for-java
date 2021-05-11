@@ -759,6 +759,7 @@
         <module>sdk/mixedreality</module>
         <module>sdk/modelsrepository</module>
         <module>sdk/monitor</module>
+        <module>sdk/mutestbase</module>
         <module>sdk/mysql</module>
         <module>sdk/netapp</module>
         <module>sdk/notificationhubs</module>
@@ -767,6 +768,7 @@
         <module>sdk/policyinsights</module>
         <module>sdk/postgresql</module>
         <module>sdk/powerbidedicated</module>
+        <module>sdk/purview</module>
         <module>sdk/quantum</module>
         <module>sdk/recoveryservices</module>
         <module>sdk/redisenterprise</module>
@@ -776,7 +778,6 @@
         <module>sdk/resourcehealth</module>
         <module>sdk/resourcemanager</module>
         <module>sdk/resourcemover</module>
-        <module>sdk/purview</module>
         <module>sdk/schemaregistry</module>
         <module>sdk/search</module>
         <module>sdk/servicebus</module>
