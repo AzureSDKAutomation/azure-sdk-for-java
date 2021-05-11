@@ -464,7 +464,7 @@ public interface BigDataPoolResourceInfo {
              * @param force Whether to stop any running jobs in the Big Data pool.
              * @return the next definition stage.
              */
-            WithCreate withForce(Boolean force);
+            WithCreate withWithForce(Boolean force);
         }
     }
     /**
