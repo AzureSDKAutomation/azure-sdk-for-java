@@ -52,6 +52,7 @@
       </activation>
       <modules>
         <module>azure-data-confidentialledger</module>
+        <module>azure-resourcemanager-confidentialledger</module>
       </modules>
     </profile>
   </profiles>
