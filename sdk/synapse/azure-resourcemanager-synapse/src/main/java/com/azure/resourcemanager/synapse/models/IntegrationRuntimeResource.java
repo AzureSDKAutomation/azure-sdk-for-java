@@ -115,7 +115,7 @@ public interface IntegrationRuntimeResource {
              *     should match existing entity or can be * for unconditional update.
              * @return the next definition stage.
              */
-            WithCreate withIfMatch(String ifMatch);
+            WithCreate withWithIfMatch(String ifMatch);
         }
     }
     /**
