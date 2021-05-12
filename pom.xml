@@ -773,6 +773,7 @@
         <module>sdk/policyinsights</module>
         <module>sdk/postgresql</module>
         <module>sdk/powerbidedicated</module>
+        <module>sdk/purview</module>
         <module>sdk/quantum</module>
         <module>sdk/recoveryservices</module>
         <module>sdk/redisenterprise</module>
@@ -782,13 +783,13 @@
         <module>sdk/resourcehealth</module>
         <module>sdk/resourcemanager</module>
         <module>sdk/resourcemover</module>
-        <module>sdk/purview</module>
         <module>sdk/schemaregistry</module>
         <module>sdk/search</module>
         <module>sdk/servicebus</module>
         <module>sdk/servicefabric</module>
         <module>sdk/signalr</module>
         <module>sdk/spring</module>
+        <module>sdk/sql</module>
         <module>sdk/sqlvirtualmachine</module>
         <module>sdk/storage</module>
         <module>sdk/storagecache</module>
