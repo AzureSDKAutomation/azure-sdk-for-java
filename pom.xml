@@ -703,6 +703,7 @@
         <module>sdk/authorization</module>
         <module>sdk/automation</module>
         <module>sdk/avs</module>
+        <module>sdk/azuredata</module>
         <module>sdk/azurestack</module>
         <module>sdk/azurestackhci</module>
         <module>sdk/batch</module>
