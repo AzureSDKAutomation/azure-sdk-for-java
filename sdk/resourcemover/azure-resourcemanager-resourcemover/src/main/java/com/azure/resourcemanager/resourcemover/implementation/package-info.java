@@ -4,6 +4,6 @@
 
 /**
  * Package containing the implementations for ResourceMoverServiceApi. A first party Azure service orchestrating the
- * move of Azure resources from one Azure region to another or between zones within a region.
+ * move of Azure resources from one Azure region to another.
  */
 package com.azure.resourcemanager.resourcemover.implementation;

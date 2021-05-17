@@ -8,61 +8,42 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /** Gets or sets the resource settings. */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "resourceType",
-    defaultImpl = ResourceSettings.class)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "resourceType")
 @JsonTypeName("ResourceSettings")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "Microsoft.Compute/virtualMachines", value = VirtualMachineResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Compute/availabilitySets", value = AvailabilitySetResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Network/virtualNetworks", value = VirtualNetworkResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Network/networkInterfaces", value = NetworkInterfaceResourceSettings.class),
-    @JsonSubTypes.Type(
-        name = "Microsoft.Network/networkSecurityGroups",
-        value = NetworkSecurityGroupResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Network/loadBalancers", value = LoadBalancerResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Sql/servers", value = SqlServerResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Sql/servers/elasticPools", value = SqlElasticPoolResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Sql/servers/databases", value = SqlDatabaseResourceSettings.class),
-    @JsonSubTypes.Type(name = "resourceGroups", value = ResourceGroupResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Network/publicIPAddresses", value = PublicIpAddressResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.KeyVault/vaults", value = KeyVaultResourceSettings.class),
-    @JsonSubTypes.Type(name = "Microsoft.Compute/diskEncryptionSets", value = DiskEncryptionSetResourceSettings.class)
-})
 @Fluent
-public class ResourceSettings {
+public final class ResourceSettings {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ResourceSettings.class);
 
     /*
-     * Gets or sets the target Resource name.
+     * Gets or sets the resource provider specific serialized resource
+     * settings. Resource providers need to document the settings.
      */
-    @JsonProperty(value = "targetResourceName", required = true)
-    private String targetResourceName;
+    @JsonProperty(value = "serializedResourceSettings")
+    private String serializedResourceSettings;
 
     /**
-     * Get the targetResourceName property: Gets or sets the target Resource name.
+     * Get the serializedResourceSettings property: Gets or sets the resource provider specific serialized resource
+     * settings. Resource providers need to document the settings.
      *
-     * @return the targetResourceName value.
+     * @return the serializedResourceSettings value.
      */
-    public String targetResourceName() {
-        return this.targetResourceName;
+    public String serializedResourceSettings() {
+        return this.serializedResourceSettings;
     }
 
     /**
-     * Set the targetResourceName property: Gets or sets the target Resource name.
+     * Set the serializedResourceSettings property: Gets or sets the resource provider specific serialized resource
+     * settings. Resource providers need to document the settings.
      *
-     * @param targetResourceName the targetResourceName value to set.
+     * @param serializedResourceSettings the serializedResourceSettings value to set.
      * @return the ResourceSettings object itself.
      */
-    public ResourceSettings withTargetResourceName(String targetResourceName) {
-        this.targetResourceName = targetResourceName;
+    public ResourceSettings withSerializedResourceSettings(String serializedResourceSettings) {
+        this.serializedResourceSettings = serializedResourceSettings;
         return this;
     }
 
@@ -72,11 +53,5 @@ public class ResourceSettings {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (targetResourceName() == null) {
-            throw logger
-                .logExceptionAsError(
-                    new IllegalArgumentException(
-                        "Missing required property targetResourceName in model ResourceSettings"));
-        }
     }
 }

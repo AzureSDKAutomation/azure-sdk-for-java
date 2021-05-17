@@ -25,6 +25,7 @@ import com.azure.resourcemanager.resourcemover.fluent.MoveCollectionsClient;
 import com.azure.resourcemanager.resourcemover.fluent.MoveResourcesClient;
 import com.azure.resourcemanager.resourcemover.fluent.OperationsDiscoveriesClient;
 import com.azure.resourcemanager.resourcemover.fluent.ResourceMoverServiceApi;
+import com.azure.resourcemanager.resourcemover.fluent.SupportedResourceTypesForResourceMoversClient;
 import com.azure.resourcemanager.resourcemover.fluent.UnresolvedDependenciesClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -113,6 +114,18 @@ public final class ResourceMoverServiceApiImpl implements ResourceMoverServiceAp
         return this.defaultPollInterval;
     }
 
+    /** The SupportedResourceTypesForResourceMoversClient object to access its operations. */
+    private final SupportedResourceTypesForResourceMoversClient supportedResourceTypesForResourceMovers;
+
+    /**
+     * Gets the SupportedResourceTypesForResourceMoversClient object to access its operations.
+     *
+     * @return the SupportedResourceTypesForResourceMoversClient object.
+     */
+    public SupportedResourceTypesForResourceMoversClient getSupportedResourceTypesForResourceMovers() {
+        return this.supportedResourceTypesForResourceMovers;
+    }
+
     /** The MoveCollectionsClient object to access its operations. */
     private final MoveCollectionsClient moveCollections;
 
@@ -184,6 +197,7 @@ public final class ResourceMoverServiceApiImpl implements ResourceMoverServiceAp
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
         this.apiVersion = "2021-01-01";
+        this.supportedResourceTypesForResourceMovers = new SupportedResourceTypesForResourceMoversClientImpl(this);
         this.moveCollections = new MoveCollectionsClientImpl(this);
         this.moveResources = new MoveResourcesClientImpl(this);
         this.unresolvedDependencies = new UnresolvedDependenciesClientImpl(this);

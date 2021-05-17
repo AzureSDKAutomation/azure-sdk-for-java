@@ -25,10 +25,12 @@ import com.azure.resourcemanager.resourcemover.implementation.MoveCollectionsImp
 import com.azure.resourcemanager.resourcemover.implementation.MoveResourcesImpl;
 import com.azure.resourcemanager.resourcemover.implementation.OperationsDiscoveriesImpl;
 import com.azure.resourcemanager.resourcemover.implementation.ResourceMoverServiceApiBuilder;
+import com.azure.resourcemanager.resourcemover.implementation.SupportedResourceTypesForResourceMoversImpl;
 import com.azure.resourcemanager.resourcemover.implementation.UnresolvedDependenciesImpl;
 import com.azure.resourcemanager.resourcemover.models.MoveCollections;
 import com.azure.resourcemanager.resourcemover.models.MoveResources;
 import com.azure.resourcemanager.resourcemover.models.OperationsDiscoveries;
+import com.azure.resourcemanager.resourcemover.models.SupportedResourceTypesForResourceMovers;
 import com.azure.resourcemanager.resourcemover.models.UnresolvedDependencies;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -38,9 +40,11 @@ import java.util.Objects;
 
 /**
  * Entry point to ResourceMoverManager. A first party Azure service orchestrating the move of Azure resources from one
- * Azure region to another or between zones within a region.
+ * Azure region to another.
  */
 public final class ResourceMoverManager {
+    private SupportedResourceTypesForResourceMovers supportedResourceTypesForResourceMovers;
+
     private MoveCollections moveCollections;
 
     private MoveResources moveResources;
@@ -210,6 +214,16 @@ public final class ResourceMoverManager {
                     .build();
             return new ResourceMoverManager(httpPipeline, profile, defaultPollInterval);
         }
+    }
+
+    /** @return Resource collection API of SupportedResourceTypesForResourceMovers. */
+    public SupportedResourceTypesForResourceMovers supportedResourceTypesForResourceMovers() {
+        if (this.supportedResourceTypesForResourceMovers == null) {
+            this.supportedResourceTypesForResourceMovers =
+                new SupportedResourceTypesForResourceMoversImpl(
+                    clientObject.getSupportedResourceTypesForResourceMovers(), this);
+        }
+        return supportedResourceTypesForResourceMovers;
     }
 
     /** @return Resource collection API of MoveCollections. */

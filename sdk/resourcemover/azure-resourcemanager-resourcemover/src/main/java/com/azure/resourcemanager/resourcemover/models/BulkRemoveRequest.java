@@ -31,6 +31,13 @@ public final class BulkRemoveRequest {
     private List<String> moveResources;
 
     /*
+     * Gets or sets a value indicating whether the operation needs to add
+     * dependency automatically.
+     */
+    @JsonProperty(value = "addDependencyAutomatically")
+    private Boolean addDependencyAutomatically;
+
+    /*
      * Defines the move resource input type.
      */
     @JsonProperty(value = "moveResourceInputType")
@@ -77,6 +84,28 @@ public final class BulkRemoveRequest {
      */
     public BulkRemoveRequest withMoveResources(List<String> moveResources) {
         this.moveResources = moveResources;
+        return this;
+    }
+
+    /**
+     * Get the addDependencyAutomatically property: Gets or sets a value indicating whether the operation needs to add
+     * dependency automatically.
+     *
+     * @return the addDependencyAutomatically value.
+     */
+    public Boolean addDependencyAutomatically() {
+        return this.addDependencyAutomatically;
+    }
+
+    /**
+     * Set the addDependencyAutomatically property: Gets or sets a value indicating whether the operation needs to add
+     * dependency automatically.
+     *
+     * @param addDependencyAutomatically the addDependencyAutomatically value to set.
+     * @return the BulkRemoveRequest object itself.
+     */
+    public BulkRemoveRequest withAddDependencyAutomatically(Boolean addDependencyAutomatically) {
+        this.addDependencyAutomatically = addDependencyAutomatically;
         return this;
     }
 
