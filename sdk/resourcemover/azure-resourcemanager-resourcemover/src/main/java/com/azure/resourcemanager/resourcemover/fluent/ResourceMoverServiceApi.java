@@ -45,6 +45,13 @@ public interface ResourceMoverServiceApi {
     Duration getDefaultPollInterval();
 
     /**
+     * Gets the SupportedResourceTypesForResourceMoversClient object to access its operations.
+     *
+     * @return the SupportedResourceTypesForResourceMoversClient object.
+     */
+    SupportedResourceTypesForResourceMoversClient getSupportedResourceTypesForResourceMovers();
+
+    /**
      * Gets the MoveCollectionsClient object to access its operations.
      *
      * @return the MoveCollectionsClient object.

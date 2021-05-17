@@ -46,10 +46,10 @@ public final class MoveResourceProperties {
     private ResourceSettings resourceSettings;
 
     /*
-     * Gets or sets the source resource settings.
+     * Gets or sets the target Resource name.
      */
-    @JsonProperty(value = "sourceResourceSettings", access = JsonProperty.Access.WRITE_ONLY)
-    private ResourceSettings sourceResourceSettings;
+    @JsonProperty(value = "targetResourceName")
+    private String targetResourceName;
 
     /*
      * Defines the move resource status.
@@ -161,12 +161,23 @@ public final class MoveResourceProperties {
     }
 
     /**
-     * Get the sourceResourceSettings property: Gets or sets the source resource settings.
+     * Get the targetResourceName property: Gets or sets the target Resource name.
      *
-     * @return the sourceResourceSettings value.
+     * @return the targetResourceName value.
      */
-    public ResourceSettings sourceResourceSettings() {
-        return this.sourceResourceSettings;
+    public String targetResourceName() {
+        return this.targetResourceName;
+    }
+
+    /**
+     * Set the targetResourceName property: Gets or sets the target Resource name.
+     *
+     * @param targetResourceName the targetResourceName value to set.
+     * @return the MoveResourceProperties object itself.
+     */
+    public MoveResourceProperties withTargetResourceName(String targetResourceName) {
+        this.targetResourceName = targetResourceName;
+        return this;
     }
 
     /**
@@ -239,9 +250,6 @@ public final class MoveResourceProperties {
         }
         if (resourceSettings() != null) {
             resourceSettings().validate();
-        }
-        if (sourceResourceSettings() != null) {
-            sourceResourceSettings().validate();
         }
         if (moveStatus() != null) {
             moveStatus().validate();
