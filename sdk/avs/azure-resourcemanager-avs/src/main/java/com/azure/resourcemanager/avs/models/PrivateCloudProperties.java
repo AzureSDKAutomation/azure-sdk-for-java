@@ -43,6 +43,12 @@ public final class PrivateCloudProperties extends PrivateCloudUpdateProperties {
     private String networkBlock;
 
     /*
+     * Array of cloud link IDs from other clouds that connect to this one
+     */
+    @JsonProperty(value = "externalCloudLinks", access = JsonProperty.Access.WRITE_ONLY)
+    private List<String> externalCloudLinks;
+
+    /*
      * Network used to access vCenter Server and NSX-T Manager
      */
     @JsonProperty(value = "managementNetwork", access = JsonProperty.Access.WRITE_ONLY)
@@ -146,6 +152,15 @@ public final class PrivateCloudProperties extends PrivateCloudUpdateProperties {
     public PrivateCloudProperties withNetworkBlock(String networkBlock) {
         this.networkBlock = networkBlock;
         return this;
+    }
+
+    /**
+     * Get the externalCloudLinks property: Array of cloud link IDs from other clouds that connect to this one.
+     *
+     * @return the externalCloudLinks value.
+     */
+    public List<String> externalCloudLinks() {
+        return this.externalCloudLinks;
     }
 
     /**

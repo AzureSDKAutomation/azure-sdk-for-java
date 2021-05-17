@@ -27,16 +27,16 @@ public class ClusterInner extends ProxyResource {
     private Sku sku;
 
     /*
-     * The cluster size
-     */
-    @JsonProperty(value = "properties.clusterSize")
-    private Integer clusterSize;
-
-    /*
      * The state of the cluster provisioning
      */
     @JsonProperty(value = "properties.provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private ClusterProvisioningState provisioningState;
+
+    /*
+     * The cluster size
+     */
+    @JsonProperty(value = "properties.clusterSize")
+    private Integer clusterSize;
 
     /*
      * The identity
@@ -71,6 +71,15 @@ public class ClusterInner extends ProxyResource {
     }
 
     /**
+     * Get the provisioningState property: The state of the cluster provisioning.
+     *
+     * @return the provisioningState value.
+     */
+    public ClusterProvisioningState provisioningState() {
+        return this.provisioningState;
+    }
+
+    /**
      * Get the clusterSize property: The cluster size.
      *
      * @return the clusterSize value.
@@ -88,15 +97,6 @@ public class ClusterInner extends ProxyResource {
     public ClusterInner withClusterSize(Integer clusterSize) {
         this.clusterSize = clusterSize;
         return this;
-    }
-
-    /**
-     * Get the provisioningState property: The state of the cluster provisioning.
-     *
-     * @return the provisioningState value.
-     */
-    public ClusterProvisioningState provisioningState() {
-        return this.provisioningState;
     }
 
     /**
