@@ -39,18 +39,18 @@ public interface Cluster {
     Sku sku();
 
     /**
-     * Gets the clusterSize property: The cluster size.
-     *
-     * @return the clusterSize value.
-     */
-    Integer clusterSize();
-
-    /**
      * Gets the provisioningState property: The state of the cluster provisioning.
      *
      * @return the provisioningState value.
      */
     ClusterProvisioningState provisioningState();
+
+    /**
+     * Gets the clusterSize property: The cluster size.
+     *
+     * @return the clusterSize value.
+     */
+    Integer clusterSize();
 
     /**
      * Gets the clusterId property: The identity.
