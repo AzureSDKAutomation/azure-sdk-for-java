@@ -21,6 +21,12 @@ import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.ClusterExtensionTypesClient;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.ClusterExtensionTypesOperationsClient;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.ExtensionTypeVersionsClient;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.ExtensionsClient;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.LocationExtensionTypesClient;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.OperationStatusClient;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.OperationsClient;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.SourceControlConfigurationClient;
 import com.azure.resourcemanager.kubernetesconfiguration.fluent.SourceControlConfigurationsClient;
@@ -39,11 +45,11 @@ import reactor.core.publisher.Mono;
 public final class SourceControlConfigurationClientImpl implements SourceControlConfigurationClient {
     private final ClientLogger logger = new ClientLogger(SourceControlConfigurationClientImpl.class);
 
-    /** The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000). */
+    /** The ID of the target subscription. */
     private final String subscriptionId;
 
     /**
-     * Gets The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+     * Gets The ID of the target subscription.
      *
      * @return the subscriptionId value.
      */
@@ -111,6 +117,78 @@ public final class SourceControlConfigurationClientImpl implements SourceControl
         return this.defaultPollInterval;
     }
 
+    /** The ExtensionsClient object to access its operations. */
+    private final ExtensionsClient extensions;
+
+    /**
+     * Gets the ExtensionsClient object to access its operations.
+     *
+     * @return the ExtensionsClient object.
+     */
+    public ExtensionsClient getExtensions() {
+        return this.extensions;
+    }
+
+    /** The OperationStatusClient object to access its operations. */
+    private final OperationStatusClient operationStatus;
+
+    /**
+     * Gets the OperationStatusClient object to access its operations.
+     *
+     * @return the OperationStatusClient object.
+     */
+    public OperationStatusClient getOperationStatus() {
+        return this.operationStatus;
+    }
+
+    /** The ClusterExtensionTypesClient object to access its operations. */
+    private final ClusterExtensionTypesClient clusterExtensionTypes;
+
+    /**
+     * Gets the ClusterExtensionTypesClient object to access its operations.
+     *
+     * @return the ClusterExtensionTypesClient object.
+     */
+    public ClusterExtensionTypesClient getClusterExtensionTypes() {
+        return this.clusterExtensionTypes;
+    }
+
+    /** The ClusterExtensionTypesOperationsClient object to access its operations. */
+    private final ClusterExtensionTypesOperationsClient clusterExtensionTypesOperations;
+
+    /**
+     * Gets the ClusterExtensionTypesOperationsClient object to access its operations.
+     *
+     * @return the ClusterExtensionTypesOperationsClient object.
+     */
+    public ClusterExtensionTypesOperationsClient getClusterExtensionTypesOperations() {
+        return this.clusterExtensionTypesOperations;
+    }
+
+    /** The ExtensionTypeVersionsClient object to access its operations. */
+    private final ExtensionTypeVersionsClient extensionTypeVersions;
+
+    /**
+     * Gets the ExtensionTypeVersionsClient object to access its operations.
+     *
+     * @return the ExtensionTypeVersionsClient object.
+     */
+    public ExtensionTypeVersionsClient getExtensionTypeVersions() {
+        return this.extensionTypeVersions;
+    }
+
+    /** The LocationExtensionTypesClient object to access its operations. */
+    private final LocationExtensionTypesClient locationExtensionTypes;
+
+    /**
+     * Gets the LocationExtensionTypesClient object to access its operations.
+     *
+     * @return the LocationExtensionTypesClient object.
+     */
+    public LocationExtensionTypesClient getLocationExtensionTypes() {
+        return this.locationExtensionTypes;
+    }
+
     /** The SourceControlConfigurationsClient object to access its operations. */
     private final SourceControlConfigurationsClient sourceControlConfigurations;
 
@@ -142,8 +220,7 @@ public final class SourceControlConfigurationClientImpl implements SourceControl
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param defaultPollInterval The default poll interval for long-running operation.
      * @param environment The Azure environment.
-     * @param subscriptionId The Azure subscription ID. This is a GUID-formatted string (e.g.
-     *     00000000-0000-0000-0000-000000000000).
+     * @param subscriptionId The ID of the target subscription.
      * @param endpoint server parameter.
      */
     SourceControlConfigurationClientImpl(
@@ -158,7 +235,13 @@ public final class SourceControlConfigurationClientImpl implements SourceControl
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-03-01";
+        this.apiVersion = "2021-05-01-preview";
+        this.extensions = new ExtensionsClientImpl(this);
+        this.operationStatus = new OperationStatusClientImpl(this);
+        this.clusterExtensionTypes = new ClusterExtensionTypesClientImpl(this);
+        this.clusterExtensionTypesOperations = new ClusterExtensionTypesOperationsClientImpl(this);
+        this.extensionTypeVersions = new ExtensionTypeVersionsClientImpl(this);
+        this.locationExtensionTypes = new LocationExtensionTypesClientImpl(this);
         this.sourceControlConfigurations = new SourceControlConfigurationsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
     }

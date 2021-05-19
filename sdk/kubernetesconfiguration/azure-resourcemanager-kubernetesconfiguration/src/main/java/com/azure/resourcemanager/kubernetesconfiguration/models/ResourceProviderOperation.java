@@ -23,6 +23,14 @@ public interface ResourceProviderOperation {
     ResourceProviderOperationDisplay display();
 
     /**
+     * Gets the origin property: The intended executor of the operation;governs the display of the operation in the RBAC
+     * UX and the audit logs UX.
+     *
+     * @return the origin value.
+     */
+    String origin();
+
+    /**
      * Gets the isDataAction property: The flag that indicates whether the operation applies to data plane.
      *
      * @return the isDataAction value.
