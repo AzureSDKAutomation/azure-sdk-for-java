@@ -15,11 +15,13 @@ import com.azure.resourcemanager.eventgrid.models.DomainProvisioningState;
 import com.azure.resourcemanager.eventgrid.models.DomainRegenerateKeyRequest;
 import com.azure.resourcemanager.eventgrid.models.DomainSharedAccessKeys;
 import com.azure.resourcemanager.eventgrid.models.DomainUpdateParameters;
+import com.azure.resourcemanager.eventgrid.models.IdentityInfo;
 import com.azure.resourcemanager.eventgrid.models.InboundIpRule;
 import com.azure.resourcemanager.eventgrid.models.InputSchema;
 import com.azure.resourcemanager.eventgrid.models.InputSchemaMapping;
 import com.azure.resourcemanager.eventgrid.models.PrivateEndpointConnection;
 import com.azure.resourcemanager.eventgrid.models.PublicNetworkAccess;
+import com.azure.resourcemanager.eventgrid.models.ResourceSku;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +55,14 @@ public final class DomainImpl implements Domain, Domain.Definition, Domain.Updat
         } else {
             return Collections.emptyMap();
         }
+    }
+
+    public ResourceSku sku() {
+        return this.innerModel().sku();
+    }
+
+    public IdentityInfo identity() {
+        return this.innerModel().identity();
     }
 
     public SystemData systemData() {
@@ -242,6 +252,26 @@ public final class DomainImpl implements Domain, Domain.Definition, Domain.Updat
             return this;
         } else {
             this.updateDomainUpdateParameters.withTags(tags);
+            return this;
+        }
+    }
+
+    public DomainImpl withSku(ResourceSku sku) {
+        if (isInCreateMode()) {
+            this.innerModel().withSku(sku);
+            return this;
+        } else {
+            this.updateDomainUpdateParameters.withSku(sku);
+            return this;
+        }
+    }
+
+    public DomainImpl withIdentity(IdentityInfo identity) {
+        if (isInCreateMode()) {
+            this.innerModel().withIdentity(identity);
+            return this;
+        } else {
+            this.updateDomainUpdateParameters.withIdentity(identity);
             return this;
         }
     }
