@@ -25,6 +25,7 @@ import com.azure.resourcemanager.support.fluent.CommunicationsClient;
 import com.azure.resourcemanager.support.fluent.MicrosoftSupport;
 import com.azure.resourcemanager.support.fluent.OperationsClient;
 import com.azure.resourcemanager.support.fluent.ProblemClassificationsClient;
+import com.azure.resourcemanager.support.fluent.ResourceProvidersClient;
 import com.azure.resourcemanager.support.fluent.ServicesClient;
 import com.azure.resourcemanager.support.fluent.SupportTicketsClient;
 import java.io.IOException;
@@ -162,6 +163,18 @@ public final class MicrosoftSupportImpl implements MicrosoftSupport {
         return this.supportTickets;
     }
 
+    /** The ResourceProvidersClient object to access its operations. */
+    private final ResourceProvidersClient resourceProviders;
+
+    /**
+     * Gets the ResourceProvidersClient object to access its operations.
+     *
+     * @return the ResourceProvidersClient object.
+     */
+    public ResourceProvidersClient getResourceProviders() {
+        return this.resourceProviders;
+    }
+
     /** The CommunicationsClient object to access its operations. */
     private final CommunicationsClient communications;
 
@@ -201,6 +214,7 @@ public final class MicrosoftSupportImpl implements MicrosoftSupport {
         this.services = new ServicesClientImpl(this);
         this.problemClassifications = new ProblemClassificationsClientImpl(this);
         this.supportTickets = new SupportTicketsClientImpl(this);
+        this.resourceProviders = new ResourceProvidersClientImpl(this);
         this.communications = new CommunicationsClientImpl(this);
     }
 

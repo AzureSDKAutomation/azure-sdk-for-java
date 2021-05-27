@@ -73,6 +73,13 @@ public interface MicrosoftSupport {
     SupportTicketsClient getSupportTickets();
 
     /**
+     * Gets the ResourceProvidersClient object to access its operations.
+     *
+     * @return the ResourceProvidersClient object.
+     */
+    ResourceProvidersClient getResourceProviders();
+
+    /**
      * Gets the CommunicationsClient object to access its operations.
      *
      * @return the CommunicationsClient object.
