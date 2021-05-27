@@ -25,11 +25,13 @@ import com.azure.resourcemanager.support.implementation.CommunicationsImpl;
 import com.azure.resourcemanager.support.implementation.MicrosoftSupportBuilder;
 import com.azure.resourcemanager.support.implementation.OperationsImpl;
 import com.azure.resourcemanager.support.implementation.ProblemClassificationsImpl;
+import com.azure.resourcemanager.support.implementation.ResourceProvidersImpl;
 import com.azure.resourcemanager.support.implementation.ServicesImpl;
 import com.azure.resourcemanager.support.implementation.SupportTicketsImpl;
 import com.azure.resourcemanager.support.models.Communications;
 import com.azure.resourcemanager.support.models.Operations;
 import com.azure.resourcemanager.support.models.ProblemClassifications;
+import com.azure.resourcemanager.support.models.ResourceProviders;
 import com.azure.resourcemanager.support.models.Services;
 import com.azure.resourcemanager.support.models.SupportTickets;
 import java.time.Duration;
@@ -48,6 +50,8 @@ public final class SupportManager {
 
     private SupportTickets supportTickets;
 
+    private ResourceProviders resourceProviders;
+
     private Communications communications;
 
     private final MicrosoftSupport clientObject;
@@ -65,11 +69,11 @@ public final class SupportManager {
     }
 
     /**
-     * Creates an instance of Support service API entry point.
+     * Creates an instance of support service API entry point.
      *
      * @param credential the credential to use.
      * @param profile the Azure profile for client.
-     * @return the Support service API instance.
+     * @return the support service API instance.
      */
     public static SupportManager authenticate(TokenCredential credential, AzureProfile profile) {
         Objects.requireNonNull(credential, "'credential' cannot be null.");
@@ -158,11 +162,11 @@ public final class SupportManager {
         }
 
         /**
-         * Creates an instance of Support service API entry point.
+         * Creates an instance of support service API entry point.
          *
          * @param credential the credential to use.
          * @param profile the Azure profile for client.
-         * @return the Support service API instance.
+         * @return the support service API instance.
          */
         public SupportManager authenticate(TokenCredential credential, AzureProfile profile) {
             Objects.requireNonNull(credential, "'credential' cannot be null.");
@@ -244,6 +248,14 @@ public final class SupportManager {
             this.supportTickets = new SupportTicketsImpl(clientObject.getSupportTickets(), this);
         }
         return supportTickets;
+    }
+
+    /** @return Resource collection API of ResourceProviders. */
+    public ResourceProviders resourceProviders() {
+        if (this.resourceProviders == null) {
+            this.resourceProviders = new ResourceProvidersImpl(clientObject.getResourceProviders(), this);
+        }
+        return resourceProviders;
     }
 
     /** @return Resource collection API of Communications. */
