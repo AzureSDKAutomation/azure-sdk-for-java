@@ -136,7 +136,7 @@ public class WorkspaceInner extends Resource {
     private String adlaResourceId;
 
     /*
-     * Enable or Disable pubic network access to workspace
+     * Enable or Disable public network access to workspace
      */
     @JsonProperty(value = "properties.publicNetworkAccess")
     private WorkspacePublicNetworkAccess publicNetworkAccess;
@@ -449,7 +449,7 @@ public class WorkspaceInner extends Resource {
     }
 
     /**
-     * Get the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Get the publicNetworkAccess property: Enable or Disable public network access to workspace.
      *
      * @return the publicNetworkAccess value.
      */
@@ -458,7 +458,7 @@ public class WorkspaceInner extends Resource {
     }
 
     /**
-     * Set the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Set the publicNetworkAccess property: Enable or Disable public network access to workspace.
      *
      * @param publicNetworkAccess the publicNetworkAccess value to set.
      * @return the WorkspaceInner object itself.
