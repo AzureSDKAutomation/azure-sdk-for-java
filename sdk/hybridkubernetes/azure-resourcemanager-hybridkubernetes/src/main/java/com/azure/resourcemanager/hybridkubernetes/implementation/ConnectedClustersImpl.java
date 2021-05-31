@@ -9,7 +9,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.hybridkubernetes.HybridKubernetesManager;
 import com.azure.resourcemanager.hybridkubernetes.fluent.ConnectedClustersClient;
 import com.azure.resourcemanager.hybridkubernetes.fluent.models.ConnectedClusterInner;
 import com.azure.resourcemanager.hybridkubernetes.models.ConnectedCluster;
@@ -21,9 +20,11 @@ public final class ConnectedClustersImpl implements ConnectedClusters {
 
     private final ConnectedClustersClient innerClient;
 
-    private final HybridKubernetesManager serviceManager;
+    private final com.azure.resourcemanager.hybridkubernetes.HybridKubernetesManager serviceManager;
 
-    public ConnectedClustersImpl(ConnectedClustersClient innerClient, HybridKubernetesManager serviceManager) {
+    public ConnectedClustersImpl(
+        ConnectedClustersClient innerClient,
+        com.azure.resourcemanager.hybridkubernetes.HybridKubernetesManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
@@ -169,7 +170,7 @@ public final class ConnectedClustersImpl implements ConnectedClusters {
         return this.innerClient;
     }
 
-    private HybridKubernetesManager manager() {
+    private com.azure.resourcemanager.hybridkubernetes.HybridKubernetesManager manager() {
         return this.serviceManager;
     }
 
