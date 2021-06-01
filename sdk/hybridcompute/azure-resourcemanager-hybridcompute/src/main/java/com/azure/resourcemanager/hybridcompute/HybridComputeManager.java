@@ -28,12 +28,14 @@ import com.azure.resourcemanager.hybridcompute.implementation.OperationsImpl;
 import com.azure.resourcemanager.hybridcompute.implementation.PrivateEndpointConnectionsImpl;
 import com.azure.resourcemanager.hybridcompute.implementation.PrivateLinkResourcesImpl;
 import com.azure.resourcemanager.hybridcompute.implementation.PrivateLinkScopesImpl;
+import com.azure.resourcemanager.hybridcompute.implementation.ResourceProvidersImpl;
 import com.azure.resourcemanager.hybridcompute.models.MachineExtensions;
 import com.azure.resourcemanager.hybridcompute.models.Machines;
 import com.azure.resourcemanager.hybridcompute.models.Operations;
 import com.azure.resourcemanager.hybridcompute.models.PrivateEndpointConnections;
 import com.azure.resourcemanager.hybridcompute.models.PrivateLinkResources;
 import com.azure.resourcemanager.hybridcompute.models.PrivateLinkScopes;
+import com.azure.resourcemanager.hybridcompute.models.ResourceProviders;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public final class HybridComputeManager {
     private Machines machines;
 
     private MachineExtensions machineExtensions;
+
+    private ResourceProviders resourceProviders;
 
     private Operations operations;
 
@@ -231,6 +235,14 @@ public final class HybridComputeManager {
             this.machineExtensions = new MachineExtensionsImpl(clientObject.getMachineExtensions(), this);
         }
         return machineExtensions;
+    }
+
+    /** @return Resource collection API of ResourceProviders. */
+    public ResourceProviders resourceProviders() {
+        if (this.resourceProviders == null) {
+            this.resourceProviders = new ResourceProvidersImpl(clientObject.getResourceProviders(), this);
+        }
+        return resourceProviders;
     }
 
     /** @return Resource collection API of Operations. */
