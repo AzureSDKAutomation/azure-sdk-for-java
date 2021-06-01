@@ -16,7 +16,7 @@ import com.azure.resourcemanager.machinelearningservices.fluent.models.NotebookR
 /** An instance of this class provides access to all the operations defined in NotebooksClient. */
 public interface NotebooksClient {
     /**
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -28,7 +28,7 @@ public interface NotebooksClient {
         String resourceGroupName, String workspaceName);
 
     /**
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -41,7 +41,7 @@ public interface NotebooksClient {
         String resourceGroupName, String workspaceName, Context context);
 
     /**
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -52,7 +52,7 @@ public interface NotebooksClient {
     NotebookResourceInfoInner prepare(String resourceGroupName, String workspaceName);
 
     /**
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -64,7 +64,7 @@ public interface NotebooksClient {
     NotebookResourceInfoInner prepare(String resourceGroupName, String workspaceName, Context context);
 
     /**
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -75,7 +75,7 @@ public interface NotebooksClient {
     ListNotebookKeysResultInner listKeys(String resourceGroupName, String workspaceName);
 
     /**
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

@@ -35,6 +35,7 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.machinelearningservices.fluent.WorkspacesClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.models.ListStorageAccountKeysResultInner;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.ListWorkspaceKeysResultInner;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.NotebookAccessTokenResultInner;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.WorkspaceInner;
@@ -207,6 +208,21 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
             Context context);
 
         @Headers({"Content-Type: application/json"})
+        @Post(
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers"
+                + "/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<ListStorageAccountKeysResultInner>> listStorageAccountKeys(
+            @HostParam("$host") String endpoint,
+            @QueryParam("api-version") String apiVersion,
+            @PathParam("subscriptionId") String subscriptionId,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("workspaceName") String workspaceName,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -230,7 +246,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Gets the properties of the specified machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -278,7 +294,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Gets the properties of the specified machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -324,7 +340,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Gets the properties of the specified machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -347,7 +363,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Gets the properties of the specified machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -362,7 +378,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Gets the properties of the specified machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -379,7 +395,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -434,7 +450,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @param context The context to associate with this operation.
@@ -487,7 +503,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -509,7 +525,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @param context The context to associate with this operation.
@@ -533,7 +549,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -550,7 +566,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @param context The context to associate with this operation.
@@ -568,7 +584,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -587,7 +603,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @param context The context to associate with this operation.
@@ -607,7 +623,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -623,7 +639,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Creates or updates a workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for creating or updating a machine learning workspace.
      * @param context The context to associate with this operation.
@@ -641,7 +657,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -688,7 +704,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -734,7 +750,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -752,7 +768,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -773,7 +789,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -788,7 +804,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -805,7 +821,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -820,7 +836,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -838,7 +854,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -852,7 +868,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Deletes a machine learning workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -867,7 +883,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Updates a machine learning workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for updating a machine learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -922,7 +938,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Updates a machine learning workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for updating a machine learning workspace.
      * @param context The context to associate with this operation.
@@ -975,7 +991,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Updates a machine learning workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for updating a machine learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1000,7 +1016,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Updates a machine learning workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for updating a machine learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1016,7 +1032,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Updates a machine learning workspace with the specified parameters.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param parameters The parameters for updating a machine learning workspace.
      * @param context The context to associate with this operation.
@@ -1034,7 +1050,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Lists all the available machine learning workspaces under the specified resource group.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param skip Continuation token for pagination.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1088,7 +1104,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Lists all the available machine learning workspaces under the specified resource group.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param skip Continuation token for pagination.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1140,7 +1156,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Lists all the available machine learning workspaces under the specified resource group.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param skip Continuation token for pagination.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1157,7 +1173,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Lists all the available machine learning workspaces under the specified resource group.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1174,7 +1190,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Lists all the available machine learning workspaces under the specified resource group.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param skip Continuation token for pagination.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1192,7 +1208,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Lists all the available machine learning workspaces under the specified resource group.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1207,7 +1223,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * Lists all the available machine learning workspaces under the specified resource group.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param skip Continuation token for pagination.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1224,7 +1240,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1273,7 +1289,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1320,7 +1336,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1344,7 +1360,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1360,7 +1376,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1378,7 +1394,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1427,7 +1443,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1474,7 +1490,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1493,7 +1509,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1515,7 +1531,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1531,7 +1547,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1549,7 +1565,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1567,7 +1583,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1586,7 +1602,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1601,7 +1617,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and
      * password for container registry.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1782,7 +1798,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * return notebook access token and refresh token.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1830,7 +1846,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * return notebook access token and refresh token.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1876,7 +1892,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * return notebook access token and refresh token.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1900,7 +1916,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * return notebook access token and refresh token.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1915,7 +1931,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     /**
      * return notebook access token and refresh token.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1927,6 +1943,146 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
     public Response<NotebookAccessTokenResultInner> listNotebookAccessTokenWithResponse(
         String resourceGroupName, String workspaceName, Context context) {
         return listNotebookAccessTokenWithResponseAsync(resourceGroupName, workspaceName, context).block();
+    }
+
+    /**
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<ListStorageAccountKeysResultInner>> listStorageAccountKeysWithResponseAsync(
+        String resourceGroupName, String workspaceName) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (workspaceName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter workspaceName is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .listStorageAccountKeys(
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            this.client.getSubscriptionId(),
+                            resourceGroupName,
+                            workspaceName,
+                            accept,
+                            context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<ListStorageAccountKeysResultInner>> listStorageAccountKeysWithResponseAsync(
+        String resourceGroupName, String workspaceName, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (workspaceName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter workspaceName is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listStorageAccountKeys(
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                this.client.getSubscriptionId(),
+                resourceGroupName,
+                workspaceName,
+                accept,
+                context);
+    }
+
+    /**
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<ListStorageAccountKeysResultInner> listStorageAccountKeysAsync(
+        String resourceGroupName, String workspaceName) {
+        return listStorageAccountKeysWithResponseAsync(resourceGroupName, workspaceName)
+            .flatMap(
+                (Response<ListStorageAccountKeysResultInner> res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
+    }
+
+    /**
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ListStorageAccountKeysResultInner listStorageAccountKeys(String resourceGroupName, String workspaceName) {
+        return listStorageAccountKeysAsync(resourceGroupName, workspaceName).block();
+    }
+
+    /**
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ListStorageAccountKeysResultInner> listStorageAccountKeysWithResponse(
+        String resourceGroupName, String workspaceName, Context context) {
+        return listStorageAccountKeysWithResponseAsync(resourceGroupName, workspaceName, context).block();
     }
 
     /**

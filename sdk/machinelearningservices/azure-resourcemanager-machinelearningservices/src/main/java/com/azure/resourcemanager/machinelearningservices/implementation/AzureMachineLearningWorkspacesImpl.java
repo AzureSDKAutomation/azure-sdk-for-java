@@ -22,19 +22,33 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.resourcemanager.machinelearningservices.fluent.AzureMachineLearningWorkspaces;
-import com.azure.resourcemanager.machinelearningservices.fluent.MachineLearningComputesClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.BatchDeploymentsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.BatchEndpointsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.CodeContainersClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.CodeVersionsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.ComputesClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.DataContainersClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.DataVersionsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.DatastoresClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.EnvironmentContainersClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.EnvironmentSpecificationVersionsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.JobsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.LabelingJobsClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.MachineLearningServicesClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.ModelContainersClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.ModelVersionsClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.NotebooksClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.OnlineDeploymentsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.OnlineEndpointsClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.OperationsClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.PrivateEndpointConnectionsClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.PrivateLinkResourcesClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.QuotasClient;
-import com.azure.resourcemanager.machinelearningservices.fluent.StorageAccountsClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.UsagesClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.VirtualMachineSizesClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.WorkspaceConnectionsClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.WorkspaceFeaturesClient;
-import com.azure.resourcemanager.machinelearningservices.fluent.WorkspaceOperationsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.WorkspaceSkusClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.WorkspacesClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -51,11 +65,11 @@ import reactor.core.publisher.Mono;
 public final class AzureMachineLearningWorkspacesImpl implements AzureMachineLearningWorkspaces {
     private final ClientLogger logger = new ClientLogger(AzureMachineLearningWorkspacesImpl.class);
 
-    /** Azure subscription identifier. */
+    /** The ID of the target subscription. */
     private final String subscriptionId;
 
     /**
-     * Gets Azure subscription identifier.
+     * Gets The ID of the target subscription.
      *
      * @return the subscriptionId value.
      */
@@ -147,18 +161,6 @@ public final class AzureMachineLearningWorkspacesImpl implements AzureMachineLea
         return this.workspaces;
     }
 
-    /** The WorkspaceFeaturesClient object to access its operations. */
-    private final WorkspaceFeaturesClient workspaceFeatures;
-
-    /**
-     * Gets the WorkspaceFeaturesClient object to access its operations.
-     *
-     * @return the WorkspaceFeaturesClient object.
-     */
-    public WorkspaceFeaturesClient getWorkspaceFeatures() {
-        return this.workspaceFeatures;
-    }
-
     /** The UsagesClient object to access its operations. */
     private final UsagesClient usages;
 
@@ -195,28 +197,16 @@ public final class AzureMachineLearningWorkspacesImpl implements AzureMachineLea
         return this.quotas;
     }
 
-    /** The MachineLearningComputesClient object to access its operations. */
-    private final MachineLearningComputesClient machineLearningComputes;
+    /** The ComputesClient object to access its operations. */
+    private final ComputesClient computes;
 
     /**
-     * Gets the MachineLearningComputesClient object to access its operations.
+     * Gets the ComputesClient object to access its operations.
      *
-     * @return the MachineLearningComputesClient object.
+     * @return the ComputesClient object.
      */
-    public MachineLearningComputesClient getMachineLearningComputes() {
-        return this.machineLearningComputes;
-    }
-
-    /** The WorkspaceOperationsClient object to access its operations. */
-    private final WorkspaceOperationsClient workspaceOperations;
-
-    /**
-     * Gets the WorkspaceOperationsClient object to access its operations.
-     *
-     * @return the WorkspaceOperationsClient object.
-     */
-    public WorkspaceOperationsClient getWorkspaceOperations() {
-        return this.workspaceOperations;
+    public ComputesClient getComputes() {
+        return this.computes;
     }
 
     /** The PrivateEndpointConnectionsClient object to access its operations. */
@@ -243,18 +233,6 @@ public final class AzureMachineLearningWorkspacesImpl implements AzureMachineLea
         return this.privateLinkResources;
     }
 
-    /** The MachineLearningServicesClient object to access its operations. */
-    private final MachineLearningServicesClient machineLearningServices;
-
-    /**
-     * Gets the MachineLearningServicesClient object to access its operations.
-     *
-     * @return the MachineLearningServicesClient object.
-     */
-    public MachineLearningServicesClient getMachineLearningServices() {
-        return this.machineLearningServices;
-    }
-
     /** The NotebooksClient object to access its operations. */
     private final NotebooksClient notebooks;
 
@@ -265,18 +243,6 @@ public final class AzureMachineLearningWorkspacesImpl implements AzureMachineLea
      */
     public NotebooksClient getNotebooks() {
         return this.notebooks;
-    }
-
-    /** The StorageAccountsClient object to access its operations. */
-    private final StorageAccountsClient storageAccounts;
-
-    /**
-     * Gets the StorageAccountsClient object to access its operations.
-     *
-     * @return the StorageAccountsClient object.
-     */
-    public StorageAccountsClient getStorageAccounts() {
-        return this.storageAccounts;
     }
 
     /** The WorkspaceConnectionsClient object to access its operations. */
@@ -291,6 +257,222 @@ public final class AzureMachineLearningWorkspacesImpl implements AzureMachineLea
         return this.workspaceConnections;
     }
 
+    /** The BatchEndpointsClient object to access its operations. */
+    private final BatchEndpointsClient batchEndpoints;
+
+    /**
+     * Gets the BatchEndpointsClient object to access its operations.
+     *
+     * @return the BatchEndpointsClient object.
+     */
+    public BatchEndpointsClient getBatchEndpoints() {
+        return this.batchEndpoints;
+    }
+
+    /** The BatchDeploymentsClient object to access its operations. */
+    private final BatchDeploymentsClient batchDeployments;
+
+    /**
+     * Gets the BatchDeploymentsClient object to access its operations.
+     *
+     * @return the BatchDeploymentsClient object.
+     */
+    public BatchDeploymentsClient getBatchDeployments() {
+        return this.batchDeployments;
+    }
+
+    /** The CodeContainersClient object to access its operations. */
+    private final CodeContainersClient codeContainers;
+
+    /**
+     * Gets the CodeContainersClient object to access its operations.
+     *
+     * @return the CodeContainersClient object.
+     */
+    public CodeContainersClient getCodeContainers() {
+        return this.codeContainers;
+    }
+
+    /** The CodeVersionsClient object to access its operations. */
+    private final CodeVersionsClient codeVersions;
+
+    /**
+     * Gets the CodeVersionsClient object to access its operations.
+     *
+     * @return the CodeVersionsClient object.
+     */
+    public CodeVersionsClient getCodeVersions() {
+        return this.codeVersions;
+    }
+
+    /** The DataContainersClient object to access its operations. */
+    private final DataContainersClient dataContainers;
+
+    /**
+     * Gets the DataContainersClient object to access its operations.
+     *
+     * @return the DataContainersClient object.
+     */
+    public DataContainersClient getDataContainers() {
+        return this.dataContainers;
+    }
+
+    /** The DataVersionsClient object to access its operations. */
+    private final DataVersionsClient dataVersions;
+
+    /**
+     * Gets the DataVersionsClient object to access its operations.
+     *
+     * @return the DataVersionsClient object.
+     */
+    public DataVersionsClient getDataVersions() {
+        return this.dataVersions;
+    }
+
+    /** The DatastoresClient object to access its operations. */
+    private final DatastoresClient datastores;
+
+    /**
+     * Gets the DatastoresClient object to access its operations.
+     *
+     * @return the DatastoresClient object.
+     */
+    public DatastoresClient getDatastores() {
+        return this.datastores;
+    }
+
+    /** The EnvironmentContainersClient object to access its operations. */
+    private final EnvironmentContainersClient environmentContainers;
+
+    /**
+     * Gets the EnvironmentContainersClient object to access its operations.
+     *
+     * @return the EnvironmentContainersClient object.
+     */
+    public EnvironmentContainersClient getEnvironmentContainers() {
+        return this.environmentContainers;
+    }
+
+    /** The EnvironmentSpecificationVersionsClient object to access its operations. */
+    private final EnvironmentSpecificationVersionsClient environmentSpecificationVersions;
+
+    /**
+     * Gets the EnvironmentSpecificationVersionsClient object to access its operations.
+     *
+     * @return the EnvironmentSpecificationVersionsClient object.
+     */
+    public EnvironmentSpecificationVersionsClient getEnvironmentSpecificationVersions() {
+        return this.environmentSpecificationVersions;
+    }
+
+    /** The JobsClient object to access its operations. */
+    private final JobsClient jobs;
+
+    /**
+     * Gets the JobsClient object to access its operations.
+     *
+     * @return the JobsClient object.
+     */
+    public JobsClient getJobs() {
+        return this.jobs;
+    }
+
+    /** The LabelingJobsClient object to access its operations. */
+    private final LabelingJobsClient labelingJobs;
+
+    /**
+     * Gets the LabelingJobsClient object to access its operations.
+     *
+     * @return the LabelingJobsClient object.
+     */
+    public LabelingJobsClient getLabelingJobs() {
+        return this.labelingJobs;
+    }
+
+    /** The ModelContainersClient object to access its operations. */
+    private final ModelContainersClient modelContainers;
+
+    /**
+     * Gets the ModelContainersClient object to access its operations.
+     *
+     * @return the ModelContainersClient object.
+     */
+    public ModelContainersClient getModelContainers() {
+        return this.modelContainers;
+    }
+
+    /** The ModelVersionsClient object to access its operations. */
+    private final ModelVersionsClient modelVersions;
+
+    /**
+     * Gets the ModelVersionsClient object to access its operations.
+     *
+     * @return the ModelVersionsClient object.
+     */
+    public ModelVersionsClient getModelVersions() {
+        return this.modelVersions;
+    }
+
+    /** The OnlineEndpointsClient object to access its operations. */
+    private final OnlineEndpointsClient onlineEndpoints;
+
+    /**
+     * Gets the OnlineEndpointsClient object to access its operations.
+     *
+     * @return the OnlineEndpointsClient object.
+     */
+    public OnlineEndpointsClient getOnlineEndpoints() {
+        return this.onlineEndpoints;
+    }
+
+    /** The OnlineDeploymentsClient object to access its operations. */
+    private final OnlineDeploymentsClient onlineDeployments;
+
+    /**
+     * Gets the OnlineDeploymentsClient object to access its operations.
+     *
+     * @return the OnlineDeploymentsClient object.
+     */
+    public OnlineDeploymentsClient getOnlineDeployments() {
+        return this.onlineDeployments;
+    }
+
+    /** The MachineLearningServicesClient object to access its operations. */
+    private final MachineLearningServicesClient machineLearningServices;
+
+    /**
+     * Gets the MachineLearningServicesClient object to access its operations.
+     *
+     * @return the MachineLearningServicesClient object.
+     */
+    public MachineLearningServicesClient getMachineLearningServices() {
+        return this.machineLearningServices;
+    }
+
+    /** The WorkspaceFeaturesClient object to access its operations. */
+    private final WorkspaceFeaturesClient workspaceFeatures;
+
+    /**
+     * Gets the WorkspaceFeaturesClient object to access its operations.
+     *
+     * @return the WorkspaceFeaturesClient object.
+     */
+    public WorkspaceFeaturesClient getWorkspaceFeatures() {
+        return this.workspaceFeatures;
+    }
+
+    /** The WorkspaceSkusClient object to access its operations. */
+    private final WorkspaceSkusClient workspaceSkus;
+
+    /**
+     * Gets the WorkspaceSkusClient object to access its operations.
+     *
+     * @return the WorkspaceSkusClient object.
+     */
+    public WorkspaceSkusClient getWorkspaceSkus() {
+        return this.workspaceSkus;
+    }
+
     /**
      * Initializes an instance of AzureMachineLearningWorkspaces client.
      *
@@ -298,7 +480,7 @@ public final class AzureMachineLearningWorkspacesImpl implements AzureMachineLea
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param defaultPollInterval The default poll interval for long-running operation.
      * @param environment The Azure environment.
-     * @param subscriptionId Azure subscription identifier.
+     * @param subscriptionId The ID of the target subscription.
      * @param endpoint server parameter.
      */
     AzureMachineLearningWorkspacesImpl(
@@ -313,21 +495,35 @@ public final class AzureMachineLearningWorkspacesImpl implements AzureMachineLea
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-04-01";
+        this.apiVersion = "2021-03-01-preview";
         this.operations = new OperationsClientImpl(this);
         this.workspaces = new WorkspacesClientImpl(this);
-        this.workspaceFeatures = new WorkspaceFeaturesClientImpl(this);
         this.usages = new UsagesClientImpl(this);
         this.virtualMachineSizes = new VirtualMachineSizesClientImpl(this);
         this.quotas = new QuotasClientImpl(this);
-        this.machineLearningComputes = new MachineLearningComputesClientImpl(this);
-        this.workspaceOperations = new WorkspaceOperationsClientImpl(this);
+        this.computes = new ComputesClientImpl(this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsClientImpl(this);
         this.privateLinkResources = new PrivateLinkResourcesClientImpl(this);
-        this.machineLearningServices = new MachineLearningServicesClientImpl(this);
         this.notebooks = new NotebooksClientImpl(this);
-        this.storageAccounts = new StorageAccountsClientImpl(this);
         this.workspaceConnections = new WorkspaceConnectionsClientImpl(this);
+        this.batchEndpoints = new BatchEndpointsClientImpl(this);
+        this.batchDeployments = new BatchDeploymentsClientImpl(this);
+        this.codeContainers = new CodeContainersClientImpl(this);
+        this.codeVersions = new CodeVersionsClientImpl(this);
+        this.dataContainers = new DataContainersClientImpl(this);
+        this.dataVersions = new DataVersionsClientImpl(this);
+        this.datastores = new DatastoresClientImpl(this);
+        this.environmentContainers = new EnvironmentContainersClientImpl(this);
+        this.environmentSpecificationVersions = new EnvironmentSpecificationVersionsClientImpl(this);
+        this.jobs = new JobsClientImpl(this);
+        this.labelingJobs = new LabelingJobsClientImpl(this);
+        this.modelContainers = new ModelContainersClientImpl(this);
+        this.modelVersions = new ModelVersionsClientImpl(this);
+        this.onlineEndpoints = new OnlineEndpointsClientImpl(this);
+        this.onlineDeployments = new OnlineDeploymentsClientImpl(this);
+        this.machineLearningServices = new MachineLearningServicesClientImpl(this);
+        this.workspaceFeatures = new WorkspaceFeaturesClientImpl(this);
+        this.workspaceSkus = new WorkspaceSkusClientImpl(this);
     }
 
     /**

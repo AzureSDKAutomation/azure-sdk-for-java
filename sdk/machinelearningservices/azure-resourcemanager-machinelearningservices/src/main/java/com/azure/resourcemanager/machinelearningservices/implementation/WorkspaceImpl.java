@@ -13,6 +13,7 @@ import com.azure.resourcemanager.machinelearningservices.fluent.models.PrivateEn
 import com.azure.resourcemanager.machinelearningservices.fluent.models.WorkspaceInner;
 import com.azure.resourcemanager.machinelearningservices.models.EncryptionProperty;
 import com.azure.resourcemanager.machinelearningservices.models.Identity;
+import com.azure.resourcemanager.machinelearningservices.models.ListStorageAccountKeysResult;
 import com.azure.resourcemanager.machinelearningservices.models.ListWorkspaceKeysResult;
 import com.azure.resourcemanager.machinelearningservices.models.NotebookAccessTokenResult;
 import com.azure.resourcemanager.machinelearningservices.models.NotebookResourceInfo;
@@ -45,6 +46,10 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
         return this.innerModel().type();
     }
 
+    public Identity identity() {
+        return this.innerModel().identity();
+    }
+
     public String location() {
         return this.innerModel().location();
     }
@@ -56,6 +61,14 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
         } else {
             return Collections.emptyMap();
         }
+    }
+
+    public Sku sku() {
+        return this.innerModel().sku();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public String workspaceId() {
@@ -160,18 +173,6 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
 
     public String tenantId() {
         return this.innerModel().tenantId();
-    }
-
-    public Identity identity() {
-        return this.innerModel().identity();
-    }
-
-    public Sku sku() {
-        return this.innerModel().sku();
-    }
-
-    public SystemData systemData() {
-        return this.innerModel().systemData();
     }
 
     public Region region() {
@@ -306,6 +307,16 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
             .listNotebookAccessTokenWithResponse(resourceGroupName, workspaceName, context);
     }
 
+    public ListStorageAccountKeysResult listStorageAccountKeys() {
+        return serviceManager.workspaces().listStorageAccountKeys(resourceGroupName, workspaceName);
+    }
+
+    public Response<ListStorageAccountKeysResult> listStorageAccountKeysWithResponse(Context context) {
+        return serviceManager
+            .workspaces()
+            .listStorageAccountKeysWithResponse(resourceGroupName, workspaceName, context);
+    }
+
     public WorkspaceImpl withRegion(Region location) {
         this.innerModel().withLocation(location.toString());
         return this;
@@ -322,6 +333,26 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
             return this;
         } else {
             this.updateParameters.withTags(tags);
+            return this;
+        }
+    }
+
+    public WorkspaceImpl withIdentity(Identity identity) {
+        if (isInCreateMode()) {
+            this.innerModel().withIdentity(identity);
+            return this;
+        } else {
+            this.updateParameters.withIdentity(identity);
+            return this;
+        }
+    }
+
+    public WorkspaceImpl withSku(Sku sku) {
+        if (isInCreateMode()) {
+            this.innerModel().withSku(sku);
+            return this;
+        } else {
+            this.updateParameters.withSku(sku);
             return this;
         }
     }
@@ -418,26 +449,6 @@ public final class WorkspaceImpl implements Workspace, Workspace.Definition, Wor
             return this;
         } else {
             this.updateParameters.withPrimaryUserAssignedIdentity(primaryUserAssignedIdentity);
-            return this;
-        }
-    }
-
-    public WorkspaceImpl withIdentity(Identity identity) {
-        if (isInCreateMode()) {
-            this.innerModel().withIdentity(identity);
-            return this;
-        } else {
-            this.updateParameters.withIdentity(identity);
-            return this;
-        }
-    }
-
-    public WorkspaceImpl withSku(Sku sku) {
-        if (isInCreateMode()) {
-            this.innerModel().withSku(sku);
-            return this;
-        } else {
-            this.updateParameters.withSku(sku);
             return this;
         }
     }

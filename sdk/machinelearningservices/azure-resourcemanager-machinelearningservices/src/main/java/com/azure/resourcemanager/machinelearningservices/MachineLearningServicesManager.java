@@ -22,33 +22,61 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.machinelearningservices.fluent.AzureMachineLearningWorkspaces;
 import com.azure.resourcemanager.machinelearningservices.implementation.AzureMachineLearningWorkspacesBuilder;
-import com.azure.resourcemanager.machinelearningservices.implementation.MachineLearningComputesImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.BatchDeploymentsImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.BatchEndpointsImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.CodeContainersImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.CodeVersionsImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.ComputesImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.DataContainersImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.DataVersionsImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.DatastoresImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.EnvironmentContainersImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.EnvironmentSpecificationVersionsImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.JobsImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.LabelingJobsImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.MachineLearningServicesImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.ModelContainersImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.ModelVersionsImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.NotebooksImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.OnlineDeploymentsImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.OnlineEndpointsImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.OperationsImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.PrivateEndpointConnectionsImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.PrivateLinkResourcesImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.QuotasImpl;
-import com.azure.resourcemanager.machinelearningservices.implementation.StorageAccountsImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.UsagesImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.VirtualMachineSizesImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.WorkspaceConnectionsImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.WorkspaceFeaturesImpl;
-import com.azure.resourcemanager.machinelearningservices.implementation.WorkspaceOperationsImpl;
+import com.azure.resourcemanager.machinelearningservices.implementation.WorkspaceSkusImpl;
 import com.azure.resourcemanager.machinelearningservices.implementation.WorkspacesImpl;
-import com.azure.resourcemanager.machinelearningservices.models.MachineLearningComputes;
+import com.azure.resourcemanager.machinelearningservices.models.BatchDeployments;
+import com.azure.resourcemanager.machinelearningservices.models.BatchEndpoints;
+import com.azure.resourcemanager.machinelearningservices.models.CodeContainers;
+import com.azure.resourcemanager.machinelearningservices.models.CodeVersions;
+import com.azure.resourcemanager.machinelearningservices.models.Computes;
+import com.azure.resourcemanager.machinelearningservices.models.DataContainers;
+import com.azure.resourcemanager.machinelearningservices.models.DataVersions;
+import com.azure.resourcemanager.machinelearningservices.models.Datastores;
+import com.azure.resourcemanager.machinelearningservices.models.EnvironmentContainers;
+import com.azure.resourcemanager.machinelearningservices.models.EnvironmentSpecificationVersions;
+import com.azure.resourcemanager.machinelearningservices.models.Jobs;
+import com.azure.resourcemanager.machinelearningservices.models.LabelingJobs;
 import com.azure.resourcemanager.machinelearningservices.models.MachineLearningServices;
+import com.azure.resourcemanager.machinelearningservices.models.ModelContainers;
+import com.azure.resourcemanager.machinelearningservices.models.ModelVersions;
 import com.azure.resourcemanager.machinelearningservices.models.Notebooks;
+import com.azure.resourcemanager.machinelearningservices.models.OnlineDeployments;
+import com.azure.resourcemanager.machinelearningservices.models.OnlineEndpoints;
 import com.azure.resourcemanager.machinelearningservices.models.Operations;
 import com.azure.resourcemanager.machinelearningservices.models.PrivateEndpointConnections;
 import com.azure.resourcemanager.machinelearningservices.models.PrivateLinkResources;
 import com.azure.resourcemanager.machinelearningservices.models.Quotas;
-import com.azure.resourcemanager.machinelearningservices.models.StorageAccounts;
 import com.azure.resourcemanager.machinelearningservices.models.Usages;
 import com.azure.resourcemanager.machinelearningservices.models.VirtualMachineSizes;
 import com.azure.resourcemanager.machinelearningservices.models.WorkspaceConnections;
 import com.azure.resourcemanager.machinelearningservices.models.WorkspaceFeatures;
-import com.azure.resourcemanager.machinelearningservices.models.WorkspaceOperations;
+import com.azure.resourcemanager.machinelearningservices.models.WorkspaceSkus;
 import com.azure.resourcemanager.machinelearningservices.models.Workspaces;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -65,29 +93,57 @@ public final class MachineLearningServicesManager {
 
     private Workspaces workspaces;
 
-    private WorkspaceFeatures workspaceFeatures;
-
     private Usages usages;
 
     private VirtualMachineSizes virtualMachineSizes;
 
     private Quotas quotas;
 
-    private MachineLearningComputes machineLearningComputes;
-
-    private WorkspaceOperations workspaceOperations;
+    private Computes computes;
 
     private PrivateEndpointConnections privateEndpointConnections;
 
     private PrivateLinkResources privateLinkResources;
 
-    private MachineLearningServices machineLearningServices;
-
     private Notebooks notebooks;
 
-    private StorageAccounts storageAccounts;
-
     private WorkspaceConnections workspaceConnections;
+
+    private BatchEndpoints batchEndpoints;
+
+    private BatchDeployments batchDeployments;
+
+    private CodeContainers codeContainers;
+
+    private CodeVersions codeVersions;
+
+    private DataContainers dataContainers;
+
+    private DataVersions dataVersions;
+
+    private Datastores datastores;
+
+    private EnvironmentContainers environmentContainers;
+
+    private EnvironmentSpecificationVersions environmentSpecificationVersions;
+
+    private Jobs jobs;
+
+    private LabelingJobs labelingJobs;
+
+    private ModelContainers modelContainers;
+
+    private ModelVersions modelVersions;
+
+    private OnlineEndpoints onlineEndpoints;
+
+    private OnlineDeployments onlineDeployments;
+
+    private MachineLearningServices machineLearningServices;
+
+    private WorkspaceFeatures workspaceFeatures;
+
+    private WorkspaceSkus workspaceSkus;
 
     private final AzureMachineLearningWorkspaces clientObject;
 
@@ -270,14 +326,6 @@ public final class MachineLearningServicesManager {
         return workspaces;
     }
 
-    /** @return Resource collection API of WorkspaceFeatures. */
-    public WorkspaceFeatures workspaceFeatures() {
-        if (this.workspaceFeatures == null) {
-            this.workspaceFeatures = new WorkspaceFeaturesImpl(clientObject.getWorkspaceFeatures(), this);
-        }
-        return workspaceFeatures;
-    }
-
     /** @return Resource collection API of Usages. */
     public Usages usages() {
         if (this.usages == null) {
@@ -302,21 +350,12 @@ public final class MachineLearningServicesManager {
         return quotas;
     }
 
-    /** @return Resource collection API of MachineLearningComputes. */
-    public MachineLearningComputes machineLearningComputes() {
-        if (this.machineLearningComputes == null) {
-            this.machineLearningComputes =
-                new MachineLearningComputesImpl(clientObject.getMachineLearningComputes(), this);
+    /** @return Resource collection API of Computes. */
+    public Computes computes() {
+        if (this.computes == null) {
+            this.computes = new ComputesImpl(clientObject.getComputes(), this);
         }
-        return machineLearningComputes;
-    }
-
-    /** @return Resource collection API of WorkspaceOperations. */
-    public WorkspaceOperations workspaceOperations() {
-        if (this.workspaceOperations == null) {
-            this.workspaceOperations = new WorkspaceOperationsImpl(clientObject.getWorkspaceOperations(), this);
-        }
-        return workspaceOperations;
+        return computes;
     }
 
     /** @return Resource collection API of PrivateEndpointConnections. */
@@ -336,6 +375,143 @@ public final class MachineLearningServicesManager {
         return privateLinkResources;
     }
 
+    /** @return Resource collection API of Notebooks. */
+    public Notebooks notebooks() {
+        if (this.notebooks == null) {
+            this.notebooks = new NotebooksImpl(clientObject.getNotebooks(), this);
+        }
+        return notebooks;
+    }
+
+    /** @return Resource collection API of WorkspaceConnections. */
+    public WorkspaceConnections workspaceConnections() {
+        if (this.workspaceConnections == null) {
+            this.workspaceConnections = new WorkspaceConnectionsImpl(clientObject.getWorkspaceConnections(), this);
+        }
+        return workspaceConnections;
+    }
+
+    /** @return Resource collection API of BatchEndpoints. */
+    public BatchEndpoints batchEndpoints() {
+        if (this.batchEndpoints == null) {
+            this.batchEndpoints = new BatchEndpointsImpl(clientObject.getBatchEndpoints(), this);
+        }
+        return batchEndpoints;
+    }
+
+    /** @return Resource collection API of BatchDeployments. */
+    public BatchDeployments batchDeployments() {
+        if (this.batchDeployments == null) {
+            this.batchDeployments = new BatchDeploymentsImpl(clientObject.getBatchDeployments(), this);
+        }
+        return batchDeployments;
+    }
+
+    /** @return Resource collection API of CodeContainers. */
+    public CodeContainers codeContainers() {
+        if (this.codeContainers == null) {
+            this.codeContainers = new CodeContainersImpl(clientObject.getCodeContainers(), this);
+        }
+        return codeContainers;
+    }
+
+    /** @return Resource collection API of CodeVersions. */
+    public CodeVersions codeVersions() {
+        if (this.codeVersions == null) {
+            this.codeVersions = new CodeVersionsImpl(clientObject.getCodeVersions(), this);
+        }
+        return codeVersions;
+    }
+
+    /** @return Resource collection API of DataContainers. */
+    public DataContainers dataContainers() {
+        if (this.dataContainers == null) {
+            this.dataContainers = new DataContainersImpl(clientObject.getDataContainers(), this);
+        }
+        return dataContainers;
+    }
+
+    /** @return Resource collection API of DataVersions. */
+    public DataVersions dataVersions() {
+        if (this.dataVersions == null) {
+            this.dataVersions = new DataVersionsImpl(clientObject.getDataVersions(), this);
+        }
+        return dataVersions;
+    }
+
+    /** @return Resource collection API of Datastores. */
+    public Datastores datastores() {
+        if (this.datastores == null) {
+            this.datastores = new DatastoresImpl(clientObject.getDatastores(), this);
+        }
+        return datastores;
+    }
+
+    /** @return Resource collection API of EnvironmentContainers. */
+    public EnvironmentContainers environmentContainers() {
+        if (this.environmentContainers == null) {
+            this.environmentContainers = new EnvironmentContainersImpl(clientObject.getEnvironmentContainers(), this);
+        }
+        return environmentContainers;
+    }
+
+    /** @return Resource collection API of EnvironmentSpecificationVersions. */
+    public EnvironmentSpecificationVersions environmentSpecificationVersions() {
+        if (this.environmentSpecificationVersions == null) {
+            this.environmentSpecificationVersions =
+                new EnvironmentSpecificationVersionsImpl(clientObject.getEnvironmentSpecificationVersions(), this);
+        }
+        return environmentSpecificationVersions;
+    }
+
+    /** @return Resource collection API of Jobs. */
+    public Jobs jobs() {
+        if (this.jobs == null) {
+            this.jobs = new JobsImpl(clientObject.getJobs(), this);
+        }
+        return jobs;
+    }
+
+    /** @return Resource collection API of LabelingJobs. */
+    public LabelingJobs labelingJobs() {
+        if (this.labelingJobs == null) {
+            this.labelingJobs = new LabelingJobsImpl(clientObject.getLabelingJobs(), this);
+        }
+        return labelingJobs;
+    }
+
+    /** @return Resource collection API of ModelContainers. */
+    public ModelContainers modelContainers() {
+        if (this.modelContainers == null) {
+            this.modelContainers = new ModelContainersImpl(clientObject.getModelContainers(), this);
+        }
+        return modelContainers;
+    }
+
+    /** @return Resource collection API of ModelVersions. */
+    public ModelVersions modelVersions() {
+        if (this.modelVersions == null) {
+            this.modelVersions = new ModelVersionsImpl(clientObject.getModelVersions(), this);
+        }
+        return modelVersions;
+    }
+
+    /** @return Resource collection API of OnlineEndpoints. */
+    public OnlineEndpoints onlineEndpoints() {
+        if (this.onlineEndpoints == null) {
+            this.onlineEndpoints = new OnlineEndpointsImpl(clientObject.getOnlineEndpoints(), this);
+        }
+        return onlineEndpoints;
+    }
+
+    /** @return Resource collection API of OnlineDeployments. */
+    public OnlineDeployments onlineDeployments() {
+        if (this.onlineDeployments == null) {
+            this.onlineDeployments = new OnlineDeploymentsImpl(clientObject.getOnlineDeployments(), this);
+        }
+        return onlineDeployments;
+    }
+
     /** @return Resource collection API of MachineLearningServices. */
     public MachineLearningServices machineLearningServices() {
         if (this.machineLearningServices == null) {
@@ -345,28 +521,20 @@ public final class MachineLearningServicesManager {
         return machineLearningServices;
     }
 
-    /** @return Resource collection API of Notebooks. */
-    public Notebooks notebooks() {
-        if (this.notebooks == null) {
-            this.notebooks = new NotebooksImpl(clientObject.getNotebooks(), this);
+    /** @return Resource collection API of WorkspaceFeatures. */
+    public WorkspaceFeatures workspaceFeatures() {
+        if (this.workspaceFeatures == null) {
+            this.workspaceFeatures = new WorkspaceFeaturesImpl(clientObject.getWorkspaceFeatures(), this);
         }
-        return notebooks;
+        return workspaceFeatures;
     }
 
-    /** @return Resource collection API of StorageAccounts. */
-    public StorageAccounts storageAccounts() {
-        if (this.storageAccounts == null) {
-            this.storageAccounts = new StorageAccountsImpl(clientObject.getStorageAccounts(), this);
+    /** @return Resource collection API of WorkspaceSkus. */
+    public WorkspaceSkus workspaceSkus() {
+        if (this.workspaceSkus == null) {
+            this.workspaceSkus = new WorkspaceSkusImpl(clientObject.getWorkspaceSkus(), this);
         }
-        return storageAccounts;
-    }
-
-    /** @return Resource collection API of WorkspaceConnections. */
-    public WorkspaceConnections workspaceConnections() {
-        if (this.workspaceConnections == null) {
-            this.workspaceConnections = new WorkspaceConnectionsImpl(clientObject.getWorkspaceConnections(), this);
-        }
-        return workspaceConnections;
+        return workspaceSkus;
     }
 
     /**
