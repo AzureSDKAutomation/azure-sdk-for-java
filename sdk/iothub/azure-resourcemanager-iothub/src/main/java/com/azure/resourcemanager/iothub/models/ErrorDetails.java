@@ -5,14 +5,17 @@
 package com.azure.resourcemanager.iothub.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /** Error details. */
+@JsonFlatten
 @Immutable
-public final class ErrorDetails extends ManagementError {
+public class ErrorDetails extends ManagementError {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ErrorDetails.class);
 
     /*
@@ -20,6 +23,12 @@ public final class ErrorDetails extends ManagementError {
      */
     @JsonProperty(value = "httpStatusCode", access = JsonProperty.Access.WRITE_ONLY)
     private String httpStatusCode;
+
+    /*
+     * A list of additional details about the error.
+     */
+    @JsonProperty(value = "error.details", access = JsonProperty.Access.WRITE_ONLY)
+    private List<ErrorDetails> detailsErrorDetails;
 
     /**
      * Get the httpStatusCode property: The HTTP status code.
@@ -31,10 +40,22 @@ public final class ErrorDetails extends ManagementError {
     }
 
     /**
+     * Get the detailsErrorDetails property: A list of additional details about the error.
+     *
+     * @return the detailsErrorDetails value.
+     */
+    public List<ErrorDetails> getDetailsErrorDetails() {
+        return this.detailsErrorDetails;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (getDetailsErrorDetails() != null) {
+            getDetailsErrorDetails().forEach(e -> e.validate());
+        }
     }
 }

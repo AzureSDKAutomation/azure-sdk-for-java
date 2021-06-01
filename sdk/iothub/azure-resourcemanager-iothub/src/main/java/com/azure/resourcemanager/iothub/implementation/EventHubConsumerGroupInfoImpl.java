@@ -36,8 +36,8 @@ public final class EventHubConsumerGroupInfoImpl
         return this.innerModel().type();
     }
 
-    public Map<String, Object> properties() {
-        Map<String, Object> inner = this.innerModel().properties();
+    public Map<String, String> properties() {
+        Map<String, String> inner = this.innerModel().properties();
         if (inner != null) {
             return Collections.unmodifiableMap(inner);
         } else {
