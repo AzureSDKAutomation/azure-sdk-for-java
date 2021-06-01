@@ -4,15 +4,41 @@
 
 package com.azure.resourcemanager.machinelearningservices.models;
 
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 
 /** Resource collection API of PrivateEndpointConnections. */
 public interface PrivateEndpointConnections {
     /**
+     * List all the private endpoint connections associated with the workspace.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return list of private endpoint connection associated with the specified workspace.
+     */
+    PagedIterable<PrivateEndpointConnection> list(String resourceGroupName, String workspaceName);
+
+    /**
+     * List all the private endpoint connections associated with the workspace.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return list of private endpoint connection associated with the specified workspace.
+     */
+    PagedIterable<PrivateEndpointConnection> list(String resourceGroupName, String workspaceName, Context context);
+
+    /**
      * Gets the specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -25,7 +51,7 @@ public interface PrivateEndpointConnections {
     /**
      * Gets the specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @param context The context to associate with this operation.
@@ -40,7 +66,7 @@ public interface PrivateEndpointConnections {
     /**
      * Deletes the specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -52,7 +78,7 @@ public interface PrivateEndpointConnections {
     /**
      * Deletes the specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @param context The context to associate with this operation.

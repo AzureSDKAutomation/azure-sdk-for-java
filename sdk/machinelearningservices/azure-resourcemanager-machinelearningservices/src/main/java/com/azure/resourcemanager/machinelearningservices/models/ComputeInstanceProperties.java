@@ -99,6 +99,12 @@ public final class ComputeInstanceProperties {
     @JsonProperty(value = "lastOperation", access = JsonProperty.Access.WRITE_ONLY)
     private ComputeInstanceLastOperation lastOperation;
 
+    /*
+     * The list of schedules to be applied on the compute instance.
+     */
+    @JsonProperty(value = "schedules")
+    private ComputeSchedules schedules;
+
     /**
      * Get the vmSize property: Virtual Machine Size.
      *
@@ -302,6 +308,26 @@ public final class ComputeInstanceProperties {
     }
 
     /**
+     * Get the schedules property: The list of schedules to be applied on the compute instance.
+     *
+     * @return the schedules value.
+     */
+    public ComputeSchedules schedules() {
+        return this.schedules;
+    }
+
+    /**
+     * Set the schedules property: The list of schedules to be applied on the compute instance.
+     *
+     * @param schedules the schedules value to set.
+     * @return the ComputeInstanceProperties object itself.
+     */
+    public ComputeInstanceProperties withSchedules(ComputeSchedules schedules) {
+        this.schedules = schedules;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -330,6 +356,9 @@ public final class ComputeInstanceProperties {
         }
         if (lastOperation() != null) {
             lastOperation().validate();
+        }
+        if (schedules() != null) {
+            schedules().validate();
         }
     }
 }

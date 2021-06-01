@@ -6,7 +6,7 @@ package com.azure.resourcemanager.machinelearningservices.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
-import com.azure.core.management.Resource;
+import com.azure.core.management.ProxyResource;
 import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.machinelearningservices.models.EncryptionProperty;
@@ -23,8 +23,38 @@ import java.util.Map;
 /** An object that represents a machine learning workspace. */
 @JsonFlatten
 @Fluent
-public class WorkspaceInner extends Resource {
+public class WorkspaceInner extends ProxyResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(WorkspaceInner.class);
+
+    /*
+     * The identity of the resource.
+     */
+    @JsonProperty(value = "identity")
+    private Identity identity;
+
+    /*
+     * Specifies the location of the resource.
+     */
+    @JsonProperty(value = "location")
+    private String location;
+
+    /*
+     * Contains resource tags defined as key/value pairs.
+     */
+    @JsonProperty(value = "tags")
+    private Map<String, String> tags;
+
+    /*
+     * The sku of the workspace.
+     */
+    @JsonProperty(value = "sku")
+    private Sku sku;
+
+    /*
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * The immutable id associated with this workspace.
@@ -161,23 +191,94 @@ public class WorkspaceInner extends Resource {
     @JsonProperty(value = "properties.tenantId", access = JsonProperty.Access.WRITE_ONLY)
     private String tenantId;
 
-    /*
-     * The identity of the resource.
+    /**
+     * Get the identity property: The identity of the resource.
+     *
+     * @return the identity value.
      */
-    @JsonProperty(value = "identity")
-    private Identity identity;
+    public Identity identity() {
+        return this.identity;
+    }
 
-    /*
-     * The sku of the workspace.
+    /**
+     * Set the identity property: The identity of the resource.
+     *
+     * @param identity the identity value to set.
+     * @return the WorkspaceInner object itself.
      */
-    @JsonProperty(value = "sku")
-    private Sku sku;
+    public WorkspaceInner withIdentity(Identity identity) {
+        this.identity = identity;
+        return this;
+    }
 
-    /*
-     * Read only system data
+    /**
+     * Get the location property: Specifies the location of the resource.
+     *
+     * @return the location value.
      */
-    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
-    private SystemData systemData;
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Set the location property: Specifies the location of the resource.
+     *
+     * @param location the location value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the tags property: Contains resource tags defined as key/value pairs.
+     *
+     * @return the tags value.
+     */
+    public Map<String, String> tags() {
+        return this.tags;
+    }
+
+    /**
+     * Set the tags property: Contains resource tags defined as key/value pairs.
+     *
+     * @param tags the tags value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withTags(Map<String, String> tags) {
+        this.tags = tags;
+        return this;
+    }
+
+    /**
+     * Get the sku property: The sku of the workspace.
+     *
+     * @return the sku value.
+     */
+    public Sku sku() {
+        return this.sku;
+    }
+
+    /**
+     * Set the sku property: The sku of the workspace.
+     *
+     * @param sku the sku value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withSku(Sku sku) {
+        this.sku = sku;
+        return this;
+    }
+
+    /**
+     * Get the systemData property: Metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the workspaceId property: The immutable id associated with this workspace.
@@ -542,74 +643,17 @@ public class WorkspaceInner extends Resource {
     }
 
     /**
-     * Get the identity property: The identity of the resource.
-     *
-     * @return the identity value.
-     */
-    public Identity identity() {
-        return this.identity;
-    }
-
-    /**
-     * Set the identity property: The identity of the resource.
-     *
-     * @param identity the identity value to set.
-     * @return the WorkspaceInner object itself.
-     */
-    public WorkspaceInner withIdentity(Identity identity) {
-        this.identity = identity;
-        return this;
-    }
-
-    /**
-     * Get the sku property: The sku of the workspace.
-     *
-     * @return the sku value.
-     */
-    public Sku sku() {
-        return this.sku;
-    }
-
-    /**
-     * Set the sku property: The sku of the workspace.
-     *
-     * @param sku the sku value to set.
-     * @return the WorkspaceInner object itself.
-     */
-    public WorkspaceInner withSku(Sku sku) {
-        this.sku = sku;
-        return this;
-    }
-
-    /**
-     * Get the systemData property: Read only system data.
-     *
-     * @return the systemData value.
-     */
-    public SystemData systemData() {
-        return this.systemData;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public WorkspaceInner withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public WorkspaceInner withTags(Map<String, String> tags) {
-        super.withTags(tags);
-        return this;
-    }
-
-    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (identity() != null) {
+            identity().validate();
+        }
+        if (sku() != null) {
+            sku().validate();
+        }
         if (encryption() != null) {
             encryption().validate();
         }
@@ -624,12 +668,6 @@ public class WorkspaceInner extends Resource {
         }
         if (serviceManagedResourcesSettings() != null) {
             serviceManagedResourcesSettings().validate();
-        }
-        if (identity() != null) {
-            identity().validate();
-        }
-        if (sku() != null) {
-            sku().validate();
         }
     }
 }

@@ -10,9 +10,11 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.machinelearningservices.fluent.WorkspacesClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.models.ListStorageAccountKeysResultInner;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.ListWorkspaceKeysResultInner;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.NotebookAccessTokenResultInner;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.WorkspaceInner;
+import com.azure.resourcemanager.machinelearningservices.models.ListStorageAccountKeysResult;
 import com.azure.resourcemanager.machinelearningservices.models.ListWorkspaceKeysResult;
 import com.azure.resourcemanager.machinelearningservices.models.NotebookAccessTokenResult;
 import com.azure.resourcemanager.machinelearningservices.models.Workspace;
@@ -138,6 +140,31 @@ public final class WorkspacesImpl implements Workspaces {
                 inner.getStatusCode(),
                 inner.getHeaders(),
                 new NotebookAccessTokenResultImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public ListStorageAccountKeysResult listStorageAccountKeys(String resourceGroupName, String workspaceName) {
+        ListStorageAccountKeysResultInner inner =
+            this.serviceClient().listStorageAccountKeys(resourceGroupName, workspaceName);
+        if (inner != null) {
+            return new ListStorageAccountKeysResultImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Response<ListStorageAccountKeysResult> listStorageAccountKeysWithResponse(
+        String resourceGroupName, String workspaceName, Context context) {
+        Response<ListStorageAccountKeysResultInner> inner =
+            this.serviceClient().listStorageAccountKeysWithResponse(resourceGroupName, workspaceName, context);
+        if (inner != null) {
+            return new SimpleResponse<>(
+                inner.getRequest(),
+                inner.getStatusCode(),
+                inner.getHeaders(),
+                new ListStorageAccountKeysResultImpl(inner.getValue(), this.manager()));
         } else {
             return null;
         }

@@ -86,7 +86,7 @@ public interface WorkspaceConnection {
             /**
              * Specifies resourceGroupName, workspaceName.
              *
-             * @param resourceGroupName Name of the resource group in which workspace is located.
+             * @param resourceGroupName The name of the resource group. The name is case insensitive.
              * @param workspaceName Name of Azure Machine Learning workspace.
              * @return the next definition stage.
              */
