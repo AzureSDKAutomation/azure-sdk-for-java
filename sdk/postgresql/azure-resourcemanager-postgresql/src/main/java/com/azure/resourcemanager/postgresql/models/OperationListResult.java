@@ -10,11 +10,19 @@ import java.util.List;
 /** An immutable client-side representation of OperationListResult. */
 public interface OperationListResult {
     /**
-     * Gets the value property: The list of resource provider operations.
+     * Gets the value property: Collection of available operation details.
      *
      * @return the value value.
      */
     List<Operation> value();
+
+    /**
+     * Gets the nextLink property: URL client should use to fetch the next page (per server side paging). It's null for
+     * now, added for future use.
+     *
+     * @return the nextLink value.
+     */
+    String nextLink();
 
     /**
      * Gets the inner com.azure.resourcemanager.postgresql.fluent.models.OperationListResultInner object.
