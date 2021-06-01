@@ -26,6 +26,9 @@ import com.azure.resourcemanager.servicefabric.fluent.ApplicationTypesClient;
 import com.azure.resourcemanager.servicefabric.fluent.ApplicationsClient;
 import com.azure.resourcemanager.servicefabric.fluent.ClusterVersionsClient;
 import com.azure.resourcemanager.servicefabric.fluent.ClustersClient;
+import com.azure.resourcemanager.servicefabric.fluent.ManagedClusterVersionsClient;
+import com.azure.resourcemanager.servicefabric.fluent.ManagedClustersClient;
+import com.azure.resourcemanager.servicefabric.fluent.NodeTypesClient;
 import com.azure.resourcemanager.servicefabric.fluent.OperationsClient;
 import com.azure.resourcemanager.servicefabric.fluent.ServiceFabricManagementClient;
 import com.azure.resourcemanager.servicefabric.fluent.ServicesClient;
@@ -66,18 +69,6 @@ public final class ServiceFabricManagementClientImpl implements ServiceFabricMan
      */
     public String getEndpoint() {
         return this.endpoint;
-    }
-
-    /** Api Version. */
-    private final String apiVersion;
-
-    /**
-     * Gets Api Version.
-     *
-     * @return the apiVersion value.
-     */
-    public String getApiVersion() {
-        return this.apiVersion;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -200,6 +191,42 @@ public final class ServiceFabricManagementClientImpl implements ServiceFabricMan
         return this.services;
     }
 
+    /** The ManagedClustersClient object to access its operations. */
+    private final ManagedClustersClient managedClusters;
+
+    /**
+     * Gets the ManagedClustersClient object to access its operations.
+     *
+     * @return the ManagedClustersClient object.
+     */
+    public ManagedClustersClient getManagedClusters() {
+        return this.managedClusters;
+    }
+
+    /** The ManagedClusterVersionsClient object to access its operations. */
+    private final ManagedClusterVersionsClient managedClusterVersions;
+
+    /**
+     * Gets the ManagedClusterVersionsClient object to access its operations.
+     *
+     * @return the ManagedClusterVersionsClient object.
+     */
+    public ManagedClusterVersionsClient getManagedClusterVersions() {
+        return this.managedClusterVersions;
+    }
+
+    /** The NodeTypesClient object to access its operations. */
+    private final NodeTypesClient nodeTypes;
+
+    /**
+     * Gets the NodeTypesClient object to access its operations.
+     *
+     * @return the NodeTypesClient object.
+     */
+    public NodeTypesClient getNodeTypes() {
+        return this.nodeTypes;
+    }
+
     /**
      * Initializes an instance of ServiceFabricManagementClient client.
      *
@@ -222,7 +249,6 @@ public final class ServiceFabricManagementClientImpl implements ServiceFabricMan
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2019-03-01";
         this.clusters = new ClustersClientImpl(this);
         this.clusterVersions = new ClusterVersionsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
@@ -230,6 +256,9 @@ public final class ServiceFabricManagementClientImpl implements ServiceFabricMan
         this.applicationTypeVersions = new ApplicationTypeVersionsClientImpl(this);
         this.applications = new ApplicationsClientImpl(this);
         this.services = new ServicesClientImpl(this);
+        this.managedClusters = new ManagedClustersClientImpl(this);
+        this.managedClusterVersions = new ManagedClusterVersionsClientImpl(this);
+        this.nodeTypes = new NodeTypesClientImpl(this);
     }
 
     /**

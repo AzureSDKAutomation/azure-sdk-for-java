@@ -87,6 +87,10 @@ public final class ServiceResourceImpl implements ServiceResource, ServiceResour
         return this.innerModel().servicePackageActivationMode();
     }
 
+    public String serviceDnsName() {
+        return this.innerModel().serviceDnsName();
+    }
+
     public String location() {
         return this.innerModel().location();
     }
@@ -301,6 +305,11 @@ public final class ServiceResourceImpl implements ServiceResource, ServiceResour
     public ServiceResourceImpl withServicePackageActivationMode(
         ArmServicePackageActivationMode servicePackageActivationMode) {
         this.innerModel().withServicePackageActivationMode(servicePackageActivationMode);
+        return this;
+    }
+
+    public ServiceResourceImpl withServiceDnsName(String serviceDnsName) {
+        this.innerModel().withServiceDnsName(serviceDnsName);
         return this;
     }
 

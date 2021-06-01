@@ -26,6 +26,9 @@ import com.azure.resourcemanager.servicefabric.implementation.ApplicationTypesIm
 import com.azure.resourcemanager.servicefabric.implementation.ApplicationsImpl;
 import com.azure.resourcemanager.servicefabric.implementation.ClusterVersionsImpl;
 import com.azure.resourcemanager.servicefabric.implementation.ClustersImpl;
+import com.azure.resourcemanager.servicefabric.implementation.ManagedClusterVersionsImpl;
+import com.azure.resourcemanager.servicefabric.implementation.ManagedClustersImpl;
+import com.azure.resourcemanager.servicefabric.implementation.NodeTypesImpl;
 import com.azure.resourcemanager.servicefabric.implementation.OperationsImpl;
 import com.azure.resourcemanager.servicefabric.implementation.ServiceFabricManagementClientBuilder;
 import com.azure.resourcemanager.servicefabric.implementation.ServicesImpl;
@@ -34,6 +37,9 @@ import com.azure.resourcemanager.servicefabric.models.ApplicationTypes;
 import com.azure.resourcemanager.servicefabric.models.Applications;
 import com.azure.resourcemanager.servicefabric.models.ClusterVersions;
 import com.azure.resourcemanager.servicefabric.models.Clusters;
+import com.azure.resourcemanager.servicefabric.models.ManagedClusterVersions;
+import com.azure.resourcemanager.servicefabric.models.ManagedClusters;
+import com.azure.resourcemanager.servicefabric.models.NodeTypes;
 import com.azure.resourcemanager.servicefabric.models.Operations;
 import com.azure.resourcemanager.servicefabric.models.Services;
 import java.time.Duration;
@@ -57,6 +63,12 @@ public final class ServiceFabricManager {
     private Applications applications;
 
     private Services services;
+
+    private ManagedClusters managedClusters;
+
+    private ManagedClusterVersions managedClusterVersions;
+
+    private NodeTypes nodeTypes;
 
     private final ServiceFabricManagementClient clientObject;
 
@@ -276,6 +288,31 @@ public final class ServiceFabricManager {
             this.services = new ServicesImpl(clientObject.getServices(), this);
         }
         return services;
+    }
+
+    /** @return Resource collection API of ManagedClusters. */
+    public ManagedClusters managedClusters() {
+        if (this.managedClusters == null) {
+            this.managedClusters = new ManagedClustersImpl(clientObject.getManagedClusters(), this);
+        }
+        return managedClusters;
+    }
+
+    /** @return Resource collection API of ManagedClusterVersions. */
+    public ManagedClusterVersions managedClusterVersions() {
+        if (this.managedClusterVersions == null) {
+            this.managedClusterVersions =
+                new ManagedClusterVersionsImpl(clientObject.getManagedClusterVersions(), this);
+        }
+        return managedClusterVersions;
+    }
+
+    /** @return Resource collection API of NodeTypes. */
+    public NodeTypes nodeTypes() {
+        if (this.nodeTypes == null) {
+            this.nodeTypes = new NodeTypesImpl(clientObject.getNodeTypes(), this);
+        }
+        return nodeTypes;
     }
 
     /**

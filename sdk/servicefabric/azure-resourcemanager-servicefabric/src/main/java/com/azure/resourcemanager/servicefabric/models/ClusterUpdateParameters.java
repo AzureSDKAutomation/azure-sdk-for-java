@@ -133,6 +133,12 @@ public class ClusterUpdateParameters {
     @JsonProperty(value = "properties.upgradeMode")
     private UpgradeMode upgradeMode;
 
+    /*
+     * The policy used to clean up unused versions.
+     */
+    @JsonProperty(value = "properties.applicationTypeVersionsCleanupPolicy")
+    private ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy;
+
     /**
      * Get the tags property: Cluster update parameters.
      *
@@ -458,6 +464,27 @@ public class ClusterUpdateParameters {
     }
 
     /**
+     * Get the applicationTypeVersionsCleanupPolicy property: The policy used to clean up unused versions.
+     *
+     * @return the applicationTypeVersionsCleanupPolicy value.
+     */
+    public ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy() {
+        return this.applicationTypeVersionsCleanupPolicy;
+    }
+
+    /**
+     * Set the applicationTypeVersionsCleanupPolicy property: The policy used to clean up unused versions.
+     *
+     * @param applicationTypeVersionsCleanupPolicy the applicationTypeVersionsCleanupPolicy value to set.
+     * @return the ClusterUpdateParameters object itself.
+     */
+    public ClusterUpdateParameters withApplicationTypeVersionsCleanupPolicy(
+        ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy) {
+        this.applicationTypeVersionsCleanupPolicy = applicationTypeVersionsCleanupPolicy;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -486,6 +513,9 @@ public class ClusterUpdateParameters {
         }
         if (upgradeDescription() != null) {
             upgradeDescription().validate();
+        }
+        if (applicationTypeVersionsCleanupPolicy() != null) {
+            applicationTypeVersionsCleanupPolicy().validate();
         }
     }
 }

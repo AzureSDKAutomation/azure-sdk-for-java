@@ -8,6 +8,7 @@ import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.servicefabric.fluent.models.ClusterInner;
 import com.azure.resourcemanager.servicefabric.models.AddOnFeatures;
+import com.azure.resourcemanager.servicefabric.models.ApplicationTypeVersionsCleanupPolicy;
 import com.azure.resourcemanager.servicefabric.models.AzureActiveDirectory;
 import com.azure.resourcemanager.servicefabric.models.CertificateDescription;
 import com.azure.resourcemanager.servicefabric.models.ClientCertificateCommonName;
@@ -174,6 +175,10 @@ public final class ClusterImpl implements Cluster, Cluster.Definition, Cluster.U
 
     public UpgradeMode upgradeMode() {
         return this.innerModel().upgradeMode();
+    }
+
+    public ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy() {
+        return this.innerModel().applicationTypeVersionsCleanupPolicy();
     }
 
     public String vmImage() {
@@ -455,6 +460,17 @@ public final class ClusterImpl implements Cluster, Cluster.Definition, Cluster.U
             return this;
         } else {
             this.updateParameters.withUpgradeMode(upgradeMode);
+            return this;
+        }
+    }
+
+    public ClusterImpl withApplicationTypeVersionsCleanupPolicy(
+        ApplicationTypeVersionsCleanupPolicy applicationTypeVersionsCleanupPolicy) {
+        if (isInCreateMode()) {
+            this.innerModel().withApplicationTypeVersionsCleanupPolicy(applicationTypeVersionsCleanupPolicy);
+            return this;
+        } else {
+            this.updateParameters.withApplicationTypeVersionsCleanupPolicy(applicationTypeVersionsCleanupPolicy);
             return this;
         }
     }
