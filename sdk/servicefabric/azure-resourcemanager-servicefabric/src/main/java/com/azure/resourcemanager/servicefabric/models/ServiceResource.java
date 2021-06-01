@@ -103,6 +103,14 @@ public interface ServiceResource {
     ArmServicePackageActivationMode servicePackageActivationMode();
 
     /**
+     * Gets the serviceDnsName property: Dns name used for the service. If this is specified, then the service can be
+     * accessed via its DNS name instead of service name.
+     *
+     * @return the serviceDnsName value.
+     */
+    String serviceDnsName();
+
+    /**
      * Gets the location property: It will be deprecated in New API, resource location depends on the parent resource.
      *
      * @return the location value.
@@ -179,7 +187,8 @@ public interface ServiceResource {
                 DefinitionStages.WithDefaultMoveCost,
                 DefinitionStages.WithServiceTypeName,
                 DefinitionStages.WithPartitionDescription,
-                DefinitionStages.WithServicePackageActivationMode {
+                DefinitionStages.WithServicePackageActivationMode,
+                DefinitionStages.WithServiceDnsName {
             /**
              * Executes the create request.
              *
@@ -312,6 +321,18 @@ public interface ServiceResource {
              * @return the next definition stage.
              */
             WithCreate withServicePackageActivationMode(ArmServicePackageActivationMode servicePackageActivationMode);
+        }
+        /** The stage of the ServiceResource definition allowing to specify serviceDnsName. */
+        interface WithServiceDnsName {
+            /**
+             * Specifies the serviceDnsName property: Dns name used for the service. If this is specified, then the
+             * service can be accessed via its DNS name instead of service name..
+             *
+             * @param serviceDnsName Dns name used for the service. If this is specified, then the service can be
+             *     accessed via its DNS name instead of service name.
+             * @return the next definition stage.
+             */
+            WithCreate withServiceDnsName(String serviceDnsName);
         }
     }
     /**
