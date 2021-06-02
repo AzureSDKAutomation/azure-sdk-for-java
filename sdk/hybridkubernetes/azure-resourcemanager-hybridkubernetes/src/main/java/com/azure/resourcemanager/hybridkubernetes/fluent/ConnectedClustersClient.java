@@ -12,7 +12,9 @@ import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.hybridkubernetes.fluent.models.ConnectedClusterInner;
+import com.azure.resourcemanager.hybridkubernetes.fluent.models.CredentialResultsInner;
 import com.azure.resourcemanager.hybridkubernetes.models.ConnectedClusterPatch;
+import com.azure.resourcemanager.hybridkubernetes.models.ListClusterUserCredentialsProperties;
 
 /** An instance of this class provides access to all the operations defined in ConnectedClustersClient. */
 public interface ConnectedClustersClient {
@@ -189,6 +191,37 @@ public interface ConnectedClustersClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     void delete(String resourceGroupName, String clusterName, Context context);
+
+    /**
+     * Gets cluster user credentials of the connected cluster with a specified resource group and name.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterName The name of the Kubernetes cluster on which get is called.
+     * @param properties ListClusterUserCredentials properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return cluster user credentials of the connected cluster with a specified resource group and name.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    CredentialResultsInner listClusterUserCredentials(
+        String resourceGroupName, String clusterName, ListClusterUserCredentialsProperties properties);
+
+    /**
+     * Gets cluster user credentials of the connected cluster with a specified resource group and name.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterName The name of the Kubernetes cluster on which get is called.
+     * @param properties ListClusterUserCredentials properties.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return cluster user credentials of the connected cluster with a specified resource group and name.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<CredentialResultsInner> listClusterUserCredentialsWithResponse(
+        String resourceGroupName, String clusterName, ListClusterUserCredentialsProperties properties, Context context);
 
     /**
      * API to enumerate registered connected K8s clusters under a Resource Group.
