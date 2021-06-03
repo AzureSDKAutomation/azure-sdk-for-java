@@ -7,7 +7,9 @@ package com.azure.resourcemanager.postgresql.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.ProxyResource;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.postgresql.models.ConfigurationDataType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,6 +18,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public class ConfigurationInner extends ProxyResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ConfigurationInner.class);
+
+    /*
+     * The system metadata relating to this resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * Value of the configuration.
@@ -39,7 +47,7 @@ public class ConfigurationInner extends ProxyResource {
      * Data type of the configuration.
      */
     @JsonProperty(value = "properties.dataType", access = JsonProperty.Access.WRITE_ONLY)
-    private String dataType;
+    private ConfigurationDataType dataType;
 
     /*
      * Allowed values of the configuration.
@@ -52,6 +60,15 @@ public class ConfigurationInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.source")
     private String source;
+
+    /**
+     * Get the systemData property: The system metadata relating to this resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the value property: Value of the configuration.
@@ -96,7 +113,7 @@ public class ConfigurationInner extends ProxyResource {
      *
      * @return the dataType value.
      */
-    public String dataType() {
+    public ConfigurationDataType dataType() {
         return this.dataType;
     }
 
