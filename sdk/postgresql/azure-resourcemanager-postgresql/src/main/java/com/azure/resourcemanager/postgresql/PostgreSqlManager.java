@@ -25,39 +25,21 @@ import com.azure.resourcemanager.postgresql.implementation.CheckNameAvailabiliti
 import com.azure.resourcemanager.postgresql.implementation.ConfigurationsImpl;
 import com.azure.resourcemanager.postgresql.implementation.DatabasesImpl;
 import com.azure.resourcemanager.postgresql.implementation.FirewallRulesImpl;
-import com.azure.resourcemanager.postgresql.implementation.LocationBasedPerformanceTiersImpl;
-import com.azure.resourcemanager.postgresql.implementation.LogFilesImpl;
+import com.azure.resourcemanager.postgresql.implementation.GetPrivateDnsZoneSuffixesImpl;
+import com.azure.resourcemanager.postgresql.implementation.LocationBasedCapabilitiesImpl;
 import com.azure.resourcemanager.postgresql.implementation.OperationsImpl;
 import com.azure.resourcemanager.postgresql.implementation.PostgreSqlManagementClientBuilder;
-import com.azure.resourcemanager.postgresql.implementation.PrivateEndpointConnectionsImpl;
-import com.azure.resourcemanager.postgresql.implementation.PrivateLinkResourcesImpl;
-import com.azure.resourcemanager.postgresql.implementation.RecoverableServersImpl;
-import com.azure.resourcemanager.postgresql.implementation.ReplicasImpl;
-import com.azure.resourcemanager.postgresql.implementation.ServerAdministratorsImpl;
-import com.azure.resourcemanager.postgresql.implementation.ServerBasedPerformanceTiersImpl;
-import com.azure.resourcemanager.postgresql.implementation.ServerKeysImpl;
-import com.azure.resourcemanager.postgresql.implementation.ServerParametersImpl;
-import com.azure.resourcemanager.postgresql.implementation.ServerSecurityAlertPoliciesImpl;
 import com.azure.resourcemanager.postgresql.implementation.ServersImpl;
-import com.azure.resourcemanager.postgresql.implementation.VirtualNetworkRulesImpl;
+import com.azure.resourcemanager.postgresql.implementation.VirtualNetworkSubnetUsagesImpl;
 import com.azure.resourcemanager.postgresql.models.CheckNameAvailabilities;
 import com.azure.resourcemanager.postgresql.models.Configurations;
 import com.azure.resourcemanager.postgresql.models.Databases;
 import com.azure.resourcemanager.postgresql.models.FirewallRules;
-import com.azure.resourcemanager.postgresql.models.LocationBasedPerformanceTiers;
-import com.azure.resourcemanager.postgresql.models.LogFiles;
+import com.azure.resourcemanager.postgresql.models.GetPrivateDnsZoneSuffixes;
+import com.azure.resourcemanager.postgresql.models.LocationBasedCapabilities;
 import com.azure.resourcemanager.postgresql.models.Operations;
-import com.azure.resourcemanager.postgresql.models.PrivateEndpointConnections;
-import com.azure.resourcemanager.postgresql.models.PrivateLinkResources;
-import com.azure.resourcemanager.postgresql.models.RecoverableServers;
-import com.azure.resourcemanager.postgresql.models.Replicas;
-import com.azure.resourcemanager.postgresql.models.ServerAdministrators;
-import com.azure.resourcemanager.postgresql.models.ServerBasedPerformanceTiers;
-import com.azure.resourcemanager.postgresql.models.ServerKeys;
-import com.azure.resourcemanager.postgresql.models.ServerParameters;
-import com.azure.resourcemanager.postgresql.models.ServerSecurityAlertPolicies;
 import com.azure.resourcemanager.postgresql.models.Servers;
-import com.azure.resourcemanager.postgresql.models.VirtualNetworkRules;
+import com.azure.resourcemanager.postgresql.models.VirtualNetworkSubnetUsages;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -72,39 +54,21 @@ import java.util.Objects;
 public final class PostgreSqlManager {
     private Servers servers;
 
-    private Replicas replicas;
-
     private FirewallRules firewallRules;
-
-    private VirtualNetworkRules virtualNetworkRules;
-
-    private Databases databases;
 
     private Configurations configurations;
 
-    private ServerParameters serverParameters;
-
-    private LogFiles logFiles;
-
-    private ServerAdministrators serverAdministrators;
-
-    private RecoverableServers recoverableServers;
-
-    private ServerBasedPerformanceTiers serverBasedPerformanceTiers;
-
-    private LocationBasedPerformanceTiers locationBasedPerformanceTiers;
-
     private CheckNameAvailabilities checkNameAvailabilities;
+
+    private LocationBasedCapabilities locationBasedCapabilities;
+
+    private VirtualNetworkSubnetUsages virtualNetworkSubnetUsages;
 
     private Operations operations;
 
-    private ServerSecurityAlertPolicies serverSecurityAlertPolicies;
+    private Databases databases;
 
-    private PrivateEndpointConnections privateEndpointConnections;
-
-    private PrivateLinkResources privateLinkResources;
-
-    private ServerKeys serverKeys;
+    private GetPrivateDnsZoneSuffixes getPrivateDnsZoneSuffixes;
 
     private final PostgreSqlManagementClient clientObject;
 
@@ -230,7 +194,7 @@ public final class PostgreSqlManager {
                 .append("-")
                 .append("com.azure.resourcemanager.postgresql")
                 .append("/")
-                .append("1.0.0");
+                .append("1.0.0-beta.1");
             if (!Configuration.getGlobalConfiguration().get("AZURE_TELEMETRY_DISABLED", false)) {
                 userAgentBuilder
                     .append(" (")
@@ -277,14 +241,6 @@ public final class PostgreSqlManager {
         return servers;
     }
 
-    /** @return Resource collection API of Replicas. */
-    public Replicas replicas() {
-        if (this.replicas == null) {
-            this.replicas = new ReplicasImpl(clientObject.getReplicas(), this);
-        }
-        return replicas;
-    }
-
     /** @return Resource collection API of FirewallRules. */
     public FirewallRules firewallRules() {
         if (this.firewallRules == null) {
@@ -293,78 +249,12 @@ public final class PostgreSqlManager {
         return firewallRules;
     }
 
-    /** @return Resource collection API of VirtualNetworkRules. */
-    public VirtualNetworkRules virtualNetworkRules() {
-        if (this.virtualNetworkRules == null) {
-            this.virtualNetworkRules = new VirtualNetworkRulesImpl(clientObject.getVirtualNetworkRules(), this);
-        }
-        return virtualNetworkRules;
-    }
-
-    /** @return Resource collection API of Databases. */
-    public Databases databases() {
-        if (this.databases == null) {
-            this.databases = new DatabasesImpl(clientObject.getDatabases(), this);
-        }
-        return databases;
-    }
-
     /** @return Resource collection API of Configurations. */
     public Configurations configurations() {
         if (this.configurations == null) {
             this.configurations = new ConfigurationsImpl(clientObject.getConfigurations(), this);
         }
         return configurations;
-    }
-
-    /** @return Resource collection API of ServerParameters. */
-    public ServerParameters serverParameters() {
-        if (this.serverParameters == null) {
-            this.serverParameters = new ServerParametersImpl(clientObject.getServerParameters(), this);
-        }
-        return serverParameters;
-    }
-
-    /** @return Resource collection API of LogFiles. */
-    public LogFiles logFiles() {
-        if (this.logFiles == null) {
-            this.logFiles = new LogFilesImpl(clientObject.getLogFiles(), this);
-        }
-        return logFiles;
-    }
-
-    /** @return Resource collection API of ServerAdministrators. */
-    public ServerAdministrators serverAdministrators() {
-        if (this.serverAdministrators == null) {
-            this.serverAdministrators = new ServerAdministratorsImpl(clientObject.getServerAdministrators(), this);
-        }
-        return serverAdministrators;
-    }
-
-    /** @return Resource collection API of RecoverableServers. */
-    public RecoverableServers recoverableServers() {
-        if (this.recoverableServers == null) {
-            this.recoverableServers = new RecoverableServersImpl(clientObject.getRecoverableServers(), this);
-        }
-        return recoverableServers;
-    }
-
-    /** @return Resource collection API of ServerBasedPerformanceTiers. */
-    public ServerBasedPerformanceTiers serverBasedPerformanceTiers() {
-        if (this.serverBasedPerformanceTiers == null) {
-            this.serverBasedPerformanceTiers =
-                new ServerBasedPerformanceTiersImpl(clientObject.getServerBasedPerformanceTiers(), this);
-        }
-        return serverBasedPerformanceTiers;
-    }
-
-    /** @return Resource collection API of LocationBasedPerformanceTiers. */
-    public LocationBasedPerformanceTiers locationBasedPerformanceTiers() {
-        if (this.locationBasedPerformanceTiers == null) {
-            this.locationBasedPerformanceTiers =
-                new LocationBasedPerformanceTiersImpl(clientObject.getLocationBasedPerformanceTiers(), this);
-        }
-        return locationBasedPerformanceTiers;
     }
 
     /** @return Resource collection API of CheckNameAvailabilities. */
@@ -376,6 +266,24 @@ public final class PostgreSqlManager {
         return checkNameAvailabilities;
     }
 
+    /** @return Resource collection API of LocationBasedCapabilities. */
+    public LocationBasedCapabilities locationBasedCapabilities() {
+        if (this.locationBasedCapabilities == null) {
+            this.locationBasedCapabilities =
+                new LocationBasedCapabilitiesImpl(clientObject.getLocationBasedCapabilities(), this);
+        }
+        return locationBasedCapabilities;
+    }
+
+    /** @return Resource collection API of VirtualNetworkSubnetUsages. */
+    public VirtualNetworkSubnetUsages virtualNetworkSubnetUsages() {
+        if (this.virtualNetworkSubnetUsages == null) {
+            this.virtualNetworkSubnetUsages =
+                new VirtualNetworkSubnetUsagesImpl(clientObject.getVirtualNetworkSubnetUsages(), this);
+        }
+        return virtualNetworkSubnetUsages;
+    }
+
     /** @return Resource collection API of Operations. */
     public Operations operations() {
         if (this.operations == null) {
@@ -384,38 +292,21 @@ public final class PostgreSqlManager {
         return operations;
     }
 
-    /** @return Resource collection API of ServerSecurityAlertPolicies. */
-    public ServerSecurityAlertPolicies serverSecurityAlertPolicies() {
-        if (this.serverSecurityAlertPolicies == null) {
-            this.serverSecurityAlertPolicies =
-                new ServerSecurityAlertPoliciesImpl(clientObject.getServerSecurityAlertPolicies(), this);
+    /** @return Resource collection API of Databases. */
+    public Databases databases() {
+        if (this.databases == null) {
+            this.databases = new DatabasesImpl(clientObject.getDatabases(), this);
         }
-        return serverSecurityAlertPolicies;
+        return databases;
     }
 
-    /** @return Resource collection API of PrivateEndpointConnections. */
-    public PrivateEndpointConnections privateEndpointConnections() {
-        if (this.privateEndpointConnections == null) {
-            this.privateEndpointConnections =
-                new PrivateEndpointConnectionsImpl(clientObject.getPrivateEndpointConnections(), this);
+    /** @return Resource collection API of GetPrivateDnsZoneSuffixes. */
+    public GetPrivateDnsZoneSuffixes getPrivateDnsZoneSuffixes() {
+        if (this.getPrivateDnsZoneSuffixes == null) {
+            this.getPrivateDnsZoneSuffixes =
+                new GetPrivateDnsZoneSuffixesImpl(clientObject.getGetPrivateDnsZoneSuffixes(), this);
         }
-        return privateEndpointConnections;
-    }
-
-    /** @return Resource collection API of PrivateLinkResources. */
-    public PrivateLinkResources privateLinkResources() {
-        if (this.privateLinkResources == null) {
-            this.privateLinkResources = new PrivateLinkResourcesImpl(clientObject.getPrivateLinkResources(), this);
-        }
-        return privateLinkResources;
-    }
-
-    /** @return Resource collection API of ServerKeys. */
-    public ServerKeys serverKeys() {
-        if (this.serverKeys == null) {
-            this.serverKeys = new ServerKeysImpl(clientObject.getServerKeys(), this);
-        }
-        return serverKeys;
+        return getPrivateDnsZoneSuffixes;
     }
 
     /**

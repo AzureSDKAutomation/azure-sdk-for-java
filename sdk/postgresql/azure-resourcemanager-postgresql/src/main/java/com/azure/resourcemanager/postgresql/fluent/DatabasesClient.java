@@ -28,7 +28,7 @@ public interface DatabasesClient {
      * @return represents a Database.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SyncPoller<PollResult<DatabaseInner>, DatabaseInner> beginCreateOrUpdate(
+    SyncPoller<PollResult<DatabaseInner>, DatabaseInner> beginCreate(
         String resourceGroupName, String serverName, String databaseName, DatabaseInner parameters);
 
     /**
@@ -45,7 +45,7 @@ public interface DatabasesClient {
      * @return represents a Database.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SyncPoller<PollResult<DatabaseInner>, DatabaseInner> beginCreateOrUpdate(
+    SyncPoller<PollResult<DatabaseInner>, DatabaseInner> beginCreate(
         String resourceGroupName, String serverName, String databaseName, DatabaseInner parameters, Context context);
 
     /**
@@ -61,8 +61,7 @@ public interface DatabasesClient {
      * @return represents a Database.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    DatabaseInner createOrUpdate(
-        String resourceGroupName, String serverName, String databaseName, DatabaseInner parameters);
+    DatabaseInner create(String resourceGroupName, String serverName, String databaseName, DatabaseInner parameters);
 
     /**
      * Creates a new database or updates an existing database.
@@ -78,7 +77,7 @@ public interface DatabasesClient {
      * @return represents a Database.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    DatabaseInner createOrUpdate(
+    DatabaseInner create(
         String resourceGroupName, String serverName, String databaseName, DatabaseInner parameters, Context context);
 
     /**

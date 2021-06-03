@@ -11,8 +11,8 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.PathParam;
-import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -33,7 +33,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.postgresql.fluent.ConfigurationsClient;
 import com.azure.resourcemanager.postgresql.fluent.models.ConfigurationInner;
-import com.azure.resourcemanager.postgresql.fluent.models.ConfigurationListResultInner;
+import com.azure.resourcemanager.postgresql.models.ConfigurationListResult;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -67,26 +67,24 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
     @ServiceInterface(name = "PostgreSqlManagement")
     private interface ConfigurationsService {
         @Headers({"Content-Type: application/json"})
-        @Put(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSQL"
-                + "/servers/{serverName}/configurations/{configurationName}")
-        @ExpectedResponses({200, 202})
+        @Get(
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql"
+                + "/flexibleServers/{serverName}/configurations")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> createOrUpdate(
+        Mono<Response<ConfigurationListResult>> listByServer(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("serverName") String serverName,
-            @PathParam("configurationName") String configurationName,
-            @BodyParam("application/json") ConfigurationInner parameters,
             @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSQL"
-                + "/servers/{serverName}/configurations/{configurationName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql"
+                + "/flexibleServers/{serverName}/configurations/{configurationName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ConfigurationInner>> get(
@@ -100,36 +98,46 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
             Context context);
 
         @Headers({"Content-Type: application/json"})
-        @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSQL"
-                + "/servers/{serverName}/configurations")
-        @ExpectedResponses({200})
+        @Patch(
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql"
+                + "/flexibleServers/{serverName}/configurations/{configurationName}")
+        @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<ConfigurationListResultInner>> listByServer(
+        Mono<Response<Flux<ByteBuffer>>> update(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("serverName") String serverName,
+            @PathParam("configurationName") String configurationName,
+            @BodyParam("application/json") ConfigurationInner parameters,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<ConfigurationListResult>> listByServerNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
             @HeaderParam("Accept") String accept,
             Context context);
     }
 
     /**
-     * Updates a configuration of a server.
+     * List all the configurations in a given server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
+     * @return a list of server configurations.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(
-        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
+    private Mono<PagedResponse<ConfigurationInner>> listByServerSinglePageAsync(
+        String resourceGroupName, String serverName) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -149,54 +157,45 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
         if (serverName == null) {
             return Mono.error(new IllegalArgumentException("Parameter serverName is required and cannot be null."));
         }
-        if (configurationName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter configurationName is required and cannot be null."));
-        }
-        if (parameters == null) {
-            return Mono.error(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
-        } else {
-            parameters.validate();
-        }
-        final String apiVersion = "2017-12-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
-                        .createOrUpdate(
+                        .listByServer(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             serverName,
-                            configurationName,
-                            parameters,
                             accept,
                             context))
+            .<PagedResponse<ConfigurationInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().nextLink(),
+                        null))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
-     * Updates a configuration of a server.
+     * List all the configurations in a given server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
+     * @return a list of server configurations.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(
-        String resourceGroupName,
-        String serverName,
-        String configurationName,
-        ConfigurationInner parameters,
-        Context context) {
+    private Mono<PagedResponse<ConfigurationInner>> listByServerSinglePageAsync(
+        String resourceGroupName, String serverName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -216,209 +215,94 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
         if (serverName == null) {
             return Mono.error(new IllegalArgumentException("Parameter serverName is required and cannot be null."));
         }
-        if (configurationName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter configurationName is required and cannot be null."));
-        }
-        if (parameters == null) {
-            return Mono.error(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
-        } else {
-            parameters.validate();
-        }
-        final String apiVersion = "2017-12-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .createOrUpdate(
+            .listByServer(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 serverName,
-                configurationName,
-                parameters,
                 accept,
-                context);
+                context)
+            .map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().nextLink(),
+                        null));
     }
 
     /**
-     * Updates a configuration of a server.
+     * List all the configurations in a given server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
+     * @return a list of server configurations.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private PollerFlux<PollResult<ConfigurationInner>, ConfigurationInner> beginCreateOrUpdateAsync(
-        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
-        Mono<Response<Flux<ByteBuffer>>> mono =
-            createOrUpdateWithResponseAsync(resourceGroupName, serverName, configurationName, parameters);
-        return this
-            .client
-            .<ConfigurationInner, ConfigurationInner>getLroResult(
-                mono, this.client.getHttpPipeline(), ConfigurationInner.class, ConfigurationInner.class, Context.NONE);
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    private PagedFlux<ConfigurationInner> listByServerAsync(String resourceGroupName, String serverName) {
+        return new PagedFlux<>(
+            () -> listByServerSinglePageAsync(resourceGroupName, serverName),
+            nextLink -> listByServerNextSinglePageAsync(nextLink));
     }
 
     /**
-     * Updates a configuration of a server.
+     * List all the configurations in a given server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
+     * @return a list of server configurations.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private PollerFlux<PollResult<ConfigurationInner>, ConfigurationInner> beginCreateOrUpdateAsync(
-        String resourceGroupName,
-        String serverName,
-        String configurationName,
-        ConfigurationInner parameters,
-        Context context) {
-        context = this.client.mergeContext(context);
-        Mono<Response<Flux<ByteBuffer>>> mono =
-            createOrUpdateWithResponseAsync(resourceGroupName, serverName, configurationName, parameters, context);
-        return this
-            .client
-            .<ConfigurationInner, ConfigurationInner>getLroResult(
-                mono, this.client.getHttpPipeline(), ConfigurationInner.class, ConfigurationInner.class, context);
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    private PagedFlux<ConfigurationInner> listByServerAsync(
+        String resourceGroupName, String serverName, Context context) {
+        return new PagedFlux<>(
+            () -> listByServerSinglePageAsync(resourceGroupName, serverName, context),
+            nextLink -> listByServerNextSinglePageAsync(nextLink, context));
     }
 
     /**
-     * Updates a configuration of a server.
+     * List all the configurations in a given server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
+     * @return a list of server configurations.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SyncPoller<PollResult<ConfigurationInner>, ConfigurationInner> beginCreateOrUpdate(
-        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
-        return beginCreateOrUpdateAsync(resourceGroupName, serverName, configurationName, parameters).getSyncPoller();
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<ConfigurationInner> listByServer(String resourceGroupName, String serverName) {
+        return new PagedIterable<>(listByServerAsync(resourceGroupName, serverName));
     }
 
     /**
-     * Updates a configuration of a server.
+     * List all the configurations in a given server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
+     * @return a list of server configurations.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SyncPoller<PollResult<ConfigurationInner>, ConfigurationInner> beginCreateOrUpdate(
-        String resourceGroupName,
-        String serverName,
-        String configurationName,
-        ConfigurationInner parameters,
-        Context context) {
-        return beginCreateOrUpdateAsync(resourceGroupName, serverName, configurationName, parameters, context)
-            .getSyncPoller();
-    }
-
-    /**
-     * Updates a configuration of a server.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<ConfigurationInner> createOrUpdateAsync(
-        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
-        return beginCreateOrUpdateAsync(resourceGroupName, serverName, configurationName, parameters)
-            .last()
-            .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Updates a configuration of a server.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<ConfigurationInner> createOrUpdateAsync(
-        String resourceGroupName,
-        String serverName,
-        String configurationName,
-        ConfigurationInner parameters,
-        Context context) {
-        return beginCreateOrUpdateAsync(resourceGroupName, serverName, configurationName, parameters, context)
-            .last()
-            .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Updates a configuration of a server.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ConfigurationInner createOrUpdate(
-        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
-        return createOrUpdateAsync(resourceGroupName, serverName, configurationName, parameters).block();
-    }
-
-    /**
-     * Updates a configuration of a server.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param serverName The name of the server.
-     * @param configurationName The name of the server configuration.
-     * @param parameters The required parameters for updating a server configuration.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return represents a Configuration.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ConfigurationInner createOrUpdate(
-        String resourceGroupName,
-        String serverName,
-        String configurationName,
-        ConfigurationInner parameters,
-        Context context) {
-        return createOrUpdateAsync(resourceGroupName, serverName, configurationName, parameters, context).block();
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<ConfigurationInner> listByServer(
+        String resourceGroupName, String serverName, Context context) {
+        return new PagedIterable<>(listByServerAsync(resourceGroupName, serverName, context));
     }
 
     /**
@@ -458,7 +342,6 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter configurationName is required and cannot be null."));
         }
-        final String apiVersion = "2017-12-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -466,7 +349,7 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
                     service
                         .get(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             serverName,
@@ -514,13 +397,12 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter configurationName is required and cannot be null."));
         }
-        final String apiVersion = "2017-12-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .get(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 serverName,
@@ -588,18 +470,20 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
     }
 
     /**
-     * List all the configurations in a given server.
+     * Updates a configuration of a server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of server configurations.
+     * @return represents a Configuration.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ConfigurationInner>> listByServerSinglePageAsync(
-        String resourceGroupName, String serverName) {
+    private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(
+        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -619,41 +503,53 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
         if (serverName == null) {
             return Mono.error(new IllegalArgumentException("Parameter serverName is required and cannot be null."));
         }
-        final String apiVersion = "2017-12-01";
+        if (configurationName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter configurationName is required and cannot be null."));
+        }
+        if (parameters == null) {
+            return Mono.error(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
+        } else {
+            parameters.validate();
+        }
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
-                        .listByServer(
+                        .update(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             serverName,
+                            configurationName,
+                            parameters,
                             accept,
                             context))
-            .<PagedResponse<ConfigurationInner>>map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(), res.getStatusCode(), res.getHeaders(), res.getValue().value(), null, null))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
-     * List all the configurations in a given server.
+     * Updates a configuration of a server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of server configurations.
+     * @return represents a Configuration.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ConfigurationInner>> listByServerSinglePageAsync(
-        String resourceGroupName, String serverName, Context context) {
+    private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(
+        String resourceGroupName,
+        String serverName,
+        String configurationName,
+        ConfigurationInner parameters,
+        Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -673,85 +569,277 @@ public final class ConfigurationsClientImpl implements ConfigurationsClient {
         if (serverName == null) {
             return Mono.error(new IllegalArgumentException("Parameter serverName is required and cannot be null."));
         }
-        final String apiVersion = "2017-12-01";
+        if (configurationName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter configurationName is required and cannot be null."));
+        }
+        if (parameters == null) {
+            return Mono.error(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
+        } else {
+            parameters.validate();
+        }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByServer(
+            .update(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 serverName,
+                configurationName,
+                parameters,
                 accept,
-                context)
+                context);
+    }
+
+    /**
+     * Updates a configuration of a server.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a Configuration.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<ConfigurationInner>, ConfigurationInner> beginUpdateAsync(
+        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
+        Mono<Response<Flux<ByteBuffer>>> mono =
+            updateWithResponseAsync(resourceGroupName, serverName, configurationName, parameters);
+        return this
+            .client
+            .<ConfigurationInner, ConfigurationInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ConfigurationInner.class, ConfigurationInner.class, Context.NONE);
+    }
+
+    /**
+     * Updates a configuration of a server.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a Configuration.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<ConfigurationInner>, ConfigurationInner> beginUpdateAsync(
+        String resourceGroupName,
+        String serverName,
+        String configurationName,
+        ConfigurationInner parameters,
+        Context context) {
+        context = this.client.mergeContext(context);
+        Mono<Response<Flux<ByteBuffer>>> mono =
+            updateWithResponseAsync(resourceGroupName, serverName, configurationName, parameters, context);
+        return this
+            .client
+            .<ConfigurationInner, ConfigurationInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ConfigurationInner.class, ConfigurationInner.class, context);
+    }
+
+    /**
+     * Updates a configuration of a server.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a Configuration.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<ConfigurationInner>, ConfigurationInner> beginUpdate(
+        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
+        return beginUpdateAsync(resourceGroupName, serverName, configurationName, parameters).getSyncPoller();
+    }
+
+    /**
+     * Updates a configuration of a server.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a Configuration.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<ConfigurationInner>, ConfigurationInner> beginUpdate(
+        String resourceGroupName,
+        String serverName,
+        String configurationName,
+        ConfigurationInner parameters,
+        Context context) {
+        return beginUpdateAsync(resourceGroupName, serverName, configurationName, parameters, context).getSyncPoller();
+    }
+
+    /**
+     * Updates a configuration of a server.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a Configuration.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<ConfigurationInner> updateAsync(
+        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
+        return beginUpdateAsync(resourceGroupName, serverName, configurationName, parameters)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
+    }
+
+    /**
+     * Updates a configuration of a server.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a Configuration.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<ConfigurationInner> updateAsync(
+        String resourceGroupName,
+        String serverName,
+        String configurationName,
+        ConfigurationInner parameters,
+        Context context) {
+        return beginUpdateAsync(resourceGroupName, serverName, configurationName, parameters, context)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
+    }
+
+    /**
+     * Updates a configuration of a server.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a Configuration.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ConfigurationInner update(
+        String resourceGroupName, String serverName, String configurationName, ConfigurationInner parameters) {
+        return updateAsync(resourceGroupName, serverName, configurationName, parameters).block();
+    }
+
+    /**
+     * Updates a configuration of a server.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param serverName The name of the server.
+     * @param configurationName The name of the server configuration.
+     * @param parameters The required parameters for updating a server configuration.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a Configuration.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ConfigurationInner update(
+        String resourceGroupName,
+        String serverName,
+        String configurationName,
+        ConfigurationInner parameters,
+        Context context) {
+        return updateAsync(resourceGroupName, serverName, configurationName, parameters, context).block();
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a list of server configurations.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<ConfigurationInner>> listByServerNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.listByServerNext(nextLink, this.client.getEndpoint(), accept, context))
+            .<PagedResponse<ConfigurationInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().nextLink(),
+                        null))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a list of server configurations.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<ConfigurationInner>> listByServerNextSinglePageAsync(String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listByServerNext(nextLink, this.client.getEndpoint(), accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
-                        res.getRequest(), res.getStatusCode(), res.getHeaders(), res.getValue().value(), null, null));
-    }
-
-    /**
-     * List all the configurations in a given server.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param serverName The name of the server.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of server configurations.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<ConfigurationInner> listByServerAsync(String resourceGroupName, String serverName) {
-        return new PagedFlux<>(() -> listByServerSinglePageAsync(resourceGroupName, serverName));
-    }
-
-    /**
-     * List all the configurations in a given server.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param serverName The name of the server.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of server configurations.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<ConfigurationInner> listByServerAsync(
-        String resourceGroupName, String serverName, Context context) {
-        return new PagedFlux<>(() -> listByServerSinglePageAsync(resourceGroupName, serverName, context));
-    }
-
-    /**
-     * List all the configurations in a given server.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param serverName The name of the server.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of server configurations.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ConfigurationInner> listByServer(String resourceGroupName, String serverName) {
-        return new PagedIterable<>(listByServerAsync(resourceGroupName, serverName));
-    }
-
-    /**
-     * List all the configurations in a given server.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param serverName The name of the server.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of server configurations.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ConfigurationInner> listByServer(
-        String resourceGroupName, String serverName, Context context) {
-        return new PagedIterable<>(listByServerAsync(resourceGroupName, serverName, context));
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().nextLink(),
+                        null));
     }
 }
