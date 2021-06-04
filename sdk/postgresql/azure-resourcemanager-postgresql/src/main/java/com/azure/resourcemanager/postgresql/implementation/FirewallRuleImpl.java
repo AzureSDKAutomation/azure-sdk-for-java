@@ -4,6 +4,7 @@
 
 package com.azure.resourcemanager.postgresql.implementation;
 
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.postgresql.fluent.models.FirewallRuleInner;
 import com.azure.resourcemanager.postgresql.models.FirewallRule;
@@ -23,6 +24,10 @@ public final class FirewallRuleImpl implements FirewallRule, FirewallRule.Defini
 
     public String type() {
         return this.innerModel().type();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public String startIpAddress() {
@@ -47,7 +52,7 @@ public final class FirewallRuleImpl implements FirewallRule, FirewallRule.Defini
 
     private String firewallRuleName;
 
-    public FirewallRuleImpl withExistingServer(String resourceGroupName, String serverName) {
+    public FirewallRuleImpl withExistingFlexibleServer(String resourceGroupName, String serverName) {
         this.resourceGroupName = resourceGroupName;
         this.serverName = serverName;
         return this;
@@ -104,7 +109,7 @@ public final class FirewallRuleImpl implements FirewallRule, FirewallRule.Defini
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
-        this.serverName = Utils.getValueFromIdByName(innerObject.id(), "servers");
+        this.serverName = Utils.getValueFromIdByName(innerObject.id(), "flexibleServers");
         this.firewallRuleName = Utils.getValueFromIdByName(innerObject.id(), "firewallRules");
     }
 

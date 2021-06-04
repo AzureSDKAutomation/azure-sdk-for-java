@@ -4,22 +4,78 @@
 
 package com.azure.resourcemanager.postgresql.models;
 
-import com.azure.resourcemanager.postgresql.fluent.models.ConfigurationListResultInner;
+import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.postgresql.fluent.models.ConfigurationInner;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** An immutable client-side representation of ConfigurationListResult. */
-public interface ConfigurationListResult {
+/** A list of server configurations. */
+@Fluent
+public final class ConfigurationListResult {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ConfigurationListResult.class);
+
+    /*
+     * The list of server configurations.
+     */
+    @JsonProperty(value = "value")
+    private List<ConfigurationInner> value;
+
+    /*
+     * The link used to get the next page of operations.
+     */
+    @JsonProperty(value = "nextLink")
+    private String nextLink;
+
     /**
-     * Gets the value property: The list of server configurations.
+     * Get the value property: The list of server configurations.
      *
      * @return the value value.
      */
-    List<Configuration> value();
+    public List<ConfigurationInner> value() {
+        return this.value;
+    }
 
     /**
-     * Gets the inner com.azure.resourcemanager.postgresql.fluent.models.ConfigurationListResultInner object.
+     * Set the value property: The list of server configurations.
      *
-     * @return the inner object.
+     * @param value the value value to set.
+     * @return the ConfigurationListResult object itself.
      */
-    ConfigurationListResultInner innerModel();
+    public ConfigurationListResult withValue(List<ConfigurationInner> value) {
+        this.value = value;
+        return this;
+    }
+
+    /**
+     * Get the nextLink property: The link used to get the next page of operations.
+     *
+     * @return the nextLink value.
+     */
+    public String nextLink() {
+        return this.nextLink;
+    }
+
+    /**
+     * Set the nextLink property: The link used to get the next page of operations.
+     *
+     * @param nextLink the nextLink value to set.
+     * @return the ConfigurationListResult object itself.
+     */
+    public ConfigurationListResult withNextLink(String nextLink) {
+        this.nextLink = nextLink;
+        return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (value() != null) {
+            value().forEach(e -> e.validate());
+        }
+    }
 }
