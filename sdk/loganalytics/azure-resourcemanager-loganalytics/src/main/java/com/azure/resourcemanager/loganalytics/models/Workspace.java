@@ -133,11 +133,33 @@ public interface Workspace {
     List<PrivateLinkScopedResource> privateLinkScopedResources();
 
     /**
-     * Gets the features property: Workspace features.
+     * Gets the enableDataExport property: Flag that indicate if data should be exported.
      *
-     * @return the features value.
+     * @return the enableDataExport value.
      */
-    Map<String, Object> features();
+    Boolean enableDataExport();
+
+    /**
+     * Gets the immediatePurgeDataOn30Days property: Flag that describes if we want to remove the data after 30 days.
+     *
+     * @return the immediatePurgeDataOn30Days value.
+     */
+    Boolean immediatePurgeDataOn30Days();
+
+    /**
+     * Gets the enableLogAccessUsingOnlyResourcePermissions property: Flag that indicate which permission to use -
+     * resource or workspace or both.
+     *
+     * @return the enableLogAccessUsingOnlyResourcePermissions value.
+     */
+    Boolean enableLogAccessUsingOnlyResourcePermissions();
+
+    /**
+     * Gets the clusterResourceId property: Dedicated LA cluster resourceId that is linked to the workspaces.
+     *
+     * @return the clusterResourceId value.
+     */
+    String clusterResourceId();
 
     /**
      * Gets the region of the resource.
@@ -214,7 +236,10 @@ public interface Workspace {
                 DefinitionStages.WithPublicNetworkAccessForIngestion,
                 DefinitionStages.WithPublicNetworkAccessForQuery,
                 DefinitionStages.WithForceCmkForQuery,
-                DefinitionStages.WithFeatures {
+                DefinitionStages.WithEnableDataExport,
+                DefinitionStages.WithImmediatePurgeDataOn30Days,
+                DefinitionStages.WithEnableLogAccessUsingOnlyResourcePermissions,
+                DefinitionStages.WithClusterResourceId {
             /**
              * Executes the create request.
              *
@@ -325,15 +350,50 @@ public interface Workspace {
              */
             WithCreate withForceCmkForQuery(Boolean forceCmkForQuery);
         }
-        /** The stage of the Workspace definition allowing to specify features. */
-        interface WithFeatures {
+        /** The stage of the Workspace definition allowing to specify enableDataExport. */
+        interface WithEnableDataExport {
             /**
-             * Specifies the features property: Workspace features..
+             * Specifies the enableDataExport property: Flag that indicate if data should be exported..
              *
-             * @param features Workspace features.
+             * @param enableDataExport Flag that indicate if data should be exported.
              * @return the next definition stage.
              */
-            WithCreate withFeatures(Map<String, Object> features);
+            WithCreate withEnableDataExport(Boolean enableDataExport);
+        }
+        /** The stage of the Workspace definition allowing to specify immediatePurgeDataOn30Days. */
+        interface WithImmediatePurgeDataOn30Days {
+            /**
+             * Specifies the immediatePurgeDataOn30Days property: Flag that describes if we want to remove the data
+             * after 30 days..
+             *
+             * @param immediatePurgeDataOn30Days Flag that describes if we want to remove the data after 30 days.
+             * @return the next definition stage.
+             */
+            WithCreate withImmediatePurgeDataOn30Days(Boolean immediatePurgeDataOn30Days);
+        }
+        /** The stage of the Workspace definition allowing to specify enableLogAccessUsingOnlyResourcePermissions. */
+        interface WithEnableLogAccessUsingOnlyResourcePermissions {
+            /**
+             * Specifies the enableLogAccessUsingOnlyResourcePermissions property: Flag that indicate which permission
+             * to use - resource or workspace or both..
+             *
+             * @param enableLogAccessUsingOnlyResourcePermissions Flag that indicate which permission to use - resource
+             *     or workspace or both.
+             * @return the next definition stage.
+             */
+            WithCreate withEnableLogAccessUsingOnlyResourcePermissions(
+                Boolean enableLogAccessUsingOnlyResourcePermissions);
+        }
+        /** The stage of the Workspace definition allowing to specify clusterResourceId. */
+        interface WithClusterResourceId {
+            /**
+             * Specifies the clusterResourceId property: Dedicated LA cluster resourceId that is linked to the
+             * workspaces..
+             *
+             * @param clusterResourceId Dedicated LA cluster resourceId that is linked to the workspaces.
+             * @return the next definition stage.
+             */
+            WithCreate withClusterResourceId(String clusterResourceId);
         }
     }
     /**
@@ -353,7 +413,10 @@ public interface Workspace {
             UpdateStages.WithPublicNetworkAccessForIngestion,
             UpdateStages.WithPublicNetworkAccessForQuery,
             UpdateStages.WithForceCmkForQuery,
-            UpdateStages.WithFeatures {
+            UpdateStages.WithEnableDataExport,
+            UpdateStages.WithImmediatePurgeDataOn30Days,
+            UpdateStages.WithEnableLogAccessUsingOnlyResourcePermissions,
+            UpdateStages.WithClusterResourceId {
         /**
          * Executes the update request.
          *
@@ -456,15 +519,49 @@ public interface Workspace {
              */
             Update withForceCmkForQuery(Boolean forceCmkForQuery);
         }
-        /** The stage of the Workspace update allowing to specify features. */
-        interface WithFeatures {
+        /** The stage of the Workspace update allowing to specify enableDataExport. */
+        interface WithEnableDataExport {
             /**
-             * Specifies the features property: Workspace features..
+             * Specifies the enableDataExport property: Flag that indicate if data should be exported..
              *
-             * @param features Workspace features.
+             * @param enableDataExport Flag that indicate if data should be exported.
              * @return the next definition stage.
              */
-            Update withFeatures(Map<String, Object> features);
+            Update withEnableDataExport(Boolean enableDataExport);
+        }
+        /** The stage of the Workspace update allowing to specify immediatePurgeDataOn30Days. */
+        interface WithImmediatePurgeDataOn30Days {
+            /**
+             * Specifies the immediatePurgeDataOn30Days property: Flag that describes if we want to remove the data
+             * after 30 days..
+             *
+             * @param immediatePurgeDataOn30Days Flag that describes if we want to remove the data after 30 days.
+             * @return the next definition stage.
+             */
+            Update withImmediatePurgeDataOn30Days(Boolean immediatePurgeDataOn30Days);
+        }
+        /** The stage of the Workspace update allowing to specify enableLogAccessUsingOnlyResourcePermissions. */
+        interface WithEnableLogAccessUsingOnlyResourcePermissions {
+            /**
+             * Specifies the enableLogAccessUsingOnlyResourcePermissions property: Flag that indicate which permission
+             * to use - resource or workspace or both..
+             *
+             * @param enableLogAccessUsingOnlyResourcePermissions Flag that indicate which permission to use - resource
+             *     or workspace or both.
+             * @return the next definition stage.
+             */
+            Update withEnableLogAccessUsingOnlyResourcePermissions(Boolean enableLogAccessUsingOnlyResourcePermissions);
+        }
+        /** The stage of the Workspace update allowing to specify clusterResourceId. */
+        interface WithClusterResourceId {
+            /**
+             * Specifies the clusterResourceId property: Dedicated LA cluster resourceId that is linked to the
+             * workspaces..
+             *
+             * @param clusterResourceId Dedicated LA cluster resourceId that is linked to the workspaces.
+             * @return the next definition stage.
+             */
+            Update withClusterResourceId(String clusterResourceId);
         }
     }
     /**
