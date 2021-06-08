@@ -24,7 +24,6 @@ import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.resourcemanager.batchai.fluent.BatchAI;
 import com.azure.resourcemanager.batchai.fluent.ClustersClient;
 import com.azure.resourcemanager.batchai.fluent.ExperimentsClient;
-import com.azure.resourcemanager.batchai.fluent.FileServersClient;
 import com.azure.resourcemanager.batchai.fluent.JobsClient;
 import com.azure.resourcemanager.batchai.fluent.OperationsClient;
 import com.azure.resourcemanager.batchai.fluent.UsagesClient;
@@ -176,18 +175,6 @@ public final class BatchAIImpl implements BatchAI {
         return this.jobs;
     }
 
-    /** The FileServersClient object to access its operations. */
-    private final FileServersClient fileServers;
-
-    /**
-     * Gets the FileServersClient object to access its operations.
-     *
-     * @return the FileServersClient object.
-     */
-    public FileServersClient getFileServers() {
-        return this.fileServers;
-    }
-
     /** The ClustersClient object to access its operations. */
     private final ClustersClient clusters;
 
@@ -228,7 +215,6 @@ public final class BatchAIImpl implements BatchAI {
         this.workspaces = new WorkspacesClientImpl(this);
         this.experiments = new ExperimentsClientImpl(this);
         this.jobs = new JobsClientImpl(this);
-        this.fileServers = new FileServersClientImpl(this);
         this.clusters = new ClustersClientImpl(this);
     }
 
