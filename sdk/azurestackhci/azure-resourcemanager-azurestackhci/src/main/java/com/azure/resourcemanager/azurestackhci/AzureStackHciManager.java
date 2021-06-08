@@ -21,10 +21,14 @@ import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.azurestackhci.fluent.AzureStackHciClient;
+import com.azure.resourcemanager.azurestackhci.implementation.ArcSettingsImpl;
 import com.azure.resourcemanager.azurestackhci.implementation.AzureStackHciClientBuilder;
 import com.azure.resourcemanager.azurestackhci.implementation.ClustersImpl;
+import com.azure.resourcemanager.azurestackhci.implementation.ExtensionsImpl;
 import com.azure.resourcemanager.azurestackhci.implementation.OperationsImpl;
+import com.azure.resourcemanager.azurestackhci.models.ArcSettings;
 import com.azure.resourcemanager.azurestackhci.models.Clusters;
+import com.azure.resourcemanager.azurestackhci.models.Extensions;
 import com.azure.resourcemanager.azurestackhci.models.Operations;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -34,9 +38,13 @@ import java.util.Objects;
 
 /** Entry point to AzureStackHciManager. Azure Stack HCI management service. */
 public final class AzureStackHciManager {
-    private Operations operations;
+    private ArcSettings arcSettings;
 
     private Clusters clusters;
+
+    private Extensions extensions;
+
+    private Operations operations;
 
     private final AzureStackHciClient clientObject;
 
@@ -201,12 +209,12 @@ public final class AzureStackHciManager {
         }
     }
 
-    /** @return Resource collection API of Operations. */
-    public Operations operations() {
-        if (this.operations == null) {
-            this.operations = new OperationsImpl(clientObject.getOperations(), this);
+    /** @return Resource collection API of ArcSettings. */
+    public ArcSettings arcSettings() {
+        if (this.arcSettings == null) {
+            this.arcSettings = new ArcSettingsImpl(clientObject.getArcSettings(), this);
         }
-        return operations;
+        return arcSettings;
     }
 
     /** @return Resource collection API of Clusters. */
@@ -215,6 +223,22 @@ public final class AzureStackHciManager {
             this.clusters = new ClustersImpl(clientObject.getClusters(), this);
         }
         return clusters;
+    }
+
+    /** @return Resource collection API of Extensions. */
+    public Extensions extensions() {
+        if (this.extensions == null) {
+            this.extensions = new ExtensionsImpl(clientObject.getExtensions(), this);
+        }
+        return extensions;
+    }
+
+    /** @return Resource collection API of Operations. */
+    public Operations operations() {
+        if (this.operations == null) {
+            this.operations = new OperationsImpl(clientObject.getOperations(), this);
+        }
+        return operations;
     }
 
     /**
