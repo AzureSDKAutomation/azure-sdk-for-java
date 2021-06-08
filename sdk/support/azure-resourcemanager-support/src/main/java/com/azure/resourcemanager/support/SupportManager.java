@@ -65,11 +65,11 @@ public final class SupportManager {
     }
 
     /**
-     * Creates an instance of Support service API entry point.
+     * Creates an instance of support service API entry point.
      *
      * @param credential the credential to use.
      * @param profile the Azure profile for client.
-     * @return the Support service API instance.
+     * @return the support service API instance.
      */
     public static SupportManager authenticate(TokenCredential credential, AzureProfile profile) {
         Objects.requireNonNull(credential, "'credential' cannot be null.");
@@ -158,11 +158,11 @@ public final class SupportManager {
         }
 
         /**
-         * Creates an instance of Support service API entry point.
+         * Creates an instance of support service API entry point.
          *
          * @param credential the credential to use.
          * @param profile the Azure profile for client.
-         * @return the Support service API instance.
+         * @return the support service API instance.
          */
         public SupportManager authenticate(TokenCredential credential, AzureProfile profile) {
             Objects.requireNonNull(credential, "'credential' cannot be null.");
