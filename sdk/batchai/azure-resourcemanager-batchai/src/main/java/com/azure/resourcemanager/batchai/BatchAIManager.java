@@ -24,14 +24,12 @@ import com.azure.resourcemanager.batchai.fluent.BatchAI;
 import com.azure.resourcemanager.batchai.implementation.BatchAIBuilder;
 import com.azure.resourcemanager.batchai.implementation.ClustersImpl;
 import com.azure.resourcemanager.batchai.implementation.ExperimentsImpl;
-import com.azure.resourcemanager.batchai.implementation.FileServersImpl;
 import com.azure.resourcemanager.batchai.implementation.JobsImpl;
 import com.azure.resourcemanager.batchai.implementation.OperationsImpl;
 import com.azure.resourcemanager.batchai.implementation.UsagesImpl;
 import com.azure.resourcemanager.batchai.implementation.WorkspacesImpl;
 import com.azure.resourcemanager.batchai.models.Clusters;
 import com.azure.resourcemanager.batchai.models.Experiments;
-import com.azure.resourcemanager.batchai.models.FileServers;
 import com.azure.resourcemanager.batchai.models.Jobs;
 import com.azure.resourcemanager.batchai.models.Operations;
 import com.azure.resourcemanager.batchai.models.Usages;
@@ -53,8 +51,6 @@ public final class BatchAIManager {
     private Experiments experiments;
 
     private Jobs jobs;
-
-    private FileServers fileServers;
 
     private Clusters clusters;
 
@@ -259,14 +255,6 @@ public final class BatchAIManager {
             this.jobs = new JobsImpl(clientObject.getJobs(), this);
         }
         return jobs;
-    }
-
-    /** @return Resource collection API of FileServers. */
-    public FileServers fileServers() {
-        if (this.fileServers == null) {
-            this.fileServers = new FileServersImpl(clientObject.getFileServers(), this);
-        }
-        return fileServers;
     }
 
     /** @return Resource collection API of Clusters. */

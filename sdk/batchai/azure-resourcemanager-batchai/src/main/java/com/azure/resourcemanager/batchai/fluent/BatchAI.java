@@ -80,13 +80,6 @@ public interface BatchAI {
     JobsClient getJobs();
 
     /**
-     * Gets the FileServersClient object to access its operations.
-     *
-     * @return the FileServersClient object.
-     */
-    FileServersClient getFileServers();
-
-    /**
      * Gets the ClustersClient object to access its operations.
      *
      * @return the ClustersClient object.

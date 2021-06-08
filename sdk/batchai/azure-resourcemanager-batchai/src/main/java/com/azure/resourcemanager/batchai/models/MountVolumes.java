@@ -30,13 +30,6 @@ public final class MountVolumes {
     private List<AzureBlobFileSystemReference> azureBlobFileSystems;
 
     /*
-     * A collection of Batch AI File Servers that are to be mounted to the
-     * cluster nodes.
-     */
-    @JsonProperty(value = "fileServers")
-    private List<FileServerReference> fileServers;
-
-    /*
      * A collection of unmanaged file systems that are to be mounted to the
      * cluster nodes.
      */
@@ -86,26 +79,6 @@ public final class MountVolumes {
     }
 
     /**
-     * Get the fileServers property: A collection of Batch AI File Servers that are to be mounted to the cluster nodes.
-     *
-     * @return the fileServers value.
-     */
-    public List<FileServerReference> fileServers() {
-        return this.fileServers;
-    }
-
-    /**
-     * Set the fileServers property: A collection of Batch AI File Servers that are to be mounted to the cluster nodes.
-     *
-     * @param fileServers the fileServers value to set.
-     * @return the MountVolumes object itself.
-     */
-    public MountVolumes withFileServers(List<FileServerReference> fileServers) {
-        this.fileServers = fileServers;
-        return this;
-    }
-
-    /**
      * Get the unmanagedFileSystems property: A collection of unmanaged file systems that are to be mounted to the
      * cluster nodes.
      *
@@ -138,9 +111,6 @@ public final class MountVolumes {
         }
         if (azureBlobFileSystems() != null) {
             azureBlobFileSystems().forEach(e -> e.validate());
-        }
-        if (fileServers() != null) {
-            fileServers().forEach(e -> e.validate());
         }
         if (unmanagedFileSystems() != null) {
             unmanagedFileSystems().forEach(e -> e.validate());
