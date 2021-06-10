@@ -27,6 +27,12 @@ public final class HealthBotUpdateParameters {
     @JsonProperty(value = "sku")
     private Sku sku;
 
+    /*
+     * The identity of the Healthbot.
+     */
+    @JsonProperty(value = "identity")
+    private Identity identity;
+
     /**
      * Get the tags property: Tags for a HealthBot.
      *
@@ -68,6 +74,26 @@ public final class HealthBotUpdateParameters {
     }
 
     /**
+     * Get the identity property: The identity of the Healthbot.
+     *
+     * @return the identity value.
+     */
+    public Identity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: The identity of the Healthbot.
+     *
+     * @param identity the identity value to set.
+     * @return the HealthBotUpdateParameters object itself.
+     */
+    public HealthBotUpdateParameters withIdentity(Identity identity) {
+        this.identity = identity;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -75,6 +101,9 @@ public final class HealthBotUpdateParameters {
     public void validate() {
         if (sku() != null) {
             sku().validate();
+        }
+        if (identity() != null) {
+            identity().validate();
         }
     }
 }

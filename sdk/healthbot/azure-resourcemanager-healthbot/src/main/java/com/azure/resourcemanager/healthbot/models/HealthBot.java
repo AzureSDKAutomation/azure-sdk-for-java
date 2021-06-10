@@ -61,6 +61,13 @@ public interface HealthBot {
     HealthBotProperties properties();
 
     /**
+     * Gets the identity property: The identity of the Healthbot.
+     *
+     * @return the identity value.
+     */
+    Identity identity();
+
+    /**
      * Gets the region of the resource.
      *
      * @return the region of the resource.
@@ -136,7 +143,8 @@ public interface HealthBot {
          * The stage of the HealthBot definition which contains all the minimum required properties for the resource to
          * be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithProperties {
+        interface WithCreate
+            extends DefinitionStages.WithTags, DefinitionStages.WithProperties, DefinitionStages.WithIdentity {
             /**
              * Executes the create request.
              *
@@ -172,6 +180,16 @@ public interface HealthBot {
              */
             WithCreate withProperties(HealthBotProperties properties);
         }
+        /** The stage of the HealthBot definition allowing to specify identity. */
+        interface WithIdentity {
+            /**
+             * Specifies the identity property: The identity of the Healthbot..
+             *
+             * @param identity The identity of the Healthbot.
+             * @return the next definition stage.
+             */
+            WithCreate withIdentity(Identity identity);
+        }
     }
     /**
      * Begins update for the HealthBot resource.
@@ -181,7 +199,7 @@ public interface HealthBot {
     HealthBot.Update update();
 
     /** The template for HealthBot update. */
-    interface Update extends UpdateStages.WithTags, UpdateStages.WithSku {
+    interface Update extends UpdateStages.WithTags, UpdateStages.WithSku, UpdateStages.WithIdentity {
         /**
          * Executes the update request.
          *
@@ -218,6 +236,16 @@ public interface HealthBot {
              * @return the next definition stage.
              */
             Update withSku(Sku sku);
+        }
+        /** The stage of the HealthBot update allowing to specify identity. */
+        interface WithIdentity {
+            /**
+             * Specifies the identity property: The identity of the Healthbot..
+             *
+             * @param identity The identity of the Healthbot.
+             * @return the next definition stage.
+             */
+            Update withIdentity(Identity identity);
         }
     }
     /**
