@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.healthbot.models.HealthBotProperties;
+import com.azure.resourcemanager.healthbot.models.Identity;
 import com.azure.resourcemanager.healthbot.models.Sku;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,6 +30,12 @@ public final class HealthBotInner extends Resource {
      */
     @JsonProperty(value = "properties")
     private HealthBotProperties properties;
+
+    /*
+     * The identity of the Healthbot.
+     */
+    @JsonProperty(value = "identity")
+    private Identity identity;
 
     /**
      * Get the sku property: SKU of the HealthBot.
@@ -70,6 +77,26 @@ public final class HealthBotInner extends Resource {
         return this;
     }
 
+    /**
+     * Get the identity property: The identity of the Healthbot.
+     *
+     * @return the identity value.
+     */
+    public Identity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: The identity of the Healthbot.
+     *
+     * @param identity the identity value to set.
+     * @return the HealthBotInner object itself.
+     */
+    public HealthBotInner withIdentity(Identity identity) {
+        this.identity = identity;
+        return this;
+    }
+
     /** {@inheritDoc} */
     @Override
     public HealthBotInner withLocation(String location) {
@@ -99,6 +126,9 @@ public final class HealthBotInner extends Resource {
         }
         if (properties() != null) {
             properties().validate();
+        }
+        if (identity() != null) {
+            identity().validate();
         }
     }
 }
