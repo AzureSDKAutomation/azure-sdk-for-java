@@ -22,8 +22,11 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.synapse.fluent.SynapseManagementClient;
 import com.azure.resourcemanager.synapse.implementation.BigDataPoolsImpl;
+import com.azure.resourcemanager.synapse.implementation.DataConnectionsImpl;
 import com.azure.resourcemanager.synapse.implementation.DataMaskingPoliciesImpl;
 import com.azure.resourcemanager.synapse.implementation.DataMaskingRulesImpl;
+import com.azure.resourcemanager.synapse.implementation.DatabasePrincipalAssignmentsImpl;
+import com.azure.resourcemanager.synapse.implementation.DatabasesImpl;
 import com.azure.resourcemanager.synapse.implementation.ExtendedSqlPoolBlobAuditingPoliciesImpl;
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeAuthKeysOperationsImpl;
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeConnectionInfosImpl;
@@ -36,6 +39,9 @@ import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeStatus
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimesImpl;
 import com.azure.resourcemanager.synapse.implementation.IpFirewallRulesImpl;
 import com.azure.resourcemanager.synapse.implementation.KeysImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoOperationsImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoPoolPrincipalAssignmentsImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoPoolsImpl;
 import com.azure.resourcemanager.synapse.implementation.LibrariesImpl;
 import com.azure.resourcemanager.synapse.implementation.LibrariesOperationsImpl;
 import com.azure.resourcemanager.synapse.implementation.OperationsImpl;
@@ -84,8 +90,11 @@ import com.azure.resourcemanager.synapse.implementation.WorkspaceManagedSqlServe
 import com.azure.resourcemanager.synapse.implementation.WorkspaceSqlAadAdminsImpl;
 import com.azure.resourcemanager.synapse.implementation.WorkspacesImpl;
 import com.azure.resourcemanager.synapse.models.BigDataPools;
+import com.azure.resourcemanager.synapse.models.DataConnections;
 import com.azure.resourcemanager.synapse.models.DataMaskingPolicies;
 import com.azure.resourcemanager.synapse.models.DataMaskingRules;
+import com.azure.resourcemanager.synapse.models.DatabasePrincipalAssignments;
+import com.azure.resourcemanager.synapse.models.Databases;
 import com.azure.resourcemanager.synapse.models.ExtendedSqlPoolBlobAuditingPolicies;
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimeAuthKeysOperations;
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimeConnectionInfos;
@@ -98,6 +107,9 @@ import com.azure.resourcemanager.synapse.models.IntegrationRuntimeStatusOperatio
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimes;
 import com.azure.resourcemanager.synapse.models.IpFirewallRules;
 import com.azure.resourcemanager.synapse.models.Keys;
+import com.azure.resourcemanager.synapse.models.KustoOperations;
+import com.azure.resourcemanager.synapse.models.KustoPoolPrincipalAssignments;
+import com.azure.resourcemanager.synapse.models.KustoPools;
 import com.azure.resourcemanager.synapse.models.Libraries;
 import com.azure.resourcemanager.synapse.models.LibrariesOperations;
 import com.azure.resourcemanager.synapse.models.Operations;
@@ -177,6 +189,18 @@ public final class SynapseManager {
     private IntegrationRuntimeStatusOperations integrationRuntimeStatusOperations;
 
     private Keys keys;
+
+    private KustoOperations kustoOperations;
+
+    private KustoPools kustoPools;
+
+    private Databases databases;
+
+    private DataConnections dataConnections;
+
+    private KustoPoolPrincipalAssignments kustoPoolPrincipalAssignments;
+
+    private DatabasePrincipalAssignments databasePrincipalAssignments;
 
     private Libraries libraries;
 
@@ -549,6 +573,56 @@ public final class SynapseManager {
             this.keys = new KeysImpl(clientObject.getKeys(), this);
         }
         return keys;
+    }
+
+    /** @return Resource collection API of KustoOperations. */
+    public KustoOperations kustoOperations() {
+        if (this.kustoOperations == null) {
+            this.kustoOperations = new KustoOperationsImpl(clientObject.getKustoOperations(), this);
+        }
+        return kustoOperations;
+    }
+
+    /** @return Resource collection API of KustoPools. */
+    public KustoPools kustoPools() {
+        if (this.kustoPools == null) {
+            this.kustoPools = new KustoPoolsImpl(clientObject.getKustoPools(), this);
+        }
+        return kustoPools;
+    }
+
+    /** @return Resource collection API of Databases. */
+    public Databases databases() {
+        if (this.databases == null) {
+            this.databases = new DatabasesImpl(clientObject.getDatabases(), this);
+        }
+        return databases;
+    }
+
+    /** @return Resource collection API of DataConnections. */
+    public DataConnections dataConnections() {
+        if (this.dataConnections == null) {
+            this.dataConnections = new DataConnectionsImpl(clientObject.getDataConnections(), this);
+        }
+        return dataConnections;
+    }
+
+    /** @return Resource collection API of KustoPoolPrincipalAssignments. */
+    public KustoPoolPrincipalAssignments kustoPoolPrincipalAssignments() {
+        if (this.kustoPoolPrincipalAssignments == null) {
+            this.kustoPoolPrincipalAssignments =
+                new KustoPoolPrincipalAssignmentsImpl(clientObject.getKustoPoolPrincipalAssignments(), this);
+        }
+        return kustoPoolPrincipalAssignments;
+    }
+
+    /** @return Resource collection API of DatabasePrincipalAssignments. */
+    public DatabasePrincipalAssignments databasePrincipalAssignments() {
+        if (this.databasePrincipalAssignments == null) {
+            this.databasePrincipalAssignments =
+                new DatabasePrincipalAssignmentsImpl(clientObject.getDatabasePrincipalAssignments(), this);
+        }
+        return databasePrincipalAssignments;
     }
 
     /** @return Resource collection API of Libraries. */
