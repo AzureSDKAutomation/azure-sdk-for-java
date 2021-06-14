@@ -22,8 +22,11 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.resourcemanager.synapse.fluent.BigDataPoolsClient;
+import com.azure.resourcemanager.synapse.fluent.DataConnectionsClient;
 import com.azure.resourcemanager.synapse.fluent.DataMaskingPoliciesClient;
 import com.azure.resourcemanager.synapse.fluent.DataMaskingRulesClient;
+import com.azure.resourcemanager.synapse.fluent.DatabasePrincipalAssignmentsClient;
+import com.azure.resourcemanager.synapse.fluent.DatabasesClient;
 import com.azure.resourcemanager.synapse.fluent.ExtendedSqlPoolBlobAuditingPoliciesClient;
 import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimeAuthKeysOperationsClient;
 import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimeConnectionInfosClient;
@@ -36,6 +39,9 @@ import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimeStatusOperatio
 import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimesClient;
 import com.azure.resourcemanager.synapse.fluent.IpFirewallRulesClient;
 import com.azure.resourcemanager.synapse.fluent.KeysClient;
+import com.azure.resourcemanager.synapse.fluent.KustoOperationsClient;
+import com.azure.resourcemanager.synapse.fluent.KustoPoolPrincipalAssignmentsClient;
+import com.azure.resourcemanager.synapse.fluent.KustoPoolsClient;
 import com.azure.resourcemanager.synapse.fluent.LibrariesClient;
 import com.azure.resourcemanager.synapse.fluent.LibrariesOperationsClient;
 import com.azure.resourcemanager.synapse.fluent.OperationsClient;
@@ -324,6 +330,78 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
      */
     public KeysClient getKeys() {
         return this.keys;
+    }
+
+    /** The KustoOperationsClient object to access its operations. */
+    private final KustoOperationsClient kustoOperations;
+
+    /**
+     * Gets the KustoOperationsClient object to access its operations.
+     *
+     * @return the KustoOperationsClient object.
+     */
+    public KustoOperationsClient getKustoOperations() {
+        return this.kustoOperations;
+    }
+
+    /** The KustoPoolsClient object to access its operations. */
+    private final KustoPoolsClient kustoPools;
+
+    /**
+     * Gets the KustoPoolsClient object to access its operations.
+     *
+     * @return the KustoPoolsClient object.
+     */
+    public KustoPoolsClient getKustoPools() {
+        return this.kustoPools;
+    }
+
+    /** The DatabasesClient object to access its operations. */
+    private final DatabasesClient databases;
+
+    /**
+     * Gets the DatabasesClient object to access its operations.
+     *
+     * @return the DatabasesClient object.
+     */
+    public DatabasesClient getDatabases() {
+        return this.databases;
+    }
+
+    /** The DataConnectionsClient object to access its operations. */
+    private final DataConnectionsClient dataConnections;
+
+    /**
+     * Gets the DataConnectionsClient object to access its operations.
+     *
+     * @return the DataConnectionsClient object.
+     */
+    public DataConnectionsClient getDataConnections() {
+        return this.dataConnections;
+    }
+
+    /** The KustoPoolPrincipalAssignmentsClient object to access its operations. */
+    private final KustoPoolPrincipalAssignmentsClient kustoPoolPrincipalAssignments;
+
+    /**
+     * Gets the KustoPoolPrincipalAssignmentsClient object to access its operations.
+     *
+     * @return the KustoPoolPrincipalAssignmentsClient object.
+     */
+    public KustoPoolPrincipalAssignmentsClient getKustoPoolPrincipalAssignments() {
+        return this.kustoPoolPrincipalAssignments;
+    }
+
+    /** The DatabasePrincipalAssignmentsClient object to access its operations. */
+    private final DatabasePrincipalAssignmentsClient databasePrincipalAssignments;
+
+    /**
+     * Gets the DatabasePrincipalAssignmentsClient object to access its operations.
+     *
+     * @return the DatabasePrincipalAssignmentsClient object.
+     */
+    public DatabasePrincipalAssignmentsClient getDatabasePrincipalAssignments() {
+        return this.databasePrincipalAssignments;
     }
 
     /** The LibrariesClient object to access its operations. */
@@ -928,7 +1006,7 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-03-01";
+        this.apiVersion = "2021-06-01";
         this.bigDataPools = new BigDataPoolsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
         this.ipFirewallRules = new IpFirewallRulesClientImpl(this);
@@ -942,6 +1020,12 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         this.integrationRuntimeMonitoringDatas = new IntegrationRuntimeMonitoringDatasClientImpl(this);
         this.integrationRuntimeStatusOperations = new IntegrationRuntimeStatusOperationsClientImpl(this);
         this.keys = new KeysClientImpl(this);
+        this.kustoOperations = new KustoOperationsClientImpl(this);
+        this.kustoPools = new KustoPoolsClientImpl(this);
+        this.databases = new DatabasesClientImpl(this);
+        this.dataConnections = new DataConnectionsClientImpl(this);
+        this.kustoPoolPrincipalAssignments = new KustoPoolPrincipalAssignmentsClientImpl(this);
+        this.databasePrincipalAssignments = new DatabasePrincipalAssignmentsClientImpl(this);
         this.libraries = new LibrariesClientImpl(this);
         this.librariesOperations = new LibrariesOperationsClientImpl(this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsClientImpl(this);
