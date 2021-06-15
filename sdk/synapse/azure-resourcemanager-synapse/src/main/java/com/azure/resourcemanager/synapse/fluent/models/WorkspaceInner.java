@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.synapse.models.CspWorkspaceAdminProperties;
 import com.azure.resourcemanager.synapse.models.DataLakeStorageAccountDetails;
 import com.azure.resourcemanager.synapse.models.EncryptionDetails;
 import com.azure.resourcemanager.synapse.models.ManagedIdentity;
@@ -136,10 +137,28 @@ public class WorkspaceInner extends Resource {
     private String adlaResourceId;
 
     /*
-     * Enable or Disable pubic network access to workspace
+     * Enable or Disable public network access to workspace
      */
     @JsonProperty(value = "properties.publicNetworkAccess")
     private WorkspacePublicNetworkAccess publicNetworkAccess;
+
+    /*
+     * Initial workspace AAD admin properties for a CSP subscription
+     */
+    @JsonProperty(value = "properties.cspWorkspaceAdminProperties")
+    private CspWorkspaceAdminProperties cspWorkspaceAdminProperties;
+
+    /*
+     * Workspace settings
+     */
+    @JsonProperty(value = "properties.settings", access = JsonProperty.Access.WRITE_ONLY)
+    private Map<String, Object> settings;
+
+    /*
+     * Enable or Disable AzureADonlyauthetication on All Workspace subresource
+     */
+    @JsonProperty(value = "properties.azureADOnlyAuthentication")
+    private Boolean azureADOnlyAuthentication;
 
     /**
      * Get the identity property: Identity of the workspace.
@@ -449,7 +468,7 @@ public class WorkspaceInner extends Resource {
     }
 
     /**
-     * Get the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Get the publicNetworkAccess property: Enable or Disable public network access to workspace.
      *
      * @return the publicNetworkAccess value.
      */
@@ -458,13 +477,64 @@ public class WorkspaceInner extends Resource {
     }
 
     /**
-     * Set the publicNetworkAccess property: Enable or Disable pubic network access to workspace.
+     * Set the publicNetworkAccess property: Enable or Disable public network access to workspace.
      *
      * @param publicNetworkAccess the publicNetworkAccess value to set.
      * @return the WorkspaceInner object itself.
      */
     public WorkspaceInner withPublicNetworkAccess(WorkspacePublicNetworkAccess publicNetworkAccess) {
         this.publicNetworkAccess = publicNetworkAccess;
+        return this;
+    }
+
+    /**
+     * Get the cspWorkspaceAdminProperties property: Initial workspace AAD admin properties for a CSP subscription.
+     *
+     * @return the cspWorkspaceAdminProperties value.
+     */
+    public CspWorkspaceAdminProperties cspWorkspaceAdminProperties() {
+        return this.cspWorkspaceAdminProperties;
+    }
+
+    /**
+     * Set the cspWorkspaceAdminProperties property: Initial workspace AAD admin properties for a CSP subscription.
+     *
+     * @param cspWorkspaceAdminProperties the cspWorkspaceAdminProperties value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withCspWorkspaceAdminProperties(CspWorkspaceAdminProperties cspWorkspaceAdminProperties) {
+        this.cspWorkspaceAdminProperties = cspWorkspaceAdminProperties;
+        return this;
+    }
+
+    /**
+     * Get the settings property: Workspace settings.
+     *
+     * @return the settings value.
+     */
+    public Map<String, Object> settings() {
+        return this.settings;
+    }
+
+    /**
+     * Get the azureADOnlyAuthentication property: Enable or Disable AzureADonlyauthetication on All Workspace
+     * subresource.
+     *
+     * @return the azureADOnlyAuthentication value.
+     */
+    public Boolean azureADOnlyAuthentication() {
+        return this.azureADOnlyAuthentication;
+    }
+
+    /**
+     * Set the azureADOnlyAuthentication property: Enable or Disable AzureADonlyauthetication on All Workspace
+     * subresource.
+     *
+     * @param azureADOnlyAuthentication the azureADOnlyAuthentication value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withAzureADOnlyAuthentication(Boolean azureADOnlyAuthentication) {
+        this.azureADOnlyAuthentication = azureADOnlyAuthentication;
         return this;
     }
 
@@ -511,6 +581,9 @@ public class WorkspaceInner extends Resource {
         }
         if (purviewConfiguration() != null) {
             purviewConfiguration().validate();
+        }
+        if (cspWorkspaceAdminProperties() != null) {
+            cspWorkspaceAdminProperties().validate();
         }
     }
 }
