@@ -784,6 +784,7 @@
         <module>sdk/mysql</module>
         <module>sdk/netapp</module>
         <module>sdk/notificationhubs</module>
+        <module>sdk/openai</module>
         <module>sdk/operationsmanagement</module>
         <module>sdk/peering</module>
         <module>sdk/policyinsights</module>
