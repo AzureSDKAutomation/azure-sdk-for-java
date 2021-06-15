@@ -27,10 +27,16 @@ public final class NameAvailabilityInner {
     private Boolean nameAvailable;
 
     /*
-     * Reason for name being unavailable.
+     * name of the PostgreSQL server.
      */
-    @JsonProperty(value = "reason")
-    private String reason;
+    @JsonProperty(value = "name")
+    private String name;
+
+    /*
+     * type of the server
+     */
+    @JsonProperty(value = "type")
+    private String type;
 
     /**
      * Get the message property: Error Message.
@@ -73,22 +79,42 @@ public final class NameAvailabilityInner {
     }
 
     /**
-     * Get the reason property: Reason for name being unavailable.
+     * Get the name property: name of the PostgreSQL server.
      *
-     * @return the reason value.
+     * @return the name value.
      */
-    public String reason() {
-        return this.reason;
+    public String name() {
+        return this.name;
     }
 
     /**
-     * Set the reason property: Reason for name being unavailable.
+     * Set the name property: name of the PostgreSQL server.
      *
-     * @param reason the reason value to set.
+     * @param name the name value to set.
      * @return the NameAvailabilityInner object itself.
      */
-    public NameAvailabilityInner withReason(String reason) {
-        this.reason = reason;
+    public NameAvailabilityInner withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Get the type property: type of the server.
+     *
+     * @return the type value.
+     */
+    public String type() {
+        return this.type;
+    }
+
+    /**
+     * Set the type property: type of the server.
+     *
+     * @param type the type value to set.
+     * @return the NameAvailabilityInner object itself.
+     */
+    public NameAvailabilityInner withType(String type) {
+        this.type = type;
         return this;
     }
 
