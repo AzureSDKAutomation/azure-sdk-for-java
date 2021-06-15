@@ -26,8 +26,12 @@ public final class NameAvailabilityImpl implements NameAvailability {
         return this.innerModel().nameAvailable();
     }
 
-    public String reason() {
-        return this.innerModel().reason();
+    public String name() {
+        return this.innerModel().name();
+    }
+
+    public String type() {
+        return this.innerModel().type();
     }
 
     public NameAvailabilityInner innerModel() {

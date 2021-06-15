@@ -4,6 +4,7 @@
 
 package com.azure.resourcemanager.postgresql.models;
 
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.postgresql.fluent.models.ConfigurationInner;
 
@@ -31,6 +32,13 @@ public interface Configuration {
     String type();
 
     /**
+     * Gets the systemData property: The system metadata relating to this resource.
+     *
+     * @return the systemData value.
+     */
+    SystemData systemData();
+
+    /**
      * Gets the value property: Value of the configuration.
      *
      * @return the value value.
@@ -56,7 +64,7 @@ public interface Configuration {
      *
      * @return the dataType value.
      */
-    String dataType();
+    ConfigurationDataType dataType();
 
     /**
      * Gets the allowedValues property: Allowed values of the configuration.
@@ -97,7 +105,7 @@ public interface Configuration {
              * @param serverName The name of the server.
              * @return the next definition stage.
              */
-            WithCreate withExistingServer(String resourceGroupName, String serverName);
+            WithCreate withExistingFlexibleServer(String resourceGroupName, String serverName);
         }
         /**
          * The stage of the Configuration definition which contains all the minimum required properties for the resource
