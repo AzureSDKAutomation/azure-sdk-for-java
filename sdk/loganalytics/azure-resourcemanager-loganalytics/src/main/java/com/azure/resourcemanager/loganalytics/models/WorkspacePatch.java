@@ -97,7 +97,7 @@ public class WorkspacePatch extends AzureEntityResource {
      * Workspace features.
      */
     @JsonProperty(value = "properties.features")
-    private Map<String, Object> features;
+    private WorkspaceFeatures features;
 
     /**
      * Get the tags property: Resource tags. Optional.
@@ -302,7 +302,7 @@ public class WorkspacePatch extends AzureEntityResource {
      *
      * @return the features value.
      */
-    public Map<String, Object> features() {
+    public WorkspaceFeatures features() {
         return this.features;
     }
 
@@ -312,7 +312,7 @@ public class WorkspacePatch extends AzureEntityResource {
      * @param features the features value to set.
      * @return the WorkspacePatch object itself.
      */
-    public WorkspacePatch withFeatures(Map<String, Object> features) {
+    public WorkspacePatch withFeatures(WorkspaceFeatures features) {
         this.features = features;
         return this;
     }
@@ -333,6 +333,9 @@ public class WorkspacePatch extends AzureEntityResource {
         }
         if (privateLinkScopedResources() != null) {
             privateLinkScopedResources().forEach(e -> e.validate());
+        }
+        if (features() != null) {
+            features().validate();
         }
     }
 }
