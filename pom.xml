@@ -744,6 +744,7 @@
         <module>sdk/datamigration</module>
         <module>sdk/delegatednetwork</module>
         <module>sdk/deploymentmanager</module>
+        <module>sdk/desktopvirtualization</module>
         <module>sdk/deviceprovisioningservices</module>
         <module>sdk/deviceupdate</module>
         <module>sdk/devspaces</module>
