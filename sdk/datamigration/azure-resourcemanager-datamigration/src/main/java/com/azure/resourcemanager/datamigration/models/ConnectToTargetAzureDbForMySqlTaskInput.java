@@ -26,6 +26,12 @@ public final class ConnectToTargetAzureDbForMySqlTaskInput {
     @JsonProperty(value = "targetConnectionInfo", required = true)
     private MySqlConnectionInfo targetConnectionInfo;
 
+    /*
+     * Flag for whether or not the migration is offline
+     */
+    @JsonProperty(value = "isOfflineMigration")
+    private Boolean isOfflineMigration;
+
     /**
      * Get the sourceConnectionInfo property: Connection information for source MySQL server.
      *
@@ -63,6 +69,26 @@ public final class ConnectToTargetAzureDbForMySqlTaskInput {
      */
     public ConnectToTargetAzureDbForMySqlTaskInput withTargetConnectionInfo(MySqlConnectionInfo targetConnectionInfo) {
         this.targetConnectionInfo = targetConnectionInfo;
+        return this;
+    }
+
+    /**
+     * Get the isOfflineMigration property: Flag for whether or not the migration is offline.
+     *
+     * @return the isOfflineMigration value.
+     */
+    public Boolean isOfflineMigration() {
+        return this.isOfflineMigration;
+    }
+
+    /**
+     * Set the isOfflineMigration property: Flag for whether or not the migration is offline.
+     *
+     * @param isOfflineMigration the isOfflineMigration value to set.
+     * @return the ConnectToTargetAzureDbForMySqlTaskInput object itself.
+     */
+    public ConnectToTargetAzureDbForMySqlTaskInput withIsOfflineMigration(Boolean isOfflineMigration) {
+        this.isOfflineMigration = isOfflineMigration;
         return this;
     }
 
