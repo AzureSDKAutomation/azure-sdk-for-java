@@ -21,12 +21,6 @@ public final class AddressDetails {
     private String firstName;
 
     /*
-     * Middle name.
-     */
-    @JsonProperty(value = "middleName")
-    private String middleName;
-
-    /*
      * Last name.
      */
     @JsonProperty(value = "lastName")
@@ -115,26 +109,6 @@ public final class AddressDetails {
      */
     public AddressDetails withFirstName(String firstName) {
         this.firstName = firstName;
-        return this;
-    }
-
-    /**
-     * Get the middleName property: Middle name.
-     *
-     * @return the middleName value.
-     */
-    public String middleName() {
-        return this.middleName;
-    }
-
-    /**
-     * Set the middleName property: Middle name.
-     *
-     * @param middleName the middleName value to set.
-     * @return the AddressDetails object itself.
-     */
-    public AddressDetails withMiddleName(String middleName) {
-        this.middleName = middleName;
         return this;
     }
 

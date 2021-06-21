@@ -206,7 +206,6 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     new IllegalArgumentException(
                         "Parameter billingRoleDefinitionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -214,7 +213,7 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     service
                         .getByBillingAccount(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingRoleDefinitionName,
                             accept,
@@ -253,12 +252,16 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     new IllegalArgumentException(
                         "Parameter billingRoleDefinitionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .getByBillingAccount(
-                this.client.getEndpoint(), apiVersion, billingAccountName, billingRoleDefinitionName, accept, context);
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                billingRoleDefinitionName,
+                accept,
+                context);
     }
 
     /**
@@ -363,7 +366,6 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     new IllegalArgumentException(
                         "Parameter billingRoleDefinitionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -371,7 +373,7 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     service
                         .getByInvoiceSection(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             invoiceSectionName,
@@ -426,13 +428,12 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     new IllegalArgumentException(
                         "Parameter billingRoleDefinitionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .getByInvoiceSection(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 billingAccountName,
                 billingProfileName,
                 invoiceSectionName,
@@ -557,7 +558,6 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     new IllegalArgumentException(
                         "Parameter billingRoleDefinitionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -565,7 +565,7 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     service
                         .getByBillingProfile(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             billingRoleDefinitionName,
@@ -610,13 +610,12 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     new IllegalArgumentException(
                         "Parameter billingRoleDefinitionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .getByBillingProfile(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 billingAccountName,
                 billingProfileName,
                 billingRoleDefinitionName,
@@ -712,14 +711,17 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByBillingAccount(
-                            this.client.getEndpoint(), apiVersion, billingAccountName, accept, context))
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            billingAccountName,
+                            accept,
+                            context))
             .<PagedResponse<BillingRoleDefinitionInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -756,11 +758,11 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByBillingAccount(this.client.getEndpoint(), apiVersion, billingAccountName, accept, context)
+            .listByBillingAccount(
+                this.client.getEndpoint(), this.client.getApiVersion(), billingAccountName, accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -872,7 +874,6 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
             return Mono
                 .error(new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -880,7 +881,7 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     service
                         .listByInvoiceSection(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             invoiceSectionName,
@@ -932,13 +933,12 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
             return Mono
                 .error(new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .listByInvoiceSection(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 billingAccountName,
                 billingProfileName,
                 invoiceSectionName,
@@ -1065,7 +1065,6 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1073,7 +1072,7 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
                     service
                         .listByBillingProfile(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             accept,
@@ -1119,12 +1118,16 @@ public final class BillingRoleDefinitionsClientImpl implements BillingRoleDefini
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .listByBillingProfile(
-                this.client.getEndpoint(), apiVersion, billingAccountName, billingProfileName, accept, context)
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                billingProfileName,
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(

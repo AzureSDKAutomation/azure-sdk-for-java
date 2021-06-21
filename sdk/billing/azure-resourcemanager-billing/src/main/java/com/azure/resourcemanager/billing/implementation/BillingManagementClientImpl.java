@@ -26,7 +26,6 @@ import com.azure.resourcemanager.billing.fluent.AgreementsClient;
 import com.azure.resourcemanager.billing.fluent.AvailableBalancesClient;
 import com.azure.resourcemanager.billing.fluent.BillingAccountsClient;
 import com.azure.resourcemanager.billing.fluent.BillingManagementClient;
-import com.azure.resourcemanager.billing.fluent.BillingPeriodsClient;
 import com.azure.resourcemanager.billing.fluent.BillingPermissionsClient;
 import com.azure.resourcemanager.billing.fluent.BillingProfilesClient;
 import com.azure.resourcemanager.billing.fluent.BillingPropertiesClient;
@@ -34,14 +33,12 @@ import com.azure.resourcemanager.billing.fluent.BillingRoleAssignmentsClient;
 import com.azure.resourcemanager.billing.fluent.BillingRoleDefinitionsClient;
 import com.azure.resourcemanager.billing.fluent.BillingSubscriptionsClient;
 import com.azure.resourcemanager.billing.fluent.CustomersClient;
-import com.azure.resourcemanager.billing.fluent.EnrollmentAccountsClient;
 import com.azure.resourcemanager.billing.fluent.InstructionsClient;
 import com.azure.resourcemanager.billing.fluent.InvoiceSectionsClient;
 import com.azure.resourcemanager.billing.fluent.InvoicesClient;
 import com.azure.resourcemanager.billing.fluent.OperationsClient;
 import com.azure.resourcemanager.billing.fluent.PoliciesClient;
 import com.azure.resourcemanager.billing.fluent.ProductsClient;
-import com.azure.resourcemanager.billing.fluent.ReservationsClient;
 import com.azure.resourcemanager.billing.fluent.TransactionsClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -80,6 +77,18 @@ public final class BillingManagementClientImpl implements BillingManagementClien
      */
     public String getEndpoint() {
         return this.endpoint;
+    }
+
+    /** Api Version. */
+    private final String apiVersion;
+
+    /**
+     * Gets Api Version.
+     *
+     * @return the apiVersion value.
+     */
+    public String getApiVersion() {
+        return this.apiVersion;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -334,42 +343,6 @@ public final class BillingManagementClientImpl implements BillingManagementClien
         return this.agreements;
     }
 
-    /** The ReservationsClient object to access its operations. */
-    private final ReservationsClient reservations;
-
-    /**
-     * Gets the ReservationsClient object to access its operations.
-     *
-     * @return the ReservationsClient object.
-     */
-    public ReservationsClient getReservations() {
-        return this.reservations;
-    }
-
-    /** The EnrollmentAccountsClient object to access its operations. */
-    private final EnrollmentAccountsClient enrollmentAccounts;
-
-    /**
-     * Gets the EnrollmentAccountsClient object to access its operations.
-     *
-     * @return the EnrollmentAccountsClient object.
-     */
-    public EnrollmentAccountsClient getEnrollmentAccounts() {
-        return this.enrollmentAccounts;
-    }
-
-    /** The BillingPeriodsClient object to access its operations. */
-    private final BillingPeriodsClient billingPeriods;
-
-    /**
-     * Gets the BillingPeriodsClient object to access its operations.
-     *
-     * @return the BillingPeriodsClient object.
-     */
-    public BillingPeriodsClient getBillingPeriods() {
-        return this.billingPeriods;
-    }
-
     /**
      * Initializes an instance of BillingManagementClient client.
      *
@@ -392,6 +365,7 @@ public final class BillingManagementClientImpl implements BillingManagementClien
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
+        this.apiVersion = "2020-11-30";
         this.billingAccounts = new BillingAccountsClientImpl(this);
         this.address = new AddressClientImpl(this);
         this.availableBalances = new AvailableBalancesClientImpl(this);
@@ -410,9 +384,6 @@ public final class BillingManagementClientImpl implements BillingManagementClien
         this.billingRoleDefinitions = new BillingRoleDefinitionsClientImpl(this);
         this.billingRoleAssignments = new BillingRoleAssignmentsClientImpl(this);
         this.agreements = new AgreementsClientImpl(this);
-        this.reservations = new ReservationsClientImpl(this);
-        this.enrollmentAccounts = new EnrollmentAccountsClientImpl(this);
-        this.billingPeriods = new BillingPeriodsClientImpl(this);
     }
 
     /**

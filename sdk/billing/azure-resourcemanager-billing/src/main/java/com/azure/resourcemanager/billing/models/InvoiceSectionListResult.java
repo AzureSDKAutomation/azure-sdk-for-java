@@ -23,12 +23,6 @@ public final class InvoiceSectionListResult {
     private List<InvoiceSectionInner> value;
 
     /*
-     * Total number of records.
-     */
-    @JsonProperty(value = "totalCount", access = JsonProperty.Access.WRITE_ONLY)
-    private Integer totalCount;
-
-    /*
      * The link (url) to the next page of results.
      */
     @JsonProperty(value = "nextLink", access = JsonProperty.Access.WRITE_ONLY)
@@ -41,15 +35,6 @@ public final class InvoiceSectionListResult {
      */
     public List<InvoiceSectionInner> value() {
         return this.value;
-    }
-
-    /**
-     * Get the totalCount property: Total number of records.
-     *
-     * @return the totalCount value.
-     */
-    public Integer totalCount() {
-        return this.totalCount;
     }
 
     /**

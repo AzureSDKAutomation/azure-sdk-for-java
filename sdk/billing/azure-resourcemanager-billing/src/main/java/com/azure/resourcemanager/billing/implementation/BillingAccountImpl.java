@@ -90,10 +90,6 @@ public final class BillingAccountImpl implements BillingAccount {
         return this.innerModel().hasReadAccess();
     }
 
-    public String notificationEmailAddress() {
-        return this.innerModel().notificationEmailAddress();
-    }
-
     public BillingAccountInner innerModel() {
         return this.innerObject;
     }

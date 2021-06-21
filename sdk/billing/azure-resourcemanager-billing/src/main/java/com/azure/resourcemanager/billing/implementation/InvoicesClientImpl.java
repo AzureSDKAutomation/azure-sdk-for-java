@@ -263,7 +263,6 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (periodEndDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter periodEndDate is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -271,7 +270,7 @@ public final class InvoicesClientImpl implements InvoicesClient {
                     service
                         .listByBillingAccount(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             periodStartDate,
                             periodEndDate,
@@ -322,13 +321,12 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (periodEndDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter periodEndDate is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .listByBillingAccount(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 billingAccountName,
                 periodStartDate,
                 periodEndDate,
@@ -461,7 +459,6 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (periodEndDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter periodEndDate is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -469,7 +466,7 @@ public final class InvoicesClientImpl implements InvoicesClient {
                     service
                         .listByBillingProfile(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             periodStartDate,
@@ -530,13 +527,12 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (periodEndDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter periodEndDate is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .listByBillingProfile(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 billingAccountName,
                 billingProfileName,
                 periodStartDate,
@@ -676,13 +672,18 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (invoiceName == null) {
             return Mono.error(new IllegalArgumentException("Parameter invoiceName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
-                        .get(this.client.getEndpoint(), apiVersion, billingAccountName, invoiceName, accept, context))
+                        .get(
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            billingAccountName,
+                            invoiceName,
+                            accept,
+                            context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -714,10 +715,16 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (invoiceName == null) {
             return Mono.error(new IllegalArgumentException("Parameter invoiceName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.get(this.client.getEndpoint(), apiVersion, billingAccountName, invoiceName, accept, context);
+        return service
+            .get(
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                invoiceName,
+                accept,
+                context);
     }
 
     /**
@@ -798,11 +805,12 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (invoiceName == null) {
             return Mono.error(new IllegalArgumentException("Parameter invoiceName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
-                context -> service.getById(this.client.getEndpoint(), apiVersion, invoiceName, accept, context))
+                context ->
+                    service
+                        .getById(this.client.getEndpoint(), this.client.getApiVersion(), invoiceName, accept, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -828,10 +836,9 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (invoiceName == null) {
             return Mono.error(new IllegalArgumentException("Parameter invoiceName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.getById(this.client.getEndpoint(), apiVersion, invoiceName, accept, context);
+        return service.getById(this.client.getEndpoint(), this.client.getApiVersion(), invoiceName, accept, context);
     }
 
     /**
@@ -919,7 +926,6 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (downloadToken == null) {
             return Mono.error(new IllegalArgumentException("Parameter downloadToken is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -927,7 +933,7 @@ public final class InvoicesClientImpl implements InvoicesClient {
                     service
                         .downloadInvoice(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             invoiceName,
                             downloadToken,
@@ -968,12 +974,17 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (downloadToken == null) {
             return Mono.error(new IllegalArgumentException("Parameter downloadToken is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .downloadInvoice(
-                this.client.getEndpoint(), apiVersion, billingAccountName, invoiceName, downloadToken, accept, context);
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                invoiceName,
+                downloadToken,
+                accept,
+                context);
     }
 
     /**
@@ -1166,14 +1177,18 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (downloadUrls == null) {
             return Mono.error(new IllegalArgumentException("Parameter downloadUrls is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .downloadMultipleBillingProfileInvoices(
-                            this.client.getEndpoint(), apiVersion, billingAccountName, downloadUrls, accept, context))
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            billingAccountName,
+                            downloadUrls,
+                            accept,
+                            context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -1206,12 +1221,16 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (downloadUrls == null) {
             return Mono.error(new IllegalArgumentException("Parameter downloadUrls is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .downloadMultipleBillingProfileInvoices(
-                this.client.getEndpoint(), apiVersion, billingAccountName, downloadUrls, accept, context);
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                downloadUrls,
+                accept,
+                context);
     }
 
     /**
@@ -1410,7 +1429,6 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (periodEndDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter periodEndDate is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1421,7 +1439,7 @@ public final class InvoicesClientImpl implements InvoicesClient {
                             this.client.getSubscriptionId(),
                             periodStartDate,
                             periodEndDate,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             accept,
                             context))
             .<PagedResponse<InvoiceInner>>map(
@@ -1469,7 +1487,6 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (periodEndDate == null) {
             return Mono.error(new IllegalArgumentException("Parameter periodEndDate is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1478,7 +1495,7 @@ public final class InvoicesClientImpl implements InvoicesClient {
                 this.client.getSubscriptionId(),
                 periodStartDate,
                 periodEndDate,
-                apiVersion,
+                this.client.getApiVersion(),
                 accept,
                 context)
             .map(
@@ -1586,7 +1603,6 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (invoiceName == null) {
             return Mono.error(new IllegalArgumentException("Parameter invoiceName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1596,7 +1612,7 @@ public final class InvoicesClientImpl implements InvoicesClient {
                             this.client.getEndpoint(),
                             this.client.getSubscriptionId(),
                             invoiceName,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -1630,12 +1646,16 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (invoiceName == null) {
             return Mono.error(new IllegalArgumentException("Parameter invoiceName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .getBySubscriptionAndInvoiceId(
-                this.client.getEndpoint(), this.client.getSubscriptionId(), invoiceName, apiVersion, accept, context);
+                this.client.getEndpoint(),
+                this.client.getSubscriptionId(),
+                invoiceName,
+                this.client.getApiVersion(),
+                accept,
+                context);
     }
 
     /**
@@ -1720,7 +1740,6 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (downloadToken == null) {
             return Mono.error(new IllegalArgumentException("Parameter downloadToken is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1728,7 +1747,7 @@ public final class InvoicesClientImpl implements InvoicesClient {
                     service
                         .downloadBillingSubscriptionInvoice(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             this.client.getSubscriptionId(),
                             invoiceName,
                             downloadToken,
@@ -1769,13 +1788,12 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (downloadToken == null) {
             return Mono.error(new IllegalArgumentException("Parameter downloadToken is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .downloadBillingSubscriptionInvoice(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 this.client.getSubscriptionId(),
                 invoiceName,
                 downloadToken,
@@ -1955,7 +1973,6 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (downloadUrls == null) {
             return Mono.error(new IllegalArgumentException("Parameter downloadUrls is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1963,7 +1980,7 @@ public final class InvoicesClientImpl implements InvoicesClient {
                     service
                         .downloadMultipleBillingSubscriptionInvoices(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             this.client.getSubscriptionId(),
                             downloadUrls,
                             accept,
@@ -1999,12 +2016,16 @@ public final class InvoicesClientImpl implements InvoicesClient {
         if (downloadUrls == null) {
             return Mono.error(new IllegalArgumentException("Parameter downloadUrls is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .downloadMultipleBillingSubscriptionInvoices(
-                this.client.getEndpoint(), apiVersion, this.client.getSubscriptionId(), downloadUrls, accept, context);
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                this.client.getSubscriptionId(),
+                downloadUrls,
+                accept,
+                context);
     }
 
     /**

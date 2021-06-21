@@ -240,14 +240,18 @@ public final class ProductsClientImpl implements ProductsClient {
         if (customerName == null) {
             return Mono.error(new IllegalArgumentException("Parameter customerName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByCustomer(
-                            this.client.getEndpoint(), billingAccountName, customerName, apiVersion, accept, context))
+                            this.client.getEndpoint(),
+                            billingAccountName,
+                            customerName,
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
             .<PagedResponse<ProductInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -288,11 +292,16 @@ public final class ProductsClientImpl implements ProductsClient {
         if (customerName == null) {
             return Mono.error(new IllegalArgumentException("Parameter customerName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByCustomer(this.client.getEndpoint(), billingAccountName, customerName, apiVersion, accept, context)
+            .listByCustomer(
+                this.client.getEndpoint(),
+                billingAccountName,
+                customerName,
+                this.client.getApiVersion(),
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -401,14 +410,18 @@ public final class ProductsClientImpl implements ProductsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByBillingAccount(
-                            this.client.getEndpoint(), billingAccountName, apiVersion, filter, accept, context))
+                            this.client.getEndpoint(),
+                            billingAccountName,
+                            this.client.getApiVersion(),
+                            filter,
+                            accept,
+                            context))
             .<PagedResponse<ProductInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -448,11 +461,11 @@ public final class ProductsClientImpl implements ProductsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByBillingAccount(this.client.getEndpoint(), billingAccountName, apiVersion, filter, accept, context)
+            .listByBillingAccount(
+                this.client.getEndpoint(), billingAccountName, this.client.getApiVersion(), filter, accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -590,7 +603,6 @@ public final class ProductsClientImpl implements ProductsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -600,7 +612,7 @@ public final class ProductsClientImpl implements ProductsClient {
                             this.client.getEndpoint(),
                             billingAccountName,
                             billingProfileName,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             filter,
                             accept,
                             context))
@@ -648,12 +660,17 @@ public final class ProductsClientImpl implements ProductsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .listByBillingProfile(
-                this.client.getEndpoint(), billingAccountName, billingProfileName, apiVersion, filter, accept, context)
+                this.client.getEndpoint(),
+                billingAccountName,
+                billingProfileName,
+                this.client.getApiVersion(),
+                filter,
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -803,7 +820,6 @@ public final class ProductsClientImpl implements ProductsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -814,7 +830,7 @@ public final class ProductsClientImpl implements ProductsClient {
                             billingAccountName,
                             billingProfileName,
                             invoiceSectionName,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             filter,
                             accept,
                             context))
@@ -871,7 +887,6 @@ public final class ProductsClientImpl implements ProductsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -880,7 +895,7 @@ public final class ProductsClientImpl implements ProductsClient {
                 billingAccountName,
                 billingProfileName,
                 invoiceSectionName,
-                apiVersion,
+                this.client.getApiVersion(),
                 filter,
                 accept,
                 context)
@@ -1044,13 +1059,18 @@ public final class ProductsClientImpl implements ProductsClient {
         if (productName == null) {
             return Mono.error(new IllegalArgumentException("Parameter productName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
-                        .get(this.client.getEndpoint(), billingAccountName, productName, apiVersion, accept, context))
+                        .get(
+                            this.client.getEndpoint(),
+                            billingAccountName,
+                            productName,
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -1082,10 +1102,16 @@ public final class ProductsClientImpl implements ProductsClient {
         if (productName == null) {
             return Mono.error(new IllegalArgumentException("Parameter productName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.get(this.client.getEndpoint(), billingAccountName, productName, apiVersion, accept, context);
+        return service
+            .get(
+                this.client.getEndpoint(),
+                billingAccountName,
+                productName,
+                this.client.getApiVersion(),
+                accept,
+                context);
     }
 
     /**
@@ -1178,7 +1204,6 @@ public final class ProductsClientImpl implements ProductsClient {
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1188,7 +1213,7 @@ public final class ProductsClientImpl implements ProductsClient {
                             this.client.getEndpoint(),
                             billingAccountName,
                             productName,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             parameters,
                             accept,
                             context))
@@ -1229,12 +1254,17 @@ public final class ProductsClientImpl implements ProductsClient {
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .update(
-                this.client.getEndpoint(), billingAccountName, productName, apiVersion, parameters, accept, context);
+                this.client.getEndpoint(),
+                billingAccountName,
+                productName,
+                this.client.getApiVersion(),
+                parameters,
+                accept,
+                context);
     }
 
     /**
@@ -1332,7 +1362,6 @@ public final class ProductsClientImpl implements ProductsClient {
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1342,7 +1371,7 @@ public final class ProductsClientImpl implements ProductsClient {
                             this.client.getEndpoint(),
                             billingAccountName,
                             productName,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             parameters,
                             accept,
                             context))
@@ -1384,11 +1413,17 @@ public final class ProductsClientImpl implements ProductsClient {
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .move(this.client.getEndpoint(), billingAccountName, productName, apiVersion, parameters, accept, context);
+            .move(
+                this.client.getEndpoint(),
+                billingAccountName,
+                productName,
+                this.client.getApiVersion(),
+                parameters,
+                accept,
+                context);
     }
 
     /**
@@ -1491,7 +1526,6 @@ public final class ProductsClientImpl implements ProductsClient {
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1501,7 +1535,7 @@ public final class ProductsClientImpl implements ProductsClient {
                             this.client.getEndpoint(),
                             billingAccountName,
                             productName,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             parameters,
                             accept,
                             context))
@@ -1543,12 +1577,17 @@ public final class ProductsClientImpl implements ProductsClient {
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .validateMove(
-                this.client.getEndpoint(), billingAccountName, productName, apiVersion, parameters, accept, context);
+                this.client.getEndpoint(),
+                billingAccountName,
+                productName,
+                this.client.getApiVersion(),
+                parameters,
+                accept,
+                context);
     }
 
     /**

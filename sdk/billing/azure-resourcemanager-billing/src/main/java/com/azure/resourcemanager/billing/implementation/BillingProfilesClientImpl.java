@@ -139,14 +139,18 @@ public final class BillingProfilesClientImpl implements BillingProfilesClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByBillingAccount(
-                            this.client.getEndpoint(), apiVersion, billingAccountName, expand, accept, context))
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            billingAccountName,
+                            expand,
+                            accept,
+                            context))
             .<PagedResponse<BillingProfileInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -184,11 +188,11 @@ public final class BillingProfilesClientImpl implements BillingProfilesClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByBillingAccount(this.client.getEndpoint(), apiVersion, billingAccountName, expand, accept, context)
+            .listByBillingAccount(
+                this.client.getEndpoint(), this.client.getApiVersion(), billingAccountName, expand, accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -319,7 +323,6 @@ public final class BillingProfilesClientImpl implements BillingProfilesClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -327,7 +330,7 @@ public final class BillingProfilesClientImpl implements BillingProfilesClient {
                     service
                         .get(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             expand,
@@ -366,12 +369,17 @@ public final class BillingProfilesClientImpl implements BillingProfilesClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .get(
-                this.client.getEndpoint(), apiVersion, billingAccountName, billingProfileName, expand, accept, context);
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                billingProfileName,
+                expand,
+                accept,
+                context);
     }
 
     /**
@@ -494,7 +502,6 @@ public final class BillingProfilesClientImpl implements BillingProfilesClient {
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -502,7 +509,7 @@ public final class BillingProfilesClientImpl implements BillingProfilesClient {
                     service
                         .createOrUpdate(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             parameters,
@@ -546,13 +553,12 @@ public final class BillingProfilesClientImpl implements BillingProfilesClient {
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .createOrUpdate(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 billingAccountName,
                 billingProfileName,
                 parameters,

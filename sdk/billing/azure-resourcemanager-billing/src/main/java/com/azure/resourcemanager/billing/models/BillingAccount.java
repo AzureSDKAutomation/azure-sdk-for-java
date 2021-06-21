@@ -104,13 +104,6 @@ public interface BillingAccount {
     Boolean hasReadAccess();
 
     /**
-     * Gets the notificationEmailAddress property: Notification email address, only for legacy accounts.
-     *
-     * @return the notificationEmailAddress value.
-     */
-    String notificationEmailAddress();
-
-    /**
      * Gets the inner com.azure.resourcemanager.billing.fluent.models.BillingAccountInner object.
      *
      * @return the inner object.

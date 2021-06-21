@@ -31,8 +31,8 @@ public final class EnrollmentPolicies {
      * The policy that controls whether Azure marketplace purchases are allowed
      * in the enrollment.
      */
-    @JsonProperty(value = "marketplaceEnabled", access = JsonProperty.Access.WRITE_ONLY)
-    private Boolean marketplaceEnabled;
+    @JsonProperty(value = "marketplacesEnabled", access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean marketplacesEnabled;
 
     /*
      * The policy that controls whether Azure reservation purchases are allowed
@@ -61,13 +61,13 @@ public final class EnrollmentPolicies {
     }
 
     /**
-     * Get the marketplaceEnabled property: The policy that controls whether Azure marketplace purchases are allowed in
+     * Get the marketplacesEnabled property: The policy that controls whether Azure marketplace purchases are allowed in
      * the enrollment.
      *
-     * @return the marketplaceEnabled value.
+     * @return the marketplacesEnabled value.
      */
-    public Boolean marketplaceEnabled() {
-        return this.marketplaceEnabled;
+    public Boolean marketplacesEnabled() {
+        return this.marketplacesEnabled;
     }
 
     /**

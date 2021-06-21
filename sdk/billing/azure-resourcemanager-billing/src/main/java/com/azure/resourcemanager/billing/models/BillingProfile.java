@@ -6,7 +6,6 @@ package com.azure.resourcemanager.billing.models;
 
 import com.azure.resourcemanager.billing.fluent.models.BillingProfileInner;
 import java.util.List;
-import java.util.Map;
 
 /** An immutable client-side representation of BillingProfile. */
 public interface BillingProfile {
@@ -148,13 +147,6 @@ public interface BillingProfile {
      * @return the targetClouds value.
      */
     List<TargetCloud> targetClouds();
-
-    /**
-     * Gets the tags property: Tags of billing profiles.
-     *
-     * @return the tags value.
-     */
-    Map<String, String> tags();
 
     /**
      * Gets the inner com.azure.resourcemanager.billing.fluent.models.BillingProfileInner object.

@@ -20,7 +20,6 @@ import com.azure.resourcemanager.billing.models.TargetCloud;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import java.util.Map;
 
 /** A billing profile. */
 @JsonFlatten
@@ -130,12 +129,6 @@ public class BillingProfileInner extends ProxyResource {
      */
     @JsonProperty(value = "properties.targetClouds", access = JsonProperty.Access.WRITE_ONLY)
     private List<TargetCloud> targetClouds;
-
-    /*
-     * Tags of billing profiles.
-     */
-    @JsonProperty(value = "properties.tags")
-    private Map<String, String> tags;
 
     /**
      * Get the displayName property: The name of the billing profile.
@@ -354,26 +347,6 @@ public class BillingProfileInner extends ProxyResource {
      */
     public List<TargetCloud> targetClouds() {
         return this.targetClouds;
-    }
-
-    /**
-     * Get the tags property: Tags of billing profiles.
-     *
-     * @return the tags value.
-     */
-    public Map<String, String> tags() {
-        return this.tags;
-    }
-
-    /**
-     * Set the tags property: Tags of billing profiles.
-     *
-     * @param tags the tags value to set.
-     * @return the BillingProfileInner object itself.
-     */
-    public BillingProfileInner withTags(Map<String, String> tags) {
-        this.tags = tags;
-        return this;
     }
 
     /**
