@@ -22,12 +22,6 @@ public final class OperationInner {
     private String name;
 
     /*
-     * Identifies if the operation is a data operation.
-     */
-    @JsonProperty(value = "isDataAction", access = JsonProperty.Access.WRITE_ONLY)
-    private Boolean isDataAction;
-
-    /*
      * The object that represents the operation.
      */
     @JsonProperty(value = "display")
@@ -40,15 +34,6 @@ public final class OperationInner {
      */
     public String name() {
         return this.name;
-    }
-
-    /**
-     * Get the isDataAction property: Identifies if the operation is a data operation.
-     *
-     * @return the isDataAction value.
-     */
-    public Boolean isDataAction() {
-        return this.isDataAction;
     }
 
     /**

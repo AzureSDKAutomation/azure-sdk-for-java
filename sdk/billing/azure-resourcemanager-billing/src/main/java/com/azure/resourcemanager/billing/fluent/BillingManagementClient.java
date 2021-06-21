@@ -24,6 +24,13 @@ public interface BillingManagementClient {
     String getEndpoint();
 
     /**
+     * Gets Api Version.
+     *
+     * @return the apiVersion value.
+     */
+    String getApiVersion();
+
+    /**
      * Gets The HTTP pipeline to send requests through.
      *
      * @return the httpPipeline value.
@@ -162,25 +169,4 @@ public interface BillingManagementClient {
      * @return the AgreementsClient object.
      */
     AgreementsClient getAgreements();
-
-    /**
-     * Gets the ReservationsClient object to access its operations.
-     *
-     * @return the ReservationsClient object.
-     */
-    ReservationsClient getReservations();
-
-    /**
-     * Gets the EnrollmentAccountsClient object to access its operations.
-     *
-     * @return the EnrollmentAccountsClient object.
-     */
-    EnrollmentAccountsClient getEnrollmentAccounts();
-
-    /**
-     * Gets the BillingPeriodsClient object to access its operations.
-     *
-     * @return the BillingPeriodsClient object.
-     */
-    BillingPeriodsClient getBillingPeriods();
 }

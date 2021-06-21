@@ -180,14 +180,18 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
         if (customerName == null) {
             return Mono.error(new IllegalArgumentException("Parameter customerName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByCustomer(
-                            this.client.getEndpoint(), apiVersion, billingAccountName, customerName, accept, context))
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            billingAccountName,
+                            customerName,
+                            accept,
+                            context))
             .<PagedResponse<BillingPermissionsPropertiesInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -227,11 +231,16 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
         if (customerName == null) {
             return Mono.error(new IllegalArgumentException("Parameter customerName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByCustomer(this.client.getEndpoint(), apiVersion, billingAccountName, customerName, accept, context)
+            .listByCustomer(
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                customerName,
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -335,14 +344,17 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByBillingAccount(
-                            this.client.getEndpoint(), apiVersion, billingAccountName, accept, context))
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            billingAccountName,
+                            accept,
+                            context))
             .<PagedResponse<BillingPermissionsPropertiesInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -378,11 +390,11 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByBillingAccount(this.client.getEndpoint(), apiVersion, billingAccountName, accept, context)
+            .listByBillingAccount(
+                this.client.getEndpoint(), this.client.getApiVersion(), billingAccountName, accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -490,7 +502,6 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
             return Mono
                 .error(new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -498,7 +509,7 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
                     service
                         .listByInvoiceSections(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             invoiceSectionName,
@@ -549,13 +560,12 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
             return Mono
                 .error(new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .listByInvoiceSections(
                 this.client.getEndpoint(),
-                apiVersion,
+                this.client.getApiVersion(),
                 billingAccountName,
                 billingProfileName,
                 invoiceSectionName,
@@ -677,7 +687,6 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -685,7 +694,7 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
                     service
                         .listByBillingProfile(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             billingProfileName,
                             accept,
@@ -730,12 +739,16 @@ public final class BillingPermissionsClientImpl implements BillingPermissionsCli
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .listByBillingProfile(
-                this.client.getEndpoint(), apiVersion, billingAccountName, billingProfileName, accept, context)
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                billingProfileName,
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(

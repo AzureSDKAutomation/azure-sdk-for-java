@@ -9,7 +9,6 @@ import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.AddDatePolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -17,6 +16,7 @@ import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
@@ -26,7 +26,6 @@ import com.azure.resourcemanager.billing.implementation.AgreementsImpl;
 import com.azure.resourcemanager.billing.implementation.AvailableBalancesImpl;
 import com.azure.resourcemanager.billing.implementation.BillingAccountsImpl;
 import com.azure.resourcemanager.billing.implementation.BillingManagementClientBuilder;
-import com.azure.resourcemanager.billing.implementation.BillingPeriodsImpl;
 import com.azure.resourcemanager.billing.implementation.BillingPermissionsImpl;
 import com.azure.resourcemanager.billing.implementation.BillingProfilesImpl;
 import com.azure.resourcemanager.billing.implementation.BillingPropertiesImpl;
@@ -34,20 +33,17 @@ import com.azure.resourcemanager.billing.implementation.BillingRoleAssignmentsIm
 import com.azure.resourcemanager.billing.implementation.BillingRoleDefinitionsImpl;
 import com.azure.resourcemanager.billing.implementation.BillingSubscriptionsImpl;
 import com.azure.resourcemanager.billing.implementation.CustomersImpl;
-import com.azure.resourcemanager.billing.implementation.EnrollmentAccountsImpl;
 import com.azure.resourcemanager.billing.implementation.InstructionsImpl;
 import com.azure.resourcemanager.billing.implementation.InvoiceSectionsImpl;
 import com.azure.resourcemanager.billing.implementation.InvoicesImpl;
 import com.azure.resourcemanager.billing.implementation.OperationsImpl;
 import com.azure.resourcemanager.billing.implementation.PoliciesImpl;
 import com.azure.resourcemanager.billing.implementation.ProductsImpl;
-import com.azure.resourcemanager.billing.implementation.ReservationsImpl;
 import com.azure.resourcemanager.billing.implementation.TransactionsImpl;
 import com.azure.resourcemanager.billing.models.Address;
 import com.azure.resourcemanager.billing.models.Agreements;
 import com.azure.resourcemanager.billing.models.AvailableBalances;
 import com.azure.resourcemanager.billing.models.BillingAccounts;
-import com.azure.resourcemanager.billing.models.BillingPeriods;
 import com.azure.resourcemanager.billing.models.BillingPermissions;
 import com.azure.resourcemanager.billing.models.BillingProfiles;
 import com.azure.resourcemanager.billing.models.BillingProperties;
@@ -55,14 +51,12 @@ import com.azure.resourcemanager.billing.models.BillingRoleAssignments;
 import com.azure.resourcemanager.billing.models.BillingRoleDefinitions;
 import com.azure.resourcemanager.billing.models.BillingSubscriptions;
 import com.azure.resourcemanager.billing.models.Customers;
-import com.azure.resourcemanager.billing.models.EnrollmentAccounts;
 import com.azure.resourcemanager.billing.models.Instructions;
 import com.azure.resourcemanager.billing.models.InvoiceSections;
 import com.azure.resourcemanager.billing.models.Invoices;
 import com.azure.resourcemanager.billing.models.Operations;
 import com.azure.resourcemanager.billing.models.Policies;
 import com.azure.resourcemanager.billing.models.Products;
-import com.azure.resourcemanager.billing.models.Reservations;
 import com.azure.resourcemanager.billing.models.Transactions;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -108,12 +102,6 @@ public final class BillingManager {
 
     private Agreements agreements;
 
-    private Reservations reservations;
-
-    private EnrollmentAccounts enrollmentAccounts;
-
-    private BillingPeriods billingPeriods;
-
     private final BillingManagementClient clientObject;
 
     private BillingManager(HttpPipeline httpPipeline, AzureProfile profile, Duration defaultPollInterval) {
@@ -157,6 +145,7 @@ public final class BillingManager {
         private HttpClient httpClient;
         private HttpLogOptions httpLogOptions;
         private final List<HttpPipelinePolicy> policies = new ArrayList<>();
+        private final List<String> scopes = new ArrayList<>();
         private RetryPolicy retryPolicy;
         private Duration defaultPollInterval;
 
@@ -193,6 +182,17 @@ public final class BillingManager {
          */
         public Configurable withPolicy(HttpPipelinePolicy policy) {
             this.policies.add(Objects.requireNonNull(policy, "'policy' cannot be null."));
+            return this;
+        }
+
+        /**
+         * Adds the scope to permission sets.
+         *
+         * @param scope the scope.
+         * @return the configurable object itself.
+         */
+        public Configurable withScope(String scope) {
+            this.scopes.add(Objects.requireNonNull(scope, "'scope' cannot be null."));
             return this;
         }
 
@@ -252,6 +252,9 @@ public final class BillingManager {
                 userAgentBuilder.append(" (auto-generated)");
             }
 
+            if (scopes.isEmpty()) {
+                scopes.add(profile.getEnvironment().getManagementEndpoint() + "/.default");
+            }
             if (retryPolicy == null) {
                 retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
             }
@@ -261,10 +264,7 @@ public final class BillingManager {
             HttpPolicyProviders.addBeforeRetryPolicies(policies);
             policies.add(retryPolicy);
             policies.add(new AddDatePolicy());
-            policies
-                .add(
-                    new BearerTokenAuthenticationPolicy(
-                        credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
+            policies.add(new ArmChallengeAuthenticationPolicy(credential, scopes.toArray(new String[0])));
             policies.addAll(this.policies);
             HttpPolicyProviders.addAfterRetryPolicies(policies);
             policies.add(new HttpLoggingPolicy(httpLogOptions));
@@ -421,30 +421,6 @@ public final class BillingManager {
             this.agreements = new AgreementsImpl(clientObject.getAgreements(), this);
         }
         return agreements;
-    }
-
-    /** @return Resource collection API of Reservations. */
-    public Reservations reservations() {
-        if (this.reservations == null) {
-            this.reservations = new ReservationsImpl(clientObject.getReservations(), this);
-        }
-        return reservations;
-    }
-
-    /** @return Resource collection API of EnrollmentAccounts. */
-    public EnrollmentAccounts enrollmentAccounts() {
-        if (this.enrollmentAccounts == null) {
-            this.enrollmentAccounts = new EnrollmentAccountsImpl(clientObject.getEnrollmentAccounts(), this);
-        }
-        return enrollmentAccounts;
-    }
-
-    /** @return Resource collection API of BillingPeriods. */
-    public BillingPeriods billingPeriods() {
-        if (this.billingPeriods == null) {
-            this.billingPeriods = new BillingPeriodsImpl(clientObject.getBillingPeriods(), this);
-        }
-        return billingPeriods;
     }
 
     /**

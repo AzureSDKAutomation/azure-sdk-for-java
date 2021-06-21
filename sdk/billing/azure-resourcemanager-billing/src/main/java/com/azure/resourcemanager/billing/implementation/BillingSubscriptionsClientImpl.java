@@ -248,14 +248,18 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
         if (customerName == null) {
             return Mono.error(new IllegalArgumentException("Parameter customerName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByCustomer(
-                            this.client.getEndpoint(), billingAccountName, customerName, apiVersion, accept, context))
+                            this.client.getEndpoint(),
+                            billingAccountName,
+                            customerName,
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
             .<PagedResponse<BillingSubscriptionInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -296,11 +300,16 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
         if (customerName == null) {
             return Mono.error(new IllegalArgumentException("Parameter customerName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByCustomer(this.client.getEndpoint(), billingAccountName, customerName, apiVersion, accept, context)
+            .listByCustomer(
+                this.client.getEndpoint(),
+                billingAccountName,
+                customerName,
+                this.client.getApiVersion(),
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -407,14 +416,17 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByBillingAccount(
-                            this.client.getEndpoint(), billingAccountName, apiVersion, accept, context))
+                            this.client.getEndpoint(),
+                            billingAccountName,
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
             .<PagedResponse<BillingSubscriptionInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -451,11 +463,11 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByBillingAccount(this.client.getEndpoint(), billingAccountName, apiVersion, accept, context)
+            .listByBillingAccount(
+                this.client.getEndpoint(), billingAccountName, this.client.getApiVersion(), accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -561,7 +573,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -571,7 +582,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                             this.client.getEndpoint(),
                             billingAccountName,
                             billingProfileName,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             accept,
                             context))
             .<PagedResponse<BillingSubscriptionInner>>map(
@@ -615,12 +626,16 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
             return Mono
                 .error(new IllegalArgumentException("Parameter billingProfileName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .listByBillingProfile(
-                this.client.getEndpoint(), billingAccountName, billingProfileName, apiVersion, accept, context)
+                this.client.getEndpoint(),
+                billingAccountName,
+                billingProfileName,
+                this.client.getApiVersion(),
+                accept,
+                context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -739,7 +754,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
             return Mono
                 .error(new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -750,7 +764,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                             billingAccountName,
                             billingProfileName,
                             invoiceSectionName,
-                            apiVersion,
+                            this.client.getApiVersion(),
                             accept,
                             context))
             .<PagedResponse<BillingSubscriptionInner>>map(
@@ -799,7 +813,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
             return Mono
                 .error(new IllegalArgumentException("Parameter invoiceSectionName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -808,7 +821,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                 billingAccountName,
                 billingProfileName,
                 invoiceSectionName,
-                apiVersion,
+                this.client.getApiVersion(),
                 accept,
                 context)
             .map(
@@ -932,7 +945,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -942,7 +954,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                             this.client.getEndpoint(),
                             billingAccountName,
                             this.client.getSubscriptionId(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -977,7 +989,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -985,7 +996,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                 this.client.getEndpoint(),
                 billingAccountName,
                 this.client.getSubscriptionId(),
-                apiVersion,
+                this.client.getApiVersion(),
                 accept,
                 context);
     }
@@ -1079,7 +1090,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1089,7 +1099,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                             this.client.getEndpoint(),
                             billingAccountName,
                             this.client.getSubscriptionId(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             parameters,
                             accept,
                             context))
@@ -1132,7 +1142,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1140,7 +1149,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                 this.client.getEndpoint(),
                 billingAccountName,
                 this.client.getSubscriptionId(),
-                apiVersion,
+                this.client.getApiVersion(),
                 parameters,
                 accept,
                 context);
@@ -1240,7 +1249,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1250,7 +1258,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                             this.client.getEndpoint(),
                             billingAccountName,
                             this.client.getSubscriptionId(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             parameters,
                             accept,
                             context))
@@ -1294,7 +1302,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1302,7 +1309,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                 this.client.getEndpoint(),
                 billingAccountName,
                 this.client.getSubscriptionId(),
-                apiVersion,
+                this.client.getApiVersion(),
                 parameters,
                 accept,
                 context);
@@ -1510,7 +1517,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1520,7 +1526,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                             this.client.getEndpoint(),
                             billingAccountName,
                             this.client.getSubscriptionId(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             parameters,
                             accept,
                             context))
@@ -1563,7 +1569,6 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
         } else {
             parameters.validate();
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1571,7 +1576,7 @@ public final class BillingSubscriptionsClientImpl implements BillingSubscription
                 this.client.getEndpoint(),
                 billingAccountName,
                 this.client.getSubscriptionId(),
-                apiVersion,
+                this.client.getApiVersion(),
                 parameters,
                 accept,
                 context);

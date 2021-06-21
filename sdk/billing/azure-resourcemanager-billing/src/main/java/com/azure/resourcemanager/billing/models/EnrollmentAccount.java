@@ -37,12 +37,6 @@ public class EnrollmentAccount extends ProxyResource {
     private String accountOwner;
 
     /*
-     * The enrollment account owner email address.
-     */
-    @JsonProperty(value = "properties.accountOwnerEmail")
-    private String accountOwnerEmail;
-
-    /*
      * The status of the enrollment account.
      */
     @JsonProperty(value = "properties.status")
@@ -124,26 +118,6 @@ public class EnrollmentAccount extends ProxyResource {
      */
     public EnrollmentAccount withAccountOwner(String accountOwner) {
         this.accountOwner = accountOwner;
-        return this;
-    }
-
-    /**
-     * Get the accountOwnerEmail property: The enrollment account owner email address.
-     *
-     * @return the accountOwnerEmail value.
-     */
-    public String accountOwnerEmail() {
-        return this.accountOwnerEmail;
-    }
-
-    /**
-     * Set the accountOwnerEmail property: The enrollment account owner email address.
-     *
-     * @param accountOwnerEmail the accountOwnerEmail value to set.
-     * @return the EnrollmentAccount object itself.
-     */
-    public EnrollmentAccount withAccountOwnerEmail(String accountOwnerEmail) {
-        this.accountOwnerEmail = accountOwnerEmail;
         return this;
     }
 

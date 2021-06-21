@@ -118,14 +118,18 @@ public final class AgreementsClientImpl implements AgreementsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
                         .listByBillingAccount(
-                            this.client.getEndpoint(), apiVersion, billingAccountName, expand, accept, context))
+                            this.client.getEndpoint(),
+                            this.client.getApiVersion(),
+                            billingAccountName,
+                            expand,
+                            accept,
+                            context))
             .<PagedResponse<AgreementInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -162,11 +166,11 @@ public final class AgreementsClientImpl implements AgreementsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter billingAccountName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByBillingAccount(this.client.getEndpoint(), apiVersion, billingAccountName, expand, accept, context)
+            .listByBillingAccount(
+                this.client.getEndpoint(), this.client.getApiVersion(), billingAccountName, expand, accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
@@ -290,7 +294,6 @@ public final class AgreementsClientImpl implements AgreementsClient {
         if (agreementName == null) {
             return Mono.error(new IllegalArgumentException("Parameter agreementName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -298,7 +301,7 @@ public final class AgreementsClientImpl implements AgreementsClient {
                     service
                         .get(
                             this.client.getEndpoint(),
-                            apiVersion,
+                            this.client.getApiVersion(),
                             billingAccountName,
                             agreementName,
                             expand,
@@ -335,11 +338,17 @@ public final class AgreementsClientImpl implements AgreementsClient {
         if (agreementName == null) {
             return Mono.error(new IllegalArgumentException("Parameter agreementName is required and cannot be null."));
         }
-        final String apiVersion = "2020-05-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .get(this.client.getEndpoint(), apiVersion, billingAccountName, agreementName, expand, accept, context);
+            .get(
+                this.client.getEndpoint(),
+                this.client.getApiVersion(),
+                billingAccountName,
+                agreementName,
+                expand,
+                accept,
+                context);
     }
 
     /**

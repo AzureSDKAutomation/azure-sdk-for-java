@@ -89,12 +89,6 @@ public class BillingAccountInner extends ProxyResource {
     @JsonProperty(value = "properties.hasReadAccess", access = JsonProperty.Access.WRITE_ONLY)
     private Boolean hasReadAccess;
 
-    /*
-     * Notification email address, only for legacy accounts
-     */
-    @JsonProperty(value = "properties.notificationEmailAddress")
-    private String notificationEmailAddress;
-
     /**
      * Get the displayName property: The billing account name.
      *
@@ -243,26 +237,6 @@ public class BillingAccountInner extends ProxyResource {
      */
     public Boolean hasReadAccess() {
         return this.hasReadAccess;
-    }
-
-    /**
-     * Get the notificationEmailAddress property: Notification email address, only for legacy accounts.
-     *
-     * @return the notificationEmailAddress value.
-     */
-    public String notificationEmailAddress() {
-        return this.notificationEmailAddress;
-    }
-
-    /**
-     * Set the notificationEmailAddress property: Notification email address, only for legacy accounts.
-     *
-     * @param notificationEmailAddress the notificationEmailAddress value to set.
-     * @return the BillingAccountInner object itself.
-     */
-    public BillingAccountInner withNotificationEmailAddress(String notificationEmailAddress) {
-        this.notificationEmailAddress = notificationEmailAddress;
-        return this;
     }
 
     /**

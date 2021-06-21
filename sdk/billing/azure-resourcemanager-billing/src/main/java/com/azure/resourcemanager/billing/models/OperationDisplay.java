@@ -33,12 +33,6 @@ public final class OperationDisplay {
     @JsonProperty(value = "operation", access = JsonProperty.Access.WRITE_ONLY)
     private String operation;
 
-    /*
-     * Description of operation.
-     */
-    @JsonProperty(value = "description", access = JsonProperty.Access.WRITE_ONLY)
-    private String description;
-
     /**
      * Get the provider property: Service provider: Microsoft.Billing.
      *
@@ -64,15 +58,6 @@ public final class OperationDisplay {
      */
     public String operation() {
         return this.operation;
-    }
-
-    /**
-     * Get the description property: Description of operation.
-     *
-     * @return the description value.
-     */
-    public String description() {
-        return this.description;
     }
 
     /**
