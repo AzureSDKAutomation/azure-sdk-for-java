@@ -9,10 +9,13 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.devtestlabs.fluent.models.LabInner;
+import com.azure.resourcemanager.devtestlabs.models.EnableStatus;
+import com.azure.resourcemanager.devtestlabs.models.Encryption;
 import com.azure.resourcemanager.devtestlabs.models.EnvironmentPermission;
 import com.azure.resourcemanager.devtestlabs.models.ExportResourceUsageParameters;
 import com.azure.resourcemanager.devtestlabs.models.GenerateUploadUriParameter;
 import com.azure.resourcemanager.devtestlabs.models.GenerateUploadUriResponse;
+import com.azure.resourcemanager.devtestlabs.models.IdentityProperties;
 import com.azure.resourcemanager.devtestlabs.models.ImportLabVirtualMachineRequest;
 import com.azure.resourcemanager.devtestlabs.models.Lab;
 import com.azure.resourcemanager.devtestlabs.models.LabAnnouncementProperties;
@@ -55,6 +58,10 @@ public final class LabImpl implements Lab, Lab.Definition, Lab.Update {
         } else {
             return Collections.emptyMap();
         }
+    }
+
+    public IdentityProperties identity() {
+        return this.innerModel().identity();
     }
 
     public String defaultStorageAccount() {
@@ -119,8 +126,8 @@ public final class LabImpl implements Lab, Lab.Definition, Lab.Update {
         return this.innerModel().support();
     }
 
-    public String vmCreationResourceGroup() {
-        return this.innerModel().vmCreationResourceGroup();
+    public String vmCreationResourceGroupId() {
+        return this.innerModel().vmCreationResourceGroupId();
     }
 
     public String publicIpId() {
@@ -142,6 +149,31 @@ public final class LabImpl implements Lab, Lab.Definition, Lab.Update {
         } else {
             return Collections.emptyMap();
         }
+    }
+
+    public EnableStatus browserConnect() {
+        return this.innerModel().browserConnect();
+    }
+
+    public Boolean disableAutoUpgradeCseMinorVersion() {
+        return this.innerModel().disableAutoUpgradeCseMinorVersion();
+    }
+
+    public Map<String, Object> managementIdentities() {
+        Map<String, Object> inner = this.innerModel().managementIdentities();
+        if (inner != null) {
+            return Collections.unmodifiableMap(inner);
+        } else {
+            return Collections.emptyMap();
+        }
+    }
+
+    public EnableStatus isolateLabResources() {
+        return this.innerModel().isolateLabResources();
+    }
+
+    public Encryption encryption() {
+        return this.innerModel().encryption();
     }
 
     public String provisioningState() {
@@ -274,6 +306,14 @@ public final class LabImpl implements Lab, Lab.Definition, Lab.Update {
         serviceManager.labs().createEnvironment(resourceGroupName, name, labVirtualMachineCreationParameter, context);
     }
 
+    public void ensureCurrentUserProfile() {
+        serviceManager.labs().ensureCurrentUserProfile(resourceGroupName, name);
+    }
+
+    public Response<Void> ensureCurrentUserProfileWithResponse(Context context) {
+        return serviceManager.labs().ensureCurrentUserProfileWithResponse(resourceGroupName, name, context);
+    }
+
     public void exportResourceUsage(ExportResourceUsageParameters exportResourceUsageParameters) {
         serviceManager.labs().exportResourceUsage(resourceGroupName, name, exportResourceUsageParameters);
     }
@@ -329,6 +369,16 @@ public final class LabImpl implements Lab, Lab.Definition, Lab.Update {
         }
     }
 
+    public LabImpl withIdentity(IdentityProperties identity) {
+        this.innerModel().withIdentity(identity);
+        return this;
+    }
+
+    public LabImpl withArtifactsStorageAccount(String artifactsStorageAccount) {
+        this.innerModel().withArtifactsStorageAccount(artifactsStorageAccount);
+        return this;
+    }
+
     public LabImpl withLabStorageType(StorageType labStorageType) {
         this.innerModel().withLabStorageType(labStorageType);
         return this;
@@ -364,8 +414,38 @@ public final class LabImpl implements Lab, Lab.Definition, Lab.Update {
         return this;
     }
 
+    public LabImpl withVmCreationResourceGroupId(String vmCreationResourceGroupId) {
+        this.innerModel().withVmCreationResourceGroupId(vmCreationResourceGroupId);
+        return this;
+    }
+
     public LabImpl withExtendedProperties(Map<String, String> extendedProperties) {
         this.innerModel().withExtendedProperties(extendedProperties);
+        return this;
+    }
+
+    public LabImpl withBrowserConnect(EnableStatus browserConnect) {
+        this.innerModel().withBrowserConnect(browserConnect);
+        return this;
+    }
+
+    public LabImpl withDisableAutoUpgradeCseMinorVersion(Boolean disableAutoUpgradeCseMinorVersion) {
+        this.innerModel().withDisableAutoUpgradeCseMinorVersion(disableAutoUpgradeCseMinorVersion);
+        return this;
+    }
+
+    public LabImpl withManagementIdentities(Map<String, Object> managementIdentities) {
+        this.innerModel().withManagementIdentities(managementIdentities);
+        return this;
+    }
+
+    public LabImpl withIsolateLabResources(EnableStatus isolateLabResources) {
+        this.innerModel().withIsolateLabResources(isolateLabResources);
+        return this;
+    }
+
+    public LabImpl withEncryption(Encryption encryption) {
+        this.innerModel().withEncryption(encryption);
         return this;
     }
 

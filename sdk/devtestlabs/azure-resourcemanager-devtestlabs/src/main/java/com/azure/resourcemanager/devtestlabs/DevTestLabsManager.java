@@ -9,7 +9,6 @@ import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.AddDatePolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -17,6 +16,7 @@ import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
@@ -24,6 +24,7 @@ import com.azure.resourcemanager.devtestlabs.fluent.DevTestLabsClient;
 import com.azure.resourcemanager.devtestlabs.implementation.ArmTemplatesImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.ArtifactSourcesImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.ArtifactsImpl;
+import com.azure.resourcemanager.devtestlabs.implementation.BastionHostsImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.CostsImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.CustomImagesImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.DevTestLabsClientBuilder;
@@ -43,13 +44,17 @@ import com.azure.resourcemanager.devtestlabs.implementation.SecretsImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.ServiceFabricSchedulesImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.ServiceFabricsImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.ServiceRunnersImpl;
+import com.azure.resourcemanager.devtestlabs.implementation.SharedGalleriesImpl;
+import com.azure.resourcemanager.devtestlabs.implementation.SharedImagesImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.UsersImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.VirtualMachineSchedulesImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.VirtualMachinesImpl;
 import com.azure.resourcemanager.devtestlabs.implementation.VirtualNetworksImpl;
+import com.azure.resourcemanager.devtestlabs.implementation.VmPoolsImpl;
 import com.azure.resourcemanager.devtestlabs.models.ArmTemplates;
 import com.azure.resourcemanager.devtestlabs.models.ArtifactSources;
 import com.azure.resourcemanager.devtestlabs.models.Artifacts;
+import com.azure.resourcemanager.devtestlabs.models.BastionHosts;
 import com.azure.resourcemanager.devtestlabs.models.Costs;
 import com.azure.resourcemanager.devtestlabs.models.CustomImages;
 import com.azure.resourcemanager.devtestlabs.models.Disks;
@@ -68,10 +73,13 @@ import com.azure.resourcemanager.devtestlabs.models.Secrets;
 import com.azure.resourcemanager.devtestlabs.models.ServiceFabricSchedules;
 import com.azure.resourcemanager.devtestlabs.models.ServiceFabrics;
 import com.azure.resourcemanager.devtestlabs.models.ServiceRunners;
+import com.azure.resourcemanager.devtestlabs.models.SharedGalleries;
+import com.azure.resourcemanager.devtestlabs.models.SharedImages;
 import com.azure.resourcemanager.devtestlabs.models.Users;
 import com.azure.resourcemanager.devtestlabs.models.VirtualMachineSchedules;
 import com.azure.resourcemanager.devtestlabs.models.VirtualMachines;
 import com.azure.resourcemanager.devtestlabs.models.VirtualNetworks;
+import com.azure.resourcemanager.devtestlabs.models.VmPools;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -112,6 +120,10 @@ public final class DevTestLabsManager {
 
     private ServiceRunners serviceRunners;
 
+    private SharedGalleries sharedGalleries;
+
+    private SharedImages sharedImages;
+
     private Users users;
 
     private Disks disks;
@@ -129,6 +141,10 @@ public final class DevTestLabsManager {
     private VirtualMachineSchedules virtualMachineSchedules;
 
     private VirtualNetworks virtualNetworks;
+
+    private BastionHosts bastionHosts;
+
+    private VmPools vmPools;
 
     private final DevTestLabsClient clientObject;
 
@@ -173,6 +189,7 @@ public final class DevTestLabsManager {
         private HttpClient httpClient;
         private HttpLogOptions httpLogOptions;
         private final List<HttpPipelinePolicy> policies = new ArrayList<>();
+        private final List<String> scopes = new ArrayList<>();
         private RetryPolicy retryPolicy;
         private Duration defaultPollInterval;
 
@@ -209,6 +226,17 @@ public final class DevTestLabsManager {
          */
         public Configurable withPolicy(HttpPipelinePolicy policy) {
             this.policies.add(Objects.requireNonNull(policy, "'policy' cannot be null."));
+            return this;
+        }
+
+        /**
+         * Adds the scope to permission sets.
+         *
+         * @param scope the scope.
+         * @return the configurable object itself.
+         */
+        public Configurable withScope(String scope) {
+            this.scopes.add(Objects.requireNonNull(scope, "'scope' cannot be null."));
             return this;
         }
 
@@ -268,6 +296,9 @@ public final class DevTestLabsManager {
                 userAgentBuilder.append(" (auto-generated)");
             }
 
+            if (scopes.isEmpty()) {
+                scopes.add(profile.getEnvironment().getManagementEndpoint() + "/.default");
+            }
             if (retryPolicy == null) {
                 retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
             }
@@ -277,10 +308,7 @@ public final class DevTestLabsManager {
             HttpPolicyProviders.addBeforeRetryPolicies(policies);
             policies.add(retryPolicy);
             policies.add(new AddDatePolicy());
-            policies
-                .add(
-                    new BearerTokenAuthenticationPolicy(
-                        credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
+            policies.add(new ArmChallengeAuthenticationPolicy(credential, scopes.toArray(new String[0])));
             policies.addAll(this.policies);
             HttpPolicyProviders.addAfterRetryPolicies(policies);
             policies.add(new HttpLoggingPolicy(httpLogOptions));
@@ -421,6 +449,22 @@ public final class DevTestLabsManager {
         return serviceRunners;
     }
 
+    /** @return Resource collection API of SharedGalleries. */
+    public SharedGalleries sharedGalleries() {
+        if (this.sharedGalleries == null) {
+            this.sharedGalleries = new SharedGalleriesImpl(clientObject.getSharedGalleries(), this);
+        }
+        return sharedGalleries;
+    }
+
+    /** @return Resource collection API of SharedImages. */
+    public SharedImages sharedImages() {
+        if (this.sharedImages == null) {
+            this.sharedImages = new SharedImagesImpl(clientObject.getSharedImages(), this);
+        }
+        return sharedImages;
+    }
+
     /** @return Resource collection API of Users. */
     public Users users() {
         if (this.users == null) {
@@ -493,6 +537,22 @@ public final class DevTestLabsManager {
             this.virtualNetworks = new VirtualNetworksImpl(clientObject.getVirtualNetworks(), this);
         }
         return virtualNetworks;
+    }
+
+    /** @return Resource collection API of BastionHosts. */
+    public BastionHosts bastionHosts() {
+        if (this.bastionHosts == null) {
+            this.bastionHosts = new BastionHostsImpl(clientObject.getBastionHosts(), this);
+        }
+        return bastionHosts;
+    }
+
+    /** @return Resource collection API of VmPools. */
+    public VmPools vmPools() {
+        if (this.vmPools == null) {
+            this.vmPools = new VmPoolsImpl(clientObject.getVmPools(), this);
+        }
+        return vmPools;
     }
 
     /**

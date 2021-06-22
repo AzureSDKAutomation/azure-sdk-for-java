@@ -37,9 +37,9 @@ public final class ServiceRunnersImpl implements ServiceRunners {
     }
 
     public Response<ServiceRunner> getWithResponse(
-        String resourceGroupName, String labName, String name, Context context) {
+        String resourceGroupName, String labName, String name, String expand, Context context) {
         Response<ServiceRunnerInner> inner =
-            this.serviceClient().getWithResponse(resourceGroupName, labName, name, context);
+            this.serviceClient().getWithResponse(resourceGroupName, labName, name, expand, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -55,8 +55,8 @@ public final class ServiceRunnersImpl implements ServiceRunners {
         this.serviceClient().delete(resourceGroupName, labName, name);
     }
 
-    public Response<Void> deleteWithResponse(String resourceGroupName, String labName, String name, Context context) {
-        return this.serviceClient().deleteWithResponse(resourceGroupName, labName, name, context);
+    public void delete(String resourceGroupName, String labName, String name, Context context) {
+        this.serviceClient().delete(resourceGroupName, labName, name, context);
     }
 
     public ServiceRunner getById(String id) {
@@ -83,10 +83,11 @@ public final class ServiceRunnersImpl implements ServiceRunners {
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'servicerunners'.", id)));
         }
-        return this.getWithResponse(resourceGroupName, labName, name, Context.NONE).getValue();
+        String localExpand = null;
+        return this.getWithResponse(resourceGroupName, labName, name, localExpand, Context.NONE).getValue();
     }
 
-    public Response<ServiceRunner> getByIdWithResponse(String id, Context context) {
+    public Response<ServiceRunner> getByIdWithResponse(String id, String expand, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw logger
@@ -110,7 +111,7 @@ public final class ServiceRunnersImpl implements ServiceRunners {
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'servicerunners'.", id)));
         }
-        return this.getWithResponse(resourceGroupName, labName, name, context);
+        return this.getWithResponse(resourceGroupName, labName, name, expand, context);
     }
 
     public void deleteById(String id) {
@@ -137,10 +138,10 @@ public final class ServiceRunnersImpl implements ServiceRunners {
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'servicerunners'.", id)));
         }
-        this.deleteWithResponse(resourceGroupName, labName, name, Context.NONE).getValue();
+        this.delete(resourceGroupName, labName, name, Context.NONE);
     }
 
-    public Response<Void> deleteByIdWithResponse(String id, Context context) {
+    public void deleteByIdWithResponse(String id, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw logger
@@ -164,7 +165,7 @@ public final class ServiceRunnersImpl implements ServiceRunners {
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'servicerunners'.", id)));
         }
-        return this.deleteWithResponse(resourceGroupName, labName, name, context);
+        this.delete(resourceGroupName, labName, name, context);
     }
 
     private ServiceRunnersClient serviceClient() {

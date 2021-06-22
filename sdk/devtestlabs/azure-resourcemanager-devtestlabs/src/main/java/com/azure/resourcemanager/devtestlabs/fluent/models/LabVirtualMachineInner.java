@@ -77,6 +77,26 @@ public class LabVirtualMachineInner extends Resource {
     private String customImageId;
 
     /*
+     * The shared gallery image version resource identifier of the virtual
+     * machine.
+     */
+    @JsonProperty(value = "properties.galleryImageVersionId")
+    private String galleryImageVersionId;
+
+    /*
+     * The shared image resource identifier of the virtual machine.
+     */
+    @JsonProperty(value = "properties.sharedImageId")
+    private String sharedImageId;
+
+    /*
+     * The shared image version for the specified shared image Id. Will use
+     * latest if not specified.
+     */
+    @JsonProperty(value = "properties.sharedImageVersion")
+    private String sharedImageVersion;
+
+    /*
      * The OS type of the virtual machine.
      */
     @JsonProperty(value = "properties.osType", access = JsonProperty.Access.WRITE_ONLY)
@@ -163,6 +183,13 @@ public class LabVirtualMachineInner extends Resource {
     private String planId;
 
     /*
+     * Specifies the size of an empty data disk in gigabytes. This element can
+     * be used to overwrite the size of the disk in a virtual machine image.
+     */
+    @JsonProperty(value = "properties.osDiskSizeGb")
+    private Integer osDiskSizeGb;
+
+    /*
      * The compute virtual machine properties.
      */
     @JsonProperty(value = "properties.computeVm", access = JsonProperty.Access.WRITE_ONLY)
@@ -193,7 +220,8 @@ public class LabVirtualMachineInner extends Resource {
     private Boolean allowClaim;
 
     /*
-     * Storage type to use for virtual machine (i.e. Standard, Premium).
+     * Storage type to use for virtual machine (i.e. Standard, Premium,
+     * StandardSSD).
      */
     @JsonProperty(value = "properties.storageType")
     private String storageType;
@@ -229,6 +257,13 @@ public class LabVirtualMachineInner extends Resource {
      */
     @JsonProperty(value = "properties.lastKnownPowerState", access = JsonProperty.Access.WRITE_ONLY)
     private String lastKnownPowerState;
+
+    /*
+     * Flag to determine if apply artifacts can be triggered at the time of
+     * fetching the document.
+     */
+    @JsonProperty(value = "properties.canApplyArtifacts", access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean canApplyArtifacts;
 
     /*
      * The provisioning status of the resource.
@@ -366,6 +401,70 @@ public class LabVirtualMachineInner extends Resource {
      */
     public LabVirtualMachineInner withCustomImageId(String customImageId) {
         this.customImageId = customImageId;
+        return this;
+    }
+
+    /**
+     * Get the galleryImageVersionId property: The shared gallery image version resource identifier of the virtual
+     * machine.
+     *
+     * @return the galleryImageVersionId value.
+     */
+    public String galleryImageVersionId() {
+        return this.galleryImageVersionId;
+    }
+
+    /**
+     * Set the galleryImageVersionId property: The shared gallery image version resource identifier of the virtual
+     * machine.
+     *
+     * @param galleryImageVersionId the galleryImageVersionId value to set.
+     * @return the LabVirtualMachineInner object itself.
+     */
+    public LabVirtualMachineInner withGalleryImageVersionId(String galleryImageVersionId) {
+        this.galleryImageVersionId = galleryImageVersionId;
+        return this;
+    }
+
+    /**
+     * Get the sharedImageId property: The shared image resource identifier of the virtual machine.
+     *
+     * @return the sharedImageId value.
+     */
+    public String sharedImageId() {
+        return this.sharedImageId;
+    }
+
+    /**
+     * Set the sharedImageId property: The shared image resource identifier of the virtual machine.
+     *
+     * @param sharedImageId the sharedImageId value to set.
+     * @return the LabVirtualMachineInner object itself.
+     */
+    public LabVirtualMachineInner withSharedImageId(String sharedImageId) {
+        this.sharedImageId = sharedImageId;
+        return this;
+    }
+
+    /**
+     * Get the sharedImageVersion property: The shared image version for the specified shared image Id. Will use latest
+     * if not specified.
+     *
+     * @return the sharedImageVersion value.
+     */
+    public String sharedImageVersion() {
+        return this.sharedImageVersion;
+    }
+
+    /**
+     * Set the sharedImageVersion property: The shared image version for the specified shared image Id. Will use latest
+     * if not specified.
+     *
+     * @param sharedImageVersion the sharedImageVersion value to set.
+     * @return the LabVirtualMachineInner object itself.
+     */
+    public LabVirtualMachineInner withSharedImageVersion(String sharedImageVersion) {
+        this.sharedImageVersion = sharedImageVersion;
         return this;
     }
 
@@ -621,6 +720,28 @@ public class LabVirtualMachineInner extends Resource {
     }
 
     /**
+     * Get the osDiskSizeGb property: Specifies the size of an empty data disk in gigabytes. This element can be used to
+     * overwrite the size of the disk in a virtual machine image.
+     *
+     * @return the osDiskSizeGb value.
+     */
+    public Integer osDiskSizeGb() {
+        return this.osDiskSizeGb;
+    }
+
+    /**
+     * Set the osDiskSizeGb property: Specifies the size of an empty data disk in gigabytes. This element can be used to
+     * overwrite the size of the disk in a virtual machine image.
+     *
+     * @param osDiskSizeGb the osDiskSizeGb value to set.
+     * @return the LabVirtualMachineInner object itself.
+     */
+    public LabVirtualMachineInner withOsDiskSizeGb(Integer osDiskSizeGb) {
+        this.osDiskSizeGb = osDiskSizeGb;
+        return this;
+    }
+
+    /**
      * Get the computeVm property: The compute virtual machine properties.
      *
      * @return the computeVm value.
@@ -699,7 +820,7 @@ public class LabVirtualMachineInner extends Resource {
     }
 
     /**
-     * Get the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium).
+     * Get the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium, StandardSSD).
      *
      * @return the storageType value.
      */
@@ -708,7 +829,7 @@ public class LabVirtualMachineInner extends Resource {
     }
 
     /**
-     * Set the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium).
+     * Set the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium, StandardSSD).
      *
      * @param storageType the storageType value to set.
      * @return the LabVirtualMachineInner object itself.
@@ -795,6 +916,16 @@ public class LabVirtualMachineInner extends Resource {
      */
     public String lastKnownPowerState() {
         return this.lastKnownPowerState;
+    }
+
+    /**
+     * Get the canApplyArtifacts property: Flag to determine if apply artifacts can be triggered at the time of fetching
+     * the document.
+     *
+     * @return the canApplyArtifacts value.
+     */
+    public Boolean canApplyArtifacts() {
+        return this.canApplyArtifacts;
     }
 
     /**

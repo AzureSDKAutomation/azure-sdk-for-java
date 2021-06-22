@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 
 /** Properties of a managed identity. */
 @Fluent
@@ -15,7 +16,7 @@ public final class IdentityProperties {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(IdentityProperties.class);
 
     /*
-     * Managed identity.
+     * Type of identity (SystemAssigned, UserAssigned, None)
      */
     @JsonProperty(value = "type")
     private ManagedIdentityType type;
@@ -38,8 +39,14 @@ public final class IdentityProperties {
     @JsonProperty(value = "clientSecretUrl")
     private String clientSecretUrl;
 
+    /*
+     * If Type is 'UserAssigned': List of user assigned identities.
+     */
+    @JsonProperty(value = "userAssignedIdentities")
+    private Map<String, Object> userAssignedIdentities;
+
     /**
-     * Get the type property: Managed identity.
+     * Get the type property: Type of identity (SystemAssigned, UserAssigned, None).
      *
      * @return the type value.
      */
@@ -48,7 +55,7 @@ public final class IdentityProperties {
     }
 
     /**
-     * Set the type property: Managed identity.
+     * Set the type property: Type of identity (SystemAssigned, UserAssigned, None).
      *
      * @param type the type value to set.
      * @return the IdentityProperties object itself.
@@ -115,6 +122,26 @@ public final class IdentityProperties {
      */
     public IdentityProperties withClientSecretUrl(String clientSecretUrl) {
         this.clientSecretUrl = clientSecretUrl;
+        return this;
+    }
+
+    /**
+     * Get the userAssignedIdentities property: If Type is 'UserAssigned': List of user assigned identities.
+     *
+     * @return the userAssignedIdentities value.
+     */
+    public Map<String, Object> userAssignedIdentities() {
+        return this.userAssignedIdentities;
+    }
+
+    /**
+     * Set the userAssignedIdentities property: If Type is 'UserAssigned': List of user assigned identities.
+     *
+     * @param userAssignedIdentities the userAssignedIdentities value to set.
+     * @return the IdentityProperties object itself.
+     */
+    public IdentityProperties withUserAssignedIdentities(Map<String, Object> userAssignedIdentities) {
+        this.userAssignedIdentities = userAssignedIdentities;
         return this;
     }
 

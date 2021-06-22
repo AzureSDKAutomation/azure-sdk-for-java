@@ -74,6 +74,26 @@ public class LabVirtualMachineCreationParameter {
     private String customImageId;
 
     /*
+     * The shared gallery image version resource identifier of the virtual
+     * machine.
+     */
+    @JsonProperty(value = "properties.galleryImageVersionId")
+    private String galleryImageVersionId;
+
+    /*
+     * The shared image resource identifier of the virtual machine.
+     */
+    @JsonProperty(value = "properties.sharedImageId")
+    private String sharedImageId;
+
+    /*
+     * The shared image version for the specified shared image Id. Will use
+     * latest if not specified.
+     */
+    @JsonProperty(value = "properties.sharedImageVersion")
+    private String sharedImageVersion;
+
+    /*
      * The size of the virtual machine.
      */
     @JsonProperty(value = "properties.size")
@@ -142,6 +162,13 @@ public class LabVirtualMachineCreationParameter {
     private String planId;
 
     /*
+     * Specifies the size of an empty data disk in gigabytes. This element can
+     * be used to overwrite the size of the disk in a virtual machine image.
+     */
+    @JsonProperty(value = "properties.osDiskSizeGb")
+    private Integer osDiskSizeGb;
+
+    /*
      * The network interface properties.
      */
     @JsonProperty(value = "properties.networkInterface")
@@ -160,7 +187,8 @@ public class LabVirtualMachineCreationParameter {
     private Boolean allowClaim;
 
     /*
-     * Storage type to use for virtual machine (i.e. Standard, Premium).
+     * Storage type to use for virtual machine (i.e. Standard, Premium,
+     * StandardSSD).
      */
     @JsonProperty(value = "properties.storageType")
     private String storageType;
@@ -363,6 +391,70 @@ public class LabVirtualMachineCreationParameter {
      */
     public LabVirtualMachineCreationParameter withCustomImageId(String customImageId) {
         this.customImageId = customImageId;
+        return this;
+    }
+
+    /**
+     * Get the galleryImageVersionId property: The shared gallery image version resource identifier of the virtual
+     * machine.
+     *
+     * @return the galleryImageVersionId value.
+     */
+    public String galleryImageVersionId() {
+        return this.galleryImageVersionId;
+    }
+
+    /**
+     * Set the galleryImageVersionId property: The shared gallery image version resource identifier of the virtual
+     * machine.
+     *
+     * @param galleryImageVersionId the galleryImageVersionId value to set.
+     * @return the LabVirtualMachineCreationParameter object itself.
+     */
+    public LabVirtualMachineCreationParameter withGalleryImageVersionId(String galleryImageVersionId) {
+        this.galleryImageVersionId = galleryImageVersionId;
+        return this;
+    }
+
+    /**
+     * Get the sharedImageId property: The shared image resource identifier of the virtual machine.
+     *
+     * @return the sharedImageId value.
+     */
+    public String sharedImageId() {
+        return this.sharedImageId;
+    }
+
+    /**
+     * Set the sharedImageId property: The shared image resource identifier of the virtual machine.
+     *
+     * @param sharedImageId the sharedImageId value to set.
+     * @return the LabVirtualMachineCreationParameter object itself.
+     */
+    public LabVirtualMachineCreationParameter withSharedImageId(String sharedImageId) {
+        this.sharedImageId = sharedImageId;
+        return this;
+    }
+
+    /**
+     * Get the sharedImageVersion property: The shared image version for the specified shared image Id. Will use latest
+     * if not specified.
+     *
+     * @return the sharedImageVersion value.
+     */
+    public String sharedImageVersion() {
+        return this.sharedImageVersion;
+    }
+
+    /**
+     * Set the sharedImageVersion property: The shared image version for the specified shared image Id. Will use latest
+     * if not specified.
+     *
+     * @param sharedImageVersion the sharedImageVersion value to set.
+     * @return the LabVirtualMachineCreationParameter object itself.
+     */
+    public LabVirtualMachineCreationParameter withSharedImageVersion(String sharedImageVersion) {
+        this.sharedImageVersion = sharedImageVersion;
         return this;
     }
 
@@ -591,6 +683,28 @@ public class LabVirtualMachineCreationParameter {
     }
 
     /**
+     * Get the osDiskSizeGb property: Specifies the size of an empty data disk in gigabytes. This element can be used to
+     * overwrite the size of the disk in a virtual machine image.
+     *
+     * @return the osDiskSizeGb value.
+     */
+    public Integer osDiskSizeGb() {
+        return this.osDiskSizeGb;
+    }
+
+    /**
+     * Set the osDiskSizeGb property: Specifies the size of an empty data disk in gigabytes. This element can be used to
+     * overwrite the size of the disk in a virtual machine image.
+     *
+     * @param osDiskSizeGb the osDiskSizeGb value to set.
+     * @return the LabVirtualMachineCreationParameter object itself.
+     */
+    public LabVirtualMachineCreationParameter withOsDiskSizeGb(Integer osDiskSizeGb) {
+        this.osDiskSizeGb = osDiskSizeGb;
+        return this;
+    }
+
+    /**
      * Get the networkInterface property: The network interface properties.
      *
      * @return the networkInterface value.
@@ -651,7 +765,7 @@ public class LabVirtualMachineCreationParameter {
     }
 
     /**
-     * Get the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium).
+     * Get the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium, StandardSSD).
      *
      * @return the storageType value.
      */
@@ -660,7 +774,7 @@ public class LabVirtualMachineCreationParameter {
     }
 
     /**
-     * Set the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium).
+     * Set the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium, StandardSSD).
      *
      * @param storageType the storageType value to set.
      * @return the LabVirtualMachineCreationParameter object itself.

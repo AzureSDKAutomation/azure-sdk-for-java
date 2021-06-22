@@ -30,7 +30,7 @@ public final class DataDiskProperties {
      * Caching option for a data disk (i.e. None, ReadOnly, ReadWrite).
      */
     @JsonProperty(value = "hostCaching")
-    private HostCachingOptions hostCaching;
+    private HostCachingOption hostCaching;
 
     /**
      * Get the attachNewDataDiskOptions property: Specifies options to attach a new disk to the virtual machine.
@@ -77,7 +77,7 @@ public final class DataDiskProperties {
      *
      * @return the hostCaching value.
      */
-    public HostCachingOptions hostCaching() {
+    public HostCachingOption hostCaching() {
         return this.hostCaching;
     }
 
@@ -87,7 +87,7 @@ public final class DataDiskProperties {
      * @param hostCaching the hostCaching value to set.
      * @return the DataDiskProperties object itself.
      */
-    public DataDiskProperties withHostCaching(HostCachingOptions hostCaching) {
+    public DataDiskProperties withHostCaching(HostCachingOption hostCaching) {
         this.hostCaching = hostCaching;
         return this;
     }

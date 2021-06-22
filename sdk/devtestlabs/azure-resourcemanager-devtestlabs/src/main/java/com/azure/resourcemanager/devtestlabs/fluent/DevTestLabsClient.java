@@ -157,6 +157,20 @@ public interface DevTestLabsClient {
     ServiceRunnersClient getServiceRunners();
 
     /**
+     * Gets the SharedGalleriesClient object to access its operations.
+     *
+     * @return the SharedGalleriesClient object.
+     */
+    SharedGalleriesClient getSharedGalleries();
+
+    /**
+     * Gets the SharedImagesClient object to access its operations.
+     *
+     * @return the SharedImagesClient object.
+     */
+    SharedImagesClient getSharedImages();
+
+    /**
      * Gets the UsersClient object to access its operations.
      *
      * @return the UsersClient object.
@@ -218,4 +232,18 @@ public interface DevTestLabsClient {
      * @return the VirtualNetworksClient object.
      */
     VirtualNetworksClient getVirtualNetworks();
+
+    /**
+     * Gets the BastionHostsClient object to access its operations.
+     *
+     * @return the BastionHostsClient object.
+     */
+    BastionHostsClient getBastionHosts();
+
+    /**
+     * Gets the VmPoolsClient object to access its operations.
+     *
+     * @return the VmPoolsClient object.
+     */
+    VmPoolsClient getVmPools();
 }
