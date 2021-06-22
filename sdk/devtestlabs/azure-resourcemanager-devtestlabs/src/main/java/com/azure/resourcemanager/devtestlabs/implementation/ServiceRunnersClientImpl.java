@@ -22,11 +22,16 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.devtestlabs.fluent.ServiceRunnersClient;
 import com.azure.resourcemanager.devtestlabs.fluent.models.ServiceRunnerInner;
+import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in ServiceRunnersClient. */
@@ -69,6 +74,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("labName") String labName,
             @PathParam("name") String name,
+            @QueryParam("$expand") String expand,
             @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
             Context context);
@@ -79,7 +85,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
                 + "/{labName}/servicerunners/{name}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<ServiceRunnerInner>> createOrUpdate(
+        Mono<Response<Flux<ByteBuffer>>> createOrUpdate(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
@@ -94,9 +100,9 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
         @Delete(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs"
                 + "/{labName}/servicerunners/{name}")
-        @ExpectedResponses({200, 204})
+        @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Void>> delete(
+        Mono<Response<Flux<ByteBuffer>>> delete(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
@@ -113,6 +119,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
      * @param name The name of the service runner.
+     * @param expand Specify the $expand query. Example: 'properties($select=identityUsageType)'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -120,7 +127,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ServiceRunnerInner>> getWithResponseAsync(
-        String resourceGroupName, String labName, String name) {
+        String resourceGroupName, String labName, String name, String expand) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -154,6 +161,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
                             resourceGroupName,
                             labName,
                             name,
+                            expand,
                             this.client.getApiVersion(),
                             accept,
                             context))
@@ -166,6 +174,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
      * @param name The name of the service runner.
+     * @param expand Specify the $expand query. Example: 'properties($select=identityUsageType)'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -174,7 +183,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ServiceRunnerInner>> getWithResponseAsync(
-        String resourceGroupName, String labName, String name, Context context) {
+        String resourceGroupName, String labName, String name, String expand, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -206,9 +215,35 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
                 resourceGroupName,
                 labName,
                 name,
+                expand,
                 this.client.getApiVersion(),
                 accept,
                 context);
+    }
+
+    /**
+     * Get service runner.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param expand Specify the $expand query. Example: 'properties($select=identityUsageType)'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return service runner.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<ServiceRunnerInner> getAsync(String resourceGroupName, String labName, String name, String expand) {
+        return getWithResponseAsync(resourceGroupName, labName, name, expand)
+            .flatMap(
+                (Response<ServiceRunnerInner> res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
     }
 
     /**
@@ -224,7 +259,8 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ServiceRunnerInner> getAsync(String resourceGroupName, String labName, String name) {
-        return getWithResponseAsync(resourceGroupName, labName, name)
+        final String expand = null;
+        return getWithResponseAsync(resourceGroupName, labName, name, expand)
             .flatMap(
                 (Response<ServiceRunnerInner> res) -> {
                     if (res.getValue() != null) {
@@ -248,7 +284,8 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ServiceRunnerInner get(String resourceGroupName, String labName, String name) {
-        return getAsync(resourceGroupName, labName, name).block();
+        final String expand = null;
+        return getAsync(resourceGroupName, labName, name, expand).block();
     }
 
     /**
@@ -257,6 +294,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
      * @param name The name of the service runner.
+     * @param expand Specify the $expand query. Example: 'properties($select=identityUsageType)'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -265,12 +303,12 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ServiceRunnerInner> getWithResponse(
-        String resourceGroupName, String labName, String name, Context context) {
-        return getWithResponseAsync(resourceGroupName, labName, name, context).block();
+        String resourceGroupName, String labName, String name, String expand, Context context) {
+        return getWithResponseAsync(resourceGroupName, labName, name, expand, context).block();
     }
 
     /**
-     * Create or replace an existing service runner.
+     * Create or replace an existing service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -282,7 +320,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @return a container for a managed identity to execute DevTest lab services.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<ServiceRunnerInner>> createOrUpdateWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(
         String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -330,7 +368,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
     }
 
     /**
-     * Create or replace an existing service runner.
+     * Create or replace an existing service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -343,7 +381,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @return a container for a managed identity to execute DevTest lab services.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<ServiceRunnerInner>> createOrUpdateWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(
         String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -388,7 +426,92 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
     }
 
     /**
-     * Create or replace an existing service runner.
+     * Create or replace an existing service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param serviceRunner A container for a managed identity to execute DevTest lab services.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a container for a managed identity to execute DevTest lab services.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<ServiceRunnerInner>, ServiceRunnerInner> beginCreateOrUpdateAsync(
+        String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner) {
+        Mono<Response<Flux<ByteBuffer>>> mono =
+            createOrUpdateWithResponseAsync(resourceGroupName, labName, name, serviceRunner);
+        return this
+            .client
+            .<ServiceRunnerInner, ServiceRunnerInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ServiceRunnerInner.class, ServiceRunnerInner.class, Context.NONE);
+    }
+
+    /**
+     * Create or replace an existing service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param serviceRunner A container for a managed identity to execute DevTest lab services.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a container for a managed identity to execute DevTest lab services.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<ServiceRunnerInner>, ServiceRunnerInner> beginCreateOrUpdateAsync(
+        String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner, Context context) {
+        context = this.client.mergeContext(context);
+        Mono<Response<Flux<ByteBuffer>>> mono =
+            createOrUpdateWithResponseAsync(resourceGroupName, labName, name, serviceRunner, context);
+        return this
+            .client
+            .<ServiceRunnerInner, ServiceRunnerInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ServiceRunnerInner.class, ServiceRunnerInner.class, context);
+    }
+
+    /**
+     * Create or replace an existing service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param serviceRunner A container for a managed identity to execute DevTest lab services.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a container for a managed identity to execute DevTest lab services.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<ServiceRunnerInner>, ServiceRunnerInner> beginCreateOrUpdate(
+        String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner) {
+        return beginCreateOrUpdateAsync(resourceGroupName, labName, name, serviceRunner).getSyncPoller();
+    }
+
+    /**
+     * Create or replace an existing service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param serviceRunner A container for a managed identity to execute DevTest lab services.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a container for a managed identity to execute DevTest lab services.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<ServiceRunnerInner>, ServiceRunnerInner> beginCreateOrUpdate(
+        String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner, Context context) {
+        return beginCreateOrUpdateAsync(resourceGroupName, labName, name, serviceRunner, context).getSyncPoller();
+    }
+
+    /**
+     * Create or replace an existing service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -402,19 +525,34 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ServiceRunnerInner> createOrUpdateAsync(
         String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner) {
-        return createOrUpdateWithResponseAsync(resourceGroupName, labName, name, serviceRunner)
-            .flatMap(
-                (Response<ServiceRunnerInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+        return beginCreateOrUpdateAsync(resourceGroupName, labName, name, serviceRunner)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
-     * Create or replace an existing service runner.
+     * Create or replace an existing service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param serviceRunner A container for a managed identity to execute DevTest lab services.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a container for a managed identity to execute DevTest lab services.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<ServiceRunnerInner> createOrUpdateAsync(
+        String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner, Context context) {
+        return beginCreateOrUpdateAsync(resourceGroupName, labName, name, serviceRunner, context)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
+    }
+
+    /**
+     * Create or replace an existing service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -432,7 +570,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
     }
 
     /**
-     * Create or replace an existing service runner.
+     * Create or replace an existing service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -445,13 +583,13 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @return a container for a managed identity to execute DevTest lab services.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ServiceRunnerInner> createOrUpdateWithResponse(
+    public ServiceRunnerInner createOrUpdate(
         String resourceGroupName, String labName, String name, ServiceRunnerInner serviceRunner, Context context) {
-        return createOrUpdateWithResponseAsync(resourceGroupName, labName, name, serviceRunner, context).block();
+        return createOrUpdateAsync(resourceGroupName, labName, name, serviceRunner, context).block();
     }
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -462,7 +600,8 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> deleteWithResponseAsync(String resourceGroupName, String labName, String name) {
+    private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
+        String resourceGroupName, String labName, String name) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -503,7 +642,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
     }
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -515,7 +654,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> deleteWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
         String resourceGroupName, String labName, String name, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -554,7 +693,82 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
     }
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceGroupName, String labName, String name) {
+        Mono<Response<Flux<ByteBuffer>>> mono = deleteWithResponseAsync(resourceGroupName, labName, name);
+        return this
+            .client
+            .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, Context.NONE);
+    }
+
+    /**
+     * Delete service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(
+        String resourceGroupName, String labName, String name, Context context) {
+        context = this.client.mergeContext(context);
+        Mono<Response<Flux<ByteBuffer>>> mono = deleteWithResponseAsync(resourceGroupName, labName, name, context);
+        return this
+            .client
+            .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, context);
+    }
+
+    /**
+     * Delete service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String labName, String name) {
+        return beginDeleteAsync(resourceGroupName, labName, name).getSyncPoller();
+    }
+
+    /**
+     * Delete service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<Void>, Void> beginDelete(
+        String resourceGroupName, String labName, String name, Context context) {
+        return beginDeleteAsync(resourceGroupName, labName, name, context).getSyncPoller();
+    }
+
+    /**
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -566,11 +780,30 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(String resourceGroupName, String labName, String name) {
-        return deleteWithResponseAsync(resourceGroupName, labName, name).flatMap((Response<Void> res) -> Mono.empty());
+        return beginDeleteAsync(resourceGroupName, labName, name).last().flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the service runner.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Void> deleteAsync(String resourceGroupName, String labName, String name, Context context) {
+        return beginDeleteAsync(resourceGroupName, labName, name, context)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
+    }
+
+    /**
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -585,7 +818,7 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
     }
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -594,10 +827,9 @@ public final class ServiceRunnersClientImpl implements ServiceRunnersClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> deleteWithResponse(String resourceGroupName, String labName, String name, Context context) {
-        return deleteWithResponseAsync(resourceGroupName, labName, name, context).block();
+    public void delete(String resourceGroupName, String labName, String name, Context context) {
+        deleteAsync(resourceGroupName, labName, name, context).block();
     }
 }

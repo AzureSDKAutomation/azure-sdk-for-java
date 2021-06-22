@@ -110,6 +110,14 @@ public final class LabsImpl implements Labs {
         this.serviceClient().createEnvironment(resourceGroupName, name, labVirtualMachineCreationParameter, context);
     }
 
+    public void ensureCurrentUserProfile(String resourceGroupName, String name) {
+        this.serviceClient().ensureCurrentUserProfile(resourceGroupName, name);
+    }
+
+    public Response<Void> ensureCurrentUserProfileWithResponse(String resourceGroupName, String name, Context context) {
+        return this.serviceClient().ensureCurrentUserProfileWithResponse(resourceGroupName, name, context);
+    }
+
     public void exportResourceUsage(
         String resourceGroupName, String name, ExportResourceUsageParameters exportResourceUsageParameters) {
         this.serviceClient().exportResourceUsage(resourceGroupName, name, exportResourceUsageParameters);

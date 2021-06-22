@@ -51,6 +51,13 @@ public interface Lab {
     Map<String, String> tags();
 
     /**
+     * Gets the identity property: The identity of the resource.
+     *
+     * @return the identity value.
+     */
+    IdentityProperties identity();
+
+    /**
      * Gets the defaultStorageAccount property: The lab's default storage account.
      *
      * @return the defaultStorageAccount value.
@@ -148,12 +155,13 @@ public interface Lab {
     LabSupportProperties support();
 
     /**
-     * Gets the vmCreationResourceGroup property: The resource group in which all new lab virtual machines will be
-     * created. To let DevTest Labs manage resource group creation, set this value to null.
+     * Gets the vmCreationResourceGroupId property: The resource group ID in which all new lab virtual machines will be
+     * created. Ex: /subscriptions/subId/resourceGroups/rgName To let DevTest Labs manage resource group creation, set
+     * this value to null.
      *
-     * @return the vmCreationResourceGroup value.
+     * @return the vmCreationResourceGroupId value.
      */
-    String vmCreationResourceGroup();
+    String vmCreationResourceGroupId();
 
     /**
      * Gets the publicIpId property: The public IP address for the lab's load balancer.
@@ -183,6 +191,42 @@ public interface Lab {
      * @return the extendedProperties value.
      */
     Map<String, String> extendedProperties();
+
+    /**
+     * Gets the browserConnect property: Is browser connect enabled for the lab.
+     *
+     * @return the browserConnect value.
+     */
+    EnableStatus browserConnect();
+
+    /**
+     * Gets the disableAutoUpgradeCseMinorVersion property: Is auto upgrade of CSE disabled for the lab?.
+     *
+     * @return the disableAutoUpgradeCseMinorVersion value.
+     */
+    Boolean disableAutoUpgradeCseMinorVersion();
+
+    /**
+     * Gets the managementIdentities property: List of identities which can be used for management of resources.
+     *
+     * @return the managementIdentities value.
+     */
+    Map<String, Object> managementIdentities();
+
+    /**
+     * Gets the isolateLabResources property: Indicates whether to create Lab resources (e.g. Storage accounts and Key
+     * Vaults) in network isolation.
+     *
+     * @return the isolateLabResources value.
+     */
+    EnableStatus isolateLabResources();
+
+    /**
+     * Gets the encryption property: Mechanism used for encryption of resources in a lab (such as virtual machines).
+     *
+     * @return the encryption value.
+     */
+    Encryption encryption();
 
     /**
      * Gets the provisioningState property: The provisioning status of the resource.
@@ -265,6 +309,8 @@ public interface Lab {
          */
         interface WithCreate
             extends DefinitionStages.WithTags,
+                DefinitionStages.WithIdentity,
+                DefinitionStages.WithArtifactsStorageAccount,
                 DefinitionStages.WithLabStorageType,
                 DefinitionStages.WithMandatoryArtifactsResourceIdsLinux,
                 DefinitionStages.WithMandatoryArtifactsResourceIdsWindows,
@@ -272,7 +318,13 @@ public interface Lab {
                 DefinitionStages.WithEnvironmentPermission,
                 DefinitionStages.WithAnnouncement,
                 DefinitionStages.WithSupport,
-                DefinitionStages.WithExtendedProperties {
+                DefinitionStages.WithVmCreationResourceGroupId,
+                DefinitionStages.WithExtendedProperties,
+                DefinitionStages.WithBrowserConnect,
+                DefinitionStages.WithDisableAutoUpgradeCseMinorVersion,
+                DefinitionStages.WithManagementIdentities,
+                DefinitionStages.WithIsolateLabResources,
+                DefinitionStages.WithEncryption {
             /**
              * Executes the create request.
              *
@@ -297,6 +349,26 @@ public interface Lab {
              * @return the next definition stage.
              */
             WithCreate withTags(Map<String, String> tags);
+        }
+        /** The stage of the Lab definition allowing to specify identity. */
+        interface WithIdentity {
+            /**
+             * Specifies the identity property: The identity of the resource..
+             *
+             * @param identity The identity of the resource.
+             * @return the next definition stage.
+             */
+            WithCreate withIdentity(IdentityProperties identity);
+        }
+        /** The stage of the Lab definition allowing to specify artifactsStorageAccount. */
+        interface WithArtifactsStorageAccount {
+            /**
+             * Specifies the artifactsStorageAccount property: The lab's artifact storage account..
+             *
+             * @param artifactsStorageAccount The lab's artifact storage account.
+             * @return the next definition stage.
+             */
+            WithCreate withArtifactsStorageAccount(String artifactsStorageAccount);
         }
         /** The stage of the Lab definition allowing to specify labStorageType. */
         interface WithLabStorageType {
@@ -381,6 +453,20 @@ public interface Lab {
              */
             WithCreate withSupport(LabSupportProperties support);
         }
+        /** The stage of the Lab definition allowing to specify vmCreationResourceGroupId. */
+        interface WithVmCreationResourceGroupId {
+            /**
+             * Specifies the vmCreationResourceGroupId property: The resource group ID in which all new lab virtual
+             * machines will be created. Ex: /subscriptions/subId/resourceGroups/rgName To let DevTest Labs manage
+             * resource group creation, set this value to null..
+             *
+             * @param vmCreationResourceGroupId The resource group ID in which all new lab virtual machines will be
+             *     created. Ex: /subscriptions/subId/resourceGroups/rgName To let DevTest Labs manage resource group
+             *     creation, set this value to null.
+             * @return the next definition stage.
+             */
+            WithCreate withVmCreationResourceGroupId(String vmCreationResourceGroupId);
+        }
         /** The stage of the Lab definition allowing to specify extendedProperties. */
         interface WithExtendedProperties {
             /**
@@ -390,6 +476,60 @@ public interface Lab {
              * @return the next definition stage.
              */
             WithCreate withExtendedProperties(Map<String, String> extendedProperties);
+        }
+        /** The stage of the Lab definition allowing to specify browserConnect. */
+        interface WithBrowserConnect {
+            /**
+             * Specifies the browserConnect property: Is browser connect enabled for the lab.
+             *
+             * @param browserConnect Is browser connect enabled for the lab.
+             * @return the next definition stage.
+             */
+            WithCreate withBrowserConnect(EnableStatus browserConnect);
+        }
+        /** The stage of the Lab definition allowing to specify disableAutoUpgradeCseMinorVersion. */
+        interface WithDisableAutoUpgradeCseMinorVersion {
+            /**
+             * Specifies the disableAutoUpgradeCseMinorVersion property: Is auto upgrade of CSE disabled for the lab?.
+             *
+             * @param disableAutoUpgradeCseMinorVersion Is auto upgrade of CSE disabled for the lab?.
+             * @return the next definition stage.
+             */
+            WithCreate withDisableAutoUpgradeCseMinorVersion(Boolean disableAutoUpgradeCseMinorVersion);
+        }
+        /** The stage of the Lab definition allowing to specify managementIdentities. */
+        interface WithManagementIdentities {
+            /**
+             * Specifies the managementIdentities property: List of identities which can be used for management of
+             * resources..
+             *
+             * @param managementIdentities List of identities which can be used for management of resources.
+             * @return the next definition stage.
+             */
+            WithCreate withManagementIdentities(Map<String, Object> managementIdentities);
+        }
+        /** The stage of the Lab definition allowing to specify isolateLabResources. */
+        interface WithIsolateLabResources {
+            /**
+             * Specifies the isolateLabResources property: Indicates whether to create Lab resources (e.g. Storage
+             * accounts and Key Vaults) in network isolation..
+             *
+             * @param isolateLabResources Indicates whether to create Lab resources (e.g. Storage accounts and Key
+             *     Vaults) in network isolation.
+             * @return the next definition stage.
+             */
+            WithCreate withIsolateLabResources(EnableStatus isolateLabResources);
+        }
+        /** The stage of the Lab definition allowing to specify encryption. */
+        interface WithEncryption {
+            /**
+             * Specifies the encryption property: Mechanism used for encryption of resources in a lab (such as virtual
+             * machines)..
+             *
+             * @param encryption Mechanism used for encryption of resources in a lab (such as virtual machines).
+             * @return the next definition stage.
+             */
+            WithCreate withEncryption(Encryption encryption);
         }
     }
     /**
@@ -482,6 +622,25 @@ public interface Lab {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void createEnvironment(LabVirtualMachineCreationParameter labVirtualMachineCreationParameter, Context context);
+
+    /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void ensureCurrentUserProfile();
+
+    /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    Response<Void> ensureCurrentUserProfileWithResponse(Context context);
 
     /**
      * Exports the lab resource usage into a storage account This operation can take a while to complete.

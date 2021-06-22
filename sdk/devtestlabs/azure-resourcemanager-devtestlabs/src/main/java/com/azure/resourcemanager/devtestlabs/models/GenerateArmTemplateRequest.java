@@ -38,7 +38,7 @@ public final class GenerateArmTemplateRequest {
      * UploadFilesAndGenerateSasTokens is the default value.
      */
     @JsonProperty(value = "fileUploadOptions")
-    private FileUploadOptions fileUploadOptions;
+    private FileUploadOption fileUploadOptions;
 
     /**
      * Get the virtualMachineName property: The resource name of the virtual machine.
@@ -106,7 +106,7 @@ public final class GenerateArmTemplateRequest {
      *
      * @return the fileUploadOptions value.
      */
-    public FileUploadOptions fileUploadOptions() {
+    public FileUploadOption fileUploadOptions() {
         return this.fileUploadOptions;
     }
 
@@ -117,7 +117,7 @@ public final class GenerateArmTemplateRequest {
      * @param fileUploadOptions the fileUploadOptions value to set.
      * @return the GenerateArmTemplateRequest object itself.
      */
-    public GenerateArmTemplateRequest withFileUploadOptions(FileUploadOptions fileUploadOptions) {
+    public GenerateArmTemplateRequest withFileUploadOptions(FileUploadOption fileUploadOptions) {
         this.fileUploadOptions = fileUploadOptions;
         return this;
     }

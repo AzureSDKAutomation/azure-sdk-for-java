@@ -215,6 +215,22 @@ public final class VirtualMachinesClientImpl implements VirtualMachinesClient {
         @Headers({"Content-Type: application/json"})
         @Post(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs"
+                + "/{labName}/virtualmachines/{name}/clearArtifactResults")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<Void>> clearArtifactResults(
+            @HostParam("$host") String endpoint,
+            @PathParam("subscriptionId") String subscriptionId,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("labName") String labName,
+            @PathParam("name") String name,
+            @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Post(
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs"
                 + "/{labName}/virtualmachines/{name}/detachDataDisk")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -2410,6 +2426,160 @@ public final class VirtualMachinesClientImpl implements VirtualMachinesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void claim(String resourceGroupName, String labName, String name, Context context) {
         claimAsync(resourceGroupName, labName, name, context).block();
+    }
+
+    /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the virtual machine.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> clearArtifactResultsWithResponseAsync(
+        String resourceGroupName, String labName, String name) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (labName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter labName is required and cannot be null."));
+        }
+        if (name == null) {
+            return Mono.error(new IllegalArgumentException("Parameter name is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .clearArtifactResults(
+                            this.client.getEndpoint(),
+                            this.client.getSubscriptionId(),
+                            resourceGroupName,
+                            labName,
+                            name,
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the virtual machine.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> clearArtifactResultsWithResponseAsync(
+        String resourceGroupName, String labName, String name, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (labName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter labName is required and cannot be null."));
+        }
+        if (name == null) {
+            return Mono.error(new IllegalArgumentException("Parameter name is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .clearArtifactResults(
+                this.client.getEndpoint(),
+                this.client.getSubscriptionId(),
+                resourceGroupName,
+                labName,
+                name,
+                this.client.getApiVersion(),
+                accept,
+                context);
+    }
+
+    /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the virtual machine.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Void> clearArtifactResultsAsync(String resourceGroupName, String labName, String name) {
+        return clearArtifactResultsWithResponseAsync(resourceGroupName, labName, name)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the virtual machine.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void clearArtifactResults(String resourceGroupName, String labName, String name) {
+        clearArtifactResultsAsync(resourceGroupName, labName, name).block();
+    }
+
+    /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the virtual machine.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> clearArtifactResultsWithResponse(
+        String resourceGroupName, String labName, String name, Context context) {
+        return clearArtifactResultsWithResponseAsync(resourceGroupName, labName, name, context).block();
     }
 
     /**

@@ -106,6 +106,29 @@ public interface LabVirtualMachine {
     String customImageId();
 
     /**
+     * Gets the galleryImageVersionId property: The shared gallery image version resource identifier of the virtual
+     * machine.
+     *
+     * @return the galleryImageVersionId value.
+     */
+    String galleryImageVersionId();
+
+    /**
+     * Gets the sharedImageId property: The shared image resource identifier of the virtual machine.
+     *
+     * @return the sharedImageId value.
+     */
+    String sharedImageId();
+
+    /**
+     * Gets the sharedImageVersion property: The shared image version for the specified shared image Id. Will use latest
+     * if not specified.
+     *
+     * @return the sharedImageVersion value.
+     */
+    String sharedImageVersion();
+
+    /**
      * Gets the osType property: The OS type of the virtual machine.
      *
      * @return the osType value.
@@ -206,6 +229,14 @@ public interface LabVirtualMachine {
     String planId();
 
     /**
+     * Gets the osDiskSizeGb property: Specifies the size of an empty data disk in gigabytes. This element can be used
+     * to overwrite the size of the disk in a virtual machine image.
+     *
+     * @return the osDiskSizeGb value.
+     */
+    Integer osDiskSizeGb();
+
+    /**
      * Gets the computeVm property: The compute virtual machine properties.
      *
      * @return the computeVm value.
@@ -241,7 +272,7 @@ public interface LabVirtualMachine {
     Boolean allowClaim();
 
     /**
-     * Gets the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium).
+     * Gets the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium, StandardSSD).
      *
      * @return the storageType value.
      */
@@ -282,6 +313,14 @@ public interface LabVirtualMachine {
      * @return the lastKnownPowerState value.
      */
     String lastKnownPowerState();
+
+    /**
+     * Gets the canApplyArtifacts property: Flag to determine if apply artifacts can be triggered at the time of
+     * fetching the document.
+     *
+     * @return the canApplyArtifacts value.
+     */
+    Boolean canApplyArtifacts();
 
     /**
      * Gets the provisioningState property: The provisioning status of the resource.
@@ -370,6 +409,9 @@ public interface LabVirtualMachine {
                 DefinitionStages.WithOwnerUserPrincipalName,
                 DefinitionStages.WithCreatedDate,
                 DefinitionStages.WithCustomImageId,
+                DefinitionStages.WithGalleryImageVersionId,
+                DefinitionStages.WithSharedImageId,
+                DefinitionStages.WithSharedImageVersion,
                 DefinitionStages.WithSize,
                 DefinitionStages.WithUsername,
                 DefinitionStages.WithPassword,
@@ -381,6 +423,7 @@ public interface LabVirtualMachine {
                 DefinitionStages.WithArtifacts,
                 DefinitionStages.WithGalleryImageReference,
                 DefinitionStages.WithPlanId,
+                DefinitionStages.WithOsDiskSizeGb,
                 DefinitionStages.WithNetworkInterface,
                 DefinitionStages.WithExpirationDate,
                 DefinitionStages.WithAllowClaim,
@@ -462,6 +505,39 @@ public interface LabVirtualMachine {
              * @return the next definition stage.
              */
             WithCreate withCustomImageId(String customImageId);
+        }
+        /** The stage of the LabVirtualMachine definition allowing to specify galleryImageVersionId. */
+        interface WithGalleryImageVersionId {
+            /**
+             * Specifies the galleryImageVersionId property: The shared gallery image version resource identifier of the
+             * virtual machine..
+             *
+             * @param galleryImageVersionId The shared gallery image version resource identifier of the virtual machine.
+             * @return the next definition stage.
+             */
+            WithCreate withGalleryImageVersionId(String galleryImageVersionId);
+        }
+        /** The stage of the LabVirtualMachine definition allowing to specify sharedImageId. */
+        interface WithSharedImageId {
+            /**
+             * Specifies the sharedImageId property: The shared image resource identifier of the virtual machine..
+             *
+             * @param sharedImageId The shared image resource identifier of the virtual machine.
+             * @return the next definition stage.
+             */
+            WithCreate withSharedImageId(String sharedImageId);
+        }
+        /** The stage of the LabVirtualMachine definition allowing to specify sharedImageVersion. */
+        interface WithSharedImageVersion {
+            /**
+             * Specifies the sharedImageVersion property: The shared image version for the specified shared image Id.
+             * Will use latest if not specified..
+             *
+             * @param sharedImageVersion The shared image version for the specified shared image Id. Will use latest if
+             *     not specified.
+             * @return the next definition stage.
+             */
+            WithCreate withSharedImageVersion(String sharedImageVersion);
         }
         /** The stage of the LabVirtualMachine definition allowing to specify size. */
         interface WithSize {
@@ -578,6 +654,18 @@ public interface LabVirtualMachine {
              */
             WithCreate withPlanId(String planId);
         }
+        /** The stage of the LabVirtualMachine definition allowing to specify osDiskSizeGb. */
+        interface WithOsDiskSizeGb {
+            /**
+             * Specifies the osDiskSizeGb property: Specifies the size of an empty data disk in gigabytes. This element
+             * can be used to overwrite the size of the disk in a virtual machine image..
+             *
+             * @param osDiskSizeGb Specifies the size of an empty data disk in gigabytes. This element can be used to
+             *     overwrite the size of the disk in a virtual machine image.
+             * @return the next definition stage.
+             */
+            WithCreate withOsDiskSizeGb(Integer osDiskSizeGb);
+        }
         /** The stage of the LabVirtualMachine definition allowing to specify networkInterface. */
         interface WithNetworkInterface {
             /**
@@ -612,9 +700,10 @@ public interface LabVirtualMachine {
         /** The stage of the LabVirtualMachine definition allowing to specify storageType. */
         interface WithStorageType {
             /**
-             * Specifies the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium)..
+             * Specifies the storageType property: Storage type to use for virtual machine (i.e. Standard, Premium,
+             * StandardSSD)..
              *
-             * @param storageType Storage type to use for virtual machine (i.e. Standard, Premium).
+             * @param storageType Storage type to use for virtual machine (i.e. Standard, Premium, StandardSSD).
              * @return the next definition stage.
              */
             WithCreate withStorageType(String storageType);
@@ -763,6 +852,25 @@ public interface LabVirtualMachine {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void claim(Context context);
+
+    /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void clearArtifactResults();
+
+    /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    Response<Void> clearArtifactResultsWithResponse(Context context);
 
     /**
      * Detach the specified disk from the virtual machine. This operation can take a while to complete.

@@ -366,6 +366,32 @@ public interface LabsClient {
         Context context);
 
     /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param name The name of the lab.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    void ensureCurrentUserProfile(String resourceGroupName, String name);
+
+    /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param name The name of the lab.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> ensureCurrentUserProfileWithResponse(String resourceGroupName, String name, Context context);
+
+    /**
      * Exports the lab resource usage into a storage account This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.

@@ -92,6 +92,18 @@ public final class LabVirtualMachineImpl
         return this.innerModel().customImageId();
     }
 
+    public String galleryImageVersionId() {
+        return this.innerModel().galleryImageVersionId();
+    }
+
+    public String sharedImageId() {
+        return this.innerModel().sharedImageId();
+    }
+
+    public String sharedImageVersion() {
+        return this.innerModel().sharedImageVersion();
+    }
+
     public String osType() {
         return this.innerModel().osType();
     }
@@ -153,6 +165,10 @@ public final class LabVirtualMachineImpl
         return this.innerModel().planId();
     }
 
+    public Integer osDiskSizeGb() {
+        return this.innerModel().osDiskSizeGb();
+    }
+
     public ComputeVmProperties computeVm() {
         return this.innerModel().computeVm();
     }
@@ -210,6 +226,10 @@ public final class LabVirtualMachineImpl
 
     public String lastKnownPowerState() {
         return this.innerModel().lastKnownPowerState();
+    }
+
+    public Boolean canApplyArtifacts() {
+        return this.innerModel().canApplyArtifacts();
     }
 
     public String provisioningState() {
@@ -356,6 +376,16 @@ public final class LabVirtualMachineImpl
         serviceManager.virtualMachines().claim(resourceGroupName, labName, name, context);
     }
 
+    public void clearArtifactResults() {
+        serviceManager.virtualMachines().clearArtifactResults(resourceGroupName, labName, name);
+    }
+
+    public Response<Void> clearArtifactResultsWithResponse(Context context) {
+        return serviceManager
+            .virtualMachines()
+            .clearArtifactResultsWithResponse(resourceGroupName, labName, name, context);
+    }
+
     public void detachDataDisk(DetachDataDiskProperties detachDataDiskProperties) {
         serviceManager.virtualMachines().detachDataDisk(resourceGroupName, labName, name, detachDataDiskProperties);
     }
@@ -489,6 +519,21 @@ public final class LabVirtualMachineImpl
         return this;
     }
 
+    public LabVirtualMachineImpl withGalleryImageVersionId(String galleryImageVersionId) {
+        this.innerModel().withGalleryImageVersionId(galleryImageVersionId);
+        return this;
+    }
+
+    public LabVirtualMachineImpl withSharedImageId(String sharedImageId) {
+        this.innerModel().withSharedImageId(sharedImageId);
+        return this;
+    }
+
+    public LabVirtualMachineImpl withSharedImageVersion(String sharedImageVersion) {
+        this.innerModel().withSharedImageVersion(sharedImageVersion);
+        return this;
+    }
+
     public LabVirtualMachineImpl withSize(String size) {
         this.innerModel().withSize(size);
         return this;
@@ -541,6 +586,11 @@ public final class LabVirtualMachineImpl
 
     public LabVirtualMachineImpl withPlanId(String planId) {
         this.innerModel().withPlanId(planId);
+        return this;
+    }
+
+    public LabVirtualMachineImpl withOsDiskSizeGb(Integer osDiskSizeGb) {
+        this.innerModel().withOsDiskSizeGb(osDiskSizeGb);
         return this;
     }
 

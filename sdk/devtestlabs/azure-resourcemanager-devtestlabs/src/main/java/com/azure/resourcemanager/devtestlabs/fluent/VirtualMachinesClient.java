@@ -454,6 +454,35 @@ public interface VirtualMachinesClient {
     void claim(String resourceGroupName, String labName, String name, Context context);
 
     /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the virtual machine.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    void clearArtifactResults(String resourceGroupName, String labName, String name);
+
+    /**
+     * Clears the artifact results of the virtual machine.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param labName The name of the lab.
+     * @param name The name of the virtual machine.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> clearArtifactResultsWithResponse(
+        String resourceGroupName, String labName, String name, Context context);
+
+    /**
      * Detach the specified disk from the virtual machine. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.

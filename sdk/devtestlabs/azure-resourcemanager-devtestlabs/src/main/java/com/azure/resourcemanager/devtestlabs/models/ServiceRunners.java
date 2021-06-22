@@ -28,16 +28,18 @@ public interface ServiceRunners {
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
      * @param name The name of the service runner.
+     * @param expand Specify the $expand query. Example: 'properties($select=identityUsageType)'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return service runner.
      */
-    Response<ServiceRunner> getWithResponse(String resourceGroupName, String labName, String name, Context context);
+    Response<ServiceRunner> getWithResponse(
+        String resourceGroupName, String labName, String name, String expand, Context context);
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -49,7 +51,7 @@ public interface ServiceRunners {
     void delete(String resourceGroupName, String labName, String name);
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param resourceGroupName The name of the resource group.
      * @param labName The name of the lab.
@@ -58,9 +60,8 @@ public interface ServiceRunners {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
-    Response<Void> deleteWithResponse(String resourceGroupName, String labName, String name, Context context);
+    void delete(String resourceGroupName, String labName, String name, Context context);
 
     /**
      * Get service runner.
@@ -77,16 +78,17 @@ public interface ServiceRunners {
      * Get service runner.
      *
      * @param id the resource ID.
+     * @param expand Specify the $expand query. Example: 'properties($select=identityUsageType)'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return service runner.
      */
-    Response<ServiceRunner> getByIdWithResponse(String id, Context context);
+    Response<ServiceRunner> getByIdWithResponse(String id, String expand, Context context);
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param id the resource ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -96,16 +98,15 @@ public interface ServiceRunners {
     void deleteById(String id);
 
     /**
-     * Delete service runner.
+     * Delete service runner. This operation can take a while to complete.
      *
      * @param id the resource ID.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
-    Response<Void> deleteByIdWithResponse(String id, Context context);
+    void deleteByIdWithResponse(String id, Context context);
 
     /**
      * Begins definition for a new ServiceRunner resource.

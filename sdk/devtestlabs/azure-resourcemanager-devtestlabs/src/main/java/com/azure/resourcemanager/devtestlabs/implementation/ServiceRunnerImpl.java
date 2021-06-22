@@ -79,8 +79,7 @@ public final class ServiceRunnerImpl implements ServiceRunner, ServiceRunner.Def
             serviceManager
                 .serviceClient()
                 .getServiceRunners()
-                .createOrUpdateWithResponse(resourceGroupName, labName, name, this.innerModel(), Context.NONE)
-                .getValue();
+                .createOrUpdate(resourceGroupName, labName, name, this.innerModel(), Context.NONE);
         return this;
     }
 
@@ -89,8 +88,7 @@ public final class ServiceRunnerImpl implements ServiceRunner, ServiceRunner.Def
             serviceManager
                 .serviceClient()
                 .getServiceRunners()
-                .createOrUpdateWithResponse(resourceGroupName, labName, name, this.innerModel(), context)
-                .getValue();
+                .createOrUpdate(resourceGroupName, labName, name, this.innerModel(), context);
         return this;
     }
 
@@ -109,8 +107,7 @@ public final class ServiceRunnerImpl implements ServiceRunner, ServiceRunner.Def
             serviceManager
                 .serviceClient()
                 .getServiceRunners()
-                .createOrUpdateWithResponse(resourceGroupName, labName, name, this.innerModel(), Context.NONE)
-                .getValue();
+                .createOrUpdate(resourceGroupName, labName, name, this.innerModel(), Context.NONE);
         return this;
     }
 
@@ -119,8 +116,7 @@ public final class ServiceRunnerImpl implements ServiceRunner, ServiceRunner.Def
             serviceManager
                 .serviceClient()
                 .getServiceRunners()
-                .createOrUpdateWithResponse(resourceGroupName, labName, name, this.innerModel(), context)
-                .getValue();
+                .createOrUpdate(resourceGroupName, labName, name, this.innerModel(), context);
         return this;
     }
 
@@ -134,21 +130,23 @@ public final class ServiceRunnerImpl implements ServiceRunner, ServiceRunner.Def
     }
 
     public ServiceRunner refresh() {
+        String localExpand = null;
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getServiceRunners()
-                .getWithResponse(resourceGroupName, labName, name, Context.NONE)
+                .getWithResponse(resourceGroupName, labName, name, localExpand, Context.NONE)
                 .getValue();
         return this;
     }
 
     public ServiceRunner refresh(Context context) {
+        String localExpand = null;
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getServiceRunners()
-                .getWithResponse(resourceGroupName, labName, name, context)
+                .getWithResponse(resourceGroupName, labName, name, localExpand, context)
                 .getValue();
         return this;
     }

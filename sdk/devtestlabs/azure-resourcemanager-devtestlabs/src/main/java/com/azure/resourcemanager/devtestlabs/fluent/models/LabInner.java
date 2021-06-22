@@ -8,7 +8,10 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.devtestlabs.models.EnableStatus;
+import com.azure.resourcemanager.devtestlabs.models.Encryption;
 import com.azure.resourcemanager.devtestlabs.models.EnvironmentPermission;
+import com.azure.resourcemanager.devtestlabs.models.IdentityProperties;
 import com.azure.resourcemanager.devtestlabs.models.LabAnnouncementProperties;
 import com.azure.resourcemanager.devtestlabs.models.LabSupportProperties;
 import com.azure.resourcemanager.devtestlabs.models.PremiumDataDisk;
@@ -26,6 +29,12 @@ public class LabInner extends Resource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(LabInner.class);
 
     /*
+     * The identity of the resource.
+     */
+    @JsonProperty(value = "identity")
+    private IdentityProperties identity;
+
+    /*
      * The lab's default storage account.
      */
     @JsonProperty(value = "properties.defaultStorageAccount", access = JsonProperty.Access.WRITE_ONLY)
@@ -40,7 +49,7 @@ public class LabInner extends Resource {
     /*
      * The lab's artifact storage account.
      */
-    @JsonProperty(value = "properties.artifactsStorageAccount", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "properties.artifactsStorageAccount")
     private String artifactsStorageAccount;
 
     /*
@@ -114,12 +123,12 @@ public class LabInner extends Resource {
     private LabSupportProperties support;
 
     /*
-     * The resource group in which all new lab virtual machines will be
-     * created. To let DevTest Labs manage resource group creation, set this
-     * value to null.
+     * The resource group ID in which all new lab virtual machines will be
+     * created. Ex: /subscriptions/subId/resourceGroups/rgName To let DevTest
+     * Labs manage resource group creation, set this value to null.
      */
-    @JsonProperty(value = "properties.vmCreationResourceGroup", access = JsonProperty.Access.WRITE_ONLY)
-    private String vmCreationResourceGroup;
+    @JsonProperty(value = "properties.vmCreationResourceGroupId")
+    private String vmCreationResourceGroupId;
 
     /*
      * The public IP address for the lab's load balancer.
@@ -147,6 +156,38 @@ public class LabInner extends Resource {
     private Map<String, String> extendedProperties;
 
     /*
+     * Is browser connect enabled for the lab
+     */
+    @JsonProperty(value = "properties.browserConnect")
+    private EnableStatus browserConnect;
+
+    /*
+     * Is auto upgrade of CSE disabled for the lab?
+     */
+    @JsonProperty(value = "properties.disableAutoUpgradeCseMinorVersion")
+    private Boolean disableAutoUpgradeCseMinorVersion;
+
+    /*
+     * List of identities which can be used for management of resources.
+     */
+    @JsonProperty(value = "properties.managementIdentities")
+    private Map<String, Object> managementIdentities;
+
+    /*
+     * Indicates whether to create Lab resources (e.g. Storage accounts and Key
+     * Vaults) in network isolation.
+     */
+    @JsonProperty(value = "properties.isolateLabResources")
+    private EnableStatus isolateLabResources;
+
+    /*
+     * Mechanism used for encryption of resources in a lab (such as virtual
+     * machines).
+     */
+    @JsonProperty(value = "properties.encryption")
+    private Encryption encryption;
+
+    /*
      * The provisioning status of the resource.
      */
     @JsonProperty(value = "properties.provisioningState", access = JsonProperty.Access.WRITE_ONLY)
@@ -157,6 +198,26 @@ public class LabInner extends Resource {
      */
     @JsonProperty(value = "properties.uniqueIdentifier", access = JsonProperty.Access.WRITE_ONLY)
     private String uniqueIdentifier;
+
+    /**
+     * Get the identity property: The identity of the resource.
+     *
+     * @return the identity value.
+     */
+    public IdentityProperties identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: The identity of the resource.
+     *
+     * @param identity the identity value to set.
+     * @return the LabInner object itself.
+     */
+    public LabInner withIdentity(IdentityProperties identity) {
+        this.identity = identity;
+        return this;
+    }
 
     /**
      * Get the defaultStorageAccount property: The lab's default storage account.
@@ -183,6 +244,17 @@ public class LabInner extends Resource {
      */
     public String artifactsStorageAccount() {
         return this.artifactsStorageAccount;
+    }
+
+    /**
+     * Set the artifactsStorageAccount property: The lab's artifact storage account.
+     *
+     * @param artifactsStorageAccount the artifactsStorageAccount value to set.
+     * @return the LabInner object itself.
+     */
+    public LabInner withArtifactsStorageAccount(String artifactsStorageAccount) {
+        this.artifactsStorageAccount = artifactsStorageAccount;
+        return this;
     }
 
     /**
@@ -365,13 +437,27 @@ public class LabInner extends Resource {
     }
 
     /**
-     * Get the vmCreationResourceGroup property: The resource group in which all new lab virtual machines will be
-     * created. To let DevTest Labs manage resource group creation, set this value to null.
+     * Get the vmCreationResourceGroupId property: The resource group ID in which all new lab virtual machines will be
+     * created. Ex: /subscriptions/subId/resourceGroups/rgName To let DevTest Labs manage resource group creation, set
+     * this value to null.
      *
-     * @return the vmCreationResourceGroup value.
+     * @return the vmCreationResourceGroupId value.
      */
-    public String vmCreationResourceGroup() {
-        return this.vmCreationResourceGroup;
+    public String vmCreationResourceGroupId() {
+        return this.vmCreationResourceGroupId;
+    }
+
+    /**
+     * Set the vmCreationResourceGroupId property: The resource group ID in which all new lab virtual machines will be
+     * created. Ex: /subscriptions/subId/resourceGroups/rgName To let DevTest Labs manage resource group creation, set
+     * this value to null.
+     *
+     * @param vmCreationResourceGroupId the vmCreationResourceGroupId value to set.
+     * @return the LabInner object itself.
+     */
+    public LabInner withVmCreationResourceGroupId(String vmCreationResourceGroupId) {
+        this.vmCreationResourceGroupId = vmCreationResourceGroupId;
+        return this;
     }
 
     /**
@@ -423,6 +509,108 @@ public class LabInner extends Resource {
     }
 
     /**
+     * Get the browserConnect property: Is browser connect enabled for the lab.
+     *
+     * @return the browserConnect value.
+     */
+    public EnableStatus browserConnect() {
+        return this.browserConnect;
+    }
+
+    /**
+     * Set the browserConnect property: Is browser connect enabled for the lab.
+     *
+     * @param browserConnect the browserConnect value to set.
+     * @return the LabInner object itself.
+     */
+    public LabInner withBrowserConnect(EnableStatus browserConnect) {
+        this.browserConnect = browserConnect;
+        return this;
+    }
+
+    /**
+     * Get the disableAutoUpgradeCseMinorVersion property: Is auto upgrade of CSE disabled for the lab?.
+     *
+     * @return the disableAutoUpgradeCseMinorVersion value.
+     */
+    public Boolean disableAutoUpgradeCseMinorVersion() {
+        return this.disableAutoUpgradeCseMinorVersion;
+    }
+
+    /**
+     * Set the disableAutoUpgradeCseMinorVersion property: Is auto upgrade of CSE disabled for the lab?.
+     *
+     * @param disableAutoUpgradeCseMinorVersion the disableAutoUpgradeCseMinorVersion value to set.
+     * @return the LabInner object itself.
+     */
+    public LabInner withDisableAutoUpgradeCseMinorVersion(Boolean disableAutoUpgradeCseMinorVersion) {
+        this.disableAutoUpgradeCseMinorVersion = disableAutoUpgradeCseMinorVersion;
+        return this;
+    }
+
+    /**
+     * Get the managementIdentities property: List of identities which can be used for management of resources.
+     *
+     * @return the managementIdentities value.
+     */
+    public Map<String, Object> managementIdentities() {
+        return this.managementIdentities;
+    }
+
+    /**
+     * Set the managementIdentities property: List of identities which can be used for management of resources.
+     *
+     * @param managementIdentities the managementIdentities value to set.
+     * @return the LabInner object itself.
+     */
+    public LabInner withManagementIdentities(Map<String, Object> managementIdentities) {
+        this.managementIdentities = managementIdentities;
+        return this;
+    }
+
+    /**
+     * Get the isolateLabResources property: Indicates whether to create Lab resources (e.g. Storage accounts and Key
+     * Vaults) in network isolation.
+     *
+     * @return the isolateLabResources value.
+     */
+    public EnableStatus isolateLabResources() {
+        return this.isolateLabResources;
+    }
+
+    /**
+     * Set the isolateLabResources property: Indicates whether to create Lab resources (e.g. Storage accounts and Key
+     * Vaults) in network isolation.
+     *
+     * @param isolateLabResources the isolateLabResources value to set.
+     * @return the LabInner object itself.
+     */
+    public LabInner withIsolateLabResources(EnableStatus isolateLabResources) {
+        this.isolateLabResources = isolateLabResources;
+        return this;
+    }
+
+    /**
+     * Get the encryption property: Mechanism used for encryption of resources in a lab (such as virtual machines).
+     *
+     * @return the encryption value.
+     */
+    public Encryption encryption() {
+        return this.encryption;
+    }
+
+    /**
+     * Set the encryption property: Mechanism used for encryption of resources in a lab (such as virtual machines).
+     *
+     * @param encryption the encryption value to set.
+     * @return the LabInner object itself.
+     */
+    public LabInner withEncryption(Encryption encryption) {
+        this.encryption = encryption;
+        return this;
+    }
+
+    /**
      * Get the provisioningState property: The provisioning status of the resource.
      *
      * @return the provisioningState value.
@@ -460,11 +648,17 @@ public class LabInner extends Resource {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (identity() != null) {
+            identity().validate();
+        }
         if (announcement() != null) {
             announcement().validate();
         }
         if (support() != null) {
             support().validate();
+        }
+        if (encryption() != null) {
+            encryption().validate();
         }
     }
 }

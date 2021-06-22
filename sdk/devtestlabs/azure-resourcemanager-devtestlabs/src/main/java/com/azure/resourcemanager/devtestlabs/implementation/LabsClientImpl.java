@@ -204,6 +204,21 @@ public final class LabsClientImpl implements LabsClient {
         @Headers({"Content-Type: application/json"})
         @Post(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs"
+                + "/{name}/ensureCurrentUserProfile")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<Void>> ensureCurrentUserProfile(
+            @HostParam("$host") String endpoint,
+            @PathParam("subscriptionId") String subscriptionId,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("name") String name,
+            @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Post(
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs"
                 + "/{name}/exportResourceUsage")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -2040,6 +2055,145 @@ public final class LabsClientImpl implements LabsClient {
         LabVirtualMachineCreationParameter labVirtualMachineCreationParameter,
         Context context) {
         createEnvironmentAsync(resourceGroupName, name, labVirtualMachineCreationParameter, context).block();
+    }
+
+    /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param name The name of the lab.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> ensureCurrentUserProfileWithResponseAsync(String resourceGroupName, String name) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (name == null) {
+            return Mono.error(new IllegalArgumentException("Parameter name is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .ensureCurrentUserProfile(
+                            this.client.getEndpoint(),
+                            this.client.getSubscriptionId(),
+                            resourceGroupName,
+                            name,
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param name The name of the lab.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> ensureCurrentUserProfileWithResponseAsync(
+        String resourceGroupName, String name, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (name == null) {
+            return Mono.error(new IllegalArgumentException("Parameter name is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .ensureCurrentUserProfile(
+                this.client.getEndpoint(),
+                this.client.getSubscriptionId(),
+                resourceGroupName,
+                name,
+                this.client.getApiVersion(),
+                accept,
+                context);
+    }
+
+    /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param name The name of the lab.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Void> ensureCurrentUserProfileAsync(String resourceGroupName, String name) {
+        return ensureCurrentUserProfileWithResponseAsync(resourceGroupName, name)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param name The name of the lab.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void ensureCurrentUserProfile(String resourceGroupName, String name) {
+        ensureCurrentUserProfileAsync(resourceGroupName, name).block();
+    }
+
+    /**
+     * Ensure the current user has a valid profile in the lab.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param name The name of the lab.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> ensureCurrentUserProfileWithResponse(String resourceGroupName, String name, Context context) {
+        return ensureCurrentUserProfileWithResponseAsync(resourceGroupName, name, context).block();
     }
 
     /**
