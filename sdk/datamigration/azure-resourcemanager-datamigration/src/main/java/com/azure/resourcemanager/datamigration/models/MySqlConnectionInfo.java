@@ -30,6 +30,12 @@ public final class MySqlConnectionInfo extends ConnectionInfo {
     @JsonProperty(value = "port", required = true)
     private int port;
 
+    /*
+     * Whether to encrypt the connection
+     */
+    @JsonProperty(value = "encryptConnection")
+    private Boolean encryptConnection;
+
     /**
      * Get the serverName property: Name of the server.
      *
@@ -67,6 +73,26 @@ public final class MySqlConnectionInfo extends ConnectionInfo {
      */
     public MySqlConnectionInfo withPort(int port) {
         this.port = port;
+        return this;
+    }
+
+    /**
+     * Get the encryptConnection property: Whether to encrypt the connection.
+     *
+     * @return the encryptConnection value.
+     */
+    public Boolean encryptConnection() {
+        return this.encryptConnection;
+    }
+
+    /**
+     * Set the encryptConnection property: Whether to encrypt the connection.
+     *
+     * @param encryptConnection the encryptConnection value to set.
+     * @return the MySqlConnectionInfo object itself.
+     */
+    public MySqlConnectionInfo withEncryptConnection(Boolean encryptConnection) {
+        this.encryptConnection = encryptConnection;
         return this;
     }
 

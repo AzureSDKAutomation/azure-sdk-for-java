@@ -7,6 +7,7 @@ package com.azure.resourcemanager.datamigration.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.datamigration.models.ServiceProvisioningState;
 import com.azure.resourcemanager.datamigration.models.ServiceSku;
@@ -57,6 +58,19 @@ public class DataMigrationServiceInner extends Resource {
      */
     @JsonProperty(value = "properties.virtualSubnetId")
     private String virtualSubnetId;
+
+    /*
+     * The ID of the Microsoft.Network/networkInterfaces resource which the
+     * service have
+     */
+    @JsonProperty(value = "properties.virtualNicId")
+    private String virtualNicId;
+
+    /*
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get the etag property: HTTP strong entity tag value. Ignored if submitted.
@@ -167,6 +181,35 @@ public class DataMigrationServiceInner extends Resource {
     public DataMigrationServiceInner withVirtualSubnetId(String virtualSubnetId) {
         this.virtualSubnetId = virtualSubnetId;
         return this;
+    }
+
+    /**
+     * Get the virtualNicId property: The ID of the Microsoft.Network/networkInterfaces resource which the service have.
+     *
+     * @return the virtualNicId value.
+     */
+    public String virtualNicId() {
+        return this.virtualNicId;
+    }
+
+    /**
+     * Set the virtualNicId property: The ID of the Microsoft.Network/networkInterfaces resource which the service have.
+     *
+     * @param virtualNicId the virtualNicId value to set.
+     * @return the DataMigrationServiceInner object itself.
+     */
+    public DataMigrationServiceInner withVirtualNicId(String virtualNicId) {
+        this.virtualNicId = virtualNicId;
+        return this;
+    }
+
+    /**
+     * Get the systemData property: Metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
     /** {@inheritDoc} */
