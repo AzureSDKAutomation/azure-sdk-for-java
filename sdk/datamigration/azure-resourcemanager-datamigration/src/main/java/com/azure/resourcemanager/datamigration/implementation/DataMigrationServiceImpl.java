@@ -6,6 +6,7 @@ package com.azure.resourcemanager.datamigration.implementation;
 
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.datamigration.fluent.models.DataMigrationServiceInner;
 import com.azure.resourcemanager.datamigration.models.DataMigrationService;
@@ -70,6 +71,14 @@ public final class DataMigrationServiceImpl
 
     public String virtualSubnetId() {
         return this.innerModel().virtualSubnetId();
+    }
+
+    public String virtualNicId() {
+        return this.innerModel().virtualNicId();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public Region region() {
@@ -193,15 +202,15 @@ public final class DataMigrationServiceImpl
         serviceManager.services().stop(groupName, serviceName, context);
     }
 
-    public NameAvailabilityResponse nestedCheckNameAvailability(NameAvailabilityRequest parameters) {
-        return serviceManager.services().nestedCheckNameAvailability(groupName, serviceName, parameters);
+    public NameAvailabilityResponse checkChildrenNameAvailability(NameAvailabilityRequest parameters) {
+        return serviceManager.services().checkChildrenNameAvailability(groupName, serviceName, parameters);
     }
 
-    public Response<NameAvailabilityResponse> nestedCheckNameAvailabilityWithResponse(
+    public Response<NameAvailabilityResponse> checkChildrenNameAvailabilityWithResponse(
         NameAvailabilityRequest parameters, Context context) {
         return serviceManager
             .services()
-            .nestedCheckNameAvailabilityWithResponse(groupName, serviceName, parameters, context);
+            .checkChildrenNameAvailabilityWithResponse(groupName, serviceName, parameters, context);
     }
 
     public DataMigrationServiceImpl withRegion(Region location) {
@@ -241,6 +250,11 @@ public final class DataMigrationServiceImpl
 
     public DataMigrationServiceImpl withVirtualSubnetId(String virtualSubnetId) {
         this.innerModel().withVirtualSubnetId(virtualSubnetId);
+        return this;
+    }
+
+    public DataMigrationServiceImpl withVirtualNicId(String virtualNicId) {
+        this.innerModel().withVirtualNicId(virtualNicId);
         return this;
     }
 }

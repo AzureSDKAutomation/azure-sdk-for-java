@@ -5,6 +5,7 @@
 package com.azure.resourcemanager.datamigration.models;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.datamigration.fluent.models.ProjectInner;
 import java.time.OffsetDateTime;
@@ -96,6 +97,13 @@ public interface Project {
      * @return the provisioningState value.
      */
     ProjectProvisioningState provisioningState();
+
+    /**
+     * Gets the systemData property: Metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value.
+     */
+    SystemData systemData();
 
     /**
      * Gets the region of the resource.

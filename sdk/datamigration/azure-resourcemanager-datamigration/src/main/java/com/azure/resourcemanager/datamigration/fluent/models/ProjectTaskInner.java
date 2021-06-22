@@ -6,6 +6,7 @@ package com.azure.resourcemanager.datamigration.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.ProxyResource;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.datamigration.models.ProjectTaskProperties;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +28,12 @@ public final class ProjectTaskInner extends ProxyResource {
      */
     @JsonProperty(value = "properties")
     private ProjectTaskProperties properties;
+
+    /*
+     * Metadata pertaining to creation and last modification of the resource.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Get the etag property: HTTP strong entity tag value. This is ignored if submitted.
@@ -66,6 +73,15 @@ public final class ProjectTaskInner extends ProxyResource {
     public ProjectTaskInner withProperties(ProjectTaskProperties properties) {
         this.properties = properties;
         return this;
+    }
+
+    /**
+     * Get the systemData property: Metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
     /**
