@@ -7,6 +7,7 @@ package com.azure.resourcemanager.storagecache.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.storagecache.models.CacheDirectorySettings;
 import com.azure.resourcemanager.storagecache.models.CacheEncryptionSettings;
@@ -17,7 +18,6 @@ import com.azure.resourcemanager.storagecache.models.CacheSecuritySettings;
 import com.azure.resourcemanager.storagecache.models.CacheSku;
 import com.azure.resourcemanager.storagecache.models.CacheUpgradeStatus;
 import com.azure.resourcemanager.storagecache.models.ProvisioningStateType;
-import com.azure.resourcemanager.storagecache.models.SystemData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -72,7 +72,7 @@ public class CacheInner extends Resource {
      * ARM provisioning state, see
      * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
      */
-    @JsonProperty(value = "properties.provisioningState")
+    @JsonProperty(value = "properties.provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private ProvisioningStateType provisioningState;
 
     /*
@@ -84,7 +84,7 @@ public class CacheInner extends Resource {
     /*
      * Upgrade status of the Cache.
      */
-    @JsonProperty(value = "properties.upgradeStatus")
+    @JsonProperty(value = "properties.upgradeStatus", access = JsonProperty.Access.WRITE_ONLY)
     private CacheUpgradeStatus upgradeStatus;
 
     /*
@@ -209,18 +209,6 @@ public class CacheInner extends Resource {
     }
 
     /**
-     * Set the provisioningState property: ARM provisioning state, see
-     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property.
-     *
-     * @param provisioningState the provisioningState value to set.
-     * @return the CacheInner object itself.
-     */
-    public CacheInner withProvisioningState(ProvisioningStateType provisioningState) {
-        this.provisioningState = provisioningState;
-        return this;
-    }
-
-    /**
      * Get the subnet property: Subnet used for the Cache.
      *
      * @return the subnet value.
@@ -247,17 +235,6 @@ public class CacheInner extends Resource {
      */
     public CacheUpgradeStatus upgradeStatus() {
         return this.upgradeStatus;
-    }
-
-    /**
-     * Set the upgradeStatus property: Upgrade status of the Cache.
-     *
-     * @param upgradeStatus the upgradeStatus value to set.
-     * @return the CacheInner object itself.
-     */
-    public CacheInner withUpgradeStatus(CacheUpgradeStatus upgradeStatus) {
-        this.upgradeStatus = upgradeStatus;
-        return this;
     }
 
     /**
@@ -362,9 +339,6 @@ public class CacheInner extends Resource {
     public void validate() {
         if (identity() != null) {
             identity().validate();
-        }
-        if (systemData() != null) {
-            systemData().validate();
         }
         if (sku() != null) {
             sku().validate();
