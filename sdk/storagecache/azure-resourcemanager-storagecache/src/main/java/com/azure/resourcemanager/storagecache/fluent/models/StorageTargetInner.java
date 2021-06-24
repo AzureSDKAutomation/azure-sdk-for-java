@@ -41,7 +41,7 @@ public class StorageTargetInner extends StorageTargetResource {
      * ARM provisioning state, see
      * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
      */
-    @JsonProperty(value = "properties.provisioningState")
+    @JsonProperty(value = "properties.provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private ProvisioningStateType provisioningState;
 
     /*
@@ -116,18 +116,6 @@ public class StorageTargetInner extends StorageTargetResource {
      */
     public ProvisioningStateType provisioningState() {
         return this.provisioningState;
-    }
-
-    /**
-     * Set the provisioningState property: ARM provisioning state, see
-     * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property.
-     *
-     * @param provisioningState the provisioningState value to set.
-     * @return the StorageTargetInner object itself.
-     */
-    public StorageTargetInner withProvisioningState(ProvisioningStateType provisioningState) {
-        this.provisioningState = provisioningState;
-        return this;
     }
 
     /**
