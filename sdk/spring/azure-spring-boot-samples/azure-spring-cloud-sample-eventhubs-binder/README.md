@@ -204,7 +204,7 @@ spring:
 
 1.  Verify in your app’s logs that a similar message was posted:
 
-        New message received: 'hello'
+        New message received: 'hello', partition key: 2002572479, sequence number: 4, offset: 768, enqueued time: 2021-06-03T01:47:36.859Z
         Message 'hello' successfully checkpointed
 
 1.  Delete the resources on [Azure Portal][azure-portal] to avoid unexpected charges.
@@ -222,11 +222,11 @@ spring:
 [azure-portal]: https://ms.portal.azure.com/
 [create-event-hubs]: https://docs.microsoft.com/azure/event-hubs/ 
 [create-azure-storage]: https://docs.microsoft.com/azure/storage/ 
-[create-sp-using-azure-cli]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/create-sp-using-azure-cli.md
-[create-managed-identity]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/create-managed-identity.md
+[create-sp-using-azure-cli]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/spring/azure-spring-boot-samples/create-sp-using-azure-cli.md
+[create-managed-identity]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/spring/azure-spring-boot-samples/create-managed-identity.md
 [deploy-spring-boot-application-to-app-service]: https://docs.microsoft.com/java/azure/spring-framework/deploy-spring-boot-java-app-with-maven-plugin?toc=%2Fazure%2Fapp-service%2Fcontainers%2Ftoc.json&view=azure-java-stable
-[environment_checklist]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/ENVIRONMENT_CHECKLIST.md#ready-to-run-checklist
+[environment_checklist]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/spring/ENVIRONMENT_CHECKLIST.md#ready-to-run-checklist
 [role-assignment]: https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal
-[application-mi.yaml]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/azure-spring-cloud-sample-eventhubs-binder/src/main/resources/application-mi.yaml
-[application.yaml]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/azure-spring-cloud-sample-eventhubs-binder/src/main/resources/application.yaml
-[application-sp.yaml]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/azure-spring-cloud-sample-eventhubs-binder/src/main/resources/application-sp.yaml
+[application-mi.yaml]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/spring/azure-spring-boot-samples/azure-spring-cloud-sample-eventhubs-binder/src/main/resources/application-mi.yaml
+[application.yaml]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/spring/azure-spring-boot-samples/azure-spring-cloud-sample-eventhubs-binder/src/main/resources/application.yaml
+[application-sp.yaml]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/spring/azure-spring-boot-samples/azure-spring-cloud-sample-eventhubs-binder/src/main/resources/application-sp.yaml
