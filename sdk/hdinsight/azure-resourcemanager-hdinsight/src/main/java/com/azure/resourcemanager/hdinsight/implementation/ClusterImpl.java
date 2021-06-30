@@ -20,6 +20,7 @@ import com.azure.resourcemanager.hdinsight.models.GatewaySettings;
 import com.azure.resourcemanager.hdinsight.models.UpdateClusterIdentityCertificateParameters;
 import com.azure.resourcemanager.hdinsight.models.UpdateGatewaySettingsParameters;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public final class ClusterImpl implements Cluster, Cluster.Definition, Cluster.Update {
@@ -54,6 +55,15 @@ public final class ClusterImpl implements Cluster, Cluster.Definition, Cluster.U
 
     public String etag() {
         return this.innerModel().etag();
+    }
+
+    public List<String> zones() {
+        List<String> inner = this.innerModel().zones();
+        if (inner != null) {
+            return Collections.unmodifiableList(inner);
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     public ClusterGetProperties properties() {
@@ -228,6 +238,11 @@ public final class ClusterImpl implements Cluster, Cluster.Definition, Cluster.U
             this.updateParameters.withTags(tags);
             return this;
         }
+    }
+
+    public ClusterImpl withZones(List<String> zones) {
+        this.createParameters.withZones(zones);
+        return this;
     }
 
     public ClusterImpl withProperties(ClusterCreateProperties properties) {
