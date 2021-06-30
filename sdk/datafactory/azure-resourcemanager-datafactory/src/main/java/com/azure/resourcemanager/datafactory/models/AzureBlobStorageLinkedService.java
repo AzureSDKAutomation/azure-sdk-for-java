@@ -55,7 +55,7 @@ public class AzureBlobStorageLinkedService extends LinkedService {
      * exclusive with connectionString, sasUri property.
      */
     @JsonProperty(value = "typeProperties.serviceEndpoint")
-    private String serviceEndpoint;
+    private Object serviceEndpoint;
 
     /*
      * The ID of the service principal used to authenticate against Azure SQL
@@ -193,7 +193,7 @@ public class AzureBlobStorageLinkedService extends LinkedService {
      *
      * @return the serviceEndpoint value.
      */
-    public String serviceEndpoint() {
+    public Object serviceEndpoint() {
         return this.serviceEndpoint;
     }
 
@@ -204,7 +204,7 @@ public class AzureBlobStorageLinkedService extends LinkedService {
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the AzureBlobStorageLinkedService object itself.
      */
-    public AzureBlobStorageLinkedService withServiceEndpoint(String serviceEndpoint) {
+    public AzureBlobStorageLinkedService withServiceEndpoint(Object serviceEndpoint) {
         this.serviceEndpoint = serviceEndpoint;
         return this;
     }
