@@ -27,7 +27,7 @@ public final class ResizeOperationStatus {
     private Integer targetDedicatedNodes;
 
     /*
-     * The desired number of low priority compute nodes in the pool.
+     * The desired number of low-priority compute nodes in the pool.
      */
     @JsonProperty(value = "targetLowPriorityNodes")
     private Integer targetLowPriorityNodes;
@@ -81,7 +81,7 @@ public final class ResizeOperationStatus {
     }
 
     /**
-     * Get the targetLowPriorityNodes property: The desired number of low priority compute nodes in the pool.
+     * Get the targetLowPriorityNodes property: The desired number of low-priority compute nodes in the pool.
      *
      * @return the targetLowPriorityNodes value.
      */
@@ -90,7 +90,7 @@ public final class ResizeOperationStatus {
     }
 
     /**
-     * Set the targetLowPriorityNodes property: The desired number of low priority compute nodes in the pool.
+     * Set the targetLowPriorityNodes property: The desired number of low-priority compute nodes in the pool.
      *
      * @param targetLowPriorityNodes the targetLowPriorityNodes value to set.
      * @return the ResizeOperationStatus object itself.
