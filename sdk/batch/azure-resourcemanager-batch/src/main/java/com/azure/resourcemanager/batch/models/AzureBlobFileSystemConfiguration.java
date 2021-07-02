@@ -27,15 +27,15 @@ public final class AzureBlobFileSystemConfiguration {
     private String containerName;
 
     /*
-     * This property is mutually exclusive with sasKey and one must be
-     * specified.
+     * This property is mutually exclusive with both sasKey and identity;
+     * exactly one must be specified.
      */
     @JsonProperty(value = "accountKey")
     private String accountKey;
 
     /*
-     * This property is mutually exclusive with accountKey and one must be
-     * specified.
+     * This property is mutually exclusive with both accountKey and identity;
+     * exactly one must be specified.
      */
     @JsonProperty(value = "sasKey")
     private String sasKey;
@@ -52,6 +52,13 @@ public final class AzureBlobFileSystemConfiguration {
      */
     @JsonProperty(value = "relativeMountPath", required = true)
     private String relativeMountPath;
+
+    /*
+     * This property is mutually exclusive with both accountKey and sasKey;
+     * exactly one must be specified.
+     */
+    @JsonProperty(value = "identityReference")
+    private ComputeNodeIdentityReference identityReference;
 
     /**
      * Get the accountName property: The Azure Storage Account name.
@@ -94,7 +101,8 @@ public final class AzureBlobFileSystemConfiguration {
     }
 
     /**
-     * Get the accountKey property: This property is mutually exclusive with sasKey and one must be specified.
+     * Get the accountKey property: This property is mutually exclusive with both sasKey and identity; exactly one must
+     * be specified.
      *
      * @return the accountKey value.
      */
@@ -103,7 +111,8 @@ public final class AzureBlobFileSystemConfiguration {
     }
 
     /**
-     * Set the accountKey property: This property is mutually exclusive with sasKey and one must be specified.
+     * Set the accountKey property: This property is mutually exclusive with both sasKey and identity; exactly one must
+     * be specified.
      *
      * @param accountKey the accountKey value to set.
      * @return the AzureBlobFileSystemConfiguration object itself.
@@ -114,7 +123,8 @@ public final class AzureBlobFileSystemConfiguration {
     }
 
     /**
-     * Get the sasKey property: This property is mutually exclusive with accountKey and one must be specified.
+     * Get the sasKey property: This property is mutually exclusive with both accountKey and identity; exactly one must
+     * be specified.
      *
      * @return the sasKey value.
      */
@@ -123,7 +133,8 @@ public final class AzureBlobFileSystemConfiguration {
     }
 
     /**
-     * Set the sasKey property: This property is mutually exclusive with accountKey and one must be specified.
+     * Set the sasKey property: This property is mutually exclusive with both accountKey and identity; exactly one must
+     * be specified.
      *
      * @param sasKey the sasKey value to set.
      * @return the AzureBlobFileSystemConfiguration object itself.
@@ -176,6 +187,28 @@ public final class AzureBlobFileSystemConfiguration {
     }
 
     /**
+     * Get the identityReference property: This property is mutually exclusive with both accountKey and sasKey; exactly
+     * one must be specified.
+     *
+     * @return the identityReference value.
+     */
+    public ComputeNodeIdentityReference identityReference() {
+        return this.identityReference;
+    }
+
+    /**
+     * Set the identityReference property: This property is mutually exclusive with both accountKey and sasKey; exactly
+     * one must be specified.
+     *
+     * @param identityReference the identityReference value to set.
+     * @return the AzureBlobFileSystemConfiguration object itself.
+     */
+    public AzureBlobFileSystemConfiguration withIdentityReference(ComputeNodeIdentityReference identityReference) {
+        this.identityReference = identityReference;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -198,6 +231,9 @@ public final class AzureBlobFileSystemConfiguration {
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property relativeMountPath in model AzureBlobFileSystemConfiguration"));
+        }
+        if (identityReference() != null) {
+            identityReference().validate();
         }
     }
 }

@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.batch.models.AuthenticationMode;
 import com.azure.resourcemanager.batch.models.AutoStorageProperties;
 import com.azure.resourcemanager.batch.models.BatchAccountIdentity;
 import com.azure.resourcemanager.batch.models.EncryptionProperties;
@@ -131,6 +132,14 @@ public class BatchAccountInner extends Resource {
      */
     @JsonProperty(value = "properties.activeJobAndJobScheduleQuota", access = JsonProperty.Access.WRITE_ONLY)
     private Integer activeJobAndJobScheduleQuota;
+
+    /*
+     * List of allowed authentication modes for the Batch account that can be
+     * used to authenticate with the data plane. This does not affect
+     * authentication with the control plane.
+     */
+    @JsonProperty(value = "properties.allowedAuthenticationModes", access = JsonProperty.Access.WRITE_ONLY)
+    private List<AuthenticationMode> allowedAuthenticationModes;
 
     /**
      * Get the identity property: The identity of the Batch account.
@@ -289,6 +298,16 @@ public class BatchAccountInner extends Resource {
      */
     public Integer activeJobAndJobScheduleQuota() {
         return this.activeJobAndJobScheduleQuota;
+    }
+
+    /**
+     * Get the allowedAuthenticationModes property: List of allowed authentication modes for the Batch account that can
+     * be used to authenticate with the data plane. This does not affect authentication with the control plane.
+     *
+     * @return the allowedAuthenticationModes value.
+     */
+    public List<AuthenticationMode> allowedAuthenticationModes() {
+        return this.allowedAuthenticationModes;
     }
 
     /** {@inheritDoc} */

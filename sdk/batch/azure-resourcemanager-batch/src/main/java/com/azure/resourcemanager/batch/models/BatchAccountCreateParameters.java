@@ -9,6 +9,7 @@ import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import java.util.Map;
 
 /** Parameters supplied to the Create operation. */
@@ -70,6 +71,14 @@ public class BatchAccountCreateParameters {
      */
     @JsonProperty(value = "properties.encryption")
     private EncryptionProperties encryption;
+
+    /*
+     * List of allowed authentication modes for the Batch account that can be
+     * used to authenticate with the data plane. This does not affect
+     * authentication with the control plane.
+     */
+    @JsonProperty(value = "properties.allowedAuthenticationModes")
+    private List<AuthenticationMode> allowedAuthenticationModes;
 
     /**
      * Get the location property: The region in which to create the account.
@@ -236,6 +245,29 @@ public class BatchAccountCreateParameters {
      */
     public BatchAccountCreateParameters withEncryption(EncryptionProperties encryption) {
         this.encryption = encryption;
+        return this;
+    }
+
+    /**
+     * Get the allowedAuthenticationModes property: List of allowed authentication modes for the Batch account that can
+     * be used to authenticate with the data plane. This does not affect authentication with the control plane.
+     *
+     * @return the allowedAuthenticationModes value.
+     */
+    public List<AuthenticationMode> allowedAuthenticationModes() {
+        return this.allowedAuthenticationModes;
+    }
+
+    /**
+     * Set the allowedAuthenticationModes property: List of allowed authentication modes for the Batch account that can
+     * be used to authenticate with the data plane. This does not affect authentication with the control plane.
+     *
+     * @param allowedAuthenticationModes the allowedAuthenticationModes value to set.
+     * @return the BatchAccountCreateParameters object itself.
+     */
+    public BatchAccountCreateParameters withAllowedAuthenticationModes(
+        List<AuthenticationMode> allowedAuthenticationModes) {
+        this.allowedAuthenticationModes = allowedAuthenticationModes;
         return this;
     }
 

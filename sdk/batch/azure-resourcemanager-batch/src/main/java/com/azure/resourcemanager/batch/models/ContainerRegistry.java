@@ -23,14 +23,21 @@ public final class ContainerRegistry {
     /*
      * The user name to log into the registry server.
      */
-    @JsonProperty(value = "username", required = true)
+    @JsonProperty(value = "username")
     private String username;
 
     /*
      * The password to log into the registry server.
      */
-    @JsonProperty(value = "password", required = true)
+    @JsonProperty(value = "password")
     private String password;
+
+    /*
+     * The reference to a user assigned identity associated with the Batch pool
+     * which a compute node will use.
+     */
+    @JsonProperty(value = "identityReference")
+    private ComputeNodeIdentityReference identityReference;
 
     /**
      * Get the registryServer property: If omitted, the default is "docker.io".
@@ -93,20 +100,35 @@ public final class ContainerRegistry {
     }
 
     /**
+     * Get the identityReference property: The reference to a user assigned identity associated with the Batch pool
+     * which a compute node will use.
+     *
+     * @return the identityReference value.
+     */
+    public ComputeNodeIdentityReference identityReference() {
+        return this.identityReference;
+    }
+
+    /**
+     * Set the identityReference property: The reference to a user assigned identity associated with the Batch pool
+     * which a compute node will use.
+     *
+     * @param identityReference the identityReference value to set.
+     * @return the ContainerRegistry object itself.
+     */
+    public ContainerRegistry withIdentityReference(ComputeNodeIdentityReference identityReference) {
+        this.identityReference = identityReference;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (username() == null) {
-            throw logger
-                .logExceptionAsError(
-                    new IllegalArgumentException("Missing required property username in model ContainerRegistry"));
-        }
-        if (password() == null) {
-            throw logger
-                .logExceptionAsError(
-                    new IllegalArgumentException("Missing required property password in model ContainerRegistry"));
+        if (identityReference() != null) {
+            identityReference().validate();
         }
     }
 }
