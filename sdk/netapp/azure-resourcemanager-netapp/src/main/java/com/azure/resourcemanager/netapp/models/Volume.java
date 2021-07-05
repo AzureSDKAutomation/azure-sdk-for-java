@@ -243,6 +243,44 @@ public interface Volume {
     String unixPermissions();
 
     /**
+     * Gets the cloneProgress property: When a volume is being restored from another volume's snapshot, will show the
+     * percentage completion of this cloning process. When this value is empty/null there is no cloning process
+     * currently happening on this volume. This value will update every 5 minutes during cloning.
+     *
+     * @return the cloneProgress value.
+     */
+    Integer cloneProgress();
+
+    /**
+     * Gets the avsDataStore property: Specifies whether the volume is enabled for Azure VMware Solution (AVS) datastore
+     * purpose.
+     *
+     * @return the avsDataStore value.
+     */
+    AvsDataStore avsDataStore();
+
+    /**
+     * Gets the isDefaultQuotaEnabled property: Specifies if default quota is enabled for the volume.
+     *
+     * @return the isDefaultQuotaEnabled value.
+     */
+    Boolean isDefaultQuotaEnabled();
+
+    /**
+     * Gets the defaultUserQuotaInKiBs property: Default user quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @return the defaultUserQuotaInKiBs value.
+     */
+    Long defaultUserQuotaInKiBs();
+
+    /**
+     * Gets the defaultGroupQuotaInKiBs property: Default group quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @return the defaultGroupQuotaInKiBs value.
+     */
+    Long defaultGroupQuotaInKiBs();
+
+    /**
      * Gets the region of the resource.
      *
      * @return the region of the resource.
@@ -367,7 +405,11 @@ public interface Volume {
                 DefinitionStages.WithLdapEnabled,
                 DefinitionStages.WithCoolAccess,
                 DefinitionStages.WithCoolnessPeriod,
-                DefinitionStages.WithUnixPermissions {
+                DefinitionStages.WithUnixPermissions,
+                DefinitionStages.WithAvsDataStore,
+                DefinitionStages.WithIsDefaultQuotaEnabled,
+                DefinitionStages.WithDefaultUserQuotaInKiBs,
+                DefinitionStages.WithDefaultGroupQuotaInKiBs {
             /**
              * Executes the create request.
              *
@@ -606,6 +648,48 @@ public interface Volume {
              */
             WithCreate withUnixPermissions(String unixPermissions);
         }
+        /** The stage of the Volume definition allowing to specify avsDataStore. */
+        interface WithAvsDataStore {
+            /**
+             * Specifies the avsDataStore property: Specifies whether the volume is enabled for Azure VMware Solution
+             * (AVS) datastore purpose.
+             *
+             * @param avsDataStore Specifies whether the volume is enabled for Azure VMware Solution (AVS) datastore
+             *     purpose.
+             * @return the next definition stage.
+             */
+            WithCreate withAvsDataStore(AvsDataStore avsDataStore);
+        }
+        /** The stage of the Volume definition allowing to specify isDefaultQuotaEnabled. */
+        interface WithIsDefaultQuotaEnabled {
+            /**
+             * Specifies the isDefaultQuotaEnabled property: Specifies if default quota is enabled for the volume..
+             *
+             * @param isDefaultQuotaEnabled Specifies if default quota is enabled for the volume.
+             * @return the next definition stage.
+             */
+            WithCreate withIsDefaultQuotaEnabled(Boolean isDefaultQuotaEnabled);
+        }
+        /** The stage of the Volume definition allowing to specify defaultUserQuotaInKiBs. */
+        interface WithDefaultUserQuotaInKiBs {
+            /**
+             * Specifies the defaultUserQuotaInKiBs property: Default user quota for volume in KiBs. Minimum 4 KiBs..
+             *
+             * @param defaultUserQuotaInKiBs Default user quota for volume in KiBs. Minimum 4 KiBs.
+             * @return the next definition stage.
+             */
+            WithCreate withDefaultUserQuotaInKiBs(Long defaultUserQuotaInKiBs);
+        }
+        /** The stage of the Volume definition allowing to specify defaultGroupQuotaInKiBs. */
+        interface WithDefaultGroupQuotaInKiBs {
+            /**
+             * Specifies the defaultGroupQuotaInKiBs property: Default group quota for volume in KiBs. Minimum 4 KiBs..
+             *
+             * @param defaultGroupQuotaInKiBs Default group quota for volume in KiBs. Minimum 4 KiBs.
+             * @return the next definition stage.
+             */
+            WithCreate withDefaultGroupQuotaInKiBs(Long defaultGroupQuotaInKiBs);
+        }
     }
     /**
      * Begins update for the Volume resource.
@@ -621,7 +705,10 @@ public interface Volume {
             UpdateStages.WithUsageThreshold,
             UpdateStages.WithExportPolicy,
             UpdateStages.WithThroughputMibps,
-            UpdateStages.WithDataProtection {
+            UpdateStages.WithDataProtection,
+            UpdateStages.WithIsDefaultQuotaEnabled,
+            UpdateStages.WithDefaultUserQuotaInKiBs,
+            UpdateStages.WithDefaultGroupQuotaInKiBs {
         /**
          * Executes the update request.
          *
@@ -702,6 +789,36 @@ public interface Volume {
              * @return the next definition stage.
              */
             Update withDataProtection(VolumePatchPropertiesDataProtection dataProtection);
+        }
+        /** The stage of the Volume update allowing to specify isDefaultQuotaEnabled. */
+        interface WithIsDefaultQuotaEnabled {
+            /**
+             * Specifies the isDefaultQuotaEnabled property: Specifies if default quota is enabled for the volume..
+             *
+             * @param isDefaultQuotaEnabled Specifies if default quota is enabled for the volume.
+             * @return the next definition stage.
+             */
+            Update withIsDefaultQuotaEnabled(Boolean isDefaultQuotaEnabled);
+        }
+        /** The stage of the Volume update allowing to specify defaultUserQuotaInKiBs. */
+        interface WithDefaultUserQuotaInKiBs {
+            /**
+             * Specifies the defaultUserQuotaInKiBs property: Default user quota for volume in KiBs. Minimum 4 KiBs..
+             *
+             * @param defaultUserQuotaInKiBs Default user quota for volume in KiBs. Minimum 4 KiBs.
+             * @return the next definition stage.
+             */
+            Update withDefaultUserQuotaInKiBs(Long defaultUserQuotaInKiBs);
+        }
+        /** The stage of the Volume update allowing to specify defaultGroupQuotaInKiBs. */
+        interface WithDefaultGroupQuotaInKiBs {
+            /**
+             * Specifies the defaultGroupQuotaInKiBs property: Default group quota for volume in KiBs. Minimum 4 KiBs..
+             *
+             * @param defaultGroupQuotaInKiBs Default group quota for volume in KiBs. Minimum 4 KiBs.
+             * @return the next definition stage.
+             */
+            Update withDefaultGroupQuotaInKiBs(Long defaultGroupQuotaInKiBs);
         }
     }
     /**

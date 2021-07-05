@@ -45,15 +45,9 @@ public class BackupPolicyInner extends Resource {
     private Integer monthlyBackupsToKeep;
 
     /*
-     * Yearly backups count to keep
-     */
-    @JsonProperty(value = "properties.yearlyBackupsToKeep")
-    private Integer yearlyBackupsToKeep;
-
-    /*
      * Volumes using current backup policy
      */
-    @JsonProperty(value = "properties.volumesAssigned")
+    @JsonProperty(value = "properties.volumesAssigned", access = JsonProperty.Access.WRITE_ONLY)
     private Integer volumesAssigned;
 
     /*
@@ -65,7 +59,7 @@ public class BackupPolicyInner extends Resource {
     /*
      * A list of volumes assigned to this policy
      */
-    @JsonProperty(value = "properties.volumeBackups")
+    @JsonProperty(value = "properties.volumeBackups", access = JsonProperty.Access.WRITE_ONLY)
     private List<VolumeBackups> volumeBackups;
 
     /**
@@ -138,43 +132,12 @@ public class BackupPolicyInner extends Resource {
     }
 
     /**
-     * Get the yearlyBackupsToKeep property: Yearly backups count to keep.
-     *
-     * @return the yearlyBackupsToKeep value.
-     */
-    public Integer yearlyBackupsToKeep() {
-        return this.yearlyBackupsToKeep;
-    }
-
-    /**
-     * Set the yearlyBackupsToKeep property: Yearly backups count to keep.
-     *
-     * @param yearlyBackupsToKeep the yearlyBackupsToKeep value to set.
-     * @return the BackupPolicyInner object itself.
-     */
-    public BackupPolicyInner withYearlyBackupsToKeep(Integer yearlyBackupsToKeep) {
-        this.yearlyBackupsToKeep = yearlyBackupsToKeep;
-        return this;
-    }
-
-    /**
      * Get the volumesAssigned property: Volumes using current backup policy.
      *
      * @return the volumesAssigned value.
      */
     public Integer volumesAssigned() {
         return this.volumesAssigned;
-    }
-
-    /**
-     * Set the volumesAssigned property: Volumes using current backup policy.
-     *
-     * @param volumesAssigned the volumesAssigned value to set.
-     * @return the BackupPolicyInner object itself.
-     */
-    public BackupPolicyInner withVolumesAssigned(Integer volumesAssigned) {
-        this.volumesAssigned = volumesAssigned;
-        return this;
     }
 
     /**
@@ -204,17 +167,6 @@ public class BackupPolicyInner extends Resource {
      */
     public List<VolumeBackups> volumeBackups() {
         return this.volumeBackups;
-    }
-
-    /**
-     * Set the volumeBackups property: A list of volumes assigned to this policy.
-     *
-     * @param volumeBackups the volumeBackups value to set.
-     * @return the BackupPolicyInner object itself.
-     */
-    public BackupPolicyInner withVolumeBackups(List<VolumeBackups> volumeBackups) {
-        this.volumeBackups = volumeBackups;
-        return this;
     }
 
     /** {@inheritDoc} */
