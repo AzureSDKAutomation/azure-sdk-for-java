@@ -51,6 +51,24 @@ public class VolumePatch extends Resource {
     @JsonProperty(value = "properties.dataProtection")
     private VolumePatchPropertiesDataProtection dataProtection;
 
+    /*
+     * Specifies if default quota is enabled for the volume.
+     */
+    @JsonProperty(value = "properties.isDefaultQuotaEnabled")
+    private Boolean isDefaultQuotaEnabled;
+
+    /*
+     * Default user quota for volume in KiBs. Minimum 4 KiBs.
+     */
+    @JsonProperty(value = "properties.defaultUserQuotaInKiBs")
+    private Long defaultUserQuotaInKiBs;
+
+    /*
+     * Default group quota for volume in KiBs. Minimum 4 KiBs.
+     */
+    @JsonProperty(value = "properties.defaultGroupQuotaInKiBs")
+    private Long defaultGroupQuotaInKiBs;
+
     /**
      * Get the serviceLevel property: The service level of the file system.
      *
@@ -152,6 +170,66 @@ public class VolumePatch extends Resource {
      */
     public VolumePatch withDataProtection(VolumePatchPropertiesDataProtection dataProtection) {
         this.dataProtection = dataProtection;
+        return this;
+    }
+
+    /**
+     * Get the isDefaultQuotaEnabled property: Specifies if default quota is enabled for the volume.
+     *
+     * @return the isDefaultQuotaEnabled value.
+     */
+    public Boolean isDefaultQuotaEnabled() {
+        return this.isDefaultQuotaEnabled;
+    }
+
+    /**
+     * Set the isDefaultQuotaEnabled property: Specifies if default quota is enabled for the volume.
+     *
+     * @param isDefaultQuotaEnabled the isDefaultQuotaEnabled value to set.
+     * @return the VolumePatch object itself.
+     */
+    public VolumePatch withIsDefaultQuotaEnabled(Boolean isDefaultQuotaEnabled) {
+        this.isDefaultQuotaEnabled = isDefaultQuotaEnabled;
+        return this;
+    }
+
+    /**
+     * Get the defaultUserQuotaInKiBs property: Default user quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @return the defaultUserQuotaInKiBs value.
+     */
+    public Long defaultUserQuotaInKiBs() {
+        return this.defaultUserQuotaInKiBs;
+    }
+
+    /**
+     * Set the defaultUserQuotaInKiBs property: Default user quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @param defaultUserQuotaInKiBs the defaultUserQuotaInKiBs value to set.
+     * @return the VolumePatch object itself.
+     */
+    public VolumePatch withDefaultUserQuotaInKiBs(Long defaultUserQuotaInKiBs) {
+        this.defaultUserQuotaInKiBs = defaultUserQuotaInKiBs;
+        return this;
+    }
+
+    /**
+     * Get the defaultGroupQuotaInKiBs property: Default group quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @return the defaultGroupQuotaInKiBs value.
+     */
+    public Long defaultGroupQuotaInKiBs() {
+        return this.defaultGroupQuotaInKiBs;
+    }
+
+    /**
+     * Set the defaultGroupQuotaInKiBs property: Default group quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @param defaultGroupQuotaInKiBs the defaultGroupQuotaInKiBs value to set.
+     * @return the VolumePatch object itself.
+     */
+    public VolumePatch withDefaultGroupQuotaInKiBs(Long defaultGroupQuotaInKiBs) {
+        this.defaultGroupQuotaInKiBs = defaultGroupQuotaInKiBs;
         return this;
     }
 

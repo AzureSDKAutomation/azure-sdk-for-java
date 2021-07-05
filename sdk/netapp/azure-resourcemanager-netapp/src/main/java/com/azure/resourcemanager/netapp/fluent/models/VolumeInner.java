@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.netapp.models.AvsDataStore;
 import com.azure.resourcemanager.netapp.models.MountTargetProperties;
 import com.azure.resourcemanager.netapp.models.SecurityStyle;
 import com.azure.resourcemanager.netapp.models.ServiceLevel;
@@ -197,6 +198,40 @@ public class VolumeInner extends Resource {
      */
     @JsonProperty(value = "properties.unixPermissions")
     private String unixPermissions;
+
+    /*
+     * When a volume is being restored from another volume's snapshot, will
+     * show the percentage completion of this cloning process. When this value
+     * is empty/null there is no cloning process currently happening on this
+     * volume. This value will update every 5 minutes during cloning.
+     */
+    @JsonProperty(value = "properties.cloneProgress", access = JsonProperty.Access.WRITE_ONLY)
+    private Integer cloneProgress;
+
+    /*
+     * Specifies whether the volume is enabled for Azure VMware Solution (AVS)
+     * datastore purpose
+     */
+    @JsonProperty(value = "properties.avsDataStore")
+    private AvsDataStore avsDataStore;
+
+    /*
+     * Specifies if default quota is enabled for the volume.
+     */
+    @JsonProperty(value = "properties.isDefaultQuotaEnabled")
+    private Boolean isDefaultQuotaEnabled;
+
+    /*
+     * Default user quota for volume in KiBs. Minimum 4 KiBs.
+     */
+    @JsonProperty(value = "properties.defaultUserQuotaInKiBs")
+    private Long defaultUserQuotaInKiBs;
+
+    /*
+     * Default group quota for volume in KiBs.  Minimum 4 KiBs.
+     */
+    @JsonProperty(value = "properties.defaultGroupQuotaInKiBs")
+    private Long defaultGroupQuotaInKiBs;
 
     /**
      * Get the fileSystemId property: Unique FileSystem Identifier.
@@ -697,6 +732,99 @@ public class VolumeInner extends Resource {
      */
     public VolumeInner withUnixPermissions(String unixPermissions) {
         this.unixPermissions = unixPermissions;
+        return this;
+    }
+
+    /**
+     * Get the cloneProgress property: When a volume is being restored from another volume's snapshot, will show the
+     * percentage completion of this cloning process. When this value is empty/null there is no cloning process
+     * currently happening on this volume. This value will update every 5 minutes during cloning.
+     *
+     * @return the cloneProgress value.
+     */
+    public Integer cloneProgress() {
+        return this.cloneProgress;
+    }
+
+    /**
+     * Get the avsDataStore property: Specifies whether the volume is enabled for Azure VMware Solution (AVS) datastore
+     * purpose.
+     *
+     * @return the avsDataStore value.
+     */
+    public AvsDataStore avsDataStore() {
+        return this.avsDataStore;
+    }
+
+    /**
+     * Set the avsDataStore property: Specifies whether the volume is enabled for Azure VMware Solution (AVS) datastore
+     * purpose.
+     *
+     * @param avsDataStore the avsDataStore value to set.
+     * @return the VolumeInner object itself.
+     */
+    public VolumeInner withAvsDataStore(AvsDataStore avsDataStore) {
+        this.avsDataStore = avsDataStore;
+        return this;
+    }
+
+    /**
+     * Get the isDefaultQuotaEnabled property: Specifies if default quota is enabled for the volume.
+     *
+     * @return the isDefaultQuotaEnabled value.
+     */
+    public Boolean isDefaultQuotaEnabled() {
+        return this.isDefaultQuotaEnabled;
+    }
+
+    /**
+     * Set the isDefaultQuotaEnabled property: Specifies if default quota is enabled for the volume.
+     *
+     * @param isDefaultQuotaEnabled the isDefaultQuotaEnabled value to set.
+     * @return the VolumeInner object itself.
+     */
+    public VolumeInner withIsDefaultQuotaEnabled(Boolean isDefaultQuotaEnabled) {
+        this.isDefaultQuotaEnabled = isDefaultQuotaEnabled;
+        return this;
+    }
+
+    /**
+     * Get the defaultUserQuotaInKiBs property: Default user quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @return the defaultUserQuotaInKiBs value.
+     */
+    public Long defaultUserQuotaInKiBs() {
+        return this.defaultUserQuotaInKiBs;
+    }
+
+    /**
+     * Set the defaultUserQuotaInKiBs property: Default user quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @param defaultUserQuotaInKiBs the defaultUserQuotaInKiBs value to set.
+     * @return the VolumeInner object itself.
+     */
+    public VolumeInner withDefaultUserQuotaInKiBs(Long defaultUserQuotaInKiBs) {
+        this.defaultUserQuotaInKiBs = defaultUserQuotaInKiBs;
+        return this;
+    }
+
+    /**
+     * Get the defaultGroupQuotaInKiBs property: Default group quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @return the defaultGroupQuotaInKiBs value.
+     */
+    public Long defaultGroupQuotaInKiBs() {
+        return this.defaultGroupQuotaInKiBs;
+    }
+
+    /**
+     * Set the defaultGroupQuotaInKiBs property: Default group quota for volume in KiBs. Minimum 4 KiBs.
+     *
+     * @param defaultGroupQuotaInKiBs the defaultGroupQuotaInKiBs value to set.
+     * @return the VolumeInner object itself.
+     */
+    public VolumeInner withDefaultGroupQuotaInKiBs(Long defaultGroupQuotaInKiBs) {
+        this.defaultGroupQuotaInKiBs = defaultGroupQuotaInKiBs;
         return this;
     }
 
