@@ -56,6 +56,12 @@ public class AppPatch {
     @JsonProperty(value = "properties.template")
     private String template;
 
+    /*
+     * The current state of the application.
+     */
+    @JsonProperty(value = "properties.state", access = JsonProperty.Access.WRITE_ONLY)
+    private AppState state;
+
     /**
      * Get the tags property: Instance tags.
      *
@@ -167,6 +173,15 @@ public class AppPatch {
     public AppPatch withTemplate(String template) {
         this.template = template;
         return this;
+    }
+
+    /**
+     * Get the state property: The current state of the application.
+     *
+     * @return the state value.
+     */
+    public AppState state() {
+        return this.state;
     }
 
     /**
