@@ -84,6 +84,13 @@ public interface App {
     String template();
 
     /**
+     * Gets the state property: The current state of the application.
+     *
+     * @return the state value.
+     */
+    AppState state();
+
+    /**
      * Gets the region of the resource.
      *
      * @return the region of the resource.
