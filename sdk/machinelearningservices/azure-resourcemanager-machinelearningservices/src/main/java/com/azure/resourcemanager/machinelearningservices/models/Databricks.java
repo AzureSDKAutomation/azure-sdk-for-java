@@ -19,13 +19,13 @@ public final class Databricks extends Compute {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(Databricks.class);
 
     /*
-     * The properties property.
+     * Properties of Databricks
      */
     @JsonProperty(value = "properties")
     private DatabricksProperties properties;
 
     /**
-     * Get the properties property: The properties property.
+     * Get the properties property: Properties of Databricks.
      *
      * @return the properties value.
      */
@@ -34,7 +34,7 @@ public final class Databricks extends Compute {
     }
 
     /**
-     * Set the properties property: The properties property.
+     * Set the properties property: Properties of Databricks.
      *
      * @param properties the properties value to set.
      * @return the Databricks object itself.

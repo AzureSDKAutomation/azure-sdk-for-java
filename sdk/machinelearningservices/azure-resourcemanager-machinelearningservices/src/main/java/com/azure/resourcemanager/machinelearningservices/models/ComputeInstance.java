@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** An Azure Machine Learning compute instance. */
+/** Properties(top level) of ComputeInstance. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "computeType")
 @JsonTypeName("ComputeInstance")
 @Fluent
@@ -19,13 +19,13 @@ public final class ComputeInstance extends Compute {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ComputeInstance.class);
 
     /*
-     * Compute Instance properties
+     * Properties of ComputeInstance
      */
     @JsonProperty(value = "properties")
     private ComputeInstanceProperties properties;
 
     /**
-     * Get the properties property: Compute Instance properties.
+     * Get the properties property: Properties of ComputeInstance.
      *
      * @return the properties value.
      */
@@ -34,7 +34,7 @@ public final class ComputeInstance extends Compute {
     }
 
     /**
-     * Set the properties property: Compute Instance properties.
+     * Set the properties property: Properties of ComputeInstance.
      *
      * @param properties the properties value to set.
      * @return the ComputeInstance object itself.

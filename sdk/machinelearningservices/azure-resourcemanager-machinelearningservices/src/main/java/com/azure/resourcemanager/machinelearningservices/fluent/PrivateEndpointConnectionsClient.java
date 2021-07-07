@@ -6,6 +6,7 @@ package com.azure.resourcemanager.machinelearningservices.fluent;
 
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.PrivateEndpointConnectionInner;
@@ -13,9 +14,36 @@ import com.azure.resourcemanager.machinelearningservices.fluent.models.PrivateEn
 /** An instance of this class provides access to all the operations defined in PrivateEndpointConnectionsClient. */
 public interface PrivateEndpointConnectionsClient {
     /**
+     * List all the private endpoint connections associated with the workspace.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return list of private endpoint connection associated with the specified workspace.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    PagedIterable<PrivateEndpointConnectionInner> list(String resourceGroupName, String workspaceName);
+
+    /**
+     * List all the private endpoint connections associated with the workspace.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return list of private endpoint connection associated with the specified workspace.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    PagedIterable<PrivateEndpointConnectionInner> list(String resourceGroupName, String workspaceName, Context context);
+
+    /**
      * Gets the specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -30,7 +58,7 @@ public interface PrivateEndpointConnectionsClient {
     /**
      * Gets the specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @param context The context to associate with this operation.
@@ -46,7 +74,7 @@ public interface PrivateEndpointConnectionsClient {
     /**
      * Update the state of specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @param properties The private endpoint connection properties.
@@ -56,7 +84,7 @@ public interface PrivateEndpointConnectionsClient {
      * @return the Private Endpoint Connection resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    PrivateEndpointConnectionInner put(
+    PrivateEndpointConnectionInner createOrUpdate(
         String resourceGroupName,
         String workspaceName,
         String privateEndpointConnectionName,
@@ -65,7 +93,7 @@ public interface PrivateEndpointConnectionsClient {
     /**
      * Update the state of specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @param properties The private endpoint connection properties.
@@ -76,7 +104,7 @@ public interface PrivateEndpointConnectionsClient {
      * @return the Private Endpoint Connection resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<PrivateEndpointConnectionInner> putWithResponse(
+    Response<PrivateEndpointConnectionInner> createOrUpdateWithResponse(
         String resourceGroupName,
         String workspaceName,
         String privateEndpointConnectionName,
@@ -86,7 +114,7 @@ public interface PrivateEndpointConnectionsClient {
     /**
      * Deletes the specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -99,7 +127,7 @@ public interface PrivateEndpointConnectionsClient {
     /**
      * Deletes the specified private endpoint connection associated with the workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the workspace.
      * @param context The context to associate with this operation.

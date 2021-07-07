@@ -34,7 +34,7 @@ import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
-import com.azure.resourcemanager.machinelearningservices.fluent.MachineLearningComputesClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.ComputesClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.ComputeResourceInner;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.ComputeSecretsInner;
 import com.azure.resourcemanager.machinelearningservices.models.AmlComputeNodeInformation;
@@ -46,42 +46,40 @@ import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in MachineLearningComputesClient. */
-public final class MachineLearningComputesClientImpl implements MachineLearningComputesClient {
-    private final ClientLogger logger = new ClientLogger(MachineLearningComputesClientImpl.class);
+/** An instance of this class provides access to all the operations defined in ComputesClient. */
+public final class ComputesClientImpl implements ComputesClient {
+    private final ClientLogger logger = new ClientLogger(ComputesClientImpl.class);
 
     /** The proxy service used to perform REST calls. */
-    private final MachineLearningComputesService service;
+    private final ComputesService service;
 
     /** The service client containing this operation class. */
     private final AzureMachineLearningWorkspacesImpl client;
 
     /**
-     * Initializes an instance of MachineLearningComputesClientImpl.
+     * Initializes an instance of ComputesClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    MachineLearningComputesClientImpl(AzureMachineLearningWorkspacesImpl client) {
-        this.service =
-            RestProxy
-                .create(MachineLearningComputesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    ComputesClientImpl(AzureMachineLearningWorkspacesImpl client) {
+        this.service = RestProxy.create(ComputesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AzureMachineLearningWorkspacesMachineLearningComputes to be used by
-     * the proxy service to perform REST calls.
+     * The interface defining all the services for AzureMachineLearningWorkspacesComputes to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AzureMachineLearning")
-    private interface MachineLearningComputesService {
+    private interface ComputesService {
         @Headers({"Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers"
                 + "/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<PaginatedComputeResourcesList>> listByWorkspace(
+        Mono<Response<PaginatedComputeResourcesList>> list(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
@@ -226,9 +224,9 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
         @Post(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers"
                 + "/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart")
-        @ExpectedResponses({200})
+        @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Void>> restart(
+        Mono<Response<Flux<ByteBuffer>>> restart(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
@@ -242,7 +240,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<PaginatedComputeResourcesList>> listByWorkspaceNext(
+        Mono<Response<PaginatedComputeResourcesList>> listNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("$host") String endpoint,
             @HeaderParam("Accept") String accept,
@@ -262,7 +260,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Gets computes in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param skip Continuation token for pagination.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -271,7 +269,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return computes in specified workspace.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ComputeResourceInner>> listByWorkspaceSinglePageAsync(
+    private Mono<PagedResponse<ComputeResourceInner>> listSinglePageAsync(
         String resourceGroupName, String workspaceName, String skip) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -297,7 +295,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
             .withContext(
                 context ->
                     service
-                        .listByWorkspace(
+                        .list(
                             this.client.getEndpoint(),
                             this.client.getSubscriptionId(),
                             resourceGroupName,
@@ -321,7 +319,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Gets computes in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param skip Continuation token for pagination.
      * @param context The context to associate with this operation.
@@ -331,7 +329,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return computes in specified workspace.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ComputeResourceInner>> listByWorkspaceSinglePageAsync(
+    private Mono<PagedResponse<ComputeResourceInner>> listSinglePageAsync(
         String resourceGroupName, String workspaceName, String skip, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -355,7 +353,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByWorkspace(
+            .list(
                 this.client.getEndpoint(),
                 this.client.getSubscriptionId(),
                 resourceGroupName,
@@ -378,7 +376,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Gets computes in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param skip Continuation token for pagination.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -387,17 +385,16 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return computes in specified workspace.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<ComputeResourceInner> listByWorkspaceAsync(
-        String resourceGroupName, String workspaceName, String skip) {
+    private PagedFlux<ComputeResourceInner> listAsync(String resourceGroupName, String workspaceName, String skip) {
         return new PagedFlux<>(
-            () -> listByWorkspaceSinglePageAsync(resourceGroupName, workspaceName, skip),
-            nextLink -> listByWorkspaceNextSinglePageAsync(nextLink));
+            () -> listSinglePageAsync(resourceGroupName, workspaceName, skip),
+            nextLink -> listNextSinglePageAsync(nextLink));
     }
 
     /**
      * Gets computes in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -405,17 +402,17 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return computes in specified workspace.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<ComputeResourceInner> listByWorkspaceAsync(String resourceGroupName, String workspaceName) {
+    private PagedFlux<ComputeResourceInner> listAsync(String resourceGroupName, String workspaceName) {
         final String skip = null;
         return new PagedFlux<>(
-            () -> listByWorkspaceSinglePageAsync(resourceGroupName, workspaceName, skip),
-            nextLink -> listByWorkspaceNextSinglePageAsync(nextLink));
+            () -> listSinglePageAsync(resourceGroupName, workspaceName, skip),
+            nextLink -> listNextSinglePageAsync(nextLink));
     }
 
     /**
      * Gets computes in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param skip Continuation token for pagination.
      * @param context The context to associate with this operation.
@@ -425,17 +422,17 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return computes in specified workspace.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<ComputeResourceInner> listByWorkspaceAsync(
+    private PagedFlux<ComputeResourceInner> listAsync(
         String resourceGroupName, String workspaceName, String skip, Context context) {
         return new PagedFlux<>(
-            () -> listByWorkspaceSinglePageAsync(resourceGroupName, workspaceName, skip, context),
-            nextLink -> listByWorkspaceNextSinglePageAsync(nextLink, context));
+            () -> listSinglePageAsync(resourceGroupName, workspaceName, skip, context),
+            nextLink -> listNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * Gets computes in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -443,15 +440,15 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return computes in specified workspace.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ComputeResourceInner> listByWorkspace(String resourceGroupName, String workspaceName) {
+    public PagedIterable<ComputeResourceInner> list(String resourceGroupName, String workspaceName) {
         final String skip = null;
-        return new PagedIterable<>(listByWorkspaceAsync(resourceGroupName, workspaceName, skip));
+        return new PagedIterable<>(listAsync(resourceGroupName, workspaceName, skip));
     }
 
     /**
      * Gets computes in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param skip Continuation token for pagination.
      * @param context The context to associate with this operation.
@@ -461,16 +458,16 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return computes in specified workspace.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ComputeResourceInner> listByWorkspace(
+    public PagedIterable<ComputeResourceInner> list(
         String resourceGroupName, String workspaceName, String skip, Context context) {
-        return new PagedIterable<>(listByWorkspaceAsync(resourceGroupName, workspaceName, skip, context));
+        return new PagedIterable<>(listAsync(resourceGroupName, workspaceName, skip, context));
     }
 
     /**
      * Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use
      * 'keys' nested resource to get them.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -524,7 +521,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use
      * 'keys' nested resource to get them.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -576,7 +573,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use
      * 'keys' nested resource to get them.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -601,7 +598,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use
      * 'keys' nested resource to get them.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -618,7 +615,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use
      * 'keys' nested resource to get them.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -637,7 +634,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -698,7 +695,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -761,7 +758,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -789,7 +786,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -819,7 +816,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -838,7 +835,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -863,7 +860,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -884,7 +881,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -910,7 +907,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -929,7 +926,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
      * If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Payload with Machine Learning compute definition.
@@ -953,7 +950,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1014,7 +1011,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1077,7 +1074,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1105,7 +1102,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1135,7 +1132,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1154,7 +1151,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1178,7 +1175,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1199,7 +1196,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1225,7 +1222,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1244,7 +1241,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable
      * operation.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param parameters Additional parameters for cluster update.
@@ -1267,7 +1264,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1331,7 +1328,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1394,7 +1391,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1420,7 +1417,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1449,7 +1446,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1472,7 +1469,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1497,7 +1494,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1521,7 +1518,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1547,7 +1544,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1568,7 +1565,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Deletes specified Machine Learning compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param underlyingResourceAction Delete the underlying compute if 'Delete', or detach the underlying compute from
@@ -1591,7 +1588,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1653,7 +1650,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -1713,7 +1710,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1732,7 +1729,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -1752,7 +1749,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1769,7 +1766,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -1787,7 +1784,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1840,7 +1837,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -1891,7 +1888,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1916,7 +1913,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1932,7 +1929,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -1950,7 +1947,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2003,7 +2000,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2054,7 +2051,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2074,7 +2071,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2097,7 +2094,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2114,7 +2111,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2132,7 +2129,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2150,7 +2147,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2169,7 +2166,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2184,7 +2181,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a start action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2200,7 +2197,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2253,7 +2250,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2304,7 +2301,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2324,7 +2321,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2347,7 +2344,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2364,7 +2361,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2382,7 +2379,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2400,7 +2397,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2419,7 +2416,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2434,7 +2431,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a stop action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2450,7 +2447,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a restart action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2459,7 +2456,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> restartWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> restartWithResponseAsync(
         String resourceGroupName, String workspaceName, String computeName) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -2503,7 +2500,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a restart action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
@@ -2513,7 +2510,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> restartWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> restartWithResponseAsync(
         String resourceGroupName, String workspaceName, String computeName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -2554,7 +2551,85 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a restart action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param computeName Name of the Azure Machine Learning compute.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<Void>, Void> beginRestartAsync(
+        String resourceGroupName, String workspaceName, String computeName) {
+        Mono<Response<Flux<ByteBuffer>>> mono = restartWithResponseAsync(resourceGroupName, workspaceName, computeName);
+        return this
+            .client
+            .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, Context.NONE);
+    }
+
+    /**
+     * Posts a restart action to a compute instance.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param computeName Name of the Azure Machine Learning compute.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<Void>, Void> beginRestartAsync(
+        String resourceGroupName, String workspaceName, String computeName, Context context) {
+        context = this.client.mergeContext(context);
+        Mono<Response<Flux<ByteBuffer>>> mono =
+            restartWithResponseAsync(resourceGroupName, workspaceName, computeName, context);
+        return this
+            .client
+            .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, context);
+    }
+
+    /**
+     * Posts a restart action to a compute instance.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param computeName Name of the Azure Machine Learning compute.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<Void>, Void> beginRestart(
+        String resourceGroupName, String workspaceName, String computeName) {
+        return beginRestartAsync(resourceGroupName, workspaceName, computeName).getSyncPoller();
+    }
+
+    /**
+     * Posts a restart action to a compute instance.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param computeName Name of the Azure Machine Learning compute.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<Void>, Void> beginRestart(
+        String resourceGroupName, String workspaceName, String computeName, Context context) {
+        return beginRestartAsync(resourceGroupName, workspaceName, computeName, context).getSyncPoller();
+    }
+
+    /**
+     * Posts a restart action to a compute instance.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2564,14 +2639,35 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> restartAsync(String resourceGroupName, String workspaceName, String computeName) {
-        return restartWithResponseAsync(resourceGroupName, workspaceName, computeName)
-            .flatMap((Response<Void> res) -> Mono.empty());
+        return beginRestartAsync(resourceGroupName, workspaceName, computeName)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
      * Posts a restart action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param computeName Name of the Azure Machine Learning compute.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Void> restartAsync(
+        String resourceGroupName, String workspaceName, String computeName, Context context) {
+        return beginRestartAsync(resourceGroupName, workspaceName, computeName, context)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
+    }
+
+    /**
+     * Posts a restart action to a compute instance.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2586,19 +2682,17 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
     /**
      * Posts a restart action to a compute instance.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param computeName Name of the Azure Machine Learning compute.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> restartWithResponse(
-        String resourceGroupName, String workspaceName, String computeName, Context context) {
-        return restartWithResponseAsync(resourceGroupName, workspaceName, computeName, context).block();
+    public void restart(String resourceGroupName, String workspaceName, String computeName, Context context) {
+        restartAsync(resourceGroupName, workspaceName, computeName, context).block();
     }
 
     /**
@@ -2611,7 +2705,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return paginated list of Machine Learning compute objects wrapped in ARM resource envelope.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ComputeResourceInner>> listByWorkspaceNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<ComputeResourceInner>> listNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -2623,7 +2717,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
         }
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.listByWorkspaceNext(nextLink, this.client.getEndpoint(), accept, context))
+            .withContext(context -> service.listNext(nextLink, this.client.getEndpoint(), accept, context))
             .<PagedResponse<ComputeResourceInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -2647,8 +2741,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
      * @return paginated list of Machine Learning compute objects wrapped in ARM resource envelope.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ComputeResourceInner>> listByWorkspaceNextSinglePageAsync(
-        String nextLink, Context context) {
+    private Mono<PagedResponse<ComputeResourceInner>> listNextSinglePageAsync(String nextLink, Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -2661,7 +2754,7 @@ public final class MachineLearningComputesClientImpl implements MachineLearningC
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByWorkspaceNext(nextLink, this.client.getEndpoint(), accept, context)
+            .listNext(nextLink, this.client.getEndpoint(), accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(

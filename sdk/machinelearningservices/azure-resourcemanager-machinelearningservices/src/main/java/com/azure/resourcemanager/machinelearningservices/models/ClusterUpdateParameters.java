@@ -17,28 +17,28 @@ public class ClusterUpdateParameters {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ClusterUpdateParameters.class);
 
     /*
-     * Desired scale settings for the amlCompute.
+     * Properties of ClusterUpdate
      */
-    @JsonProperty(value = "properties.scaleSettings")
-    private ScaleSettings scaleSettings;
+    @JsonProperty(value = "properties.properties")
+    private ScaleSettingsInformation properties;
 
     /**
-     * Get the scaleSettings property: Desired scale settings for the amlCompute.
+     * Get the properties property: Properties of ClusterUpdate.
      *
-     * @return the scaleSettings value.
+     * @return the properties value.
      */
-    public ScaleSettings scaleSettings() {
-        return this.scaleSettings;
+    public ScaleSettingsInformation properties() {
+        return this.properties;
     }
 
     /**
-     * Set the scaleSettings property: Desired scale settings for the amlCompute.
+     * Set the properties property: Properties of ClusterUpdate.
      *
-     * @param scaleSettings the scaleSettings value to set.
+     * @param properties the properties value to set.
      * @return the ClusterUpdateParameters object itself.
      */
-    public ClusterUpdateParameters withScaleSettings(ScaleSettings scaleSettings) {
-        this.scaleSettings = scaleSettings;
+    public ClusterUpdateParameters withProperties(ScaleSettingsInformation properties) {
+        this.properties = properties;
         return this;
     }
 
@@ -48,8 +48,8 @@ public class ClusterUpdateParameters {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (scaleSettings() != null) {
-            scaleSettings().validate();
+        if (properties() != null) {
+            properties().validate();
         }
     }
 }

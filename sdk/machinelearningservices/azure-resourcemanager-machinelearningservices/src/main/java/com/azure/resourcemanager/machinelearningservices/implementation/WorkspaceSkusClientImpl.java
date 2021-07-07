@@ -26,44 +26,44 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.machinelearningservices.fluent.WorkspaceOperationsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.WorkspaceSkusClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.WorkspaceSkuInner;
 import com.azure.resourcemanager.machinelearningservices.models.SkuListResult;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in WorkspaceOperationsClient. */
-public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsClient {
-    private final ClientLogger logger = new ClientLogger(WorkspaceOperationsClientImpl.class);
+/** An instance of this class provides access to all the operations defined in WorkspaceSkusClient. */
+public final class WorkspaceSkusClientImpl implements WorkspaceSkusClient {
+    private final ClientLogger logger = new ClientLogger(WorkspaceSkusClientImpl.class);
 
     /** The proxy service used to perform REST calls. */
-    private final WorkspaceOperationsService service;
+    private final WorkspaceSkusService service;
 
     /** The service client containing this operation class. */
     private final AzureMachineLearningWorkspacesImpl client;
 
     /**
-     * Initializes an instance of WorkspaceOperationsClientImpl.
+     * Initializes an instance of WorkspaceSkusClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    WorkspaceOperationsClientImpl(AzureMachineLearningWorkspacesImpl client) {
+    WorkspaceSkusClientImpl(AzureMachineLearningWorkspacesImpl client) {
         this.service =
-            RestProxy.create(WorkspaceOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+            RestProxy.create(WorkspaceSkusService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AzureMachineLearningWorkspacesWorkspaceOperations to be used by the
-     * proxy service to perform REST calls.
+     * The interface defining all the services for AzureMachineLearningWorkspacesWorkspaceSkus to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AzureMachineLearning")
-    private interface WorkspaceOperationsService {
+    private interface WorkspaceSkusService {
         @Headers({"Content-Type: application/json"})
         @Get("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces/skus")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SkuListResult>> listSkus(
+        Mono<Response<SkuListResult>> list(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
@@ -74,7 +74,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SkuListResult>> listSkusNext(
+        Mono<Response<SkuListResult>> listNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("$host") String endpoint,
             @HeaderParam("Accept") String accept,
@@ -89,7 +89,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
      * @return list of skus with features.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<WorkspaceSkuInner>> listSkusSinglePageAsync() {
+    private Mono<PagedResponse<WorkspaceSkuInner>> listSinglePageAsync() {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -107,7 +107,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
             .withContext(
                 context ->
                     service
-                        .listSkus(
+                        .list(
                             this.client.getEndpoint(),
                             this.client.getApiVersion(),
                             this.client.getSubscriptionId(),
@@ -135,7 +135,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
      * @return list of skus with features.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<WorkspaceSkuInner>> listSkusSinglePageAsync(Context context) {
+    private Mono<PagedResponse<WorkspaceSkuInner>> listSinglePageAsync(Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -151,7 +151,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listSkus(
+            .list(
                 this.client.getEndpoint(),
                 this.client.getApiVersion(),
                 this.client.getSubscriptionId(),
@@ -176,8 +176,8 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
      * @return list of skus with features.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<WorkspaceSkuInner> listSkusAsync() {
-        return new PagedFlux<>(() -> listSkusSinglePageAsync(), nextLink -> listSkusNextSinglePageAsync(nextLink));
+    private PagedFlux<WorkspaceSkuInner> listAsync() {
+        return new PagedFlux<>(() -> listSinglePageAsync(), nextLink -> listNextSinglePageAsync(nextLink));
     }
 
     /**
@@ -190,9 +190,9 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
      * @return list of skus with features.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<WorkspaceSkuInner> listSkusAsync(Context context) {
+    private PagedFlux<WorkspaceSkuInner> listAsync(Context context) {
         return new PagedFlux<>(
-            () -> listSkusSinglePageAsync(context), nextLink -> listSkusNextSinglePageAsync(nextLink, context));
+            () -> listSinglePageAsync(context), nextLink -> listNextSinglePageAsync(nextLink, context));
     }
 
     /**
@@ -203,8 +203,8 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
      * @return list of skus with features.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<WorkspaceSkuInner> listSkus() {
-        return new PagedIterable<>(listSkusAsync());
+    public PagedIterable<WorkspaceSkuInner> list() {
+        return new PagedIterable<>(listAsync());
     }
 
     /**
@@ -217,8 +217,8 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
      * @return list of skus with features.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<WorkspaceSkuInner> listSkus(Context context) {
-        return new PagedIterable<>(listSkusAsync(context));
+    public PagedIterable<WorkspaceSkuInner> list(Context context) {
+        return new PagedIterable<>(listAsync(context));
     }
 
     /**
@@ -231,7 +231,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
      * @return list of skus with features.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<WorkspaceSkuInner>> listSkusNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<WorkspaceSkuInner>> listNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -243,7 +243,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
         }
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.listSkusNext(nextLink, this.client.getEndpoint(), accept, context))
+            .withContext(context -> service.listNext(nextLink, this.client.getEndpoint(), accept, context))
             .<PagedResponse<WorkspaceSkuInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -267,7 +267,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
      * @return list of skus with features.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<WorkspaceSkuInner>> listSkusNextSinglePageAsync(String nextLink, Context context) {
+    private Mono<PagedResponse<WorkspaceSkuInner>> listNextSinglePageAsync(String nextLink, Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -280,7 +280,7 @@ public final class WorkspaceOperationsClientImpl implements WorkspaceOperationsC
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listSkusNext(nextLink, this.client.getEndpoint(), accept, context)
+            .listNext(nextLink, this.client.getEndpoint(), accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(

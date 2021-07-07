@@ -9,10 +9,10 @@ import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The MachineLearningComputesDeleteHeaders model. */
+/** The ComputesDeleteHeaders model. */
 @Fluent
-public final class MachineLearningComputesDeleteHeaders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(MachineLearningComputesDeleteHeaders.class);
+public final class ComputesDeleteHeaders {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ComputesDeleteHeaders.class);
 
     /*
      * The Azure-AsyncOperation property.
@@ -39,9 +39,9 @@ public final class MachineLearningComputesDeleteHeaders {
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
      *
      * @param azureAsyncOperation the azureAsyncOperation value to set.
-     * @return the MachineLearningComputesDeleteHeaders object itself.
+     * @return the ComputesDeleteHeaders object itself.
      */
-    public MachineLearningComputesDeleteHeaders withAzureAsyncOperation(String azureAsyncOperation) {
+    public ComputesDeleteHeaders withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
@@ -59,9 +59,9 @@ public final class MachineLearningComputesDeleteHeaders {
      * Set the location property: The Location property.
      *
      * @param location the location value to set.
-     * @return the MachineLearningComputesDeleteHeaders object itself.
+     * @return the ComputesDeleteHeaders object itself.
      */
-    public MachineLearningComputesDeleteHeaders withLocation(String location) {
+    public ComputesDeleteHeaders withLocation(String location) {
         this.location = location;
         return this;
     }

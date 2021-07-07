@@ -9,23 +9,18 @@ import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
 
 /** Contains all response data for the delete operation. */
-public final class MachineLearningComputesDeleteResponse
-    extends ResponseBase<MachineLearningComputesDeleteHeaders, Void> {
+public final class ComputesDeleteResponse extends ResponseBase<ComputesDeleteHeaders, Void> {
     /**
-     * Creates an instance of MachineLearningComputesDeleteResponse.
+     * Creates an instance of ComputesDeleteResponse.
      *
-     * @param request the request which resulted in this MachineLearningComputesDeleteResponse.
+     * @param request the request which resulted in this ComputesDeleteResponse.
      * @param statusCode the status code of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param value the deserialized value of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      */
-    public MachineLearningComputesDeleteResponse(
-        HttpRequest request,
-        int statusCode,
-        HttpHeaders rawHeaders,
-        Void value,
-        MachineLearningComputesDeleteHeaders headers) {
+    public ComputesDeleteResponse(
+        HttpRequest request, int statusCode, HttpHeaders rawHeaders, Void value, ComputesDeleteHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 }
