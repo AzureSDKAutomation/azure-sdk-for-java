@@ -10,14 +10,13 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.WorkspaceConnectionInner;
-import com.azure.resourcemanager.machinelearningservices.models.WorkspaceConnectionDto;
 
 /** An instance of this class provides access to all the operations defined in WorkspaceConnectionsClient. */
 public interface WorkspaceConnectionsClient {
     /**
      * List all connections under a AML workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -30,7 +29,7 @@ public interface WorkspaceConnectionsClient {
     /**
      * List all connections under a AML workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param target Target of the workspace connection.
      * @param category Category of the workspace connection.
@@ -47,7 +46,7 @@ public interface WorkspaceConnectionsClient {
     /**
      * Add a new workspace connection.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param connectionName Friendly name of the workspace connection.
      * @param parameters The object for creating or updating a new workspace connection.
@@ -58,12 +57,12 @@ public interface WorkspaceConnectionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     WorkspaceConnectionInner create(
-        String resourceGroupName, String workspaceName, String connectionName, WorkspaceConnectionDto parameters);
+        String resourceGroupName, String workspaceName, String connectionName, WorkspaceConnectionInner parameters);
 
     /**
      * Add a new workspace connection.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param connectionName Friendly name of the workspace connection.
      * @param parameters The object for creating or updating a new workspace connection.
@@ -78,13 +77,13 @@ public interface WorkspaceConnectionsClient {
         String resourceGroupName,
         String workspaceName,
         String connectionName,
-        WorkspaceConnectionDto parameters,
+        WorkspaceConnectionInner parameters,
         Context context);
 
     /**
      * Get the detail of a workspace connection.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param connectionName Friendly name of the workspace connection.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -98,7 +97,7 @@ public interface WorkspaceConnectionsClient {
     /**
      * Get the detail of a workspace connection.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param connectionName Friendly name of the workspace connection.
      * @param context The context to associate with this operation.
@@ -114,7 +113,7 @@ public interface WorkspaceConnectionsClient {
     /**
      * Delete a workspace connection.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param connectionName Friendly name of the workspace connection.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -127,7 +126,7 @@ public interface WorkspaceConnectionsClient {
     /**
      * Delete a workspace connection.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param connectionName Friendly name of the workspace connection.
      * @param context The context to associate with this operation.

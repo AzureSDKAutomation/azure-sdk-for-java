@@ -24,6 +24,7 @@ import java.util.List;
 @JsonTypeName("Compute")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "AKS", value = Aks.class),
+    @JsonSubTypes.Type(name = "Kubernetes", value = Kubernetes.class),
     @JsonSubTypes.Type(name = "AmlCompute", value = AmlCompute.class),
     @JsonSubTypes.Type(name = "ComputeInstance", value = ComputeInstance.class),
     @JsonSubTypes.Type(name = "VirtualMachine", value = VirtualMachine.class),

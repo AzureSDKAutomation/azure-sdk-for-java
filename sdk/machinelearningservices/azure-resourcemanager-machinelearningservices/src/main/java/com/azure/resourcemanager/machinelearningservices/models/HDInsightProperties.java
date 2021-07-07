@@ -9,7 +9,7 @@ import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The HDInsightProperties model. */
+/** HDInsight compute properties. */
 @Fluent
 public final class HDInsightProperties {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(HDInsightProperties.class);

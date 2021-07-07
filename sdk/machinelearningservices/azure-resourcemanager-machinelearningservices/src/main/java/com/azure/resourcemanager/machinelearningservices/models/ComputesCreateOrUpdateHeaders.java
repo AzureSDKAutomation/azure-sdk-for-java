@@ -9,11 +9,10 @@ import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The MachineLearningComputesCreateOrUpdateHeaders model. */
+/** The ComputesCreateOrUpdateHeaders model. */
 @Fluent
-public final class MachineLearningComputesCreateOrUpdateHeaders {
-    @JsonIgnore
-    private final ClientLogger logger = new ClientLogger(MachineLearningComputesCreateOrUpdateHeaders.class);
+public final class ComputesCreateOrUpdateHeaders {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ComputesCreateOrUpdateHeaders.class);
 
     /*
      * The Azure-AsyncOperation property.
@@ -34,9 +33,9 @@ public final class MachineLearningComputesCreateOrUpdateHeaders {
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
      *
      * @param azureAsyncOperation the azureAsyncOperation value to set.
-     * @return the MachineLearningComputesCreateOrUpdateHeaders object itself.
+     * @return the ComputesCreateOrUpdateHeaders object itself.
      */
-    public MachineLearningComputesCreateOrUpdateHeaders withAzureAsyncOperation(String azureAsyncOperation) {
+    public ComputesCreateOrUpdateHeaders withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }

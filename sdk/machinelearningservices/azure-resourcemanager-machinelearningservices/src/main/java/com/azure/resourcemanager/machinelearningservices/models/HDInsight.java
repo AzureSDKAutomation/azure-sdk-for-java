@@ -19,13 +19,13 @@ public final class HDInsight extends Compute {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(HDInsight.class);
 
     /*
-     * The properties property.
+     * HDInsight compute properties
      */
     @JsonProperty(value = "properties")
     private HDInsightProperties properties;
 
     /**
-     * Get the properties property: The properties property.
+     * Get the properties property: HDInsight compute properties.
      *
      * @return the properties value.
      */
@@ -34,7 +34,7 @@ public final class HDInsight extends Compute {
     }
 
     /**
-     * Set the properties property: The properties property.
+     * Set the properties property: HDInsight compute properties.
      *
      * @param properties the properties value to set.
      * @return the HDInsight object itself.

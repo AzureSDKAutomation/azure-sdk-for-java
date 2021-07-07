@@ -6,12 +6,13 @@ package com.azure.resourcemanager.machinelearningservices.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
-import com.azure.core.management.Resource;
+import com.azure.core.management.ProxyResource;
 import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.machinelearningservices.models.EncryptionProperty;
 import com.azure.resourcemanager.machinelearningservices.models.Identity;
 import com.azure.resourcemanager.machinelearningservices.models.ProvisioningState;
+import com.azure.resourcemanager.machinelearningservices.models.PublicNetworkAccess;
 import com.azure.resourcemanager.machinelearningservices.models.ServiceManagedResourcesSettings;
 import com.azure.resourcemanager.machinelearningservices.models.SharedPrivateLinkResource;
 import com.azure.resourcemanager.machinelearningservices.models.Sku;
@@ -23,8 +24,38 @@ import java.util.Map;
 /** An object that represents a machine learning workspace. */
 @JsonFlatten
 @Fluent
-public class WorkspaceInner extends Resource {
+public class WorkspaceInner extends ProxyResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(WorkspaceInner.class);
+
+    /*
+     * The identity of the resource.
+     */
+    @JsonProperty(value = "identity")
+    private Identity identity;
+
+    /*
+     * Specifies the location of the resource.
+     */
+    @JsonProperty(value = "location")
+    private String location;
+
+    /*
+     * Contains resource tags defined as key/value pairs.
+     */
+    @JsonProperty(value = "tags")
+    private Map<String, String> tags;
+
+    /*
+     * The sku of the workspace.
+     */
+    @JsonProperty(value = "sku")
+    private Sku sku;
+
+    /*
+     * System data
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * The immutable id associated with this workspace.
@@ -125,6 +156,12 @@ public class WorkspaceInner extends Resource {
     private Boolean allowPublicAccessWhenBehindVnet;
 
     /*
+     * Whether requests from Public Network are allowed
+     */
+    @JsonProperty(value = "properties.publicNetworkAccess")
+    private PublicNetworkAccess publicNetworkAccess;
+
+    /*
      * The list of private endpoint connections in the workspace.
      */
     @JsonProperty(value = "properties.privateEndpointConnections", access = JsonProperty.Access.WRITE_ONLY)
@@ -162,22 +199,106 @@ public class WorkspaceInner extends Resource {
     private String tenantId;
 
     /*
-     * The identity of the resource.
+     * If the storage associated with the workspace has HNS enabled.
      */
-    @JsonProperty(value = "identity")
-    private Identity identity;
+    @JsonProperty(value = "properties.storageHnsEnabled", access = JsonProperty.Access.WRITE_ONLY)
+    private String storageHnsEnabled;
 
     /*
-     * The sku of the workspace.
+     * The URI associated with this workspace that machine learning flow must
+     * point at to set up tracking.
      */
-    @JsonProperty(value = "sku")
-    private Sku sku;
+    @JsonProperty(value = "properties.mlFlowTrackingUri", access = JsonProperty.Access.WRITE_ONLY)
+    private String mlFlowTrackingUri;
 
-    /*
-     * Read only system data
+    /**
+     * Get the identity property: The identity of the resource.
+     *
+     * @return the identity value.
      */
-    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
-    private SystemData systemData;
+    public Identity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: The identity of the resource.
+     *
+     * @param identity the identity value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withIdentity(Identity identity) {
+        this.identity = identity;
+        return this;
+    }
+
+    /**
+     * Get the location property: Specifies the location of the resource.
+     *
+     * @return the location value.
+     */
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Set the location property: Specifies the location of the resource.
+     *
+     * @param location the location value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the tags property: Contains resource tags defined as key/value pairs.
+     *
+     * @return the tags value.
+     */
+    public Map<String, String> tags() {
+        return this.tags;
+    }
+
+    /**
+     * Set the tags property: Contains resource tags defined as key/value pairs.
+     *
+     * @param tags the tags value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withTags(Map<String, String> tags) {
+        this.tags = tags;
+        return this;
+    }
+
+    /**
+     * Get the sku property: The sku of the workspace.
+     *
+     * @return the sku value.
+     */
+    public Sku sku() {
+        return this.sku;
+    }
+
+    /**
+     * Set the sku property: The sku of the workspace.
+     *
+     * @param sku the sku value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withSku(Sku sku) {
+        this.sku = sku;
+        return this;
+    }
+
+    /**
+     * Get the systemData property: System data.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the workspaceId property: The immutable id associated with this workspace.
@@ -452,6 +573,26 @@ public class WorkspaceInner extends Resource {
     }
 
     /**
+     * Get the publicNetworkAccess property: Whether requests from Public Network are allowed.
+     *
+     * @return the publicNetworkAccess value.
+     */
+    public PublicNetworkAccess publicNetworkAccess() {
+        return this.publicNetworkAccess;
+    }
+
+    /**
+     * Set the publicNetworkAccess property: Whether requests from Public Network are allowed.
+     *
+     * @param publicNetworkAccess the publicNetworkAccess value to set.
+     * @return the WorkspaceInner object itself.
+     */
+    public WorkspaceInner withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess) {
+        this.publicNetworkAccess = publicNetworkAccess;
+        return this;
+    }
+
+    /**
      * Get the privateEndpointConnections property: The list of private endpoint connections in the workspace.
      *
      * @return the privateEndpointConnections value.
@@ -542,66 +683,22 @@ public class WorkspaceInner extends Resource {
     }
 
     /**
-     * Get the identity property: The identity of the resource.
+     * Get the storageHnsEnabled property: If the storage associated with the workspace has HNS enabled.
      *
-     * @return the identity value.
+     * @return the storageHnsEnabled value.
      */
-    public Identity identity() {
-        return this.identity;
+    public String storageHnsEnabled() {
+        return this.storageHnsEnabled;
     }
 
     /**
-     * Set the identity property: The identity of the resource.
+     * Get the mlFlowTrackingUri property: The URI associated with this workspace that machine learning flow must point
+     * at to set up tracking.
      *
-     * @param identity the identity value to set.
-     * @return the WorkspaceInner object itself.
+     * @return the mlFlowTrackingUri value.
      */
-    public WorkspaceInner withIdentity(Identity identity) {
-        this.identity = identity;
-        return this;
-    }
-
-    /**
-     * Get the sku property: The sku of the workspace.
-     *
-     * @return the sku value.
-     */
-    public Sku sku() {
-        return this.sku;
-    }
-
-    /**
-     * Set the sku property: The sku of the workspace.
-     *
-     * @param sku the sku value to set.
-     * @return the WorkspaceInner object itself.
-     */
-    public WorkspaceInner withSku(Sku sku) {
-        this.sku = sku;
-        return this;
-    }
-
-    /**
-     * Get the systemData property: Read only system data.
-     *
-     * @return the systemData value.
-     */
-    public SystemData systemData() {
-        return this.systemData;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public WorkspaceInner withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public WorkspaceInner withTags(Map<String, String> tags) {
-        super.withTags(tags);
-        return this;
+    public String mlFlowTrackingUri() {
+        return this.mlFlowTrackingUri;
     }
 
     /**
@@ -610,6 +707,12 @@ public class WorkspaceInner extends Resource {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (identity() != null) {
+            identity().validate();
+        }
+        if (sku() != null) {
+            sku().validate();
+        }
         if (encryption() != null) {
             encryption().validate();
         }
@@ -624,12 +727,6 @@ public class WorkspaceInner extends Resource {
         }
         if (serviceManagedResourcesSettings() != null) {
             serviceManagedResourcesSettings().validate();
-        }
-        if (identity() != null) {
-            identity().validate();
-        }
-        if (sku() != null) {
-            sku().validate();
         }
     }
 }
