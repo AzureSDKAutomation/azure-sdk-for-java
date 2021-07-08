@@ -87,6 +87,13 @@ public interface ServiceFabricManagementClient {
     ApplicationsClient getApplications();
 
     /**
+     * Gets the ApplicationManualUpgradesClient object to access its operations.
+     *
+     * @return the ApplicationManualUpgradesClient object.
+     */
+    ApplicationManualUpgradesClient getApplicationManualUpgrades();
+
+    /**
      * Gets the ServicesClient object to access its operations.
      *
      * @return the ServicesClient object.

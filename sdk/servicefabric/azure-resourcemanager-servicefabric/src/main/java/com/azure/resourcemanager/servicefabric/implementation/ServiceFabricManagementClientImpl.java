@@ -21,6 +21,7 @@ import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
+import com.azure.resourcemanager.servicefabric.fluent.ApplicationManualUpgradesClient;
 import com.azure.resourcemanager.servicefabric.fluent.ApplicationTypeVersionsClient;
 import com.azure.resourcemanager.servicefabric.fluent.ApplicationTypesClient;
 import com.azure.resourcemanager.servicefabric.fluent.ApplicationsClient;
@@ -188,6 +189,18 @@ public final class ServiceFabricManagementClientImpl implements ServiceFabricMan
         return this.applications;
     }
 
+    /** The ApplicationManualUpgradesClient object to access its operations. */
+    private final ApplicationManualUpgradesClient applicationManualUpgrades;
+
+    /**
+     * Gets the ApplicationManualUpgradesClient object to access its operations.
+     *
+     * @return the ApplicationManualUpgradesClient object.
+     */
+    public ApplicationManualUpgradesClient getApplicationManualUpgrades() {
+        return this.applicationManualUpgrades;
+    }
+
     /** The ServicesClient object to access its operations. */
     private final ServicesClient services;
 
@@ -222,13 +235,14 @@ public final class ServiceFabricManagementClientImpl implements ServiceFabricMan
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2019-03-01";
+        this.apiVersion = "2021-06-01";
         this.clusters = new ClustersClientImpl(this);
         this.clusterVersions = new ClusterVersionsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
         this.applicationTypes = new ApplicationTypesClientImpl(this);
         this.applicationTypeVersions = new ApplicationTypeVersionsClientImpl(this);
         this.applications = new ApplicationsClientImpl(this);
+        this.applicationManualUpgrades = new ApplicationManualUpgradesClientImpl(this);
         this.services = new ServicesClientImpl(this);
     }
 
