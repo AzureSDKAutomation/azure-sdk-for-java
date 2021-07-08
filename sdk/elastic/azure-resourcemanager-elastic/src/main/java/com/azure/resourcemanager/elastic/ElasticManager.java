@@ -27,17 +27,17 @@ import com.azure.resourcemanager.elastic.implementation.MonitoredResourcesImpl;
 import com.azure.resourcemanager.elastic.implementation.MonitorsImpl;
 import com.azure.resourcemanager.elastic.implementation.OperationsImpl;
 import com.azure.resourcemanager.elastic.implementation.TagRulesImpl;
-import com.azure.resourcemanager.elastic.implementation.VMCollectionsImpl;
-import com.azure.resourcemanager.elastic.implementation.VMHostsImpl;
-import com.azure.resourcemanager.elastic.implementation.VMIngestionsImpl;
+import com.azure.resourcemanager.elastic.implementation.VmCollectionsImpl;
+import com.azure.resourcemanager.elastic.implementation.VmHostsImpl;
+import com.azure.resourcemanager.elastic.implementation.VmIngestionsImpl;
 import com.azure.resourcemanager.elastic.models.DeploymentInfoes;
 import com.azure.resourcemanager.elastic.models.MonitoredResources;
 import com.azure.resourcemanager.elastic.models.Monitors;
 import com.azure.resourcemanager.elastic.models.Operations;
 import com.azure.resourcemanager.elastic.models.TagRules;
-import com.azure.resourcemanager.elastic.models.VMCollections;
-import com.azure.resourcemanager.elastic.models.VMHosts;
-import com.azure.resourcemanager.elastic.models.VMIngestions;
+import com.azure.resourcemanager.elastic.models.VmCollections;
+import com.azure.resourcemanager.elastic.models.VmHosts;
+import com.azure.resourcemanager.elastic.models.VmIngestions;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -56,11 +56,11 @@ public final class ElasticManager {
 
     private TagRules tagRules;
 
-    private VMHosts vMHosts;
+    private VmHosts vmHosts;
 
-    private VMIngestions vMIngestions;
+    private VmIngestions vmIngestions;
 
-    private VMCollections vMCollections;
+    private VmCollections vmCollections;
 
     private final MicrosoftElastic clientObject;
 
@@ -277,28 +277,28 @@ public final class ElasticManager {
         return tagRules;
     }
 
-    /** @return Resource collection API of VMHosts. */
-    public VMHosts vMHosts() {
-        if (this.vMHosts == null) {
-            this.vMHosts = new VMHostsImpl(clientObject.getVMHosts(), this);
+    /** @return Resource collection API of VmHosts. */
+    public VmHosts vmHosts() {
+        if (this.vmHosts == null) {
+            this.vmHosts = new VmHostsImpl(clientObject.getVmHosts(), this);
         }
-        return vMHosts;
+        return vmHosts;
     }
 
-    /** @return Resource collection API of VMIngestions. */
-    public VMIngestions vMIngestions() {
-        if (this.vMIngestions == null) {
-            this.vMIngestions = new VMIngestionsImpl(clientObject.getVMIngestions(), this);
+    /** @return Resource collection API of VmIngestions. */
+    public VmIngestions vmIngestions() {
+        if (this.vmIngestions == null) {
+            this.vmIngestions = new VmIngestionsImpl(clientObject.getVmIngestions(), this);
         }
-        return vMIngestions;
+        return vmIngestions;
     }
 
-    /** @return Resource collection API of VMCollections. */
-    public VMCollections vMCollections() {
-        if (this.vMCollections == null) {
-            this.vMCollections = new VMCollectionsImpl(clientObject.getVMCollections(), this);
+    /** @return Resource collection API of VmCollections. */
+    public VmCollections vmCollections() {
+        if (this.vmCollections == null) {
+            this.vmCollections = new VmCollectionsImpl(clientObject.getVmCollections(), this);
         }
-        return vMCollections;
+        return vmCollections;
     }
 
     /**

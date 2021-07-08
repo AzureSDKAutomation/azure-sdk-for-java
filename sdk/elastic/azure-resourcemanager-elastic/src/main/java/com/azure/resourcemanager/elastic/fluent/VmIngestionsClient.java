@@ -8,35 +8,35 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.elastic.models.VMCollectionUpdate;
+import com.azure.resourcemanager.elastic.fluent.models.VmIngestionDetailsResponseInner;
 
-/** An instance of this class provides access to all the operations defined in VMCollectionsClient. */
-public interface VMCollectionsClient {
+/** An instance of this class provides access to all the operations defined in VmIngestionsClient. */
+public interface VmIngestionsClient {
     /**
-     * Update the vm details that will be monitored by the Elastic monitor resource.
+     * List the vm ingestion details that will be monitored by the Elastic monitor resource.
      *
      * @param resourceGroupName The name of the resource group to which the Elastic resource belongs.
      * @param monitorName Monitor resource name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the vm ingestion details to install an agent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    void update(String resourceGroupName, String monitorName);
+    VmIngestionDetailsResponseInner details(String resourceGroupName, String monitorName);
 
     /**
-     * Update the vm details that will be monitored by the Elastic monitor resource.
+     * List the vm ingestion details that will be monitored by the Elastic monitor resource.
      *
      * @param resourceGroupName The name of the resource group to which the Elastic resource belongs.
      * @param monitorName Monitor resource name.
-     * @param body VM resource Id.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the vm ingestion details to install an agent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<Void> updateWithResponse(
-        String resourceGroupName, String monitorName, VMCollectionUpdate body, Context context);
+    Response<VmIngestionDetailsResponseInner> detailsWithResponse(
+        String resourceGroupName, String monitorName, Context context);
 }

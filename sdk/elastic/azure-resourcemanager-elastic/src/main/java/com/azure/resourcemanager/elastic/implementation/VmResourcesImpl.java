@@ -4,15 +4,15 @@
 
 package com.azure.resourcemanager.elastic.implementation;
 
-import com.azure.resourcemanager.elastic.fluent.models.VMResourcesInner;
-import com.azure.resourcemanager.elastic.models.VMResources;
+import com.azure.resourcemanager.elastic.fluent.models.VmResourcesInner;
+import com.azure.resourcemanager.elastic.models.VmResources;
 
-public final class VMResourcesImpl implements VMResources {
-    private VMResourcesInner innerObject;
+public final class VmResourcesImpl implements VmResources {
+    private VmResourcesInner innerObject;
 
     private final com.azure.resourcemanager.elastic.ElasticManager serviceManager;
 
-    VMResourcesImpl(VMResourcesInner innerObject, com.azure.resourcemanager.elastic.ElasticManager serviceManager) {
+    VmResourcesImpl(VmResourcesInner innerObject, com.azure.resourcemanager.elastic.ElasticManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
     }
@@ -21,7 +21,7 @@ public final class VMResourcesImpl implements VMResources {
         return this.innerModel().vmResourceId();
     }
 
-    public VMResourcesInner innerModel() {
+    public VmResourcesInner innerModel() {
         return this.innerObject;
     }
 

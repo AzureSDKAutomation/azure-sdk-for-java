@@ -4,16 +4,16 @@
 
 package com.azure.resourcemanager.elastic.implementation;
 
-import com.azure.resourcemanager.elastic.fluent.models.VMIngestionDetailsResponseInner;
-import com.azure.resourcemanager.elastic.models.VMIngestionDetailsResponse;
+import com.azure.resourcemanager.elastic.fluent.models.VmIngestionDetailsResponseInner;
+import com.azure.resourcemanager.elastic.models.VmIngestionDetailsResponse;
 
-public final class VMIngestionDetailsResponseImpl implements VMIngestionDetailsResponse {
-    private VMIngestionDetailsResponseInner innerObject;
+public final class VmIngestionDetailsResponseImpl implements VmIngestionDetailsResponse {
+    private VmIngestionDetailsResponseInner innerObject;
 
     private final com.azure.resourcemanager.elastic.ElasticManager serviceManager;
 
-    VMIngestionDetailsResponseImpl(
-        VMIngestionDetailsResponseInner innerObject, com.azure.resourcemanager.elastic.ElasticManager serviceManager) {
+    VmIngestionDetailsResponseImpl(
+        VmIngestionDetailsResponseInner innerObject, com.azure.resourcemanager.elastic.ElasticManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
     }
@@ -26,7 +26,7 @@ public final class VMIngestionDetailsResponseImpl implements VMIngestionDetailsR
         return this.innerModel().ingestionKey();
     }
 
-    public VMIngestionDetailsResponseInner innerModel() {
+    public VmIngestionDetailsResponseInner innerModel() {
         return this.innerObject;
     }
 

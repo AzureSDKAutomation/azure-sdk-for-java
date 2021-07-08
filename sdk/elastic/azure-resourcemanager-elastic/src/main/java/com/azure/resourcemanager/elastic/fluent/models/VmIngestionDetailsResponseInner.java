@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The vm ingestion details to install an agent. */
 @Fluent
-public final class VMIngestionDetailsResponseInner {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(VMIngestionDetailsResponseInner.class);
+public final class VmIngestionDetailsResponseInner {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(VmIngestionDetailsResponseInner.class);
 
     /*
      * The cloudId of given Elastic monitor resource.
@@ -39,9 +39,9 @@ public final class VMIngestionDetailsResponseInner {
      * Set the cloudId property: The cloudId of given Elastic monitor resource.
      *
      * @param cloudId the cloudId value to set.
-     * @return the VMIngestionDetailsResponseInner object itself.
+     * @return the VmIngestionDetailsResponseInner object itself.
      */
-    public VMIngestionDetailsResponseInner withCloudId(String cloudId) {
+    public VmIngestionDetailsResponseInner withCloudId(String cloudId) {
         this.cloudId = cloudId;
         return this;
     }
@@ -59,9 +59,9 @@ public final class VMIngestionDetailsResponseInner {
      * Set the ingestionKey property: Ingestion details to install agent on given VM.
      *
      * @param ingestionKey the ingestionKey value to set.
-     * @return the VMIngestionDetailsResponseInner object itself.
+     * @return the VmIngestionDetailsResponseInner object itself.
      */
-    public VMIngestionDetailsResponseInner withIngestionKey(String ingestionKey) {
+    public VmIngestionDetailsResponseInner withIngestionKey(String ingestionKey) {
         this.ingestionKey = ingestionKey;
         return this;
     }

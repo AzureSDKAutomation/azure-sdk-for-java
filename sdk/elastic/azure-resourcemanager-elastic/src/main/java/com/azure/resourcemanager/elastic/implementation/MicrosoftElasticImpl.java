@@ -27,9 +27,9 @@ import com.azure.resourcemanager.elastic.fluent.MonitoredResourcesClient;
 import com.azure.resourcemanager.elastic.fluent.MonitorsClient;
 import com.azure.resourcemanager.elastic.fluent.OperationsClient;
 import com.azure.resourcemanager.elastic.fluent.TagRulesClient;
-import com.azure.resourcemanager.elastic.fluent.VMCollectionsClient;
-import com.azure.resourcemanager.elastic.fluent.VMHostsClient;
-import com.azure.resourcemanager.elastic.fluent.VMIngestionsClient;
+import com.azure.resourcemanager.elastic.fluent.VmCollectionsClient;
+import com.azure.resourcemanager.elastic.fluent.VmHostsClient;
+import com.azure.resourcemanager.elastic.fluent.VmIngestionsClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
@@ -177,40 +177,40 @@ public final class MicrosoftElasticImpl implements MicrosoftElastic {
         return this.tagRules;
     }
 
-    /** The VMHostsClient object to access its operations. */
-    private final VMHostsClient vMHosts;
+    /** The VmHostsClient object to access its operations. */
+    private final VmHostsClient vmHosts;
 
     /**
-     * Gets the VMHostsClient object to access its operations.
+     * Gets the VmHostsClient object to access its operations.
      *
-     * @return the VMHostsClient object.
+     * @return the VmHostsClient object.
      */
-    public VMHostsClient getVMHosts() {
-        return this.vMHosts;
+    public VmHostsClient getVmHosts() {
+        return this.vmHosts;
     }
 
-    /** The VMIngestionsClient object to access its operations. */
-    private final VMIngestionsClient vMIngestions;
+    /** The VmIngestionsClient object to access its operations. */
+    private final VmIngestionsClient vmIngestions;
 
     /**
-     * Gets the VMIngestionsClient object to access its operations.
+     * Gets the VmIngestionsClient object to access its operations.
      *
-     * @return the VMIngestionsClient object.
+     * @return the VmIngestionsClient object.
      */
-    public VMIngestionsClient getVMIngestions() {
-        return this.vMIngestions;
+    public VmIngestionsClient getVmIngestions() {
+        return this.vmIngestions;
     }
 
-    /** The VMCollectionsClient object to access its operations. */
-    private final VMCollectionsClient vMCollections;
+    /** The VmCollectionsClient object to access its operations. */
+    private final VmCollectionsClient vmCollections;
 
     /**
-     * Gets the VMCollectionsClient object to access its operations.
+     * Gets the VmCollectionsClient object to access its operations.
      *
-     * @return the VMCollectionsClient object.
+     * @return the VmCollectionsClient object.
      */
-    public VMCollectionsClient getVMCollections() {
-        return this.vMCollections;
+    public VmCollectionsClient getVmCollections() {
+        return this.vmCollections;
     }
 
     /**
@@ -242,9 +242,9 @@ public final class MicrosoftElasticImpl implements MicrosoftElastic {
         this.monitoredResources = new MonitoredResourcesClientImpl(this);
         this.deploymentInfoes = new DeploymentInfoesClientImpl(this);
         this.tagRules = new TagRulesClientImpl(this);
-        this.vMHosts = new VMHostsClientImpl(this);
-        this.vMIngestions = new VMIngestionsClientImpl(this);
-        this.vMCollections = new VMCollectionsClientImpl(this);
+        this.vmHosts = new VmHostsClientImpl(this);
+        this.vmIngestions = new VmIngestionsClientImpl(this);
+        this.vmCollections = new VmCollectionsClientImpl(this);
     }
 
     /**

@@ -7,20 +7,20 @@ package com.azure.resourcemanager.elastic.implementation;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.elastic.fluent.VMCollectionsClient;
-import com.azure.resourcemanager.elastic.models.VMCollectionUpdate;
-import com.azure.resourcemanager.elastic.models.VMCollections;
+import com.azure.resourcemanager.elastic.fluent.VmCollectionsClient;
+import com.azure.resourcemanager.elastic.models.VmCollectionUpdate;
+import com.azure.resourcemanager.elastic.models.VmCollections;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public final class VMCollectionsImpl implements VMCollections {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(VMCollectionsImpl.class);
+public final class VmCollectionsImpl implements VmCollections {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(VmCollectionsImpl.class);
 
-    private final VMCollectionsClient innerClient;
+    private final VmCollectionsClient innerClient;
 
     private final com.azure.resourcemanager.elastic.ElasticManager serviceManager;
 
-    public VMCollectionsImpl(
-        VMCollectionsClient innerClient, com.azure.resourcemanager.elastic.ElasticManager serviceManager) {
+    public VmCollectionsImpl(
+        VmCollectionsClient innerClient, com.azure.resourcemanager.elastic.ElasticManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
@@ -30,11 +30,11 @@ public final class VMCollectionsImpl implements VMCollections {
     }
 
     public Response<Void> updateWithResponse(
-        String resourceGroupName, String monitorName, VMCollectionUpdate body, Context context) {
+        String resourceGroupName, String monitorName, VmCollectionUpdate body, Context context) {
         return this.serviceClient().updateWithResponse(resourceGroupName, monitorName, body, context);
     }
 
-    private VMCollectionsClient serviceClient() {
+    private VmCollectionsClient serviceClient() {
         return this.innerClient;
     }
 

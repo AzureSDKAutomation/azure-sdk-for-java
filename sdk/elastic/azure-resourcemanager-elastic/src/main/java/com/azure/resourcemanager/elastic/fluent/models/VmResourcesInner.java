@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The vm resource properties that is currently being monitored by the Elastic monitor resource. */
 @Fluent
-public final class VMResourcesInner {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(VMResourcesInner.class);
+public final class VmResourcesInner {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(VmResourcesInner.class);
 
     /*
      * The ARM id of the VM resource.
@@ -33,9 +33,9 @@ public final class VMResourcesInner {
      * Set the vmResourceId property: The ARM id of the VM resource.
      *
      * @param vmResourceId the vmResourceId value to set.
-     * @return the VMResourcesInner object itself.
+     * @return the VmResourcesInner object itself.
      */
-    public VMResourcesInner withVmResourceId(String vmResourceId) {
+    public VmResourcesInner withVmResourceId(String vmResourceId) {
         this.vmResourceId = vmResourceId;
         return this;
     }
