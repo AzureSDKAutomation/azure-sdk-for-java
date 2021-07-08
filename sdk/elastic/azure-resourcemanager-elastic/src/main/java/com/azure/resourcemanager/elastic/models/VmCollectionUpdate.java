@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Update VM resource collection. */
 @Fluent
-public final class VMCollectionUpdate {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(VMCollectionUpdate.class);
+public final class VmCollectionUpdate {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(VmCollectionUpdate.class);
 
     /*
      * ARM id of the VM resource.
@@ -39,9 +39,9 @@ public final class VMCollectionUpdate {
      * Set the vmResourceId property: ARM id of the VM resource.
      *
      * @param vmResourceId the vmResourceId value to set.
-     * @return the VMCollectionUpdate object itself.
+     * @return the VmCollectionUpdate object itself.
      */
-    public VMCollectionUpdate withVmResourceId(String vmResourceId) {
+    public VmCollectionUpdate withVmResourceId(String vmResourceId) {
         this.vmResourceId = vmResourceId;
         return this;
     }
@@ -59,9 +59,9 @@ public final class VMCollectionUpdate {
      * Set the operationName property: Operation to be performed for given VM.
      *
      * @param operationName the operationName value to set.
-     * @return the VMCollectionUpdate object itself.
+     * @return the VmCollectionUpdate object itself.
      */
-    public VMCollectionUpdate withOperationName(OperationName operationName) {
+    public VmCollectionUpdate withOperationName(OperationName operationName) {
         this.operationName = operationName;
         return this;
     }

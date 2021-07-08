@@ -27,45 +27,45 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.elastic.fluent.VMHostsClient;
-import com.azure.resourcemanager.elastic.fluent.models.VMResourcesInner;
-import com.azure.resourcemanager.elastic.models.VMHostListResponse;
+import com.azure.resourcemanager.elastic.fluent.VmHostsClient;
+import com.azure.resourcemanager.elastic.fluent.models.VmResourcesInner;
+import com.azure.resourcemanager.elastic.models.VmHostListResponse;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in VMHostsClient. */
-public final class VMHostsClientImpl implements VMHostsClient {
-    private final ClientLogger logger = new ClientLogger(VMHostsClientImpl.class);
+/** An instance of this class provides access to all the operations defined in VmHostsClient. */
+public final class VmHostsClientImpl implements VmHostsClient {
+    private final ClientLogger logger = new ClientLogger(VmHostsClientImpl.class);
 
     /** The proxy service used to perform REST calls. */
-    private final VMHostsService service;
+    private final VmHostsService service;
 
     /** The service client containing this operation class. */
     private final MicrosoftElasticImpl client;
 
     /**
-     * Initializes an instance of VMHostsClientImpl.
+     * Initializes an instance of VmHostsClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    VMHostsClientImpl(MicrosoftElasticImpl client) {
-        this.service = RestProxy.create(VMHostsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    VmHostsClientImpl(MicrosoftElasticImpl client) {
+        this.service = RestProxy.create(VmHostsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for MicrosoftElasticVMHosts to be used by the proxy service to perform
+     * The interface defining all the services for MicrosoftElasticVmHosts to be used by the proxy service to perform
      * REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "MicrosoftElasticVMHo")
-    private interface VMHostsService {
+    @ServiceInterface(name = "MicrosoftElasticVmHo")
+    private interface VmHostsService {
         @Headers({"Content-Type: application/json"})
         @Post(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors"
                 + "/{monitorName}/listVMHost")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<VMHostListResponse>> list(
+        Mono<Response<VmHostListResponse>> list(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
@@ -78,7 +78,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<VMHostListResponse>> listNext(
+        Mono<Response<VmHostListResponse>> listNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("$host") String endpoint,
             @HeaderParam("Accept") String accept,
@@ -96,7 +96,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<VMResourcesInner>> listSinglePageAsync(String resourceGroupName, String monitorName) {
+    private Mono<PagedResponse<VmResourcesInner>> listSinglePageAsync(String resourceGroupName, String monitorName) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -129,7 +129,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
                             monitorName,
                             accept,
                             context))
-            .<PagedResponse<VMResourcesInner>>map(
+            .<PagedResponse<VmResourcesInner>>map(
                 res ->
                     new PagedResponseBase<>(
                         res.getRequest(),
@@ -153,7 +153,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<VMResourcesInner>> listSinglePageAsync(
+    private Mono<PagedResponse<VmResourcesInner>> listSinglePageAsync(
         String resourceGroupName, String monitorName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -207,7 +207,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<VMResourcesInner> listAsync(String resourceGroupName, String monitorName) {
+    private PagedFlux<VmResourcesInner> listAsync(String resourceGroupName, String monitorName) {
         return new PagedFlux<>(
             () -> listSinglePageAsync(resourceGroupName, monitorName), nextLink -> listNextSinglePageAsync(nextLink));
     }
@@ -224,7 +224,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<VMResourcesInner> listAsync(String resourceGroupName, String monitorName, Context context) {
+    private PagedFlux<VmResourcesInner> listAsync(String resourceGroupName, String monitorName, Context context) {
         return new PagedFlux<>(
             () -> listSinglePageAsync(resourceGroupName, monitorName, context),
             nextLink -> listNextSinglePageAsync(nextLink, context));
@@ -241,7 +241,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<VMResourcesInner> list(String resourceGroupName, String monitorName) {
+    public PagedIterable<VmResourcesInner> list(String resourceGroupName, String monitorName) {
         return new PagedIterable<>(listAsync(resourceGroupName, monitorName));
     }
 
@@ -257,7 +257,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<VMResourcesInner> list(String resourceGroupName, String monitorName, Context context) {
+    public PagedIterable<VmResourcesInner> list(String resourceGroupName, String monitorName, Context context) {
         return new PagedIterable<>(listAsync(resourceGroupName, monitorName, context));
     }
 
@@ -271,7 +271,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<VMResourcesInner>> listNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<VmResourcesInner>> listNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -284,7 +284,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.listNext(nextLink, this.client.getEndpoint(), accept, context))
-            .<PagedResponse<VMResourcesInner>>map(
+            .<PagedResponse<VmResourcesInner>>map(
                 res ->
                     new PagedResponseBase<>(
                         res.getRequest(),
@@ -307,7 +307,7 @@ public final class VMHostsClientImpl implements VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<VMResourcesInner>> listNextSinglePageAsync(String nextLink, Context context) {
+    private Mono<PagedResponse<VmResourcesInner>> listNextSinglePageAsync(String nextLink, Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }

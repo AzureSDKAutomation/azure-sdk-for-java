@@ -23,38 +23,38 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.elastic.fluent.VMCollectionsClient;
-import com.azure.resourcemanager.elastic.models.VMCollectionUpdate;
+import com.azure.resourcemanager.elastic.fluent.VmCollectionsClient;
+import com.azure.resourcemanager.elastic.models.VmCollectionUpdate;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in VMCollectionsClient. */
-public final class VMCollectionsClientImpl implements VMCollectionsClient {
-    private final ClientLogger logger = new ClientLogger(VMCollectionsClientImpl.class);
+/** An instance of this class provides access to all the operations defined in VmCollectionsClient. */
+public final class VmCollectionsClientImpl implements VmCollectionsClient {
+    private final ClientLogger logger = new ClientLogger(VmCollectionsClientImpl.class);
 
     /** The proxy service used to perform REST calls. */
-    private final VMCollectionsService service;
+    private final VmCollectionsService service;
 
     /** The service client containing this operation class. */
     private final MicrosoftElasticImpl client;
 
     /**
-     * Initializes an instance of VMCollectionsClientImpl.
+     * Initializes an instance of VmCollectionsClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    VMCollectionsClientImpl(MicrosoftElasticImpl client) {
+    VmCollectionsClientImpl(MicrosoftElasticImpl client) {
         this.service =
-            RestProxy.create(VMCollectionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+            RestProxy.create(VmCollectionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for MicrosoftElasticVMCollections to be used by the proxy service to
+     * The interface defining all the services for MicrosoftElasticVmCollections to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "MicrosoftElasticVMCo")
-    private interface VMCollectionsService {
+    @ServiceInterface(name = "MicrosoftElasticVmCo")
+    private interface VmCollectionsService {
         @Headers({"Content-Type: application/json"})
         @Post(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors"
@@ -67,7 +67,7 @@ public final class VMCollectionsClientImpl implements VMCollectionsClient {
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("monitorName") String monitorName,
-            @BodyParam("application/json") VMCollectionUpdate body,
+            @BodyParam("application/json") VmCollectionUpdate body,
             @HeaderParam("Accept") String accept,
             Context context);
     }
@@ -85,7 +85,7 @@ public final class VMCollectionsClientImpl implements VMCollectionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> updateWithResponseAsync(
-        String resourceGroupName, String monitorName, VMCollectionUpdate body) {
+        String resourceGroupName, String monitorName, VmCollectionUpdate body) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -139,7 +139,7 @@ public final class VMCollectionsClientImpl implements VMCollectionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> updateWithResponseAsync(
-        String resourceGroupName, String monitorName, VMCollectionUpdate body, Context context) {
+        String resourceGroupName, String monitorName, VmCollectionUpdate body, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -188,7 +188,7 @@ public final class VMCollectionsClientImpl implements VMCollectionsClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Void> updateAsync(String resourceGroupName, String monitorName, VMCollectionUpdate body) {
+    private Mono<Void> updateAsync(String resourceGroupName, String monitorName, VmCollectionUpdate body) {
         return updateWithResponseAsync(resourceGroupName, monitorName, body)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
@@ -205,7 +205,7 @@ public final class VMCollectionsClientImpl implements VMCollectionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> updateAsync(String resourceGroupName, String monitorName) {
-        final VMCollectionUpdate body = null;
+        final VmCollectionUpdate body = null;
         return updateWithResponseAsync(resourceGroupName, monitorName, body)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
@@ -221,7 +221,7 @@ public final class VMCollectionsClientImpl implements VMCollectionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void update(String resourceGroupName, String monitorName) {
-        final VMCollectionUpdate body = null;
+        final VmCollectionUpdate body = null;
         updateAsync(resourceGroupName, monitorName, body).block();
     }
 
@@ -239,7 +239,7 @@ public final class VMCollectionsClientImpl implements VMCollectionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> updateWithResponse(
-        String resourceGroupName, String monitorName, VMCollectionUpdate body, Context context) {
+        String resourceGroupName, String monitorName, VmCollectionUpdate body, Context context) {
         return updateWithResponseAsync(resourceGroupName, monitorName, body, context).block();
     }
 }

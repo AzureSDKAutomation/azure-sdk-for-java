@@ -7,8 +7,8 @@ package com.azure.resourcemanager.elastic.models;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Context;
 
-/** Resource collection API of VMHosts. */
-public interface VMHosts {
+/** Resource collection API of VmHosts. */
+public interface VmHosts {
     /**
      * List the vm resources currently being monitored by the Elastic monitor resource.
      *
@@ -19,7 +19,7 @@ public interface VMHosts {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return response of a list operation.
      */
-    PagedIterable<VMResources> list(String resourceGroupName, String monitorName);
+    PagedIterable<VmResources> list(String resourceGroupName, String monitorName);
 
     /**
      * List the vm resources currently being monitored by the Elastic monitor resource.
@@ -32,5 +32,5 @@ public interface VMHosts {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return response of a list operation.
      */
-    PagedIterable<VMResources> list(String resourceGroupName, String monitorName, Context context);
+    PagedIterable<VmResources> list(String resourceGroupName, String monitorName, Context context);
 }

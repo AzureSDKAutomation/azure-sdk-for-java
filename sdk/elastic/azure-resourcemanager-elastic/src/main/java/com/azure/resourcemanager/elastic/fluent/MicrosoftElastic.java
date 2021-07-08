@@ -80,23 +80,23 @@ public interface MicrosoftElastic {
     TagRulesClient getTagRules();
 
     /**
-     * Gets the VMHostsClient object to access its operations.
+     * Gets the VmHostsClient object to access its operations.
      *
-     * @return the VMHostsClient object.
+     * @return the VmHostsClient object.
      */
-    VMHostsClient getVMHosts();
+    VmHostsClient getVmHosts();
 
     /**
-     * Gets the VMIngestionsClient object to access its operations.
+     * Gets the VmIngestionsClient object to access its operations.
      *
-     * @return the VMIngestionsClient object.
+     * @return the VmIngestionsClient object.
      */
-    VMIngestionsClient getVMIngestions();
+    VmIngestionsClient getVmIngestions();
 
     /**
-     * Gets the VMCollectionsClient object to access its operations.
+     * Gets the VmCollectionsClient object to access its operations.
      *
-     * @return the VMCollectionsClient object.
+     * @return the VmCollectionsClient object.
      */
-    VMCollectionsClient getVMCollections();
+    VmCollectionsClient getVmCollections();
 }

@@ -6,21 +6,21 @@ package com.azure.resourcemanager.elastic.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.elastic.fluent.models.VMResourcesInner;
+import com.azure.resourcemanager.elastic.fluent.models.VmResourcesInner;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** Response of a list operation. */
 @Fluent
-public final class VMHostListResponse {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(VMHostListResponse.class);
+public final class VmHostListResponse {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(VmHostListResponse.class);
 
     /*
      * Results of a list operation.
      */
     @JsonProperty(value = "value")
-    private List<VMResourcesInner> value;
+    private List<VmResourcesInner> value;
 
     /*
      * Link to the next Vm resource Id, if any.
@@ -33,7 +33,7 @@ public final class VMHostListResponse {
      *
      * @return the value value.
      */
-    public List<VMResourcesInner> value() {
+    public List<VmResourcesInner> value() {
         return this.value;
     }
 
@@ -41,9 +41,9 @@ public final class VMHostListResponse {
      * Set the value property: Results of a list operation.
      *
      * @param value the value value to set.
-     * @return the VMHostListResponse object itself.
+     * @return the VmHostListResponse object itself.
      */
-    public VMHostListResponse withValue(List<VMResourcesInner> value) {
+    public VmHostListResponse withValue(List<VmResourcesInner> value) {
         this.value = value;
         return this;
     }
@@ -61,9 +61,9 @@ public final class VMHostListResponse {
      * Set the nextLink property: Link to the next Vm resource Id, if any.
      *
      * @param nextLink the nextLink value to set.
-     * @return the VMHostListResponse object itself.
+     * @return the VmHostListResponse object itself.
      */
-    public VMHostListResponse withNextLink(String nextLink) {
+    public VmHostListResponse withNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;
     }

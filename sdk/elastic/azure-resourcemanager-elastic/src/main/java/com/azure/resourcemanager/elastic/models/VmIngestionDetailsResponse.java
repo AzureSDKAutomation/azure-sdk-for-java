@@ -4,10 +4,10 @@
 
 package com.azure.resourcemanager.elastic.models;
 
-import com.azure.resourcemanager.elastic.fluent.models.VMIngestionDetailsResponseInner;
+import com.azure.resourcemanager.elastic.fluent.models.VmIngestionDetailsResponseInner;
 
-/** An immutable client-side representation of VMIngestionDetailsResponse. */
-public interface VMIngestionDetailsResponse {
+/** An immutable client-side representation of VmIngestionDetailsResponse. */
+public interface VmIngestionDetailsResponse {
     /**
      * Gets the cloudId property: The cloudId of given Elastic monitor resource.
      *
@@ -23,9 +23,9 @@ public interface VMIngestionDetailsResponse {
     String ingestionKey();
 
     /**
-     * Gets the inner com.azure.resourcemanager.elastic.fluent.models.VMIngestionDetailsResponseInner object.
+     * Gets the inner com.azure.resourcemanager.elastic.fluent.models.VmIngestionDetailsResponseInner object.
      *
      * @return the inner object.
      */
-    VMIngestionDetailsResponseInner innerModel();
+    VmIngestionDetailsResponseInner innerModel();
 }

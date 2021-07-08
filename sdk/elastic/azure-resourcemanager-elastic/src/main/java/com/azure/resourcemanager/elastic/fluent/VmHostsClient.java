@@ -8,10 +8,10 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.elastic.fluent.models.VMResourcesInner;
+import com.azure.resourcemanager.elastic.fluent.models.VmResourcesInner;
 
-/** An instance of this class provides access to all the operations defined in VMHostsClient. */
-public interface VMHostsClient {
+/** An instance of this class provides access to all the operations defined in VmHostsClient. */
+public interface VmHostsClient {
     /**
      * List the vm resources currently being monitored by the Elastic monitor resource.
      *
@@ -23,7 +23,7 @@ public interface VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<VMResourcesInner> list(String resourceGroupName, String monitorName);
+    PagedIterable<VmResourcesInner> list(String resourceGroupName, String monitorName);
 
     /**
      * List the vm resources currently being monitored by the Elastic monitor resource.
@@ -37,5 +37,5 @@ public interface VMHostsClient {
      * @return response of a list operation.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<VMResourcesInner> list(String resourceGroupName, String monitorName, Context context);
+    PagedIterable<VmResourcesInner> list(String resourceGroupName, String monitorName, Context context);
 }

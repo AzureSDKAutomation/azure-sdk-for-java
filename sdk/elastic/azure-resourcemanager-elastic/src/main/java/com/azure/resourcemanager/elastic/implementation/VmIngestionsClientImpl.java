@@ -22,45 +22,45 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.elastic.fluent.VMIngestionsClient;
-import com.azure.resourcemanager.elastic.fluent.models.VMIngestionDetailsResponseInner;
+import com.azure.resourcemanager.elastic.fluent.VmIngestionsClient;
+import com.azure.resourcemanager.elastic.fluent.models.VmIngestionDetailsResponseInner;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in VMIngestionsClient. */
-public final class VMIngestionsClientImpl implements VMIngestionsClient {
-    private final ClientLogger logger = new ClientLogger(VMIngestionsClientImpl.class);
+/** An instance of this class provides access to all the operations defined in VmIngestionsClient. */
+public final class VmIngestionsClientImpl implements VmIngestionsClient {
+    private final ClientLogger logger = new ClientLogger(VmIngestionsClientImpl.class);
 
     /** The proxy service used to perform REST calls. */
-    private final VMIngestionsService service;
+    private final VmIngestionsService service;
 
     /** The service client containing this operation class. */
     private final MicrosoftElasticImpl client;
 
     /**
-     * Initializes an instance of VMIngestionsClientImpl.
+     * Initializes an instance of VmIngestionsClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    VMIngestionsClientImpl(MicrosoftElasticImpl client) {
+    VmIngestionsClientImpl(MicrosoftElasticImpl client) {
         this.service =
-            RestProxy.create(VMIngestionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+            RestProxy.create(VmIngestionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for MicrosoftElasticVMIngestions to be used by the proxy service to
+     * The interface defining all the services for MicrosoftElasticVmIngestions to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "MicrosoftElasticVMIn")
-    private interface VMIngestionsService {
+    @ServiceInterface(name = "MicrosoftElasticVmIn")
+    private interface VmIngestionsService {
         @Headers({"Content-Type: application/json"})
         @Post(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors"
                 + "/{monitorName}/vmIngestionDetails")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<VMIngestionDetailsResponseInner>> details(
+        Mono<Response<VmIngestionDetailsResponseInner>> details(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
@@ -81,7 +81,7 @@ public final class VMIngestionsClientImpl implements VMIngestionsClient {
      * @return the vm ingestion details to install an agent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<VMIngestionDetailsResponseInner>> detailsWithResponseAsync(
+    private Mono<Response<VmIngestionDetailsResponseInner>> detailsWithResponseAsync(
         String resourceGroupName, String monitorName) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -130,7 +130,7 @@ public final class VMIngestionsClientImpl implements VMIngestionsClient {
      * @return the vm ingestion details to install an agent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<VMIngestionDetailsResponseInner>> detailsWithResponseAsync(
+    private Mono<Response<VmIngestionDetailsResponseInner>> detailsWithResponseAsync(
         String resourceGroupName, String monitorName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -175,10 +175,10 @@ public final class VMIngestionsClientImpl implements VMIngestionsClient {
      * @return the vm ingestion details to install an agent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<VMIngestionDetailsResponseInner> detailsAsync(String resourceGroupName, String monitorName) {
+    private Mono<VmIngestionDetailsResponseInner> detailsAsync(String resourceGroupName, String monitorName) {
         return detailsWithResponseAsync(resourceGroupName, monitorName)
             .flatMap(
-                (Response<VMIngestionDetailsResponseInner> res) -> {
+                (Response<VmIngestionDetailsResponseInner> res) -> {
                     if (res.getValue() != null) {
                         return Mono.just(res.getValue());
                     } else {
@@ -198,7 +198,7 @@ public final class VMIngestionsClientImpl implements VMIngestionsClient {
      * @return the vm ingestion details to install an agent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public VMIngestionDetailsResponseInner details(String resourceGroupName, String monitorName) {
+    public VmIngestionDetailsResponseInner details(String resourceGroupName, String monitorName) {
         return detailsAsync(resourceGroupName, monitorName).block();
     }
 
@@ -214,7 +214,7 @@ public final class VMIngestionsClientImpl implements VMIngestionsClient {
      * @return the vm ingestion details to install an agent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<VMIngestionDetailsResponseInner> detailsWithResponse(
+    public Response<VmIngestionDetailsResponseInner> detailsWithResponse(
         String resourceGroupName, String monitorName, Context context) {
         return detailsWithResponseAsync(resourceGroupName, monitorName, context).block();
     }
