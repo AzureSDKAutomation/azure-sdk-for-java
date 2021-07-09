@@ -66,6 +66,12 @@ public class WorkspaceUpdateParameters {
     @JsonProperty(value = "properties.primaryUserAssignedIdentity")
     private String primaryUserAssignedIdentity;
 
+    /*
+     * Whether requests from Public Network are allowed.
+     */
+    @JsonProperty(value = "properties.publicNetworkAccess")
+    private PublicNetworkAccess publicNetworkAccess;
+
     /**
      * Get the tags property: The resource tags for the machine learning workspace.
      *
@@ -226,6 +232,26 @@ public class WorkspaceUpdateParameters {
      */
     public WorkspaceUpdateParameters withPrimaryUserAssignedIdentity(String primaryUserAssignedIdentity) {
         this.primaryUserAssignedIdentity = primaryUserAssignedIdentity;
+        return this;
+    }
+
+    /**
+     * Get the publicNetworkAccess property: Whether requests from Public Network are allowed.
+     *
+     * @return the publicNetworkAccess value.
+     */
+    public PublicNetworkAccess publicNetworkAccess() {
+        return this.publicNetworkAccess;
+    }
+
+    /**
+     * Set the publicNetworkAccess property: Whether requests from Public Network are allowed.
+     *
+     * @param publicNetworkAccess the publicNetworkAccess value to set.
+     * @return the WorkspaceUpdateParameters object itself.
+     */
+    public WorkspaceUpdateParameters withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess) {
+        this.publicNetworkAccess = publicNetworkAccess;
         return this;
     }
 

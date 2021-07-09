@@ -5,9 +5,9 @@
 package com.azure.resourcemanager.machinelearningservices.fluent.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.machinelearningservices.models.BaseServiceResource;
 import com.azure.resourcemanager.machinelearningservices.models.Identity;
 import com.azure.resourcemanager.machinelearningservices.models.ServiceResponseBase;
 import com.azure.resourcemanager.machinelearningservices.models.Sku;
@@ -17,14 +17,8 @@ import java.util.Map;
 
 /** Machine Learning service object wrapped into ARM resource envelope. */
 @Fluent
-public final class ServiceResourceInner extends Resource {
+public final class ServiceResourceInner extends BaseServiceResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ServiceResourceInner.class);
-
-    /*
-     * Service properties
-     */
-    @JsonProperty(value = "properties")
-    private ServiceResponseBase properties;
 
     /*
      * The identity of the resource.
@@ -33,36 +27,28 @@ public final class ServiceResourceInner extends Resource {
     private Identity identity;
 
     /*
+     * Specifies the location of the resource.
+     */
+    @JsonProperty(value = "location")
+    private String location;
+
+    /*
+     * Contains resource tags defined as key/value pairs.
+     */
+    @JsonProperty(value = "tags")
+    private Map<String, String> tags;
+
+    /*
      * The sku of the workspace.
      */
     @JsonProperty(value = "sku")
     private Sku sku;
 
     /*
-     * Read only system data
+     * System Data
      */
     @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
     private SystemData systemData;
-
-    /**
-     * Get the properties property: Service properties.
-     *
-     * @return the properties value.
-     */
-    public ServiceResponseBase properties() {
-        return this.properties;
-    }
-
-    /**
-     * Set the properties property: Service properties.
-     *
-     * @param properties the properties value to set.
-     * @return the ServiceResourceInner object itself.
-     */
-    public ServiceResourceInner withProperties(ServiceResponseBase properties) {
-        this.properties = properties;
-        return this;
-    }
 
     /**
      * Get the identity property: The identity of the resource.
@@ -81,6 +67,46 @@ public final class ServiceResourceInner extends Resource {
      */
     public ServiceResourceInner withIdentity(Identity identity) {
         this.identity = identity;
+        return this;
+    }
+
+    /**
+     * Get the location property: Specifies the location of the resource.
+     *
+     * @return the location value.
+     */
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Set the location property: Specifies the location of the resource.
+     *
+     * @param location the location value to set.
+     * @return the ServiceResourceInner object itself.
+     */
+    public ServiceResourceInner withLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the tags property: Contains resource tags defined as key/value pairs.
+     *
+     * @return the tags value.
+     */
+    public Map<String, String> tags() {
+        return this.tags;
+    }
+
+    /**
+     * Set the tags property: Contains resource tags defined as key/value pairs.
+     *
+     * @param tags the tags value to set.
+     * @return the ServiceResourceInner object itself.
+     */
+    public ServiceResourceInner withTags(Map<String, String> tags) {
+        this.tags = tags;
         return this;
     }
 
@@ -105,7 +131,7 @@ public final class ServiceResourceInner extends Resource {
     }
 
     /**
-     * Get the systemData property: Read only system data.
+     * Get the systemData property: System Data.
      *
      * @return the systemData value.
      */
@@ -115,15 +141,8 @@ public final class ServiceResourceInner extends Resource {
 
     /** {@inheritDoc} */
     @Override
-    public ServiceResourceInner withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public ServiceResourceInner withTags(Map<String, String> tags) {
-        super.withTags(tags);
+    public ServiceResourceInner withProperties(ServiceResponseBase properties) {
+        super.withProperties(properties);
         return this;
     }
 
@@ -132,10 +151,9 @@ public final class ServiceResourceInner extends Resource {
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
-        if (properties() != null) {
-            properties().validate();
-        }
+        super.validate();
         if (identity() != null) {
             identity().validate();
         }

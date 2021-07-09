@@ -20,7 +20,7 @@ public interface MachineLearningServicesClient {
     /**
      * Gets services in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -33,7 +33,7 @@ public interface MachineLearningServicesClient {
     /**
      * Gets services in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param skip Continuation token for pagination.
      * @param modelId The Model Id.
@@ -70,7 +70,7 @@ public interface MachineLearningServicesClient {
     /**
      * Get a Service by name.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -84,7 +84,7 @@ public interface MachineLearningServicesClient {
     /**
      * Get a Service by name.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @param expand Set to True to include Model details.
@@ -101,7 +101,7 @@ public interface MachineLearningServicesClient {
     /**
      * Delete a specific Service..
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -114,7 +114,7 @@ public interface MachineLearningServicesClient {
     /**
      * Delete a specific Service..
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @param context The context to associate with this operation.
@@ -131,7 +131,7 @@ public interface MachineLearningServicesClient {
      * Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If
      * your intent is to create a new service, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @param properties The payload that is used to create or update the Service.
@@ -148,7 +148,7 @@ public interface MachineLearningServicesClient {
      * Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If
      * your intent is to create a new service, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @param properties The payload that is used to create or update the Service.
@@ -170,7 +170,7 @@ public interface MachineLearningServicesClient {
      * Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If
      * your intent is to create a new service, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @param properties The payload that is used to create or update the Service.
@@ -187,7 +187,7 @@ public interface MachineLearningServicesClient {
      * Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If
      * your intent is to create a new service, do a GET first to verify that it does not exist yet.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @param properties The payload that is used to create or update the Service.

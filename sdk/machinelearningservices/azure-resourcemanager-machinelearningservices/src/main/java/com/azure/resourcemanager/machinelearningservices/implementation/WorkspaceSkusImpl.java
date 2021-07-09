@@ -7,37 +7,37 @@ package com.azure.resourcemanager.machinelearningservices.implementation;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.machinelearningservices.fluent.WorkspaceOperationsClient;
+import com.azure.resourcemanager.machinelearningservices.fluent.WorkspaceSkusClient;
 import com.azure.resourcemanager.machinelearningservices.fluent.models.WorkspaceSkuInner;
-import com.azure.resourcemanager.machinelearningservices.models.WorkspaceOperations;
 import com.azure.resourcemanager.machinelearningservices.models.WorkspaceSku;
+import com.azure.resourcemanager.machinelearningservices.models.WorkspaceSkus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public final class WorkspaceOperationsImpl implements WorkspaceOperations {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(WorkspaceOperationsImpl.class);
+public final class WorkspaceSkusImpl implements WorkspaceSkus {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(WorkspaceSkusImpl.class);
 
-    private final WorkspaceOperationsClient innerClient;
+    private final WorkspaceSkusClient innerClient;
 
     private final com.azure.resourcemanager.machinelearningservices.MachineLearningServicesManager serviceManager;
 
-    public WorkspaceOperationsImpl(
-        WorkspaceOperationsClient innerClient,
+    public WorkspaceSkusImpl(
+        WorkspaceSkusClient innerClient,
         com.azure.resourcemanager.machinelearningservices.MachineLearningServicesManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
 
-    public PagedIterable<WorkspaceSku> listSkus() {
-        PagedIterable<WorkspaceSkuInner> inner = this.serviceClient().listSkus();
+    public PagedIterable<WorkspaceSku> list() {
+        PagedIterable<WorkspaceSkuInner> inner = this.serviceClient().list();
         return Utils.mapPage(inner, inner1 -> new WorkspaceSkuImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<WorkspaceSku> listSkus(Context context) {
-        PagedIterable<WorkspaceSkuInner> inner = this.serviceClient().listSkus(context);
+    public PagedIterable<WorkspaceSku> list(Context context) {
+        PagedIterable<WorkspaceSkuInner> inner = this.serviceClient().list(context);
         return Utils.mapPage(inner, inner1 -> new WorkspaceSkuImpl(inner1, this.manager()));
     }
 
-    private WorkspaceOperationsClient serviceClient() {
+    private WorkspaceSkusClient serviceClient() {
         return this.innerClient;
     }
 

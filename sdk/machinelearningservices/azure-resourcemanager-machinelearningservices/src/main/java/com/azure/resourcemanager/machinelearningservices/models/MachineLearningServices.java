@@ -13,7 +13,7 @@ public interface MachineLearningServices {
     /**
      * Gets services in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -25,7 +25,7 @@ public interface MachineLearningServices {
     /**
      * Gets services in specified workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param skip Continuation token for pagination.
      * @param modelId The Model Id.
@@ -61,7 +61,7 @@ public interface MachineLearningServices {
     /**
      * Get a Service by name.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -74,7 +74,7 @@ public interface MachineLearningServices {
     /**
      * Get a Service by name.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @param expand Set to True to include Model details.
@@ -90,7 +90,7 @@ public interface MachineLearningServices {
     /**
      * Delete a specific Service..
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -102,7 +102,7 @@ public interface MachineLearningServices {
     /**
      * Delete a specific Service..
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param serviceName Name of the Azure Machine Learning service.
      * @param context The context to associate with this operation.
@@ -115,56 +115,39 @@ public interface MachineLearningServices {
         String resourceGroupName, String workspaceName, String serviceName, Context context);
 
     /**
-     * Get a Service by name.
+     * Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If
+     * your intent is to create a new service, do a GET first to verify that it does not exist yet.
      *
-     * @param id the resource ID.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param serviceName Name of the Azure Machine Learning service.
+     * @param properties The payload that is used to create or update the Service.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a Service by name.
+     * @return machine Learning service object wrapped into ARM resource envelope.
      */
-    ServiceResource getById(String id);
+    ServiceResource createOrUpdate(
+        String resourceGroupName, String workspaceName, String serviceName, CreateServiceRequest properties);
 
     /**
-     * Get a Service by name.
+     * Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If
+     * your intent is to create a new service, do a GET first to verify that it does not exist yet.
      *
-     * @param id the resource ID.
-     * @param expand Set to True to include Model details.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param workspaceName Name of Azure Machine Learning workspace.
+     * @param serviceName Name of the Azure Machine Learning service.
+     * @param properties The payload that is used to create or update the Service.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a Service by name.
+     * @return machine Learning service object wrapped into ARM resource envelope.
      */
-    Response<ServiceResource> getByIdWithResponse(String id, Boolean expand, Context context);
-
-    /**
-     * Delete a specific Service..
-     *
-     * @param id the resource ID.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    void deleteById(String id);
-
-    /**
-     * Delete a specific Service..
-     *
-     * @param id the resource ID.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    Response<Void> deleteByIdWithResponse(String id, Context context);
-
-    /**
-     * Begins definition for a new ServiceResource resource.
-     *
-     * @param name resource name.
-     * @return the first stage of the new ServiceResource definition.
-     */
-    ServiceResource.DefinitionStages.Blank define(String name);
+    ServiceResource createOrUpdate(
+        String resourceGroupName,
+        String workspaceName,
+        String serviceName,
+        CreateServiceRequest properties,
+        Context context);
 }
