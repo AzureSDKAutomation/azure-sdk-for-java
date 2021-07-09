@@ -4,6 +4,7 @@
 
 package com.azure.resourcemanager.machinelearningservices.implementation;
 
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
@@ -26,6 +27,19 @@ public final class PrivateEndpointConnectionsImpl implements PrivateEndpointConn
         com.azure.resourcemanager.machinelearningservices.MachineLearningServicesManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
+    }
+
+    public PagedIterable<PrivateEndpointConnection> list(String resourceGroupName, String workspaceName) {
+        PagedIterable<PrivateEndpointConnectionInner> inner =
+            this.serviceClient().list(resourceGroupName, workspaceName);
+        return Utils.mapPage(inner, inner1 -> new PrivateEndpointConnectionImpl(inner1, this.manager()));
+    }
+
+    public PagedIterable<PrivateEndpointConnection> list(
+        String resourceGroupName, String workspaceName, Context context) {
+        PagedIterable<PrivateEndpointConnectionInner> inner =
+            this.serviceClient().list(resourceGroupName, workspaceName, context);
+        return Utils.mapPage(inner, inner1 -> new PrivateEndpointConnectionImpl(inner1, this.manager()));
     }
 
     public PrivateEndpointConnection get(

@@ -12,7 +12,7 @@ public interface WorkspaceFeatures {
     /**
      * Lists all enabled features for a workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -24,7 +24,7 @@ public interface WorkspaceFeatures {
     /**
      * Lists all enabled features for a workspace.
      *
-     * @param resourceGroupName Name of the resource group in which workspace is located.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param workspaceName Name of Azure Machine Learning workspace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

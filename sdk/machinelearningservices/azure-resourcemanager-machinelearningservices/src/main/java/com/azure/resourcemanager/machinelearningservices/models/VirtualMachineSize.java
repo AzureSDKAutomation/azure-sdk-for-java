@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /** Describes the properties of a VM size. */
 @Fluent
@@ -73,6 +74,12 @@ public final class VirtualMachineSize {
      */
     @JsonProperty(value = "estimatedVMPrices")
     private EstimatedVMPrices estimatedVMPrices;
+
+    /*
+     * Specifies the compute types supported by the virtual machine size.
+     */
+    @JsonProperty(value = "supportedComputeTypes")
+    private List<String> supportedComputeTypes;
 
     /**
      * Get the name property: The name of the virtual machine size.
@@ -172,6 +179,26 @@ public final class VirtualMachineSize {
      */
     public VirtualMachineSize withEstimatedVMPrices(EstimatedVMPrices estimatedVMPrices) {
         this.estimatedVMPrices = estimatedVMPrices;
+        return this;
+    }
+
+    /**
+     * Get the supportedComputeTypes property: Specifies the compute types supported by the virtual machine size.
+     *
+     * @return the supportedComputeTypes value.
+     */
+    public List<String> supportedComputeTypes() {
+        return this.supportedComputeTypes;
+    }
+
+    /**
+     * Set the supportedComputeTypes property: Specifies the compute types supported by the virtual machine size.
+     *
+     * @param supportedComputeTypes the supportedComputeTypes value to set.
+     * @return the VirtualMachineSize object itself.
+     */
+    public VirtualMachineSize withSupportedComputeTypes(List<String> supportedComputeTypes) {
+        this.supportedComputeTypes = supportedComputeTypes;
         return this;
     }
 
