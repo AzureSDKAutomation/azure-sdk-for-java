@@ -136,6 +136,69 @@ public interface SynapseManagementClient {
     KeysClient getKeys();
 
     /**
+     * Gets the KustoOperationsClient object to access its operations.
+     *
+     * @return the KustoOperationsClient object.
+     */
+    KustoOperationsClient getKustoOperations();
+
+    /**
+     * Gets the KustoPoolsClient object to access its operations.
+     *
+     * @return the KustoPoolsClient object.
+     */
+    KustoPoolsClient getKustoPools();
+
+    /**
+     * Gets the KustoPoolsOperationsClient object to access its operations.
+     *
+     * @return the KustoPoolsOperationsClient object.
+     */
+    KustoPoolsOperationsClient getKustoPoolsOperations();
+
+    /**
+     * Gets the KustoPoolChildResourcesClient object to access its operations.
+     *
+     * @return the KustoPoolChildResourcesClient object.
+     */
+    KustoPoolChildResourcesClient getKustoPoolChildResources();
+
+    /**
+     * Gets the AttachedDatabaseConfigurationsClient object to access its operations.
+     *
+     * @return the AttachedDatabaseConfigurationsClient object.
+     */
+    AttachedDatabaseConfigurationsClient getAttachedDatabaseConfigurations();
+
+    /**
+     * Gets the DatabasesClient object to access its operations.
+     *
+     * @return the DatabasesClient object.
+     */
+    DatabasesClient getDatabases();
+
+    /**
+     * Gets the DataConnectionsClient object to access its operations.
+     *
+     * @return the DataConnectionsClient object.
+     */
+    DataConnectionsClient getDataConnections();
+
+    /**
+     * Gets the KustoPoolPrincipalAssignmentsClient object to access its operations.
+     *
+     * @return the KustoPoolPrincipalAssignmentsClient object.
+     */
+    KustoPoolPrincipalAssignmentsClient getKustoPoolPrincipalAssignments();
+
+    /**
+     * Gets the DatabasePrincipalAssignmentsClient object to access its operations.
+     *
+     * @return the DatabasePrincipalAssignmentsClient object.
+     */
+    DatabasePrincipalAssignmentsClient getDatabasePrincipalAssignments();
+
+    /**
      * Gets the LibrariesClient object to access its operations.
      *
      * @return the LibrariesClient object.

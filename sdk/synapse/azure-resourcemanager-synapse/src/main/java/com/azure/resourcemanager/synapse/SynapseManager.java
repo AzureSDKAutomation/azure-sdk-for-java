@@ -9,7 +9,6 @@ import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.AddDatePolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -17,13 +16,18 @@ import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.synapse.fluent.SynapseManagementClient;
+import com.azure.resourcemanager.synapse.implementation.AttachedDatabaseConfigurationsImpl;
 import com.azure.resourcemanager.synapse.implementation.BigDataPoolsImpl;
+import com.azure.resourcemanager.synapse.implementation.DataConnectionsImpl;
 import com.azure.resourcemanager.synapse.implementation.DataMaskingPoliciesImpl;
 import com.azure.resourcemanager.synapse.implementation.DataMaskingRulesImpl;
+import com.azure.resourcemanager.synapse.implementation.DatabasePrincipalAssignmentsImpl;
+import com.azure.resourcemanager.synapse.implementation.DatabasesImpl;
 import com.azure.resourcemanager.synapse.implementation.ExtendedSqlPoolBlobAuditingPoliciesImpl;
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeAuthKeysOperationsImpl;
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeConnectionInfosImpl;
@@ -36,6 +40,11 @@ import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeStatus
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimesImpl;
 import com.azure.resourcemanager.synapse.implementation.IpFirewallRulesImpl;
 import com.azure.resourcemanager.synapse.implementation.KeysImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoOperationsImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoPoolChildResourcesImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoPoolPrincipalAssignmentsImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoPoolsImpl;
+import com.azure.resourcemanager.synapse.implementation.KustoPoolsOperationsImpl;
 import com.azure.resourcemanager.synapse.implementation.LibrariesImpl;
 import com.azure.resourcemanager.synapse.implementation.LibrariesOperationsImpl;
 import com.azure.resourcemanager.synapse.implementation.OperationsImpl;
@@ -83,9 +92,13 @@ import com.azure.resourcemanager.synapse.implementation.WorkspaceManagedSqlServe
 import com.azure.resourcemanager.synapse.implementation.WorkspaceManagedSqlServerVulnerabilityAssessmentsImpl;
 import com.azure.resourcemanager.synapse.implementation.WorkspaceSqlAadAdminsImpl;
 import com.azure.resourcemanager.synapse.implementation.WorkspacesImpl;
+import com.azure.resourcemanager.synapse.models.AttachedDatabaseConfigurations;
 import com.azure.resourcemanager.synapse.models.BigDataPools;
+import com.azure.resourcemanager.synapse.models.DataConnections;
 import com.azure.resourcemanager.synapse.models.DataMaskingPolicies;
 import com.azure.resourcemanager.synapse.models.DataMaskingRules;
+import com.azure.resourcemanager.synapse.models.DatabasePrincipalAssignments;
+import com.azure.resourcemanager.synapse.models.Databases;
 import com.azure.resourcemanager.synapse.models.ExtendedSqlPoolBlobAuditingPolicies;
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimeAuthKeysOperations;
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimeConnectionInfos;
@@ -98,6 +111,11 @@ import com.azure.resourcemanager.synapse.models.IntegrationRuntimeStatusOperatio
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimes;
 import com.azure.resourcemanager.synapse.models.IpFirewallRules;
 import com.azure.resourcemanager.synapse.models.Keys;
+import com.azure.resourcemanager.synapse.models.KustoOperations;
+import com.azure.resourcemanager.synapse.models.KustoPoolChildResources;
+import com.azure.resourcemanager.synapse.models.KustoPoolPrincipalAssignments;
+import com.azure.resourcemanager.synapse.models.KustoPools;
+import com.azure.resourcemanager.synapse.models.KustoPoolsOperations;
 import com.azure.resourcemanager.synapse.models.Libraries;
 import com.azure.resourcemanager.synapse.models.LibrariesOperations;
 import com.azure.resourcemanager.synapse.models.Operations;
@@ -177,6 +195,24 @@ public final class SynapseManager {
     private IntegrationRuntimeStatusOperations integrationRuntimeStatusOperations;
 
     private Keys keys;
+
+    private KustoOperations kustoOperations;
+
+    private KustoPools kustoPools;
+
+    private KustoPoolsOperations kustoPoolsOperations;
+
+    private KustoPoolChildResources kustoPoolChildResources;
+
+    private AttachedDatabaseConfigurations attachedDatabaseConfigurations;
+
+    private Databases databases;
+
+    private DataConnections dataConnections;
+
+    private KustoPoolPrincipalAssignments kustoPoolPrincipalAssignments;
+
+    private DatabasePrincipalAssignments databasePrincipalAssignments;
 
     private Libraries libraries;
 
@@ -317,6 +353,7 @@ public final class SynapseManager {
         private HttpClient httpClient;
         private HttpLogOptions httpLogOptions;
         private final List<HttpPipelinePolicy> policies = new ArrayList<>();
+        private final List<String> scopes = new ArrayList<>();
         private RetryPolicy retryPolicy;
         private Duration defaultPollInterval;
 
@@ -353,6 +390,17 @@ public final class SynapseManager {
          */
         public Configurable withPolicy(HttpPipelinePolicy policy) {
             this.policies.add(Objects.requireNonNull(policy, "'policy' cannot be null."));
+            return this;
+        }
+
+        /**
+         * Adds the scope to permission sets.
+         *
+         * @param scope the scope.
+         * @return the configurable object itself.
+         */
+        public Configurable withScope(String scope) {
+            this.scopes.add(Objects.requireNonNull(scope, "'scope' cannot be null."));
             return this;
         }
 
@@ -412,6 +460,9 @@ public final class SynapseManager {
                 userAgentBuilder.append(" (auto-generated)");
             }
 
+            if (scopes.isEmpty()) {
+                scopes.add(profile.getEnvironment().getManagementEndpoint() + "/.default");
+            }
             if (retryPolicy == null) {
                 retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
             }
@@ -421,10 +472,7 @@ public final class SynapseManager {
             HttpPolicyProviders.addBeforeRetryPolicies(policies);
             policies.add(retryPolicy);
             policies.add(new AddDatePolicy());
-            policies
-                .add(
-                    new BearerTokenAuthenticationPolicy(
-                        credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
+            policies.add(new ArmChallengeAuthenticationPolicy(credential, scopes.toArray(new String[0])));
             policies.addAll(this.policies);
             HttpPolicyProviders.addAfterRetryPolicies(policies);
             policies.add(new HttpLoggingPolicy(httpLogOptions));
@@ -549,6 +597,82 @@ public final class SynapseManager {
             this.keys = new KeysImpl(clientObject.getKeys(), this);
         }
         return keys;
+    }
+
+    /** @return Resource collection API of KustoOperations. */
+    public KustoOperations kustoOperations() {
+        if (this.kustoOperations == null) {
+            this.kustoOperations = new KustoOperationsImpl(clientObject.getKustoOperations(), this);
+        }
+        return kustoOperations;
+    }
+
+    /** @return Resource collection API of KustoPools. */
+    public KustoPools kustoPools() {
+        if (this.kustoPools == null) {
+            this.kustoPools = new KustoPoolsImpl(clientObject.getKustoPools(), this);
+        }
+        return kustoPools;
+    }
+
+    /** @return Resource collection API of KustoPoolsOperations. */
+    public KustoPoolsOperations kustoPoolsOperations() {
+        if (this.kustoPoolsOperations == null) {
+            this.kustoPoolsOperations = new KustoPoolsOperationsImpl(clientObject.getKustoPoolsOperations(), this);
+        }
+        return kustoPoolsOperations;
+    }
+
+    /** @return Resource collection API of KustoPoolChildResources. */
+    public KustoPoolChildResources kustoPoolChildResources() {
+        if (this.kustoPoolChildResources == null) {
+            this.kustoPoolChildResources =
+                new KustoPoolChildResourcesImpl(clientObject.getKustoPoolChildResources(), this);
+        }
+        return kustoPoolChildResources;
+    }
+
+    /** @return Resource collection API of AttachedDatabaseConfigurations. */
+    public AttachedDatabaseConfigurations attachedDatabaseConfigurations() {
+        if (this.attachedDatabaseConfigurations == null) {
+            this.attachedDatabaseConfigurations =
+                new AttachedDatabaseConfigurationsImpl(clientObject.getAttachedDatabaseConfigurations(), this);
+        }
+        return attachedDatabaseConfigurations;
+    }
+
+    /** @return Resource collection API of Databases. */
+    public Databases databases() {
+        if (this.databases == null) {
+            this.databases = new DatabasesImpl(clientObject.getDatabases(), this);
+        }
+        return databases;
+    }
+
+    /** @return Resource collection API of DataConnections. */
+    public DataConnections dataConnections() {
+        if (this.dataConnections == null) {
+            this.dataConnections = new DataConnectionsImpl(clientObject.getDataConnections(), this);
+        }
+        return dataConnections;
+    }
+
+    /** @return Resource collection API of KustoPoolPrincipalAssignments. */
+    public KustoPoolPrincipalAssignments kustoPoolPrincipalAssignments() {
+        if (this.kustoPoolPrincipalAssignments == null) {
+            this.kustoPoolPrincipalAssignments =
+                new KustoPoolPrincipalAssignmentsImpl(clientObject.getKustoPoolPrincipalAssignments(), this);
+        }
+        return kustoPoolPrincipalAssignments;
+    }
+
+    /** @return Resource collection API of DatabasePrincipalAssignments. */
+    public DatabasePrincipalAssignments databasePrincipalAssignments() {
+        if (this.databasePrincipalAssignments == null) {
+            this.databasePrincipalAssignments =
+                new DatabasePrincipalAssignmentsImpl(clientObject.getDatabasePrincipalAssignments(), this);
+        }
+        return databasePrincipalAssignments;
     }
 
     /** @return Resource collection API of Libraries. */
