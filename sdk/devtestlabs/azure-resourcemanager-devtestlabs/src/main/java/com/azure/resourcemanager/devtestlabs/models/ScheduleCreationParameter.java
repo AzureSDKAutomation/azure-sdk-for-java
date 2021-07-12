@@ -26,7 +26,7 @@ public class ScheduleCreationParameter {
     /*
      * The location of the new virtual machine or environment
      */
-    @JsonProperty(value = "location")
+    @JsonProperty(value = "location", access = JsonProperty.Access.WRITE_ONLY)
     private String location;
 
     /*
@@ -113,17 +113,6 @@ public class ScheduleCreationParameter {
      */
     public String location() {
         return this.location;
-    }
-
-    /**
-     * Set the location property: The location of the new virtual machine or environment.
-     *
-     * @param location the location value to set.
-     * @return the ScheduleCreationParameter object itself.
-     */
-    public ScheduleCreationParameter withLocation(String location) {
-        this.location = location;
-        return this;
     }
 
     /**
