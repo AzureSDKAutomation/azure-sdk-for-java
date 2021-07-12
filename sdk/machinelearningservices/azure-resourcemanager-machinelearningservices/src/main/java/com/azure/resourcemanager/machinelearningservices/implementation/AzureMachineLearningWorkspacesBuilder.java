@@ -19,12 +19,12 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = {AzureMachineLearningWorkspacesImpl.class})
 public final class AzureMachineLearningWorkspacesBuilder {
     /*
-     * Azure subscription identifier.
+     * The ID of the target subscription.
      */
     private String subscriptionId;
 
     /**
-     * Sets Azure subscription identifier.
+     * Sets The ID of the target subscription.
      *
      * @param subscriptionId the subscriptionId value.
      * @return the AzureMachineLearningWorkspacesBuilder.

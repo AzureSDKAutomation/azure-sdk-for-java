@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** An Azure Machine Learning compute. */
+/** Properties(top level) of AmlCompute. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "computeType")
 @JsonTypeName("AmlCompute")
 @Fluent
@@ -19,13 +19,13 @@ public final class AmlCompute extends Compute {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(AmlCompute.class);
 
     /*
-     * AML Compute properties
+     * Properties of AmlCompute
      */
     @JsonProperty(value = "properties")
     private AmlComputeProperties properties;
 
     /**
-     * Get the properties property: AML Compute properties.
+     * Get the properties property: Properties of AmlCompute.
      *
      * @return the properties value.
      */
@@ -34,7 +34,7 @@ public final class AmlCompute extends Compute {
     }
 
     /**
-     * Set the properties property: AML Compute properties.
+     * Set the properties property: Properties of AmlCompute.
      *
      * @param properties the properties value to set.
      * @return the AmlCompute object itself.
