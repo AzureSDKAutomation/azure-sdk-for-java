@@ -6,6 +6,7 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
 import com.azure.resourcemanager.databoxedge.models.DayOfWeek;
@@ -18,6 +19,12 @@ import java.util.List;
 @Fluent
 public class BandwidthScheduleInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(BandwidthScheduleInner.class);
+
+    /*
+     * Bandwidth object related to ASE resource
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * The start time of the schedule in UTC.
@@ -42,6 +49,15 @@ public class BandwidthScheduleInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.days", required = true)
     private List<DayOfWeek> days;
+
+    /**
+     * Get the systemData property: Bandwidth object related to ASE resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the start property: The start time of the schedule in UTC.

@@ -8,8 +8,11 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
+import com.azure.resourcemanager.databoxedge.models.KeyVaultSyncStatus;
+import com.azure.resourcemanager.databoxedge.models.Secret;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 
 /** The extended Info of the Data Box Edge/Gateway device. */
 @JsonFlatten
@@ -35,6 +38,43 @@ public class DataBoxEdgeDeviceExtendedInfoInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.resourceKey", access = JsonProperty.Access.WRITE_ONLY)
     private String resourceKey;
+
+    /*
+     * The Key Vault ARM Id for client secrets
+     */
+    @JsonProperty(value = "properties.clientSecretStoreId")
+    private String clientSecretStoreId;
+
+    /*
+     * The url to access the Client Key Vault
+     */
+    @JsonProperty(value = "properties.clientSecretStoreUrl")
+    private String clientSecretStoreUrl;
+
+    /*
+     * The name of Channel Integrity Key stored in the Client Key Vault
+     */
+    @JsonProperty(value = "properties.channelIntegrityKeyName")
+    private String channelIntegrityKeyName;
+
+    /*
+     * The version of Channel Integrity Key stored in the Client Key Vault
+     */
+    @JsonProperty(value = "properties.channelIntegrityKeyVersion")
+    private String channelIntegrityKeyVersion;
+
+    /*
+     * Key vault sync status
+     */
+    @JsonProperty(value = "properties.keyVaultSyncStatus")
+    private KeyVaultSyncStatus keyVaultSyncStatus;
+
+    /*
+     * Device secrets, will be returned only with ODataFilter
+     * $expand=deviceSecrets
+     */
+    @JsonProperty(value = "properties.deviceSecrets", access = JsonProperty.Access.WRITE_ONLY)
+    private Map<String, Secret> deviceSecrets;
 
     /**
      * Get the encryptionKeyThumbprint property: The digital signature of encrypted certificate.
@@ -88,6 +128,115 @@ public class DataBoxEdgeDeviceExtendedInfoInner extends ArmBaseModel {
     }
 
     /**
+     * Get the clientSecretStoreId property: The Key Vault ARM Id for client secrets.
+     *
+     * @return the clientSecretStoreId value.
+     */
+    public String clientSecretStoreId() {
+        return this.clientSecretStoreId;
+    }
+
+    /**
+     * Set the clientSecretStoreId property: The Key Vault ARM Id for client secrets.
+     *
+     * @param clientSecretStoreId the clientSecretStoreId value to set.
+     * @return the DataBoxEdgeDeviceExtendedInfoInner object itself.
+     */
+    public DataBoxEdgeDeviceExtendedInfoInner withClientSecretStoreId(String clientSecretStoreId) {
+        this.clientSecretStoreId = clientSecretStoreId;
+        return this;
+    }
+
+    /**
+     * Get the clientSecretStoreUrl property: The url to access the Client Key Vault.
+     *
+     * @return the clientSecretStoreUrl value.
+     */
+    public String clientSecretStoreUrl() {
+        return this.clientSecretStoreUrl;
+    }
+
+    /**
+     * Set the clientSecretStoreUrl property: The url to access the Client Key Vault.
+     *
+     * @param clientSecretStoreUrl the clientSecretStoreUrl value to set.
+     * @return the DataBoxEdgeDeviceExtendedInfoInner object itself.
+     */
+    public DataBoxEdgeDeviceExtendedInfoInner withClientSecretStoreUrl(String clientSecretStoreUrl) {
+        this.clientSecretStoreUrl = clientSecretStoreUrl;
+        return this;
+    }
+
+    /**
+     * Get the channelIntegrityKeyName property: The name of Channel Integrity Key stored in the Client Key Vault.
+     *
+     * @return the channelIntegrityKeyName value.
+     */
+    public String channelIntegrityKeyName() {
+        return this.channelIntegrityKeyName;
+    }
+
+    /**
+     * Set the channelIntegrityKeyName property: The name of Channel Integrity Key stored in the Client Key Vault.
+     *
+     * @param channelIntegrityKeyName the channelIntegrityKeyName value to set.
+     * @return the DataBoxEdgeDeviceExtendedInfoInner object itself.
+     */
+    public DataBoxEdgeDeviceExtendedInfoInner withChannelIntegrityKeyName(String channelIntegrityKeyName) {
+        this.channelIntegrityKeyName = channelIntegrityKeyName;
+        return this;
+    }
+
+    /**
+     * Get the channelIntegrityKeyVersion property: The version of Channel Integrity Key stored in the Client Key Vault.
+     *
+     * @return the channelIntegrityKeyVersion value.
+     */
+    public String channelIntegrityKeyVersion() {
+        return this.channelIntegrityKeyVersion;
+    }
+
+    /**
+     * Set the channelIntegrityKeyVersion property: The version of Channel Integrity Key stored in the Client Key Vault.
+     *
+     * @param channelIntegrityKeyVersion the channelIntegrityKeyVersion value to set.
+     * @return the DataBoxEdgeDeviceExtendedInfoInner object itself.
+     */
+    public DataBoxEdgeDeviceExtendedInfoInner withChannelIntegrityKeyVersion(String channelIntegrityKeyVersion) {
+        this.channelIntegrityKeyVersion = channelIntegrityKeyVersion;
+        return this;
+    }
+
+    /**
+     * Get the keyVaultSyncStatus property: Key vault sync status.
+     *
+     * @return the keyVaultSyncStatus value.
+     */
+    public KeyVaultSyncStatus keyVaultSyncStatus() {
+        return this.keyVaultSyncStatus;
+    }
+
+    /**
+     * Set the keyVaultSyncStatus property: Key vault sync status.
+     *
+     * @param keyVaultSyncStatus the keyVaultSyncStatus value to set.
+     * @return the DataBoxEdgeDeviceExtendedInfoInner object itself.
+     */
+    public DataBoxEdgeDeviceExtendedInfoInner withKeyVaultSyncStatus(KeyVaultSyncStatus keyVaultSyncStatus) {
+        this.keyVaultSyncStatus = keyVaultSyncStatus;
+        return this;
+    }
+
+    /**
+     * Get the deviceSecrets property: Device secrets, will be returned only with ODataFilter $expand=deviceSecrets.
+     *
+     * @return the deviceSecrets value.
+     */
+    public Map<String, Secret> deviceSecrets() {
+        return this.deviceSecrets;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -95,5 +244,15 @@ public class DataBoxEdgeDeviceExtendedInfoInner extends ArmBaseModel {
     @Override
     public void validate() {
         super.validate();
+        if (deviceSecrets() != null) {
+            deviceSecrets()
+                .values()
+                .forEach(
+                    e -> {
+                        if (e != null) {
+                            e.validate();
+                        }
+                    });
+        }
     }
 }

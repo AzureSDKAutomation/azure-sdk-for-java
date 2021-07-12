@@ -6,6 +6,7 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.AlertErrorDetails;
 import com.azure.resourcemanager.databoxedge.models.AlertSeverity;
@@ -20,6 +21,12 @@ import java.util.Map;
 @Immutable
 public class AlertInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(AlertInner.class);
+
+    /*
+     * Alert generated in the resource
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * Alert title.
@@ -62,6 +69,15 @@ public class AlertInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.detailedInformation", access = JsonProperty.Access.WRITE_ONLY)
     private Map<String, String> detailedInformation;
+
+    /**
+     * Get the systemData property: Alert generated in the resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the title property: Alert title.

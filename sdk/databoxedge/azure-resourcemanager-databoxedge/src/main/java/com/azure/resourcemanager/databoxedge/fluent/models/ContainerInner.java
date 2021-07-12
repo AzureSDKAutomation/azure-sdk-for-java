@@ -6,6 +6,7 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
 import com.azure.resourcemanager.databoxedge.models.AzureContainerDataFormat;
@@ -20,6 +21,12 @@ import java.time.OffsetDateTime;
 @Fluent
 public class ContainerInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ContainerInner.class);
+
+    /*
+     * Container in DataBoxEdge Resource
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * Current status of the container.
@@ -44,6 +51,15 @@ public class ContainerInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.createdDateTime", access = JsonProperty.Access.WRITE_ONLY)
     private OffsetDateTime createdDateTime;
+
+    /**
+     * Get the systemData property: Container in DataBoxEdge Resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the containerStatus property: Current status of the container.

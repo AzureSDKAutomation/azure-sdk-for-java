@@ -6,6 +6,7 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
 import com.azure.resourcemanager.databoxedge.models.DataPolicy;
@@ -18,6 +19,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public class StorageAccountInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(StorageAccountInner.class);
+
+    /*
+     * StorageAccount object on ASE device
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * Description for the storage Account.
@@ -34,7 +41,7 @@ public class StorageAccountInner extends ArmBaseModel {
     /*
      * Data policy of the storage Account.
      */
-    @JsonProperty(value = "properties.dataPolicy")
+    @JsonProperty(value = "properties.dataPolicy", required = true)
     private DataPolicy dataPolicy;
 
     /*
@@ -55,6 +62,15 @@ public class StorageAccountInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.containerCount", access = JsonProperty.Access.WRITE_ONLY)
     private Integer containerCount;
+
+    /**
+     * Get the systemData property: StorageAccount object on ASE device.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the description property: Description for the storage Account.
@@ -163,5 +179,10 @@ public class StorageAccountInner extends ArmBaseModel {
     @Override
     public void validate() {
         super.validate();
+        if (dataPolicy() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException("Missing required property dataPolicy in model StorageAccountInner"));
+        }
     }
 }

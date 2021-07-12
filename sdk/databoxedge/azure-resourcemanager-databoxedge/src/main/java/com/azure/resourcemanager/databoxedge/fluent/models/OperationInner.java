@@ -25,6 +25,12 @@ public class OperationInner {
     private String name;
 
     /*
+     * Is data action.
+     */
+    @JsonProperty(value = "isDataAction")
+    private Boolean isDataAction;
+
+    /*
      * Properties displayed for the operation.
      */
     @JsonProperty(value = "display")
@@ -59,6 +65,26 @@ public class OperationInner {
      */
     public OperationInner withName(String name) {
         this.name = name;
+        return this;
+    }
+
+    /**
+     * Get the isDataAction property: Is data action.
+     *
+     * @return the isDataAction value.
+     */
+    public Boolean isDataAction() {
+        return this.isDataAction;
+    }
+
+    /**
+     * Set the isDataAction property: Is data action.
+     *
+     * @param isDataAction the isDataAction value to set.
+     * @return the OperationInner object itself.
+     */
+    public OperationInner withIsDataAction(Boolean isDataAction) {
+        this.isDataAction = isDataAction;
         return this;
     }
 
