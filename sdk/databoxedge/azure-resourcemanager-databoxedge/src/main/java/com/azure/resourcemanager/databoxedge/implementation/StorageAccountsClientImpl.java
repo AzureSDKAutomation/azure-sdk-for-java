@@ -143,7 +143,7 @@ public final class StorageAccountsClientImpl implements StorageAccountsClient {
     }
 
     /**
-     * Lists all the storage accounts in a Data Box Edge/Data Box Gateway device.
+     * Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
@@ -200,7 +200,7 @@ public final class StorageAccountsClientImpl implements StorageAccountsClient {
     }
 
     /**
-     * Lists all the storage accounts in a Data Box Edge/Data Box Gateway device.
+     * Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
@@ -255,7 +255,7 @@ public final class StorageAccountsClientImpl implements StorageAccountsClient {
     }
 
     /**
-     * Lists all the storage accounts in a Data Box Edge/Data Box Gateway device.
+     * Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
@@ -272,7 +272,7 @@ public final class StorageAccountsClientImpl implements StorageAccountsClient {
     }
 
     /**
-     * Lists all the storage accounts in a Data Box Edge/Data Box Gateway device.
+     * Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
@@ -291,7 +291,7 @@ public final class StorageAccountsClientImpl implements StorageAccountsClient {
     }
 
     /**
-     * Lists all the storage accounts in a Data Box Edge/Data Box Gateway device.
+     * Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
@@ -306,7 +306,7 @@ public final class StorageAccountsClientImpl implements StorageAccountsClient {
     }
 
     /**
-     * Lists all the storage accounts in a Data Box Edge/Data Box Gateway device.
+     * Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.

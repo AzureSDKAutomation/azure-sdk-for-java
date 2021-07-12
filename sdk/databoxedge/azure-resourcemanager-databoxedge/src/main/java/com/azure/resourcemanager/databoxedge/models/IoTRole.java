@@ -47,6 +47,24 @@ public class IoTRole extends RoleInner {
     private List<MountPointMap> shareMappings;
 
     /*
+     * Iot edge agent details to download the agent and bootstrap iot runtime.
+     */
+    @JsonProperty(value = "properties.ioTEdgeAgentInfo")
+    private IoTEdgeAgentInfo ioTEdgeAgentInfo;
+
+    /*
+     * Platform where the Iot runtime is hosted.
+     */
+    @JsonProperty(value = "properties.hostPlatformType", access = JsonProperty.Access.WRITE_ONLY)
+    private HostPlatformType hostPlatformType;
+
+    /*
+     * Resource allocation
+     */
+    @JsonProperty(value = "properties.computeResource")
+    private ComputeResource computeResource;
+
+    /*
      * Role status.
      */
     @JsonProperty(value = "properties.roleStatus")
@@ -133,6 +151,55 @@ public class IoTRole extends RoleInner {
     }
 
     /**
+     * Get the ioTEdgeAgentInfo property: Iot edge agent details to download the agent and bootstrap iot runtime.
+     *
+     * @return the ioTEdgeAgentInfo value.
+     */
+    public IoTEdgeAgentInfo ioTEdgeAgentInfo() {
+        return this.ioTEdgeAgentInfo;
+    }
+
+    /**
+     * Set the ioTEdgeAgentInfo property: Iot edge agent details to download the agent and bootstrap iot runtime.
+     *
+     * @param ioTEdgeAgentInfo the ioTEdgeAgentInfo value to set.
+     * @return the IoTRole object itself.
+     */
+    public IoTRole withIoTEdgeAgentInfo(IoTEdgeAgentInfo ioTEdgeAgentInfo) {
+        this.ioTEdgeAgentInfo = ioTEdgeAgentInfo;
+        return this;
+    }
+
+    /**
+     * Get the hostPlatformType property: Platform where the Iot runtime is hosted.
+     *
+     * @return the hostPlatformType value.
+     */
+    public HostPlatformType hostPlatformType() {
+        return this.hostPlatformType;
+    }
+
+    /**
+     * Get the computeResource property: Resource allocation.
+     *
+     * @return the computeResource value.
+     */
+    public ComputeResource computeResource() {
+        return this.computeResource;
+    }
+
+    /**
+     * Set the computeResource property: Resource allocation.
+     *
+     * @param computeResource the computeResource value to set.
+     * @return the IoTRole object itself.
+     */
+    public IoTRole withComputeResource(ComputeResource computeResource) {
+        this.computeResource = computeResource;
+        return this;
+    }
+
+    /**
      * Get the roleStatus property: Role status.
      *
      * @return the roleStatus value.
@@ -168,6 +235,12 @@ public class IoTRole extends RoleInner {
         }
         if (shareMappings() != null) {
             shareMappings().forEach(e -> e.validate());
+        }
+        if (ioTEdgeAgentInfo() != null) {
+            ioTEdgeAgentInfo().validate();
+        }
+        if (computeResource() != null) {
+            computeResource().validate();
         }
     }
 }

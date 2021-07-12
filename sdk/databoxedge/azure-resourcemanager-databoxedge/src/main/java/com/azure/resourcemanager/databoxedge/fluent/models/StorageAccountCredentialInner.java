@@ -6,6 +6,7 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.AccountType;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
@@ -19,6 +20,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public class StorageAccountCredentialInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(StorageAccountCredentialInner.class);
+
+    /*
+     * StorageAccountCredential object
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * Alias for the storage account.
@@ -68,6 +75,15 @@ public class StorageAccountCredentialInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.storageAccountId")
     private String storageAccountId;
+
+    /**
+     * Get the systemData property: StorageAccountCredential object.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the alias property: Alias for the storage account.
