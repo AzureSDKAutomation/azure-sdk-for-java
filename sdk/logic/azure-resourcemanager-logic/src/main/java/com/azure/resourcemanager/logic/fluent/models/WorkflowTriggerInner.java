@@ -4,7 +4,7 @@
 
 package com.azure.resourcemanager.logic.fluent.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.SubResource;
 import com.azure.core.util.logging.ClientLogger;
@@ -19,7 +19,7 @@ import java.time.OffsetDateTime;
 
 /** The workflow trigger. */
 @JsonFlatten
-@Immutable
+@Fluent
 public class WorkflowTriggerInner extends SubResource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(WorkflowTriggerInner.class);
 
