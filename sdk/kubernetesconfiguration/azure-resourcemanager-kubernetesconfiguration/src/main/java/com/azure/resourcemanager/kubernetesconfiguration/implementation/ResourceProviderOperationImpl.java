@@ -28,6 +28,10 @@ public final class ResourceProviderOperationImpl implements ResourceProviderOper
         return this.innerModel().display();
     }
 
+    public String origin() {
+        return this.innerModel().origin();
+    }
+
     public Boolean isDataAction() {
         return this.innerModel().isDataAction();
     }
