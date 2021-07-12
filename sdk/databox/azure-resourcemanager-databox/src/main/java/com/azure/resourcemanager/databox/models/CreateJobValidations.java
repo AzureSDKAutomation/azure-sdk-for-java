@@ -4,7 +4,7 @@
 
 package com.azure.resourcemanager.databox.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -14,7 +14,7 @@ import java.util.List;
 /** It does all pre-job creation validations. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "validationCategory")
 @JsonTypeName("JobCreationValidation")
-@Immutable
+@Fluent
 public final class CreateJobValidations extends ValidationRequest {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(CreateJobValidations.class);
 
