@@ -24,25 +24,23 @@ public final class ResourceFile {
     /*
      * The autoStorageContainerName, storageContainerUrl and httpUrl properties
      * are mutually exclusive and one of them must be specified. This URL must
-     * be readable and listable using anonymous access; that is, the Batch
-     * service does not present any credentials when downloading the blob.
-     * There are two ways to get such a URL for a blob in Azure storage:
-     * include a Shared Access Signature (SAS) granting read and list
-     * permissions on the blob, or set the ACL for the blob or its container to
-     * allow public access.
+     * be readable and listable from compute nodes. There are three ways to get
+     * such a URL for a container in Azure storage: include a Shared Access
+     * Signature (SAS) granting read and list permissions on the container, use
+     * a managed identity with read and list permissions, or set the ACL for
+     * the container to allow public access.
      */
     @JsonProperty(value = "storageContainerUrl")
     private String storageContainerUrl;
 
     /*
      * The autoStorageContainerName, storageContainerUrl and httpUrl properties
-     * are mutually exclusive and one of them must be specified. If the URL is
-     * Azure Blob Storage, it must be readable using anonymous access; that is,
-     * the Batch service does not present any credentials when downloading the
-     * blob. There are two ways to get such a URL for a blob in Azure storage:
+     * are mutually exclusive and one of them must be specified. If the URL
+     * points to Azure Blob Storage, it must be readable from compute nodes.
+     * There are three ways to get such a URL for a blob in Azure storage:
      * include a Shared Access Signature (SAS) granting read permissions on the
-     * blob, or set the ACL for the blob or its container to allow public
-     * access.
+     * blob, use a managed identity with read permission, or set the ACL for
+     * the blob or its container to allow public access.
      */
     @JsonProperty(value = "httpUrl")
     private String httpUrl;
@@ -79,6 +77,13 @@ public final class ResourceFile {
     @JsonProperty(value = "fileMode")
     private String fileMode;
 
+    /*
+     * The reference to a user assigned identity associated with the Batch pool
+     * which a compute node will use.
+     */
+    @JsonProperty(value = "identityReference")
+    private ComputeNodeIdentityReference identityReference;
+
     /**
      * Get the autoStorageContainerName property: The autoStorageContainerName, storageContainerUrl and httpUrl
      * properties are mutually exclusive and one of them must be specified.
@@ -103,10 +108,10 @@ public final class ResourceFile {
 
     /**
      * Get the storageContainerUrl property: The autoStorageContainerName, storageContainerUrl and httpUrl properties
-     * are mutually exclusive and one of them must be specified. This URL must be readable and listable using anonymous
-     * access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways
-     * to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read and list
-     * permissions on the blob, or set the ACL for the blob or its container to allow public access.
+     * are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute
+     * nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature
+     * (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions,
+     * or set the ACL for the container to allow public access.
      *
      * @return the storageContainerUrl value.
      */
@@ -116,10 +121,10 @@ public final class ResourceFile {
 
     /**
      * Set the storageContainerUrl property: The autoStorageContainerName, storageContainerUrl and httpUrl properties
-     * are mutually exclusive and one of them must be specified. This URL must be readable and listable using anonymous
-     * access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways
-     * to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read and list
-     * permissions on the blob, or set the ACL for the blob or its container to allow public access.
+     * are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute
+     * nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature
+     * (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions,
+     * or set the ACL for the container to allow public access.
      *
      * @param storageContainerUrl the storageContainerUrl value to set.
      * @return the ResourceFile object itself.
@@ -131,10 +136,10 @@ public final class ResourceFile {
 
     /**
      * Get the httpUrl property: The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually
-     * exclusive and one of them must be specified. If the URL is Azure Blob Storage, it must be readable using
-     * anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There
-     * are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read
-     * permissions on the blob, or set the ACL for the blob or its container to allow public access.
+     * exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from
+     * compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access
+     * Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the
+     * ACL for the blob or its container to allow public access.
      *
      * @return the httpUrl value.
      */
@@ -144,10 +149,10 @@ public final class ResourceFile {
 
     /**
      * Set the httpUrl property: The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually
-     * exclusive and one of them must be specified. If the URL is Azure Blob Storage, it must be readable using
-     * anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There
-     * are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read
-     * permissions on the blob, or set the ACL for the blob or its container to allow public access.
+     * exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from
+     * compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access
+     * Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the
+     * ACL for the blob or its container to allow public access.
      *
      * @param httpUrl the httpUrl value to set.
      * @return the ResourceFile object itself.
@@ -236,10 +241,35 @@ public final class ResourceFile {
     }
 
     /**
+     * Get the identityReference property: The reference to a user assigned identity associated with the Batch pool
+     * which a compute node will use.
+     *
+     * @return the identityReference value.
+     */
+    public ComputeNodeIdentityReference identityReference() {
+        return this.identityReference;
+    }
+
+    /**
+     * Set the identityReference property: The reference to a user assigned identity associated with the Batch pool
+     * which a compute node will use.
+     *
+     * @param identityReference the identityReference value to set.
+     * @return the ResourceFile object itself.
+     */
+    public ResourceFile withIdentityReference(ComputeNodeIdentityReference identityReference) {
+        this.identityReference = identityReference;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (identityReference() != null) {
+            identityReference().validate();
+        }
     }
 }
