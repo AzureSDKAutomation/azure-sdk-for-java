@@ -4,85 +4,55 @@
 
 package com.azure.resourcemanager.databoxedge.models;
 
-import com.azure.resourcemanager.databoxedge.fluent.models.ResourceTypeSkuInner;
+import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** An immutable client-side representation of ResourceTypeSku. */
-public interface ResourceTypeSku {
+/** Resource type Sku object. */
+@Immutable
+public final class ResourceTypeSku {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ResourceTypeSku.class);
+
+    /*
+     * The resource type.
+     */
+    @JsonProperty(value = "resourceType", access = JsonProperty.Access.WRITE_ONLY)
+    private String resourceType;
+
+    /*
+     * The skus.
+     */
+    @JsonProperty(value = "skus", access = JsonProperty.Access.WRITE_ONLY)
+    private List<SkuInformation> skus;
+
     /**
-     * Gets the resourceType property: The type of the resource.
+     * Get the resourceType property: The resource type.
      *
      * @return the resourceType value.
      */
-    String resourceType();
+    public String resourceType() {
+        return this.resourceType;
+    }
 
     /**
-     * Gets the name property: The Sku name.
+     * Get the skus property: The skus.
      *
-     * @return the name value.
+     * @return the skus value.
      */
-    SkuName name();
+    public List<SkuInformation> skus() {
+        return this.skus;
+    }
 
     /**
-     * Gets the kind property: The Sku kind.
+     * Validates the instance.
      *
-     * @return the kind value.
+     * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    String kind();
-
-    /**
-     * Gets the tier property: The Sku tier.
-     *
-     * @return the tier value.
-     */
-    SkuTier tier();
-
-    /**
-     * Gets the family property: The Sku family.
-     *
-     * @return the family value.
-     */
-    String family();
-
-    /**
-     * Gets the locations property: Availability of the SKU for the region.
-     *
-     * @return the locations value.
-     */
-    List<String> locations();
-
-    /**
-     * Gets the apiVersions property: The API versions in which SKU is available.
-     *
-     * @return the apiVersions value.
-     */
-    List<String> apiVersions();
-
-    /**
-     * Gets the locationInfo property: Availability of the SKU for the location/zone.
-     *
-     * @return the locationInfo value.
-     */
-    List<SkuLocationInfo> locationInfo();
-
-    /**
-     * Gets the costs property: The pricing info of the Sku.
-     *
-     * @return the costs value.
-     */
-    List<SkuCost> costs();
-
-    /**
-     * Gets the restrictions property: Restrictions of the SKU availability.
-     *
-     * @return the restrictions value.
-     */
-    List<SkuRestriction> restrictions();
-
-    /**
-     * Gets the inner com.azure.resourcemanager.databoxedge.fluent.models.ResourceTypeSkuInner object.
-     *
-     * @return the inner object.
-     */
-    ResourceTypeSkuInner innerModel();
+    public void validate() {
+        if (skus() != null) {
+            skus().forEach(e -> e.validate());
+        }
+    }
 }

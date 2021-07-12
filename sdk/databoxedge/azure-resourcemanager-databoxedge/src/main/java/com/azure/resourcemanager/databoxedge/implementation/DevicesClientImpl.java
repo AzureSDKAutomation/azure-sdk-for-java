@@ -37,9 +37,11 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.databoxedge.fluent.DevicesClient;
 import com.azure.resourcemanager.databoxedge.fluent.models.DataBoxEdgeDeviceExtendedInfoInner;
 import com.azure.resourcemanager.databoxedge.fluent.models.DataBoxEdgeDeviceInner;
+import com.azure.resourcemanager.databoxedge.fluent.models.GenerateCertResponseInner;
 import com.azure.resourcemanager.databoxedge.fluent.models.NetworkSettingsInner;
 import com.azure.resourcemanager.databoxedge.fluent.models.UpdateSummaryInner;
 import com.azure.resourcemanager.databoxedge.fluent.models.UploadCertificateResponseInner;
+import com.azure.resourcemanager.databoxedge.models.DataBoxEdgeDeviceExtendedInfoPatch;
 import com.azure.resourcemanager.databoxedge.models.DataBoxEdgeDeviceList;
 import com.azure.resourcemanager.databoxedge.models.DataBoxEdgeDevicePatch;
 import com.azure.resourcemanager.databoxedge.models.SecuritySettings;
@@ -123,7 +125,7 @@ public final class DevicesClientImpl implements DevicesClient {
                 + "/dataBoxEdgeDevices/{deviceName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> createOrUpdate(
+        Mono<Response<DataBoxEdgeDeviceInner>> createOrUpdate(
             @HostParam("$host") String endpoint,
             @PathParam("deviceName") String deviceName,
             @PathParam("subscriptionId") String subscriptionId,
@@ -171,6 +173,21 @@ public final class DevicesClientImpl implements DevicesClient {
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> downloadUpdates(
+            @HostParam("$host") String endpoint,
+            @PathParam("deviceName") String deviceName,
+            @PathParam("subscriptionId") String subscriptionId,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Post(
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge"
+                + "/dataBoxEdgeDevices/{deviceName}/generateCertificate")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<GenerateCertResponseInner>> generateCertificate(
             @HostParam("$host") String endpoint,
             @PathParam("deviceName") String deviceName,
             @PathParam("subscriptionId") String subscriptionId,
@@ -252,6 +269,22 @@ public final class DevicesClientImpl implements DevicesClient {
             @PathParam("resourceGroupName") String resourceGroupName,
             @QueryParam("api-version") String apiVersion,
             @BodyParam("application/json") SecuritySettings securitySettings,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Post(
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge"
+                + "/dataBoxEdgeDevices/{deviceName}/updateExtendedInformation")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<DataBoxEdgeDeviceExtendedInfoInner>> updateExtendedInformation(
+            @HostParam("$host") String endpoint,
+            @PathParam("deviceName") String deviceName,
+            @PathParam("subscriptionId") String subscriptionId,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") DataBoxEdgeDeviceExtendedInfoPatch parameters,
             @HeaderParam("Accept") String accept,
             Context context);
 
@@ -835,7 +868,7 @@ public final class DevicesClientImpl implements DevicesClient {
      * @return the Data Box Edge/Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(
+    private Mono<Response<DataBoxEdgeDeviceInner>> createOrUpdateWithResponseAsync(
         String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -892,7 +925,7 @@ public final class DevicesClientImpl implements DevicesClient {
      * @return the Data Box Edge/Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(
+    private Mono<Response<DataBoxEdgeDeviceInner>> createOrUpdateWithResponseAsync(
         String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -945,120 +978,17 @@ public final class DevicesClientImpl implements DevicesClient {
      * @return the Data Box Edge/Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private PollerFlux<PollResult<DataBoxEdgeDeviceInner>, DataBoxEdgeDeviceInner> beginCreateOrUpdateAsync(
-        String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice) {
-        Mono<Response<Flux<ByteBuffer>>> mono =
-            createOrUpdateWithResponseAsync(deviceName, resourceGroupName, dataBoxEdgeDevice);
-        return this
-            .client
-            .<DataBoxEdgeDeviceInner, DataBoxEdgeDeviceInner>getLroResult(
-                mono,
-                this.client.getHttpPipeline(),
-                DataBoxEdgeDeviceInner.class,
-                DataBoxEdgeDeviceInner.class,
-                Context.NONE);
-    }
-
-    /**
-     * Creates or updates a Data Box Edge/Data Box Gateway resource.
-     *
-     * @param deviceName The device name.
-     * @param resourceGroupName The resource group name.
-     * @param dataBoxEdgeDevice The resource object.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Data Box Edge/Gateway device.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private PollerFlux<PollResult<DataBoxEdgeDeviceInner>, DataBoxEdgeDeviceInner> beginCreateOrUpdateAsync(
-        String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice, Context context) {
-        context = this.client.mergeContext(context);
-        Mono<Response<Flux<ByteBuffer>>> mono =
-            createOrUpdateWithResponseAsync(deviceName, resourceGroupName, dataBoxEdgeDevice, context);
-        return this
-            .client
-            .<DataBoxEdgeDeviceInner, DataBoxEdgeDeviceInner>getLroResult(
-                mono,
-                this.client.getHttpPipeline(),
-                DataBoxEdgeDeviceInner.class,
-                DataBoxEdgeDeviceInner.class,
-                context);
-    }
-
-    /**
-     * Creates or updates a Data Box Edge/Data Box Gateway resource.
-     *
-     * @param deviceName The device name.
-     * @param resourceGroupName The resource group name.
-     * @param dataBoxEdgeDevice The resource object.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Data Box Edge/Gateway device.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SyncPoller<PollResult<DataBoxEdgeDeviceInner>, DataBoxEdgeDeviceInner> beginCreateOrUpdate(
-        String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice) {
-        return beginCreateOrUpdateAsync(deviceName, resourceGroupName, dataBoxEdgeDevice).getSyncPoller();
-    }
-
-    /**
-     * Creates or updates a Data Box Edge/Data Box Gateway resource.
-     *
-     * @param deviceName The device name.
-     * @param resourceGroupName The resource group name.
-     * @param dataBoxEdgeDevice The resource object.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Data Box Edge/Gateway device.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SyncPoller<PollResult<DataBoxEdgeDeviceInner>, DataBoxEdgeDeviceInner> beginCreateOrUpdate(
-        String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice, Context context) {
-        return beginCreateOrUpdateAsync(deviceName, resourceGroupName, dataBoxEdgeDevice, context).getSyncPoller();
-    }
-
-    /**
-     * Creates or updates a Data Box Edge/Data Box Gateway resource.
-     *
-     * @param deviceName The device name.
-     * @param resourceGroupName The resource group name.
-     * @param dataBoxEdgeDevice The resource object.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Data Box Edge/Gateway device.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<DataBoxEdgeDeviceInner> createOrUpdateAsync(
         String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice) {
-        return beginCreateOrUpdateAsync(deviceName, resourceGroupName, dataBoxEdgeDevice)
-            .last()
-            .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Creates or updates a Data Box Edge/Data Box Gateway resource.
-     *
-     * @param deviceName The device name.
-     * @param resourceGroupName The resource group name.
-     * @param dataBoxEdgeDevice The resource object.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Data Box Edge/Gateway device.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<DataBoxEdgeDeviceInner> createOrUpdateAsync(
-        String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice, Context context) {
-        return beginCreateOrUpdateAsync(deviceName, resourceGroupName, dataBoxEdgeDevice, context)
-            .last()
-            .flatMap(this.client::getLroFinalResultOrError);
+        return createOrUpdateWithResponseAsync(deviceName, resourceGroupName, dataBoxEdgeDevice)
+            .flatMap(
+                (Response<DataBoxEdgeDeviceInner> res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
     }
 
     /**
@@ -1091,9 +1021,9 @@ public final class DevicesClientImpl implements DevicesClient {
      * @return the Data Box Edge/Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DataBoxEdgeDeviceInner createOrUpdate(
+    public Response<DataBoxEdgeDeviceInner> createOrUpdateWithResponse(
         String deviceName, String resourceGroupName, DataBoxEdgeDeviceInner dataBoxEdgeDevice, Context context) {
-        return createOrUpdateAsync(deviceName, resourceGroupName, dataBoxEdgeDevice, context).block();
+        return createOrUpdateWithResponseAsync(deviceName, resourceGroupName, dataBoxEdgeDevice, context).block();
     }
 
     /**
@@ -1721,14 +1651,163 @@ public final class DevicesClientImpl implements DevicesClient {
     }
 
     /**
-     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     * Generates certificate for activation key.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     * @return used in activation key generation flow.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<GenerateCertResponseInner>> generateCertificateWithResponseAsync(
+        String deviceName, String resourceGroupName) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (deviceName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter deviceName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .generateCertificate(
+                            this.client.getEndpoint(),
+                            deviceName,
+                            this.client.getSubscriptionId(),
+                            resourceGroupName,
+                            this.client.getApiVersion(),
+                            accept,
+                            context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Generates certificate for activation key.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return used in activation key generation flow.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<GenerateCertResponseInner>> generateCertificateWithResponseAsync(
+        String deviceName, String resourceGroupName, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (deviceName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter deviceName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .generateCertificate(
+                this.client.getEndpoint(),
+                deviceName,
+                this.client.getSubscriptionId(),
+                resourceGroupName,
+                this.client.getApiVersion(),
+                accept,
+                context);
+    }
+
+    /**
+     * Generates certificate for activation key.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return used in activation key generation flow.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<GenerateCertResponseInner> generateCertificateAsync(String deviceName, String resourceGroupName) {
+        return generateCertificateWithResponseAsync(deviceName, resourceGroupName)
+            .flatMap(
+                (Response<GenerateCertResponseInner> res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
+    }
+
+    /**
+     * Generates certificate for activation key.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return used in activation key generation flow.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public GenerateCertResponseInner generateCertificate(String deviceName, String resourceGroupName) {
+        return generateCertificateAsync(deviceName, resourceGroupName).block();
+    }
+
+    /**
+     * Generates certificate for activation key.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return used in activation key generation flow.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<GenerateCertResponseInner> generateCertificateWithResponse(
+        String deviceName, String resourceGroupName, Context context) {
+        return generateCertificateWithResponseAsync(deviceName, resourceGroupName, context).block();
+    }
+
+    /**
+     * Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return additional information for the specified Azure Stack Edge/Data Box Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<DataBoxEdgeDeviceExtendedInfoInner>> getExtendedInformationWithResponseAsync(
@@ -1769,7 +1848,7 @@ public final class DevicesClientImpl implements DevicesClient {
     }
 
     /**
-     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     * Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
@@ -1777,7 +1856,7 @@ public final class DevicesClientImpl implements DevicesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     * @return additional information for the specified Azure Stack Edge/Data Box Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<DataBoxEdgeDeviceExtendedInfoInner>> getExtendedInformationWithResponseAsync(
@@ -1815,14 +1894,14 @@ public final class DevicesClientImpl implements DevicesClient {
     }
 
     /**
-     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     * Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     * @return additional information for the specified Azure Stack Edge/Data Box Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<DataBoxEdgeDeviceExtendedInfoInner> getExtendedInformationAsync(
@@ -1839,14 +1918,14 @@ public final class DevicesClientImpl implements DevicesClient {
     }
 
     /**
-     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     * Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     * @return additional information for the specified Azure Stack Edge/Data Box Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DataBoxEdgeDeviceExtendedInfoInner getExtendedInformation(String deviceName, String resourceGroupName) {
@@ -1854,7 +1933,7 @@ public final class DevicesClientImpl implements DevicesClient {
     }
 
     /**
-     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     * Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.
      *
      * @param deviceName The device name.
      * @param resourceGroupName The resource group name.
@@ -1862,7 +1941,7 @@ public final class DevicesClientImpl implements DevicesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     * @return additional information for the specified Azure Stack Edge/Data Box Gateway device.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DataBoxEdgeDeviceExtendedInfoInner> getExtendedInformationWithResponse(
@@ -2738,6 +2817,174 @@ public final class DevicesClientImpl implements DevicesClient {
     public void createOrUpdateSecuritySettings(
         String deviceName, String resourceGroupName, SecuritySettings securitySettings, Context context) {
         createOrUpdateSecuritySettingsAsync(deviceName, resourceGroupName, securitySettings, context).block();
+    }
+
+    /**
+     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @param parameters The patch object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<DataBoxEdgeDeviceExtendedInfoInner>> updateExtendedInformationWithResponseAsync(
+        String deviceName, String resourceGroupName, DataBoxEdgeDeviceExtendedInfoPatch parameters) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (deviceName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter deviceName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (parameters == null) {
+            return Mono.error(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
+        } else {
+            parameters.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .updateExtendedInformation(
+                            this.client.getEndpoint(),
+                            deviceName,
+                            this.client.getSubscriptionId(),
+                            resourceGroupName,
+                            this.client.getApiVersion(),
+                            parameters,
+                            accept,
+                            context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @param parameters The patch object.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<DataBoxEdgeDeviceExtendedInfoInner>> updateExtendedInformationWithResponseAsync(
+        String deviceName, String resourceGroupName, DataBoxEdgeDeviceExtendedInfoPatch parameters, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (deviceName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter deviceName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (parameters == null) {
+            return Mono.error(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
+        } else {
+            parameters.validate();
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .updateExtendedInformation(
+                this.client.getEndpoint(),
+                deviceName,
+                this.client.getSubscriptionId(),
+                resourceGroupName,
+                this.client.getApiVersion(),
+                parameters,
+                accept,
+                context);
+    }
+
+    /**
+     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @param parameters The patch object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<DataBoxEdgeDeviceExtendedInfoInner> updateExtendedInformationAsync(
+        String deviceName, String resourceGroupName, DataBoxEdgeDeviceExtendedInfoPatch parameters) {
+        return updateExtendedInformationWithResponseAsync(deviceName, resourceGroupName, parameters)
+            .flatMap(
+                (Response<DataBoxEdgeDeviceExtendedInfoInner> res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
+    }
+
+    /**
+     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @param parameters The patch object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DataBoxEdgeDeviceExtendedInfoInner updateExtendedInformation(
+        String deviceName, String resourceGroupName, DataBoxEdgeDeviceExtendedInfoPatch parameters) {
+        return updateExtendedInformationAsync(deviceName, resourceGroupName, parameters).block();
+    }
+
+    /**
+     * Gets additional information for the specified Data Box Edge/Data Box Gateway device.
+     *
+     * @param deviceName The device name.
+     * @param resourceGroupName The resource group name.
+     * @param parameters The patch object.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return additional information for the specified Data Box Edge/Data Box Gateway device.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DataBoxEdgeDeviceExtendedInfoInner> updateExtendedInformationWithResponse(
+        String deviceName, String resourceGroupName, DataBoxEdgeDeviceExtendedInfoPatch parameters, Context context) {
+        return updateExtendedInformationWithResponseAsync(deviceName, resourceGroupName, parameters, context).block();
     }
 
     /**

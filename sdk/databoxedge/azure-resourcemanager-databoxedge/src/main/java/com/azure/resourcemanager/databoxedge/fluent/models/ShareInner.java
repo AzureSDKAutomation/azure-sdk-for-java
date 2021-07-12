@@ -6,6 +6,7 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
 import com.azure.resourcemanager.databoxedge.models.AzureContainerInfo;
@@ -26,6 +27,12 @@ import java.util.List;
 @Fluent
 public class ShareInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ShareInner.class);
+
+    /*
+     * Share on ASE device
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * Description for the share.
@@ -88,6 +95,15 @@ public class ShareInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.dataPolicy")
     private DataPolicy dataPolicy;
+
+    /**
+     * Get the systemData property: Share on ASE device.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the description property: Description for the share.
