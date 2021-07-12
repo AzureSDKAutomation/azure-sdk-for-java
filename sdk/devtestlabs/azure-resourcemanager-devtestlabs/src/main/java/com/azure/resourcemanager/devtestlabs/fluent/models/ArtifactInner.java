@@ -4,7 +4,7 @@
 
 package com.azure.resourcemanager.devtestlabs.fluent.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
 import com.azure.core.util.logging.ClientLogger;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 /** An artifact. */
 @JsonFlatten
-@Immutable
+@Fluent
 public class ArtifactInner extends Resource {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ArtifactInner.class);
 
