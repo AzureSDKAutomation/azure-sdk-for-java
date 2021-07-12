@@ -9,7 +9,7 @@ import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The CertificateBaseProperties model. */
+/** Base certificate properties. */
 @Fluent
 public class CertificateBaseProperties {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(CertificateBaseProperties.class);
