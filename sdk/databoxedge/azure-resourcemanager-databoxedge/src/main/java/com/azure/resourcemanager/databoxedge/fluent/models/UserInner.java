@@ -6,6 +6,7 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
 import com.azure.resourcemanager.databoxedge.models.AsymmetricEncryptedSecret;
@@ -22,6 +23,12 @@ public class UserInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(UserInner.class);
 
     /*
+     * User in DataBoxEdge Resource
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
+
+    /*
      * The password details.
      */
     @JsonProperty(value = "properties.encryptedPassword")
@@ -31,7 +38,7 @@ public class UserInner extends ArmBaseModel {
      * List of shares that the user has rights on. This field should not be
      * specified during user creation.
      */
-    @JsonProperty(value = "properties.shareAccessRights")
+    @JsonProperty(value = "properties.shareAccessRights", access = JsonProperty.Access.WRITE_ONLY)
     private List<ShareAccessRight> shareAccessRights;
 
     /*
@@ -39,6 +46,15 @@ public class UserInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.userType", required = true)
     private UserType userType;
+
+    /**
+     * Get the systemData property: User in DataBoxEdge Resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the encryptedPassword property: The password details.
@@ -68,18 +84,6 @@ public class UserInner extends ArmBaseModel {
      */
     public List<ShareAccessRight> shareAccessRights() {
         return this.shareAccessRights;
-    }
-
-    /**
-     * Set the shareAccessRights property: List of shares that the user has rights on. This field should not be
-     * specified during user creation.
-     *
-     * @param shareAccessRights the shareAccessRights value to set.
-     * @return the UserInner object itself.
-     */
-    public UserInner withShareAccessRights(List<ShareAccessRight> shareAccessRights) {
-        this.shareAccessRights = shareAccessRights;
-        return this;
     }
 
     /**

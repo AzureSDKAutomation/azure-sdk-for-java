@@ -6,10 +6,16 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
+import com.azure.resourcemanager.databoxedge.models.DataBoxEdgeDeviceKind;
 import com.azure.resourcemanager.databoxedge.models.DataBoxEdgeDeviceStatus;
+import com.azure.resourcemanager.databoxedge.models.DataResidency;
 import com.azure.resourcemanager.databoxedge.models.DeviceType;
+import com.azure.resourcemanager.databoxedge.models.EdgeProfile;
+import com.azure.resourcemanager.databoxedge.models.ResourceIdentity;
+import com.azure.resourcemanager.databoxedge.models.ResourceMoveDetails;
 import com.azure.resourcemanager.databoxedge.models.RoleTypes;
 import com.azure.resourcemanager.databoxedge.models.Sku;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -53,6 +59,30 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
     private String etag;
 
     /*
+     * Msi identity of the resource
+     */
+    @JsonProperty(value = "identity")
+    private ResourceIdentity identity;
+
+    /*
+     * The kind of the device.
+     */
+    @JsonProperty(value = "kind")
+    private DataBoxEdgeDeviceKind kind;
+
+    /*
+     * DataBoxEdge Resource
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
+
+    /*
+     * DataBoxEdge Device Properties
+     */
+    @JsonProperty(value = "properties.systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemDataPropertiesSystemData;
+
+    /*
      * The status of the Data Box Edge/Gateway device.
      */
     @JsonProperty(value = "properties.dataBoxEdgeDeviceStatus")
@@ -67,13 +97,13 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
     /*
      * The Description of the Data Box Edge/Gateway device.
      */
-    @JsonProperty(value = "properties.description")
+    @JsonProperty(value = "properties.description", access = JsonProperty.Access.WRITE_ONLY)
     private String description;
 
     /*
      * The description of the Data Box Edge/Gateway device model.
      */
-    @JsonProperty(value = "properties.modelDescription")
+    @JsonProperty(value = "properties.modelDescription", access = JsonProperty.Access.WRITE_ONLY)
     private String modelDescription;
 
     /*
@@ -85,7 +115,7 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
     /*
      * The Data Box Edge/Gateway device name.
      */
-    @JsonProperty(value = "properties.friendlyName")
+    @JsonProperty(value = "properties.friendlyName", access = JsonProperty.Access.WRITE_ONLY)
     private String friendlyName;
 
     /*
@@ -135,6 +165,24 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.nodeCount", access = JsonProperty.Access.WRITE_ONLY)
     private Integer nodeCount;
+
+    /*
+     * The details of the move operation on this resource.
+     */
+    @JsonProperty(value = "properties.resourceMoveDetails", access = JsonProperty.Access.WRITE_ONLY)
+    private ResourceMoveDetails resourceMoveDetails;
+
+    /*
+     * The details of Edge Profile for this resource
+     */
+    @JsonProperty(value = "properties.edgeProfile", access = JsonProperty.Access.WRITE_ONLY)
+    private EdgeProfile edgeProfile;
+
+    /*
+     * The details of data-residency related properties for this resource
+     */
+    @JsonProperty(value = "properties.dataResidency")
+    private DataResidency dataResidency;
 
     /**
      * Get the location property: The location of the device. This is a supported and registered Azure geographical
@@ -223,6 +271,64 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
     }
 
     /**
+     * Get the identity property: Msi identity of the resource.
+     *
+     * @return the identity value.
+     */
+    public ResourceIdentity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: Msi identity of the resource.
+     *
+     * @param identity the identity value to set.
+     * @return the DataBoxEdgeDeviceInner object itself.
+     */
+    public DataBoxEdgeDeviceInner withIdentity(ResourceIdentity identity) {
+        this.identity = identity;
+        return this;
+    }
+
+    /**
+     * Get the kind property: The kind of the device.
+     *
+     * @return the kind value.
+     */
+    public DataBoxEdgeDeviceKind kind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: The kind of the device.
+     *
+     * @param kind the kind value to set.
+     * @return the DataBoxEdgeDeviceInner object itself.
+     */
+    public DataBoxEdgeDeviceInner withKind(DataBoxEdgeDeviceKind kind) {
+        this.kind = kind;
+        return this;
+    }
+
+    /**
+     * Get the systemData property: DataBoxEdge Resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
+
+    /**
+     * Get the systemDataPropertiesSystemData property: DataBoxEdge Device Properties.
+     *
+     * @return the systemDataPropertiesSystemData value.
+     */
+    public SystemData systemDataPropertiesSystemData() {
+        return this.systemDataPropertiesSystemData;
+    }
+
+    /**
      * Get the dataBoxEdgeDeviceStatus property: The status of the Data Box Edge/Gateway device.
      *
      * @return the dataBoxEdgeDeviceStatus value.
@@ -261,34 +367,12 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
     }
 
     /**
-     * Set the description property: The Description of the Data Box Edge/Gateway device.
-     *
-     * @param description the description value to set.
-     * @return the DataBoxEdgeDeviceInner object itself.
-     */
-    public DataBoxEdgeDeviceInner withDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    /**
      * Get the modelDescription property: The description of the Data Box Edge/Gateway device model.
      *
      * @return the modelDescription value.
      */
     public String modelDescription() {
         return this.modelDescription;
-    }
-
-    /**
-     * Set the modelDescription property: The description of the Data Box Edge/Gateway device model.
-     *
-     * @param modelDescription the modelDescription value to set.
-     * @return the DataBoxEdgeDeviceInner object itself.
-     */
-    public DataBoxEdgeDeviceInner withModelDescription(String modelDescription) {
-        this.modelDescription = modelDescription;
-        return this;
     }
 
     /**
@@ -307,17 +391,6 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
      */
     public String friendlyName() {
         return this.friendlyName;
-    }
-
-    /**
-     * Set the friendlyName property: The Data Box Edge/Gateway device name.
-     *
-     * @param friendlyName the friendlyName value to set.
-     * @return the DataBoxEdgeDeviceInner object itself.
-     */
-    public DataBoxEdgeDeviceInner withFriendlyName(String friendlyName) {
-        this.friendlyName = friendlyName;
-        return this;
     }
 
     /**
@@ -393,6 +466,44 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
     }
 
     /**
+     * Get the resourceMoveDetails property: The details of the move operation on this resource.
+     *
+     * @return the resourceMoveDetails value.
+     */
+    public ResourceMoveDetails resourceMoveDetails() {
+        return this.resourceMoveDetails;
+    }
+
+    /**
+     * Get the edgeProfile property: The details of Edge Profile for this resource.
+     *
+     * @return the edgeProfile value.
+     */
+    public EdgeProfile edgeProfile() {
+        return this.edgeProfile;
+    }
+
+    /**
+     * Get the dataResidency property: The details of data-residency related properties for this resource.
+     *
+     * @return the dataResidency value.
+     */
+    public DataResidency dataResidency() {
+        return this.dataResidency;
+    }
+
+    /**
+     * Set the dataResidency property: The details of data-residency related properties for this resource.
+     *
+     * @param dataResidency the dataResidency value to set.
+     * @return the DataBoxEdgeDeviceInner object itself.
+     */
+    public DataBoxEdgeDeviceInner withDataResidency(DataResidency dataResidency) {
+        this.dataResidency = dataResidency;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -407,6 +518,18 @@ public class DataBoxEdgeDeviceInner extends ArmBaseModel {
         }
         if (sku() != null) {
             sku().validate();
+        }
+        if (identity() != null) {
+            identity().validate();
+        }
+        if (resourceMoveDetails() != null) {
+            resourceMoveDetails().validate();
+        }
+        if (edgeProfile() != null) {
+            edgeProfile().validate();
+        }
+        if (dataResidency() != null) {
+            dataResidency().validate();
         }
     }
 }

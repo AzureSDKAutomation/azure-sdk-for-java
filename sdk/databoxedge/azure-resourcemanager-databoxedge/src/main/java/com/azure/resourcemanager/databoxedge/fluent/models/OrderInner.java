@@ -6,11 +6,13 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.Address;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
 import com.azure.resourcemanager.databoxedge.models.ContactDetails;
 import com.azure.resourcemanager.databoxedge.models.OrderStatus;
+import com.azure.resourcemanager.databoxedge.models.ShipmentType;
 import com.azure.resourcemanager.databoxedge.models.TrackingInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,6 +23,12 @@ import java.util.List;
 @Fluent
 public class OrderInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(OrderInner.class);
+
+    /*
+     * Order configured on ASE resource
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /*
      * The contact details.
@@ -37,7 +45,7 @@ public class OrderInner extends ArmBaseModel {
     /*
      * Current status of the order.
      */
-    @JsonProperty(value = "properties.currentStatus")
+    @JsonProperty(value = "properties.currentStatus", access = JsonProperty.Access.WRITE_ONLY)
     private OrderStatus currentStatus;
 
     /*
@@ -65,6 +73,21 @@ public class OrderInner extends ArmBaseModel {
      */
     @JsonProperty(value = "properties.returnTrackingInfo", access = JsonProperty.Access.WRITE_ONLY)
     private List<TrackingInfo> returnTrackingInfo;
+
+    /*
+     * ShipmentType of the order
+     */
+    @JsonProperty(value = "properties.shipmentType")
+    private ShipmentType shipmentType;
+
+    /**
+     * Get the systemData property: Order configured on ASE resource.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the contactInformation property: The contact details.
@@ -116,17 +139,6 @@ public class OrderInner extends ArmBaseModel {
     }
 
     /**
-     * Set the currentStatus property: Current status of the order.
-     *
-     * @param currentStatus the currentStatus value to set.
-     * @return the OrderInner object itself.
-     */
-    public OrderInner withCurrentStatus(OrderStatus currentStatus) {
-        this.currentStatus = currentStatus;
-        return this;
-    }
-
-    /**
      * Get the orderHistory property: List of status changes in the order.
      *
      * @return the orderHistory value.
@@ -162,6 +174,26 @@ public class OrderInner extends ArmBaseModel {
      */
     public List<TrackingInfo> returnTrackingInfo() {
         return this.returnTrackingInfo;
+    }
+
+    /**
+     * Get the shipmentType property: ShipmentType of the order.
+     *
+     * @return the shipmentType value.
+     */
+    public ShipmentType shipmentType() {
+        return this.shipmentType;
+    }
+
+    /**
+     * Set the shipmentType property: ShipmentType of the order.
+     *
+     * @param shipmentType the shipmentType value to set.
+     * @return the OrderInner object itself.
+     */
+    public OrderInner withShipmentType(ShipmentType shipmentType) {
+        this.shipmentType = shipmentType;
+        return this;
     }
 
     /**

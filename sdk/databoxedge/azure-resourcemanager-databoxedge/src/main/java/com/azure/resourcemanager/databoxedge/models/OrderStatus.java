@@ -35,6 +35,12 @@ public final class OrderStatus {
     private String comments;
 
     /*
+     * Tracking information related to the state in the ordering flow
+     */
+    @JsonProperty(value = "trackingInformation", access = JsonProperty.Access.WRITE_ONLY)
+    private TrackingInfo trackingInformation;
+
+    /*
      * Dictionary to hold generic information which is not stored
      * by the already existing properties
      */
@@ -91,6 +97,15 @@ public final class OrderStatus {
     }
 
     /**
+     * Get the trackingInformation property: Tracking information related to the state in the ordering flow.
+     *
+     * @return the trackingInformation value.
+     */
+    public TrackingInfo trackingInformation() {
+        return this.trackingInformation;
+    }
+
+    /**
      * Get the additionalOrderDetails property: Dictionary to hold generic information which is not stored by the
      * already existing properties.
      *
@@ -110,6 +125,9 @@ public final class OrderStatus {
             throw logger
                 .logExceptionAsError(
                     new IllegalArgumentException("Missing required property status in model OrderStatus"));
+        }
+        if (trackingInformation() != null) {
+            trackingInformation().validate();
         }
     }
 }

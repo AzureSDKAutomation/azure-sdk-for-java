@@ -6,6 +6,7 @@ package com.azure.resourcemanager.databoxedge.fluent.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.databoxedge.models.ArmBaseModel;
 import com.azure.resourcemanager.databoxedge.models.NetworkAdapter;
@@ -20,10 +21,25 @@ public class NetworkSettingsInner extends ArmBaseModel {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(NetworkSettingsInner.class);
 
     /*
+     * NetworkSettings on ASE device
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
+
+    /*
      * The network adapter list on the device.
      */
     @JsonProperty(value = "properties.networkAdapters", access = JsonProperty.Access.WRITE_ONLY)
     private List<NetworkAdapter> networkAdapters;
+
+    /**
+     * Get the systemData property: NetworkSettings on ASE device.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
 
     /**
      * Get the networkAdapters property: The network adapter list on the device.

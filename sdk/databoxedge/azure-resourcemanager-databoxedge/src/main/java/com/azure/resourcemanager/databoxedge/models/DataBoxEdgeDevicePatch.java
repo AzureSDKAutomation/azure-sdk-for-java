@@ -5,14 +5,16 @@
 package com.azure.resourcemanager.databoxedge.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /** The Data Box Edge/Gateway device patch. */
+@JsonFlatten
 @Fluent
-public final class DataBoxEdgeDevicePatch {
+public class DataBoxEdgeDevicePatch {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(DataBoxEdgeDevicePatch.class);
 
     /*
@@ -20,6 +22,18 @@ public final class DataBoxEdgeDevicePatch {
      */
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
+
+    /*
+     * Msi identity of the resource
+     */
+    @JsonProperty(value = "identity")
+    private ResourceIdentity identity;
+
+    /*
+     * Edge Profile property of the Data Box Edge/Gateway device
+     */
+    @JsonProperty(value = "properties.edgeProfile")
+    private EdgeProfilePatch edgeProfile;
 
     /**
      * Get the tags property: The tags attached to the Data Box Edge/Gateway resource.
@@ -42,10 +56,56 @@ public final class DataBoxEdgeDevicePatch {
     }
 
     /**
+     * Get the identity property: Msi identity of the resource.
+     *
+     * @return the identity value.
+     */
+    public ResourceIdentity identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: Msi identity of the resource.
+     *
+     * @param identity the identity value to set.
+     * @return the DataBoxEdgeDevicePatch object itself.
+     */
+    public DataBoxEdgeDevicePatch withIdentity(ResourceIdentity identity) {
+        this.identity = identity;
+        return this;
+    }
+
+    /**
+     * Get the edgeProfile property: Edge Profile property of the Data Box Edge/Gateway device.
+     *
+     * @return the edgeProfile value.
+     */
+    public EdgeProfilePatch edgeProfile() {
+        return this.edgeProfile;
+    }
+
+    /**
+     * Set the edgeProfile property: Edge Profile property of the Data Box Edge/Gateway device.
+     *
+     * @param edgeProfile the edgeProfile value to set.
+     * @return the DataBoxEdgeDevicePatch object itself.
+     */
+    public DataBoxEdgeDevicePatch withEdgeProfile(EdgeProfilePatch edgeProfile) {
+        this.edgeProfile = edgeProfile;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (identity() != null) {
+            identity().validate();
+        }
+        if (edgeProfile() != null) {
+            edgeProfile().validate();
+        }
     }
 }
