@@ -32,90 +32,88 @@ import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
-import com.azure.resourcemanager.kubernetesconfiguration.fluent.SourceControlConfigurationsClient;
-import com.azure.resourcemanager.kubernetesconfiguration.fluent.models.SourceControlConfigurationInner;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.ExtensionsClient;
+import com.azure.resourcemanager.kubernetesconfiguration.fluent.models.ExtensionInner;
 import com.azure.resourcemanager.kubernetesconfiguration.models.ExtensionsClusterResourceName;
 import com.azure.resourcemanager.kubernetesconfiguration.models.ExtensionsClusterRp;
-import com.azure.resourcemanager.kubernetesconfiguration.models.SourceControlConfigurationList;
+import com.azure.resourcemanager.kubernetesconfiguration.models.ExtensionsList;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in SourceControlConfigurationsClient. */
-public final class SourceControlConfigurationsClientImpl implements SourceControlConfigurationsClient {
-    private final ClientLogger logger = new ClientLogger(SourceControlConfigurationsClientImpl.class);
+/** An instance of this class provides access to all the operations defined in ExtensionsClient. */
+public final class ExtensionsClientImpl implements ExtensionsClient {
+    private final ClientLogger logger = new ClientLogger(ExtensionsClientImpl.class);
 
     /** The proxy service used to perform REST calls. */
-    private final SourceControlConfigurationsService service;
+    private final ExtensionsService service;
 
     /** The service client containing this operation class. */
     private final SourceControlConfigurationClientImpl client;
 
     /**
-     * Initializes an instance of SourceControlConfigurationsClientImpl.
+     * Initializes an instance of ExtensionsClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    SourceControlConfigurationsClientImpl(SourceControlConfigurationClientImpl client) {
+    ExtensionsClientImpl(SourceControlConfigurationClientImpl client) {
         this.service =
-            RestProxy
-                .create(
-                    SourceControlConfigurationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+            RestProxy.create(ExtensionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for SourceControlConfigurationClientSourceControlConfigurations to be
-     * used by the proxy service to perform REST calls.
+     * The interface defining all the services for SourceControlConfigurationClientExtensions to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "SourceControlConfigu")
-    private interface SourceControlConfigurationsService {
+    private interface ExtensionsService {
         @Headers({"Content-Type: application/json"})
-        @Get(
+        @Put(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}"
-                + "/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration"
-                + "/sourceControlConfigurations/{sourceControlConfigurationName}")
-        @ExpectedResponses({200})
+                + "/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions"
+                + "/{extensionName}")
+        @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SourceControlConfigurationInner>> get(
+        Mono<Response<Flux<ByteBuffer>>> create(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("clusterRp") ExtensionsClusterRp clusterRp,
             @PathParam("clusterResourceName") ExtensionsClusterResourceName clusterResourceName,
             @PathParam("clusterName") String clusterName,
-            @PathParam("sourceControlConfigurationName") String sourceControlConfigurationName,
+            @PathParam("extensionName") String extensionName,
             @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") ExtensionInner extension,
             @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({"Content-Type: application/json"})
-        @Put(
+        @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}"
-                + "/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration"
-                + "/sourceControlConfigurations/{sourceControlConfigurationName}")
-        @ExpectedResponses({200, 201})
+                + "/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions"
+                + "/{extensionName}")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SourceControlConfigurationInner>> createOrUpdate(
+        Mono<Response<ExtensionInner>> get(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("clusterRp") ExtensionsClusterRp clusterRp,
             @PathParam("clusterResourceName") ExtensionsClusterResourceName clusterResourceName,
             @PathParam("clusterName") String clusterName,
-            @PathParam("sourceControlConfigurationName") String sourceControlConfigurationName,
+            @PathParam("extensionName") String extensionName,
             @QueryParam("api-version") String apiVersion,
-            @BodyParam("application/json") SourceControlConfigurationInner sourceControlConfiguration,
             @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({"Content-Type: application/json"})
         @Delete(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}"
-                + "/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration"
-                + "/sourceControlConfigurations/{sourceControlConfigurationName}")
-        @ExpectedResponses({200, 204})
+                + "/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions"
+                + "/{extensionName}")
+        @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> delete(
             @HostParam("$host") String endpoint,
@@ -124,19 +122,19 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
             @PathParam("clusterRp") ExtensionsClusterRp clusterRp,
             @PathParam("clusterResourceName") ExtensionsClusterResourceName clusterResourceName,
             @PathParam("clusterName") String clusterName,
-            @PathParam("sourceControlConfigurationName") String sourceControlConfigurationName,
+            @PathParam("extensionName") String extensionName,
             @QueryParam("api-version") String apiVersion,
+            @QueryParam("forceDelete") Boolean forceDelete,
             @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({"Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}"
-                + "/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration"
-                + "/sourceControlConfigurations")
+                + "/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SourceControlConfigurationList>> list(
+        Mono<Response<ExtensionsList>> list(
             @HostParam("$host") String endpoint,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
@@ -151,7 +149,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SourceControlConfigurationList>> listNext(
+        Mono<Response<ExtensionsList>> listNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("$host") String endpoint,
             @HeaderParam("Accept") String accept,
@@ -159,7 +157,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
     }
 
     /**
-     * Gets details of the Source Control Configuration.
+     * Create a new Kubernetes Cluster Extension.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -167,19 +165,21 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details of the Source Control Configuration.
+     * @return the Extension object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SourceControlConfigurationInner>> getWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> createWithResponseAsync(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName) {
+        String extensionName,
+        ExtensionInner extension) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -206,11 +206,411 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         if (clusterName == null) {
             return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
         }
-        if (sourceControlConfigurationName == null) {
+        if (extensionName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionName is required and cannot be null."));
+        }
+        if (extension == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extension is required and cannot be null."));
+        } else {
+            extension.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .create(
+                            this.client.getEndpoint(),
+                            this.client.getSubscriptionId(),
+                            resourceGroupName,
+                            clusterRp,
+                            clusterResourceName,
+                            clusterName,
+                            extensionName,
+                            this.client.getApiVersion(),
+                            extension,
+                            accept,
+                            context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Flux<ByteBuffer>>> createWithResponseAsync(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension,
+        Context context) {
+        if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
-                        "Parameter sourceControlConfigurationName is required and cannot be null."));
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (clusterRp == null) {
+            return Mono.error(new IllegalArgumentException("Parameter clusterRp is required and cannot be null."));
+        }
+        if (clusterResourceName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter clusterResourceName is required and cannot be null."));
+        }
+        if (clusterName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
+        }
+        if (extensionName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionName is required and cannot be null."));
+        }
+        if (extension == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extension is required and cannot be null."));
+        } else {
+            extension.validate();
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .create(
+                this.client.getEndpoint(),
+                this.client.getSubscriptionId(),
+                resourceGroupName,
+                clusterRp,
+                clusterResourceName,
+                clusterName,
+                extensionName,
+                this.client.getApiVersion(),
+                extension,
+                accept,
+                context);
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<ExtensionInner>, ExtensionInner> beginCreateAsync(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension) {
+        Mono<Response<Flux<ByteBuffer>>> mono =
+            createWithResponseAsync(
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, extension);
+        return this
+            .client
+            .<ExtensionInner, ExtensionInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ExtensionInner.class, ExtensionInner.class, Context.NONE);
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PollerFlux<PollResult<ExtensionInner>, ExtensionInner> beginCreateAsync(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension,
+        Context context) {
+        context = this.client.mergeContext(context);
+        Mono<Response<Flux<ByteBuffer>>> mono =
+            createWithResponseAsync(
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, extension, context);
+        return this
+            .client
+            .<ExtensionInner, ExtensionInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ExtensionInner.class, ExtensionInner.class, context);
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<ExtensionInner>, ExtensionInner> beginCreate(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension) {
+        return beginCreateAsync(
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, extension)
+            .getSyncPoller();
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public SyncPoller<PollResult<ExtensionInner>, ExtensionInner> beginCreate(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension,
+        Context context) {
+        return beginCreateAsync(
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, extension, context)
+            .getSyncPoller();
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<ExtensionInner> createAsync(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension) {
+        return beginCreateAsync(
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, extension)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<ExtensionInner> createAsync(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension,
+        Context context) {
+        return beginCreateAsync(
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, extension, context)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ExtensionInner create(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension) {
+        return createAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, extension)
+            .block();
+    }
+
+    /**
+     * Create a new Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param extension Properties necessary to Create an Extension.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Extension object.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ExtensionInner create(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName,
+        ExtensionInner extension,
+        Context context) {
+        return createAsync(
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, extension, context)
+            .block();
+    }
+
+    /**
+     * Gets Kubernetes Cluster Extension.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return kubernetes Cluster Extension.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<ExtensionInner>> getWithResponseAsync(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName) {
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (clusterRp == null) {
+            return Mono.error(new IllegalArgumentException("Parameter clusterRp is required and cannot be null."));
+        }
+        if (clusterResourceName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter clusterResourceName is required and cannot be null."));
+        }
+        if (clusterName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
+        }
+        if (extensionName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionName is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil
@@ -224,7 +624,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
                             clusterRp,
                             clusterResourceName,
                             clusterName,
-                            sourceControlConfigurationName,
+                            extensionName,
                             this.client.getApiVersion(),
                             accept,
                             context))
@@ -232,7 +632,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
     }
 
     /**
-     * Gets details of the Source Control Configuration.
+     * Gets Kubernetes Cluster Extension.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -240,20 +640,20 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details of the Source Control Configuration.
+     * @return kubernetes Cluster Extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SourceControlConfigurationInner>> getWithResponseAsync(
+    private Mono<Response<ExtensionInner>> getWithResponseAsync(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
         Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -281,11 +681,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         if (clusterName == null) {
             return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
         }
-        if (sourceControlConfigurationName == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter sourceControlConfigurationName is required and cannot be null."));
+        if (extensionName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionName is required and cannot be null."));
         }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
@@ -297,14 +694,14 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
                 clusterRp,
                 clusterResourceName,
                 clusterName,
-                sourceControlConfigurationName,
+                extensionName,
                 this.client.getApiVersion(),
                 accept,
                 context);
     }
 
     /**
-     * Gets details of the Source Control Configuration.
+     * Gets Kubernetes Cluster Extension.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -312,23 +709,22 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details of the Source Control Configuration.
+     * @return kubernetes Cluster Extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SourceControlConfigurationInner> getAsync(
+    private Mono<ExtensionInner> getAsync(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName) {
-        return getWithResponseAsync(
-                resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName)
+        String extensionName) {
+        return getWithResponseAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName)
             .flatMap(
-                (Response<SourceControlConfigurationInner> res) -> {
+                (Response<ExtensionInner> res) -> {
                     if (res.getValue() != null) {
                         return Mono.just(res.getValue());
                     } else {
@@ -338,7 +734,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
     }
 
     /**
-     * Gets details of the Source Control Configuration.
+     * Gets Kubernetes Cluster Extension.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -346,25 +742,24 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details of the Source Control Configuration.
+     * @return kubernetes Cluster Extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SourceControlConfigurationInner get(
+    public ExtensionInner get(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName) {
-        return getAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName)
-            .block();
+        String extensionName) {
+        return getAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName).block();
     }
 
     /**
-     * Gets details of the Source Control Configuration.
+     * Gets Kubernetes Cluster Extension.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -372,28 +767,28 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details of the Source Control Configuration.
+     * @return kubernetes Cluster Extension.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<SourceControlConfigurationInner> getWithResponse(
+    public Response<ExtensionInner> getWithResponse(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
         Context context) {
         return getWithResponseAsync(
-                resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName, context)
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, context)
             .block();
     }
 
     /**
-     * Create a new Kubernetes Source Control Configuration.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -401,287 +796,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
-     * @param sourceControlConfiguration Properties necessary to Create KubernetesConfiguration.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the SourceControl Configuration object returned in Get &amp; Put response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SourceControlConfigurationInner>> createOrUpdateWithResponseAsync(
-        String resourceGroupName,
-        ExtensionsClusterRp clusterRp,
-        ExtensionsClusterResourceName clusterResourceName,
-        String clusterName,
-        String sourceControlConfigurationName,
-        SourceControlConfigurationInner sourceControlConfiguration) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (clusterRp == null) {
-            return Mono.error(new IllegalArgumentException("Parameter clusterRp is required and cannot be null."));
-        }
-        if (clusterResourceName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter clusterResourceName is required and cannot be null."));
-        }
-        if (clusterName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
-        }
-        if (sourceControlConfigurationName == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter sourceControlConfigurationName is required and cannot be null."));
-        }
-        if (sourceControlConfiguration == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter sourceControlConfiguration is required and cannot be null."));
-        } else {
-            sourceControlConfiguration.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(
-                context ->
-                    service
-                        .createOrUpdate(
-                            this.client.getEndpoint(),
-                            this.client.getSubscriptionId(),
-                            resourceGroupName,
-                            clusterRp,
-                            clusterResourceName,
-                            clusterName,
-                            sourceControlConfigurationName,
-                            this.client.getApiVersion(),
-                            sourceControlConfiguration,
-                            accept,
-                            context))
-            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
-    }
-
-    /**
-     * Create a new Kubernetes Source Control Configuration.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
-     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
-     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
-     *     connectedClusters (for OnPrem K8S clusters).
-     * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
-     * @param sourceControlConfiguration Properties necessary to Create KubernetesConfiguration.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the SourceControl Configuration object returned in Get &amp; Put response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SourceControlConfigurationInner>> createOrUpdateWithResponseAsync(
-        String resourceGroupName,
-        ExtensionsClusterRp clusterRp,
-        ExtensionsClusterResourceName clusterResourceName,
-        String clusterName,
-        String sourceControlConfigurationName,
-        SourceControlConfigurationInner sourceControlConfiguration,
-        Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (clusterRp == null) {
-            return Mono.error(new IllegalArgumentException("Parameter clusterRp is required and cannot be null."));
-        }
-        if (clusterResourceName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter clusterResourceName is required and cannot be null."));
-        }
-        if (clusterName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
-        }
-        if (sourceControlConfigurationName == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter sourceControlConfigurationName is required and cannot be null."));
-        }
-        if (sourceControlConfiguration == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter sourceControlConfiguration is required and cannot be null."));
-        } else {
-            sourceControlConfiguration.validate();
-        }
-        final String accept = "application/json";
-        context = this.client.mergeContext(context);
-        return service
-            .createOrUpdate(
-                this.client.getEndpoint(),
-                this.client.getSubscriptionId(),
-                resourceGroupName,
-                clusterRp,
-                clusterResourceName,
-                clusterName,
-                sourceControlConfigurationName,
-                this.client.getApiVersion(),
-                sourceControlConfiguration,
-                accept,
-                context);
-    }
-
-    /**
-     * Create a new Kubernetes Source Control Configuration.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
-     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
-     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
-     *     connectedClusters (for OnPrem K8S clusters).
-     * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
-     * @param sourceControlConfiguration Properties necessary to Create KubernetesConfiguration.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the SourceControl Configuration object returned in Get &amp; Put response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SourceControlConfigurationInner> createOrUpdateAsync(
-        String resourceGroupName,
-        ExtensionsClusterRp clusterRp,
-        ExtensionsClusterResourceName clusterResourceName,
-        String clusterName,
-        String sourceControlConfigurationName,
-        SourceControlConfigurationInner sourceControlConfiguration) {
-        return createOrUpdateWithResponseAsync(
-                resourceGroupName,
-                clusterRp,
-                clusterResourceName,
-                clusterName,
-                sourceControlConfigurationName,
-                sourceControlConfiguration)
-            .flatMap(
-                (Response<SourceControlConfigurationInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
-    }
-
-    /**
-     * Create a new Kubernetes Source Control Configuration.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
-     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
-     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
-     *     connectedClusters (for OnPrem K8S clusters).
-     * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
-     * @param sourceControlConfiguration Properties necessary to Create KubernetesConfiguration.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the SourceControl Configuration object returned in Get &amp; Put response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SourceControlConfigurationInner createOrUpdate(
-        String resourceGroupName,
-        ExtensionsClusterRp clusterRp,
-        ExtensionsClusterResourceName clusterResourceName,
-        String clusterName,
-        String sourceControlConfigurationName,
-        SourceControlConfigurationInner sourceControlConfiguration) {
-        return createOrUpdateAsync(
-                resourceGroupName,
-                clusterRp,
-                clusterResourceName,
-                clusterName,
-                sourceControlConfigurationName,
-                sourceControlConfiguration)
-            .block();
-    }
-
-    /**
-     * Create a new Kubernetes Source Control Configuration.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
-     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
-     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
-     *     connectedClusters (for OnPrem K8S clusters).
-     * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
-     * @param sourceControlConfiguration Properties necessary to Create KubernetesConfiguration.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the SourceControl Configuration object returned in Get &amp; Put response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<SourceControlConfigurationInner> createOrUpdateWithResponse(
-        String resourceGroupName,
-        ExtensionsClusterRp clusterRp,
-        ExtensionsClusterResourceName clusterResourceName,
-        String clusterName,
-        String sourceControlConfigurationName,
-        SourceControlConfigurationInner sourceControlConfiguration,
-        Context context) {
-        return createOrUpdateWithResponseAsync(
-                resourceGroupName,
-                clusterRp,
-                clusterResourceName,
-                clusterName,
-                sourceControlConfigurationName,
-                sourceControlConfiguration,
-                context)
-            .block();
-    }
-
-    /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
-     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
-     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
-     *     connectedClusters (for OnPrem K8S clusters).
-     * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -693,7 +809,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName) {
+        String extensionName,
+        Boolean forceDelete) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -720,11 +837,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         if (clusterName == null) {
             return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
         }
-        if (sourceControlConfigurationName == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter sourceControlConfigurationName is required and cannot be null."));
+        if (extensionName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionName is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil
@@ -738,16 +852,16 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
                             clusterRp,
                             clusterResourceName,
                             clusterName,
-                            sourceControlConfigurationName,
+                            extensionName,
                             this.client.getApiVersion(),
+                            forceDelete,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -755,7 +869,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -768,7 +883,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
+        Boolean forceDelete,
         Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -796,11 +912,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         if (clusterName == null) {
             return Mono.error(new IllegalArgumentException("Parameter clusterName is required and cannot be null."));
         }
-        if (sourceControlConfigurationName == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter sourceControlConfigurationName is required and cannot be null."));
+        if (extensionName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionName is required and cannot be null."));
         }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
@@ -812,15 +925,15 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
                 clusterRp,
                 clusterResourceName,
                 clusterName,
-                sourceControlConfigurationName,
+                extensionName,
                 this.client.getApiVersion(),
+                forceDelete,
                 accept,
                 context);
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -828,7 +941,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -840,18 +954,18 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName) {
+        String extensionName,
+        Boolean forceDelete) {
         Mono<Response<Flux<ByteBuffer>>> mono =
             deleteWithResponseAsync(
-                resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName);
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete);
         return this
             .client
             .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, Context.NONE);
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -859,7 +973,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -872,25 +987,20 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
+        Boolean forceDelete,
         Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono =
             deleteWithResponseAsync(
-                resourceGroupName,
-                clusterRp,
-                clusterResourceName,
-                clusterName,
-                sourceControlConfigurationName,
-                context);
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete, context);
         return this
             .client
             .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, context);
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -898,7 +1008,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -910,15 +1021,15 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName) {
+        String extensionName,
+        Boolean forceDelete) {
         return beginDeleteAsync(
-                resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName)
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete)
             .getSyncPoller();
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -926,7 +1037,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -939,16 +1051,16 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
+        Boolean forceDelete,
         Context context) {
         return beginDeleteAsync(
-                resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName, context)
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete, context)
             .getSyncPoller();
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -956,7 +1068,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -968,16 +1081,16 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName) {
+        String extensionName,
+        Boolean forceDelete) {
         return beginDeleteAsync(
-                resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName)
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -985,7 +1098,37 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the completion.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Void> deleteAsync(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName) {
+        final Boolean forceDelete = null;
+        return beginDeleteAsync(
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
+    }
+
+    /**
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -998,17 +1141,17 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
+        Boolean forceDelete,
         Context context) {
         return beginDeleteAsync(
-                resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName, context)
+                resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -1016,7 +1159,8 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1027,14 +1171,13 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName) {
-        deleteAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName)
-            .block();
+        String extensionName,
+        Boolean forceDelete) {
+        deleteAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete).block();
     }
 
     /**
-     * This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from
-     * the source repo.
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -1042,7 +1185,33 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
      *     connectedClusters (for OnPrem K8S clusters).
      * @param clusterName The name of the kubernetes cluster.
-     * @param sourceControlConfigurationName Name of the Source Control Configuration.
+     * @param extensionName Name of the Extension.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void delete(
+        String resourceGroupName,
+        ExtensionsClusterRp clusterRp,
+        ExtensionsClusterResourceName clusterResourceName,
+        String clusterName,
+        String extensionName) {
+        final Boolean forceDelete = null;
+        deleteAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete).block();
+    }
+
+    /**
+     * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
+     *
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
+     *     Microsoft.Kubernetes (for OnPrem K8S clusters).
+     * @param clusterResourceName The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or
+     *     connectedClusters (for OnPrem K8S clusters).
+     * @param clusterName The name of the kubernetes cluster.
+     * @param extensionName Name of the Extension.
+     * @param forceDelete Delete the extension resource in Azure - not the normal asynchronous delete.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1054,15 +1223,15 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
         String clusterName,
-        String sourceControlConfigurationName,
+        String extensionName,
+        Boolean forceDelete,
         Context context) {
-        deleteAsync(
-                resourceGroupName, clusterRp, clusterResourceName, clusterName, sourceControlConfigurationName, context)
+        deleteAsync(resourceGroupName, clusterRp, clusterResourceName, clusterName, extensionName, forceDelete, context)
             .block();
     }
 
     /**
-     * List all Source Control Configurations.
+     * List all Extensions in the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -1073,10 +1242,10 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SourceControlConfigurationInner>> listSinglePageAsync(
+    private Mono<PagedResponse<ExtensionInner>> listSinglePageAsync(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
@@ -1122,7 +1291,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
                             this.client.getApiVersion(),
                             accept,
                             context))
-            .<PagedResponse<SourceControlConfigurationInner>>map(
+            .<PagedResponse<ExtensionInner>>map(
                 res ->
                     new PagedResponseBase<>(
                         res.getRequest(),
@@ -1135,7 +1304,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
     }
 
     /**
-     * List all Source Control Configurations.
+     * List all Extensions in the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -1147,10 +1316,10 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SourceControlConfigurationInner>> listSinglePageAsync(
+    private Mono<PagedResponse<ExtensionInner>> listSinglePageAsync(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
@@ -1207,7 +1376,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
     }
 
     /**
-     * List all Source Control Configurations.
+     * List all Extensions in the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -1218,10 +1387,10 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<SourceControlConfigurationInner> listAsync(
+    private PagedFlux<ExtensionInner> listAsync(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
@@ -1232,7 +1401,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
     }
 
     /**
-     * List all Source Control Configurations.
+     * List all Extensions in the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -1244,10 +1413,10 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<SourceControlConfigurationInner> listAsync(
+    private PagedFlux<ExtensionInner> listAsync(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
@@ -1259,7 +1428,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
     }
 
     /**
-     * List all Source Control Configurations.
+     * List all Extensions in the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -1270,10 +1439,10 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<SourceControlConfigurationInner> list(
+    public PagedIterable<ExtensionInner> list(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
@@ -1282,7 +1451,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
     }
 
     /**
-     * List all Source Control Configurations.
+     * List all Extensions in the cluster.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param clusterRp The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or
@@ -1294,10 +1463,10 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<SourceControlConfigurationInner> list(
+    public PagedIterable<ExtensionInner> list(
         String resourceGroupName,
         ExtensionsClusterRp clusterRp,
         ExtensionsClusterResourceName clusterResourceName,
@@ -1313,10 +1482,10 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SourceControlConfigurationInner>> listNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<ExtensionInner>> listNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1329,7 +1498,7 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.listNext(nextLink, this.client.getEndpoint(), accept, context))
-            .<PagedResponse<SourceControlConfigurationInner>>map(
+            .<PagedResponse<ExtensionInner>>map(
                 res ->
                     new PagedResponseBase<>(
                         res.getRequest(),
@@ -1349,11 +1518,10 @@ public final class SourceControlConfigurationsClientImpl implements SourceContro
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the request to list Source Control Configurations.
+     * @return result of the request to list Extensions.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SourceControlConfigurationInner>> listNextSinglePageAsync(
-        String nextLink, Context context) {
+    private Mono<PagedResponse<ExtensionInner>> listNextSinglePageAsync(String nextLink, Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
