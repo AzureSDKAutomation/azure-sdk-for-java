@@ -6,7 +6,6 @@ package com.azure.resourcemanager.healthbot.implementation;
 
 import com.azure.core.management.Region;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.healthbot.HealthbotManager;
 import com.azure.resourcemanager.healthbot.fluent.models.HealthBotInner;
 import com.azure.resourcemanager.healthbot.models.HealthBot;
 import com.azure.resourcemanager.healthbot.models.HealthBotProperties;
@@ -18,7 +17,7 @@ import java.util.Map;
 public final class HealthBotImpl implements HealthBot, HealthBot.Definition, HealthBot.Update {
     private HealthBotInner innerObject;
 
-    private final HealthbotManager serviceManager;
+    private final com.azure.resourcemanager.healthbot.HealthbotManager serviceManager;
 
     public String id() {
         return this.innerModel().id();
@@ -65,7 +64,7 @@ public final class HealthBotImpl implements HealthBot, HealthBot.Definition, Hea
         return this.innerObject;
     }
 
-    private HealthbotManager manager() {
+    private com.azure.resourcemanager.healthbot.HealthbotManager manager() {
         return this.serviceManager;
     }
 
@@ -95,7 +94,7 @@ public final class HealthBotImpl implements HealthBot, HealthBot.Definition, Hea
         return this;
     }
 
-    HealthBotImpl(String name, HealthbotManager serviceManager) {
+    HealthBotImpl(String name, com.azure.resourcemanager.healthbot.HealthbotManager serviceManager) {
         this.innerObject = new HealthBotInner();
         this.serviceManager = serviceManager;
         this.botName = name;
@@ -126,7 +125,7 @@ public final class HealthBotImpl implements HealthBot, HealthBot.Definition, Hea
         return this;
     }
 
-    HealthBotImpl(HealthBotInner innerObject, HealthbotManager serviceManager) {
+    HealthBotImpl(HealthBotInner innerObject, com.azure.resourcemanager.healthbot.HealthbotManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
