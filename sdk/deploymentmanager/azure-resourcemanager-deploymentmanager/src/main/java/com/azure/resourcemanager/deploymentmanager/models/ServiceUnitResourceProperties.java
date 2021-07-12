@@ -4,12 +4,12 @@
 
 package com.azure.resourcemanager.deploymentmanager.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /** The properties that define the service unit. */
-@Immutable
+@Fluent
 public final class ServiceUnitResourceProperties extends ServiceUnitProperties {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ServiceUnitResourceProperties.class);
 

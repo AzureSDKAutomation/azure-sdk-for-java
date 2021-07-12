@@ -4,12 +4,12 @@
 
 package com.azure.resourcemanager.deploymentmanager.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /** The properties that define a service in a service topology. */
-@Immutable
+@Fluent
 public final class ServiceResourceProperties extends ServiceProperties {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(ServiceResourceProperties.class);
 

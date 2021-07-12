@@ -4,14 +4,14 @@
 
 package com.azure.resourcemanager.deploymentmanager.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The properties that define a rollout. */
-@Immutable
+@Fluent
 public final class RolloutProperties extends RolloutRequestProperties {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(RolloutProperties.class);
 
