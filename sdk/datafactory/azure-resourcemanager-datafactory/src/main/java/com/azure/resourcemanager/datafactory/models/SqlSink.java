@@ -61,6 +61,25 @@ public final class SqlSink extends CopySink {
     @JsonProperty(value = "tableOption")
     private Object tableOption;
 
+    /*
+     * Whether to use table lock during bulk copy. Type: boolean (or Expression
+     * with resultType boolean).
+     */
+    @JsonProperty(value = "sqlWriterUseTableLock")
+    private Object sqlWriterUseTableLock;
+
+    /*
+     * Any object
+     */
+    @JsonProperty(value = "writeBehavior")
+    private Object writeBehavior;
+
+    /*
+     * SQL upsert settings.
+     */
+    @JsonProperty(value = "upsertSettings")
+    private SqlUpsertSettings upsertSettings;
+
     /**
      * Get the sqlWriterStoredProcedureName property: SQL writer stored procedure name. Type: string (or Expression with
      * resultType string).
@@ -187,6 +206,68 @@ public final class SqlSink extends CopySink {
         return this;
     }
 
+    /**
+     * Get the sqlWriterUseTableLock property: Whether to use table lock during bulk copy. Type: boolean (or Expression
+     * with resultType boolean).
+     *
+     * @return the sqlWriterUseTableLock value.
+     */
+    public Object sqlWriterUseTableLock() {
+        return this.sqlWriterUseTableLock;
+    }
+
+    /**
+     * Set the sqlWriterUseTableLock property: Whether to use table lock during bulk copy. Type: boolean (or Expression
+     * with resultType boolean).
+     *
+     * @param sqlWriterUseTableLock the sqlWriterUseTableLock value to set.
+     * @return the SqlSink object itself.
+     */
+    public SqlSink withSqlWriterUseTableLock(Object sqlWriterUseTableLock) {
+        this.sqlWriterUseTableLock = sqlWriterUseTableLock;
+        return this;
+    }
+
+    /**
+     * Get the writeBehavior property: Any object.
+     *
+     * @return the writeBehavior value.
+     */
+    public Object writeBehavior() {
+        return this.writeBehavior;
+    }
+
+    /**
+     * Set the writeBehavior property: Any object.
+     *
+     * @param writeBehavior the writeBehavior value to set.
+     * @return the SqlSink object itself.
+     */
+    public SqlSink withWriteBehavior(Object writeBehavior) {
+        this.writeBehavior = writeBehavior;
+        return this;
+    }
+
+    /**
+     * Get the upsertSettings property: SQL upsert settings.
+     *
+     * @return the upsertSettings value.
+     */
+    public SqlUpsertSettings upsertSettings() {
+        return this.upsertSettings;
+    }
+
+    /**
+     * Set the upsertSettings property: SQL upsert settings.
+     *
+     * @param upsertSettings the upsertSettings value to set.
+     * @return the SqlSink object itself.
+     */
+    public SqlSink withUpsertSettings(SqlUpsertSettings upsertSettings) {
+        this.upsertSettings = upsertSettings;
+        return this;
+    }
+
     /** {@inheritDoc} */
     @Override
     public SqlSink withWriteBatchSize(Object writeBatchSize) {
@@ -246,6 +327,9 @@ public final class SqlSink extends CopySink {
                             e.validate();
                         }
                     });
+        }
+        if (upsertSettings() != null) {
+            upsertSettings().validate();
         }
     }
 }
