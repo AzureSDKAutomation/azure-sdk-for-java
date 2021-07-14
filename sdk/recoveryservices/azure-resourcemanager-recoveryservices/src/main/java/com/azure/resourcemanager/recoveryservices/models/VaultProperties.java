@@ -45,6 +45,24 @@ public final class VaultProperties {
     @JsonProperty(value = "privateEndpointStateForSiteRecovery", access = JsonProperty.Access.WRITE_ONLY)
     private VaultPrivateEndpointState privateEndpointStateForSiteRecovery;
 
+    /*
+     * Customer Managed Key details of the resource.
+     */
+    @JsonProperty(value = "encryption")
+    private VaultPropertiesEncryption encryption;
+
+    /*
+     * The details of the latest move operation performed on the Azure Resource
+     */
+    @JsonProperty(value = "moveDetails")
+    private VaultPropertiesMoveDetails moveDetails;
+
+    /*
+     * The State of the Resource after the move operation
+     */
+    @JsonProperty(value = "moveState", access = JsonProperty.Access.WRITE_ONLY)
+    private ResourceMoveState moveState;
+
     /**
      * Get the provisioningState property: Provisioning State.
      *
@@ -102,6 +120,55 @@ public final class VaultProperties {
     }
 
     /**
+     * Get the encryption property: Customer Managed Key details of the resource.
+     *
+     * @return the encryption value.
+     */
+    public VaultPropertiesEncryption encryption() {
+        return this.encryption;
+    }
+
+    /**
+     * Set the encryption property: Customer Managed Key details of the resource.
+     *
+     * @param encryption the encryption value to set.
+     * @return the VaultProperties object itself.
+     */
+    public VaultProperties withEncryption(VaultPropertiesEncryption encryption) {
+        this.encryption = encryption;
+        return this;
+    }
+
+    /**
+     * Get the moveDetails property: The details of the latest move operation performed on the Azure Resource.
+     *
+     * @return the moveDetails value.
+     */
+    public VaultPropertiesMoveDetails moveDetails() {
+        return this.moveDetails;
+    }
+
+    /**
+     * Set the moveDetails property: The details of the latest move operation performed on the Azure Resource.
+     *
+     * @param moveDetails the moveDetails value to set.
+     * @return the VaultProperties object itself.
+     */
+    public VaultProperties withMoveDetails(VaultPropertiesMoveDetails moveDetails) {
+        this.moveDetails = moveDetails;
+        return this;
+    }
+
+    /**
+     * Get the moveState property: The State of the Resource after the move operation.
+     *
+     * @return the moveState value.
+     */
+    public ResourceMoveState moveState() {
+        return this.moveState;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -112,6 +179,12 @@ public final class VaultProperties {
         }
         if (privateEndpointConnections() != null) {
             privateEndpointConnections().forEach(e -> e.validate());
+        }
+        if (encryption() != null) {
+            encryption().validate();
+        }
+        if (moveDetails() != null) {
+            moveDetails().validate();
         }
     }
 }
