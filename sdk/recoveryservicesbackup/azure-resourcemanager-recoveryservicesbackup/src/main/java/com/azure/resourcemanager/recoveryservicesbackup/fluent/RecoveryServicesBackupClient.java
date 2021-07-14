@@ -38,6 +38,55 @@ public interface RecoveryServicesBackupClient {
     Duration getDefaultPollInterval();
 
     /**
+     * Gets the BackupResourceStorageConfigsNonCrrsClient object to access its operations.
+     *
+     * @return the BackupResourceStorageConfigsNonCrrsClient object.
+     */
+    BackupResourceStorageConfigsNonCrrsClient getBackupResourceStorageConfigsNonCrrs();
+
+    /**
+     * Gets the ProtectionIntentsClient object to access its operations.
+     *
+     * @return the ProtectionIntentsClient object.
+     */
+    ProtectionIntentsClient getProtectionIntents();
+
+    /**
+     * Gets the BackupStatusClient object to access its operations.
+     *
+     * @return the BackupStatusClient object.
+     */
+    BackupStatusClient getBackupStatus();
+
+    /**
+     * Gets the FeatureSupportsClient object to access its operations.
+     *
+     * @return the FeatureSupportsClient object.
+     */
+    FeatureSupportsClient getFeatureSupports();
+
+    /**
+     * Gets the BackupProtectionIntentsClient object to access its operations.
+     *
+     * @return the BackupProtectionIntentsClient object.
+     */
+    BackupProtectionIntentsClient getBackupProtectionIntents();
+
+    /**
+     * Gets the BackupUsageSummariesClient object to access its operations.
+     *
+     * @return the BackupUsageSummariesClient object.
+     */
+    BackupUsageSummariesClient getBackupUsageSummaries();
+
+    /**
+     * Gets the OperationsClient object to access its operations.
+     *
+     * @return the OperationsClient object.
+     */
+    OperationsClient getOperations();
+
+    /**
      * Gets the BackupResourceVaultConfigsClient object to access its operations.
      *
      * @return the BackupResourceVaultConfigsClient object.
@@ -178,11 +227,11 @@ public interface RecoveryServicesBackupClient {
     BackupProtectedItemsClient getBackupProtectedItems();
 
     /**
-     * Gets the OperationsClient object to access its operations.
+     * Gets the OperationOperationsClient object to access its operations.
      *
-     * @return the OperationsClient object.
+     * @return the OperationOperationsClient object.
      */
-    OperationsClient getOperations();
+    OperationOperationsClient getOperationOperations();
 
     /**
      * Gets the BackupEnginesClient object to access its operations.
@@ -365,46 +414,4 @@ public interface RecoveryServicesBackupClient {
      * @return the BackupProtectedItemsCrrsClient object.
      */
     BackupProtectedItemsCrrsClient getBackupProtectedItemsCrrs();
-
-    /**
-     * Gets the ProtectionIntentsClient object to access its operations.
-     *
-     * @return the ProtectionIntentsClient object.
-     */
-    ProtectionIntentsClient getProtectionIntents();
-
-    /**
-     * Gets the BackupStatusClient object to access its operations.
-     *
-     * @return the BackupStatusClient object.
-     */
-    BackupStatusClient getBackupStatus();
-
-    /**
-     * Gets the FeatureSupportsClient object to access its operations.
-     *
-     * @return the FeatureSupportsClient object.
-     */
-    FeatureSupportsClient getFeatureSupports();
-
-    /**
-     * Gets the BackupProtectionIntentsClient object to access its operations.
-     *
-     * @return the BackupProtectionIntentsClient object.
-     */
-    BackupProtectionIntentsClient getBackupProtectionIntents();
-
-    /**
-     * Gets the BackupUsageSummariesClient object to access its operations.
-     *
-     * @return the BackupUsageSummariesClient object.
-     */
-    BackupUsageSummariesClient getBackupUsageSummaries();
-
-    /**
-     * Gets the OperationsOperationsClient object to access its operations.
-     *
-     * @return the OperationsOperationsClient object.
-     */
-    OperationsOperationsClient getOperationsOperations();
 }

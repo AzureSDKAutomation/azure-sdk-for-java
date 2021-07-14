@@ -22,6 +22,12 @@ public final class AzureIaaSvmJob extends Job {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(AzureIaaSvmJob.class);
 
     /*
+     * Container name of the entity on which the current job is executing.
+     */
+    @JsonProperty(value = "containerName")
+    private String containerName;
+
+    /*
      * Time elapsed during the execution of this job.
      */
     @JsonProperty(value = "duration")
@@ -51,6 +57,26 @@ public final class AzureIaaSvmJob extends Job {
      */
     @JsonProperty(value = "extendedInfo")
     private AzureIaaSvmJobExtendedInfo extendedInfo;
+
+    /**
+     * Get the containerName property: Container name of the entity on which the current job is executing.
+     *
+     * @return the containerName value.
+     */
+    public String containerName() {
+        return this.containerName;
+    }
+
+    /**
+     * Set the containerName property: Container name of the entity on which the current job is executing.
+     *
+     * @param containerName the containerName value to set.
+     * @return the AzureIaaSvmJob object itself.
+     */
+    public AzureIaaSvmJob withContainerName(String containerName) {
+        this.containerName = containerName;
+        return this;
+    }
 
     /**
      * Get the duration property: Time elapsed during the execution of this job.

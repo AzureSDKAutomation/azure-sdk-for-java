@@ -45,6 +45,12 @@ public final class BackupResourceVaultConfig {
     @JsonProperty(value = "softDeleteFeatureState")
     private SoftDeleteFeatureState softDeleteFeatureState;
 
+    /*
+     * whether softDeleteFeatureState can be updated or not
+     */
+    @JsonProperty(value = "isSoftDeleteFeatureStateEditable")
+    private Boolean isSoftDeleteFeatureStateEditable;
+
     /**
      * Get the storageModelType property: Storage type.
      *
@@ -144,6 +150,26 @@ public final class BackupResourceVaultConfig {
      */
     public BackupResourceVaultConfig withSoftDeleteFeatureState(SoftDeleteFeatureState softDeleteFeatureState) {
         this.softDeleteFeatureState = softDeleteFeatureState;
+        return this;
+    }
+
+    /**
+     * Get the isSoftDeleteFeatureStateEditable property: whether softDeleteFeatureState can be updated or not.
+     *
+     * @return the isSoftDeleteFeatureStateEditable value.
+     */
+    public Boolean isSoftDeleteFeatureStateEditable() {
+        return this.isSoftDeleteFeatureStateEditable;
+    }
+
+    /**
+     * Set the isSoftDeleteFeatureStateEditable property: whether softDeleteFeatureState can be updated or not.
+     *
+     * @param isSoftDeleteFeatureStateEditable the isSoftDeleteFeatureStateEditable value to set.
+     * @return the BackupResourceVaultConfig object itself.
+     */
+    public BackupResourceVaultConfig withIsSoftDeleteFeatureStateEditable(Boolean isSoftDeleteFeatureStateEditable) {
+        this.isSoftDeleteFeatureStateEditable = isSoftDeleteFeatureStateEditable;
         return this;
     }
 

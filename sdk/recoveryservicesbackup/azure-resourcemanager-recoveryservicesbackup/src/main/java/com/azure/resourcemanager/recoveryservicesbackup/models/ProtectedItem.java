@@ -116,6 +116,18 @@ public class ProtectedItem {
     @JsonProperty(value = "isRehydrate")
     private Boolean isRehydrate;
 
+    /*
+     * Name of the policy used for protection.
+     */
+    @JsonProperty(value = "policyName")
+    private String policyName;
+
+    /*
+     * Flag to identify whether datasource is protected in archive
+     */
+    @JsonProperty(value = "isArchiveEnabled")
+    private Boolean isArchiveEnabled;
+
     /**
      * Get the backupManagementType property: Type of backup management for the backed up item.
      *
@@ -381,6 +393,46 @@ public class ProtectedItem {
      */
     public ProtectedItem withIsRehydrate(Boolean isRehydrate) {
         this.isRehydrate = isRehydrate;
+        return this;
+    }
+
+    /**
+     * Get the policyName property: Name of the policy used for protection.
+     *
+     * @return the policyName value.
+     */
+    public String policyName() {
+        return this.policyName;
+    }
+
+    /**
+     * Set the policyName property: Name of the policy used for protection.
+     *
+     * @param policyName the policyName value to set.
+     * @return the ProtectedItem object itself.
+     */
+    public ProtectedItem withPolicyName(String policyName) {
+        this.policyName = policyName;
+        return this;
+    }
+
+    /**
+     * Get the isArchiveEnabled property: Flag to identify whether datasource is protected in archive.
+     *
+     * @return the isArchiveEnabled value.
+     */
+    public Boolean isArchiveEnabled() {
+        return this.isArchiveEnabled;
+    }
+
+    /**
+     * Set the isArchiveEnabled property: Flag to identify whether datasource is protected in archive.
+     *
+     * @param isArchiveEnabled the isArchiveEnabled value to set.
+     * @return the ProtectedItem object itself.
+     */
+    public ProtectedItem withIsArchiveEnabled(Boolean isArchiveEnabled) {
+        this.isArchiveEnabled = isArchiveEnabled;
         return this;
     }
 

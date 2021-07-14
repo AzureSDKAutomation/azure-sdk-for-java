@@ -150,6 +150,13 @@ public final class AzureStorageContainer extends ProtectionContainer {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public AzureStorageContainer withProtectableObjectType(String protectableObjectType) {
+        super.withProtectableObjectType(protectableObjectType);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *

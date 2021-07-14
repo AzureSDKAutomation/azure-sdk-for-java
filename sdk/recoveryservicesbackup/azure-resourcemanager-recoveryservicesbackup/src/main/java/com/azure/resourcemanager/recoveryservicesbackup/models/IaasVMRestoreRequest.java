@@ -153,6 +153,13 @@ public class IaasVMRestoreRequest extends RestoreRequest {
     @JsonProperty(value = "zones")
     private List<String> zones;
 
+    /*
+     * Managed Identity information required to access customer storage
+     * account.
+     */
+    @JsonProperty(value = "identityInfo")
+    private IdentityInfo identityInfo;
+
     /**
      * Get the recoveryPointId property: ID of the backup copy to be recovered.
      *
@@ -536,6 +543,26 @@ public class IaasVMRestoreRequest extends RestoreRequest {
     }
 
     /**
+     * Get the identityInfo property: Managed Identity information required to access customer storage account.
+     *
+     * @return the identityInfo value.
+     */
+    public IdentityInfo identityInfo() {
+        return this.identityInfo;
+    }
+
+    /**
+     * Set the identityInfo property: Managed Identity information required to access customer storage account.
+     *
+     * @param identityInfo the identityInfo value to set.
+     * @return the IaasVMRestoreRequest object itself.
+     */
+    public IaasVMRestoreRequest withIdentityInfo(IdentityInfo identityInfo) {
+        this.identityInfo = identityInfo;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -545,6 +572,9 @@ public class IaasVMRestoreRequest extends RestoreRequest {
         super.validate();
         if (encryptionDetails() != null) {
             encryptionDetails().validate();
+        }
+        if (identityInfo() != null) {
+            identityInfo().validate();
         }
     }
 }

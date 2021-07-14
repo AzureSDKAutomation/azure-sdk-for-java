@@ -35,6 +35,12 @@ public class IaaSvmProtectableItem extends WorkloadProtectableItem {
     @JsonProperty(value = "virtualMachineId")
     private String virtualMachineId;
 
+    /*
+     * Version of the virtual machine
+     */
+    @JsonProperty(value = "virtualMachineVersion")
+    private String virtualMachineVersion;
+
     /**
      * Get the virtualMachineId property: Fully qualified ARM ID of the virtual machine.
      *
@@ -52,6 +58,26 @@ public class IaaSvmProtectableItem extends WorkloadProtectableItem {
      */
     public IaaSvmProtectableItem withVirtualMachineId(String virtualMachineId) {
         this.virtualMachineId = virtualMachineId;
+        return this;
+    }
+
+    /**
+     * Get the virtualMachineVersion property: Version of the virtual machine.
+     *
+     * @return the virtualMachineVersion value.
+     */
+    public String virtualMachineVersion() {
+        return this.virtualMachineVersion;
+    }
+
+    /**
+     * Set the virtualMachineVersion property: Version of the virtual machine.
+     *
+     * @param virtualMachineVersion the virtualMachineVersion value to set.
+     * @return the IaaSvmProtectableItem object itself.
+     */
+    public IaaSvmProtectableItem withVirtualMachineVersion(String virtualMachineVersion) {
+        this.virtualMachineVersion = virtualMachineVersion;
         return this;
     }
 

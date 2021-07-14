@@ -293,6 +293,20 @@ public final class AzureFileshareProtectedItem extends ProtectedItem {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public AzureFileshareProtectedItem withPolicyName(String policyName) {
+        super.withPolicyName(policyName);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AzureFileshareProtectedItem withIsArchiveEnabled(Boolean isArchiveEnabled) {
+        super.withIsArchiveEnabled(isArchiveEnabled);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *

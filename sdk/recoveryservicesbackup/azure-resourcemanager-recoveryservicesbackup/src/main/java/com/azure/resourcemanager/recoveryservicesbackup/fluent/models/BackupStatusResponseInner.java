@@ -72,6 +72,12 @@ public final class BackupStatusResponseInner {
     @JsonProperty(value = "registrationStatus")
     private String registrationStatus;
 
+    /*
+     * Number of protected items
+     */
+    @JsonProperty(value = "protectedItemsCount")
+    private Integer protectedItemsCount;
+
     /**
      * Get the protectionStatus property: Specifies whether the container is registered or not.
      *
@@ -253,6 +259,26 @@ public final class BackupStatusResponseInner {
      */
     public BackupStatusResponseInner withRegistrationStatus(String registrationStatus) {
         this.registrationStatus = registrationStatus;
+        return this;
+    }
+
+    /**
+     * Get the protectedItemsCount property: Number of protected items.
+     *
+     * @return the protectedItemsCount value.
+     */
+    public Integer protectedItemsCount() {
+        return this.protectedItemsCount;
+    }
+
+    /**
+     * Set the protectedItemsCount property: Number of protected items.
+     *
+     * @param protectedItemsCount the protectedItemsCount value to set.
+     * @return the BackupStatusResponseInner object itself.
+     */
+    public BackupStatusResponseInner withProtectedItemsCount(Integer protectedItemsCount) {
+        this.protectedItemsCount = protectedItemsCount;
         return this;
     }
 
