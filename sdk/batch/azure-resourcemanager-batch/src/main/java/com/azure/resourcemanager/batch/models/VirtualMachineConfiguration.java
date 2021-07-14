@@ -93,6 +93,12 @@ public final class VirtualMachineConfiguration {
     @JsonProperty(value = "extensions")
     private List<VMExtension> extensions;
 
+    /*
+     * Contains configuration for ephemeral OSDisk settings.
+     */
+    @JsonProperty(value = "osDisk")
+    private OSDisk osDisk;
+
     /**
      * Get the imageReference property: A reference to an Azure Virtual Machines Marketplace image or the Azure Image
      * resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the
@@ -312,6 +318,26 @@ public final class VirtualMachineConfiguration {
     }
 
     /**
+     * Get the osDisk property: Contains configuration for ephemeral OSDisk settings.
+     *
+     * @return the osDisk value.
+     */
+    public OSDisk osDisk() {
+        return this.osDisk;
+    }
+
+    /**
+     * Set the osDisk property: Contains configuration for ephemeral OSDisk settings.
+     *
+     * @param osDisk the osDisk value to set.
+     * @return the VirtualMachineConfiguration object itself.
+     */
+    public VirtualMachineConfiguration withOsDisk(OSDisk osDisk) {
+        this.osDisk = osDisk;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -348,6 +374,9 @@ public final class VirtualMachineConfiguration {
         }
         if (extensions() != null) {
             extensions().forEach(e -> e.validate());
+        }
+        if (osDisk() != null) {
+            osDisk().validate();
         }
     }
 }
