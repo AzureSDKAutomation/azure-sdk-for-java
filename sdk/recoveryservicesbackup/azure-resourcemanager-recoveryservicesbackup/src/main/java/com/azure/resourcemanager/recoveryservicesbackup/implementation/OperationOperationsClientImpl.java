@@ -23,81 +23,70 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupsClient;
-import com.azure.resourcemanager.recoveryservicesbackup.models.BackupRequestResource;
+import com.azure.resourcemanager.recoveryservicesbackup.fluent.OperationOperationsClient;
+import com.azure.resourcemanager.recoveryservicesbackup.fluent.models.ValidateOperationsResponseInner;
+import com.azure.resourcemanager.recoveryservicesbackup.models.ValidateOperationRequest;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in BackupsClient. */
-public final class BackupsClientImpl implements BackupsClient {
-    private final ClientLogger logger = new ClientLogger(BackupsClientImpl.class);
+/** An instance of this class provides access to all the operations defined in OperationOperationsClient. */
+public final class OperationOperationsClientImpl implements OperationOperationsClient {
+    private final ClientLogger logger = new ClientLogger(OperationOperationsClientImpl.class);
 
     /** The proxy service used to perform REST calls. */
-    private final BackupsService service;
+    private final OperationOperationsService service;
 
     /** The service client containing this operation class. */
     private final RecoveryServicesBackupClientImpl client;
 
     /**
-     * Initializes an instance of BackupsClientImpl.
+     * Initializes an instance of OperationOperationsClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    BackupsClientImpl(RecoveryServicesBackupClientImpl client) {
-        this.service = RestProxy.create(BackupsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    OperationOperationsClientImpl(RecoveryServicesBackupClientImpl client) {
+        this.service =
+            RestProxy.create(OperationOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for RecoveryServicesBackupClientBackups to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for RecoveryServicesBackupClientOperationOperations to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "RecoveryServicesBack")
-    private interface BackupsService {
+    private interface OperationOperationsService {
         @Headers({"Content-Type: application/json"})
         @Post(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices"
-                + "/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems"
-                + "/{protectedItemName}/backup")
-        @ExpectedResponses({202})
+                + "/vaults/{vaultName}/backupValidateOperation")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Void>> trigger(
+        Mono<Response<ValidateOperationsResponseInner>> validate(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("vaultName") String vaultName,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("fabricName") String fabricName,
-            @PathParam("containerName") String containerName,
-            @PathParam("protectedItemName") String protectedItemName,
-            @BodyParam("application/json") BackupRequestResource parameters,
+            @BodyParam("application/json") ValidateOperationRequest parameters,
             @HeaderParam("Accept") String accept,
             Context context);
     }
 
     /**
-     * Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the
-     * operation, call GetProtectedItemOperationResult API.
+     * Validate operation for specified backed up item. This is a synchronous operation.
      *
      * @param vaultName The name of the recovery services vault.
      * @param resourceGroupName The name of the resource group where the recovery services vault is present.
-     * @param fabricName Fabric name associated with the backup item.
-     * @param containerName Container name associated with the backup item.
-     * @param protectedItemName Backup item for which backup needs to be triggered.
-     * @param parameters resource backup request.
+     * @param parameters resource validate operation request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> triggerWithResponseAsync(
-        String vaultName,
-        String resourceGroupName,
-        String fabricName,
-        String containerName,
-        String protectedItemName,
-        BackupRequestResource parameters) {
+    private Mono<Response<ValidateOperationsResponseInner>> validateWithResponseAsync(
+        String vaultName, String resourceGroupName, ValidateOperationRequest parameters) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -116,16 +105,6 @@ public final class BackupsClientImpl implements BackupsClient {
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (fabricName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter fabricName is required and cannot be null."));
-        }
-        if (containerName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter containerName is required and cannot be null."));
-        }
-        if (protectedItemName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter protectedItemName is required and cannot be null."));
         }
         if (parameters == null) {
             return Mono.error(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
@@ -138,15 +117,12 @@ public final class BackupsClientImpl implements BackupsClient {
             .withContext(
                 context ->
                     service
-                        .trigger(
+                        .validate(
                             this.client.getEndpoint(),
                             apiVersion,
                             vaultName,
                             resourceGroupName,
                             this.client.getSubscriptionId(),
-                            fabricName,
-                            containerName,
-                            protectedItemName,
                             parameters,
                             accept,
                             context))
@@ -154,30 +130,20 @@ public final class BackupsClientImpl implements BackupsClient {
     }
 
     /**
-     * Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the
-     * operation, call GetProtectedItemOperationResult API.
+     * Validate operation for specified backed up item. This is a synchronous operation.
      *
      * @param vaultName The name of the recovery services vault.
      * @param resourceGroupName The name of the resource group where the recovery services vault is present.
-     * @param fabricName Fabric name associated with the backup item.
-     * @param containerName Container name associated with the backup item.
-     * @param protectedItemName Backup item for which backup needs to be triggered.
-     * @param parameters resource backup request.
+     * @param parameters resource validate operation request.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> triggerWithResponseAsync(
-        String vaultName,
-        String resourceGroupName,
-        String fabricName,
-        String containerName,
-        String protectedItemName,
-        BackupRequestResource parameters,
-        Context context) {
+    private Mono<Response<ValidateOperationsResponseInner>> validateWithResponseAsync(
+        String vaultName, String resourceGroupName, ValidateOperationRequest parameters, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -197,16 +163,6 @@ public final class BackupsClientImpl implements BackupsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        if (fabricName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter fabricName is required and cannot be null."));
-        }
-        if (containerName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter containerName is required and cannot be null."));
-        }
-        if (protectedItemName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter protectedItemName is required and cannot be null."));
-        }
         if (parameters == null) {
             return Mono.error(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
         } else {
@@ -216,83 +172,65 @@ public final class BackupsClientImpl implements BackupsClient {
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .trigger(
+            .validate(
                 this.client.getEndpoint(),
                 apiVersion,
                 vaultName,
                 resourceGroupName,
                 this.client.getSubscriptionId(),
-                fabricName,
-                containerName,
-                protectedItemName,
                 parameters,
                 accept,
                 context);
     }
 
     /**
-     * Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the
-     * operation, call GetProtectedItemOperationResult API.
+     * Validate operation for specified backed up item. This is a synchronous operation.
      *
      * @param vaultName The name of the recovery services vault.
      * @param resourceGroupName The name of the resource group where the recovery services vault is present.
-     * @param fabricName Fabric name associated with the backup item.
-     * @param containerName Container name associated with the backup item.
-     * @param protectedItemName Backup item for which backup needs to be triggered.
-     * @param parameters resource backup request.
+     * @param parameters resource validate operation request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Void> triggerAsync(
-        String vaultName,
-        String resourceGroupName,
-        String fabricName,
-        String containerName,
-        String protectedItemName,
-        BackupRequestResource parameters) {
-        return triggerWithResponseAsync(
-                vaultName, resourceGroupName, fabricName, containerName, protectedItemName, parameters)
-            .flatMap((Response<Void> res) -> Mono.empty());
+    private Mono<ValidateOperationsResponseInner> validateAsync(
+        String vaultName, String resourceGroupName, ValidateOperationRequest parameters) {
+        return validateWithResponseAsync(vaultName, resourceGroupName, parameters)
+            .flatMap(
+                (Response<ValidateOperationsResponseInner> res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
     }
 
     /**
-     * Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the
-     * operation, call GetProtectedItemOperationResult API.
+     * Validate operation for specified backed up item. This is a synchronous operation.
      *
      * @param vaultName The name of the recovery services vault.
      * @param resourceGroupName The name of the resource group where the recovery services vault is present.
-     * @param fabricName Fabric name associated with the backup item.
-     * @param containerName Container name associated with the backup item.
-     * @param protectedItemName Backup item for which backup needs to be triggered.
-     * @param parameters resource backup request.
+     * @param parameters resource validate operation request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void trigger(
-        String vaultName,
-        String resourceGroupName,
-        String fabricName,
-        String containerName,
-        String protectedItemName,
-        BackupRequestResource parameters) {
-        triggerAsync(vaultName, resourceGroupName, fabricName, containerName, protectedItemName, parameters).block();
+    public ValidateOperationsResponseInner validate(
+        String vaultName, String resourceGroupName, ValidateOperationRequest parameters) {
+        return validateAsync(vaultName, resourceGroupName, parameters).block();
     }
 
     /**
-     * Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the
-     * operation, call GetProtectedItemOperationResult API.
+     * Validate operation for specified backed up item. This is a synchronous operation.
      *
      * @param vaultName The name of the recovery services vault.
      * @param resourceGroupName The name of the resource group where the recovery services vault is present.
-     * @param fabricName Fabric name associated with the backup item.
-     * @param containerName Container name associated with the backup item.
-     * @param protectedItemName Backup item for which backup needs to be triggered.
-     * @param parameters resource backup request.
+     * @param parameters resource validate operation request.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -300,16 +238,8 @@ public final class BackupsClientImpl implements BackupsClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> triggerWithResponse(
-        String vaultName,
-        String resourceGroupName,
-        String fabricName,
-        String containerName,
-        String protectedItemName,
-        BackupRequestResource parameters,
-        Context context) {
-        return triggerWithResponseAsync(
-                vaultName, resourceGroupName, fabricName, containerName, protectedItemName, parameters, context)
-            .block();
+    public Response<ValidateOperationsResponseInner> validateWithResponse(
+        String vaultName, String resourceGroupName, ValidateOperationRequest parameters, Context context) {
+        return validateWithResponseAsync(vaultName, resourceGroupName, parameters, context).block();
     }
 }
