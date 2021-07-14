@@ -12,6 +12,7 @@ import com.azure.resourcemanager.security.models.AssessmentType;
 import com.azure.resourcemanager.security.models.Categories;
 import com.azure.resourcemanager.security.models.ImplementationEffort;
 import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataPartnerData;
+import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataPropertiesResponsePublishDates;
 import com.azure.resourcemanager.security.models.Severity;
 import com.azure.resourcemanager.security.models.Threats;
 import com.azure.resourcemanager.security.models.UserImpact;
@@ -19,11 +20,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Security assessment metadata. */
+/** Security assessment metadata response. */
 @JsonFlatten
 @Fluent
-public class SecurityAssessmentMetadataInner extends ProxyResource {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(SecurityAssessmentMetadataInner.class);
+public class SecurityAssessmentMetadataResponseInner extends ProxyResource {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(SecurityAssessmentMetadataResponseInner.class);
 
     /*
      * User friendly display name of the assessment
@@ -100,6 +101,18 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
     @JsonProperty(value = "properties.partnerData")
     private SecurityAssessmentMetadataPartnerData partnerData;
 
+    /*
+     * The publishDates property.
+     */
+    @JsonProperty(value = "properties.publishDates")
+    private SecurityAssessmentMetadataPropertiesResponsePublishDates publishDates;
+
+    /*
+     * The plannedDeprecationDate property.
+     */
+    @JsonProperty(value = "properties.plannedDeprecationDate")
+    private String plannedDeprecationDate;
+
     /**
      * Get the displayName property: User friendly display name of the assessment.
      *
@@ -113,9 +126,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the displayName property: User friendly display name of the assessment.
      *
      * @param displayName the displayName value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withDisplayName(String displayName) {
+    public SecurityAssessmentMetadataResponseInner withDisplayName(String displayName) {
         this.displayName = displayName;
         return this;
     }
@@ -143,9 +156,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the description property: Human readable description of the assessment.
      *
      * @param description the description value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withDescription(String description) {
+    public SecurityAssessmentMetadataResponseInner withDescription(String description) {
         this.description = description;
         return this;
     }
@@ -165,9 +178,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * security issue.
      *
      * @param remediationDescription the remediationDescription value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withRemediationDescription(String remediationDescription) {
+    public SecurityAssessmentMetadataResponseInner withRemediationDescription(String remediationDescription) {
         this.remediationDescription = remediationDescription;
         return this;
     }
@@ -185,9 +198,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the categories property: The categories property.
      *
      * @param categories the categories value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withCategories(List<Categories> categories) {
+    public SecurityAssessmentMetadataResponseInner withCategories(List<Categories> categories) {
         this.categories = categories;
         return this;
     }
@@ -205,9 +218,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the severity property: The severity level of the assessment.
      *
      * @param severity the severity value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withSeverity(Severity severity) {
+    public SecurityAssessmentMetadataResponseInner withSeverity(Severity severity) {
         this.severity = severity;
         return this;
     }
@@ -225,9 +238,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the userImpact property: The user impact of the assessment.
      *
      * @param userImpact the userImpact value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withUserImpact(UserImpact userImpact) {
+    public SecurityAssessmentMetadataResponseInner withUserImpact(UserImpact userImpact) {
         this.userImpact = userImpact;
         return this;
     }
@@ -245,9 +258,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the implementationEffort property: The implementation effort required to remediate this assessment.
      *
      * @param implementationEffort the implementationEffort value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withImplementationEffort(ImplementationEffort implementationEffort) {
+    public SecurityAssessmentMetadataResponseInner withImplementationEffort(ImplementationEffort implementationEffort) {
         this.implementationEffort = implementationEffort;
         return this;
     }
@@ -265,9 +278,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the threats property: The threats property.
      *
      * @param threats the threats value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withThreats(List<Threats> threats) {
+    public SecurityAssessmentMetadataResponseInner withThreats(List<Threats> threats) {
         this.threats = threats;
         return this;
     }
@@ -285,9 +298,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the preview property: True if this assessment is in preview release status.
      *
      * @param preview the preview value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withPreview(Boolean preview) {
+    public SecurityAssessmentMetadataResponseInner withPreview(Boolean preview) {
         this.preview = preview;
         return this;
     }
@@ -307,9 +320,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * the assessment based on custom Azure Policy definition.
      *
      * @param assessmentType the assessmentType value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withAssessmentType(AssessmentType assessmentType) {
+    public SecurityAssessmentMetadataResponseInner withAssessmentType(AssessmentType assessmentType) {
         this.assessmentType = assessmentType;
         return this;
     }
@@ -327,10 +340,51 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
      * Set the partnerData property: Describes the partner that created the assessment.
      *
      * @param partnerData the partnerData value to set.
-     * @return the SecurityAssessmentMetadataInner object itself.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
      */
-    public SecurityAssessmentMetadataInner withPartnerData(SecurityAssessmentMetadataPartnerData partnerData) {
+    public SecurityAssessmentMetadataResponseInner withPartnerData(SecurityAssessmentMetadataPartnerData partnerData) {
         this.partnerData = partnerData;
+        return this;
+    }
+
+    /**
+     * Get the publishDates property: The publishDates property.
+     *
+     * @return the publishDates value.
+     */
+    public SecurityAssessmentMetadataPropertiesResponsePublishDates publishDates() {
+        return this.publishDates;
+    }
+
+    /**
+     * Set the publishDates property: The publishDates property.
+     *
+     * @param publishDates the publishDates value to set.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
+     */
+    public SecurityAssessmentMetadataResponseInner withPublishDates(
+        SecurityAssessmentMetadataPropertiesResponsePublishDates publishDates) {
+        this.publishDates = publishDates;
+        return this;
+    }
+
+    /**
+     * Get the plannedDeprecationDate property: The plannedDeprecationDate property.
+     *
+     * @return the plannedDeprecationDate value.
+     */
+    public String plannedDeprecationDate() {
+        return this.plannedDeprecationDate;
+    }
+
+    /**
+     * Set the plannedDeprecationDate property: The plannedDeprecationDate property.
+     *
+     * @param plannedDeprecationDate the plannedDeprecationDate value to set.
+     * @return the SecurityAssessmentMetadataResponseInner object itself.
+     */
+    public SecurityAssessmentMetadataResponseInner withPlannedDeprecationDate(String plannedDeprecationDate) {
+        this.plannedDeprecationDate = plannedDeprecationDate;
         return this;
     }
 
@@ -342,6 +396,9 @@ public class SecurityAssessmentMetadataInner extends ProxyResource {
     public void validate() {
         if (partnerData() != null) {
             partnerData().validate();
+        }
+        if (publishDates() != null) {
+            publishDates().validate();
         }
     }
 }

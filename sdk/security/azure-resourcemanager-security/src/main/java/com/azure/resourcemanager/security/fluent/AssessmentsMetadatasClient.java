@@ -9,7 +9,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataInner;
+import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataResponseInner;
+import com.azure.resourcemanager.security.models.SecurityAssessmentMetadata;
 
 /** An instance of this class provides access to all the operations defined in AssessmentsMetadatasClient. */
 public interface AssessmentsMetadatasClient {
@@ -21,7 +22,7 @@ public interface AssessmentsMetadatasClient {
      * @return metadata information on all assessment types.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<SecurityAssessmentMetadataInner> list();
+    PagedIterable<SecurityAssessmentMetadataResponseInner> list();
 
     /**
      * Get metadata information on all assessment types.
@@ -33,7 +34,7 @@ public interface AssessmentsMetadatasClient {
      * @return metadata information on all assessment types.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<SecurityAssessmentMetadataInner> list(Context context);
+    PagedIterable<SecurityAssessmentMetadataResponseInner> list(Context context);
 
     /**
      * Get metadata information on an assessment type.
@@ -45,7 +46,7 @@ public interface AssessmentsMetadatasClient {
      * @return metadata information on an assessment type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SecurityAssessmentMetadataInner get(String assessmentMetadataName);
+    SecurityAssessmentMetadataResponseInner get(String assessmentMetadataName);
 
     /**
      * Get metadata information on an assessment type.
@@ -58,7 +59,7 @@ public interface AssessmentsMetadatasClient {
      * @return metadata information on an assessment type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<SecurityAssessmentMetadataInner> getWithResponse(String assessmentMetadataName, Context context);
+    Response<SecurityAssessmentMetadataResponseInner> getWithResponse(String assessmentMetadataName, Context context);
 
     /**
      * Get metadata information on all assessment types in a specific subscription.
@@ -68,7 +69,7 @@ public interface AssessmentsMetadatasClient {
      * @return metadata information on all assessment types in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<SecurityAssessmentMetadataInner> listBySubscription();
+    PagedIterable<SecurityAssessmentMetadataResponseInner> listBySubscription();
 
     /**
      * Get metadata information on all assessment types in a specific subscription.
@@ -80,7 +81,7 @@ public interface AssessmentsMetadatasClient {
      * @return metadata information on all assessment types in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<SecurityAssessmentMetadataInner> listBySubscription(Context context);
+    PagedIterable<SecurityAssessmentMetadataResponseInner> listBySubscription(Context context);
 
     /**
      * Get metadata information on an assessment type in a specific subscription.
@@ -92,7 +93,7 @@ public interface AssessmentsMetadatasClient {
      * @return metadata information on an assessment type in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SecurityAssessmentMetadataInner getInSubscription(String assessmentMetadataName);
+    SecurityAssessmentMetadataResponseInner getInSubscription(String assessmentMetadataName);
 
     /**
      * Get metadata information on an assessment type in a specific subscription.
@@ -105,7 +106,7 @@ public interface AssessmentsMetadatasClient {
      * @return metadata information on an assessment type in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<SecurityAssessmentMetadataInner> getInSubscriptionWithResponse(
+    Response<SecurityAssessmentMetadataResponseInner> getInSubscriptionWithResponse(
         String assessmentMetadataName, Context context);
 
     /**
@@ -116,11 +117,11 @@ public interface AssessmentsMetadatasClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment metadata.
+     * @return security assessment metadata response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SecurityAssessmentMetadataInner createInSubscription(
-        String assessmentMetadataName, SecurityAssessmentMetadataInner assessmentMetadata);
+    SecurityAssessmentMetadataResponseInner createInSubscription(
+        String assessmentMetadataName, SecurityAssessmentMetadata assessmentMetadata);
 
     /**
      * Create metadata information on an assessment type in a specific subscription.
@@ -131,11 +132,11 @@ public interface AssessmentsMetadatasClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment metadata.
+     * @return security assessment metadata response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<SecurityAssessmentMetadataInner> createInSubscriptionWithResponse(
-        String assessmentMetadataName, SecurityAssessmentMetadataInner assessmentMetadata, Context context);
+    Response<SecurityAssessmentMetadataResponseInner> createInSubscriptionWithResponse(
+        String assessmentMetadataName, SecurityAssessmentMetadata assessmentMetadata, Context context);
 
     /**
      * Delete metadata information on an assessment type in a specific subscription, will cause the deletion of all the

@@ -30,8 +30,9 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.security.fluent.AssessmentsMetadatasClient;
-import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataInner;
-import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataList;
+import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataResponseInner;
+import com.azure.resourcemanager.security.models.SecurityAssessmentMetadata;
+import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataResponseList;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in AssessmentsMetadatasClient. */
@@ -67,7 +68,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         @Get("/providers/Microsoft.Security/assessmentMetadata")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SecurityAssessmentMetadataList>> list(
+        Mono<Response<SecurityAssessmentMetadataResponseList>> list(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
@@ -77,7 +78,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         @Get("/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SecurityAssessmentMetadataInner>> get(
+        Mono<Response<SecurityAssessmentMetadataResponseInner>> get(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("assessmentMetadataName") String assessmentMetadataName,
@@ -88,7 +89,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         @Get("/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SecurityAssessmentMetadataList>> listBySubscription(
+        Mono<Response<SecurityAssessmentMetadataResponseList>> listBySubscription(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
@@ -99,7 +100,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         @Get("/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SecurityAssessmentMetadataInner>> getInSubscription(
+        Mono<Response<SecurityAssessmentMetadataResponseInner>> getInSubscription(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("assessmentMetadataName") String assessmentMetadataName,
@@ -111,12 +112,12 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         @Put("/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SecurityAssessmentMetadataInner>> createInSubscription(
+        Mono<Response<SecurityAssessmentMetadataResponseInner>> createInSubscription(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("assessmentMetadataName") String assessmentMetadataName,
             @PathParam("subscriptionId") String subscriptionId,
-            @BodyParam("application/json") SecurityAssessmentMetadataInner assessmentMetadata,
+            @BodyParam("application/json") SecurityAssessmentMetadata assessmentMetadata,
             @HeaderParam("Accept") String accept,
             Context context);
 
@@ -137,7 +138,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SecurityAssessmentMetadataList>> listNext(
+        Mono<Response<SecurityAssessmentMetadataResponseList>> listNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("$host") String endpoint,
             @HeaderParam("Accept") String accept,
@@ -147,7 +148,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<SecurityAssessmentMetadataList>> listBySubscriptionNext(
+        Mono<Response<SecurityAssessmentMetadataResponseList>> listBySubscriptionNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("$host") String endpoint,
             @HeaderParam("Accept") String accept,
@@ -162,18 +163,18 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SecurityAssessmentMetadataInner>> listSinglePageAsync() {
+    private Mono<PagedResponse<SecurityAssessmentMetadataResponseInner>> listSinglePageAsync() {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.list(this.client.getEndpoint(), apiVersion, accept, context))
-            .<PagedResponse<SecurityAssessmentMetadataInner>>map(
+            .<PagedResponse<SecurityAssessmentMetadataResponseInner>>map(
                 res ->
                     new PagedResponseBase<>(
                         res.getRequest(),
@@ -195,14 +196,14 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SecurityAssessmentMetadataInner>> listSinglePageAsync(Context context) {
+    private Mono<PagedResponse<SecurityAssessmentMetadataResponseInner>> listSinglePageAsync(Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -226,7 +227,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<SecurityAssessmentMetadataInner> listAsync() {
+    private PagedFlux<SecurityAssessmentMetadataResponseInner> listAsync() {
         return new PagedFlux<>(() -> listSinglePageAsync(), nextLink -> listNextSinglePageAsync(nextLink));
     }
 
@@ -240,7 +241,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<SecurityAssessmentMetadataInner> listAsync(Context context) {
+    private PagedFlux<SecurityAssessmentMetadataResponseInner> listAsync(Context context) {
         return new PagedFlux<>(
             () -> listSinglePageAsync(context), nextLink -> listNextSinglePageAsync(nextLink, context));
     }
@@ -253,7 +254,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<SecurityAssessmentMetadataInner> list() {
+    public PagedIterable<SecurityAssessmentMetadataResponseInner> list() {
         return new PagedIterable<>(listAsync());
     }
 
@@ -267,7 +268,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<SecurityAssessmentMetadataInner> list(Context context) {
+    public PagedIterable<SecurityAssessmentMetadataResponseInner> list(Context context) {
         return new PagedIterable<>(listAsync(context));
     }
 
@@ -281,7 +282,8 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SecurityAssessmentMetadataInner>> getWithResponseAsync(String assessmentMetadataName) {
+    private Mono<Response<SecurityAssessmentMetadataResponseInner>> getWithResponseAsync(
+        String assessmentMetadataName) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -293,7 +295,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                 .error(
                     new IllegalArgumentException("Parameter assessmentMetadataName is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -312,7 +314,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SecurityAssessmentMetadataInner>> getWithResponseAsync(
+    private Mono<Response<SecurityAssessmentMetadataResponseInner>> getWithResponseAsync(
         String assessmentMetadataName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -325,7 +327,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                 .error(
                     new IllegalArgumentException("Parameter assessmentMetadataName is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.get(this.client.getEndpoint(), apiVersion, assessmentMetadataName, accept, context);
@@ -341,10 +343,10 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SecurityAssessmentMetadataInner> getAsync(String assessmentMetadataName) {
+    private Mono<SecurityAssessmentMetadataResponseInner> getAsync(String assessmentMetadataName) {
         return getWithResponseAsync(assessmentMetadataName)
             .flatMap(
-                (Response<SecurityAssessmentMetadataInner> res) -> {
+                (Response<SecurityAssessmentMetadataResponseInner> res) -> {
                     if (res.getValue() != null) {
                         return Mono.just(res.getValue());
                     } else {
@@ -363,7 +365,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SecurityAssessmentMetadataInner get(String assessmentMetadataName) {
+    public SecurityAssessmentMetadataResponseInner get(String assessmentMetadataName) {
         return getAsync(assessmentMetadataName).block();
     }
 
@@ -378,7 +380,8 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<SecurityAssessmentMetadataInner> getWithResponse(String assessmentMetadataName, Context context) {
+    public Response<SecurityAssessmentMetadataResponseInner> getWithResponse(
+        String assessmentMetadataName, Context context) {
         return getWithResponseAsync(assessmentMetadataName, context).block();
     }
 
@@ -390,7 +393,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SecurityAssessmentMetadataInner>> listBySubscriptionSinglePageAsync() {
+    private Mono<PagedResponse<SecurityAssessmentMetadataResponseInner>> listBySubscriptionSinglePageAsync() {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -403,7 +406,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -411,7 +414,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                     service
                         .listBySubscription(
                             this.client.getEndpoint(), apiVersion, this.client.getSubscriptionId(), accept, context))
-            .<PagedResponse<SecurityAssessmentMetadataInner>>map(
+            .<PagedResponse<SecurityAssessmentMetadataResponseInner>>map(
                 res ->
                     new PagedResponseBase<>(
                         res.getRequest(),
@@ -433,7 +436,8 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SecurityAssessmentMetadataInner>> listBySubscriptionSinglePageAsync(Context context) {
+    private Mono<PagedResponse<SecurityAssessmentMetadataResponseInner>> listBySubscriptionSinglePageAsync(
+        Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -446,7 +450,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -470,7 +474,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<SecurityAssessmentMetadataInner> listBySubscriptionAsync() {
+    private PagedFlux<SecurityAssessmentMetadataResponseInner> listBySubscriptionAsync() {
         return new PagedFlux<>(
             () -> listBySubscriptionSinglePageAsync(), nextLink -> listBySubscriptionNextSinglePageAsync(nextLink));
     }
@@ -485,7 +489,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<SecurityAssessmentMetadataInner> listBySubscriptionAsync(Context context) {
+    private PagedFlux<SecurityAssessmentMetadataResponseInner> listBySubscriptionAsync(Context context) {
         return new PagedFlux<>(
             () -> listBySubscriptionSinglePageAsync(context),
             nextLink -> listBySubscriptionNextSinglePageAsync(nextLink, context));
@@ -499,7 +503,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<SecurityAssessmentMetadataInner> listBySubscription() {
+    public PagedIterable<SecurityAssessmentMetadataResponseInner> listBySubscription() {
         return new PagedIterable<>(listBySubscriptionAsync());
     }
 
@@ -513,7 +517,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on all assessment types in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<SecurityAssessmentMetadataInner> listBySubscription(Context context) {
+    public PagedIterable<SecurityAssessmentMetadataResponseInner> listBySubscription(Context context) {
         return new PagedIterable<>(listBySubscriptionAsync(context));
     }
 
@@ -527,7 +531,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SecurityAssessmentMetadataInner>> getInSubscriptionWithResponseAsync(
+    private Mono<Response<SecurityAssessmentMetadataResponseInner>> getInSubscriptionWithResponseAsync(
         String assessmentMetadataName) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -546,7 +550,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -573,7 +577,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SecurityAssessmentMetadataInner>> getInSubscriptionWithResponseAsync(
+    private Mono<Response<SecurityAssessmentMetadataResponseInner>> getInSubscriptionWithResponseAsync(
         String assessmentMetadataName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -592,7 +596,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -615,10 +619,10 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SecurityAssessmentMetadataInner> getInSubscriptionAsync(String assessmentMetadataName) {
+    private Mono<SecurityAssessmentMetadataResponseInner> getInSubscriptionAsync(String assessmentMetadataName) {
         return getInSubscriptionWithResponseAsync(assessmentMetadataName)
             .flatMap(
-                (Response<SecurityAssessmentMetadataInner> res) -> {
+                (Response<SecurityAssessmentMetadataResponseInner> res) -> {
                     if (res.getValue() != null) {
                         return Mono.just(res.getValue());
                     } else {
@@ -637,7 +641,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SecurityAssessmentMetadataInner getInSubscription(String assessmentMetadataName) {
+    public SecurityAssessmentMetadataResponseInner getInSubscription(String assessmentMetadataName) {
         return getInSubscriptionAsync(assessmentMetadataName).block();
     }
 
@@ -652,7 +656,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return metadata information on an assessment type in a specific subscription.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<SecurityAssessmentMetadataInner> getInSubscriptionWithResponse(
+    public Response<SecurityAssessmentMetadataResponseInner> getInSubscriptionWithResponse(
         String assessmentMetadataName, Context context) {
         return getInSubscriptionWithResponseAsync(assessmentMetadataName, context).block();
     }
@@ -665,11 +669,11 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment metadata.
+     * @return security assessment metadata response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SecurityAssessmentMetadataInner>> createInSubscriptionWithResponseAsync(
-        String assessmentMetadataName, SecurityAssessmentMetadataInner assessmentMetadata) {
+    private Mono<Response<SecurityAssessmentMetadataResponseInner>> createInSubscriptionWithResponseAsync(
+        String assessmentMetadataName, SecurityAssessmentMetadata assessmentMetadata) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -693,7 +697,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         } else {
             assessmentMetadata.validate();
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -719,11 +723,11 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment metadata.
+     * @return security assessment metadata response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<SecurityAssessmentMetadataInner>> createInSubscriptionWithResponseAsync(
-        String assessmentMetadataName, SecurityAssessmentMetadataInner assessmentMetadata, Context context) {
+    private Mono<Response<SecurityAssessmentMetadataResponseInner>> createInSubscriptionWithResponseAsync(
+        String assessmentMetadataName, SecurityAssessmentMetadata assessmentMetadata, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -747,7 +751,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         } else {
             assessmentMetadata.validate();
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -769,14 +773,14 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment metadata.
+     * @return security assessment metadata response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SecurityAssessmentMetadataInner> createInSubscriptionAsync(
-        String assessmentMetadataName, SecurityAssessmentMetadataInner assessmentMetadata) {
+    private Mono<SecurityAssessmentMetadataResponseInner> createInSubscriptionAsync(
+        String assessmentMetadataName, SecurityAssessmentMetadata assessmentMetadata) {
         return createInSubscriptionWithResponseAsync(assessmentMetadataName, assessmentMetadata)
             .flatMap(
-                (Response<SecurityAssessmentMetadataInner> res) -> {
+                (Response<SecurityAssessmentMetadataResponseInner> res) -> {
                     if (res.getValue() != null) {
                         return Mono.just(res.getValue());
                     } else {
@@ -793,11 +797,11 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment metadata.
+     * @return security assessment metadata response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SecurityAssessmentMetadataInner createInSubscription(
-        String assessmentMetadataName, SecurityAssessmentMetadataInner assessmentMetadata) {
+    public SecurityAssessmentMetadataResponseInner createInSubscription(
+        String assessmentMetadataName, SecurityAssessmentMetadata assessmentMetadata) {
         return createInSubscriptionAsync(assessmentMetadataName, assessmentMetadata).block();
     }
 
@@ -810,11 +814,11 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment metadata.
+     * @return security assessment metadata response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<SecurityAssessmentMetadataInner> createInSubscriptionWithResponse(
-        String assessmentMetadataName, SecurityAssessmentMetadataInner assessmentMetadata, Context context) {
+    public Response<SecurityAssessmentMetadataResponseInner> createInSubscriptionWithResponse(
+        String assessmentMetadataName, SecurityAssessmentMetadata assessmentMetadata, Context context) {
         return createInSubscriptionWithResponseAsync(assessmentMetadataName, assessmentMetadata, context).block();
     }
 
@@ -847,7 +851,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -893,7 +897,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        final String apiVersion = "2020-01-01";
+        final String apiVersion = "2021-06-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -962,7 +966,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return list of security assessment metadata.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SecurityAssessmentMetadataInner>> listNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<SecurityAssessmentMetadataResponseInner>> listNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -975,7 +979,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.listNext(nextLink, this.client.getEndpoint(), accept, context))
-            .<PagedResponse<SecurityAssessmentMetadataInner>>map(
+            .<PagedResponse<SecurityAssessmentMetadataResponseInner>>map(
                 res ->
                     new PagedResponseBase<>(
                         res.getRequest(),
@@ -998,7 +1002,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return list of security assessment metadata.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SecurityAssessmentMetadataInner>> listNextSinglePageAsync(
+    private Mono<PagedResponse<SecurityAssessmentMetadataResponseInner>> listNextSinglePageAsync(
         String nextLink, Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
@@ -1034,7 +1038,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return list of security assessment metadata.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SecurityAssessmentMetadataInner>> listBySubscriptionNextSinglePageAsync(
+    private Mono<PagedResponse<SecurityAssessmentMetadataResponseInner>> listBySubscriptionNextSinglePageAsync(
         String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
@@ -1049,7 +1053,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
         return FluxUtil
             .withContext(
                 context -> service.listBySubscriptionNext(nextLink, this.client.getEndpoint(), accept, context))
-            .<PagedResponse<SecurityAssessmentMetadataInner>>map(
+            .<PagedResponse<SecurityAssessmentMetadataResponseInner>>map(
                 res ->
                     new PagedResponseBase<>(
                         res.getRequest(),
@@ -1072,7 +1076,7 @@ public final class AssessmentsMetadatasClientImpl implements AssessmentsMetadata
      * @return list of security assessment metadata.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<SecurityAssessmentMetadataInner>> listBySubscriptionNextSinglePageAsync(
+    private Mono<PagedResponse<SecurityAssessmentMetadataResponseInner>> listBySubscriptionNextSinglePageAsync(
         String nextLink, Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));

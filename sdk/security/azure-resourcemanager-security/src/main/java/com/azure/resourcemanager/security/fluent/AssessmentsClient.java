@@ -9,8 +9,9 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentInner;
+import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentResponseInner;
 import com.azure.resourcemanager.security.models.ExpandEnum;
+import com.azure.resourcemanager.security.models.SecurityAssessment;
 
 /** An instance of this class provides access to all the operations defined in AssessmentsClient. */
 public interface AssessmentsClient {
@@ -25,7 +26,7 @@ public interface AssessmentsClient {
      * @return security assessments on all your scanned resources inside a scope.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<SecurityAssessmentInner> list(String scope);
+    PagedIterable<SecurityAssessmentResponseInner> list(String scope);
 
     /**
      * Get security assessments on all your scanned resources inside a scope.
@@ -39,7 +40,7 @@ public interface AssessmentsClient {
      * @return security assessments on all your scanned resources inside a scope.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<SecurityAssessmentInner> list(String scope, Context context);
+    PagedIterable<SecurityAssessmentResponseInner> list(String scope, Context context);
 
     /**
      * Get a security assessment on your scanned resource.
@@ -52,7 +53,7 @@ public interface AssessmentsClient {
      * @return a security assessment on your scanned resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SecurityAssessmentInner get(String resourceId, String assessmentName);
+    SecurityAssessmentResponseInner get(String resourceId, String assessmentName);
 
     /**
      * Get a security assessment on your scanned resource.
@@ -67,7 +68,7 @@ public interface AssessmentsClient {
      * @return a security assessment on your scanned resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<SecurityAssessmentInner> getWithResponse(
+    Response<SecurityAssessmentResponseInner> getWithResponse(
         String resourceId, String assessmentName, ExpandEnum expand, Context context);
 
     /**
@@ -80,11 +81,11 @@ public interface AssessmentsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment on a resource.
+     * @return security assessment on a resource - response format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SecurityAssessmentInner createOrUpdate(
-        String resourceId, String assessmentName, SecurityAssessmentInner assessment);
+    SecurityAssessmentResponseInner createOrUpdate(
+        String resourceId, String assessmentName, SecurityAssessment assessment);
 
     /**
      * Create a security assessment on your resource. An assessment metadata that describes this assessment must be
@@ -97,11 +98,11 @@ public interface AssessmentsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return security assessment on a resource.
+     * @return security assessment on a resource - response format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<SecurityAssessmentInner> createOrUpdateWithResponse(
-        String resourceId, String assessmentName, SecurityAssessmentInner assessment, Context context);
+    Response<SecurityAssessmentResponseInner> createOrUpdateWithResponse(
+        String resourceId, String assessmentName, SecurityAssessment assessment, Context context);
 
     /**
      * Delete a security assessment on your resource. An assessment metadata that describes this assessment must be

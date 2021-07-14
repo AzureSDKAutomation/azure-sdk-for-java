@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The result of the assessment. */
 @Fluent
-public final class AssessmentStatus {
+public class AssessmentStatus {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(AssessmentStatus.class);
 
     /*

@@ -5,26 +5,28 @@
 package com.azure.resourcemanager.security.implementation;
 
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataInner;
+import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataResponseInner;
 import com.azure.resourcemanager.security.models.AssessmentType;
 import com.azure.resourcemanager.security.models.Categories;
 import com.azure.resourcemanager.security.models.ImplementationEffort;
 import com.azure.resourcemanager.security.models.SecurityAssessmentMetadata;
 import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataPartnerData;
+import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataPropertiesResponsePublishDates;
+import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataResponse;
 import com.azure.resourcemanager.security.models.Severity;
 import com.azure.resourcemanager.security.models.Threats;
 import com.azure.resourcemanager.security.models.UserImpact;
 import java.util.Collections;
 import java.util.List;
 
-public final class SecurityAssessmentMetadataImpl
-    implements SecurityAssessmentMetadata, SecurityAssessmentMetadata.Definition {
-    private SecurityAssessmentMetadataInner innerObject;
+public final class SecurityAssessmentMetadataResponseImpl
+    implements SecurityAssessmentMetadataResponse, SecurityAssessmentMetadataResponse.Definition {
+    private SecurityAssessmentMetadataResponseInner innerObject;
 
     private final com.azure.resourcemanager.security.SecurityManager serviceManager;
 
-    SecurityAssessmentMetadataImpl(
-        SecurityAssessmentMetadataInner innerObject,
+    SecurityAssessmentMetadataResponseImpl(
+        SecurityAssessmentMetadataResponseInner innerObject,
         com.azure.resourcemanager.security.SecurityManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
@@ -100,7 +102,15 @@ public final class SecurityAssessmentMetadataImpl
         return this.innerModel().partnerData();
     }
 
-    public SecurityAssessmentMetadataInner innerModel() {
+    public SecurityAssessmentMetadataPropertiesResponsePublishDates publishDates() {
+        return this.innerModel().publishDates();
+    }
+
+    public String plannedDeprecationDate() {
+        return this.innerModel().plannedDeprecationDate();
+    }
+
+    public SecurityAssessmentMetadataResponseInner innerModel() {
         return this.innerObject;
     }
 
@@ -110,33 +120,37 @@ public final class SecurityAssessmentMetadataImpl
 
     private String assessmentMetadataName;
 
-    public SecurityAssessmentMetadata create() {
+    private SecurityAssessmentMetadata createAssessmentMetadata;
+
+    public SecurityAssessmentMetadataResponse create() {
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getAssessmentsMetadatas()
-                .createInSubscriptionWithResponse(assessmentMetadataName, this.innerModel(), Context.NONE)
+                .createInSubscriptionWithResponse(assessmentMetadataName, createAssessmentMetadata, Context.NONE)
                 .getValue();
         return this;
     }
 
-    public SecurityAssessmentMetadata create(Context context) {
+    public SecurityAssessmentMetadataResponse create(Context context) {
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getAssessmentsMetadatas()
-                .createInSubscriptionWithResponse(assessmentMetadataName, this.innerModel(), context)
+                .createInSubscriptionWithResponse(assessmentMetadataName, createAssessmentMetadata, context)
                 .getValue();
         return this;
     }
 
-    SecurityAssessmentMetadataImpl(String name, com.azure.resourcemanager.security.SecurityManager serviceManager) {
-        this.innerObject = new SecurityAssessmentMetadataInner();
+    SecurityAssessmentMetadataResponseImpl(
+        String name, com.azure.resourcemanager.security.SecurityManager serviceManager) {
+        this.innerObject = new SecurityAssessmentMetadataResponseInner();
         this.serviceManager = serviceManager;
         this.assessmentMetadataName = name;
+        this.createAssessmentMetadata = new SecurityAssessmentMetadata();
     }
 
-    public SecurityAssessmentMetadata refresh() {
+    public SecurityAssessmentMetadataResponse refresh() {
         this.innerObject =
             serviceManager
                 .serviceClient()
@@ -146,7 +160,7 @@ public final class SecurityAssessmentMetadataImpl
         return this;
     }
 
-    public SecurityAssessmentMetadata refresh(Context context) {
+    public SecurityAssessmentMetadataResponse refresh(Context context) {
         this.innerObject =
             serviceManager
                 .serviceClient()
@@ -156,58 +170,58 @@ public final class SecurityAssessmentMetadataImpl
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withDisplayName(String displayName) {
-        this.innerModel().withDisplayName(displayName);
+    public SecurityAssessmentMetadataResponseImpl withDisplayName(String displayName) {
+        this.createAssessmentMetadata.withDisplayName(displayName);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withDescription(String description) {
-        this.innerModel().withDescription(description);
+    public SecurityAssessmentMetadataResponseImpl withDescription(String description) {
+        this.createAssessmentMetadata.withDescription(description);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withRemediationDescription(String remediationDescription) {
-        this.innerModel().withRemediationDescription(remediationDescription);
+    public SecurityAssessmentMetadataResponseImpl withRemediationDescription(String remediationDescription) {
+        this.createAssessmentMetadata.withRemediationDescription(remediationDescription);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withCategories(List<Categories> categories) {
-        this.innerModel().withCategories(categories);
+    public SecurityAssessmentMetadataResponseImpl withCategories(List<Categories> categories) {
+        this.createAssessmentMetadata.withCategories(categories);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withSeverity(Severity severity) {
-        this.innerModel().withSeverity(severity);
+    public SecurityAssessmentMetadataResponseImpl withSeverity(Severity severity) {
+        this.createAssessmentMetadata.withSeverity(severity);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withUserImpact(UserImpact userImpact) {
-        this.innerModel().withUserImpact(userImpact);
+    public SecurityAssessmentMetadataResponseImpl withUserImpact(UserImpact userImpact) {
+        this.createAssessmentMetadata.withUserImpact(userImpact);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withImplementationEffort(ImplementationEffort implementationEffort) {
-        this.innerModel().withImplementationEffort(implementationEffort);
+    public SecurityAssessmentMetadataResponseImpl withImplementationEffort(ImplementationEffort implementationEffort) {
+        this.createAssessmentMetadata.withImplementationEffort(implementationEffort);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withThreats(List<Threats> threats) {
-        this.innerModel().withThreats(threats);
+    public SecurityAssessmentMetadataResponseImpl withThreats(List<Threats> threats) {
+        this.createAssessmentMetadata.withThreats(threats);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withPreview(Boolean preview) {
-        this.innerModel().withPreview(preview);
+    public SecurityAssessmentMetadataResponseImpl withPreview(Boolean preview) {
+        this.createAssessmentMetadata.withPreview(preview);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withAssessmentType(AssessmentType assessmentType) {
-        this.innerModel().withAssessmentType(assessmentType);
+    public SecurityAssessmentMetadataResponseImpl withAssessmentType(AssessmentType assessmentType) {
+        this.createAssessmentMetadata.withAssessmentType(assessmentType);
         return this;
     }
 
-    public SecurityAssessmentMetadataImpl withPartnerData(SecurityAssessmentMetadataPartnerData partnerData) {
-        this.innerModel().withPartnerData(partnerData);
+    public SecurityAssessmentMetadataResponseImpl withPartnerData(SecurityAssessmentMetadataPartnerData partnerData) {
+        this.createAssessmentMetadata.withPartnerData(partnerData);
         return this;
     }
 }

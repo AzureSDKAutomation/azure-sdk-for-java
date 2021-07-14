@@ -10,9 +10,9 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.security.fluent.AssessmentsMetadatasClient;
-import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataInner;
+import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataResponseInner;
 import com.azure.resourcemanager.security.models.AssessmentsMetadatas;
-import com.azure.resourcemanager.security.models.SecurityAssessmentMetadata;
+import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public final class AssessmentsMetadatasImpl implements AssessmentsMetadatas {
@@ -28,68 +28,69 @@ public final class AssessmentsMetadatasImpl implements AssessmentsMetadatas {
         this.serviceManager = serviceManager;
     }
 
-    public PagedIterable<SecurityAssessmentMetadata> list() {
-        PagedIterable<SecurityAssessmentMetadataInner> inner = this.serviceClient().list();
-        return Utils.mapPage(inner, inner1 -> new SecurityAssessmentMetadataImpl(inner1, this.manager()));
+    public PagedIterable<SecurityAssessmentMetadataResponse> list() {
+        PagedIterable<SecurityAssessmentMetadataResponseInner> inner = this.serviceClient().list();
+        return Utils.mapPage(inner, inner1 -> new SecurityAssessmentMetadataResponseImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<SecurityAssessmentMetadata> list(Context context) {
-        PagedIterable<SecurityAssessmentMetadataInner> inner = this.serviceClient().list(context);
-        return Utils.mapPage(inner, inner1 -> new SecurityAssessmentMetadataImpl(inner1, this.manager()));
+    public PagedIterable<SecurityAssessmentMetadataResponse> list(Context context) {
+        PagedIterable<SecurityAssessmentMetadataResponseInner> inner = this.serviceClient().list(context);
+        return Utils.mapPage(inner, inner1 -> new SecurityAssessmentMetadataResponseImpl(inner1, this.manager()));
     }
 
-    public SecurityAssessmentMetadata get(String assessmentMetadataName) {
-        SecurityAssessmentMetadataInner inner = this.serviceClient().get(assessmentMetadataName);
+    public SecurityAssessmentMetadataResponse get(String assessmentMetadataName) {
+        SecurityAssessmentMetadataResponseInner inner = this.serviceClient().get(assessmentMetadataName);
         if (inner != null) {
-            return new SecurityAssessmentMetadataImpl(inner, this.manager());
+            return new SecurityAssessmentMetadataResponseImpl(inner, this.manager());
         } else {
             return null;
         }
     }
 
-    public Response<SecurityAssessmentMetadata> getWithResponse(String assessmentMetadataName, Context context) {
-        Response<SecurityAssessmentMetadataInner> inner =
+    public Response<SecurityAssessmentMetadataResponse> getWithResponse(
+        String assessmentMetadataName, Context context) {
+        Response<SecurityAssessmentMetadataResponseInner> inner =
             this.serviceClient().getWithResponse(assessmentMetadataName, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
                 inner.getStatusCode(),
                 inner.getHeaders(),
-                new SecurityAssessmentMetadataImpl(inner.getValue(), this.manager()));
+                new SecurityAssessmentMetadataResponseImpl(inner.getValue(), this.manager()));
         } else {
             return null;
         }
     }
 
-    public PagedIterable<SecurityAssessmentMetadata> listBySubscription() {
-        PagedIterable<SecurityAssessmentMetadataInner> inner = this.serviceClient().listBySubscription();
-        return Utils.mapPage(inner, inner1 -> new SecurityAssessmentMetadataImpl(inner1, this.manager()));
+    public PagedIterable<SecurityAssessmentMetadataResponse> listBySubscription() {
+        PagedIterable<SecurityAssessmentMetadataResponseInner> inner = this.serviceClient().listBySubscription();
+        return Utils.mapPage(inner, inner1 -> new SecurityAssessmentMetadataResponseImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<SecurityAssessmentMetadata> listBySubscription(Context context) {
-        PagedIterable<SecurityAssessmentMetadataInner> inner = this.serviceClient().listBySubscription(context);
-        return Utils.mapPage(inner, inner1 -> new SecurityAssessmentMetadataImpl(inner1, this.manager()));
+    public PagedIterable<SecurityAssessmentMetadataResponse> listBySubscription(Context context) {
+        PagedIterable<SecurityAssessmentMetadataResponseInner> inner = this.serviceClient().listBySubscription(context);
+        return Utils.mapPage(inner, inner1 -> new SecurityAssessmentMetadataResponseImpl(inner1, this.manager()));
     }
 
-    public SecurityAssessmentMetadata getInSubscription(String assessmentMetadataName) {
-        SecurityAssessmentMetadataInner inner = this.serviceClient().getInSubscription(assessmentMetadataName);
+    public SecurityAssessmentMetadataResponse getInSubscription(String assessmentMetadataName) {
+        SecurityAssessmentMetadataResponseInner inner = this.serviceClient().getInSubscription(assessmentMetadataName);
         if (inner != null) {
-            return new SecurityAssessmentMetadataImpl(inner, this.manager());
+            return new SecurityAssessmentMetadataResponseImpl(inner, this.manager());
         } else {
             return null;
         }
     }
 
-    public Response<SecurityAssessmentMetadata> getInSubscriptionWithResponse(
+    public Response<SecurityAssessmentMetadataResponse> getInSubscriptionWithResponse(
         String assessmentMetadataName, Context context) {
-        Response<SecurityAssessmentMetadataInner> inner =
+        Response<SecurityAssessmentMetadataResponseInner> inner =
             this.serviceClient().getInSubscriptionWithResponse(assessmentMetadataName, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
                 inner.getStatusCode(),
                 inner.getHeaders(),
-                new SecurityAssessmentMetadataImpl(inner.getValue(), this.manager()));
+                new SecurityAssessmentMetadataResponseImpl(inner.getValue(), this.manager()));
         } else {
             return null;
         }
@@ -103,7 +104,7 @@ public final class AssessmentsMetadatasImpl implements AssessmentsMetadatas {
         return this.serviceClient().deleteInSubscriptionWithResponse(assessmentMetadataName, context);
     }
 
-    public SecurityAssessmentMetadata getInSubscriptionById(String id) {
+    public SecurityAssessmentMetadataResponse getInSubscriptionById(String id) {
         String assessmentMetadataName = Utils.getValueFromIdByName(id, "assessmentMetadata");
         if (assessmentMetadataName == null) {
             throw logger
@@ -116,7 +117,7 @@ public final class AssessmentsMetadatasImpl implements AssessmentsMetadatas {
         return this.getInSubscriptionWithResponse(assessmentMetadataName, Context.NONE).getValue();
     }
 
-    public Response<SecurityAssessmentMetadata> getInSubscriptionByIdWithResponse(String id, Context context) {
+    public Response<SecurityAssessmentMetadataResponse> getInSubscriptionByIdWithResponse(String id, Context context) {
         String assessmentMetadataName = Utils.getValueFromIdByName(id, "assessmentMetadata");
         if (assessmentMetadataName == null) {
             throw logger
@@ -163,7 +164,7 @@ public final class AssessmentsMetadatasImpl implements AssessmentsMetadatas {
         return this.serviceManager;
     }
 
-    public SecurityAssessmentMetadataImpl define(String name) {
-        return new SecurityAssessmentMetadataImpl(name, this.manager());
+    public SecurityAssessmentMetadataResponseImpl define(String name) {
+        return new SecurityAssessmentMetadataResponseImpl(name, this.manager());
     }
 }

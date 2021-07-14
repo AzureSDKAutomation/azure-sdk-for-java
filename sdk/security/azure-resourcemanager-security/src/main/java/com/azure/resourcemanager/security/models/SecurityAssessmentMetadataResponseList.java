@@ -6,21 +6,21 @@ package com.azure.resourcemanager.security.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataInner;
+import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataResponseInner;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** List of security assessment metadata. */
 @Immutable
-public final class SecurityAssessmentMetadataList {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(SecurityAssessmentMetadataList.class);
+public final class SecurityAssessmentMetadataResponseList {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(SecurityAssessmentMetadataResponseList.class);
 
     /*
      * The value property.
      */
     @JsonProperty(value = "value", access = JsonProperty.Access.WRITE_ONLY)
-    private List<SecurityAssessmentMetadataInner> value;
+    private List<SecurityAssessmentMetadataResponseInner> value;
 
     /*
      * The URI to fetch the next page.
@@ -33,7 +33,7 @@ public final class SecurityAssessmentMetadataList {
      *
      * @return the value value.
      */
-    public List<SecurityAssessmentMetadataInner> value() {
+    public List<SecurityAssessmentMetadataResponseInner> value() {
         return this.value;
     }
 
