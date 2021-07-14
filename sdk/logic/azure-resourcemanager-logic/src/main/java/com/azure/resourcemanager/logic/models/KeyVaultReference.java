@@ -4,12 +4,12 @@
 
 package com.azure.resourcemanager.logic.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /** The key vault reference. */
-@Immutable
+@Fluent
 public final class KeyVaultReference extends ResourceReference {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(KeyVaultReference.class);
 
