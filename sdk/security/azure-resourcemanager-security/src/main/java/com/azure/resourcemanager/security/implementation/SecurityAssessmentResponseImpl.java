@@ -5,20 +5,22 @@
 package com.azure.resourcemanager.security.implementation;
 
 import com.azure.core.util.Context;
-import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentInner;
+import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentResponseInner;
 import com.azure.resourcemanager.security.models.AssessmentLinks;
 import com.azure.resourcemanager.security.models.AssessmentStatus;
+import com.azure.resourcemanager.security.models.AssessmentStatusResponse;
 import com.azure.resourcemanager.security.models.ExpandEnum;
 import com.azure.resourcemanager.security.models.ResourceDetails;
 import com.azure.resourcemanager.security.models.SecurityAssessment;
 import com.azure.resourcemanager.security.models.SecurityAssessmentMetadataProperties;
 import com.azure.resourcemanager.security.models.SecurityAssessmentPartnerData;
+import com.azure.resourcemanager.security.models.SecurityAssessmentResponse;
 import java.util.Collections;
 import java.util.Map;
 
-public final class SecurityAssessmentImpl
-    implements SecurityAssessment, SecurityAssessment.Definition, SecurityAssessment.Update {
-    private SecurityAssessmentInner innerObject;
+public final class SecurityAssessmentResponseImpl
+    implements SecurityAssessmentResponse, SecurityAssessmentResponse.Definition, SecurityAssessmentResponse.Update {
+    private SecurityAssessmentResponseInner innerObject;
 
     private final com.azure.resourcemanager.security.SecurityManager serviceManager;
 
@@ -42,10 +44,6 @@ public final class SecurityAssessmentImpl
         return this.innerModel().displayName();
     }
 
-    public AssessmentStatus status() {
-        return this.innerModel().status();
-    }
-
     public Map<String, String> additionalData() {
         Map<String, String> inner = this.innerModel().additionalData();
         if (inner != null) {
@@ -67,7 +65,11 @@ public final class SecurityAssessmentImpl
         return this.innerModel().partnersData();
     }
 
-    public SecurityAssessmentInner innerModel() {
+    public AssessmentStatusResponse status() {
+        return this.innerModel().status();
+    }
+
+    public SecurityAssessmentResponseInner innerModel() {
         return this.innerObject;
     }
 
@@ -79,63 +81,70 @@ public final class SecurityAssessmentImpl
 
     private String assessmentName;
 
-    public SecurityAssessmentImpl withExistingResourceId(String resourceId) {
+    private SecurityAssessment createAssessment;
+
+    private SecurityAssessment updateAssessment;
+
+    public SecurityAssessmentResponseImpl withExistingResourceId(String resourceId) {
         this.resourceId = resourceId;
         return this;
     }
 
-    public SecurityAssessment create() {
+    public SecurityAssessmentResponse create() {
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getAssessments()
-                .createOrUpdateWithResponse(resourceId, assessmentName, this.innerModel(), Context.NONE)
+                .createOrUpdateWithResponse(resourceId, assessmentName, createAssessment, Context.NONE)
                 .getValue();
         return this;
     }
 
-    public SecurityAssessment create(Context context) {
+    public SecurityAssessmentResponse create(Context context) {
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getAssessments()
-                .createOrUpdateWithResponse(resourceId, assessmentName, this.innerModel(), context)
+                .createOrUpdateWithResponse(resourceId, assessmentName, createAssessment, context)
                 .getValue();
         return this;
     }
 
-    SecurityAssessmentImpl(String name, com.azure.resourcemanager.security.SecurityManager serviceManager) {
-        this.innerObject = new SecurityAssessmentInner();
+    SecurityAssessmentResponseImpl(String name, com.azure.resourcemanager.security.SecurityManager serviceManager) {
+        this.innerObject = new SecurityAssessmentResponseInner();
         this.serviceManager = serviceManager;
         this.assessmentName = name;
+        this.createAssessment = new SecurityAssessment();
     }
 
-    public SecurityAssessmentImpl update() {
+    public SecurityAssessmentResponseImpl update() {
+        this.updateAssessment = new SecurityAssessment();
         return this;
     }
 
-    public SecurityAssessment apply() {
+    public SecurityAssessmentResponse apply() {
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getAssessments()
-                .createOrUpdateWithResponse(resourceId, assessmentName, this.innerModel(), Context.NONE)
+                .createOrUpdateWithResponse(resourceId, assessmentName, updateAssessment, Context.NONE)
                 .getValue();
         return this;
     }
 
-    public SecurityAssessment apply(Context context) {
+    public SecurityAssessmentResponse apply(Context context) {
         this.innerObject =
             serviceManager
                 .serviceClient()
                 .getAssessments()
-                .createOrUpdateWithResponse(resourceId, assessmentName, this.innerModel(), context)
+                .createOrUpdateWithResponse(resourceId, assessmentName, updateAssessment, context)
                 .getValue();
         return this;
     }
 
-    SecurityAssessmentImpl(
-        SecurityAssessmentInner innerObject, com.azure.resourcemanager.security.SecurityManager serviceManager) {
+    SecurityAssessmentResponseImpl(
+        SecurityAssessmentResponseInner innerObject,
+        com.azure.resourcemanager.security.SecurityManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
         this.resourceId =
@@ -152,7 +161,7 @@ public final class SecurityAssessmentImpl
                     "assessmentName");
     }
 
-    public SecurityAssessment refresh() {
+    public SecurityAssessmentResponse refresh() {
         ExpandEnum localExpand = null;
         this.innerObject =
             serviceManager
@@ -163,7 +172,7 @@ public final class SecurityAssessmentImpl
         return this;
     }
 
-    public SecurityAssessment refresh(Context context) {
+    public SecurityAssessmentResponse refresh(Context context) {
         ExpandEnum localExpand = null;
         this.innerObject =
             serviceManager
@@ -174,28 +183,57 @@ public final class SecurityAssessmentImpl
         return this;
     }
 
-    public SecurityAssessmentImpl withResourceDetails(ResourceDetails resourceDetails) {
-        this.innerModel().withResourceDetails(resourceDetails);
-        return this;
+    public SecurityAssessmentResponseImpl withResourceDetails(ResourceDetails resourceDetails) {
+        if (isInCreateMode()) {
+            this.createAssessment.withResourceDetails(resourceDetails);
+            return this;
+        } else {
+            this.updateAssessment.withResourceDetails(resourceDetails);
+            return this;
+        }
     }
 
-    public SecurityAssessmentImpl withStatus(AssessmentStatus status) {
-        this.innerModel().withStatus(status);
-        return this;
+    public SecurityAssessmentResponseImpl withAdditionalData(Map<String, String> additionalData) {
+        if (isInCreateMode()) {
+            this.createAssessment.withAdditionalData(additionalData);
+            return this;
+        } else {
+            this.updateAssessment.withAdditionalData(additionalData);
+            return this;
+        }
     }
 
-    public SecurityAssessmentImpl withAdditionalData(Map<String, String> additionalData) {
-        this.innerModel().withAdditionalData(additionalData);
-        return this;
+    public SecurityAssessmentResponseImpl withMetadata(SecurityAssessmentMetadataProperties metadata) {
+        if (isInCreateMode()) {
+            this.createAssessment.withMetadata(metadata);
+            return this;
+        } else {
+            this.updateAssessment.withMetadata(metadata);
+            return this;
+        }
     }
 
-    public SecurityAssessmentImpl withMetadata(SecurityAssessmentMetadataProperties metadata) {
-        this.innerModel().withMetadata(metadata);
-        return this;
+    public SecurityAssessmentResponseImpl withPartnersData(SecurityAssessmentPartnerData partnersData) {
+        if (isInCreateMode()) {
+            this.createAssessment.withPartnersData(partnersData);
+            return this;
+        } else {
+            this.updateAssessment.withPartnersData(partnersData);
+            return this;
+        }
     }
 
-    public SecurityAssessmentImpl withPartnersData(SecurityAssessmentPartnerData partnersData) {
-        this.innerModel().withPartnersData(partnersData);
-        return this;
+    public SecurityAssessmentResponseImpl withStatus(AssessmentStatus status) {
+        if (isInCreateMode()) {
+            this.createAssessment.withStatus(status);
+            return this;
+        } else {
+            this.updateAssessment.withStatus(status);
+            return this;
+        }
+    }
+
+    private boolean isInCreateMode() {
+        return this.innerModel().id() == null;
     }
 }

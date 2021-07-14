@@ -4,294 +4,337 @@
 
 package com.azure.resourcemanager.security.models;
 
-import com.azure.core.util.Context;
-import com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataInner;
+import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.management.ProxyResource;
+import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** An immutable client-side representation of SecurityAssessmentMetadata. */
-public interface SecurityAssessmentMetadata {
-    /**
-     * Gets the id property: Fully qualified resource Id for the resource.
-     *
-     * @return the id value.
+/** Security assessment metadata. */
+@JsonFlatten
+@Fluent
+public class SecurityAssessmentMetadata extends ProxyResource {
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(SecurityAssessmentMetadata.class);
+
+    /*
+     * User friendly display name of the assessment
      */
-    String id();
+    @JsonProperty(value = "properties.displayName")
+    private String displayName;
+
+    /*
+     * Azure resource ID of the policy definition that turns this assessment
+     * calculation on
+     */
+    @JsonProperty(value = "properties.policyDefinitionId", access = JsonProperty.Access.WRITE_ONLY)
+    private String policyDefinitionId;
+
+    /*
+     * Human readable description of the assessment
+     */
+    @JsonProperty(value = "properties.description")
+    private String description;
+
+    /*
+     * Human readable description of what you should do to mitigate this
+     * security issue
+     */
+    @JsonProperty(value = "properties.remediationDescription")
+    private String remediationDescription;
+
+    /*
+     * The categories property.
+     */
+    @JsonProperty(value = "properties.categories")
+    private List<Categories> categories;
+
+    /*
+     * The severity level of the assessment
+     */
+    @JsonProperty(value = "properties.severity")
+    private Severity severity;
+
+    /*
+     * The user impact of the assessment
+     */
+    @JsonProperty(value = "properties.userImpact")
+    private UserImpact userImpact;
+
+    /*
+     * The implementation effort required to remediate this assessment
+     */
+    @JsonProperty(value = "properties.implementationEffort")
+    private ImplementationEffort implementationEffort;
+
+    /*
+     * The threats property.
+     */
+    @JsonProperty(value = "properties.threats")
+    private List<Threats> threats;
+
+    /*
+     * True if this assessment is in preview release status
+     */
+    @JsonProperty(value = "properties.preview")
+    private Boolean preview;
+
+    /*
+     * BuiltIn if the assessment based on built-in Azure Policy definition,
+     * Custom if the assessment based on custom Azure Policy definition
+     */
+    @JsonProperty(value = "properties.assessmentType")
+    private AssessmentType assessmentType;
+
+    /*
+     * Describes the partner that created the assessment
+     */
+    @JsonProperty(value = "properties.partnerData")
+    private SecurityAssessmentMetadataPartnerData partnerData;
 
     /**
-     * Gets the name property: The name of the resource.
-     *
-     * @return the name value.
-     */
-    String name();
-
-    /**
-     * Gets the type property: The type of the resource.
-     *
-     * @return the type value.
-     */
-    String type();
-
-    /**
-     * Gets the displayName property: User friendly display name of the assessment.
+     * Get the displayName property: User friendly display name of the assessment.
      *
      * @return the displayName value.
      */
-    String displayName();
+    public String displayName() {
+        return this.displayName;
+    }
 
     /**
-     * Gets the policyDefinitionId property: Azure resource ID of the policy definition that turns this assessment
+     * Set the displayName property: User friendly display name of the assessment.
+     *
+     * @param displayName the displayName value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withDisplayName(String displayName) {
+        this.displayName = displayName;
+        return this;
+    }
+
+    /**
+     * Get the policyDefinitionId property: Azure resource ID of the policy definition that turns this assessment
      * calculation on.
      *
      * @return the policyDefinitionId value.
      */
-    String policyDefinitionId();
+    public String policyDefinitionId() {
+        return this.policyDefinitionId;
+    }
 
     /**
-     * Gets the description property: Human readable description of the assessment.
+     * Get the description property: Human readable description of the assessment.
      *
      * @return the description value.
      */
-    String description();
+    public String description() {
+        return this.description;
+    }
 
     /**
-     * Gets the remediationDescription property: Human readable description of what you should do to mitigate this
+     * Set the description property: Human readable description of the assessment.
+     *
+     * @param description the description value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    /**
+     * Get the remediationDescription property: Human readable description of what you should do to mitigate this
      * security issue.
      *
      * @return the remediationDescription value.
      */
-    String remediationDescription();
+    public String remediationDescription() {
+        return this.remediationDescription;
+    }
 
     /**
-     * Gets the categories property: The categories property.
+     * Set the remediationDescription property: Human readable description of what you should do to mitigate this
+     * security issue.
+     *
+     * @param remediationDescription the remediationDescription value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withRemediationDescription(String remediationDescription) {
+        this.remediationDescription = remediationDescription;
+        return this;
+    }
+
+    /**
+     * Get the categories property: The categories property.
      *
      * @return the categories value.
      */
-    List<Categories> categories();
+    public List<Categories> categories() {
+        return this.categories;
+    }
 
     /**
-     * Gets the severity property: The severity level of the assessment.
+     * Set the categories property: The categories property.
+     *
+     * @param categories the categories value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withCategories(List<Categories> categories) {
+        this.categories = categories;
+        return this;
+    }
+
+    /**
+     * Get the severity property: The severity level of the assessment.
      *
      * @return the severity value.
      */
-    Severity severity();
+    public Severity severity() {
+        return this.severity;
+    }
 
     /**
-     * Gets the userImpact property: The user impact of the assessment.
+     * Set the severity property: The severity level of the assessment.
+     *
+     * @param severity the severity value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withSeverity(Severity severity) {
+        this.severity = severity;
+        return this;
+    }
+
+    /**
+     * Get the userImpact property: The user impact of the assessment.
      *
      * @return the userImpact value.
      */
-    UserImpact userImpact();
+    public UserImpact userImpact() {
+        return this.userImpact;
+    }
 
     /**
-     * Gets the implementationEffort property: The implementation effort required to remediate this assessment.
+     * Set the userImpact property: The user impact of the assessment.
+     *
+     * @param userImpact the userImpact value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withUserImpact(UserImpact userImpact) {
+        this.userImpact = userImpact;
+        return this;
+    }
+
+    /**
+     * Get the implementationEffort property: The implementation effort required to remediate this assessment.
      *
      * @return the implementationEffort value.
      */
-    ImplementationEffort implementationEffort();
+    public ImplementationEffort implementationEffort() {
+        return this.implementationEffort;
+    }
 
     /**
-     * Gets the threats property: The threats property.
+     * Set the implementationEffort property: The implementation effort required to remediate this assessment.
+     *
+     * @param implementationEffort the implementationEffort value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withImplementationEffort(ImplementationEffort implementationEffort) {
+        this.implementationEffort = implementationEffort;
+        return this;
+    }
+
+    /**
+     * Get the threats property: The threats property.
      *
      * @return the threats value.
      */
-    List<Threats> threats();
+    public List<Threats> threats() {
+        return this.threats;
+    }
 
     /**
-     * Gets the preview property: True if this assessment is in preview release status.
+     * Set the threats property: The threats property.
+     *
+     * @param threats the threats value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withThreats(List<Threats> threats) {
+        this.threats = threats;
+        return this;
+    }
+
+    /**
+     * Get the preview property: True if this assessment is in preview release status.
      *
      * @return the preview value.
      */
-    Boolean preview();
+    public Boolean preview() {
+        return this.preview;
+    }
 
     /**
-     * Gets the assessmentType property: BuiltIn if the assessment based on built-in Azure Policy definition, Custom if
+     * Set the preview property: True if this assessment is in preview release status.
+     *
+     * @param preview the preview value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withPreview(Boolean preview) {
+        this.preview = preview;
+        return this;
+    }
+
+    /**
+     * Get the assessmentType property: BuiltIn if the assessment based on built-in Azure Policy definition, Custom if
      * the assessment based on custom Azure Policy definition.
      *
      * @return the assessmentType value.
      */
-    AssessmentType assessmentType();
+    public AssessmentType assessmentType() {
+        return this.assessmentType;
+    }
 
     /**
-     * Gets the partnerData property: Describes the partner that created the assessment.
+     * Set the assessmentType property: BuiltIn if the assessment based on built-in Azure Policy definition, Custom if
+     * the assessment based on custom Azure Policy definition.
+     *
+     * @param assessmentType the assessmentType value to set.
+     * @return the SecurityAssessmentMetadata object itself.
+     */
+    public SecurityAssessmentMetadata withAssessmentType(AssessmentType assessmentType) {
+        this.assessmentType = assessmentType;
+        return this;
+    }
+
+    /**
+     * Get the partnerData property: Describes the partner that created the assessment.
      *
      * @return the partnerData value.
      */
-    SecurityAssessmentMetadataPartnerData partnerData();
+    public SecurityAssessmentMetadataPartnerData partnerData() {
+        return this.partnerData;
+    }
 
     /**
-     * Gets the inner com.azure.resourcemanager.security.fluent.models.SecurityAssessmentMetadataInner object.
+     * Set the partnerData property: Describes the partner that created the assessment.
      *
-     * @return the inner object.
+     * @param partnerData the partnerData value to set.
+     * @return the SecurityAssessmentMetadata object itself.
      */
-    SecurityAssessmentMetadataInner innerModel();
-
-    /** The entirety of the SecurityAssessmentMetadata definition. */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithCreate {
+    public SecurityAssessmentMetadata withPartnerData(SecurityAssessmentMetadataPartnerData partnerData) {
+        this.partnerData = partnerData;
+        return this;
     }
-    /** The SecurityAssessmentMetadata definition stages. */
-    interface DefinitionStages {
-        /** The first stage of the SecurityAssessmentMetadata definition. */
-        interface Blank extends WithCreate {
-        }
-        /**
-         * The stage of the SecurityAssessmentMetadata definition which contains all the minimum required properties for
-         * the resource to be created, but also allows for any other optional properties to be specified.
-         */
-        interface WithCreate
-            extends DefinitionStages.WithDisplayName,
-                DefinitionStages.WithDescription,
-                DefinitionStages.WithRemediationDescription,
-                DefinitionStages.WithCategories,
-                DefinitionStages.WithSeverity,
-                DefinitionStages.WithUserImpact,
-                DefinitionStages.WithImplementationEffort,
-                DefinitionStages.WithThreats,
-                DefinitionStages.WithPreview,
-                DefinitionStages.WithAssessmentType,
-                DefinitionStages.WithPartnerData {
-            /**
-             * Executes the create request.
-             *
-             * @return the created resource.
-             */
-            SecurityAssessmentMetadata create();
 
-            /**
-             * Executes the create request.
-             *
-             * @param context The context to associate with this operation.
-             * @return the created resource.
-             */
-            SecurityAssessmentMetadata create(Context context);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify displayName. */
-        interface WithDisplayName {
-            /**
-             * Specifies the displayName property: User friendly display name of the assessment.
-             *
-             * @param displayName User friendly display name of the assessment.
-             * @return the next definition stage.
-             */
-            WithCreate withDisplayName(String displayName);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify description. */
-        interface WithDescription {
-            /**
-             * Specifies the description property: Human readable description of the assessment.
-             *
-             * @param description Human readable description of the assessment.
-             * @return the next definition stage.
-             */
-            WithCreate withDescription(String description);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify remediationDescription. */
-        interface WithRemediationDescription {
-            /**
-             * Specifies the remediationDescription property: Human readable description of what you should do to
-             * mitigate this security issue.
-             *
-             * @param remediationDescription Human readable description of what you should do to mitigate this security
-             *     issue.
-             * @return the next definition stage.
-             */
-            WithCreate withRemediationDescription(String remediationDescription);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify categories. */
-        interface WithCategories {
-            /**
-             * Specifies the categories property: The categories property..
-             *
-             * @param categories The categories property.
-             * @return the next definition stage.
-             */
-            WithCreate withCategories(List<Categories> categories);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify severity. */
-        interface WithSeverity {
-            /**
-             * Specifies the severity property: The severity level of the assessment.
-             *
-             * @param severity The severity level of the assessment.
-             * @return the next definition stage.
-             */
-            WithCreate withSeverity(Severity severity);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify userImpact. */
-        interface WithUserImpact {
-            /**
-             * Specifies the userImpact property: The user impact of the assessment.
-             *
-             * @param userImpact The user impact of the assessment.
-             * @return the next definition stage.
-             */
-            WithCreate withUserImpact(UserImpact userImpact);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify implementationEffort. */
-        interface WithImplementationEffort {
-            /**
-             * Specifies the implementationEffort property: The implementation effort required to remediate this
-             * assessment.
-             *
-             * @param implementationEffort The implementation effort required to remediate this assessment.
-             * @return the next definition stage.
-             */
-            WithCreate withImplementationEffort(ImplementationEffort implementationEffort);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify threats. */
-        interface WithThreats {
-            /**
-             * Specifies the threats property: The threats property..
-             *
-             * @param threats The threats property.
-             * @return the next definition stage.
-             */
-            WithCreate withThreats(List<Threats> threats);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify preview. */
-        interface WithPreview {
-            /**
-             * Specifies the preview property: True if this assessment is in preview release status.
-             *
-             * @param preview True if this assessment is in preview release status.
-             * @return the next definition stage.
-             */
-            WithCreate withPreview(Boolean preview);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify assessmentType. */
-        interface WithAssessmentType {
-            /**
-             * Specifies the assessmentType property: BuiltIn if the assessment based on built-in Azure Policy
-             * definition, Custom if the assessment based on custom Azure Policy definition.
-             *
-             * @param assessmentType BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the
-             *     assessment based on custom Azure Policy definition.
-             * @return the next definition stage.
-             */
-            WithCreate withAssessmentType(AssessmentType assessmentType);
-        }
-        /** The stage of the SecurityAssessmentMetadata definition allowing to specify partnerData. */
-        interface WithPartnerData {
-            /**
-             * Specifies the partnerData property: Describes the partner that created the assessment.
-             *
-             * @param partnerData Describes the partner that created the assessment.
-             * @return the next definition stage.
-             */
-            WithCreate withPartnerData(SecurityAssessmentMetadataPartnerData partnerData);
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (partnerData() != null) {
+            partnerData().validate();
         }
     }
-    /**
-     * Refreshes the resource to sync with Azure.
-     *
-     * @return the refreshed resource.
-     */
-    SecurityAssessmentMetadata refresh();
-
-    /**
-     * Refreshes the resource to sync with Azure.
-     *
-     * @param context The context to associate with this operation.
-     * @return the refreshed resource.
-     */
-    SecurityAssessmentMetadata refresh(Context context);
 }

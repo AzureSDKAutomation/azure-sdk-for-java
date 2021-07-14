@@ -12,7 +12,7 @@ import java.util.List;
 
 /** Describes properties of an assessment metadata. */
 @Fluent
-public final class SecurityAssessmentMetadataProperties {
+public class SecurityAssessmentMetadataProperties {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(SecurityAssessmentMetadataProperties.class);
 
     /*
