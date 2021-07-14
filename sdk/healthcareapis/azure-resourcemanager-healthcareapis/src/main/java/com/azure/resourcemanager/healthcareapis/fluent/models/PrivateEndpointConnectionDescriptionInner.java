@@ -4,7 +4,7 @@
 
 package com.azure.resourcemanager.healthcareapis.fluent.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.management.SystemData;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.healthcareapis.models.PrivateEndpoint;
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Private Endpoint Connection resource. */
-@Immutable
+@Fluent
 public final class PrivateEndpointConnectionDescriptionInner extends PrivateEndpointConnection {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(PrivateEndpointConnectionDescriptionInner.class);
 
