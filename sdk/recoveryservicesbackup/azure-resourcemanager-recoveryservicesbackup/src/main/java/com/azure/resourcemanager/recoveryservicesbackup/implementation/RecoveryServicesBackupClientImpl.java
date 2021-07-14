@@ -36,6 +36,7 @@ import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupProtectionC
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupProtectionIntentsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupResourceEncryptionConfigsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupResourceStorageConfigsClient;
+import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupResourceStorageConfigsNonCrrsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupResourceVaultConfigsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupStatusClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.BackupUsageSummariesClient;
@@ -53,8 +54,8 @@ import com.azure.resourcemanager.recoveryservicesbackup.fluent.JobCancellationsC
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.JobDetailsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.JobOperationResultsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.JobsClient;
+import com.azure.resourcemanager.recoveryservicesbackup.fluent.OperationOperationsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.OperationsClient;
-import com.azure.resourcemanager.recoveryservicesbackup.fluent.OperationsOperationsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.PrivateEndpointConnectionsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.PrivateEndpointsClient;
 import com.azure.resourcemanager.recoveryservicesbackup.fluent.ProtectableContainersClient;
@@ -148,6 +149,90 @@ public final class RecoveryServicesBackupClientImpl implements RecoveryServicesB
      */
     public Duration getDefaultPollInterval() {
         return this.defaultPollInterval;
+    }
+
+    /** The BackupResourceStorageConfigsNonCrrsClient object to access its operations. */
+    private final BackupResourceStorageConfigsNonCrrsClient backupResourceStorageConfigsNonCrrs;
+
+    /**
+     * Gets the BackupResourceStorageConfigsNonCrrsClient object to access its operations.
+     *
+     * @return the BackupResourceStorageConfigsNonCrrsClient object.
+     */
+    public BackupResourceStorageConfigsNonCrrsClient getBackupResourceStorageConfigsNonCrrs() {
+        return this.backupResourceStorageConfigsNonCrrs;
+    }
+
+    /** The ProtectionIntentsClient object to access its operations. */
+    private final ProtectionIntentsClient protectionIntents;
+
+    /**
+     * Gets the ProtectionIntentsClient object to access its operations.
+     *
+     * @return the ProtectionIntentsClient object.
+     */
+    public ProtectionIntentsClient getProtectionIntents() {
+        return this.protectionIntents;
+    }
+
+    /** The BackupStatusClient object to access its operations. */
+    private final BackupStatusClient backupStatus;
+
+    /**
+     * Gets the BackupStatusClient object to access its operations.
+     *
+     * @return the BackupStatusClient object.
+     */
+    public BackupStatusClient getBackupStatus() {
+        return this.backupStatus;
+    }
+
+    /** The FeatureSupportsClient object to access its operations. */
+    private final FeatureSupportsClient featureSupports;
+
+    /**
+     * Gets the FeatureSupportsClient object to access its operations.
+     *
+     * @return the FeatureSupportsClient object.
+     */
+    public FeatureSupportsClient getFeatureSupports() {
+        return this.featureSupports;
+    }
+
+    /** The BackupProtectionIntentsClient object to access its operations. */
+    private final BackupProtectionIntentsClient backupProtectionIntents;
+
+    /**
+     * Gets the BackupProtectionIntentsClient object to access its operations.
+     *
+     * @return the BackupProtectionIntentsClient object.
+     */
+    public BackupProtectionIntentsClient getBackupProtectionIntents() {
+        return this.backupProtectionIntents;
+    }
+
+    /** The BackupUsageSummariesClient object to access its operations. */
+    private final BackupUsageSummariesClient backupUsageSummaries;
+
+    /**
+     * Gets the BackupUsageSummariesClient object to access its operations.
+     *
+     * @return the BackupUsageSummariesClient object.
+     */
+    public BackupUsageSummariesClient getBackupUsageSummaries() {
+        return this.backupUsageSummaries;
+    }
+
+    /** The OperationsClient object to access its operations. */
+    private final OperationsClient operations;
+
+    /**
+     * Gets the OperationsClient object to access its operations.
+     *
+     * @return the OperationsClient object.
+     */
+    public OperationsClient getOperations() {
+        return this.operations;
     }
 
     /** The BackupResourceVaultConfigsClient object to access its operations. */
@@ -390,16 +475,16 @@ public final class RecoveryServicesBackupClientImpl implements RecoveryServicesB
         return this.backupProtectedItems;
     }
 
-    /** The OperationsClient object to access its operations. */
-    private final OperationsClient operations;
+    /** The OperationOperationsClient object to access its operations. */
+    private final OperationOperationsClient operationOperations;
 
     /**
-     * Gets the OperationsClient object to access its operations.
+     * Gets the OperationOperationsClient object to access its operations.
      *
-     * @return the OperationsClient object.
+     * @return the OperationOperationsClient object.
      */
-    public OperationsClient getOperations() {
-        return this.operations;
+    public OperationOperationsClient getOperationOperations() {
+        return this.operationOperations;
     }
 
     /** The BackupEnginesClient object to access its operations. */
@@ -714,78 +799,6 @@ public final class RecoveryServicesBackupClientImpl implements RecoveryServicesB
         return this.backupProtectedItemsCrrs;
     }
 
-    /** The ProtectionIntentsClient object to access its operations. */
-    private final ProtectionIntentsClient protectionIntents;
-
-    /**
-     * Gets the ProtectionIntentsClient object to access its operations.
-     *
-     * @return the ProtectionIntentsClient object.
-     */
-    public ProtectionIntentsClient getProtectionIntents() {
-        return this.protectionIntents;
-    }
-
-    /** The BackupStatusClient object to access its operations. */
-    private final BackupStatusClient backupStatus;
-
-    /**
-     * Gets the BackupStatusClient object to access its operations.
-     *
-     * @return the BackupStatusClient object.
-     */
-    public BackupStatusClient getBackupStatus() {
-        return this.backupStatus;
-    }
-
-    /** The FeatureSupportsClient object to access its operations. */
-    private final FeatureSupportsClient featureSupports;
-
-    /**
-     * Gets the FeatureSupportsClient object to access its operations.
-     *
-     * @return the FeatureSupportsClient object.
-     */
-    public FeatureSupportsClient getFeatureSupports() {
-        return this.featureSupports;
-    }
-
-    /** The BackupProtectionIntentsClient object to access its operations. */
-    private final BackupProtectionIntentsClient backupProtectionIntents;
-
-    /**
-     * Gets the BackupProtectionIntentsClient object to access its operations.
-     *
-     * @return the BackupProtectionIntentsClient object.
-     */
-    public BackupProtectionIntentsClient getBackupProtectionIntents() {
-        return this.backupProtectionIntents;
-    }
-
-    /** The BackupUsageSummariesClient object to access its operations. */
-    private final BackupUsageSummariesClient backupUsageSummaries;
-
-    /**
-     * Gets the BackupUsageSummariesClient object to access its operations.
-     *
-     * @return the BackupUsageSummariesClient object.
-     */
-    public BackupUsageSummariesClient getBackupUsageSummaries() {
-        return this.backupUsageSummaries;
-    }
-
-    /** The OperationsOperationsClient object to access its operations. */
-    private final OperationsOperationsClient operationsOperations;
-
-    /**
-     * Gets the OperationsOperationsClient object to access its operations.
-     *
-     * @return the OperationsOperationsClient object.
-     */
-    public OperationsOperationsClient getOperationsOperations() {
-        return this.operationsOperations;
-    }
-
     /**
      * Initializes an instance of RecoveryServicesBackupClient client.
      *
@@ -808,6 +821,13 @@ public final class RecoveryServicesBackupClientImpl implements RecoveryServicesB
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
+        this.backupResourceStorageConfigsNonCrrs = new BackupResourceStorageConfigsNonCrrsClientImpl(this);
+        this.protectionIntents = new ProtectionIntentsClientImpl(this);
+        this.backupStatus = new BackupStatusClientImpl(this);
+        this.featureSupports = new FeatureSupportsClientImpl(this);
+        this.backupProtectionIntents = new BackupProtectionIntentsClientImpl(this);
+        this.backupUsageSummaries = new BackupUsageSummariesClientImpl(this);
+        this.operations = new OperationsClientImpl(this);
         this.backupResourceVaultConfigs = new BackupResourceVaultConfigsClientImpl(this);
         this.backupResourceEncryptionConfigs = new BackupResourceEncryptionConfigsClientImpl(this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsClientImpl(this);
@@ -828,7 +848,7 @@ public final class RecoveryServicesBackupClientImpl implements RecoveryServicesB
         this.exportJobsOperationResults = new ExportJobsOperationResultsClientImpl(this);
         this.jobs = new JobsClientImpl(this);
         this.backupProtectedItems = new BackupProtectedItemsClientImpl(this);
-        this.operations = new OperationsClientImpl(this);
+        this.operationOperations = new OperationOperationsClientImpl(this);
         this.backupEngines = new BackupEnginesClientImpl(this);
         this.protectionContainerRefreshOperationResults =
             new ProtectionContainerRefreshOperationResultsClientImpl(this);
@@ -856,12 +876,6 @@ public final class RecoveryServicesBackupClientImpl implements RecoveryServicesB
         this.backupResourceStorageConfigs = new BackupResourceStorageConfigsClientImpl(this);
         this.recoveryPointsCrrs = new RecoveryPointsCrrsClientImpl(this);
         this.backupProtectedItemsCrrs = new BackupProtectedItemsCrrsClientImpl(this);
-        this.protectionIntents = new ProtectionIntentsClientImpl(this);
-        this.backupStatus = new BackupStatusClientImpl(this);
-        this.featureSupports = new FeatureSupportsClientImpl(this);
-        this.backupProtectionIntents = new BackupProtectionIntentsClientImpl(this);
-        this.backupUsageSummaries = new BackupUsageSummariesClientImpl(this);
-        this.operationsOperations = new OperationsOperationsClientImpl(this);
     }
 
     /**

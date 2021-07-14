@@ -57,6 +57,10 @@ public final class BackupStatusResponseImpl implements BackupStatusResponse {
         return this.innerModel().registrationStatus();
     }
 
+    public Integer protectedItemsCount() {
+        return this.innerModel().protectedItemsCount();
+    }
+
     public BackupStatusResponseInner innerModel() {
         return this.innerObject;
     }

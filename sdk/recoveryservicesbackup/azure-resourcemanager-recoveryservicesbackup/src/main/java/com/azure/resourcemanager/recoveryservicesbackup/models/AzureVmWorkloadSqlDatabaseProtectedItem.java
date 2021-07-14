@@ -4,7 +4,7 @@
 
 package com.azure.resourcemanager.recoveryservicesbackup.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -15,7 +15,7 @@ import java.util.Map;
 /** Azure VM workload-specific protected item representing SQL Database. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "protectedItemType")
 @JsonTypeName("AzureVmWorkloadSQLDatabase")
-@Immutable
+@Fluent
 public final class AzureVmWorkloadSqlDatabaseProtectedItem extends AzureVmWorkloadProtectedItem {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(AzureVmWorkloadSqlDatabaseProtectedItem.class);
 
@@ -202,6 +202,20 @@ public final class AzureVmWorkloadSqlDatabaseProtectedItem extends AzureVmWorklo
     @Override
     public AzureVmWorkloadSqlDatabaseProtectedItem withIsRehydrate(Boolean isRehydrate) {
         super.withIsRehydrate(isRehydrate);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AzureVmWorkloadSqlDatabaseProtectedItem withPolicyName(String policyName) {
+        super.withPolicyName(policyName);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AzureVmWorkloadSqlDatabaseProtectedItem withIsArchiveEnabled(Boolean isArchiveEnabled) {
+        super.withIsArchiveEnabled(isArchiveEnabled);
         return this;
     }
 
