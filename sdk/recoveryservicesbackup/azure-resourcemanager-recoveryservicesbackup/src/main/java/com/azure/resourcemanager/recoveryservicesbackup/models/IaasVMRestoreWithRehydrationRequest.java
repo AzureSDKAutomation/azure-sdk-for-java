@@ -172,6 +172,13 @@ public final class IaasVMRestoreWithRehydrationRequest extends IaasVMRestoreRequ
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public IaasVMRestoreWithRehydrationRequest withIdentityInfo(IdentityInfo identityInfo) {
+        super.withIdentityInfo(identityInfo);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *
